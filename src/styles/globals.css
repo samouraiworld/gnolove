@@ -1,0 +1,30 @@
+@import 'tailwindcss/base';
+
+@import '@radix-ui/themes/styles.css';
+
+@tailwind components;
+@tailwind utilities;
+
+.radix-themes {
+    --cursor-button: pointer;
+    --cursor-link: pointer;
+}
+
+/* TableCell */
+.rt-TableCell {
+    white-space: nowrap;
+}
+
+/* TextField Error Status */
+.rt-TextFieldRoot.error {
+    box-shadow: inset 0 0 0 var(--text-field-border-width) var(--red-11);
+}
+
+.rt-TextFieldRoot.error:where(:has(.rt-TextFieldInput:focus)) {
+    outline: 2px solid var(--red-a8);
+}
+
+/* Toast */
+.rt-ToastRoot {
+    --viewport-padding: 25px;
+}
