@@ -57,7 +57,7 @@ const SingleToast = ({ id, title = '', message = '', timer = 5000, infinite = fa
 
   return (
     <Toast.Root
-      className="rt-ToastRoot rounded-4 bg-whiteA-12 pointer-events-auto flex flex-col items-start gap-x-4 p-5 shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] [grid-template-areas:_'title_action'_'description_action']"
+      className="rt-ToastRoot pointer-events-auto flex flex-col items-start gap-x-4 rounded-4 bg-whiteA-12 p-5 shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] [grid-template-areas:_'title_action'_'description_action']"
       duration={Infinity}
     >
       <Toast.Title className={cn('text-3 font-medium')}>{title}</Toast.Title>
