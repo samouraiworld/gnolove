@@ -9,14 +9,20 @@
     "lint": "npm-run-all format check-types next-lint",
     "next-lint": "next lint",
     "format": "prettier --check --write \"src/**/*.{ts,tsx}\"",
-    "check-types": "tsc --noemit"
+    "check-types": "tsc --noemit",
+    "generate-contributors": "npm-run-all generate-contributors-no-format format",
+    "generate-contributors-no-format": "tsx src/scripts/generate-contributors.ts "
   },
   "dependencies": {
+    "@octokit/graphql": "^8.1.1",
+    "@octokit/graphql-schema": "^15.25.0",
+    "@octokit/rest": "^21.0.2",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-toast": "^1.2.1",
     "@radix-ui/themes": "^3.1.3",
     "autoprefixer": "^10.4.19",
     "clsx": "^2.1.1",
+    "lucide-react": "^0.445.0",
     "next": "^14.2.3",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.38",

@@ -8,6 +8,10 @@ declare global {
   export interface IPropsWithChildren {
     children?: ReactNode;
   }
+
+  export type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType extends readonly (infer ElementType)[]
+    ? ElementType
+    : never;
 }
 
 export default global;

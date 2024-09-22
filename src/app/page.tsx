@@ -1,17 +1,41 @@
-import type { ReactElement } from 'react';
+import { useMemo } from 'react';
 
-import { Metadata } from 'next';
+import { Flex, ScrollArea, Table } from '@radix-ui/themes';
 
-import { Flex, Heading } from '@radix-ui/themes';
+import ContributorRow from '@/module/contributor-row';
 
-export const metadata: Metadata = {
-  title: 'Next.js App Router',
-};
+import contributors from '@/constant/contributors';
 
-const HomePage = (): ReactElement => {
+const HomePage = () => {
+  const contributorsWithScore = useMemo(() => {
+    return contributors
+      .map((row) => ({ ...row, score: row.commits + row.issues + row.prs }))
+      .toSorted((a, b) => b.score - a.score);
+  }, [contributors]);
+
   return (
-    <Flex p="6" justify="center" align="center" className="h-screen w-screen">
-      <Heading as="h1">Hello world!</Heading>
+    <Flex className="h-screen w-screen" asChild>
+      <ScrollArea>
+        <Flex direction="column" p="7" justify="center" align="center">
+          <Table.Root layout="auto" className="w-full max-w-4xl">
+            <Table.Header>
+              <Table.Row>
+                <Table.ColumnHeaderCell className="w-full">Username</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell className="text-center">Commits</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell className="text-center">Issues</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell className="text-center">PRs</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell className="text-center">Score</Table.ColumnHeaderCell>
+              </Table.Row>
+            </Table.Header>
+
+            <Table.Body>
+              {contributorsWithScore.map(({ score, ...contributor }) => {
+                return <ContributorRow key={contributor.id} {...{ contributor, score }} />;
+              })}
+            </Table.Body>
+          </Table.Root>
+        </Flex>
+      </ScrollArea>
     </Flex>
   );
 };
