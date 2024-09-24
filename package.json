@@ -14,6 +14,7 @@
     "generate-contributors-no-format": "tsx src/scripts/generate-contributors.ts "
   },
   "dependencies": {
+    "@next/env": "^14.2.13",
     "@octokit/graphql": "^8.1.1",
     "@octokit/graphql-schema": "^15.25.0",
     "@octokit/rest": "^21.0.2",
@@ -31,7 +32,8 @@
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.0",
     "tailwindcss": "^3.4.4",
-    "tw-merge": "0.0.1-alpha.3"
+    "tw-merge": "0.0.1-alpha.3",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
