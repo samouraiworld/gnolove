@@ -24,7 +24,8 @@ const getCachedContributorsQuery = (timeFilter: TimeFilter) =>
       if (process.env.NODE_ENV !== 'production') return contributors[timeFilter];
 
       try {
-        return getUsersWithStats(graphql, REPOSITORY, timeFilter);
+        // ! Keep the 'await' otherwise, the try-catch block is not triggered.
+        return await getUsersWithStats(graphql, REPOSITORY, timeFilter);
       } catch (err) {
         console.error(err);
 
