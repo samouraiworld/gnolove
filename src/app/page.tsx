@@ -1,10 +1,16 @@
 import { useMemo } from 'react';
 
+import { Metadata } from 'next';
+
 import { Flex, ScrollArea, Table } from '@radix-ui/themes';
 
 import ContributorRow from '@/module/contributor-row';
 
 import contributors from '@/constant/contributors';
+
+export const metadata: Metadata = {
+  title: 'Top of Gnome',
+};
 
 const HomePage = () => {
   const contributorsWithScore = useMemo(() => {
