@@ -1,26 +1,16 @@
 /* eslint-disable no-console */
-import { graphql } from '@octokit/graphql';
 import { writeFileSync } from 'node:fs';
+
+import graphql from '@/instance/graphql';
 
 import { getUsersWithStats } from '@/util/github';
 
-import { Repository } from '@/type/github';
-
-import ENV from '@/env';
+import REPOSITORY from '@/constant/repository';
 
 const main = async () => {
-  const repo: Repository = {
-    owner: 'gnolang',
-    repository: 'gno',
-  };
+  console.log(`> Generating the contributors for repository '${REPOSITORY.owner}/${REPOSITORY.repository}'.`);
 
-  const graphqlWithAuth = graphql.defaults({
-    headers: { authorization: `token ${ENV.GITHUB_TOKEN}` },
-  });
-
-  console.log(`> Generating the contributors for repository '${repo.owner}/${repo.repository}'.`);
-
-  const res = await getUsersWithStats(graphqlWithAuth, repo);
+  const res = await getUsersWithStats(graphql, REPOSITORY);
   const jsonStr = JSON.stringify(res, null, 2);
   writeFileSync('src/constants/contributors.ts', `const data = ${jsonStr};\n\nexport default data;`);
 
