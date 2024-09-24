@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 const HomePage = () => {
   const contributorsWithScore = useMemo(() => {
     return contributors
+      .slice(0, 50)
       .map((row) => ({ ...row, score: row.commits + row.issues + row.prs }))
       .toSorted((a, b) => b.score - a.score);
   }, [contributors]);
