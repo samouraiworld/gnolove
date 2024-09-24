@@ -77,12 +77,13 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
                 <Table.ColumnHeaderCell className="text-center">Issues</Table.ColumnHeaderCell>
                 <Table.ColumnHeaderCell className="text-center">PRs</Table.ColumnHeaderCell>
                 <Table.ColumnHeaderCell className="text-center">Score</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell className="text-center">Rank</Table.ColumnHeaderCell>
               </Table.Row>
             </Table.Header>
 
             <Table.Body>
-              {contributorsWithScore.map(({ score, ...contributor }) => {
-                return <ContributorRow key={contributor.id} {...{ contributor, score }} />;
+              {contributorsWithScore.map(({ score, ...contributor }, rank) => {
+                return <ContributorRow key={contributor.id} {...{ contributor, score, rank }} />;
               })}
             </Table.Body>
           </Table.Root>
