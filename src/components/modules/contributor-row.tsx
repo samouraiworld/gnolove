@@ -38,6 +38,11 @@ const ContributorRow = ({ contributor, score, rank }: ContributorRowProps) => {
       data-href={contributor.url}
       key={contributor.id}
     >
+      <Table.Cell className="text-center">
+        <Flex height="100%" align="center" justify="center">
+          {rankElement}
+        </Flex>
+      </Table.Cell>
       <Table.Cell>
         <Flex width="100%" height="100%" align="center" gap="2">
           <Image
@@ -57,11 +62,6 @@ const ContributorRow = ({ contributor, score, rank }: ContributorRowProps) => {
       <Table.Cell className="text-center">{contributor.issues}</Table.Cell>
       <Table.Cell className="text-center">{contributor.prs}</Table.Cell>
       <Table.Cell className="text-center font-bold">{score}</Table.Cell>
-      <Table.Cell className="text-center">
-        <Flex height="100%" align="center" justify="center">
-          {rankElement}
-        </Flex>
-      </Table.Cell>
     </Table.Row>
   );
 };

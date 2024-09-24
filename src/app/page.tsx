@@ -72,12 +72,12 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
           <Table.Root layout="auto">
             <Table.Header>
               <Table.Row>
+                <Table.ColumnHeaderCell className="text-center">Rank</Table.ColumnHeaderCell>
                 <Table.ColumnHeaderCell className="w-full">Username</Table.ColumnHeaderCell>
                 <Table.ColumnHeaderCell className="text-center">Commits</Table.ColumnHeaderCell>
                 <Table.ColumnHeaderCell className="text-center">Issues</Table.ColumnHeaderCell>
                 <Table.ColumnHeaderCell className="text-center">PRs</Table.ColumnHeaderCell>
                 <Table.ColumnHeaderCell className="text-center">Score</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell className="text-center">Rank</Table.ColumnHeaderCell>
               </Table.Row>
             </Table.Header>
 
