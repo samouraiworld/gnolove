@@ -1,6 +1,14 @@
 import { graphql } from '@octokit/graphql/types';
+import { endOfMonth, endOfWeek, endOfYear, format, Interval, startOfMonth, startOfWeek, startOfYear } from 'date-fns';
 
 import { Repository, User, UserWithStats } from '@/type/github';
+
+export enum TimeFilter {
+  ALL_TIME = 'All Time',
+  YEARLY = 'Yearly',
+  MONTHLY = 'Monthly',
+  WEEKLY = 'Weekly',
+}
 
 export const getContributors = async (client: graphql, repo: Repository): Promise<User[]> => {
   let hasNextPage = true;
@@ -47,7 +55,23 @@ export const getContributors = async (client: graphql, repo: Repository): Promis
   return contributors;
 };
 
-export const getUserStats = async (client: graphql, repo: Repository, user: User): Promise<UserWithStats> => {
+export const buildSearchQuery = (repo: Repository, user: User, is: 'issue' | 'pr', interval: Interval | undefined) => {
+  const query = [`repo:${repo.owner}/${repo.repository}`, `author:${user.login}`, `is:${is}`];
+
+  if (interval) {
+    const stringyfiedInterval = [interval.start, interval.end].map((value) => format(value, 'yyyy-MM-dd')).join('..');
+    query.push(`created:${stringyfiedInterval}`);
+  }
+
+  return query.join(' ');
+};
+
+export const getUserStats = async (
+  client: graphql,
+  repo: Repository,
+  user: User,
+  interval: Interval | undefined,
+): Promise<UserWithStats> => {
   const query = `
     query($owner: String!, $repository: String!, $id: ID!, $issuesQuery: String!, $pullRequestsQuery: String!) {
       commits: repository(owner: $owner, name: $repository) {
@@ -71,8 +95,8 @@ export const getUserStats = async (client: graphql, repo: Repository, user: User
       }
     }`;
 
-  const issuesQuery = `repo:${repo.owner}/${repo.repository} author:${user.login} is:issue`;
-  const pullRequestsQuery = `repo:${repo.owner}/${repo.repository} author:${user.login} is:pr`;
+  const issuesQuery = buildSearchQuery(repo, user, 'issue', interval);
+  const pullRequestsQuery = buildSearchQuery(repo, user, 'pr', interval);
 
   const res = await client<{
     commits: { defaultBranchRef: { target: { history: { totalCount: number } } } };
@@ -88,7 +112,44 @@ export const getUserStats = async (client: graphql, repo: Repository, user: User
   };
 };
 
-export const getUsersWithStats = async (client: graphql, repo: Repository): Promise<UserWithStats[]> => {
+export const getUsersWithStats = async (
+  client: graphql,
+  repo: Repository,
+  timeFilter: TimeFilter,
+): Promise<UserWithStats[]> => {
+  const interval = getTimeFilterInterval(timeFilter);
+
   const users = await getContributors(client, repo);
-  return Promise.all(users.map((user) => getUserStats(client, repo, user)));
+  return Promise.all(users.map((user) => getUserStats(client, repo, user, interval)));
+};
+
+export const getTimeFilterInterval = (timeFilter: TimeFilter | undefined): Interval | undefined => {
+  const now = new Date();
+
+  switch (timeFilter) {
+    case TimeFilter.WEEKLY:
+      return { start: startOfWeek(now, { weekStartsOn: 1 }), end: endOfWeek(now, { weekStartsOn: 1 }) };
+
+    case TimeFilter.MONTHLY:
+      return { start: startOfMonth(now), end: endOfMonth(now) };
+
+    case TimeFilter.YEARLY:
+      return { start: startOfYear(now), end: endOfYear(now) };
+
+    default:
+      return undefined;
+  }
+};
+
+export const isTimeFilter = (value: string): value is keyof typeof TimeFilter => {
+  return value in TimeFilter;
+};
+
+export const getTimeFilterFromSearchParam = (
+  searchParam: string | string[] | undefined,
+  fallback = TimeFilter.ALL_TIME,
+) => {
+  return searchParam && typeof searchParam === 'string' && isTimeFilter(searchParam)
+    ? TimeFilter[searchParam]
+    : fallback;
 };
