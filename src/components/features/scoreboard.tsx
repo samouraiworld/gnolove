@@ -1,4 +1,4 @@
-import React from 'react';
+import Link from 'next/link';
 
 import { Flex, FlexProps, Table, TabNav } from '@radix-ui/themes';
 
@@ -14,17 +14,17 @@ export interface ScoreboardProps {
   timeFilter: TimeFilter;
 }
 
-const Scoreboard = ({ contributors, timeFilter, p, ...props }: ScoreboardProps & FlexProps) => {
+const Scoreboard = ({ contributors, timeFilter, ...props }: ScoreboardProps & FlexProps) => {
   const contributorsWithScore = getSortedContributorsWithScore(contributors).slice(0, 50);
 
   return (
-    <Flex direction="column" p={p ?? { initial: '2', sm: '4', lg: '7' }} {...props}>
+    <Flex direction="column" {...props}>
       <TabNav.Root mb="4">
         {Object.keys(TimeFilter)
           .filter(isTimeFilter)
           .map((key) => (
-            <TabNav.Link key={key} href={`?f=${key}`} active={timeFilter.toString() === TimeFilter[key]}>
-              {TimeFilter[key]}
+            <TabNav.Link key={key} href={`?f=${key}`} active={timeFilter.toString() === TimeFilter[key]} asChild>
+              <Link href={`?f=${key}`}>{TimeFilter[key]}</Link>
             </TabNav.Link>
           ))}
       </TabNav.Root>
