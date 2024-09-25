@@ -1,7 +1,7 @@
 import { graphql } from '@octokit/graphql/types';
 import { endOfMonth, endOfWeek, endOfYear, format, Interval, startOfMonth, startOfWeek, startOfYear } from 'date-fns';
 
-import { PullRequest, Repository, User, UserWithStats } from '@/type/github';
+import { Repository, User, UserWithStats } from '@/type/github';
 
 export enum TimeFilter {
   ALL_TIME = 'All Time',
