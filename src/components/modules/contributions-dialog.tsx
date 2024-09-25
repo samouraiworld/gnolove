@@ -2,6 +2,8 @@
 
 import { useMemo, useState } from 'react';
 
+import Link from 'next/link';
+
 import { ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons';
 import { Badge, Button, Dialog, Flex, Text } from '@radix-ui/themes';
 import { emojify } from 'node-emoji';
@@ -48,23 +50,32 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
           <>
             <Flex direction="column" className="divide-y divide-gray-4">
               {issuesAndPRs.map(({ title, url, labels }) => (
-                <Flex key={url} direction="column" py="2" gap="1">
-                  <Text size="1">{title}</Text>
-                  <Flex gap="1" wrap="wrap">
-                    {labels.map(({ name, color: rawColor }) => {
-                      const isWhite = rawColor === 'ffffff';
+                <Flex
+                  key={url}
+                  direction="column"
+                  py="2"
+                  gap="1"
+                  className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-grayA-2"
+                  asChild
+                >
+                  <Link href={url}>
+                    <Text size="1">{title}</Text>
+                    <Flex gap="1" wrap="wrap">
+                      {labels.map(({ name, color: rawColor }) => {
+                        const isWhite = rawColor === 'ffffff';
 
-                      const color = `#${rawColor}`;
-                      const rgbColor = hexToRGB(color);
-                      const background = `rgba(${rgbColor[0]}, ${rgbColor[1]}, ${rgbColor[2]}, .2)`;
+                        const color = `#${rawColor}`;
+                        const rgbColor = hexToRGB(color);
+                        const background = `rgba(${rgbColor[0]}, ${rgbColor[1]}, ${rgbColor[2]}, .2)`;
 
-                      return (
-                        <Badge size="1" key={name} color="gray" style={!isWhite ? { background, color } : undefined}>
-                          {emojify(name)}
-                        </Badge>
-                      );
-                    })}
-                  </Flex>
+                        return (
+                          <Badge size="1" key={name} color="gray" style={!isWhite ? { background, color } : undefined}>
+                            {emojify(name)}
+                          </Badge>
+                        );
+                      })}
+                    </Flex>
+                  </Link>
                 </Flex>
               ))}
             </Flex>
