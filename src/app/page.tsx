@@ -48,7 +48,7 @@ export interface HomePageParams {
 }
 
 const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
-  const timeFilter = getTimeFilterFromSearchParam(f);
+  const timeFilter = getTimeFilterFromSearchParam(f, TimeFilter.MONTHLY);
   const query = getCachedContributorsQuery(timeFilter);
 
   const cachedContributors = await query();
