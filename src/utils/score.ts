@@ -17,8 +17,8 @@ export const getContributorsWithScore = (contributors: UserWithStats[]): UserWit
 
 export const getSortedContributorsWithScore = (contributors: UserWithStats[]): UserWithStatsAndScore[] => {
   return getContributorsWithScore(contributors)
-    .toSorted((a, b) => b.mrs.count - a.mrs.count)
-    .toSorted((a, b) => b.prs.count - a.prs.count)
     .toSorted((a, b) => b.commits - a.commits)
+    .toSorted((a, b) => b.prs.count - a.prs.count)
+    .toSorted((a, b) => b.mrs.count - a.mrs.count)
     .toSorted((a, b) => b.score - a.score);
 };
