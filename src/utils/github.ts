@@ -1,7 +1,7 @@
 import { graphql } from '@octokit/graphql/types';
 import { endOfMonth, endOfWeek, endOfYear, format, Interval, startOfMonth, startOfWeek, startOfYear } from 'date-fns';
 
-import { Repository, User, UserWithStats } from '@/type/github';
+import { Issue, PullRequest, Repository, User, UserWithStats } from '@/type/github';
 
 export enum TimeFilter {
   ALL_TIME = 'All Time',
@@ -91,7 +91,7 @@ export const getUserStats = async (
         }
       }
       
-      issues: search(query: $issuesQuery, type: ISSUE, first: 100) {
+      issues: search(query: $issuesQuery, type: ISSUE, first: 100, last: 100) {
         nodes {
           ... on Issue {
             id
@@ -254,4 +254,23 @@ export const getLastIssuesWithLabel = (contributors: UserWithStats[], labels: st
     .toSorted(cmpCreatedAt);
 
   return filteredIssues.slice(0, last);
+};
+
+export const getContributorOldestContribution = (contributor: UserWithStats): Issue | PullRequest | undefined => {
+  const contributions = [...contributor.issues.data, ...contributor.prs.data].toSorted(cmpCreatedAt);
+  if (!contributions.length) return undefined;
+
+  return contributions[contributions.length - 1];
+};
+
+export const getNewContributors = (contributors: UserWithStats[], last: number) => {
+  const sortedContributors = contributors.toSorted((contributor1, contributor2) => {
+    const contributor1LastContribution = getContributorOldestContribution(contributor1);
+    const contributor2LastContribution = getContributorOldestContribution(contributor2);
+    if (!contributor1LastContribution || !contributor2LastContribution) return 0;
+
+    return cmpCreatedAt(contributor1LastContribution, contributor2LastContribution);
+  });
+
+  return sortedContributors.slice(0, last);
 };

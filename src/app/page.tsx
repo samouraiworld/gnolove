@@ -6,11 +6,18 @@ import { Flex, Heading, ScrollArea } from '@radix-ui/themes';
 
 import Scoreboard from '@/feature/scoreboard';
 
+import ContributorTable from '@/module/contributor-table';
 import IssuesTable from '@/module/issues-table';
 
 import graphql from '@/instance/graphql';
 
-import { getLastIssuesWithLabel, getTimeFilterFromSearchParam, getUsersWithStats, TimeFilter } from '@/util/github';
+import {
+  getNewContributors,
+  getLastIssuesWithLabel,
+  getTimeFilterFromSearchParam,
+  getUsersWithStats,
+  TimeFilter,
+} from '@/util/github';
 
 import contributors from '@/constant/contributors';
 import REPOSITORY from '@/constant/repository';
@@ -61,6 +68,7 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
   const cachedContributors = await query();
 
   const lastIssues = getLastIssuesWithLabel(allTimeCachedContributors, ['good first issue', 'help wanted'], 5);
+  const newContributors = getNewContributors(allTimeCachedContributors, 5);
 
   return (
     <Flex className="h-screen w-screen" asChild>
@@ -78,6 +86,12 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
           </Heading>
 
           <IssuesTable issues={lastIssues} className="w-full" />
+
+          <Heading size="6" mt="6">
+            New Rising Contributors
+          </Heading>
+
+          <ContributorTable contributors={newContributors} />
 
           <Heading size="6" mt="6">
             Scoreboard

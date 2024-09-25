@@ -11,9 +11,12 @@ export const getScore = (user: UserWithStats): number => {
   );
 };
 
+export const getContributorsWithScore = (contributors: UserWithStats[]): UserWithStatsAndScore[] => {
+  return contributors.map((row) => ({ ...row, score: getScore(row) }));
+};
+
 export const getSortedContributorsWithScore = (contributors: UserWithStats[]): UserWithStatsAndScore[] => {
-  return contributors
-    .map((row) => ({ ...row, score: getScore(row) }))
+  return getContributorsWithScore(contributors)
     .toSorted((a, b) => b.mrs.count - a.mrs.count)
     .toSorted((a, b) => b.prs.count - a.prs.count)
     .toSorted((a, b) => b.commits - a.commits)

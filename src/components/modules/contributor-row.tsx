@@ -20,9 +20,11 @@ export interface ContributorRowProps {
   contributor: UserWithStats;
   score: number;
   rank: number;
+
+  showRank?: boolean;
 }
 
-const ContributorRow = ({ contributor, score, rank }: ContributorRowProps) => {
+const ContributorRow = ({ contributor, score, rank, showRank }: ContributorRowProps) => {
   const rankElement = useMemo(() => {
     if (rank < 3)
       return (
@@ -52,11 +54,13 @@ const ContributorRow = ({ contributor, score, rank }: ContributorRowProps) => {
 
   return (
     <Table.Row className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-grayA-2" key={contributor.id}>
-      <Table.Cell data-href={contributor.url} onClick={onClick} className="text-center">
-        <Flex height="100%" align="center" justify="center">
-          {rankElement}
-        </Flex>
-      </Table.Cell>
+      {showRank && (
+        <Table.Cell data-href={contributor.url} onClick={onClick} className="text-center">
+          <Flex height="100%" align="center" justify="center">
+            {rankElement}
+          </Flex>
+        </Table.Cell>
+      )}
 
       <Table.Cell data-href={contributor.url} onClick={onClick}>
         <Flex width="100%" height="100%" align="center" gap="2">
