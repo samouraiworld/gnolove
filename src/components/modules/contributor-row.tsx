@@ -3,7 +3,6 @@
 import { useMemo } from 'react';
 
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 
 import { ExternalLinkIcon, MagnifyingGlassIcon, StarFilledIcon } from '@radix-ui/react-icons';
 import { Flex, IconButton, Table, Text } from '@radix-ui/themes';
@@ -24,8 +23,6 @@ export interface ContributorRowProps {
 }
 
 const ContributorRow = ({ contributor, score, rank }: ContributorRowProps) => {
-  const router = useRouter();
-
   const rankElement = useMemo(() => {
     if (rank < 3)
       return (
@@ -44,7 +41,13 @@ const ContributorRow = ({ contributor, score, rank }: ContributorRowProps) => {
   }, [contributor]);
 
   const onClick = () => {
-    router.push(contributor.url);
+    if (typeof window === 'undefined') return;
+    window.open(contributor.url, '_blank');
+  };
+
+  const onLastContributionClick = () => {
+    if (typeof window === 'undefined' || !lastContribution) return;
+    window.open(lastContribution.url, '_blank');
   };
 
   return (
@@ -74,7 +77,7 @@ const ContributorRow = ({ contributor, score, rank }: ContributorRowProps) => {
       {lastContribution ? (
         <Table.Cell
           data-href={lastContribution.url}
-          onClick={() => router.push(lastContribution.url)}
+          onClick={onLastContributionClick}
           className="group hidden text-left lg:table-cell"
         >
           <Flex width="100%" height="100%" align="center" gap="2" className="text-1">

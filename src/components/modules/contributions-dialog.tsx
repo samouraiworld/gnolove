@@ -58,7 +58,7 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
                   className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-grayA-2"
                   asChild
                 >
-                  <Link href={url}>
+                  <Link href={url} target="_blank">
                     <Text size="1">{title}</Text>
                     <Flex gap="1" wrap="wrap">
                       {labels.map(({ name, color: rawColor }) => {
