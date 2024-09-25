@@ -78,12 +78,12 @@ export const getUserStats = async (
   interval: Interval | undefined,
 ): Promise<UserWithStats> => {
   const query = `
-    query($owner: String!, $repository: String!, $id: ID!, $issuesQuery: String!, $pullRequestsQuery: String!, $mergedRequestsQuery: String!) {
+    query($owner: String!, $repository: String!, $id: ID!, $until: GitTimestamp, $since: GitTimestamp,  $issuesQuery: String!, $pullRequestsQuery: String!, $mergedRequestsQuery: String!) {
       commits: repository(owner: $owner, name: $repository) {
         defaultBranchRef {
           target {
             ... on Commit {
-              history(author: {id: $id}) {
+              history(author: {id: $id}, since: $since, until: $until) {
                 totalCount
               }
             }
@@ -169,6 +169,8 @@ export const getUserStats = async (
     owner: repo.owner,
     repository: repo.repository,
     id: user.id,
+    since: interval?.start ?? null,
+    until: interval?.end ?? null,
     issuesQuery,
     pullRequestsQuery,
     mergedRequestsQuery,
