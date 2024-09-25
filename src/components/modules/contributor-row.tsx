@@ -5,7 +5,7 @@ import { useMemo } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-import { ExternalLinkIcon, InfoCircledIcon, StarFilledIcon } from '@radix-ui/react-icons';
+import { ExternalLinkIcon, InfoCircledIcon, MagnifyingGlassIcon, StarFilledIcon } from '@radix-ui/react-icons';
 import { Flex, IconButton, Table, Text } from '@radix-ui/themes';
 import { formatDistanceToNow } from 'date-fns';
 import { CircleDotIcon, GitPullRequestIcon } from 'lucide-react';
@@ -77,19 +77,28 @@ const ContributorRow = ({ contributor, score, rank }: ContributorRowProps) => {
           onClick={() => router.push(lastContribution.url)}
           className="group hidden text-left lg:table-cell"
         >
-          <Flex width="100%" height="100%" align="center" gap="2">
-            {lastContribution.type === 'ISSUE' ? (
-              <>
-                <CircleDotIcon className="size-3 group-hover:text-accent-10" />
-                <Text className="group-hover:text-accent-10">Issue</Text>
-              </>
-            ) : (
-              <>
-                <GitPullRequestIcon className="size-3 group-hover:text-accent-10" />
-                <Text className="group-hover:text-accent-10">PR</Text>
-              </>
-            )}
-            <Text color="gray">{formatDistanceToNow(lastContribution.createdAt)}</Text>
+          <Flex width="100%" height="100%" align="center" gap="2" className="text-1">
+            <Flex direction="column">
+              <Flex align="center" gap="1">
+                {lastContribution.type === 'ISSUE' ? (
+                  <>
+                    <CircleDotIcon className="size-3 group-hover:text-accent-10" />
+                    <Text className="group-hover:text-accent-10">Issue</Text>
+                  </>
+                ) : (
+                  <>
+                    <GitPullRequestIcon className="size-3 group-hover:text-accent-10" />
+                    <Text className="group-hover:text-accent-10">PR</Text>
+                  </>
+                )}
+
+                <Text color="gray">{formatDistanceToNow(lastContribution.createdAt)}</Text>
+              </Flex>
+
+              <Text color="gray" className="max-w-52 truncate">
+                {lastContribution.title}
+              </Text>
+            </Flex>
           </Flex>
         </Table.Cell>
       ) : (
@@ -98,19 +107,31 @@ const ContributorRow = ({ contributor, score, rank }: ContributorRowProps) => {
         </Table.Cell>
       )}
 
-      <Table.Cell data-href={contributor.url} onClick={onClick} className="hidden text-center sm:table-cell">
+      <Table.Cell
+        data-href={contributor.url}
+        onClick={onClick}
+        className="hidden text-center align-middle sm:table-cell"
+      >
         {contributor.commits}
       </Table.Cell>
 
-      <Table.Cell data-href={contributor.url} onClick={onClick} className="hidden text-center sm:table-cell">
+      <Table.Cell
+        data-href={contributor.url}
+        onClick={onClick}
+        className="hidden text-center align-middle sm:table-cell"
+      >
         {contributor.issues.count}
       </Table.Cell>
 
-      <Table.Cell data-href={contributor.url} onClick={onClick} className="hidden text-center sm:table-cell">
+      <Table.Cell
+        data-href={contributor.url}
+        onClick={onClick}
+        className="hidden text-center align-middle sm:table-cell"
+      >
         {contributor.prs.count} ({contributor.mrs.count})
       </Table.Cell>
 
-      <Table.Cell data-href={contributor.url} onClick={onClick} className="text-center font-bold">
+      <Table.Cell data-href={contributor.url} onClick={onClick} className="text-center align-middle font-bold">
         {score}
       </Table.Cell>
 
@@ -118,7 +139,7 @@ const ContributorRow = ({ contributor, score, rank }: ContributorRowProps) => {
         <Flex height="100%" align="center" justify="center">
           <ContributionsDialog user={contributor}>
             <IconButton variant="ghost">
-              <InfoCircledIcon />
+              <MagnifyingGlassIcon />
             </IconButton>
           </ContributionsDialog>
         </Flex>
