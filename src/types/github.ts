@@ -1,6 +1,6 @@
 export type Label = { name: string; color: string };
-export type Issue = { title: string; url: string; createdAt: string; labels: Label[] };
-export type PullRequest = { title: string; url: string; createdAt: string; labels: Label[] };
+export type Issue = { id: string; title: string; url: string; createdAt: string; labels: Label[] };
+export type PullRequest = { id: string; title: string; url: string; createdAt: string; labels: Label[] };
 
 export type Repository = { owner: string; repository: string };
 export type User = { login: string; id: string; avatarUrl: string; url: string; name: string | null };

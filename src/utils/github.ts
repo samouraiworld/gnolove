@@ -94,6 +94,7 @@ export const getUserStats = async (
       issues: search(query: $issuesQuery, type: ISSUE, first: 100) {
         nodes {
           ... on Issue {
+            id
             title
             url
             createdAt
@@ -111,6 +112,7 @@ export const getUserStats = async (
       pullRequests: search(query: $pullRequestsQuery, type: ISSUE, first: 100) {
         nodes {
           ... on PullRequest {
+            id
             title
             url
             createdAt
@@ -128,6 +130,7 @@ export const getUserStats = async (
       mergedRequests: search(query: $mergedRequestsQuery, type: ISSUE, first: 100) {
         nodes {
           ... on PullRequest {
+            id
             title
             url
             createdAt
@@ -148,6 +151,7 @@ export const getUserStats = async (
   const mergedRequestsQuery = buildSearchQuery(repo, user, interval, ['merged']);
 
   type ReturnedNode = {
+    id: string;
     title: string;
     url: string;
     createdAt: string;
@@ -179,6 +183,8 @@ export const getUserStats = async (
   const mapNodesAndLabels = (nodes: ReturnedNode[]) => {
     return nodes.map(({ labels, ...props }) => ({ ...props, labels: labels.nodes }));
   };
+
+  // TODO: Use schema validation to prevent invalid data from being retrieved and type mismatch.
 
   return {
     ...user,
@@ -233,4 +239,19 @@ export const getTimeFilterFromSearchParam = (
 
 export const cmpCreatedAt = <T extends { createdAt: string | Date }>(objA: T, objB: T): number => {
   return new Date(objB.createdAt).getTime() - new Date(objA.createdAt).getTime();
+};
+
+export const getLastIssuesWithLabel = (contributors: UserWithStats[], labels: string[], last: number) => {
+  const issues = contributors.map(({ issues }) => issues.data).flat();
+
+  const filteredIssues = issues
+    .filter((issue, i) => {
+      if (issues.findIndex(({ id }) => id === issue.id) !== i) return false;
+
+      const strLabels = issue.labels.map(({ name }) => name);
+      return strLabels.some((name) => labels.includes(name));
+    })
+    .toSorted(cmpCreatedAt);
+
+  return filteredIssues.slice(0, last);
 };
