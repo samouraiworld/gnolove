@@ -74,7 +74,7 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
               <Table.Row>
                 <Table.ColumnHeaderCell className="text-center">Rank</Table.ColumnHeaderCell>
                 <Table.ColumnHeaderCell className="w-full">Username</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell className="hidden lg:table-cell">Last Edited</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell className="hidden lg:table-cell">Last Activity</Table.ColumnHeaderCell>
                 <Table.ColumnHeaderCell className="hidden text-center sm:table-cell">Commits</Table.ColumnHeaderCell>
                 <Table.ColumnHeaderCell className="hidden text-center sm:table-cell">Issues</Table.ColumnHeaderCell>
                 <Table.ColumnHeaderCell className="hidden text-center sm:table-cell">PRs (MRs)</Table.ColumnHeaderCell>

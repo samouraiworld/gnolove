@@ -71,26 +71,32 @@ const ContributorRow = ({ contributor, score, rank }: ContributorRowProps) => {
         </Flex>
       </Table.Cell>
 
-      <Table.Cell data-href={contributor.url} onClick={onClick} className="hidden text-left lg:table-cell">
-        {lastContribution ? (
+      {lastContribution ? (
+        <Table.Cell
+          data-href={lastContribution.url}
+          onClick={() => router.push(lastContribution.url)}
+          className="group hidden text-left lg:table-cell"
+        >
           <Flex width="100%" height="100%" align="center" gap="2">
             {lastContribution.type === 'ISSUE' ? (
               <>
-                <CircleDotIcon className="size-3" />
-                <Text>Issue</Text>
+                <CircleDotIcon className="size-3 group-hover:text-accent-10" />
+                <Text className="group-hover:text-accent-10">Issue</Text>
               </>
             ) : (
               <>
-                <GitPullRequestIcon className="size-3" />
-                <Text>PR</Text>
+                <GitPullRequestIcon className="size-3 group-hover:text-accent-10" />
+                <Text className="group-hover:text-accent-10">PR</Text>
               </>
             )}
             <Text color="gray">{formatDistanceToNow(lastContribution.createdAt)}</Text>
           </Flex>
-        ) : (
+        </Table.Cell>
+      ) : (
+        <Table.Cell data-href={contributor.url} onClick={onClick} className="hidden text-left lg:table-cell">
           <Text color="gray">-</Text>
-        )}
-      </Table.Cell>
+        </Table.Cell>
+      )}
 
       <Table.Cell data-href={contributor.url} onClick={onClick} className="hidden text-center sm:table-cell">
         {contributor.commits}
