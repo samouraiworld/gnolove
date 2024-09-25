@@ -5,11 +5,11 @@ import { useMemo, useState } from 'react';
 import Link from 'next/link';
 
 import { ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons';
-import { Badge, Button, Dialog, Flex, Text } from '@radix-ui/themes';
-import { emojify } from 'node-emoji';
+import { Button, Dialog, Flex, Text } from '@radix-ui/themes';
+
+import Label from '@/element/label';
 
 import { chunk } from '@/util/array';
-import { hexToRGB } from '@/util/style';
 
 import { UserWithStats } from '@/type/github';
 
@@ -61,19 +61,9 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
                   <Link href={url} target="_blank">
                     <Text size="1">{title}</Text>
                     <Flex gap="1" wrap="wrap">
-                      {labels.map(({ name, color: rawColor }) => {
-                        const isWhite = rawColor === 'ffffff';
-
-                        const color = `#${rawColor}`;
-                        const rgbColor = hexToRGB(color);
-                        const background = `rgba(${rgbColor[0]}, ${rgbColor[1]}, ${rgbColor[2]}, .2)`;
-
-                        return (
-                          <Badge size="1" key={name} color="gray" style={!isWhite ? { background, color } : undefined}>
-                            {emojify(name)}
-                          </Badge>
-                        );
-                      })}
+                      {labels.map((label) => (
+                        <Label key={label.name + label.color} label={label} />
+                      ))}
                     </Flex>
                   </Link>
                 </Flex>
