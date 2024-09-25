@@ -27,6 +27,7 @@
     "date-fns": "^4.1.0",
     "lucide-react": "^0.445.0",
     "next": "^14.2.3",
+    "node-emoji": "^2.1.3",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.38",
     "radix-themes-tw": "^0.2.3",

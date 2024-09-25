@@ -51,9 +51,9 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
   const cachedContributors = await query();
 
   const contributorsWithScore = cachedContributors
-    .slice(0, 50)
-    .map((row) => ({ ...row, score: row.commits + row.issues + row.prs }))
-    .toSorted((a, b) => b.score - a.score);
+    .map((row) => ({ ...row, score: row.commits + row.issues.count + row.prs.count }))
+    .toSorted((a, b) => b.score - a.score)
+    .slice(0, 50);
 
   return (
     <Flex className="h-screen w-screen" asChild>
@@ -78,6 +78,7 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
                 <Table.ColumnHeaderCell className="text-center">Issues</Table.ColumnHeaderCell>
                 <Table.ColumnHeaderCell className="text-center">PRs</Table.ColumnHeaderCell>
                 <Table.ColumnHeaderCell className="text-center">Score</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell></Table.ColumnHeaderCell>
               </Table.Row>
             </Table.Header>
 

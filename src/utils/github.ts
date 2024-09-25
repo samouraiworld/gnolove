@@ -1,7 +1,7 @@
 import { graphql } from '@octokit/graphql/types';
 import { endOfMonth, endOfWeek, endOfYear, format, Interval, startOfMonth, startOfWeek, startOfYear } from 'date-fns';
 
-import { Repository, User, UserWithStats } from '@/type/github';
+import { PullRequest, Repository, User, UserWithStats } from '@/type/github';
 
 export enum TimeFilter {
   ALL_TIME = 'All Time',
@@ -86,11 +86,37 @@ export const getUserStats = async (
         }
       }
       
-      issues: search(query: $issuesQuery, type: ISSUE) {
+      issues: search(query: $issuesQuery, type: ISSUE, first: 100) {
+        nodes {
+          ... on Issue {
+            title
+            url
+            createdAt
+            labels(first: 10) {
+              nodes {
+                name
+                color
+              }
+            }
+          }
+        }
         count: issueCount
       }
 
-      pullRequests: search(query: $pullRequestsQuery, type: ISSUE) {
+      pullRequests: search(query: $pullRequestsQuery, type: ISSUE, first: 100) {
+        nodes {
+          ... on PullRequest {
+            title
+            url
+            createdAt
+            labels(first: 10) {
+              nodes {
+                name
+                color
+              }
+            }
+          }
+        }
         count: issueCount
       }
     }`;
@@ -98,17 +124,32 @@ export const getUserStats = async (
   const issuesQuery = buildSearchQuery(repo, user, 'issue', interval);
   const pullRequestsQuery = buildSearchQuery(repo, user, 'pr', interval);
 
+  type ReturnedIssues = {
+    nodes: { title: string; url: string; createdAt: string; labels: { nodes: { name: string; color: string }[] } }[];
+    count: number;
+  };
+
+  type ReturnedPullRequests = {
+    nodes: { title: string; url: string; createdAt: string; labels: { nodes: { name: string; color: string }[] } }[];
+    count: number;
+  };
+
+  type ReturnedCommits = { defaultBranchRef: { target: { history: { totalCount: number } } } };
+
   const res = await client<{
-    commits: { defaultBranchRef: { target: { history: { totalCount: number } } } };
-    issues: { count: number };
-    pullRequests: { count: number };
+    commits: ReturnedCommits;
+    issues: ReturnedIssues;
+    pullRequests: ReturnedPullRequests;
   }>(query, { owner: repo.owner, repository: repo.repository, id: user.id, issuesQuery, pullRequestsQuery });
+
+  const issues = res.issues.nodes.map(({ labels, ...props }) => ({ ...props, labels: labels.nodes }));
+  const pullRequests = res.pullRequests.nodes.map(({ labels, ...props }) => ({ ...props, labels: labels.nodes }));
 
   return {
     ...user,
     commits: res.commits.defaultBranchRef.target.history.totalCount,
-    issues: res.issues.count,
-    prs: res.pullRequests.count,
+    issues: { count: res.issues.count, data: issues },
+    prs: { count: res.pullRequests.count, data: pullRequests },
   };
 };
 

@@ -5,8 +5,10 @@ import { useMemo } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-import { ExternalLinkIcon, StarFilledIcon } from '@radix-ui/react-icons';
-import { Flex, Table } from '@radix-ui/themes';
+import { ExternalLinkIcon, InfoCircledIcon, StarFilledIcon } from '@radix-ui/react-icons';
+import { Flex, IconButton, Table } from '@radix-ui/themes';
+
+import ContributionsDialog from '@/module/contributions-dialog';
 
 import { cn } from '@/util/style';
 
@@ -31,19 +33,19 @@ const ContributorRow = ({ contributor, score, rank }: ContributorRowProps) => {
     return `${rank + 1} th`;
   }, [rank]);
 
+  const onClick = () => {
+    router.push(contributor.url);
+  };
+
   return (
-    <Table.Row
-      className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-grayA-2"
-      onClick={() => router.push(contributor.url)}
-      data-href={contributor.url}
-      key={contributor.id}
-    >
-      <Table.Cell className="text-center">
+    <Table.Row className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-grayA-2" key={contributor.id}>
+      <Table.Cell data-href={contributor.url} onClick={onClick} className="text-center">
         <Flex height="100%" align="center" justify="center">
           {rankElement}
         </Flex>
       </Table.Cell>
-      <Table.Cell>
+
+      <Table.Cell data-href={contributor.url} onClick={onClick}>
         <Flex width="100%" height="100%" align="center" gap="2">
           <Image
             src={contributor.avatarUrl}
@@ -58,10 +60,32 @@ const ContributorRow = ({ contributor, score, rank }: ContributorRowProps) => {
           <ExternalLinkIcon className="text-blue-10" />
         </Flex>
       </Table.Cell>
-      <Table.Cell className="text-center">{contributor.commits}</Table.Cell>
-      <Table.Cell className="text-center">{contributor.issues}</Table.Cell>
-      <Table.Cell className="text-center">{contributor.prs}</Table.Cell>
-      <Table.Cell className="text-center font-bold">{score}</Table.Cell>
+
+      <Table.Cell data-href={contributor.url} onClick={onClick} className="text-center">
+        {contributor.commits}
+      </Table.Cell>
+
+      <Table.Cell data-href={contributor.url} onClick={onClick} className="text-center">
+        {contributor.issues.count}
+      </Table.Cell>
+
+      <Table.Cell data-href={contributor.url} onClick={onClick} className="text-center">
+        {contributor.prs.count}
+      </Table.Cell>
+
+      <Table.Cell data-href={contributor.url} onClick={onClick} className="text-center font-bold">
+        {score}
+      </Table.Cell>
+
+      <Table.Cell className="text-center">
+        <Flex height="100%" align="center" justify="center">
+          <ContributionsDialog user={contributor}>
+            <IconButton variant="ghost">
+              <InfoCircledIcon />
+            </IconButton>
+          </ContributionsDialog>
+        </Flex>
+      </Table.Cell>
     </Table.Row>
   );
 };
