@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { unstable_cache } from 'next/cache';
 import Image from 'next/image';
 
-import { Flex, Heading, ScrollArea, Separator } from '@radix-ui/themes';
+import { Flex, Heading, ScrollArea } from '@radix-ui/themes';
 
 import Scoreboard from '@/feature/scoreboard';
 
