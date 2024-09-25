@@ -65,12 +65,12 @@ const ContributorRow = ({ contributor, score, rank }: ContributorRowProps) => {
             alt={`${contributor.login} avatar url`}
             height={24}
             width={24}
-            className="overflow-hidden rounded-full"
+            className="shrink-0 overflow-hidden rounded-full"
           />
 
-          {contributor.name ?? contributor.login}
+          <Text className="whitespace-break-spaces text-wrap">{contributor.name ?? contributor.login}</Text>
 
-          <ExternalLinkIcon className="text-blue-10" />
+          <ExternalLinkIcon className="shrink-0 text-blue-10" />
         </Flex>
       </Table.Cell>
 

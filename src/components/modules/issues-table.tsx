@@ -37,7 +37,7 @@ const IssuesTable = ({ issues, ...props }: IssuesTableProps) => {
             <Table.Cell className="!whitespace-normal text-wrap">
               <Flex width="100%" height="100%" align="center" gap="2">
                 {title}
-                <ExternalLinkIcon className="text-blue-10" />
+                <ExternalLinkIcon className="shrink-0 text-blue-10" />
               </Flex>
             </Table.Cell>
             <Table.Cell>
