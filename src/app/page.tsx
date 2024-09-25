@@ -1,14 +1,13 @@
 import { Metadata } from 'next';
 import { unstable_cache } from 'next/cache';
 
-import { Flex, ScrollArea, Table, TabNav } from '@radix-ui/themes';
+import { Flex, ScrollArea } from '@radix-ui/themes';
 
-import ContributorRow from '@/module/contributor-row';
+import Scoreboard from '@/feature/scoreboard';
 
 import graphql from '@/instance/graphql';
 
-import { getTimeFilterFromSearchParam, getUsersWithStats, isTimeFilter, TimeFilter } from '@/util/github';
-import { getSortedContributorsWithScore } from '@/util/score';
+import { getTimeFilterFromSearchParam, getUsersWithStats, TimeFilter } from '@/util/github';
 
 import contributors from '@/constant/contributors';
 import REPOSITORY from '@/constant/repository';
@@ -53,43 +52,10 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
 
   const cachedContributors = await query();
 
-  const contributorsWithScore = getSortedContributorsWithScore(cachedContributors).slice(0, 50);
-
   return (
     <Flex className="h-screen w-screen" asChild>
       <ScrollArea>
-        <Flex direction="column" p={{ initial: '2', sm: '4', lg: '7' }} className="mx-auto w-full max-w-5xl">
-          <TabNav.Root mb="4">
-            {Object.keys(TimeFilter)
-              .filter(isTimeFilter)
-              .map((key) => (
-                <TabNav.Link key={key} href={`?f=${key}`} active={timeFilter.toString() === TimeFilter[key]}>
-                  {TimeFilter[key]}
-                </TabNav.Link>
-              ))}
-          </TabNav.Root>
-
-          <Table.Root layout="auto">
-            <Table.Header>
-              <Table.Row>
-                <Table.ColumnHeaderCell className="text-center">Rank</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell className="w-full">Username</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell className="hidden lg:table-cell">Last Activity</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell className="hidden text-center sm:table-cell">Commits</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell className="hidden text-center sm:table-cell">Issues</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell className="hidden text-center sm:table-cell">PRs (MRs)</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell className="text-center">Magic Power</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell></Table.ColumnHeaderCell>
-              </Table.Row>
-            </Table.Header>
-
-            <Table.Body>
-              {contributorsWithScore.map(({ score, ...contributor }, rank) => (
-                <ContributorRow key={contributor.id} {...{ contributor, score, rank }} />
-              ))}
-            </Table.Body>
-          </Table.Root>
-        </Flex>
+        <Scoreboard contributors={cachedContributors} timeFilter={timeFilter} className="mx-auto w-full max-w-5xl" />
       </ScrollArea>
     </Flex>
   );
