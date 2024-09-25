@@ -20,7 +20,7 @@ const RootLayout = ({ children }: IProps) => {
   return (
     <html lang="en">
       <body>
-        <ThemeProvider attribute="class">
+        <ThemeProvider defaultTheme="light" attribute="class">
           <Theme>
             <ThemeSwitch />
 
