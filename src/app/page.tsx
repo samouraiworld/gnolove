@@ -58,7 +58,7 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
   return (
     <Flex className="h-screen w-screen" asChild>
       <ScrollArea>
-        <Flex direction="column" p={{ initial: '2', sm: '4', lg: '7' }} className="mx-auto w-full max-w-4xl">
+        <Flex direction="column" p={{ initial: '2', sm: '4', lg: '7' }} className="mx-auto w-full max-w-5xl">
           <TabNav.Root mb="4">
             {Object.keys(TimeFilter)
               .filter(isTimeFilter)
@@ -78,7 +78,7 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
                 <Table.ColumnHeaderCell className="hidden text-center sm:table-cell">Commits</Table.ColumnHeaderCell>
                 <Table.ColumnHeaderCell className="hidden text-center sm:table-cell">Issues</Table.ColumnHeaderCell>
                 <Table.ColumnHeaderCell className="hidden text-center sm:table-cell">PRs (MRs)</Table.ColumnHeaderCell>
-                <Table.ColumnHeaderCell className="text-center">Score</Table.ColumnHeaderCell>
+                <Table.ColumnHeaderCell className="text-center">Magic Power</Table.ColumnHeaderCell>
                 <Table.ColumnHeaderCell></Table.ColumnHeaderCell>
               </Table.Row>
             </Table.Header>
