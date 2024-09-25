@@ -55,8 +55,13 @@ export const getContributors = async (client: graphql, repo: Repository): Promis
   return contributors;
 };
 
-export const buildSearchQuery = (repo: Repository, user: User, is: 'issue' | 'pr', interval: Interval | undefined) => {
-  const query = [`repo:${repo.owner}/${repo.repository}`, `author:${user.login}`, `is:${is}`];
+export const buildSearchQuery = (
+  repo: Repository,
+  user: User,
+  interval: Interval | undefined,
+  is: ('issue' | 'pr' | 'merged')[],
+) => {
+  const query = [`repo:${repo.owner}/${repo.repository}`, `author:${user.login}`, is.map((v) => `is:${v}`)];
 
   if (interval) {
     const stringyfiedInterval = [interval.start, interval.end].map((value) => format(value, 'yyyy-MM-dd')).join('..');
@@ -73,7 +78,7 @@ export const getUserStats = async (
   interval: Interval | undefined,
 ): Promise<UserWithStats> => {
   const query = `
-    query($owner: String!, $repository: String!, $id: ID!, $issuesQuery: String!, $pullRequestsQuery: String!) {
+    query($owner: String!, $repository: String!, $id: ID!, $issuesQuery: String!, $pullRequestsQuery: String!, $mergedRequestsQuery: String!) {
       commits: repository(owner: $owner, name: $repository) {
         defaultBranchRef {
           target {
@@ -119,20 +124,39 @@ export const getUserStats = async (
         }
         count: issueCount
       }
+      
+      mergedRequests: search(query: $mergedRequestsQuery, type: ISSUE, first: 100) {
+        nodes {
+          ... on PullRequest {
+            title
+            url
+            createdAt
+            labels(first: 10) {
+              nodes {
+                name
+                color
+              }
+            }
+          }
+        }
+        count: issueCount
+      }
     }`;
 
-  const issuesQuery = buildSearchQuery(repo, user, 'issue', interval);
-  const pullRequestsQuery = buildSearchQuery(repo, user, 'pr', interval);
+  const issuesQuery = buildSearchQuery(repo, user, interval, ['issue']);
+  const pullRequestsQuery = buildSearchQuery(repo, user, interval, ['pr']);
+  const mergedRequestsQuery = buildSearchQuery(repo, user, interval, ['merged']);
 
-  type ReturnedIssues = {
-    nodes: { title: string; url: string; createdAt: string; labels: { nodes: { name: string; color: string }[] } }[];
-    count: number;
+  type ReturnedNode = {
+    title: string;
+    url: string;
+    createdAt: string;
+    labels: { nodes: { name: string; color: string }[] };
   };
 
-  type ReturnedPullRequests = {
-    nodes: { title: string; url: string; createdAt: string; labels: { nodes: { name: string; color: string }[] } }[];
-    count: number;
-  };
+  type ReturnedIssues = { nodes: ReturnedNode[]; count: number };
+  type ReturnedPullRequests = { nodes: ReturnedNode[]; count: number };
+  type ReturnedMergedRequests = { nodes: ReturnedNode[]; count: number };
 
   type ReturnedCommits = { defaultBranchRef: { target: { history: { totalCount: number } } } };
 
@@ -140,16 +164,26 @@ export const getUserStats = async (
     commits: ReturnedCommits;
     issues: ReturnedIssues;
     pullRequests: ReturnedPullRequests;
-  }>(query, { owner: repo.owner, repository: repo.repository, id: user.id, issuesQuery, pullRequestsQuery });
+    mergedRequests: ReturnedMergedRequests;
+  }>(query, {
+    owner: repo.owner,
+    repository: repo.repository,
+    id: user.id,
+    issuesQuery,
+    pullRequestsQuery,
+    mergedRequestsQuery,
+  });
 
-  const issues = res.issues.nodes.map(({ labels, ...props }) => ({ ...props, labels: labels.nodes }));
-  const pullRequests = res.pullRequests.nodes.map(({ labels, ...props }) => ({ ...props, labels: labels.nodes }));
+  const mapNodesAndLabels = (nodes: ReturnedNode[]) => {
+    return nodes.map(({ labels, ...props }) => ({ ...props, labels: labels.nodes }));
+  };
 
   return {
     ...user,
     commits: res.commits.defaultBranchRef.target.history.totalCount,
-    issues: { count: res.issues.count, data: issues },
-    prs: { count: res.pullRequests.count, data: pullRequests },
+    issues: { count: res.issues.count, data: mapNodesAndLabels(res.issues.nodes) },
+    prs: { count: res.pullRequests.count, data: mapNodesAndLabels(res.pullRequests.nodes) },
+    mrs: { count: res.mergedRequests.count, data: mapNodesAndLabels(res.mergedRequests.nodes) },
   };
 };
 
@@ -193,4 +227,8 @@ export const getTimeFilterFromSearchParam = (
   return searchParam && typeof searchParam === 'string' && isTimeFilter(searchParam)
     ? TimeFilter[searchParam]
     : fallback;
+};
+
+export const cmpCreatedAt = <T extends { createdAt: string | Date }>(objA: T, objB: T): number => {
+  return new Date(objB.createdAt).getTime() - new Date(objA.createdAt).getTime();
 };

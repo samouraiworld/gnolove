@@ -15,6 +15,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjEyOTky',
@@ -43,6 +47,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjUzNzg1',
@@ -59,6 +67,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjkyMjgw',
@@ -72,6 +84,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -165,8 +181,19 @@ const data = {
         ],
       },
       prs: {
-        count: 4,
+        count: 5,
         data: [
+          {
+            title: 'feat(examples/moul): ownable, entity, safe',
+            url: 'https://github.com/gnolang/gno/pull/2844',
+            createdAt: '2024-09-24T18:30:37Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             title: 'chore: rename r/manfred -> r/moul',
             url: 'https://github.com/gnolang/gno/pull/2820',
@@ -217,6 +244,33 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 2,
+        data: [
+          {
+            title: 'feat(examples): add p/printfdebugging',
+            url: 'https://github.com/gnolang/gno/pull/2809',
+            createdAt: '2024-09-17T17:17:01Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(examples): add p/fqname',
+            url: 'https://github.com/gnolang/gno/pull/2808',
+            createdAt: '2024-09-17T17:15:42Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjE0MzIwOQ==',
@@ -230,6 +284,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -249,6 +307,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjMyMjc2MQ==',
@@ -262,6 +324,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -295,6 +361,17 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'docs(portal-loop): mention packages can be deployed permissionlessly',
+            url: 'https://github.com/gnolang/gno/pull/2747',
+            createdAt: '2024-09-01T05:01:14Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjY4OTQ0MA==',
@@ -308,6 +385,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -327,6 +408,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjc1OTc0Nw==',
@@ -343,6 +428,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjc3Nzg2Ng==',
@@ -356,6 +445,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -387,6 +480,10 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjg5NDI5OQ==',
@@ -400,6 +497,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -419,6 +520,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjEzMjk0Mjk=',
@@ -435,6 +540,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjE5OTk1NDM=',
@@ -448,6 +557,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -516,6 +629,41 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 2,
+        data: [
+          {
+            title: "fix: Don't emit events from failed transactions",
+            url: 'https://github.com/gnolang/gno/pull/2806',
+            createdAt: '2024-09-17T00:40:42Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): Make GnoVM slice allocations before go runtime allocations',
+            url: 'https://github.com/gnolang/gno/pull/2781',
+            createdAt: '2024-09-10T19:12:37Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjI1NDIzNDU=',
@@ -532,6 +680,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjM2MTIwMTc=',
@@ -545,6 +697,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -710,6 +866,72 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 6,
+        data: [
+          {
+            title: 'feat(examples): add simplest "counter" realm',
+            url: 'https://github.com/gnolang/gno/pull/2815',
+            createdAt: '2024-09-18T18:40:47Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'perf(tm2/bft/fail): use sync.Once instead of Getenv on each call',
+            url: 'https://github.com/gnolang/gno/pull/2805',
+            createdAt: '2024-09-16T21:02:18Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test(gnovm): run initStaticBlocks in BenchmarkPreprocess',
+            url: 'https://github.com/gnolang/gno/pull/2792',
+            createdAt: '2024-09-13T09:33:16Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: mark files generated from genstd as generated',
+            url: 'https://github.com/gnolang/gno/pull/2785',
+            createdAt: '2024-09-12T11:50:42Z',
+            labels: [],
+          },
+          {
+            title: 'docs(website): more info on /contribute ',
+            url: 'https://github.com/gnolang/gno/pull/2765',
+            createdAt: '2024-09-06T12:41:04Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test(gnovm): test all files in gnovm/tests subdirs',
+            url: 'https://github.com/gnolang/gno/pull/2754',
+            createdAt: '2024-09-03T13:21:31Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjUyMjI1MjU=',
@@ -733,6 +955,10 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjU0NjMyMTg=',
@@ -746,6 +972,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -777,6 +1007,10 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjYwMDc1Nzg=',
@@ -790,6 +1024,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -809,6 +1047,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjY1NTAwMzU=',
@@ -822,6 +1064,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -841,6 +1087,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjcwNDAzNTA=',
@@ -854,6 +1104,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -873,6 +1127,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjcxOTY5MTg=',
@@ -886,6 +1144,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -905,6 +1167,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjc0ODIwNjU=',
@@ -918,6 +1184,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -937,6 +1207,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjc4Nzc0MzA=',
@@ -953,6 +1227,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjc5MTcwNjQ=',
@@ -966,6 +1244,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -994,6 +1276,22 @@ const data = {
         ],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'chore(tm2): crypto.Address json Marshal',
+            url: 'https://github.com/gnolang/gno/pull/2756',
+            createdAt: '2024-09-04T12:47:06Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -1048,6 +1346,17 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'feat(gnobro): add json log format',
+            url: 'https://github.com/gnolang/gno/pull/2812',
+            createdAt: '2024-09-18T09:02:33Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjEwMzAxNTAz',
@@ -1064,6 +1373,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjEwNDk0Mzk3',
@@ -1077,6 +1390,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -1101,8 +1418,19 @@ const data = {
         ],
       },
       prs: {
-        count: 2,
+        count: 3,
         data: [
+          {
+            title: "feat(p/int256): Optimize `int256` with two's complement implementation",
+            url: 'https://github.com/gnolang/gno/pull/2846',
+            createdAt: '2024-09-25T07:18:44Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             title: 'fix(p/int256): "-0" Output When Calculating Basic Arithmetics',
             url: 'https://github.com/gnolang/gno/pull/2750',
@@ -1118,6 +1446,22 @@ const data = {
             title: 'chore(p/grc20): Distinct Event Types for GRC20 Functions',
             url: 'https://github.com/gnolang/gno/pull/2749',
             createdAt: '2024-09-02T02:37:37Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'fix(p/int256): "-0" Output When Calculating Basic Arithmetics',
+            url: 'https://github.com/gnolang/gno/pull/2750',
+            createdAt: '2024-09-02T05:14:31Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -1143,6 +1487,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjEyNzEwODYw',
@@ -1156,6 +1504,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -1175,6 +1527,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjEzNjA1NDEw',
@@ -1191,6 +1547,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjE0OTI2NTg3',
@@ -1204,6 +1564,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -1259,6 +1623,10 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjE1NjU0OTgw',
@@ -1272,6 +1640,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -1307,6 +1679,10 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjE3MDM4NzYw',
@@ -1320,6 +1696,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -1339,6 +1719,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjE3NzU1NTg3',
@@ -1355,6 +1739,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjE4MzU3ODI3',
@@ -1368,6 +1756,22 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'docs: updated missing gnofaucet README',
+            url: 'https://github.com/gnolang/gno/pull/2783',
+            createdAt: '2024-09-11T17:56:47Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -1462,6 +1866,10 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjE5NDM1Mjcx',
@@ -1475,6 +1883,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -1494,6 +1906,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjIwNzE4Njkz',
@@ -1510,6 +1926,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjIxMTM5NDE2',
@@ -1523,6 +1943,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -1609,6 +2033,10 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjIyMzYxNTAz',
@@ -1622,6 +2050,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -1641,6 +2073,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjIzNzAzNzQx',
@@ -1654,6 +2090,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -1673,6 +2113,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjI1NDk3MDgz',
@@ -1686,6 +2130,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -1705,6 +2153,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjMxMDk0MTAy',
@@ -1718,6 +2170,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -1837,6 +2293,28 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 2,
+        data: [
+          {
+            title: 'fix(grc20): remove unused interface, fix typo',
+            url: 'https://github.com/gnolang/gno/pull/2793',
+            createdAt: '2024-09-13T09:37:03Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs(gnokey): add more info on `vm/qfile`',
+            url: 'https://github.com/gnolang/gno/pull/2770',
+            createdAt: '2024-09-09T11:38:27Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjM3MzQ1MDQw',
@@ -1850,6 +2328,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -1869,6 +2351,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjQwMDI4NDkz',
@@ -1882,6 +2368,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -1901,6 +2391,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjQxMzI2MzU1',
@@ -1914,6 +2408,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -1933,6 +2431,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjQ2MjQ4ODcw',
@@ -1946,6 +2448,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -1965,6 +2471,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjQ5ODExNTI5',
@@ -1978,6 +2488,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -1997,6 +2511,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjU2OTI1MTYw',
@@ -2010,6 +2528,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -2029,6 +2551,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjY2NDAxODE0',
@@ -2045,6 +2571,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjY4NDMzOTM1',
@@ -2058,6 +2588,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -2089,6 +2623,22 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'feat(p/demo/merkle): add constructor w/ getter for merkle.Node struct',
+            url: 'https://github.com/gnolang/gno/pull/2784',
+            createdAt: '2024-09-11T22:55:13Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjcyMTU2NTM3',
@@ -2102,6 +2652,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -2121,6 +2675,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjc0NDA2MzM1',
@@ -2134,6 +2692,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -2153,6 +2715,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjg2NjgyNjgz',
@@ -2166,6 +2732,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -2185,6 +2755,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjkwMzUzMzI5',
@@ -2198,6 +2772,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -2233,6 +2811,10 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjkwOTE1OTIx',
@@ -2246,6 +2828,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -2265,6 +2851,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOBXsI4w',
@@ -2278,6 +2868,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -2297,6 +2891,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOBbhvdA',
@@ -2310,6 +2908,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -2329,6 +2931,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOBhY4VQ',
@@ -2342,6 +2948,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -2361,6 +2971,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOBj5HAw',
@@ -2374,6 +2988,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -2393,6 +3011,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOBloeWQ',
@@ -2409,6 +3031,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOBoSBBw',
@@ -2422,6 +3048,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -2489,6 +3119,10 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOBrJ9Iw',
@@ -2502,6 +3136,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -2521,6 +3159,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOB2bfUw',
@@ -2537,6 +3179,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOB6A6Vg',
@@ -2550,6 +3196,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -2581,6 +3231,10 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOCH6X9g',
@@ -2594,6 +3248,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -2620,6 +3278,10 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOCOwYpw',
@@ -2633,6 +3295,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -2652,6 +3318,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOCQlyiA',
@@ -2665,6 +3335,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -2787,6 +3461,26 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'test(gnoland): test content mismatch for addpkg.txtar',
+            url: 'https://github.com/gnolang/gno/pull/2766',
+            createdAt: '2024-09-07T09:15:08Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'U_kgDOCg4pdQ',
@@ -2803,6 +3497,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOCj0XyQ',
@@ -2816,6 +3514,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -2837,6 +3539,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjEyOTky',
@@ -2850,6 +3556,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -2869,6 +3579,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjkyMjgw',
@@ -2885,6 +3599,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjk0MDI5',
@@ -2898,6 +3616,22 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'feat(examples/moul): ownable, entity, safe',
+            url: 'https://github.com/gnolang/gno/pull/2844',
+            createdAt: '2024-09-24T18:30:37Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -2917,6 +3651,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjE3MjUzMQ==',
@@ -2930,6 +3668,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -2949,6 +3691,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjM1MDM1NA==',
@@ -2962,6 +3708,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -2981,6 +3731,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjczNjkyNw==',
@@ -2994,6 +3748,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3013,6 +3771,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjc3Nzg2Ng==',
@@ -3026,6 +3788,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3045,6 +3811,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjg5NDI5OQ==',
@@ -3058,6 +3828,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3077,6 +3851,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjEzMjk0Mjk=',
@@ -3093,6 +3871,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjE5OTk1NDM=',
@@ -3106,6 +3888,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3137,6 +3923,10 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjI1NDIzNDU=',
@@ -3153,6 +3943,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjM2MTIwMTc=',
@@ -3166,6 +3960,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3192,6 +3990,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjUyMjI1MjU=',
@@ -3208,6 +4010,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjU0NjMyMTg=',
@@ -3221,6 +4027,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3252,6 +4062,10 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjYwMDc1Nzg=',
@@ -3265,6 +4079,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3284,6 +4102,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjY1NTAwMzU=',
@@ -3297,6 +4119,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3316,6 +4142,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjcwNDAzNTA=',
@@ -3329,6 +4159,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3348,6 +4182,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjcxOTY5MTg=',
@@ -3361,6 +4199,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3380,6 +4222,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjc0ODIwNjU=',
@@ -3393,6 +4239,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3412,6 +4262,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjc4Nzc0MzA=',
@@ -3425,6 +4279,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3444,6 +4302,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjgwODk3MTI=',
@@ -3457,6 +4319,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3476,6 +4342,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjEwMzAxNTAz',
@@ -3489,6 +4359,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3508,6 +4382,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjExODUzOTE4',
@@ -3521,6 +4399,22 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: "feat(p/int256): Optimize `int256` with two's complement implementation",
+            url: 'https://github.com/gnolang/gno/pull/2846',
+            createdAt: '2024-09-25T07:18:44Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3540,6 +4434,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjEyNzEwODYw',
@@ -3553,6 +4451,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3572,6 +4474,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjEzNjA1NDEw',
@@ -3588,6 +4494,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjE0OTI2NTg3',
@@ -3601,6 +4511,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3633,6 +4547,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjE1NjU0OTgw',
@@ -3646,6 +4564,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3681,6 +4603,10 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjE3MDM4NzYw',
@@ -3694,6 +4620,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3713,6 +4643,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjE3NzU1NTg3',
@@ -3726,6 +4660,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3745,6 +4683,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjE4Mzk1MTU0',
@@ -3758,6 +4700,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3777,6 +4723,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjIwMTM1NDc4',
@@ -3790,6 +4740,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3809,6 +4763,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjIxMTM5NDE2',
@@ -3822,6 +4780,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3841,6 +4803,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjIyMzYxNTAz',
@@ -3854,6 +4820,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3873,6 +4843,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjIzNzAzNzQx',
@@ -3886,6 +4860,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3905,6 +4883,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjI1NDk3MDgz',
@@ -3918,6 +4900,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3937,6 +4923,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjMxMDk0MTAy',
@@ -3950,6 +4940,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -3997,6 +4991,10 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjM3MzQ1MDQw',
@@ -4010,6 +5008,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4029,6 +5031,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjQwMDI4NDkz',
@@ -4042,6 +5048,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4061,6 +5071,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjQxMzI2MzU1',
@@ -4074,6 +5088,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4093,6 +5111,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjQ2MjQ4ODcw',
@@ -4106,6 +5128,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4125,6 +5151,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjQ5ODExNTI5',
@@ -4138,6 +5168,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4157,6 +5191,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjU2OTI1MTYw',
@@ -4170,6 +5208,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4189,6 +5231,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjY2NDAxODE0',
@@ -4202,6 +5248,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4221,6 +5271,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjcxMzM5MTUz',
@@ -4234,6 +5288,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4253,6 +5311,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjczOTgzNjc3',
@@ -4266,6 +5328,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4285,6 +5351,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjgwODAwNTI1',
@@ -4298,6 +5368,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4317,6 +5391,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjg3ODc2NjE4',
@@ -4333,6 +5411,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjkwMzUzMzI5',
@@ -4346,6 +5428,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4381,6 +5467,10 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjkwOTE1OTIx',
@@ -4394,6 +5484,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4413,6 +5507,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOBXsI4w',
@@ -4426,6 +5524,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4445,6 +5547,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOBbhvdA',
@@ -4458,6 +5564,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4477,6 +5587,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOBhY4VQ',
@@ -4490,6 +5604,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4509,6 +5627,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOBj5HAw',
@@ -4522,6 +5644,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4541,6 +5667,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOBloeWQ',
@@ -4557,6 +5687,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOBoSBBw',
@@ -4570,6 +5704,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4614,6 +5752,10 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOBrJ9Iw',
@@ -4627,6 +5769,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4646,6 +5792,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOB2bfUw',
@@ -4659,6 +5809,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4678,6 +5832,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOCAENWw',
@@ -4691,6 +5849,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4710,6 +5872,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOCL7jGg',
@@ -4723,6 +5889,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4742,6 +5912,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOCPiJEg',
@@ -4755,6 +5929,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4774,6 +5952,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOCfbl1g',
@@ -4787,6 +5969,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4806,6 +5992,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOCj0XyQ',
@@ -4819,6 +6009,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4837,6 +6031,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -4865,6 +6063,10 @@ const data = {
         ],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -5080,6 +6282,81 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 5,
+        data: [
+          {
+            title: 'feat: Initialize static blocks before preprocess',
+            url: 'https://github.com/gnolang/gno/pull/2418',
+            createdAt: '2024-06-23T00:31:26Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: small improvements for #1702',
+            url: 'https://github.com/gnolang/gno/pull/2276',
+            createdAt: '2024-06-04T19:17:20Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: update `overview.md`',
+            url: 'https://github.com/gnolang/gno/pull/2275',
+            createdAt: '2024-06-04T19:16:18Z',
+            labels: [],
+          },
+          {
+            title: 'add redirect temporarily from /gophercon24 to docs.gno.land',
+            url: 'https://github.com/gnolang/gno/pull/2274',
+            createdAt: '2024-06-04T18:55:22Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: (gnovm) star expr assign for #1919',
+            url: 'https://github.com/gnolang/gno/pull/2255',
+            createdAt: '2024-06-01T05:55:18Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjkyMjgw',
@@ -5131,6 +6408,93 @@ const data = {
             createdAt: '2024-03-03T11:52:15Z',
             labels: [],
           },
+          {
+            title: 'feat: PrevRealm ignores user realms in MsgRun',
+            url: 'https://github.com/gnolang/gno/pull/1719',
+            createdAt: '2024-03-01T16:04:26Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(precompile): use `//line` directive in generated go files',
+            url: 'https://github.com/gnolang/gno/pull/1688',
+            createdAt: '2024-02-23T17:50:30Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix:  unify the precompile output to make it easier to parse and read. ',
+            url: 'https://github.com/gnolang/gno/pull/1670',
+            createdAt: '2024-02-20T19:01:01Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: make `AssertOriginCall` always panic with `MsgRun`',
+            url: 'https://github.com/gnolang/gno/pull/1665',
+            createdAt: '2024-02-18T18:12:07Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test: improve `gnovm/pkg/gnolang.TestPrecompile()`',
+            url: 'https://github.com/gnolang/gno/pull/1659',
+            createdAt: '2024-02-15T14:35:23Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test(precompile): add more cases',
+            url: 'https://github.com/gnolang/gno/pull/1640',
+            createdAt: '2024-02-08T12:41:35Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
+        count: 6,
+        data: [
           {
             title: 'feat: PrevRealm ignores user realms in MsgRun',
             url: 'https://github.com/gnolang/gno/pull/1719',
@@ -5787,8 +7151,19 @@ const data = {
         ],
       },
       prs: {
-        count: 61,
+        count: 62,
         data: [
+          {
+            title: 'feat(examples/moul): ownable, entity, safe',
+            url: 'https://github.com/gnolang/gno/pull/2844',
+            createdAt: '2024-09-24T18:30:37Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             title: 'chore: rename r/manfred -> r/moul',
             url: 'https://github.com/gnolang/gno/pull/2820',
@@ -6490,6 +7865,390 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 36,
+        data: [
+          {
+            title: 'feat(examples): add p/printfdebugging',
+            url: 'https://github.com/gnolang/gno/pull/2809',
+            createdAt: '2024-09-17T17:17:01Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(examples): add p/fqname',
+            url: 'https://github.com/gnolang/gno/pull/2808',
+            createdAt: '2024-09-17T17:15:42Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: trigger gnoland CI when updating examples/',
+            url: 'https://github.com/gnolang/gno/pull/2588',
+            createdAt: '2024-07-14T20:17:37Z',
+            labels: [],
+          },
+          {
+            title: 'chore: fix ci',
+            url: 'https://github.com/gnolang/gno/pull/2587',
+            createdAt: '2024-07-14T17:48:12Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(r/gnoland/home): add AdminSetOverride',
+            url: 'https://github.com/gnolang/gno/pull/2583',
+            createdAt: '2024-07-14T08:14:01Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: skip `gno.mod` in ReadMemPackage',
+            url: 'https://github.com/gnolang/gno/pull/2559',
+            createdAt: '2024-07-09T20:20:26Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: update homepage',
+            url: 'https://github.com/gnolang/gno/pull/2552',
+            createdAt: '2024-07-09T03:51:08Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: fix broken CI',
+            url: 'https://github.com/gnolang/gno/pull/2538',
+            createdAt: '2024-07-08T00:46:22Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "chore: update docs/' Makefile and CI",
+            url: 'https://github.com/gnolang/gno/pull/2534',
+            createdAt: '2024-07-07T14:30:49Z',
+            labels: [],
+          },
+          {
+            title: 'feat(examples): refactor grc20',
+            url: 'https://github.com/gnolang/gno/pull/2529',
+            createdAt: '2024-07-07T01:01:38Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add p/demo/entropy',
+            url: 'https://github.com/gnolang/gno/pull/2487',
+            createdAt: '2024-07-03T04:40:39Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "feat: add 'gno mod tidy -v --recursive' flags",
+            url: 'https://github.com/gnolang/gno/pull/2485',
+            createdAt: '2024-07-03T04:40:08Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnovm): enforce formatting of added packages',
+            url: 'https://github.com/gnolang/gno/pull/2464',
+            createdAt: '2024-06-29T06:02:37Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add r/demo/bar20 example',
+            url: 'https://github.com/gnolang/gno/pull/2388',
+            createdAt: '2024-06-18T17:18:56Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: update CODEOWNERS',
+            url: 'https://github.com/gnolang/gno/pull/2387',
+            createdAt: '2024-06-18T16:19:38Z',
+            labels: [],
+          },
+          {
+            title: 'feat: new govdao pattern with context',
+            url: 'https://github.com/gnolang/gno/pull/2380',
+            createdAt: '2024-06-18T11:38:13Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: refactor govdao structure and examples',
+            url: 'https://github.com/gnolang/gno/pull/2379',
+            createdAt: '2024-06-18T10:12:52Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: govdao mvp improvement',
+            url: 'https://github.com/gnolang/gno/pull/2344',
+            createdAt: '2024-06-12T16:43:47Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add p/nestedpkg',
+            url: 'https://github.com/gnolang/gno/pull/2342',
+            createdAt: '2024-06-12T15:02:29Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: add two new upgrade examples + refactor existing ones',
+            url: 'https://github.com/gnolang/gno/pull/2334',
+            createdAt: '2024-06-12T07:07:34Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: improve p/ownable API',
+            url: 'https://github.com/gnolang/gno/pull/2330',
+            createdAt: '2024-06-11T18:14:19Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add watchdog and monit',
+            url: 'https://github.com/gnolang/gno/pull/2329',
+            createdAt: '2024-06-11T16:51:27Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: make contribs/ Makefile dynamic',
+            url: 'https://github.com/gnolang/gno/pull/2318',
+            createdAt: '2024-06-10T13:32:59Z',
+            labels: [],
+          },
+          {
+            title: 'feat(examples): add upgrade pattern d example',
+            url: 'https://github.com/gnolang/gno/pull/2151',
+            createdAt: '2024-05-20T12:15:38Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: update CODEOWNERS',
+            url: 'https://github.com/gnolang/gno/pull/1986',
+            createdAt: '2024-04-26T08:21:20Z',
+            labels: [],
+          },
+          {
+            title: 'fix(gno test): pass ExecContext when initializing imported packages',
+            url: 'https://github.com/gnolang/gno/pull/1965',
+            createdAt: '2024-04-21T11:24:28Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: update /doc.go',
+            url: 'https://github.com/gnolang/gno/pull/1964',
+            createdAt: '2024-04-21T07:14:34Z',
+            labels: [],
+          },
+          {
+            title: 'chore: portal loop small fixes',
+            url: 'https://github.com/gnolang/gno/pull/1959',
+            createdAt: '2024-04-19T13:19:54Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: rename r/system -> r/sys',
+            url: 'https://github.com/gnolang/gno/pull/1948',
+            createdAt: '2024-04-18T08:44:42Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(PoC,gov): initial sys/validators and gov/dao contracts',
+            url: 'https://github.com/gnolang/gno/pull/1945',
+            createdAt: '2024-04-17T20:30:23Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: archive old demo',
+            url: 'https://github.com/gnolang/gno/pull/1940',
+            createdAt: '2024-04-17T12:32:00Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add grc20factory example',
+            url: 'https://github.com/gnolang/gno/pull/1913',
+            createdAt: '2024-04-10T22:48:18Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: replace some TODOs on the portal home',
+            url: 'https://github.com/gnolang/gno/pull/1667',
+            createdAt: '2024-02-19T10:43:37Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: update CODEOWNERS',
+            url: 'https://github.com/gnolang/gno/pull/1545',
+            createdAt: '2024-01-17T14:34:54Z',
+            labels: [],
+          },
+          {
+            title: "chore: make gnokeykc use gnokey's basecfg",
+            url: 'https://github.com/gnolang/gno/pull/1531',
+            createdAt: '2024-01-12T19:48:04Z',
+            labels: [],
+          },
+          {
+            title: 'chore: update staging deployment config',
+            url: 'https://github.com/gnolang/gno/pull/1500',
+            createdAt: '2024-01-06T21:18:45Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjE0MzIwOQ==',
@@ -6503,6 +8262,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -6522,6 +8285,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjMyMjc2MQ==',
@@ -6535,6 +8302,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -6908,6 +8679,96 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 10,
+        data: [
+          {
+            title: 'docs(portal-loop): mention packages can be deployed permissionlessly',
+            url: 'https://github.com/gnolang/gno/pull/2747',
+            createdAt: '2024-09-01T05:01:14Z',
+            labels: [],
+          },
+          {
+            title: 'feat(examples): improve p/demo/ufmt',
+            url: 'https://github.com/gnolang/gno/pull/2553',
+            createdAt: '2024-07-09T07:38:50Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "chore(gnodev): show link to docs upon 'h' key",
+            url: 'https://github.com/gnolang/gno/pull/2497',
+            createdAt: '2024-07-04T05:45:39Z',
+            labels: [],
+          },
+          {
+            title: 'fix(gnokeykc): gnokeykc maketx {addpkg,call,run} missing because of tm2 separation (fixes #2373)',
+            url: 'https://github.com/gnolang/gno/pull/2375',
+            createdAt: '2024-06-18T02:34:48Z',
+            labels: [],
+          },
+          {
+            title: 'docs: add missing doc link to docs/reference/gnoclient',
+            url: 'https://github.com/gnolang/gno/pull/2259',
+            createdAt: '2024-06-02T05:28:18Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: update genesis to fix commands in /r/demo/boards:testboard/5 (#2183)',
+            url: 'https://github.com/gnolang/gno/pull/2188',
+            createdAt: '2024-05-25T00:18:48Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add LongHelp to `gno bug`, remove \\n from `gnodev` LongHelp',
+            url: 'https://github.com/gnolang/gno/pull/2180',
+            createdAt: '2024-05-24T04:50:07Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: make install colors not always shown',
+            url: 'https://github.com/gnolang/gno/pull/2179',
+            createdAt: '2024-05-24T01:23:27Z',
+            labels: [],
+          },
+          {
+            title: 'chore: add r/demo/echo',
+            url: 'https://github.com/gnolang/gno/pull/1783',
+            createdAt: '2024-03-18T06:22:53Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "chore(tm2/pkg/std): add failing regexp in MemPackage.Validate's errors",
+            url: 'https://github.com/gnolang/gno/pull/1673',
+            createdAt: '2024-02-21T07:04:26Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjY4OTQ0MA==',
@@ -6953,6 +8814,33 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 2,
+        data: [
+          {
+            title: 'fix(gnoweb): fixed broken URL link',
+            url: 'https://github.com/gnolang/gno/pull/1839',
+            createdAt: '2024-03-26T00:15:23Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore:  HTTP server error handling',
+            url: 'https://github.com/gnolang/gno/pull/1494',
+            createdAt: '2024-01-02T23:12:27Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjczNjkyNw==',
@@ -6969,6 +8857,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjc1OTc0Nw==',
@@ -6982,6 +8874,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -7091,6 +8987,34 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 3,
+        data: [
+          {
+            title: 'chore(ci): revamping master branch goreleaser',
+            url: 'https://github.com/gnolang/gno/pull/2694',
+            createdAt: '2024-08-14T08:37:28Z',
+            labels: [],
+          },
+          {
+            title: 'chore(ci): Fix master branch goreleaser',
+            url: 'https://github.com/gnolang/gno/pull/2686',
+            createdAt: '2024-08-13T13:06:28Z',
+            labels: [],
+          },
+          {
+            title: 'ci: Full revision of Goreleaser tasks',
+            url: 'https://github.com/gnolang/gno/pull/2672',
+            createdAt: '2024-08-09T08:38:29Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjgzNjEyOA==',
@@ -7130,6 +9054,22 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'feat: adding support for arbitrary field',
+            url: 'https://github.com/gnolang/gno/pull/2717',
+            createdAt: '2024-08-20T16:19:20Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjg5NDI5OQ==',
@@ -7143,6 +9083,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -7451,6 +9395,137 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 13,
+        data: [
+          {
+            title: 'fix: govDAO: Use GetOrigCaller() to be able to run proposals using MsgRun',
+            url: 'https://github.com/gnolang/gno/pull/2556',
+            createdAt: '2024-07-09T13:46:01Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: Added missing functionality to govDAO',
+            url: 'https://github.com/gnolang/gno/pull/2493',
+            createdAt: '2024-07-03T14:37:02Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: Set go version to 1.22.4 on mod files.',
+            url: 'https://github.com/gnolang/gno/pull/2474',
+            createdAt: '2024-07-01T14:17:35Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: Give different names to nightly and master releases',
+            url: 'https://github.com/gnolang/gno/pull/2452',
+            createdAt: '2024-06-27T14:41:55Z',
+            labels: [],
+          },
+          {
+            title: 'feat: Implement genesis transaction list command.',
+            url: 'https://github.com/gnolang/gno/pull/2400',
+            createdAt: '2024-06-20T11:48:19Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'ci: use tag `latest` for latest releases, `nightly` for nightly versions',
+            url: 'https://github.com/gnolang/gno/pull/2175',
+            createdAt: '2024-05-23T13:05:25Z',
+            labels: [],
+          },
+          {
+            title: 'fix: refactor nightly workflow to use goreleaser pro',
+            url: 'https://github.com/gnolang/gno/pull/2172',
+            createdAt: '2024-05-23T11:34:28Z',
+            labels: [],
+          },
+          {
+            title: 'fix: Change goreleaser secret name',
+            url: 'https://github.com/gnolang/gno/pull/2171',
+            createdAt: '2024-05-23T10:53:56Z',
+            labels: [],
+          },
+          {
+            title: 'fix(ci): failing `examples/mod-tidy`',
+            url: 'https://github.com/gnolang/gno/pull/2112',
+            createdAt: '2024-05-15T08:59:51Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: Add goreleaser',
+            url: 'https://github.com/gnolang/gno/pull/2101',
+            createdAt: '2024-05-14T13:25:13Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: Set examples.yml GitHub action inside the correct folder',
+            url: 'https://github.com/gnolang/gno/pull/2090',
+            createdAt: '2024-05-14T09:53:01Z',
+            labels: [],
+          },
+          {
+            title: 'feat: Overhaul Github Actions',
+            url: 'https://github.com/gnolang/gno/pull/2040',
+            createdAt: '2024-05-06T11:32:48Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: Revert "fix: hardcode max vm cycles in keeper"',
+            url: 'https://github.com/gnolang/gno/pull/1902',
+            createdAt: '2024-04-08T10:34:00Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjEzMjk0Mjk=',
@@ -7464,6 +9539,17 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'docs: Update expired Discord link, and minor documentation fixes',
+            url: 'https://github.com/gnolang/gno/pull/2634',
+            createdAt: '2024-07-27T01:45:25Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -7815,6 +9901,187 @@ const data = {
             url: 'https://github.com/gnolang/gno/pull/1583',
             createdAt: '2024-01-25T11:41:19Z',
             labels: [],
+          },
+          {
+            title: 'chore(gnoclient): Add Run support',
+            url: 'https://github.com/gnolang/gno/pull/1574',
+            createdAt: '2024-01-23T13:12:00Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(r/demo/boards): correctly render reposts',
+            url: 'https://github.com/gnolang/gno/pull/1530',
+            createdAt: '2024-01-12T16:41:56Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(r/demo/boards): update the user link in displayAddressMD to correct path',
+            url: 'https://github.com/gnolang/gno/pull/1525',
+            createdAt: '2024-01-11T13:10:05Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: In gnodev serveGnoWebServer, set webConfig HelpChainID and HelpRemote',
+            url: 'https://github.com/gnolang/gno/pull/1497',
+            createdAt: '2024-01-05T16:33:41Z',
+            labels: [],
+          },
+          {
+            title: 'fix: In gnoweb realm_help.html, update to Data.Config.HelpRemote and Data.Config.HelpChainID',
+            url: 'https://github.com/gnolang/gno/pull/1496',
+            createdAt: '2024-01-05T16:08:49Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnofaucet): fix transactions by querying account number and sequence each time',
+            url: 'https://github.com/gnolang/gno/pull/1493',
+            createdAt: '2024-01-02T11:55:15Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
+        count: 17,
+        data: [
+          {
+            title: 'chore: gnoclient: Require Caller in Msg. Remove syntax sugar Msgs',
+            url: 'https://github.com/gnolang/gno/pull/2715',
+            createdAt: '2024-08-20T14:57:20Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: In r/demo/profile fieldHandler, use url.QueryEscape(value)',
+            url: 'https://github.com/gnolang/gno/pull/2642',
+            createdAt: '2024-07-30T13:29:58Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: In gnoclient, separate out SignTx and BroadcastTxCommit',
+            url: 'https://github.com/gnolang/gno/pull/2641',
+            createdAt: '2024-07-29T13:59:27Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: In doc setting-up-a-new-chain, resetting the chain also, delete genesis.json',
+            url: 'https://github.com/gnolang/gno/pull/2513',
+            createdAt: '2024-07-05T10:23:11Z',
+            labels: [],
+          },
+          {
+            title: 'chore: In the validator FAQ, update planned Test4 launch to Q3 2024',
+            url: 'https://github.com/gnolang/gno/pull/2511',
+            createdAt: '2024-07-05T10:10:52Z',
+            labels: [],
+          },
+          {
+            title: 'chore: In r/demo/boards public API, change AssertOriginCall() to PrevRealm().IsUser()',
+            url: 'https://github.com/gnolang/gno/pull/2358',
+            createdAt: '2024-06-14T09:32:47Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: In gnodev, include gnoweb flags',
+            url: 'https://github.com/gnolang/gno/pull/2135',
+            createdAt: '2024-05-17T09:13:28Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: time-simple.txtar',
+            url: 'https://github.com/gnolang/gno/pull/2111',
+            createdAt: '2024-05-15T08:52:21Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: In r/demo/users, add ListUsersByPrefix',
+            url: 'https://github.com/gnolang/gno/pull/1708',
+            createdAt: '2024-02-29T12:48:32Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(gnoclient): Add Send support',
+            url: 'https://github.com/gnolang/gno/pull/1639',
+            createdAt: '2024-02-08T09:05:46Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(sdk/vm): improve MsgCall panic error message for wrong number of args',
+            url: 'https://github.com/gnolang/gno/pull/1610',
+            createdAt: '2024-02-01T08:57:28Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
           },
           {
             title: 'chore(gnoclient): Add Run support',
@@ -8739,6 +11006,355 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 27,
+        data: [
+          {
+            title: "fix: Don't emit events from failed transactions",
+            url: 'https://github.com/gnolang/gno/pull/2806',
+            createdAt: '2024-09-17T00:40:42Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): Make GnoVM slice allocations before go runtime allocations',
+            url: 'https://github.com/gnolang/gno/pull/2781',
+            createdAt: '2024-09-10T19:12:37Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: add a ugnot constant',
+            url: 'https://github.com/gnolang/gno/pull/2656',
+            createdAt: '2024-08-03T18:05:46Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): handle non call expression valuedecl values',
+            url: 'https://github.com/gnolang/gno/pull/2647',
+            createdAt: '2024-07-31T03:48:56Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): fix max names in block check',
+            url: 'https://github.com/gnolang/gno/pull/2645',
+            createdAt: '2024-07-31T01:12:07Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): repair selector type aliasing',
+            url: 'https://github.com/gnolang/gno/pull/2483',
+            createdAt: '2024-07-02T19:34:03Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): Resolve RefValues before using as Objects',
+            url: 'https://github.com/gnolang/gno/pull/2454',
+            createdAt: '2024-06-27T18:17:04Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add realm type',
+            url: 'https://github.com/gnolang/gno/pull/2441',
+            createdAt: '2024-06-25T22:32:19Z',
+            labels: [],
+          },
+          {
+            title: 'fix: allow LICENSE rendering via gnoweb',
+            url: 'https://github.com/gnolang/gno/pull/2417',
+            createdAt: '2024-06-22T23:28:08Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnodev): allow gnodev to load txs',
+            url: 'https://github.com/gnolang/gno/pull/2281',
+            createdAt: '2024-06-04T22:28:52Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: improve missing config error message',
+            url: 'https://github.com/gnolang/gno/pull/2247',
+            createdAt: '2024-05-30T19:18:47Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(stdlibs/time): add DateTime, DateOnly and TimeOnly',
+            url: 'https://github.com/gnolang/gno/pull/2240',
+            createdAt: '2024-05-30T02:45:57Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: use blank identifier constants',
+            url: 'https://github.com/gnolang/gno/pull/2158',
+            createdAt: '2024-05-21T08:01:10Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'perf: make debug a constant set using a build flag',
+            url: 'https://github.com/gnolang/gno/pull/2072',
+            createdAt: '2024-05-10T17:16:27Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: clarifying panic message',
+            url: 'https://github.com/gnolang/gno/pull/2051',
+            createdAt: '2024-05-07T15:52:13Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: default untyped to uint when necessary',
+            url: 'https://github.com/gnolang/gno/pull/2024',
+            createdAt: '2024-05-02T19:32:58Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: move telemetry package',
+            url: 'https://github.com/gnolang/gno/pull/1970',
+            createdAt: '2024-04-22T18:22:41Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: meaningful realm finalization panic messages',
+            url: 'https://github.com/gnolang/gno/pull/1846',
+            createdAt: '2024-03-27T00:46:18Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "feat: issue warning when gno test package can't be resolved",
+            url: 'https://github.com/gnolang/gno/pull/1845',
+            createdAt: '2024-03-26T21:30:23Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: hardcode max vm cycles in keeper',
+            url: 'https://github.com/gnolang/gno/pull/1807',
+            createdAt: '2024-03-21T02:14:33Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: Add support for metrics collection',
+            url: 'https://github.com/gnolang/gno/pull/1762',
+            createdAt: '2024-03-12T20:01:00Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: allow disabling consensus WAL',
+            url: 'https://github.com/gnolang/gno/pull/1723',
+            createdAt: '2024-03-02T20:01:30Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: gno does not support shadowing native types',
+            url: 'https://github.com/gnolang/gno/pull/1711',
+            createdAt: '2024-03-01T00:04:52Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: achieve type assertion parity with go',
+            url: 'https://github.com/gnolang/gno/pull/1689',
+            createdAt: '2024-02-23T20:31:39Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: fix the scope of `recover()`',
+            url: 'https://github.com/gnolang/gno/pull/1672',
+            createdAt: '2024-02-21T02:25:05Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: remove incorrect type assertion when reading values from storage',
+            url: 'https://github.com/gnolang/gno/pull/1606',
+            createdAt: '2024-01-30T23:13:35Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: Oracle packages and Github verification realm',
+            url: 'https://github.com/gnolang/gno/pull/1568',
+            createdAt: '2024-01-22T21:28:02Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjI1NDIzNDU=',
@@ -8755,6 +11371,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjM2MTIwMTc=',
@@ -8768,6 +11388,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -10329,6 +12953,934 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 80,
+        data: [
+          {
+            title: 'feat(examples): add simplest "counter" realm',
+            url: 'https://github.com/gnolang/gno/pull/2815',
+            createdAt: '2024-09-18T18:40:47Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'perf(tm2/bft/fail): use sync.Once instead of Getenv on each call',
+            url: 'https://github.com/gnolang/gno/pull/2805',
+            createdAt: '2024-09-16T21:02:18Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test(gnovm): run initStaticBlocks in BenchmarkPreprocess',
+            url: 'https://github.com/gnolang/gno/pull/2792',
+            createdAt: '2024-09-13T09:33:16Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: mark files generated from genstd as generated',
+            url: 'https://github.com/gnolang/gno/pull/2785',
+            createdAt: '2024-09-12T11:50:42Z',
+            labels: [],
+          },
+          {
+            title: 'docs(website): more info on /contribute ',
+            url: 'https://github.com/gnolang/gno/pull/2765',
+            createdAt: '2024-09-06T12:41:04Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test(gnovm): test all files in gnovm/tests subdirs',
+            url: 'https://github.com/gnolang/gno/pull/2754',
+            createdAt: '2024-09-03T13:21:31Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'ci: fix backwards incompatible change',
+            url: 'https://github.com/gnolang/gno/pull/2644',
+            createdAt: '2024-07-30T17:49:41Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: remove panic from uverse',
+            url: 'https://github.com/gnolang/gno/pull/2626',
+            createdAt: '2024-07-24T14:41:40Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'ci: fix broken CI, always test all go code',
+            url: 'https://github.com/gnolang/gno/pull/2625',
+            createdAt: '2024-07-24T10:50:07Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test(cmd/gno): fix TestBugApp',
+            url: 'https://github.com/gnolang/gno/pull/2572',
+            createdAt: '2024-07-10T17:28:20Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(sdk/vm): re-load iavl store from backup if empty',
+            url: 'https://github.com/gnolang/gno/pull/2568',
+            createdAt: '2024-07-10T14:55:04Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'ci(portal-loop): run workflow on all changes to misc/loop',
+            url: 'https://github.com/gnolang/gno/pull/2537',
+            createdAt: '2024-07-07T23:58:29Z',
+            labels: [],
+          },
+          {
+            title: 'fix(gno.land): pre-load all standard libraries in vm.Initialize',
+            url: 'https://github.com/gnolang/gno/pull/2504',
+            createdAt: '2024-07-04T13:51:37Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(stdlibs): add math/rand',
+            url: 'https://github.com/gnolang/gno/pull/2455',
+            createdAt: '2024-06-27T18:27:19Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: remove stdshim',
+            url: 'https://github.com/gnolang/gno/pull/2403',
+            createdAt: '2024-06-20T13:17:48Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(keeper)!: use <pkgpath>.<expr> syntax for qeval; <pkgpath>:<path> for qrender',
+            url: 'https://github.com/gnolang/gno/pull/2382',
+            createdAt: '2024-06-18T11:54:04Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(contribs): revert back to `make <action>.<program>` syntax instead of the opposite',
+            url: 'https://github.com/gnolang/gno/pull/2353',
+            createdAt: '2024-06-13T14:58:11Z',
+            labels: [],
+          },
+          {
+            title: 'feat(examples): add `r/morgan/{home,guestbook}`',
+            url: 'https://github.com/gnolang/gno/pull/2345',
+            createdAt: '2024-06-12T18:43:56Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(gnodev): fix typo',
+            url: 'https://github.com/gnolang/gno/pull/2341',
+            createdAt: '2024-06-12T14:16:12Z',
+            labels: [],
+          },
+          {
+            title: 'chore(docs): bump minimum version to go 1.21',
+            url: 'https://github.com/gnolang/gno/pull/2328',
+            createdAt: '2024-06-11T14:39:26Z',
+            labels: [],
+          },
+          {
+            title: 'fix(gno.land): make gno store cache respect rollbacks',
+            url: 'https://github.com/gnolang/gno/pull/2319',
+            createdAt: '2024-06-10T14:02:07Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'ci: remove monthly snapshots',
+            url: 'https://github.com/gnolang/gno/pull/2263',
+            createdAt: '2024-06-03T09:18:25Z',
+            labels: [],
+          },
+          {
+            title: 'fix(gnoweb): update "airgapped" commands in realm help page',
+            url: 'https://github.com/gnolang/gno/pull/2244',
+            createdAt: '2024-05-30T14:09:17Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test(stdlibs/std): use real MsgRun pkgpath in TestPrevRealmIsOrigin',
+            url: 'https://github.com/gnolang/gno/pull/2239',
+            createdAt: '2024-05-29T12:10:07Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnodev): disable wal',
+            url: 'https://github.com/gnolang/gno/pull/2230',
+            createdAt: '2024-05-28T11:08:40Z',
+            labels: [],
+          },
+          {
+            title: 'fix(test3): RunMemPackage on p/leon/avl to restore types',
+            url: 'https://github.com/gnolang/gno/pull/2217',
+            createdAt: '2024-05-27T16:48:45Z',
+            labels: [],
+          },
+          {
+            title: 'ci: test gno.land when changing gnovm and tm2',
+            url: 'https://github.com/gnolang/gno/pull/2215',
+            createdAt: '2024-05-27T13:35:00Z',
+            labels: [],
+          },
+          {
+            title: 'test(gnovm): print unexpected error in filetests',
+            url: 'https://github.com/gnolang/gno/pull/2213',
+            createdAt: '2024-05-27T12:37:17Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(pkg/commands): provide ExitCodeError to use in place of os.Exit',
+            url: 'https://github.com/gnolang/gno/pull/2187',
+            createdAt: '2024-05-24T17:25:32Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'refactor(tm2/crypto): do not use build tags to mock ledger',
+            url: 'https://github.com/gnolang/gno/pull/2173',
+            createdAt: '2024-05-23T11:50:34Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): remove sort from gonative packages',
+            url: 'https://github.com/gnolang/gno/pull/2168',
+            createdAt: '2024-05-22T14:01:48Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(stdlibs/std)!: change TestSetPrevRealm to TestSetRealm',
+            url: 'https://github.com/gnolang/gno/pull/2164',
+            createdAt: '2024-05-22T09:46:42Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test(gnovm): re-enable stdlibs tests',
+            url: 'https://github.com/gnolang/gno/pull/2110',
+            createdAt: '2024-05-15T06:07:27Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(stdlibs/std): use appropriate variable names for regex',
+            url: 'https://github.com/gnolang/gno/pull/2106',
+            createdAt: '2024-05-14T19:30:54Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm/store): copy store caches',
+            url: 'https://github.com/gnolang/gno/pull/2105',
+            createdAt: '2024-05-14T17:27:56Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(lint): forbid usage of `regexp.Match(String)?`',
+            url: 'https://github.com/gnolang/gno/pull/2066',
+            createdAt: '2024-05-09T14:58:57Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(gnovm): move invalid labels tests to tests/files/',
+            url: 'https://github.com/gnolang/gno/pull/2058',
+            createdAt: '2024-05-08T16:56:50Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: kebab-case to snake_case all source and test files',
+            url: 'https://github.com/gnolang/gno/pull/2057',
+            createdAt: '2024-05-08T16:23:14Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(telemetry): move configuration to node config',
+            url: 'https://github.com/gnolang/gno/pull/2021',
+            createdAt: '2024-05-02T14:31:47Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(tm2/std)!: use snake_case JSON fields for MemFile and MemPackage',
+            url: 'https://github.com/gnolang/gno/pull/2019',
+            createdAt: '2024-05-02T11:59:33Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnoland): pass genesis file as a flag',
+            url: 'https://github.com/gnolang/gno/pull/1972',
+            createdAt: '2024-04-23T14:48:08Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): revert "top sort var/const globals (#1854)"',
+            url: 'https://github.com/gnolang/gno/pull/1956',
+            createdAt: '2024-04-19T09:37:13Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): assignment operators require 1 expression on both sides',
+            url: 'https://github.com/gnolang/gno/pull/1943',
+            createdAt: '2024-04-17T17:31:23Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(cmd/gnoland): fixup startup ascii art',
+            url: 'https://github.com/gnolang/gno/pull/1942',
+            createdAt: '2024-04-17T16:04:33Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(gnoland/testdata): `mv pr-1112.txtar map-storage.txtar`',
+            url: 'https://github.com/gnolang/gno/pull/1810',
+            createdAt: '2024-03-21T15:26:24Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnoland): in `config`, refer to fields using toml struct tags',
+            url: 'https://github.com/gnolang/gno/pull/1769',
+            createdAt: '2024-03-13T20:56:02Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(CODEOWNERS): update rules',
+            url: 'https://github.com/gnolang/gno/pull/1765',
+            createdAt: '2024-03-13T11:03:06Z',
+            labels: [],
+          },
+          {
+            title: 'refactor(tm2): remove pkg/maths in favour of min/max',
+            url: 'https://github.com/gnolang/gno/pull/1746',
+            createdAt: '2024-03-08T17:56:27Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(cmd/gno)!: change all `-verbose` flags to `-v`',
+            url: 'https://github.com/gnolang/gno/pull/1716',
+            createdAt: '2024-03-01T14:13:36Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(make): disable cgo, reorganise makefiles',
+            url: 'https://github.com/gnolang/gno/pull/1715',
+            createdAt: '2024-03-01T13:58:44Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(pkg/db): remove cleveldb, fsdb and rocksdb',
+            url: 'https://github.com/gnolang/gno/pull/1714',
+            createdAt: '2024-03-01T12:13:08Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gno.land): add go type checking to keeper + tx simulation in gnokey',
+            url: 'https://github.com/gnolang/gno/pull/1702',
+            createdAt: '2024-02-28T14:58:27Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(stdlibs): remove support for linkedType in native bindings',
+            url: 'https://github.com/gnolang/gno/pull/1700',
+            createdAt: '2024-02-28T14:08:32Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(transpiler): transpile gno standard libraries',
+            url: 'https://github.com/gnolang/gno/pull/1695',
+            createdAt: '2024-02-26T20:49:45Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'refactor(gnovm): rename precompiler to transpiler, move to own package',
+            url: 'https://github.com/gnolang/gno/pull/1681',
+            createdAt: '2024-02-22T13:18:30Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'ci(codecov): fix configuration',
+            url: 'https://github.com/gnolang/gno/pull/1680',
+            createdAt: '2024-02-22T11:55:21Z',
+            labels: [],
+          },
+          {
+            title: 'ci(labeler): fix labeler configuration',
+            url: 'https://github.com/gnolang/gno/pull/1679',
+            createdAt: '2024-02-22T11:27:58Z',
+            labels: [],
+          },
+          {
+            title: 'chore(stdlibs): remove unused internal/os',
+            url: 'https://github.com/gnolang/gno/pull/1678',
+            createdAt: '2024-02-22T11:22:04Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(examples): fix tests',
+            url: 'https://github.com/gnolang/gno/pull/1669',
+            createdAt: '2024-02-19T19:13:22Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(sdk/vm): coerce MsgRun pkgpath to `gno.land/r/$addr/run`',
+            url: 'https://github.com/gnolang/gno/pull/1645',
+            createdAt: '2024-02-08T15:59:12Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'ci: use action to validate dependabot.yml',
+            url: 'https://github.com/gnolang/gno/pull/1642',
+            createdAt: '2024-02-08T15:25:52Z',
+            labels: [],
+          },
+          {
+            title: 'fix(misc/genstd): ignore gno generated files',
+            url: 'https://github.com/gnolang/gno/pull/1633',
+            createdAt: '2024-02-06T15:49:51Z',
+            labels: [],
+          },
+          {
+            title: 'chore(.github): dependabot group for all GH actions',
+            url: 'https://github.com/gnolang/gno/pull/1628',
+            createdAt: '2024-02-02T16:10:46Z',
+            labels: [],
+          },
+          {
+            title: 'chore(make): provide install.gnodev in root makefile ',
+            url: 'https://github.com/gnolang/gno/pull/1626',
+            createdAt: '2024-02-02T13:44:38Z',
+            labels: [],
+          },
+          {
+            title: 'feat(gnovm): add benchmark system',
+            url: 'https://github.com/gnolang/gno/pull/1624',
+            createdAt: '2024-02-02T10:56:50Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test: add regression integ test for gnolang/gnochess#97',
+            url: 'https://github.com/gnolang/gno/pull/1608',
+            createdAt: '2024-01-31T13:05:34Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(examples): prefer Go and Gno for respective language names',
+            url: 'https://github.com/gnolang/gno/pull/1607',
+            createdAt: '2024-01-31T12:16:45Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'refactor(tm2): make rpc client not depend on goleveldb',
+            url: 'https://github.com/gnolang/gno/pull/1603',
+            createdAt: '2024-01-30T15:57:54Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'refactor(tm2): split pkg/db into sub-packages',
+            url: 'https://github.com/gnolang/gno/pull/1602',
+            createdAt: '2024-01-30T14:04:22Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(cmd/gno): move test output within gno code ',
+            url: 'https://github.com/gnolang/gno/pull/1594',
+            createdAt: '2024-01-26T20:58:27Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'refactor: compile all regexes at init',
+            url: 'https://github.com/gnolang/gno/pull/1592',
+            createdAt: '2024-01-26T16:14:42Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(CODEOWNERS): prefix directories with root slash',
+            url: 'https://github.com/gnolang/gno/pull/1573',
+            createdAt: '2024-01-23T12:48:41Z',
+            labels: [],
+          },
+          {
+            title: 'feat(examples): add package cford32, add method `seqid.ID.String`',
+            url: 'https://github.com/gnolang/gno/pull/1572',
+            createdAt: '2024-01-23T12:41:01Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(CODEOWNERS): add rules for gnovm/cmd/gno, gnovm/tests',
+            url: 'https://github.com/gnolang/gno/pull/1561',
+            createdAt: '2024-01-18T18:18:26Z',
+            labels: [],
+          },
+          {
+            title: 'docs(PHILOSOPHY): update philosophy on short flags',
+            url: 'https://github.com/gnolang/gno/pull/1555',
+            createdAt: '2024-01-18T17:31:55Z',
+            labels: [],
+          },
+          {
+            title: 'chore: make gnokey consistent with the changes applied to gnokeykc',
+            url: 'https://github.com/gnolang/gno/pull/1554',
+            createdAt: '2024-01-18T17:17:28Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: remove leftover debugging printlns',
+            url: 'https://github.com/gnolang/gno/pull/1550',
+            createdAt: '2024-01-17T18:05:14Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: add docs to auto labeler',
+            url: 'https://github.com/gnolang/gno/pull/1549',
+            createdAt: '2024-01-17T17:58:51Z',
+            labels: [],
+          },
+          {
+            title: 'docs: s/Gnolang/Gno, s/Golang/Go',
+            url: 'https://github.com/gnolang/gno/pull/1548',
+            createdAt: '2024-01-17T17:55:53Z',
+            labels: [],
+          },
+          {
+            title: 'docs(gnoweb): remove reference to gnoteam domain',
+            url: 'https://github.com/gnolang/gno/pull/1512',
+            createdAt: '2024-01-10T12:41:33Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjUyMjI1MjU=',
@@ -10350,6 +13902,28 @@ const data = {
             createdAt: '2024-09-16T08:23:51Z',
             labels: [],
           },
+          {
+            title: 'feat(gnostats): add the agent',
+            url: 'https://github.com/gnolang/gno/pull/2706',
+            createdAt: '2024-08-16T22:22:27Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: small typo in gnodev documentation',
+            url: 'https://github.com/gnolang/gno/pull/2680',
+            createdAt: '2024-08-12T16:09:00Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
+        count: 2,
+        data: [
           {
             title: 'feat(gnostats): add the agent',
             url: 'https://github.com/gnolang/gno/pull/2706',
@@ -10500,6 +14074,44 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 3,
+        data: [
+          {
+            title: 'feat: add devx balances and validators',
+            url: 'https://github.com/gnolang/gno/pull/2528',
+            createdAt: '2024-07-06T19:27:55Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(telemetry): set otel service instance key id',
+            url: 'https://github.com/gnolang/gno/pull/2435',
+            createdAt: '2024-06-25T11:50:46Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add devx faucet account',
+            url: 'https://github.com/gnolang/gno/pull/1789',
+            createdAt: '2024-03-18T12:57:24Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjU3OTIyMzk=',
@@ -10538,6 +14150,108 @@ const data = {
               },
             ],
           },
+          {
+            title: 'feat(examples): a shifumi (rock, paper, scissors) smart contract',
+            url: 'https://github.com/gnolang/gno/pull/2629',
+            createdAt: '2024-07-25T09:39:11Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnovm): add /debug command in REPL',
+            url: 'https://github.com/gnolang/gno/pull/2567',
+            createdAt: '2024-07-10T12:00:33Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): source location always precise with line and column',
+            url: 'https://github.com/gnolang/gno/pull/2362',
+            createdAt: '2024-06-15T12:28:30Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm/debugger): support breakpoints in loop bodies',
+            url: 'https://github.com/gnolang/gno/pull/2251',
+            createdAt: '2024-05-31T12:15:45Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test(gnovm): improve gnovm/pkg/gnolang test coverage',
+            url: 'https://github.com/gnolang/gno/pull/2143',
+            createdAt: '2024-05-17T20:31:56Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: use atomic for global counter used for parallel testing',
+            url: 'https://github.com/gnolang/gno/pull/1932',
+            createdAt: '2024-04-15T21:03:38Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add an interactive debugger to GnoVM',
+            url: 'https://github.com/gnolang/gno/pull/1563',
+            createdAt: '2024-01-19T14:05:35Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
+        count: 7,
+        data: [
           {
             title: 'feat(examples): a shifumi (rock, paper, scissors) smart contract',
             url: 'https://github.com/gnolang/gno/pull/2629',
@@ -10959,6 +14673,159 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 12,
+        data: [
+          {
+            title: 'fix(gnovm): correct type comparison for bool type',
+            url: 'https://github.com/gnolang/gno/pull/2725',
+            createdAt: '2024-08-22T15:54:33Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): follow up works on loop scope(#2429)',
+            url: 'https://github.com/gnolang/gno/pull/2440',
+            createdAt: '2024-06-25T18:49:09Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gno.land): refine error message for  addpkg operation',
+            url: 'https://github.com/gnolang/gno/pull/2409',
+            createdAt: '2024-06-21T07:04:35Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(examples): correct the version number in upgrade demo',
+            url: 'https://github.com/gnolang/gno/pull/2390',
+            createdAt: '2024-06-19T04:08:43Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): Correct file test issue in zream12',
+            url: 'https://github.com/gnolang/gno/pull/2340',
+            createdAt: '2024-06-12T14:06:34Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(make): re-enable package testing',
+            url: 'https://github.com/gnolang/gno/pull/2269',
+            createdAt: '2024-06-03T15:53:56Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): prevent cyclic references in type declarations',
+            url: 'https://github.com/gnolang/gno/pull/2081',
+            createdAt: '2024-05-13T08:55:57Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): correct comparison between different types',
+            url: 'https://github.com/gnolang/gno/pull/1890',
+            createdAt: '2024-04-04T17:54:23Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add support for type declarations on pointer types',
+            url: 'https://github.com/gnolang/gno/pull/1733',
+            createdAt: '2024-03-05T03:12:07Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: Corrected the comparison between an untyped constant and an interface',
+            url: 'https://github.com/gnolang/gno/pull/1732',
+            createdAt: '2024-03-05T02:35:57Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: incorrect pointer value comparison',
+            url: 'https://github.com/gnolang/gno/pull/1601',
+            createdAt: '2024-01-30T09:43:26Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: []byte("xxx") should not be  treated as const',
+            url: 'https://github.com/gnolang/gno/pull/1597',
+            createdAt: '2024-01-29T12:10:28Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjYwMjMxMTc=',
@@ -10972,6 +14839,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -10991,6 +14862,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjY4NTg4MDE=',
@@ -11004,6 +14879,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -11023,6 +14902,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjcxNDIwMjU=',
@@ -11039,6 +14922,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjcxOTY5MTg=',
@@ -11052,6 +14939,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -11146,6 +15037,17 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'ci: create codeql.yml',
+            url: 'https://github.com/gnolang/gno/pull/1915',
+            createdAt: '2024-04-11T03:47:05Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjc0ODIwNjU=',
@@ -11159,6 +15061,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -11305,6 +15211,126 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 12,
+        data: [
+          {
+            title: 'feat: render .md files from packages',
+            url: 'https://github.com/gnolang/gno/pull/2540',
+            createdAt: '2024-07-08T04:25:35Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnoweb): template and md style',
+            url: 'https://github.com/gnolang/gno/pull/2223',
+            createdAt: '2024-05-28T07:01:34Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: update logo color',
+            url: 'https://github.com/gnolang/gno/pull/2157',
+            createdAt: '2024-05-21T05:23:16Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: update favicon and og',
+            url: 'https://github.com/gnolang/gno/pull/2148',
+            createdAt: '2024-05-20T06:29:12Z',
+            labels: [
+              {
+                name: "don't merge",
+                color: 'b60205',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'style: logo and font update',
+            url: 'https://github.com/gnolang/gno/pull/2132',
+            createdAt: '2024-05-17T03:24:52Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: register hljs plaintext language',
+            url: 'https://github.com/gnolang/gno/pull/2103',
+            createdAt: '2024-05-14T15:04:39Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add edit page link and info',
+            url: 'https://github.com/gnolang/gno/pull/1629',
+            createdAt: '2024-02-04T00:19:48Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add links into navbar',
+            url: 'https://github.com/gnolang/gno/pull/1627',
+            createdAt: '2024-02-02T15:20:26Z',
+            labels: [],
+          },
+          {
+            title: 'style: fix navbar and add better meta description',
+            url: 'https://github.com/gnolang/gno/pull/1526',
+            createdAt: '2024-01-11T14:46:43Z',
+            labels: [],
+          },
+          {
+            title: 'docs: add basic custom meta',
+            url: 'https://github.com/gnolang/gno/pull/1524',
+            createdAt: '2024-01-11T12:48:35Z',
+            labels: [],
+          },
+          {
+            title: 'style: fix navbar on scroll',
+            url: 'https://github.com/gnolang/gno/pull/1518',
+            createdAt: '2024-01-10T19:42:28Z',
+            labels: [],
+          },
+          {
+            title: 'style: improve docs links, toc and icons',
+            url: 'https://github.com/gnolang/gno/pull/1516',
+            createdAt: '2024-01-10T17:36:03Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjc4Nzc0MzA=',
@@ -11318,6 +15344,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -11449,6 +15479,79 @@ const data = {
             labels: [
               {
                 name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
+        count: 6,
+        data: [
+          {
+            title: 'chore(test4): add teritori persistent peer',
+            url: 'https://github.com/gnolang/gno/pull/2575',
+            createdAt: '2024-07-11T18:55:43Z',
+            labels: [],
+          },
+          {
+            title: 'fix(vm): avoid "index out of range" in `convertArgToGno`',
+            url: 'https://github.com/gnolang/gno/pull/2500',
+            createdAt: '2024-07-04T11:31:26Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnodev): add /reload and /reset endpoints',
+            url: 'https://github.com/gnolang/gno/pull/2448',
+            createdAt: '2024-06-26T15:02:54Z',
+            labels: [],
+          },
+          {
+            title: 'chore(examples): rm inexistent dir in `make lint` targets; use `make` in ci',
+            url: 'https://github.com/gnolang/gno/pull/2034',
+            createdAt: '2024-05-04T10:18:03Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnoweb): prettify json code blocks in render',
+            url: 'https://github.com/gnolang/gno/pull/2033',
+            createdAt: '2024-05-03T17:47:12Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: expose InitChain tx responses',
+            url: 'https://github.com/gnolang/gno/pull/1941',
+            createdAt: '2024-04-17T13:54:32Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
                 color: 'ffffff',
               },
               {
@@ -11691,6 +15794,158 @@ const data = {
                 color: 'ffffff',
               },
             ],
+          },
+          {
+            title: 'chore: simplify staging',
+            url: 'https://github.com/gnolang/gno/pull/2018',
+            createdAt: '2024-05-02T10:55:26Z',
+            labels: [],
+          },
+          {
+            title: 'chore: update faucet url',
+            url: 'https://github.com/gnolang/gno/pull/1980',
+            createdAt: '2024-04-25T07:27:55Z',
+            labels: [],
+          },
+          {
+            title: 'chore(misc/loop): updates images, fix flags config',
+            url: 'https://github.com/gnolang/gno/pull/1907',
+            createdAt: '2024-04-09T09:14:24Z',
+            labels: [],
+          },
+          {
+            title: 'chore: trigger docs deploy',
+            url: 'https://github.com/gnolang/gno/pull/1801',
+            createdAt: '2024-03-20T14:48:03Z',
+            labels: [],
+          },
+          {
+            title: 'chore(misc/autocounterd): init autocounterd',
+            url: 'https://github.com/gnolang/gno/pull/1612',
+            createdAt: '2024-02-01T11:25:56Z',
+            labels: [],
+          },
+          {
+            title: 'fix(gno.land/pkg/gnoclient): Signer takes chainID',
+            url: 'https://github.com/gnolang/gno/pull/1580',
+            createdAt: '2024-01-24T16:44:37Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: fix netlify docs deploy',
+            url: 'https://github.com/gnolang/gno/pull/1564',
+            createdAt: '2024-01-19T15:23:06Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
+        count: 19,
+        data: [
+          {
+            title: 'chore(tm2): crypto.Address json Marshal',
+            url: 'https://github.com/gnolang/gno/pull/2756',
+            createdAt: '2024-09-04T12:47:06Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(tm2): rpc status validator power',
+            url: 'https://github.com/gnolang/gno/pull/2447',
+            createdAt: '2024-06-26T10:36:16Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(tm2): OTEL / handle http metrics exporter',
+            url: 'https://github.com/gnolang/gno/pull/2402',
+            createdAt: '2024-06-20T12:34:36Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: portal-loop run master image',
+            url: 'https://github.com/gnolang/gno/pull/2238',
+            createdAt: '2024-05-28T21:24:33Z',
+            labels: [],
+          },
+          {
+            title: 'fix(misc/loop): edit volume path',
+            url: 'https://github.com/gnolang/gno/pull/2186',
+            createdAt: '2024-05-24T16:06:33Z',
+            labels: [],
+          },
+          {
+            title: 'fix(misc/loop): fix portal loop post goreleaser',
+            url: 'https://github.com/gnolang/gno/pull/2185',
+            createdAt: '2024-05-24T15:42:17Z',
+            labels: [],
+          },
+          {
+            title: 'chore: replace all occurence of port 3665{6,7,8} to 2665{6,7,8}',
+            url: 'https://github.com/gnolang/gno/pull/2178',
+            createdAt: '2024-05-23T14:43:18Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(docker): fix binary path for dockerfiles',
+            url: 'https://github.com/gnolang/gno/pull/2177',
+            createdAt: '2024-05-23T14:30:34Z',
+            labels: [],
+          },
+          {
+            title: 'chore(misc/loop): gnoweb host www.gno.land',
+            url: 'https://github.com/gnolang/gno/pull/2136',
+            createdAt: '2024-05-17T10:10:33Z',
+            labels: [],
+          },
+          {
+            title: 'fix(ci): typo on deploy-docs',
+            url: 'https://github.com/gnolang/gno/pull/2089',
+            createdAt: '2024-05-14T09:15:21Z',
+            labels: [],
+          },
+          {
+            title: 'chore(ci): CI test of portal-loop',
+            url: 'https://github.com/gnolang/gno/pull/2064',
+            createdAt: '2024-05-09T09:36:34Z',
+            labels: [],
+          },
+          {
+            title: 'chore: update portal-loop configurations urls',
+            url: 'https://github.com/gnolang/gno/pull/2039',
+            createdAt: '2024-05-06T09:08:14Z',
+            labels: [],
           },
           {
             title: 'chore: simplify staging',
@@ -12190,6 +16445,289 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 25,
+        data: [
+          {
+            title: 'feat(gnobro): add json log format',
+            url: 'https://github.com/gnolang/gno/pull/2812',
+            createdAt: '2024-09-18T09:02:33Z',
+            labels: [],
+          },
+          {
+            title: 'fix(fmt): do not print a second line when printing file to stdout',
+            url: 'https://github.com/gnolang/gno/pull/2639',
+            createdAt: '2024-07-28T08:20:27Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: gnobro, a terminal-based realm browser ',
+            url: 'https://github.com/gnolang/gno/pull/2608',
+            createdAt: '2024-07-21T19:46:56Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: users namespace',
+            url: 'https://github.com/gnolang/gno/pull/2471',
+            createdAt: '2024-07-01T07:22:55Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(CI): ignored contribs folder on gno update - bis',
+            url: 'https://github.com/gnolang/gno/pull/2412',
+            createdAt: '2024-06-21T07:49:10Z',
+            labels: [],
+          },
+          {
+            title: 'feat(gnoland): Improve `gnoland config/secrets` command description',
+            url: 'https://github.com/gnolang/gno/pull/2399',
+            createdAt: '2024-06-20T09:30:20Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(coverage): Add back coverage support for `txtar`',
+            url: 'https://github.com/gnolang/gno/pull/2377',
+            createdAt: '2024-06-18T09:39:56Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: bad module naming in gov package',
+            url: 'https://github.com/gnolang/gno/pull/2339',
+            createdAt: '2024-06-12T13:55:43Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnodev): txs manipulation ability',
+            url: 'https://github.com/gnolang/gno/pull/2286',
+            createdAt: '2024-06-05T11:30:05Z',
+            labels: [],
+          },
+          {
+            title: 'fix(bft): potential deadlock in the consensus ticker on close',
+            url: 'https://github.com/gnolang/gno/pull/2264',
+            createdAt: '2024-06-03T10:12:21Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnovm): add `gno fmt` command',
+            url: 'https://github.com/gnolang/gno/pull/2156',
+            createdAt: '2024-05-20T22:01:13Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnodev): racy emitter test',
+            url: 'https://github.com/gnolang/gno/pull/2022',
+            createdAt: '2024-05-02T15:15:11Z',
+            labels: [],
+          },
+          {
+            title: 'fix: keep data as default gnohome keybase db',
+            url: 'https://github.com/gnolang/gno/pull/1984',
+            createdAt: '2024-04-25T15:12:02Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnodev): add balances & keybase support ',
+            url: 'https://github.com/gnolang/gno/pull/1938',
+            createdAt: '2024-04-16T12:39:52Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(docker): fix docker action by adding build target',
+            url: 'https://github.com/gnolang/gno/pull/1920',
+            createdAt: '2024-04-11T20:51:01Z',
+            labels: [],
+          },
+          {
+            title: 'fix: use docker buildx on ci to support multiple arch',
+            url: 'https://github.com/gnolang/gno/pull/1912',
+            createdAt: '2024-04-10T17:16:10Z',
+            labels: [],
+          },
+          {
+            title: 'feat: improve gnodev logging',
+            url: 'https://github.com/gnolang/gno/pull/1790',
+            createdAt: '2024-03-18T15:35:28Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(txtar): handle quote for gnokey',
+            url: 'https://github.com/gnolang/gno/pull/1745',
+            createdAt: '2024-03-07T10:16:28Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnodev): add node tests and lint',
+            url: 'https://github.com/gnolang/gno/pull/1668',
+            createdAt: '2024-02-19T15:21:48Z',
+            labels: [],
+          },
+          {
+            title: 'feat(go): bump go 1.20 to 1.21',
+            url: 'https://github.com/gnolang/gno/pull/1654',
+            createdAt: '2024-02-13T13:41:29Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnodev): add more configuration flags for server usage',
+            url: 'https://github.com/gnolang/gno/pull/1622',
+            createdAt: '2024-02-02T09:41:13Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(txtar): add `loadpkg` command',
+            url: 'https://github.com/gnolang/gno/pull/1598',
+            createdAt: '2024-01-29T15:39:37Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnodev): rewrite genesis with current state on reload',
+            url: 'https://github.com/gnolang/gno/pull/1566',
+            createdAt: '2024-01-22T15:18:23Z',
+            labels: [],
+          },
+          {
+            title: 'fix(bft): correctly drain channels events',
+            url: 'https://github.com/gnolang/gno/pull/1515',
+            createdAt: '2024-01-10T14:44:27Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnodev): time drifting in gnodev',
+            url: 'https://github.com/gnolang/gno/pull/1510',
+            createdAt: '2024-01-10T09:35:45Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjEwMzAxNTAz',
@@ -12206,6 +16744,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjEwNDk0Mzk3',
@@ -12219,6 +16761,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -12308,8 +16854,19 @@ const data = {
         ],
       },
       prs: {
-        count: 33,
+        count: 34,
         data: [
+          {
+            title: "feat(p/int256): Optimize `int256` with two's complement implementation",
+            url: 'https://github.com/gnolang/gno/pull/2846',
+            createdAt: '2024-09-25T07:18:44Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             title: 'fix(p/int256): "-0" Output When Calculating Basic Arithmetics',
             url: 'https://github.com/gnolang/gno/pull/2750',
@@ -12709,6 +17266,194 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 15,
+        data: [
+          {
+            title: 'fix(p/int256): "-0" Output When Calculating Basic Arithmetics',
+            url: 'https://github.com/gnolang/gno/pull/2750',
+            createdAt: '2024-09-02T05:14:31Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): Fix panic when calling `len()`/`cap()` on pointer array',
+            url: 'https://github.com/gnolang/gno/pull/2709',
+            createdAt: '2024-08-19T03:35:27Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(p/uassert, p/diff): Support Diff in `p/uassert` Package',
+            url: 'https://github.com/gnolang/gno/pull/2490',
+            createdAt: '2024-07-03T07:41:19Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "chore(make): don't print bash comment",
+            url: 'https://github.com/gnolang/gno/pull/2080',
+            createdAt: '2024-05-13T02:42:50Z',
+            labels: [],
+          },
+          {
+            title: 'chore(gnovm, tm2): changed `reflect.PtrTo` to `reflect.PointerTo`',
+            url: 'https://github.com/gnolang/gno/pull/1894',
+            createdAt: '2024-04-05T09:17:22Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test(p/avl): increase test coverage',
+            url: 'https://github.com/gnolang/gno/pull/1881',
+            createdAt: '2024-04-03T06:58:29Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnoweb): Handle unicode characters in 404 page URL',
+            url: 'https://github.com/gnolang/gno/pull/1878',
+            createdAt: '2024-04-03T01:59:10Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(p/ufmt): Support `Println`',
+            url: 'https://github.com/gnolang/gno/pull/1819',
+            createdAt: '2024-03-25T05:09:23Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(stdlibs): Fuzz for String',
+            url: 'https://github.com/gnolang/gno/pull/1809',
+            createdAt: '2024-03-21T08:11:31Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(p/uint256): uint256',
+            url: 'https://github.com/gnolang/gno/pull/1778',
+            createdAt: '2024-03-15T08:38:51Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(p/math_eval, gnovm): Simplifying Previous Error Formatting with `Errorf`',
+            url: 'https://github.com/gnolang/gno/pull/1772',
+            createdAt: '2024-03-14T06:47:08Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(p/ufmt): add ufmt.Errorf',
+            url: 'https://github.com/gnolang/gno/pull/1767',
+            createdAt: '2024-03-13T14:04:17Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(stdlib): add `unicode/utf16` pacakge',
+            url: 'https://github.com/gnolang/gno/pull/1764',
+            createdAt: '2024-03-13T08:19:53Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(gnovm): add missing packages to `stdlibWhitelist`',
+            url: 'https://github.com/gnolang/gno/pull/1677',
+            createdAt: '2024-02-22T11:05:57Z',
+            labels: [],
+          },
+          {
+            title: 'feat(gnovm, tm2): implement event emission with `std.Emit`',
+            url: 'https://github.com/gnolang/gno/pull/1653',
+            createdAt: '2024-02-13T09:59:50Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjEyMDIzNTg1',
@@ -12722,6 +17467,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -12844,6 +17593,36 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 2,
+        data: [
+          {
+            title: 'docs: Gno.land to gno.land',
+            url: 'https://github.com/gnolang/gno/pull/2514',
+            createdAt: '2024-07-05T12:12:15Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: typo in portal-loop.md',
+            url: 'https://github.com/gnolang/gno/pull/1918',
+            createdAt: '2024-04-11T16:46:17Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjEzMDQ0ODA1',
@@ -12857,6 +17636,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -12901,6 +17684,23 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 2,
+        data: [
+          {
+            title: 'fix(doc): add a missing rpcclient import',
+            url: 'https://github.com/gnolang/gno/pull/2020',
+            createdAt: '2024-05-02T14:24:44Z',
+            labels: [],
+          },
+          {
+            title: 'fix(docs): some NewHTTP functions were not renamed',
+            url: 'https://github.com/gnolang/gno/pull/2010',
+            createdAt: '2024-04-30T21:34:55Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjE0OTI2NTg3',
@@ -12914,6 +17714,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -13146,6 +17950,112 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 7,
+        data: [
+          {
+            title: 'fix: set Loc Line on Decl',
+            url: 'https://github.com/gnolang/gno/pull/2221',
+            createdAt: '2024-05-27T22:37:16Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: missing length check in value declaration',
+            url: 'https://github.com/gnolang/gno/pull/2206',
+            createdAt: '2024-05-26T21:42:08Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnovm): add stacktraces and log them in panic messages',
+            url: 'https://github.com/gnolang/gno/pull/2145',
+            createdAt: '2024-05-18T15:25:20Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnolang): fix panic when using struct as index of map',
+            url: 'https://github.com/gnolang/gno/pull/2044',
+            createdAt: '2024-05-06T17:37:50Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(#2035): Prevent infinite loops caused by cyclic references on typedValue',
+            url: 'https://github.com/gnolang/gno/pull/2036',
+            createdAt: '2024-05-04T20:57:04Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(#1966): go2Gno loses type info',
+            url: 'https://github.com/gnolang/gno/pull/2016',
+            createdAt: '2024-05-01T21:50:47Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: support crypto/ed25519.Verify',
+            url: 'https://github.com/gnolang/gno/pull/1863',
+            createdAt: '2024-03-30T13:57:31Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjE1NjU0OTgw',
@@ -13159,6 +18069,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -14509,6 +19423,640 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 47,
+        data: [
+          {
+            title: 'chore: update `gnolang/faucet` version to `v0.3.2`',
+            url: 'https://github.com/gnolang/gno/pull/2701',
+            createdAt: '2024-08-14T15:38:44Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: fixate `golangci-lint` CI version to `1.59`',
+            url: 'https://github.com/gnolang/gno/pull/2693',
+            createdAt: '2024-08-14T08:21:42Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add the `gnostats` server',
+            url: 'https://github.com/gnolang/gno/pull/2691',
+            createdAt: '2024-08-13T21:59:03Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: bump `gnolang/faucet` version to `v0.3.1`',
+            url: 'https://github.com/gnolang/gno/pull/2664',
+            createdAt: '2024-08-06T21:18:24Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: add test4 `persistent_peers`',
+            url: 'https://github.com/gnolang/gno/pull/2569',
+            createdAt: '2024-07-10T15:17:31Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: rollback docker go versions for portal loop',
+            url: 'https://github.com/gnolang/gno/pull/2545',
+            createdAt: '2024-07-08T08:56:37Z',
+            labels: [],
+          },
+          {
+            title: 'fix: regenerate output for `zrealm_tests0_stdlibs`',
+            url: 'https://github.com/gnolang/gno/pull/2527',
+            createdAt: '2024-07-06T16:49:37Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: Revert "feat: add p/nestedpkg (#2342)"',
+            url: 'https://github.com/gnolang/gno/pull/2525',
+            createdAt: '2024-07-06T16:09:26Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: update golden test `zrealm_tests0_stdlibs.gno`',
+            url: 'https://github.com/gnolang/gno/pull/2524',
+            createdAt: '2024-07-06T15:43:01Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: update `tx-archive` usage in portal loop',
+            url: 'https://github.com/gnolang/gno/pull/2521',
+            createdAt: '2024-07-06T14:32:08Z',
+            labels: [],
+          },
+          {
+            title: 'feat: improve `r/gnoland/valopers` implementation',
+            url: 'https://github.com/gnolang/gno/pull/2509',
+            createdAt: '2024-07-04T19:08:21Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: test4 `genesis.json` and suggested `config.toml`',
+            url: 'https://github.com/gnolang/gno/pull/2508',
+            createdAt: '2024-07-04T17:06:24Z',
+            labels: [
+              {
+                name: "don't merge",
+                color: 'b60205',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: `urequire` module path',
+            url: 'https://github.com/gnolang/gno/pull/2480',
+            createdAt: '2024-07-02T13:37:26Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add unit tests to `p/gov/proposal`',
+            url: 'https://github.com/gnolang/gno/pull/2475',
+            createdAt: '2024-07-01T15:44:19Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: update validator docs styling, links',
+            url: 'https://github.com/gnolang/gno/pull/2439',
+            createdAt: '2024-06-25T16:59:45Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: migrate the `libtm` repo to `tm2/pkg/libtm`',
+            url: 'https://github.com/gnolang/gno/pull/2424',
+            createdAt: '2024-06-24T09:02:23Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: overhaul `gnoland secrets` and `gnoland config` to output JSON',
+            url: 'https://github.com/gnolang/gno/pull/2393',
+            createdAt: '2024-06-19T14:40:05Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add support for displaying the P2P Address for node secrets info',
+            url: 'https://github.com/gnolang/gno/pull/2361',
+            createdAt: '2024-06-15T10:01:52Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: Add default ports for `net.Dial` if missing in RPC URL',
+            url: 'https://github.com/gnolang/gno/pull/2360',
+            createdAt: '2024-06-15T08:47:34Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add the ability to add packages to genesis transactions',
+            url: 'https://github.com/gnolang/gno/pull/2327',
+            createdAt: '2024-06-11T14:03:06Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: add `nightly` flag for `master` releases',
+            url: 'https://github.com/gnolang/gno/pull/2237',
+            createdAt: '2024-05-28T17:39:55Z',
+            labels: [],
+          },
+          {
+            title: 'feat: add Goreleaser `master` workflow',
+            url: 'https://github.com/gnolang/gno/pull/2235',
+            createdAt: '2024-05-28T16:59:18Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add valset injection through `r/sys/validators`',
+            url: 'https://github.com/gnolang/gno/pull/2229',
+            createdAt: '2024-05-28T11:06:26Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: fix up telemetry docker example',
+            url: 'https://github.com/gnolang/gno/pull/2200',
+            createdAt: '2024-05-26T09:48:15Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add `/r/sys/validators`',
+            url: 'https://github.com/gnolang/gno/pull/2130',
+            createdAt: '2024-05-16T17:41:19Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add more telemetry',
+            url: 'https://github.com/gnolang/gno/pull/2059',
+            createdAt: '2024-05-08T18:18:29Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: update `gnofaucet` dependencies',
+            url: 'https://github.com/gnolang/gno/pull/1996',
+            createdAt: '2024-04-29T13:38:24Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: overhaul lazy init in `gnoland start`',
+            url: 'https://github.com/gnolang/gno/pull/1985',
+            createdAt: '2024-04-25T17:29:43Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: bump max faucet drip amount',
+            url: 'https://github.com/gnolang/gno/pull/1977',
+            createdAt: '2024-04-24T10:14:42Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: `gnokey sign` should sign transactions',
+            url: 'https://github.com/gnolang/gno/pull/1976',
+            createdAt: '2024-04-24T09:47:20Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: remove gnofaucet leftover from gno.land Make',
+            url: 'https://github.com/gnolang/gno/pull/1957',
+            createdAt: '2024-04-19T10:24:51Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: move `gnofaucet` to `contribs`',
+            url: 'https://github.com/gnolang/gno/pull/1955',
+            createdAt: '2024-04-18T16:50:44Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'refactor!: move `genesis` to `gnoland genesis`',
+            url: 'https://github.com/gnolang/gno/pull/1954',
+            createdAt: '2024-04-18T16:20:44Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: standardize node directory structure',
+            url: 'https://github.com/gnolang/gno/pull/1944',
+            createdAt: '2024-04-17T18:40:37Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: remove empty timestamp from the tx signature payload',
+            url: 'https://github.com/gnolang/gno/pull/1939',
+            createdAt: '2024-04-16T14:32:47Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: slightly improve node log lines',
+            url: 'https://github.com/gnolang/gno/pull/1916',
+            createdAt: '2024-04-11T14:05:25Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: use original `goleveldb` package',
+            url: 'https://github.com/gnolang/gno/pull/1870',
+            createdAt: '2024-04-01T10:38:10Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: swap legacy faucet implementation',
+            url: 'https://github.com/gnolang/gno/pull/1614',
+            createdAt: '2024-02-01T12:51:09Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: remove legacy `gnotxsync`',
+            url: 'https://github.com/gnolang/gno/pull/1613',
+            createdAt: '2024-02-01T11:51:30Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add `gnoland config` command suite',
+            url: 'https://github.com/gnolang/gno/pull/1605',
+            createdAt: '2024-01-30T18:08:59Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add `gnoland secrets` command suite',
+            url: 'https://github.com/gnolang/gno/pull/1593',
+            createdAt: '2024-01-26T16:41:10Z',
+            labels: [
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: fix noop logger reference',
+            url: 'https://github.com/gnolang/gno/pull/1586',
+            createdAt: '2024-01-25T18:11:26Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add Dependabot groups',
+            url: 'https://github.com/gnolang/gno/pull/1553',
+            createdAt: '2024-01-18T15:30:43Z',
+            labels: [
+              {
+                name: 'dependencies',
+                color: '5319e7',
+              },
+            ],
+          },
+          {
+            title: 'fix: attempt to fix dependabot mod tidy',
+            url: 'https://github.com/gnolang/gno/pull/1551',
+            createdAt: '2024-01-18T14:17:51Z',
+            labels: [],
+          },
+          {
+            title: 'feat(tm2): store tx results and add endpoint to query them',
+            url: 'https://github.com/gnolang/gno/pull/1546',
+            createdAt: '2024-01-17T15:20:10Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: load config defaults if not specified in existing config',
+            url: 'https://github.com/gnolang/gno/pull/1544',
+            createdAt: '2024-01-17T13:18:28Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: add support for a ws client & batch processing over ws',
+            url: 'https://github.com/gnolang/gno/pull/1498',
+            createdAt: '2024-01-05T22:34:00Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjE3MDM4NzYw',
@@ -14525,6 +20073,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjE3NTk5ODY3',
@@ -14538,6 +20090,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -14662,6 +20218,43 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 3,
+        data: [
+          {
+            title: 'feat: add network configuration table',
+            url: 'https://github.com/gnolang/gno/pull/1707',
+            createdAt: '2024-02-29T07:04:54Z',
+            labels: [],
+          },
+          {
+            title: 'feat(pkg/std): ensure files are sorted in a `MemPackage`',
+            url: 'https://github.com/gnolang/gno/pull/1618',
+            createdAt: '2024-02-02T01:17:55Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: replace `fmt` with `ufmt` in realm examples (docs)',
+            url: 'https://github.com/gnolang/gno/pull/1559',
+            createdAt: '2024-01-18T18:06:58Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjE4MzU3ODI3',
@@ -14675,6 +20268,22 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'docs: updated missing gnofaucet README',
+            url: 'https://github.com/gnolang/gno/pull/2783',
+            createdAt: '2024-09-11T17:56:47Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -15146,6 +20755,122 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 9,
+        data: [
+          {
+            title: 'fix: pointer eq',
+            url: 'https://github.com/gnolang/gno/pull/2627',
+            createdAt: '2024-07-24T20:27:03Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'perf: for loop and if',
+            url: 'https://github.com/gnolang/gno/pull/2140',
+            createdAt: '2024-05-17T12:48:03Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: value decl loop',
+            url: 'https://github.com/gnolang/gno/pull/2074',
+            createdAt: '2024-05-11T11:11:26Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: untyped to interface check',
+            url: 'https://github.com/gnolang/gno/pull/2042',
+            createdAt: '2024-05-06T12:30:23Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: add heads machine string',
+            url: 'https://github.com/gnolang/gno/pull/2037',
+            createdAt: '2024-05-05T12:45:46Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'perf: machine string',
+            url: 'https://github.com/gnolang/gno/pull/1994',
+            createdAt: '2024-04-29T11:44:14Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: labels error handling',
+            url: 'https://github.com/gnolang/gno/pull/1877',
+            createdAt: '2024-04-02T18:53:35Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: top sort var/const globals',
+            url: 'https://github.com/gnolang/gno/pull/1854',
+            createdAt: '2024-03-28T10:36:42Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: implement shadowing rules',
+            url: 'https://github.com/gnolang/gno/pull/1793',
+            createdAt: '2024-03-19T11:25:37Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjE5NDM1Mjcx',
@@ -15159,6 +20884,22 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'fix: custom boolean types in conditional statements',
+            url: 'https://github.com/gnolang/gno/pull/2147',
+            createdAt: '2024-05-20T04:11:57Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -15190,6 +20931,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjIwNzE4Njkz',
@@ -15206,6 +20951,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjIxMTM5NDE2',
@@ -15219,6 +20968,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -15364,6 +21117,33 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 2,
+        data: [
+          {
+            title: 'fix(gnovm): annotate specific reason a value does not implement an interface ',
+            url: 'https://github.com/gnolang/gno/pull/2492',
+            createdAt: '2024-07-03T11:56:33Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: printing all the errors from goparser',
+            url: 'https://github.com/gnolang/gno/pull/2011',
+            createdAt: '2024-05-01T08:55:37Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjIyMzYxNTAz',
@@ -15377,6 +21157,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -15396,6 +21180,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjIzNzAzNzQx',
@@ -15409,6 +21197,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -15470,6 +21262,41 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 2,
+        data: [
+          {
+            title: 'refactor: check key name validation for key import and export',
+            url: 'https://github.com/gnolang/gno/pull/1492',
+            createdAt: '2024-01-02T11:18:20Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: remove the annoying tail message shows on every command with -h or --help',
+            url: 'https://github.com/gnolang/gno/pull/1490',
+            createdAt: '2024-01-02T09:21:54Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjI1NDk3MDgz',
@@ -15498,6 +21325,10 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjI1NTE5Mzg5',
@@ -15514,6 +21345,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjMxMDk0MTAy',
@@ -15527,6 +21362,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -17340,6 +23179,717 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 71,
+        data: [
+          {
+            title: 'fix(grc20): remove unused interface, fix typo',
+            url: 'https://github.com/gnolang/gno/pull/2793',
+            createdAt: '2024-09-13T09:37:03Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs(gnokey): add more info on `vm/qfile`',
+            url: 'https://github.com/gnolang/gno/pull/2770',
+            createdAt: '2024-09-09T11:38:27Z',
+            labels: [],
+          },
+          {
+            title: 'feat(examples): add `r/leon`',
+            url: 'https://github.com/gnolang/gno/pull/2740',
+            createdAt: '2024-08-28T16:43:53Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(gnokey): update long help',
+            url: 'https://github.com/gnolang/gno/pull/2712',
+            createdAt: '2024-08-20T08:23:33Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(examples): update home page, add add test for r/events',
+            url: 'https://github.com/gnolang/gno/pull/2697',
+            createdAt: '2024-08-14T12:31:47Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(docs): wrong `GetOrigCaller` usage reference',
+            url: 'https://github.com/gnolang/gno/pull/2659',
+            createdAt: '2024-08-05T14:05:35Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add test4 config & update testnets section',
+            url: 'https://github.com/gnolang/gno/pull/2576',
+            createdAt: '2024-07-12T01:12:23Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(docs): broken links',
+            url: 'https://github.com/gnolang/gno/pull/2431',
+            createdAt: '2024-06-25T10:58:38Z',
+            labels: [],
+          },
+          {
+            title: 'feat(docs-linter): add lint for local links',
+            url: 'https://github.com/gnolang/gno/pull/2416',
+            createdAt: '2024-06-21T18:42:43Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: docs linter improvements',
+            url: 'https://github.com/gnolang/gno/pull/2404',
+            createdAt: '2024-06-20T13:33:58Z',
+            labels: [],
+          },
+          {
+            title: 'docs: add 404 link checker / linter',
+            url: 'https://github.com/gnolang/gno/pull/2394',
+            createdAt: '2024-06-19T16:02:25Z',
+            labels: [],
+          },
+          {
+            title: 'feat(examples): implement `r/events`, `p/authorizable`',
+            url: 'https://github.com/gnolang/gno/pull/2372',
+            createdAt: '2024-06-17T20:43:44Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add `TestSetRealm` reference docs',
+            url: 'https://github.com/gnolang/gno/pull/2369',
+            createdAt: '2024-06-17T13:57:19Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(pages/events): update events',
+            url: 'https://github.com/gnolang/gno/pull/2347',
+            createdAt: '2024-06-12T21:57:10Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(makefile): `gnodev` with `make install`',
+            url: 'https://github.com/gnolang/gno/pull/2346',
+            createdAt: '2024-06-12T21:40:54Z',
+            labels: [],
+          },
+          {
+            title: 'fix(gnovm): incorrect `Emit` signature in stdshim',
+            url: 'https://github.com/gnolang/gno/pull/2292',
+            createdAt: '2024-06-05T16:07:04Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: Index missing pages & remove outdated ones',
+            url: 'https://github.com/gnolang/gno/pull/2291',
+            createdAt: '2024-06-05T15:14:14Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs(GRC721): remove outdated guide',
+            url: 'https://github.com/gnolang/gno/pull/2289',
+            createdAt: '2024-06-05T14:48:54Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(blog): add edit check',
+            url: 'https://github.com/gnolang/gno/pull/2271',
+            createdAt: '2024-06-04T09:01:58Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(examples): add event emit to Userbook realm',
+            url: 'https://github.com/gnolang/gno/pull/2228',
+            createdAt: '2024-05-28T10:42:47Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add `Using gnokey` tutorial',
+            url: 'https://github.com/gnolang/gno/pull/2226',
+            createdAt: '2024-05-28T09:40:19Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add infra section intro',
+            url: 'https://github.com/gnolang/gno/pull/2212',
+            createdAt: '2024-05-27T11:49:26Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(docs): warn banner',
+            url: 'https://github.com/gnolang/gno/pull/2210',
+            createdAt: '2024-05-27T07:48:38Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(docs): remove leftover wording',
+            url: 'https://github.com/gnolang/gno/pull/2203',
+            createdAt: '2024-05-26T17:17:18Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: add Golang Serbia meetup to events page',
+            url: 'https://github.com/gnolang/gno/pull/2163',
+            createdAt: '2024-05-22T08:57:17Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(blog): remove function',
+            url: 'https://github.com/gnolang/gno/pull/2154',
+            createdAt: '2024-05-20T19:22:38Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(blog): add remove functionality ',
+            url: 'https://github.com/gnolang/gno/pull/2153',
+            createdAt: '2024-05-20T17:34:45Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add disclaimer that `maketx call` is a state-changing call',
+            url: 'https://github.com/gnolang/gno/pull/2134',
+            createdAt: '2024-05-17T09:08:34Z',
+            labels: [],
+          },
+          {
+            title: 'feat(docs/home): Add Faucet Hub & `gno.land/faucet` mentions',
+            url: 'https://github.com/gnolang/gno/pull/2124',
+            createdAt: '2024-05-16T07:40:45Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnovm): add `Coin` constructor and more functionality',
+            url: 'https://github.com/gnolang/gno/pull/2104',
+            createdAt: '2024-05-14T15:49:35Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(docs): emit/event docs ',
+            url: 'https://github.com/gnolang/gno/pull/2047',
+            createdAt: '2024-05-06T19:34:37Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: add Gno license page',
+            url: 'https://github.com/gnolang/gno/pull/2005',
+            createdAt: '2024-04-30T14:24:28Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs(Portal Loop): add more info to Portal Loop concepts page',
+            url: 'https://github.com/gnolang/gno/pull/1969',
+            createdAt: '2024-04-22T11:34:49Z',
+            labels: [],
+          },
+          {
+            title: 'feat(examples): add simple userbook realm',
+            url: 'https://github.com/gnolang/gno/pull/1949',
+            createdAt: '2024-04-18T09:17:36Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs(getting-started): local setup with gnodev ',
+            url: 'https://github.com/gnolang/gno/pull/1936',
+            createdAt: '2024-04-16T05:44:48Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: `gnodev` in root `make install`',
+            url: 'https://github.com/gnolang/gno/pull/1934',
+            createdAt: '2024-04-16T04:25:59Z',
+            labels: [],
+          },
+          {
+            title: 'fix(docs): broken links',
+            url: 'https://github.com/gnolang/gno/pull/1911',
+            createdAt: '2024-04-10T11:32:46Z',
+            labels: [],
+          },
+          {
+            title: 'feat(gnoclient): support fetching blocks, block results, latest block number ',
+            url: 'https://github.com/gnolang/gno/pull/1910',
+            createdAt: '2024-04-10T06:23:07Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add missing index pages',
+            url: 'https://github.com/gnolang/gno/pull/1893',
+            createdAt: '2024-04-05T07:09:24Z',
+            labels: [],
+          },
+          {
+            title: 'feat(gnoclient): add support for `MsgAddPackage`',
+            url: 'https://github.com/gnolang/gno/pull/1892',
+            createdAt: '2024-04-05T03:54:15Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add testnets concepts & reference pages',
+            url: 'https://github.com/gnolang/gno/pull/1867',
+            createdAt: '2024-04-01T02:38:08Z',
+            labels: [],
+          },
+          {
+            title: 'fix(docs): wrongly named maketx options',
+            url: 'https://github.com/gnolang/gno/pull/1855',
+            createdAt: '2024-03-28T14:46:48Z',
+            labels: [],
+          },
+          {
+            title: 'chore(effective-gno): replace "native tokens" with "coins"',
+            url: 'https://github.com/gnolang/gno/pull/1853',
+            createdAt: '2024-03-28T07:38:12Z',
+            labels: [],
+          },
+          {
+            title: 'chore(memeland): add sorting condition',
+            url: 'https://github.com/gnolang/gno/pull/1817',
+            createdAt: '2024-03-24T12:46:34Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(memeland): sort by newest instead of by oldest',
+            url: 'https://github.com/gnolang/gno/pull/1800',
+            createdAt: '2024-03-20T12:35:41Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(docs): update blog link',
+            url: 'https://github.com/gnolang/gno/pull/1774',
+            createdAt: '2024-03-14T15:21:08Z',
+            labels: [],
+          },
+          {
+            title: 'docs: add Playground section to "Getting Started"',
+            url: 'https://github.com/gnolang/gno/pull/1773',
+            createdAt: '2024-03-14T13:47:50Z',
+            labels: [],
+          },
+          {
+            title: 'docs: update How-to section with Playground',
+            url: 'https://github.com/gnolang/gno/pull/1766',
+            createdAt: '2024-03-13T13:17:17Z',
+            labels: [],
+          },
+          {
+            title: 'chore(gnoweb/docs): better website connectivity',
+            url: 'https://github.com/gnolang/gno/pull/1763',
+            createdAt: '2024-03-12T20:26:24Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(gnoweb): update link to the docs',
+            url: 'https://github.com/gnolang/gno/pull/1753',
+            createdAt: '2024-03-11T14:54:08Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(examples): add memeland',
+            url: 'https://github.com/gnolang/gno/pull/1751',
+            createdAt: '2024-03-11T01:44:38Z',
+            labels: [
+              {
+                name: "don't merge",
+                color: 'b60205',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gno.land): update nebular text',
+            url: 'https://github.com/gnolang/gno/pull/1744',
+            createdAt: '2024-03-07T09:09:14Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(gnoweb): link header "start" button to docs: Getting Started',
+            url: 'https://github.com/gnolang/gno/pull/1743',
+            createdAt: '2024-03-06T18:28:42Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add index pages',
+            url: 'https://github.com/gnolang/gno/pull/1742',
+            createdAt: '2024-03-06T17:57:47Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(gno.land): add playground section, add GopherconUS to events page',
+            url: 'https://github.com/gnolang/gno/pull/1741',
+            createdAt: '2024-03-06T13:41:46Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(blog): make blog widget better',
+            url: 'https://github.com/gnolang/gno/pull/1740',
+            createdAt: '2024-03-06T13:05:33Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(gno.land): update content on pages',
+            url: 'https://github.com/gnolang/gno/pull/1735',
+            createdAt: '2024-03-05T11:35:59Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(stdlibs): add `math/overflow`',
+            url: 'https://github.com/gnolang/gno/pull/1698',
+            createdAt: '2024-02-27T21:48:39Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: Move Effective Gno, reorg Concepts ordering',
+            url: 'https://github.com/gnolang/gno/pull/1652',
+            createdAt: '2024-02-12T10:11:23Z',
+            labels: [],
+          },
+          {
+            title: 'chore(gnoclient): modify `Run` to use `baseTxCfg` & multiple `MsgRun` args',
+            url: 'https://github.com/gnolang/gno/pull/1637',
+            createdAt: '2024-02-07T21:40:33Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(docs): banker typo',
+            url: 'https://github.com/gnolang/gno/pull/1634',
+            createdAt: '2024-02-06T17:16:03Z',
+            labels: [],
+          },
+          {
+            title: 'fix: add missing args field to `gnoclient` Call',
+            url: 'https://github.com/gnolang/gno/pull/1616',
+            createdAt: '2024-02-01T18:24:45Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: gnodev reference',
+            url: 'https://github.com/gnolang/gno/pull/1599',
+            createdAt: '2024-01-29T15:56:18Z',
+            labels: [],
+          },
+          {
+            title: 'docs: add Portal Loop concept page',
+            url: 'https://github.com/gnolang/gno/pull/1582',
+            createdAt: '2024-01-24T23:44:06Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(docs): Update `GetOrigPkgAddr` reference',
+            url: 'https://github.com/gnolang/gno/pull/1578',
+            createdAt: '2024-01-24T14:31:00Z',
+            labels: [],
+          },
+          {
+            title: 'feat(gnoclient): add MultiCall',
+            url: 'https://github.com/gnolang/gno/pull/1565',
+            createdAt: '2024-01-20T17:58:08Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add gnoclient reference & how-to guide',
+            url: 'https://github.com/gnolang/gno/pull/1562',
+            createdAt: '2024-01-19T13:43:34Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(blog): add sorting, better rendering',
+            url: 'https://github.com/gnolang/gno/pull/1541',
+            createdAt: '2024-01-16T18:53:40Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs(fix): remove leftover paragraph',
+            url: 'https://github.com/gnolang/gno/pull/1529',
+            createdAt: '2024-01-12T16:20:50Z',
+            labels: [],
+          },
+          {
+            title: 'feat: add docs link to main README',
+            url: 'https://github.com/gnolang/gno/pull/1520',
+            createdAt: '2024-01-10T22:20:14Z',
+            labels: [],
+          },
+          {
+            title: 'docs: add analytics',
+            url: 'https://github.com/gnolang/gno/pull/1517',
+            createdAt: '2024-01-10T18:07:08Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjM3MzQ1MDQw',
@@ -17353,6 +23903,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -17684,6 +24238,232 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 19,
+        data: [
+          {
+            title: 'fix(gno.land/Makefile): lazily start gnoland node',
+            url: 'https://github.com/gnolang/gno/pull/2293',
+            createdAt: '2024-06-05T22:27:58Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(stdlibs/net/url): avoid using `fmt`',
+            url: 'https://github.com/gnolang/gno/pull/2219',
+            createdAt: '2024-05-27T18:47:12Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(stdlibs/testing): remove unused imports and vars',
+            url: 'https://github.com/gnolang/gno/pull/2214',
+            createdAt: '2024-05-27T13:16:08Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(cmd/gnoland): `s/LongHelp/ShortHelp` in genesis commands',
+            url: 'https://github.com/gnolang/gno/pull/2052',
+            createdAt: '2024-05-07T18:41:49Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat!: remove flag `-transpile` from `gno test`',
+            url: 'https://github.com/gnolang/gno/pull/2050',
+            createdAt: '2024-05-07T14:05:13Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'refactor: use `stretchr/testify` throughout codebase',
+            url: 'https://github.com/gnolang/gno/pull/1931',
+            createdAt: '2024-04-15T19:10:12Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: namespaces concepts page',
+            url: 'https://github.com/gnolang/gno/pull/1909',
+            createdAt: '2024-04-09T22:36:21Z',
+            labels: [],
+          },
+          {
+            title: 'fix(stdlibs/io): handle potential overflow in `NewSectionReader`',
+            url: 'https://github.com/gnolang/gno/pull/1905',
+            createdAt: '2024-04-09T00:12:53Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(docs): replace `gno build` with `gno transpile --gobuild`',
+            url: 'https://github.com/gnolang/gno/pull/1903',
+            createdAt: '2024-04-08T11:10:18Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: correctly validate package/realm path',
+            url: 'https://github.com/gnolang/gno/pull/1813',
+            createdAt: '2024-03-22T09:45:04Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(docs): replace `verbose` with `v`',
+            url: 'https://github.com/gnolang/gno/pull/1738',
+            createdAt: '2024-03-05T16:53:08Z',
+            labels: [],
+          },
+          {
+            title: 'chore(cmd/gno): remove dead/dormant flags from `repl`',
+            url: 'https://github.com/gnolang/gno/pull/1737',
+            createdAt: '2024-03-05T16:36:11Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: decapitalize short help and flag usage',
+            url: 'https://github.com/gnolang/gno/pull/1701',
+            createdAt: '2024-02-28T14:23:29Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(docs/getting-started): `s/genesis_txs.txt/genesis_balances.txt`',
+            url: 'https://github.com/gnolang/gno/pull/1699',
+            createdAt: '2024-02-28T11:48:43Z',
+            labels: [],
+          },
+          {
+            title: 'chore: use `.jsonl` instead of `.txt` for genesis_txs file',
+            url: 'https://github.com/gnolang/gno/pull/1697',
+            createdAt: '2024-02-27T18:53:34Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: `s/use/loadpkg` and `s/example/examples`',
+            url: 'https://github.com/gnolang/gno/pull/1690',
+            createdAt: '2024-02-23T23:22:44Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(cmd/gno): correctly filter filetests in `listNonTestFiles`',
+            url: 'https://github.com/gnolang/gno/pull/1560',
+            createdAt: '2024-01-18T18:07:22Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: remove `gnodev` leftovers',
+            url: 'https://github.com/gnolang/gno/pull/1519',
+            createdAt: '2024-01-10T20:18:07Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs(gno-tooling/cli): remove `gno build`',
+            url: 'https://github.com/gnolang/gno/pull/1514',
+            createdAt: '2024-01-10T14:08:13Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjQwMDI4NDkz',
@@ -17697,6 +24477,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -17716,6 +24500,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjQxMzI2MzU1',
@@ -17729,6 +24517,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -17748,6 +24540,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjQ2MjQ4ODcw',
@@ -17764,6 +24560,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjQ4MzI1MzUy',
@@ -17777,6 +24577,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -17877,6 +24681,66 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 6,
+        data: [
+          {
+            title: 'feat(gnoweb): Docs link to `gnokey list` with specific anchor',
+            url: 'https://github.com/gnolang/gno/pull/2428',
+            createdAt: '2024-06-24T23:29:50Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs(gno-js): Remove wrong param in getFileContent',
+            url: 'https://github.com/gnolang/gno/pull/2419',
+            createdAt: '2024-06-23T16:59:48Z',
+            labels: [],
+          },
+          {
+            title: 'docs(guides/grc20): Fix playground link with correct code',
+            url: 'https://github.com/gnolang/gno/pull/2315',
+            createdAt: '2024-06-10T12:25:06Z',
+            labels: [],
+          },
+          {
+            title: 'docs: Fix wrong indentation in concepts/packages',
+            url: 'https://github.com/gnolang/gno/pull/2287',
+            createdAt: '2024-06-05T13:12:11Z',
+            labels: [],
+          },
+          {
+            title: 'style: Fixing some typos',
+            url: 'https://github.com/gnolang/gno/pull/2279',
+            createdAt: '2024-06-04T20:37:07Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: Handle .mod files for realms in gnoweb',
+            url: 'https://github.com/gnolang/gno/pull/2278',
+            createdAt: '2024-06-04T20:27:50Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjU1ODQ2NjU0',
@@ -17893,6 +24757,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjU2OTI1MTYw',
@@ -17906,6 +24774,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -17961,6 +24833,17 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'docs: add private key of test address to ease Adena registering',
+            url: 'https://github.com/gnolang/gno/pull/1990',
+            createdAt: '2024-04-28T22:34:47Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjY2NDAxODE0',
@@ -17974,6 +24857,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -18021,6 +24908,65 @@ const data = {
             labels: [
               {
                 name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnoweb): footer display',
+            url: 'https://github.com/gnolang/gno/pull/2462',
+            createdAt: '2024-06-28T20:12:57Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnoweb): added link to readme if present',
+            url: 'https://github.com/gnolang/gno/pull/2461',
+            createdAt: '2024-06-28T19:16:53Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "fix(docs): missing 'false' return in Iterate() methods",
+            url: 'https://github.com/gnolang/gno/pull/2356',
+            createdAt: '2024-06-13T18:19:23Z',
+            labels: [],
+          },
+          {
+            title: 'fix(gnoweb): Cursor pointer when hovering over dark mode theme',
+            url: 'https://github.com/gnolang/gno/pull/2280',
+            createdAt: '2024-06-04T20:40:42Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
+        count: 5,
+        data: [
+          {
+            title: 'feat(examples): add disperse (v2)',
+            url: 'https://github.com/gnolang/gno/pull/2613',
+            createdAt: '2024-07-22T14:37:29Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
               },
             ],
@@ -18135,6 +25081,22 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'feat(p/demo/merkle): add constructor w/ getter for merkle.Node struct',
+            url: 'https://github.com/gnolang/gno/pull/2784',
+            createdAt: '2024-09-11T22:55:13Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjcyMTU2NTM3',
@@ -18148,6 +25110,22 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'fix: ledger discover',
+            url: 'https://github.com/gnolang/gno/pull/1502',
+            createdAt: '2024-01-07T10:01:27Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -18191,6 +25169,22 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'docs: fix typos',
+            url: 'https://github.com/gnolang/gno/pull/2512',
+            createdAt: '2024-07-05T10:17:56Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjc0NDA2MzM1',
@@ -18204,6 +25198,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -18223,6 +25221,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjg2NjgyNjgz',
@@ -18239,6 +25241,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjg3ODc2NjE4',
@@ -18252,6 +25258,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -18399,6 +25409,34 @@ const data = {
                 color: 'ffffff',
               },
             ],
+          },
+          {
+            title: 'docs: add new Prerequisites',
+            url: 'https://github.com/gnolang/gno/pull/1722',
+            createdAt: '2024-03-02T19:30:06Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
+        count: 3,
+        data: [
+          {
+            title: 'fix: wrong url syntax ',
+            url: 'https://github.com/gnolang/gno/pull/2724',
+            createdAt: '2024-08-22T13:19:09Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: fix code in creating-grc20.md',
+            url: 'https://github.com/gnolang/gno/pull/2246',
+            createdAt: '2024-05-30T16:07:27Z',
+            labels: [],
           },
           {
             title: 'docs: add new Prerequisites',
@@ -18574,6 +25612,22 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'feat: named and unnamed type assignment 3 of 3',
+            url: 'https://github.com/gnolang/gno/pull/2367',
+            createdAt: '2024-06-17T03:22:56Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjkwOTE1OTIx',
@@ -18587,6 +25641,17 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'docs: fix typos',
+            url: 'https://github.com/gnolang/gno/pull/1533',
+            createdAt: '2024-01-14T13:26:55Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -18613,6 +25678,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOBXsI4w',
@@ -18629,6 +25698,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOBbB6MA',
@@ -18642,6 +25715,22 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'feat: Terminating analysis',
+            url: 'https://github.com/gnolang/gno/pull/1750',
+            createdAt: '2024-03-10T13:52:30Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -18744,6 +25833,22 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'chore(docs): fix example rpcclient.NewHTTPClient returning variables',
+            url: 'https://github.com/gnolang/gno/pull/2352',
+            createdAt: '2024-06-13T10:20:24Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'U_kgDOBfu5Yw',
@@ -18757,6 +25862,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -18788,6 +25897,10 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOBjxIAQ',
@@ -18801,6 +25914,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -19289,6 +26406,247 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 15,
+        data: [
+          {
+            title: 'feat: add onbloc validator',
+            url: 'https://github.com/gnolang/gno/pull/2533',
+            createdAt: '2024-07-07T14:29:53Z',
+            labels: [],
+          },
+          {
+            title: 'docs: new validator docs (+ updated docs for gnoland cli)',
+            url: 'https://github.com/gnolang/gno/pull/2285',
+            createdAt: '2024-06-05T07:54:22Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnoland): fix: wrong help message for balances add',
+            url: 'https://github.com/gnolang/gno/pull/2284',
+            createdAt: '2024-06-05T06:37:22Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'refactor(stdlibs/std): re-organize gnoEvent struct',
+            url: 'https://github.com/gnolang/gno/pull/2160',
+            createdAt: '2024-05-21T09:29:39Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "fix: Increase 'max gas' and 'vm cycle limit' from 10M to 100M",
+            url: 'https://github.com/gnolang/gno/pull/2065',
+            createdAt: '2024-05-09T11:55:47Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add separator to rpc `block_results` to identify msg & response pair',
+            url: 'https://github.com/gnolang/gno/pull/2063',
+            createdAt: '2024-05-09T09:35:41Z',
+            labels: [
+              {
+                name: 'help wanted',
+                color: '008672',
+              },
+              {
+                name: 'investigating',
+                color: '8c008c',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(tm2/gnovm): multi-msg overwrites previous event(s)',
+            url: 'https://github.com/gnolang/gno/pull/2030',
+            createdAt: '2024-05-03T10:53:42Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: map delete',
+            url: 'https://github.com/gnolang/gno/pull/2017',
+            createdAt: '2024-05-02T06:42:13Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(stdlibs/std): restrict Banker methods based on caller of GetBanker',
+            url: 'https://github.com/gnolang/gno/pull/1921',
+            createdAt: '2024-04-12T02:37:13Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(txtar): create user from passed mnemonic, account and index',
+            url: 'https://github.com/gnolang/gno/pull/1879',
+            createdAt: '2024-04-03T02:35:17Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(p/int256): int256',
+            url: 'https://github.com/gnolang/gno/pull/1848',
+            createdAt: '2024-03-27T06:17:35Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: full `std.Address` validation',
+            url: 'https://github.com/gnolang/gno/pull/1799',
+            createdAt: '2024-03-20T02:58:05Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(stdlibs/std): Banker should only send coins owned by the calling realm',
+            url: 'https://github.com/gnolang/gno/pull/1787',
+            createdAt: '2024-03-18T08:52:04Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: `ufmt` package to print all numeric primitive',
+            url: 'https://github.com/gnolang/gno/pull/1784',
+            createdAt: '2024-03-18T06:36:02Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: make `r/demo/wugnot` compatible with `r/demo/users`',
+            url: 'https://github.com/gnolang/gno/pull/1782',
+            createdAt: '2024-03-18T05:29:31Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'U_kgDOBkuSbg',
@@ -19324,6 +26682,22 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'feat: add adena wallet in-app faucet account',
+            url: 'https://github.com/gnolang/gno/pull/1808',
+            createdAt: '2024-03-21T04:19:37Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'U_kgDOBloeWQ',
@@ -19340,6 +26714,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOBoSBBw',
@@ -19353,6 +26731,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -19534,6 +26916,51 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 5,
+        data: [
+          {
+            title: 'chore(docs): fix `gnodev.md` typo',
+            url: 'https://github.com/gnolang/gno/pull/2302',
+            createdAt: '2024-06-07T09:16:03Z',
+            labels: [],
+          },
+          {
+            title: 'fix(docs): update a typo in coins.md',
+            url: 'https://github.com/gnolang/gno/pull/2227',
+            createdAt: '2024-05-28T10:01:09Z',
+            labels: [],
+          },
+          {
+            title: 'fix: ufmt multi-byte fix.',
+            url: 'https://github.com/gnolang/gno/pull/1889',
+            createdAt: '2024-04-04T16:02:54Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(examples): add todolist package & realm',
+            url: 'https://github.com/gnolang/gno/pull/1811',
+            createdAt: '2024-03-21T17:26:54Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: update getting-started with `gno test`',
+            url: 'https://github.com/gnolang/gno/pull/1712',
+            createdAt: '2024-03-01T11:24:54Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'U_kgDOBrJ9Iw',
@@ -19557,6 +26984,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOBvu4hg',
@@ -19570,6 +27001,37 @@ const data = {
         data: [],
       },
       prs: {
+        count: 2,
+        data: [
+          {
+            title: 'feat(r/gnoland/pages): substitute /game-of-realms with /contribute page',
+            url: 'https://github.com/gnolang/gno/pull/2742',
+            createdAt: '2024-08-29T09:42:28Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: update `page_ecosystem.gno`',
+            url: 'https://github.com/gnolang/gno/pull/2702',
+            createdAt: '2024-08-15T09:26:50Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
         count: 2,
         data: [
           {
@@ -19628,6 +27090,22 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'fix(gnoweb): don\'t pre-fill help page address with "ADDRESS"',
+            url: 'https://github.com/gnolang/gno/pull/2196',
+            createdAt: '2024-05-25T12:40:26Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'U_kgDOB6A6Vg',
@@ -19641,6 +27119,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -19750,6 +27232,17 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'feat: add `irreverentsimplicity` to `persistent_peers`',
+            url: 'https://github.com/gnolang/gno/pull/2577',
+            createdAt: '2024-07-12T07:03:34Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'U_kgDOCH6X9g',
@@ -19763,6 +27256,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -19788,6 +27285,10 @@ const data = {
             labels: [],
           },
         ],
+      },
+      mrs: {
+        count: 0,
+        data: [],
       },
     },
     {
@@ -19931,6 +27432,45 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 4,
+        data: [
+          {
+            title: 'feat: p/subscription',
+            url: 'https://github.com/gnolang/gno/pull/2116',
+            createdAt: '2024-05-15T14:17:09Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: r/profile dapp',
+            url: 'https://github.com/gnolang/gno/pull/1983',
+            createdAt: '2024-04-25T15:04:58Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: Update creating-grc20.md',
+            url: 'https://github.com/gnolang/gno/pull/1771',
+            createdAt: '2024-03-13T21:47:41Z',
+            labels: [],
+          },
+          {
+            title: 'docs: update `write-simple-dapp.md`',
+            url: 'https://github.com/gnolang/gno/pull/1770',
+            createdAt: '2024-03-13T21:07:45Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'U_kgDOCPiJEg',
@@ -19959,6 +27499,22 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'fix: some docs typos',
+            url: 'https://github.com/gnolang/gno/pull/1491',
+            createdAt: '2024-01-02T09:54:47Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'U_kgDOCQlyiA',
@@ -19972,6 +27528,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -20595,6 +28155,195 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 15,
+        data: [
+          {
+            title: 'test(gnoland): test content mismatch for addpkg.txtar',
+            url: 'https://github.com/gnolang/gno/pull/2766',
+            createdAt: '2024-09-07T09:15:08Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnoland): Update error type for invalid deposit',
+            url: 'https://github.com/gnolang/gno/pull/2614',
+            createdAt: '2024-07-22T14:41:37Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: Remove slash from test4 endpoint',
+            url: 'https://github.com/gnolang/gno/pull/2603',
+            createdAt: '2024-07-18T14:47:58Z',
+            labels: [],
+          },
+          {
+            title: 'fix(tm2): Fix request_id mismatch at http client',
+            url: 'https://github.com/gnolang/gno/pull/2589',
+            createdAt: '2024-07-15T02:50:56Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(testdata): wrong expectation at gnoweb_airgapped.txtar',
+            url: 'https://github.com/gnolang/gno/pull/2582',
+            createdAt: '2024-07-14T06:24:48Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test(gnoclient): Fix a potential bug in the integration test',
+            url: 'https://github.com/gnolang/gno/pull/2558',
+            createdAt: '2024-07-09T14:52:30Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(examples): wrong module name of nestedpkg',
+            url: 'https://github.com/gnolang/gno/pull/2522',
+            createdAt: '2024-07-06T15:09:28Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(examples): fix output of uassert.Equal()',
+            url: 'https://github.com/gnolang/gno/pull/2507',
+            createdAt: '2024-07-04T15:46:04Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(examples): fix output of urequire.PanicsWithMessage()',
+            url: 'https://github.com/gnolang/gno/pull/2506',
+            createdAt: '2024-07-04T15:34:29Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(examples): Use uassert/urequire instead of testing in some demo packages',
+            url: 'https://github.com/gnolang/gno/pull/2491',
+            createdAt: '2024-07-03T10:21:27Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnokey): Print out the transaction hash when maketx executes successfully',
+            url: 'https://github.com/gnolang/gno/pull/2309',
+            createdAt: '2024-06-08T03:27:48Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnoclient): Return error when getting keypair information',
+            url: 'https://github.com/gnolang/gno/pull/2300',
+            createdAt: '2024-06-07T08:44:54Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnokey): remove height and prove flags in `query`',
+            url: 'https://github.com/gnolang/gno/pull/2234',
+            createdAt: '2024-05-28T16:37:07Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(stdlibs/std)!: remove `std.CurrentRealmPath`',
+            url: 'https://github.com/gnolang/gno/pull/2087',
+            createdAt: '2024-05-13T15:05:29Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(examples): define metadata & royalty info for GRC721 realm',
+            url: 'https://github.com/gnolang/gno/pull/1962',
+            createdAt: '2024-04-20T13:17:31Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'U_kgDOCg4pdQ',
@@ -20784,6 +28533,59 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 4,
+        data: [
+          {
+            title: 'chore(test):  update home_filetest.gno due to CI failed',
+            url: 'https://github.com/gnolang/gno/pull/2498',
+            createdAt: '2024-07-04T07:09:50Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(examples): update /r/demo/bar20/gno.mod',
+            url: 'https://github.com/gnolang/gno/pull/2398',
+            createdAt: '2024-06-20T04:42:28Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(sdk/vm)!: only allow using msgcall on realms',
+            url: 'https://github.com/gnolang/gno/pull/2242',
+            createdAt: '2024-05-30T08:54:17Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: limitation for length of package/realm path',
+            url: 'https://github.com/gnolang/gno/pull/2108',
+            createdAt: '2024-05-15T03:00:20Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'U_kgDOCj0XyQ',
@@ -20797,6 +28599,22 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'refactor(gnovm/gno/bug): sync bug template',
+            url: 'https://github.com/gnolang/gno/pull/2566',
+            createdAt: '2024-07-10T08:44:28Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -20969,6 +28787,58 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 7,
+        data: [
+          {
+            title: 'feat: add support for toml configuration files + recursive flag definitions for subcommands',
+            url: 'https://github.com/gnolang/gno/pull/827',
+            createdAt: '2023-05-17T07:20:25Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnokey): Resolve nil error in gnokey maketx',
+            url: 'https://github.com/gnolang/gno/pull/571',
+            createdAt: '2023-03-07T11:43:42Z',
+            labels: [],
+          },
+          {
+            title: 'fix:   `unexpected type gnolang.BigdecValue`',
+            url: 'https://github.com/gnolang/gno/pull/500',
+            createdAt: '2023-02-03T17:22:50Z',
+            labels: [],
+          },
+          {
+            title: 'feat: support realm subpackages',
+            url: 'https://github.com/gnolang/gno/pull/365',
+            createdAt: '2022-10-20T13:27:33Z',
+            labels: [],
+          },
+          {
+            title: 'chore: fix to import path of misc',
+            url: 'https://github.com/gnolang/gno/pull/353',
+            createdAt: '2022-10-12T06:15:15Z',
+            labels: [],
+          },
+          {
+            title: ' gnodev test with testing.T',
+            url: 'https://github.com/gnolang/gno/pull/208',
+            createdAt: '2022-05-20T14:45:19Z',
+            labels: [],
+          },
+          {
+            title: 'chore: --home default option: $HOME/.gno',
+            url: 'https://github.com/gnolang/gno/pull/141',
+            createdAt: '2022-04-27T17:45:48Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjEyOTky',
@@ -20994,6 +28864,10 @@ const data = {
         ],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -21702,6 +29576,292 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 35,
+        data: [
+          {
+            title: 'feat: Initialize static blocks before preprocess',
+            url: 'https://github.com/gnolang/gno/pull/2418',
+            createdAt: '2024-06-23T00:31:26Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: small improvements for #1702',
+            url: 'https://github.com/gnolang/gno/pull/2276',
+            createdAt: '2024-06-04T19:17:20Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: update `overview.md`',
+            url: 'https://github.com/gnolang/gno/pull/2275',
+            createdAt: '2024-06-04T19:16:18Z',
+            labels: [],
+          },
+          {
+            title: 'add redirect temporarily from /gophercon24 to docs.gno.land',
+            url: 'https://github.com/gnolang/gno/pull/2274',
+            createdAt: '2024-06-04T18:55:22Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: (gnovm) star expr assign for #1919',
+            url: 'https://github.com/gnolang/gno/pull/2255',
+            createdAt: '2024-06-01T05:55:18Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: Bound Method Realm support',
+            url: 'https://github.com/gnolang/gno/pull/1257',
+            createdAt: '2023-10-19T13:46:05Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'Fix gno.land additional terms',
+            url: 'https://github.com/gnolang/gno/pull/976',
+            createdAt: '2023-07-15T05:46:20Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "chore: improve p/demo/avl's readability and safety",
+            url: 'https://github.com/gnolang/gno/pull/785',
+            createdAt: '2023-04-27T05:57:36Z',
+            labels: [],
+          },
+          {
+            title: 'license: Update license for gnovm and gno.land',
+            url: 'https://github.com/gnolang/gno/pull/767',
+            createdAt: '2023-04-20T22:33:06Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'perf: use constructor to reset fields while keeping alloc slice',
+            url: 'https://github.com/gnolang/gno/pull/672',
+            createdAt: '2023-03-29T01:36:17Z',
+            labels: [],
+          },
+          {
+            title: 'WIP: refactor AVL ',
+            url: 'https://github.com/gnolang/gno/pull/450',
+            createdAt: '2023-01-06T18:40:40Z',
+            labels: [],
+          },
+          {
+            title: 'Update webpage',
+            url: 'https://github.com/gnolang/gno/pull/438',
+            createdAt: '2022-12-19T19:33:53Z',
+            labels: [],
+          },
+          {
+            title: 'example: gnode',
+            url: 'https://github.com/gnolang/gno/pull/324',
+            createdAt: '2022-08-23T19:58:39Z',
+            labels: [],
+          },
+          {
+            title: 'add examples/gno.land/p/flow',
+            url: 'https://github.com/gnolang/gno/pull/316',
+            createdAt: '2022-08-09T23:04:04Z',
+            labels: [],
+          },
+          {
+            title: 'Support UntypedBigdecType, BigdecType, Float32Type and Float64Type.',
+            url: 'https://github.com/gnolang/gno/pull/306',
+            createdAt: '2022-08-02T01:50:52Z',
+            labels: [],
+          },
+          {
+            title: 'WIP: Fix mempool PostCheck error bug',
+            url: 'https://github.com/gnolang/gno/pull/290',
+            createdAt: '2022-07-11T23:50:04Z',
+            labels: [],
+          },
+          {
+            title: 'chore: 1ugnot -> 1000000ugnot',
+            url: 'https://github.com/gnolang/gno/pull/281',
+            createdAt: '2022-07-09T15:33:57Z',
+            labels: [],
+          },
+          {
+            title: 'chore: tweak genesis distribution for test2',
+            url: 'https://github.com/gnolang/gno/pull/278',
+            createdAt: '2022-07-09T03:35:01Z',
+            labels: [],
+          },
+          {
+            title: 'feat: allocation tweaks',
+            url: 'https://github.com/gnolang/gno/pull/267',
+            createdAt: '2022-06-27T23:20:33Z',
+            labels: [],
+          },
+          {
+            title: 'Legal',
+            url: 'https://github.com/gnolang/gno/pull/235',
+            createdAt: '2022-06-07T17:21:11Z',
+            labels: [],
+          },
+          {
+            title: 'Sdk amino fix',
+            url: 'https://github.com/gnolang/gno/pull/229',
+            createdAt: '2022-05-31T06:26:28Z',
+            labels: [],
+          },
+          {
+            title: 'Update amino genproto',
+            url: 'https://github.com/gnolang/gno/pull/199',
+            createdAt: '2022-05-18T00:09:00Z',
+            labels: [],
+          },
+          {
+            title: 'Add support for grocksdb (but disabled by default)',
+            url: 'https://github.com/gnolang/gno/pull/197',
+            createdAt: '2022-05-17T20:10:07Z',
+            labels: [],
+          },
+          {
+            title: 'Update LICENSE.md',
+            url: 'https://github.com/gnolang/gno/pull/194',
+            createdAt: '2022-05-17T02:52:02Z',
+            labels: [],
+          },
+          {
+            title: 'feat: add EditPost feature',
+            url: 'https://github.com/gnolang/gno/pull/146',
+            createdAt: '2022-04-29T02:15:19Z',
+            labels: [],
+          },
+          {
+            title: 'feat: process genesis txs (without requiring signatures)',
+            url: 'https://github.com/gnolang/gno/pull/133',
+            createdAt: '2022-04-22T05:25:13Z',
+            labels: [],
+          },
+          {
+            title: 'WIP: fixing some nondeterministic tests',
+            url: 'https://github.com/gnolang/gno/pull/132',
+            createdAt: '2022-04-22T04:25:19Z',
+            labels: [],
+          },
+          {
+            title: 'Refactor /r/boards, /p/avl',
+            url: 'https://github.com/gnolang/gno/pull/129',
+            createdAt: '2022-04-21T04:43:05Z',
+            labels: [],
+          },
+          {
+            title: 'WIP check for exposed or package path match',
+            url: 'https://github.com/gnolang/gno/pull/124',
+            createdAt: '2022-04-20T01:40:46Z',
+            labels: [],
+          },
+          {
+            title: 'Allow name or bech32 for crypto/keys/client commands',
+            url: 'https://github.com/gnolang/gno/pull/115',
+            createdAt: '2022-04-11T04:47:12Z',
+            labels: [],
+          },
+          {
+            title: 'wip... fixing the banker test.',
+            url: 'https://github.com/gnolang/gno/pull/111',
+            createdAt: '2022-04-06T16:49:21Z',
+            labels: [],
+          },
+          {
+            title: 'Alloc',
+            url: 'https://github.com/gnolang/gno/pull/97',
+            createdAt: '2022-03-11T06:10:29Z',
+            labels: [],
+          },
+          {
+            title: 'WIP: dissociate *FuncValue and *PackageValue for concurrent node execution…',
+            url: 'https://github.com/gnolang/gno/pull/95',
+            createdAt: '2022-01-24T08:29:44Z',
+            labels: [],
+          },
+          {
+            title: 'Persistence',
+            url: 'https://github.com/gnolang/gno/pull/36',
+            createdAt: '2021-11-01T00:54:24Z',
+            labels: [],
+          },
+          {
+            title: 'Lazy values',
+            url: 'https://github.com/gnolang/gno/pull/34',
+            createdAt: '2021-09-15T03:29:40Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjkyMjgw',
@@ -22302,6 +30462,413 @@ const data = {
             title: 'chore: attempt to improve OriginCall funcs',
             url: 'https://github.com/gnolang/gno/pull/495',
             createdAt: '2023-01-30T17:14:48Z',
+            labels: [],
+          },
+          {
+            title: 'chore(website): improve markdown rendering',
+            url: 'https://github.com/gnolang/gno/pull/463',
+            createdAt: '2023-01-17T11:25:15Z',
+            labels: [],
+          },
+          {
+            title: 'chore(tx/call): improve error format output',
+            url: 'https://github.com/gnolang/gno/pull/355',
+            createdAt: '2022-10-14T21:12:30Z',
+            labels: [],
+          },
+          {
+            title: 'fix(bft/rpc): check http status code',
+            url: 'https://github.com/gnolang/gno/pull/350',
+            createdAt: '2022-10-07T18:37:57Z',
+            labels: [],
+          },
+          {
+            title: 'docs: improve vim config with usage of gofmt',
+            url: 'https://github.com/gnolang/gno/pull/337',
+            createdAt: '2022-09-19T09:52:32Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
+        count: 43,
+        data: [
+          {
+            title: 'feat: PrevRealm ignores user realms in MsgRun',
+            url: 'https://github.com/gnolang/gno/pull/1719',
+            createdAt: '2024-03-01T16:04:26Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(precompile): use `//line` directive in generated go files',
+            url: 'https://github.com/gnolang/gno/pull/1688',
+            createdAt: '2024-02-23T17:50:30Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix:  unify the precompile output to make it easier to parse and read. ',
+            url: 'https://github.com/gnolang/gno/pull/1670',
+            createdAt: '2024-02-20T19:01:01Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: make `AssertOriginCall` always panic with `MsgRun`',
+            url: 'https://github.com/gnolang/gno/pull/1665',
+            createdAt: '2024-02-18T18:12:07Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test: improve `gnovm/pkg/gnolang.TestPrecompile()`',
+            url: 'https://github.com/gnolang/gno/pull/1659',
+            createdAt: '2024-02-15T14:35:23Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test(precompile): add more cases',
+            url: 'https://github.com/gnolang/gno/pull/1640',
+            createdAt: '2024-02-08T12:41:35Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: add challenge for "is not a type" error',
+            url: 'https://github.com/gnolang/gno/pull/1452',
+            createdAt: '2023-12-17T09:31:43Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'refactor!: remove `gno build` command',
+            url: 'https://github.com/gnolang/gno/pull/1297',
+            createdAt: '2023-10-26T02:17:03Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs(contributing): add ViM instructions to setup gnols',
+            url: 'https://github.com/gnolang/gno/pull/1282',
+            createdAt: '2023-10-22T20:20:27Z',
+            labels: [],
+          },
+          {
+            title: 'test(gno build): remove exit code assertion',
+            url: 'https://github.com/gnolang/gno/pull/1261',
+            createdAt: '2023-10-19T21:09:40Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "test(gnovm): migrate 'gno build' test to testscript",
+            url: 'https://github.com/gnolang/gno/pull/1103',
+            createdAt: '2023-09-06T14:54:39Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: panic in `store.SprintStoreOps`',
+            url: 'https://github.com/gnolang/gno/pull/1036',
+            createdAt: '2023-08-09T10:29:09Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: 'gnopher-hole',
+                color: '67AC14',
+              },
+            ],
+          },
+          {
+            title: 'test(gnovm): "*_filetest.gno" instructions',
+            url: 'https://github.com/gnolang/gno/pull/1023',
+            createdAt: '2023-08-03T14:52:44Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(cmd): print shortHelp if longHelp is empty',
+            url: 'https://github.com/gnolang/gno/pull/1011',
+            createdAt: '2023-08-01T09:19:53Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs(gnovm): gno test help long description',
+            url: 'https://github.com/gnolang/gno/pull/1010',
+            createdAt: '2023-08-01T09:02:14Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test(gnovm): fix TestPackages',
+            url: 'https://github.com/gnolang/gno/pull/964',
+            createdAt: '2023-07-10T17:32:14Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): load map from state',
+            url: 'https://github.com/gnolang/gno/pull/932',
+            createdAt: '2023-06-26T15:59:02Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(tm2): better error on AddPackage when package already exists',
+            url: 'https://github.com/gnolang/gno/pull/920',
+            createdAt: '2023-06-20T19:08:24Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): PrevRealm in _test files',
+            url: 'https://github.com/gnolang/gno/pull/896',
+            createdAt: '2023-06-14T15:17:29Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(gnolang): add challenge for unused var',
+            url: 'https://github.com/gnolang/gno/pull/787',
+            createdAt: '2023-04-28T10:17:23Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnolang): handle dup key/index in map/slice/array literal',
+            url: 'https://github.com/gnolang/gno/pull/786',
+            createdAt: '2023-04-27T16:57:52Z',
+            labels: [],
+          },
+          {
+            title: 'test: fix master fail',
+            url: 'https://github.com/gnolang/gno/pull/776',
+            createdAt: '2023-04-25T10:25:13Z',
+            labels: [],
+          },
+          {
+            title: 'feat(gnoland): handle chain panics',
+            url: 'https://github.com/gnolang/gno/pull/771',
+            createdAt: '2023-04-21T17:25:08Z',
+            labels: [],
+          },
+          {
+            title: 'docs(gnolang): demonstrate a realm call from a package',
+            url: 'https://github.com/gnolang/gno/pull/769',
+            createdAt: '2023-04-21T13:44:05Z',
+            labels: [],
+          },
+          {
+            title: 'chore(gnolang): add challenges',
+            url: 'https://github.com/gnolang/gno/pull/765',
+            createdAt: '2023-04-20T14:48:36Z',
+            labels: [],
+          },
+          {
+            title: "fix(cli): accept flags after command's arguments ",
+            url: 'https://github.com/gnolang/gno/pull/762',
+            createdAt: '2023-04-19T20:59:12Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':star2:  improvement',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: recoverable panic in native functions',
+            url: 'https://github.com/gnolang/gno/pull/732',
+            createdAt: '2023-04-12T09:25:49Z',
+            labels: [],
+          },
+          {
+            title: 'fix(tm2): rpc unhandled panic',
+            url: 'https://github.com/gnolang/gno/pull/711',
+            createdAt: '2023-04-06T17:08:07Z',
+            labels: [],
+          },
+          {
+            title: 'fix(gnolang): duplicate field name in struct literal',
+            url: 'https://github.com/gnolang/gno/pull/708',
+            createdAt: '2023-04-06T14:57:32Z',
+            labels: [],
+          },
+          {
+            title: 'chore: remove `std.TestDerivePkgAddr`',
+            url: 'https://github.com/gnolang/gno/pull/707',
+            createdAt: '2023-04-06T13:59:15Z',
+            labels: [],
+          },
+          {
+            title: 'feat(test): support `*OriginCall` funcs in `_test` files',
+            url: 'https://github.com/gnolang/gno/pull/703',
+            createdAt: '2023-04-05T11:44:54Z',
+            labels: [],
+          },
+          {
+            title: 'test(docker): address FIXMEs',
+            url: 'https://github.com/gnolang/gno/pull/675',
+            createdAt: '2023-03-29T21:29:07Z',
+            labels: [],
+          },
+          {
+            title: 'fix(p/demo/ufmt): handle stringer interface',
+            url: 'https://github.com/gnolang/gno/pull/646',
+            createdAt: '2023-03-24T16:25:04Z',
+            labels: [],
+          },
+          {
+            title: 'chore: add stringer to dependency tools',
+            url: 'https://github.com/gnolang/gno/pull/643',
+            createdAt: '2023-03-24T13:14:50Z',
+            labels: [],
+          },
+          {
+            title: 'fix(r/faucet): Render call panic',
+            url: 'https://github.com/gnolang/gno/pull/628',
+            createdAt: '2023-03-21T14:02:43Z',
+            labels: [],
+          },
+          {
+            title: 'fix(website): help page and ffcli arg/flags ordering',
+            url: 'https://github.com/gnolang/gno/pull/622',
+            createdAt: '2023-03-20T16:04:35Z',
+            labels: [],
+          },
+          {
+            title: 'chore(gnolang): revamp switch fallthrough',
+            url: 'https://github.com/gnolang/gno/pull/586',
+            createdAt: '2023-03-10T09:41:55Z',
+            labels: [],
+          },
+          {
+            title: 'chore: move variadic out of challenges',
+            url: 'https://github.com/gnolang/gno/pull/507',
+            createdAt: '2023-02-10T10:36:33Z',
+            labels: [],
+          },
+          {
+            title: 'feat(gnolang): switch fallthrough',
+            url: 'https://github.com/gnolang/gno/pull/504',
+            createdAt: '2023-02-09T14:31:07Z',
             labels: [],
           },
           {
@@ -23319,8 +31886,19 @@ const data = {
         ],
       },
       prs: {
-        count: 329,
+        count: 330,
         data: [
+          {
+            title: 'feat(examples/moul): ownable, entity, safe',
+            url: 'https://github.com/gnolang/gno/pull/2844',
+            createdAt: '2024-09-24T18:30:37Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             title: 'chore: rename r/manfred -> r/moul',
             url: 'https://github.com/gnolang/gno/pull/2820',
@@ -24427,11 +33005,967 @@ const data = {
               },
             ],
           },
+        ],
+      },
+      mrs: {
+        count: 248,
+        data: [
+          {
+            title: 'feat(examples): add p/printfdebugging',
+            url: 'https://github.com/gnolang/gno/pull/2809',
+            createdAt: '2024-09-17T17:17:01Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(examples): add p/fqname',
+            url: 'https://github.com/gnolang/gno/pull/2808',
+            createdAt: '2024-09-17T17:15:42Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: trigger gnoland CI when updating examples/',
+            url: 'https://github.com/gnolang/gno/pull/2588',
+            createdAt: '2024-07-14T20:17:37Z',
+            labels: [],
+          },
+          {
+            title: 'chore: fix ci',
+            url: 'https://github.com/gnolang/gno/pull/2587',
+            createdAt: '2024-07-14T17:48:12Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(r/gnoland/home): add AdminSetOverride',
+            url: 'https://github.com/gnolang/gno/pull/2583',
+            createdAt: '2024-07-14T08:14:01Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: skip `gno.mod` in ReadMemPackage',
+            url: 'https://github.com/gnolang/gno/pull/2559',
+            createdAt: '2024-07-09T20:20:26Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: update homepage',
+            url: 'https://github.com/gnolang/gno/pull/2552',
+            createdAt: '2024-07-09T03:51:08Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: fix broken CI',
+            url: 'https://github.com/gnolang/gno/pull/2538',
+            createdAt: '2024-07-08T00:46:22Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "chore: update docs/' Makefile and CI",
+            url: 'https://github.com/gnolang/gno/pull/2534',
+            createdAt: '2024-07-07T14:30:49Z',
+            labels: [],
+          },
+          {
+            title: 'feat(examples): refactor grc20',
+            url: 'https://github.com/gnolang/gno/pull/2529',
+            createdAt: '2024-07-07T01:01:38Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add p/demo/entropy',
+            url: 'https://github.com/gnolang/gno/pull/2487',
+            createdAt: '2024-07-03T04:40:39Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "feat: add 'gno mod tidy -v --recursive' flags",
+            url: 'https://github.com/gnolang/gno/pull/2485',
+            createdAt: '2024-07-03T04:40:08Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnovm): enforce formatting of added packages',
+            url: 'https://github.com/gnolang/gno/pull/2464',
+            createdAt: '2024-06-29T06:02:37Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add r/demo/bar20 example',
+            url: 'https://github.com/gnolang/gno/pull/2388',
+            createdAt: '2024-06-18T17:18:56Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: update CODEOWNERS',
+            url: 'https://github.com/gnolang/gno/pull/2387',
+            createdAt: '2024-06-18T16:19:38Z',
+            labels: [],
+          },
+          {
+            title: 'feat: new govdao pattern with context',
+            url: 'https://github.com/gnolang/gno/pull/2380',
+            createdAt: '2024-06-18T11:38:13Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: refactor govdao structure and examples',
+            url: 'https://github.com/gnolang/gno/pull/2379',
+            createdAt: '2024-06-18T10:12:52Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: govdao mvp improvement',
+            url: 'https://github.com/gnolang/gno/pull/2344',
+            createdAt: '2024-06-12T16:43:47Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add p/nestedpkg',
+            url: 'https://github.com/gnolang/gno/pull/2342',
+            createdAt: '2024-06-12T15:02:29Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: add two new upgrade examples + refactor existing ones',
+            url: 'https://github.com/gnolang/gno/pull/2334',
+            createdAt: '2024-06-12T07:07:34Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: improve p/ownable API',
+            url: 'https://github.com/gnolang/gno/pull/2330',
+            createdAt: '2024-06-11T18:14:19Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add watchdog and monit',
+            url: 'https://github.com/gnolang/gno/pull/2329',
+            createdAt: '2024-06-11T16:51:27Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: make contribs/ Makefile dynamic',
+            url: 'https://github.com/gnolang/gno/pull/2318',
+            createdAt: '2024-06-10T13:32:59Z',
+            labels: [],
+          },
+          {
+            title: 'feat(examples): add upgrade pattern d example',
+            url: 'https://github.com/gnolang/gno/pull/2151',
+            createdAt: '2024-05-20T12:15:38Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: update CODEOWNERS',
+            url: 'https://github.com/gnolang/gno/pull/1986',
+            createdAt: '2024-04-26T08:21:20Z',
+            labels: [],
+          },
+          {
+            title: 'fix(gno test): pass ExecContext when initializing imported packages',
+            url: 'https://github.com/gnolang/gno/pull/1965',
+            createdAt: '2024-04-21T11:24:28Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: update /doc.go',
+            url: 'https://github.com/gnolang/gno/pull/1964',
+            createdAt: '2024-04-21T07:14:34Z',
+            labels: [],
+          },
+          {
+            title: 'chore: portal loop small fixes',
+            url: 'https://github.com/gnolang/gno/pull/1959',
+            createdAt: '2024-04-19T13:19:54Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: rename r/system -> r/sys',
+            url: 'https://github.com/gnolang/gno/pull/1948',
+            createdAt: '2024-04-18T08:44:42Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(PoC,gov): initial sys/validators and gov/dao contracts',
+            url: 'https://github.com/gnolang/gno/pull/1945',
+            createdAt: '2024-04-17T20:30:23Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: archive old demo',
+            url: 'https://github.com/gnolang/gno/pull/1940',
+            createdAt: '2024-04-17T12:32:00Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add grc20factory example',
+            url: 'https://github.com/gnolang/gno/pull/1913',
+            createdAt: '2024-04-10T22:48:18Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: replace some TODOs on the portal home',
+            url: 'https://github.com/gnolang/gno/pull/1667',
+            createdAt: '2024-02-19T10:43:37Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: update CODEOWNERS',
+            url: 'https://github.com/gnolang/gno/pull/1545',
+            createdAt: '2024-01-17T14:34:54Z',
+            labels: [],
+          },
+          {
+            title: "chore: make gnokeykc use gnokey's basecfg",
+            url: 'https://github.com/gnolang/gno/pull/1531',
+            createdAt: '2024-01-12T19:48:04Z',
+            labels: [],
+          },
+          {
+            title: 'chore: update staging deployment config',
+            url: 'https://github.com/gnolang/gno/pull/1500',
+            createdAt: '2024-01-06T21:18:45Z',
+            labels: [],
+          },
+          {
+            title: 'chore: remove a codeowner rule that was shadowing the expected good ones',
+            url: 'https://github.com/gnolang/gno/pull/1481',
+            createdAt: '2023-12-21T15:49:44Z',
+            labels: [],
+          },
+          {
+            title: 'fix: repair staging docker-compose by using the new gnoweb CLI',
+            url: 'https://github.com/gnolang/gno/pull/1478',
+            createdAt: '2023-12-21T11:08:44Z',
+            labels: [],
+          },
+          {
+            title: 'fix: repair gnoweb flag parsing',
+            url: 'https://github.com/gnolang/gno/pull/1476',
+            createdAt: '2023-12-20T23:45:29Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: update CODEOWNERS',
+            url: 'https://github.com/gnolang/gno/pull/1474',
+            createdAt: '2023-12-20T11:10:03Z',
+            labels: [],
+          },
+          {
+            title: 'chore: fix CODEOWNERS',
+            url: 'https://github.com/gnolang/gno/pull/1465',
+            createdAt: '2023-12-19T14:10:53Z',
+            labels: [],
+          },
+          {
+            title: "chore: portal loop's homepage update",
+            url: 'https://github.com/gnolang/gno/pull/1440',
+            createdAt: '2023-12-15T09:11:15Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: update top-level README.md',
+            url: 'https://github.com/gnolang/gno/pull/1436',
+            createdAt: '2023-12-13T09:35:46Z',
+            labels: [],
+          },
+          {
+            title: 'chore: fix link in readme',
+            url: 'https://github.com/gnolang/gno/pull/1373',
+            createdAt: '2023-11-14T15:40:00Z',
+            labels: [],
+          },
+          {
+            title: 'feat(examples): add {p,r}/demo/tamagotchi',
+            url: 'https://github.com/gnolang/gno/pull/1359',
+            createdAt: '2023-11-11T16:42:32Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(examples): wugnot (grc20’s wrapped ugnot)',
+            url: 'https://github.com/gnolang/gno/pull/1356',
+            createdAt: '2023-11-10T21:09:18Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(staging): expose rpc endpoint on https://rpc.staging.gno.land',
+            url: 'https://github.com/gnolang/gno/pull/1340',
+            createdAt: '2023-11-07T10:16:14Z',
+            labels: [],
+          },
+          {
+            title: 'chore(ci): update tm2 timeout on CI',
+            url: 'https://github.com/gnolang/gno/pull/1337',
+            createdAt: '2023-11-06T13:09:39Z',
+            labels: [],
+          },
+          {
+            title: 'chore: enable analytics on staging',
+            url: 'https://github.com/gnolang/gno/pull/1279',
+            createdAt: '2023-10-22T11:49:46Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add contribs/gnokeykc',
+            url: 'https://github.com/gnolang/gno/pull/1270',
+            createdAt: '2023-10-20T23:20:04Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: repair-staging',
+            url: 'https://github.com/gnolang/gno/pull/1268',
+            createdAt: '2023-10-20T16:35:12Z',
+            labels: [],
+          },
+          {
+            title: 'chore: add misc/list-gnophers and .mailmap',
+            url: 'https://github.com/gnolang/gno/pull/1265',
+            createdAt: '2023-10-20T14:20:05Z',
+            labels: [],
+          },
+          {
+            title: 'chore: add contract-contract interation with ownership example',
+            url: 'https://github.com/gnolang/gno/pull/1262',
+            createdAt: '2023-10-19T23:14:45Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add contribs/gnomd',
+            url: 'https://github.com/gnolang/gno/pull/1256',
+            createdAt: '2023-10-19T13:17:04Z',
+            labels: [],
+          },
+          {
+            title: 'chore: improve tests',
+            url: 'https://github.com/gnolang/gno/pull/1232',
+            createdAt: '2023-10-11T09:33:48Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: fix fossa action',
+            url: 'https://github.com/gnolang/gno/pull/1192',
+            createdAt: '2023-10-03T18:54:59Z',
+            labels: [],
+          },
+          {
+            title: 'chore: update fossa config',
+            url: 'https://github.com/gnolang/gno/pull/1184',
+            createdAt: '2023-10-02T13:04:27Z',
+            labels: [],
+          },
+          {
+            title: 'chore: configure fossa license detector',
+            url: 'https://github.com/gnolang/gno/pull/1183',
+            createdAt: '2023-10-02T12:34:59Z',
+            labels: [],
+          },
+          {
+            title: "feat: portal loop's main contracts and gnoweb improvements",
+            url: 'https://github.com/gnolang/gno/pull/1176',
+            createdAt: '2023-09-27T06:27:45Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'ci: tell codecov to wait_for_ci to avoid flappy reports',
+            url: 'https://github.com/gnolang/gno/pull/1160',
+            createdAt: '2023-09-21T12:50:24Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: add empty test files for consistent coverage',
+            url: 'https://github.com/gnolang/gno/pull/1147',
+            createdAt: '2023-09-18T14:28:58Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             title: 'chore: disable codecov flags that can overlap',
             url: 'https://github.com/gnolang/gno/pull/1140',
             createdAt: '2023-09-16T22:53:28Z',
             labels: [],
+          },
+          {
+            title: 'feat: introduce personal realms, add `r/manfred/home`',
+            url: 'https://github.com/gnolang/gno/pull/1138',
+            createdAt: '2023-09-16T20:43:32Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: fix codecov config (h/t @the-howl)',
+            url: 'https://github.com/gnolang/gno/pull/1137',
+            createdAt: '2023-09-16T20:26:35Z',
+            labels: [],
+          },
+          {
+            title: 'chore: update codecov.yml',
+            url: 'https://github.com/gnolang/gno/pull/1120',
+            createdAt: '2023-09-14T14:48:47Z',
+            labels: [],
+          },
+          {
+            title: 'chore: update PHILOSOPHY.md',
+            url: 'https://github.com/gnolang/gno/pull/1111',
+            createdAt: '2023-09-11T15:30:29Z',
+            labels: [],
+          },
+          {
+            title: 'chore: bump golang at go1.21',
+            url: 'https://github.com/gnolang/gno/pull/1093',
+            createdAt: '2023-09-04T00:14:16Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add gno.land/pkg/gnoclient (Gno.land Go client)',
+            url: 'https://github.com/gnolang/gno/pull/1047',
+            createdAt: '2023-08-11T09:00:15Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: bootstrap a glossary, with p/ and r/',
+            url: 'https://github.com/gnolang/gno/pull/1043',
+            createdAt: '2023-08-10T10:15:50Z',
+            labels: [],
+          },
+          {
+            title: 'feat: make gnovm wasm-friendly',
+            url: 'https://github.com/gnolang/gno/pull/1012',
+            createdAt: '2023-08-01T10:21:06Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: use self-hosted instance for benchmark',
+            url: 'https://github.com/gnolang/gno/pull/1002',
+            createdAt: '2023-07-30T12:34:06Z',
+            labels: [],
+          },
+          {
+            title: "feat: add 'gnokey maketx run'",
+            url: 'https://github.com/gnolang/gno/pull/1001',
+            createdAt: '2023-07-29T18:40:12Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: Effective Gno',
+            url: 'https://github.com/gnolang/gno/pull/1000',
+            createdAt: '2023-07-29T13:37:54Z',
+            labels: [],
+          },
+          {
+            title: 'chore: more concise PR template',
+            url: 'https://github.com/gnolang/gno/pull/998',
+            createdAt: '2023-07-29T12:39:46Z',
+            labels: [],
+          },
+          {
+            title: 'chore: update gitpod configuration',
+            url: 'https://github.com/gnolang/gno/pull/987',
+            createdAt: '2023-07-21T20:32:34Z',
+            labels: [],
+          },
+          {
+            title: 'chore: remove reviewers checklist from PR template',
+            url: 'https://github.com/gnolang/gno/pull/985',
+            createdAt: '2023-07-21T17:46:57Z',
+            labels: [],
+          },
+          {
+            title: "feat: initial 'gno lint'",
+            url: 'https://github.com/gnolang/gno/pull/981',
+            createdAt: '2023-07-20T12:19:16Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs(proof-of-contribution): bootstrap document',
+            url: 'https://github.com/gnolang/gno/pull/954',
+            createdAt: '2023-07-06T19:29:34Z',
+            labels: [],
+          },
+          {
+            title: 'refactor(gnoland): add subcommands support',
+            url: 'https://github.com/gnolang/gno/pull/937',
+            createdAt: '2023-06-29T19:32:48Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "chore: bootstrap 'docs/from-go-to-gno.md'",
+            url: 'https://github.com/gnolang/gno/pull/935',
+            createdAt: '2023-06-29T13:58:40Z',
+            labels: [],
+          },
+          {
+            title: 'feat: add p/demo/uassert & p/demo/urequire',
+            url: 'https://github.com/gnolang/gno/pull/928',
+            createdAt: '2023-06-22T14:14:52Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: update PR template',
+            url: 'https://github.com/gnolang/gno/pull/926',
+            createdAt: '2023-06-22T06:48:58Z',
+            labels: [],
+          },
+          {
+            title: 'feat: add p/demo/svg',
+            url: 'https://github.com/gnolang/gno/pull/905',
+            createdAt: '2023-06-16T11:42:54Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: add badges in README',
+            url: 'https://github.com/gnolang/gno/pull/904',
+            createdAt: '2023-06-16T09:44:03Z',
+            labels: [],
+          },
+          {
+            title: 'chore: refactor p/demo/ui',
+            url: 'https://github.com/gnolang/gno/pull/902',
+            createdAt: '2023-06-16T07:41:50Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(deployments): enable empty blocks creation on staging',
+            url: 'https://github.com/gnolang/gno/pull/899',
+            createdAt: '2023-06-15T07:34:09Z',
+            labels: [],
+          },
+          {
+            title: 'feat(repl): add imports, funcs, commands, etc',
+            url: 'https://github.com/gnolang/gno/pull/886',
+            createdAt: '2023-06-10T10:03:41Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add p/demo/bf (brainfuck vm)',
+            url: 'https://github.com/gnolang/gno/pull/885',
+            createdAt: '2023-06-10T09:19:02Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(docs): script to gen godoc and publish on gh-pages',
+            url: 'https://github.com/gnolang/gno/pull/884',
+            createdAt: '2023-06-10T08:41:23Z',
+            labels: [],
+          },
+          {
+            title: 'feat: add p/demo/mux',
+            url: 'https://github.com/gnolang/gno/pull/882',
+            createdAt: '2023-06-08T13:24:41Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add r/gnoland/pages',
+            url: 'https://github.com/gnolang/gno/pull/874',
+            createdAt: '2023-06-07T08:11:23Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test: improve codecov support on gnovm and gno.land',
+            url: 'https://github.com/gnolang/gno/pull/854',
+            createdAt: '2023-05-28T06:54:12Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: add gnovm/tests/challenges/print_ref.gno',
+            url: 'https://github.com/gnolang/gno/pull/849',
+            createdAt: '2023-05-25T06:50:16Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: improve tests and docs of persisted types',
+            url: 'https://github.com/gnolang/gno/pull/833',
+            createdAt: '2023-05-19T09:43:34Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: disable codecov status check',
+            url: 'https://github.com/gnolang/gno/pull/830',
+            createdAt: '2023-05-19T07:22:29Z',
+            labels: [],
+          },
+          {
+            title: 'test: set up Codecov',
+            url: 'https://github.com/gnolang/gno/pull/819',
+            createdAt: '2023-05-12T17:11:16Z',
+            labels: [],
+          },
+          {
+            title: 'chore(gnokey): print verbose errors in CLI',
+            url: 'https://github.com/gnolang/gno/pull/806',
+            createdAt: '2023-05-07T21:03:08Z',
+            labels: [],
+          },
+          {
+            title: 'chore: update CODEOWNERS',
+            url: 'https://github.com/gnolang/gno/pull/798',
+            createdAt: '2023-05-05T07:32:10Z',
+            labels: [],
+          },
+          {
+            title: 'chore: more concise and actionable PR template',
+            url: 'https://github.com/gnolang/gno/pull/797',
+            createdAt: '2023-05-04T06:04:56Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "feat: add 'gno test -use-native-fallback'",
+            url: 'https://github.com/gnolang/gno/pull/789',
+            createdAt: '2023-04-28T15:06:48Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
           },
         ],
       },
@@ -24464,6 +33998,17 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'chore: `/r/boards` example updates',
+            url: 'https://github.com/gnolang/gno/pull/158',
+            createdAt: '2022-05-03T13:52:56Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjE3MjUzMQ==',
@@ -24487,6 +34032,17 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'fix backslash issue with example `go test` and add install info',
+            url: 'https://github.com/gnolang/gno/pull/1',
+            createdAt: '2021-01-30T01:30:31Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjMyMjc2MQ==',
@@ -24500,6 +34056,22 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'chore: update README.md',
+            url: 'https://github.com/gnolang/gno/pull/870',
+            createdAt: '2023-06-06T04:17:12Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -25085,6 +34657,164 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 19,
+        data: [
+          {
+            title: 'docs(portal-loop): mention packages can be deployed permissionlessly',
+            url: 'https://github.com/gnolang/gno/pull/2747',
+            createdAt: '2024-09-01T05:01:14Z',
+            labels: [],
+          },
+          {
+            title: 'feat(examples): improve p/demo/ufmt',
+            url: 'https://github.com/gnolang/gno/pull/2553',
+            createdAt: '2024-07-09T07:38:50Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "chore(gnodev): show link to docs upon 'h' key",
+            url: 'https://github.com/gnolang/gno/pull/2497',
+            createdAt: '2024-07-04T05:45:39Z',
+            labels: [],
+          },
+          {
+            title: 'fix(gnokeykc): gnokeykc maketx {addpkg,call,run} missing because of tm2 separation (fixes #2373)',
+            url: 'https://github.com/gnolang/gno/pull/2375',
+            createdAt: '2024-06-18T02:34:48Z',
+            labels: [],
+          },
+          {
+            title: 'docs: add missing doc link to docs/reference/gnoclient',
+            url: 'https://github.com/gnolang/gno/pull/2259',
+            createdAt: '2024-06-02T05:28:18Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: update genesis to fix commands in /r/demo/boards:testboard/5 (#2183)',
+            url: 'https://github.com/gnolang/gno/pull/2188',
+            createdAt: '2024-05-25T00:18:48Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add LongHelp to `gno bug`, remove \\n from `gnodev` LongHelp',
+            url: 'https://github.com/gnolang/gno/pull/2180',
+            createdAt: '2024-05-24T04:50:07Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: make install colors not always shown',
+            url: 'https://github.com/gnolang/gno/pull/2179',
+            createdAt: '2024-05-24T01:23:27Z',
+            labels: [],
+          },
+          {
+            title: 'chore: add r/demo/echo',
+            url: 'https://github.com/gnolang/gno/pull/1783',
+            createdAt: '2024-03-18T06:22:53Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "chore(tm2/pkg/std): add failing regexp in MemPackage.Validate's errors",
+            url: 'https://github.com/gnolang/gno/pull/1673',
+            createdAt: '2024-02-21T07:04:26Z',
+            labels: [],
+          },
+          {
+            title: 'chore: fix typos in nir1218_evaluation_proposal/EVALUATION.md',
+            url: 'https://github.com/gnolang/gno/pull/933',
+            createdAt: '2023-06-29T03:55:08Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: add explanations about how to use gofumpt in vim',
+            url: 'https://github.com/gnolang/gno/pull/747',
+            createdAt: '2023-04-15T00:33:17Z',
+            labels: [],
+          },
+          {
+            title: 'feat: use os.UserConfigDir() if possible when $GNO_HOME not set',
+            url: 'https://github.com/gnolang/gno/pull/719',
+            createdAt: '2023-04-09T22:46:03Z',
+            labels: [],
+          },
+          {
+            title: 'fix: revert #670 (bcrypt cost) to fix #680',
+            url: 'https://github.com/gnolang/gno/pull/684',
+            createdAt: '2023-04-01T02:25:35Z',
+            labels: [],
+          },
+          {
+            title: 'chore: use newcli format in realm help and demos',
+            url: 'https://github.com/gnolang/gno/pull/601',
+            createdAt: '2023-03-15T05:31:39Z',
+            labels: [],
+          },
+          {
+            title: 'feat: allow viewing some .md and .txt files in gnoweb',
+            url: 'https://github.com/gnolang/gno/pull/590',
+            createdAt: '2023-03-12T14:17:58Z',
+            labels: [],
+          },
+          {
+            title: 'fix: fix vuln demonstrated by #583',
+            url: 'https://github.com/gnolang/gno/pull/584',
+            createdAt: '2023-03-10T04:50:57Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(doc): reuse commands doc from Milos in Makefile and cmd/README',
+            url: 'https://github.com/gnolang/gno/pull/573',
+            createdAt: '2023-03-08T06:49:18Z',
+            labels: [],
+          },
+          {
+            title: 'add first unit tests for gno.land website',
+            url: 'https://github.com/gnolang/gno/pull/567',
+            createdAt: '2023-03-07T05:21:07Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjY4OTQ0MA==',
@@ -25152,6 +34882,44 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 3,
+        data: [
+          {
+            title: 'fix(gnoweb): fixed broken URL link',
+            url: 'https://github.com/gnolang/gno/pull/1839',
+            createdAt: '2024-03-26T00:15:23Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore:  HTTP server error handling',
+            url: 'https://github.com/gnolang/gno/pull/1494',
+            createdAt: '2024-01-02T23:12:27Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: update gnokey url',
+            url: 'https://github.com/gnolang/gno/pull/1470',
+            createdAt: '2023-12-20T00:08:13Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjczNjkyNw==',
@@ -25187,6 +34955,29 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 3,
+        data: [
+          {
+            title: 'chore: update chainid to `dev` for local testnets',
+            url: 'https://github.com/gnolang/gno/pull/340',
+            createdAt: '2022-09-21T14:14:35Z',
+            labels: [],
+          },
+          {
+            title: 'chore: update cmd/gnofaucet/README.md',
+            url: 'https://github.com/gnolang/gno/pull/339',
+            createdAt: '2022-09-21T03:41:16Z',
+            labels: [],
+          },
+          {
+            title: 'chore: add detailed log for gnofaucet',
+            url: 'https://github.com/gnolang/gno/pull/338',
+            createdAt: '2022-09-21T03:02:37Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjc1OTc0Nw==',
@@ -25200,6 +34991,17 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'Update PHILOSOPHY.md',
+            url: 'https://github.com/gnolang/gno/pull/54',
+            createdAt: '2022-01-07T16:28:39Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -25316,6 +35118,34 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 3,
+        data: [
+          {
+            title: 'chore(ci): revamping master branch goreleaser',
+            url: 'https://github.com/gnolang/gno/pull/2694',
+            createdAt: '2024-08-14T08:37:28Z',
+            labels: [],
+          },
+          {
+            title: 'chore(ci): Fix master branch goreleaser',
+            url: 'https://github.com/gnolang/gno/pull/2686',
+            createdAt: '2024-08-13T13:06:28Z',
+            labels: [],
+          },
+          {
+            title: 'ci: Full revision of Goreleaser tasks',
+            url: 'https://github.com/gnolang/gno/pull/2672',
+            createdAt: '2024-08-09T08:38:29Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjgzNjEyOA==',
@@ -25377,6 +35207,22 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'feat: adding support for arbitrary field',
+            url: 'https://github.com/gnolang/gno/pull/2717',
+            createdAt: '2024-08-20T16:19:20Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjg5NDI5OQ==',
@@ -25390,6 +35236,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -26059,6 +35909,284 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 28,
+        data: [
+          {
+            title: 'fix: govDAO: Use GetOrigCaller() to be able to run proposals using MsgRun',
+            url: 'https://github.com/gnolang/gno/pull/2556',
+            createdAt: '2024-07-09T13:46:01Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: Added missing functionality to govDAO',
+            url: 'https://github.com/gnolang/gno/pull/2493',
+            createdAt: '2024-07-03T14:37:02Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: Set go version to 1.22.4 on mod files.',
+            url: 'https://github.com/gnolang/gno/pull/2474',
+            createdAt: '2024-07-01T14:17:35Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: Give different names to nightly and master releases',
+            url: 'https://github.com/gnolang/gno/pull/2452',
+            createdAt: '2024-06-27T14:41:55Z',
+            labels: [],
+          },
+          {
+            title: 'feat: Implement genesis transaction list command.',
+            url: 'https://github.com/gnolang/gno/pull/2400',
+            createdAt: '2024-06-20T11:48:19Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'ci: use tag `latest` for latest releases, `nightly` for nightly versions',
+            url: 'https://github.com/gnolang/gno/pull/2175',
+            createdAt: '2024-05-23T13:05:25Z',
+            labels: [],
+          },
+          {
+            title: 'fix: refactor nightly workflow to use goreleaser pro',
+            url: 'https://github.com/gnolang/gno/pull/2172',
+            createdAt: '2024-05-23T11:34:28Z',
+            labels: [],
+          },
+          {
+            title: 'fix: Change goreleaser secret name',
+            url: 'https://github.com/gnolang/gno/pull/2171',
+            createdAt: '2024-05-23T10:53:56Z',
+            labels: [],
+          },
+          {
+            title: 'fix(ci): failing `examples/mod-tidy`',
+            url: 'https://github.com/gnolang/gno/pull/2112',
+            createdAt: '2024-05-15T08:59:51Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: Add goreleaser',
+            url: 'https://github.com/gnolang/gno/pull/2101',
+            createdAt: '2024-05-14T13:25:13Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: Set examples.yml GitHub action inside the correct folder',
+            url: 'https://github.com/gnolang/gno/pull/2090',
+            createdAt: '2024-05-14T09:53:01Z',
+            labels: [],
+          },
+          {
+            title: 'feat: Overhaul Github Actions',
+            url: 'https://github.com/gnolang/gno/pull/2040',
+            createdAt: '2024-05-06T11:32:48Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: Revert "fix: hardcode max vm cycles in keeper"',
+            url: 'https://github.com/gnolang/gno/pull/1902',
+            createdAt: '2024-04-08T10:34:00Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(deps): update btcec to the latest version',
+            url: 'https://github.com/gnolang/gno/pull/1329',
+            createdAt: '2023-11-02T14:29:02Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: allow constant values of infininitesimal non-zero floating points',
+            url: 'https://github.com/gnolang/gno/pull/1185',
+            createdAt: '2023-10-02T13:20:09Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: Fix codecov',
+            url: 'https://github.com/gnolang/gno/pull/1146',
+            createdAt: '2023-09-18T13:55:31Z',
+            labels: [],
+          },
+          {
+            title: 'chore: Fix codecov',
+            url: 'https://github.com/gnolang/gno/pull/1144',
+            createdAt: '2023-09-18T09:32:50Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(vm): Release VM properly',
+            url: 'https://github.com/gnolang/gno/pull/1116',
+            createdAt: '2023-09-13T09:55:29Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(repl): Add support for new declarations.',
+            url: 'https://github.com/gnolang/gno/pull/1044',
+            createdAt: '2023-08-10T14:59:22Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(.github): fix broken link',
+            url: 'https://github.com/gnolang/gno/pull/1005',
+            createdAt: '2023-07-31T07:38:17Z',
+            labels: [],
+          },
+          {
+            title: 'feat(repl): support multi-line inputs and declarations',
+            url: 'https://github.com/gnolang/gno/pull/978',
+            createdAt: '2023-07-17T13:51:12Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add benchmarks and performance checks on PRs',
+            url: 'https://github.com/gnolang/gno/pull/881',
+            createdAt: '2023-06-08T13:16:43Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':star2:  improvement',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: Make applications go-installable',
+            url: 'https://github.com/gnolang/gno/pull/858',
+            createdAt: '2023-05-30T09:58:40Z',
+            labels: [
+              {
+                name: ':star2:  improvement',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: set MAX VM cycles from cli',
+            url: 'https://github.com/gnolang/gno/pull/828',
+            createdAt: '2023-05-18T11:27:42Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: Add labeler to GH actions.',
+            url: 'https://github.com/gnolang/gno/pull/824',
+            createdAt: '2023-05-15T10:42:38Z',
+            labels: [],
+          },
+          {
+            title: 'chore: improve output on vm tests',
+            url: 'https://github.com/gnolang/gno/pull/775',
+            createdAt: '2023-04-25T09:23:16Z',
+            labels: [],
+          },
+          {
+            title: 'fix: Execute tm2 tests on PRs too',
+            url: 'https://github.com/gnolang/gno/pull/736',
+            createdAt: '2023-04-12T12:59:38Z',
+            labels: [],
+          },
+          {
+            title: 'refactor(tm2/pkg/db): Avoid panicking when creating DBs.',
+            url: 'https://github.com/gnolang/gno/pull/726',
+            createdAt: '2023-04-10T06:56:53Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjEzMjk0Mjk=',
@@ -26072,6 +36200,17 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'docs: Update expired Discord link, and minor documentation fixes',
+            url: 'https://github.com/gnolang/gno/pull/2634',
+            createdAt: '2024-07-27T01:45:25Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -26676,6 +36815,305 @@ const data = {
             title: 'fix: In demo/boards/README, fix the build directory and make command.',
             url: 'https://github.com/gnolang/gno/pull/1030',
             createdAt: '2023-08-07T14:29:36Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
+        count: 27,
+        data: [
+          {
+            title: 'chore: gnoclient: Require Caller in Msg. Remove syntax sugar Msgs',
+            url: 'https://github.com/gnolang/gno/pull/2715',
+            createdAt: '2024-08-20T14:57:20Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: In r/demo/profile fieldHandler, use url.QueryEscape(value)',
+            url: 'https://github.com/gnolang/gno/pull/2642',
+            createdAt: '2024-07-30T13:29:58Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: In gnoclient, separate out SignTx and BroadcastTxCommit',
+            url: 'https://github.com/gnolang/gno/pull/2641',
+            createdAt: '2024-07-29T13:59:27Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: In doc setting-up-a-new-chain, resetting the chain also, delete genesis.json',
+            url: 'https://github.com/gnolang/gno/pull/2513',
+            createdAt: '2024-07-05T10:23:11Z',
+            labels: [],
+          },
+          {
+            title: 'chore: In the validator FAQ, update planned Test4 launch to Q3 2024',
+            url: 'https://github.com/gnolang/gno/pull/2511',
+            createdAt: '2024-07-05T10:10:52Z',
+            labels: [],
+          },
+          {
+            title: 'chore: In r/demo/boards public API, change AssertOriginCall() to PrevRealm().IsUser()',
+            url: 'https://github.com/gnolang/gno/pull/2358',
+            createdAt: '2024-06-14T09:32:47Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: In gnodev, include gnoweb flags',
+            url: 'https://github.com/gnolang/gno/pull/2135',
+            createdAt: '2024-05-17T09:13:28Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: time-simple.txtar',
+            url: 'https://github.com/gnolang/gno/pull/2111',
+            createdAt: '2024-05-15T08:52:21Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: In r/demo/users, add ListUsersByPrefix',
+            url: 'https://github.com/gnolang/gno/pull/1708',
+            createdAt: '2024-02-29T12:48:32Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(gnoclient): Add Send support',
+            url: 'https://github.com/gnolang/gno/pull/1639',
+            createdAt: '2024-02-08T09:05:46Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(sdk/vm): improve MsgCall panic error message for wrong number of args',
+            url: 'https://github.com/gnolang/gno/pull/1610',
+            createdAt: '2024-02-01T08:57:28Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(gnoclient): Add Run support',
+            url: 'https://github.com/gnolang/gno/pull/1574',
+            createdAt: '2024-01-23T13:12:00Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(r/demo/boards): correctly render reposts',
+            url: 'https://github.com/gnolang/gno/pull/1530',
+            createdAt: '2024-01-12T16:41:56Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(r/demo/boards): update the user link in displayAddressMD to correct path',
+            url: 'https://github.com/gnolang/gno/pull/1525',
+            createdAt: '2024-01-11T13:10:05Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: In gnodev serveGnoWebServer, set webConfig HelpChainID and HelpRemote',
+            url: 'https://github.com/gnolang/gno/pull/1497',
+            createdAt: '2024-01-05T16:33:41Z',
+            labels: [],
+          },
+          {
+            title: 'fix: In gnoweb realm_help.html, update to Data.Config.HelpRemote and Data.Config.HelpChainID',
+            url: 'https://github.com/gnolang/gno/pull/1496',
+            createdAt: '2024-01-05T16:08:49Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnofaucet): fix transactions by querying account number and sequence each time',
+            url: 'https://github.com/gnolang/gno/pull/1493',
+            createdAt: '2024-01-02T11:55:15Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: In gnoweb realm_help.html, update to Data.Flags.HelpChainID and Data.Flags.HelpRemote',
+            url: 'https://github.com/gnolang/gno/pull/1444',
+            createdAt: '2023-12-15T16:16:41Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: In demo/boards/README.md, the chainid for test3.gno.land should be test3',
+            url: 'https://github.com/gnolang/gno/pull/1384',
+            createdAt: '2023-11-20T14:24:37Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: In processSig, clarify the signature verification failed error message',
+            url: 'https://github.com/gnolang/gno/pull/1383',
+            createdAt: '2023-11-20T14:17:47Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: In Keybase GetByAddress, change generic error to NewErrKeyNotFound',
+            url: 'https://github.com/gnolang/gno/pull/1316',
+            createdAt: '2023-10-29T14:09:10Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: Add Keybase HasByNameOrAddress, HasByName and HasByAddress',
+            url: 'https://github.com/gnolang/gno/pull/1313',
+            createdAt: '2023-10-27T15:45:22Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: In TestGnoDoc, fix expected output for "doc", "avl"',
+            url: 'https://github.com/gnolang/gno/pull/1301',
+            createdAt: '2023-10-26T11:48:17Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: Error string in decryptPrivKey. Use errors.As in IsErrWrongPassword.',
+            url: 'https://github.com/gnolang/gno/pull/1289',
+            createdAt: '2023-10-24T14:39:37Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: In amino.pkg, add optional WithComments, use them in GenerateProto3MessagePartial',
+            url: 'https://github.com/gnolang/gno/pull/1235',
+            createdAt: '2023-10-11T11:13:12Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: In Amino, use ToLowerSnakeCase for Protobuf field names',
+            url: 'https://github.com/gnolang/gno/pull/1213',
+            createdAt: '2023-10-09T13:25:28Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: fix demo/boards/README, fix typos and change to a local node',
+            url: 'https://github.com/gnolang/gno/pull/1034',
+            createdAt: '2023-08-08T15:01:23Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -27702,6 +38140,469 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 37,
+        data: [
+          {
+            title: "fix: Don't emit events from failed transactions",
+            url: 'https://github.com/gnolang/gno/pull/2806',
+            createdAt: '2024-09-17T00:40:42Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): Make GnoVM slice allocations before go runtime allocations',
+            url: 'https://github.com/gnolang/gno/pull/2781',
+            createdAt: '2024-09-10T19:12:37Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: add a ugnot constant',
+            url: 'https://github.com/gnolang/gno/pull/2656',
+            createdAt: '2024-08-03T18:05:46Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): handle non call expression valuedecl values',
+            url: 'https://github.com/gnolang/gno/pull/2647',
+            createdAt: '2024-07-31T03:48:56Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): fix max names in block check',
+            url: 'https://github.com/gnolang/gno/pull/2645',
+            createdAt: '2024-07-31T01:12:07Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): repair selector type aliasing',
+            url: 'https://github.com/gnolang/gno/pull/2483',
+            createdAt: '2024-07-02T19:34:03Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): Resolve RefValues before using as Objects',
+            url: 'https://github.com/gnolang/gno/pull/2454',
+            createdAt: '2024-06-27T18:17:04Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add realm type',
+            url: 'https://github.com/gnolang/gno/pull/2441',
+            createdAt: '2024-06-25T22:32:19Z',
+            labels: [],
+          },
+          {
+            title: 'fix: allow LICENSE rendering via gnoweb',
+            url: 'https://github.com/gnolang/gno/pull/2417',
+            createdAt: '2024-06-22T23:28:08Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnodev): allow gnodev to load txs',
+            url: 'https://github.com/gnolang/gno/pull/2281',
+            createdAt: '2024-06-04T22:28:52Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: improve missing config error message',
+            url: 'https://github.com/gnolang/gno/pull/2247',
+            createdAt: '2024-05-30T19:18:47Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(stdlibs/time): add DateTime, DateOnly and TimeOnly',
+            url: 'https://github.com/gnolang/gno/pull/2240',
+            createdAt: '2024-05-30T02:45:57Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: use blank identifier constants',
+            url: 'https://github.com/gnolang/gno/pull/2158',
+            createdAt: '2024-05-21T08:01:10Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'perf: make debug a constant set using a build flag',
+            url: 'https://github.com/gnolang/gno/pull/2072',
+            createdAt: '2024-05-10T17:16:27Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: clarifying panic message',
+            url: 'https://github.com/gnolang/gno/pull/2051',
+            createdAt: '2024-05-07T15:52:13Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: default untyped to uint when necessary',
+            url: 'https://github.com/gnolang/gno/pull/2024',
+            createdAt: '2024-05-02T19:32:58Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: move telemetry package',
+            url: 'https://github.com/gnolang/gno/pull/1970',
+            createdAt: '2024-04-22T18:22:41Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: meaningful realm finalization panic messages',
+            url: 'https://github.com/gnolang/gno/pull/1846',
+            createdAt: '2024-03-27T00:46:18Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "feat: issue warning when gno test package can't be resolved",
+            url: 'https://github.com/gnolang/gno/pull/1845',
+            createdAt: '2024-03-26T21:30:23Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: hardcode max vm cycles in keeper',
+            url: 'https://github.com/gnolang/gno/pull/1807',
+            createdAt: '2024-03-21T02:14:33Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: Add support for metrics collection',
+            url: 'https://github.com/gnolang/gno/pull/1762',
+            createdAt: '2024-03-12T20:01:00Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: allow disabling consensus WAL',
+            url: 'https://github.com/gnolang/gno/pull/1723',
+            createdAt: '2024-03-02T20:01:30Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: gno does not support shadowing native types',
+            url: 'https://github.com/gnolang/gno/pull/1711',
+            createdAt: '2024-03-01T00:04:52Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: achieve type assertion parity with go',
+            url: 'https://github.com/gnolang/gno/pull/1689',
+            createdAt: '2024-02-23T20:31:39Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: fix the scope of `recover()`',
+            url: 'https://github.com/gnolang/gno/pull/1672',
+            createdAt: '2024-02-21T02:25:05Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: remove incorrect type assertion when reading values from storage',
+            url: 'https://github.com/gnolang/gno/pull/1606',
+            createdAt: '2024-01-30T23:13:35Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: Oracle packages and Github verification realm',
+            url: 'https://github.com/gnolang/gno/pull/1568',
+            createdAt: '2024-01-22T21:28:02Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: new txtar command `adduser`',
+            url: 'https://github.com/gnolang/gno/pull/1471',
+            createdAt: '2023-12-20T00:35:43Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: boolean operations must have boolean operands',
+            url: 'https://github.com/gnolang/gno/pull/1451',
+            createdAt: '2023-12-17T09:20:30Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(sdk/vm): support float as arguments to `maketx call`',
+            url: 'https://github.com/gnolang/gno/pull/1434',
+            createdAt: '2023-12-12T12:08:48Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "fix: untyped values use calling builtin function's type",
+            url: 'https://github.com/gnolang/gno/pull/1423',
+            createdAt: '2023-12-07T23:40:47Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: upgrade apd lib to version without bug',
+            url: 'https://github.com/gnolang/gno/pull/1399',
+            createdAt: '2023-11-30T00:27:38Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'style: Increased append readability',
+            url: 'https://github.com/gnolang/gno/pull/1350',
+            createdAt: '2023-11-09T19:42:25Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: txtar tests load full config and execute serially',
+            url: 'https://github.com/gnolang/gno/pull/1342',
+            createdAt: '2023-11-07T21:29:44Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: account for recursion when stringing to avoid overflow',
+            url: 'https://github.com/gnolang/gno/pull/1315',
+            createdAt: '2023-10-28T18:58:07Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: properly mark array elements when an realm slice is updated',
+            url: 'https://github.com/gnolang/gno/pull/1305',
+            createdAt: '2023-10-26T19:21:49Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "fix: don't pass value types by reference",
+            url: 'https://github.com/gnolang/gno/pull/1263',
+            createdAt: '2023-10-19T23:33:29Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjI1NDIzNDU=',
@@ -27743,6 +38644,29 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 3,
+        data: [
+          {
+            title: 'Fix panic when Render method is not declared in smart contract',
+            url: 'https://github.com/gnolang/gno/pull/489',
+            createdAt: '2023-01-29T13:44:38Z',
+            labels: [],
+          },
+          {
+            title: 'chore: add support for duration format for timeout flag',
+            url: 'https://github.com/gnolang/gno/pull/488',
+            createdAt: '2023-01-27T11:54:00Z',
+            labels: [],
+          },
+          {
+            title: 'chore: fix markdown links in CONTRIBUTING.md',
+            url: 'https://github.com/gnolang/gno/pull/480',
+            createdAt: '2023-01-25T08:52:20Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjM2MTIwMTc=',
@@ -27756,6 +38680,17 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'Quickstart Guide 404',
+            url: 'https://github.com/gnolang/gno/pull/291',
+            createdAt: '2022-07-12T22:55:04Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -30155,6 +41090,1157 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 128,
+        data: [
+          {
+            title: 'feat(examples): add simplest "counter" realm',
+            url: 'https://github.com/gnolang/gno/pull/2815',
+            createdAt: '2024-09-18T18:40:47Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'perf(tm2/bft/fail): use sync.Once instead of Getenv on each call',
+            url: 'https://github.com/gnolang/gno/pull/2805',
+            createdAt: '2024-09-16T21:02:18Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test(gnovm): run initStaticBlocks in BenchmarkPreprocess',
+            url: 'https://github.com/gnolang/gno/pull/2792',
+            createdAt: '2024-09-13T09:33:16Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: mark files generated from genstd as generated',
+            url: 'https://github.com/gnolang/gno/pull/2785',
+            createdAt: '2024-09-12T11:50:42Z',
+            labels: [],
+          },
+          {
+            title: 'docs(website): more info on /contribute ',
+            url: 'https://github.com/gnolang/gno/pull/2765',
+            createdAt: '2024-09-06T12:41:04Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test(gnovm): test all files in gnovm/tests subdirs',
+            url: 'https://github.com/gnolang/gno/pull/2754',
+            createdAt: '2024-09-03T13:21:31Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'ci: fix backwards incompatible change',
+            url: 'https://github.com/gnolang/gno/pull/2644',
+            createdAt: '2024-07-30T17:49:41Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: remove panic from uverse',
+            url: 'https://github.com/gnolang/gno/pull/2626',
+            createdAt: '2024-07-24T14:41:40Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'ci: fix broken CI, always test all go code',
+            url: 'https://github.com/gnolang/gno/pull/2625',
+            createdAt: '2024-07-24T10:50:07Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test(cmd/gno): fix TestBugApp',
+            url: 'https://github.com/gnolang/gno/pull/2572',
+            createdAt: '2024-07-10T17:28:20Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(sdk/vm): re-load iavl store from backup if empty',
+            url: 'https://github.com/gnolang/gno/pull/2568',
+            createdAt: '2024-07-10T14:55:04Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'ci(portal-loop): run workflow on all changes to misc/loop',
+            url: 'https://github.com/gnolang/gno/pull/2537',
+            createdAt: '2024-07-07T23:58:29Z',
+            labels: [],
+          },
+          {
+            title: 'fix(gno.land): pre-load all standard libraries in vm.Initialize',
+            url: 'https://github.com/gnolang/gno/pull/2504',
+            createdAt: '2024-07-04T13:51:37Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(stdlibs): add math/rand',
+            url: 'https://github.com/gnolang/gno/pull/2455',
+            createdAt: '2024-06-27T18:27:19Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: remove stdshim',
+            url: 'https://github.com/gnolang/gno/pull/2403',
+            createdAt: '2024-06-20T13:17:48Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(keeper)!: use <pkgpath>.<expr> syntax for qeval; <pkgpath>:<path> for qrender',
+            url: 'https://github.com/gnolang/gno/pull/2382',
+            createdAt: '2024-06-18T11:54:04Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(contribs): revert back to `make <action>.<program>` syntax instead of the opposite',
+            url: 'https://github.com/gnolang/gno/pull/2353',
+            createdAt: '2024-06-13T14:58:11Z',
+            labels: [],
+          },
+          {
+            title: 'feat(examples): add `r/morgan/{home,guestbook}`',
+            url: 'https://github.com/gnolang/gno/pull/2345',
+            createdAt: '2024-06-12T18:43:56Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(gnodev): fix typo',
+            url: 'https://github.com/gnolang/gno/pull/2341',
+            createdAt: '2024-06-12T14:16:12Z',
+            labels: [],
+          },
+          {
+            title: 'chore(docs): bump minimum version to go 1.21',
+            url: 'https://github.com/gnolang/gno/pull/2328',
+            createdAt: '2024-06-11T14:39:26Z',
+            labels: [],
+          },
+          {
+            title: 'fix(gno.land): make gno store cache respect rollbacks',
+            url: 'https://github.com/gnolang/gno/pull/2319',
+            createdAt: '2024-06-10T14:02:07Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'ci: remove monthly snapshots',
+            url: 'https://github.com/gnolang/gno/pull/2263',
+            createdAt: '2024-06-03T09:18:25Z',
+            labels: [],
+          },
+          {
+            title: 'fix(gnoweb): update "airgapped" commands in realm help page',
+            url: 'https://github.com/gnolang/gno/pull/2244',
+            createdAt: '2024-05-30T14:09:17Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test(stdlibs/std): use real MsgRun pkgpath in TestPrevRealmIsOrigin',
+            url: 'https://github.com/gnolang/gno/pull/2239',
+            createdAt: '2024-05-29T12:10:07Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnodev): disable wal',
+            url: 'https://github.com/gnolang/gno/pull/2230',
+            createdAt: '2024-05-28T11:08:40Z',
+            labels: [],
+          },
+          {
+            title: 'fix(test3): RunMemPackage on p/leon/avl to restore types',
+            url: 'https://github.com/gnolang/gno/pull/2217',
+            createdAt: '2024-05-27T16:48:45Z',
+            labels: [],
+          },
+          {
+            title: 'ci: test gno.land when changing gnovm and tm2',
+            url: 'https://github.com/gnolang/gno/pull/2215',
+            createdAt: '2024-05-27T13:35:00Z',
+            labels: [],
+          },
+          {
+            title: 'test(gnovm): print unexpected error in filetests',
+            url: 'https://github.com/gnolang/gno/pull/2213',
+            createdAt: '2024-05-27T12:37:17Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(pkg/commands): provide ExitCodeError to use in place of os.Exit',
+            url: 'https://github.com/gnolang/gno/pull/2187',
+            createdAt: '2024-05-24T17:25:32Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'refactor(tm2/crypto): do not use build tags to mock ledger',
+            url: 'https://github.com/gnolang/gno/pull/2173',
+            createdAt: '2024-05-23T11:50:34Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): remove sort from gonative packages',
+            url: 'https://github.com/gnolang/gno/pull/2168',
+            createdAt: '2024-05-22T14:01:48Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(stdlibs/std)!: change TestSetPrevRealm to TestSetRealm',
+            url: 'https://github.com/gnolang/gno/pull/2164',
+            createdAt: '2024-05-22T09:46:42Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test(gnovm): re-enable stdlibs tests',
+            url: 'https://github.com/gnolang/gno/pull/2110',
+            createdAt: '2024-05-15T06:07:27Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(stdlibs/std): use appropriate variable names for regex',
+            url: 'https://github.com/gnolang/gno/pull/2106',
+            createdAt: '2024-05-14T19:30:54Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm/store): copy store caches',
+            url: 'https://github.com/gnolang/gno/pull/2105',
+            createdAt: '2024-05-14T17:27:56Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(lint): forbid usage of `regexp.Match(String)?`',
+            url: 'https://github.com/gnolang/gno/pull/2066',
+            createdAt: '2024-05-09T14:58:57Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(gnovm): move invalid labels tests to tests/files/',
+            url: 'https://github.com/gnolang/gno/pull/2058',
+            createdAt: '2024-05-08T16:56:50Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: kebab-case to snake_case all source and test files',
+            url: 'https://github.com/gnolang/gno/pull/2057',
+            createdAt: '2024-05-08T16:23:14Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(telemetry): move configuration to node config',
+            url: 'https://github.com/gnolang/gno/pull/2021',
+            createdAt: '2024-05-02T14:31:47Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(tm2/std)!: use snake_case JSON fields for MemFile and MemPackage',
+            url: 'https://github.com/gnolang/gno/pull/2019',
+            createdAt: '2024-05-02T11:59:33Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnoland): pass genesis file as a flag',
+            url: 'https://github.com/gnolang/gno/pull/1972',
+            createdAt: '2024-04-23T14:48:08Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): revert "top sort var/const globals (#1854)"',
+            url: 'https://github.com/gnolang/gno/pull/1956',
+            createdAt: '2024-04-19T09:37:13Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): assignment operators require 1 expression on both sides',
+            url: 'https://github.com/gnolang/gno/pull/1943',
+            createdAt: '2024-04-17T17:31:23Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(cmd/gnoland): fixup startup ascii art',
+            url: 'https://github.com/gnolang/gno/pull/1942',
+            createdAt: '2024-04-17T16:04:33Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(gnoland/testdata): `mv pr-1112.txtar map-storage.txtar`',
+            url: 'https://github.com/gnolang/gno/pull/1810',
+            createdAt: '2024-03-21T15:26:24Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnoland): in `config`, refer to fields using toml struct tags',
+            url: 'https://github.com/gnolang/gno/pull/1769',
+            createdAt: '2024-03-13T20:56:02Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(CODEOWNERS): update rules',
+            url: 'https://github.com/gnolang/gno/pull/1765',
+            createdAt: '2024-03-13T11:03:06Z',
+            labels: [],
+          },
+          {
+            title: 'refactor(tm2): remove pkg/maths in favour of min/max',
+            url: 'https://github.com/gnolang/gno/pull/1746',
+            createdAt: '2024-03-08T17:56:27Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(cmd/gno)!: change all `-verbose` flags to `-v`',
+            url: 'https://github.com/gnolang/gno/pull/1716',
+            createdAt: '2024-03-01T14:13:36Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(make): disable cgo, reorganise makefiles',
+            url: 'https://github.com/gnolang/gno/pull/1715',
+            createdAt: '2024-03-01T13:58:44Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(pkg/db): remove cleveldb, fsdb and rocksdb',
+            url: 'https://github.com/gnolang/gno/pull/1714',
+            createdAt: '2024-03-01T12:13:08Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gno.land): add go type checking to keeper + tx simulation in gnokey',
+            url: 'https://github.com/gnolang/gno/pull/1702',
+            createdAt: '2024-02-28T14:58:27Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(stdlibs): remove support for linkedType in native bindings',
+            url: 'https://github.com/gnolang/gno/pull/1700',
+            createdAt: '2024-02-28T14:08:32Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(transpiler): transpile gno standard libraries',
+            url: 'https://github.com/gnolang/gno/pull/1695',
+            createdAt: '2024-02-26T20:49:45Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'refactor(gnovm): rename precompiler to transpiler, move to own package',
+            url: 'https://github.com/gnolang/gno/pull/1681',
+            createdAt: '2024-02-22T13:18:30Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'ci(codecov): fix configuration',
+            url: 'https://github.com/gnolang/gno/pull/1680',
+            createdAt: '2024-02-22T11:55:21Z',
+            labels: [],
+          },
+          {
+            title: 'ci(labeler): fix labeler configuration',
+            url: 'https://github.com/gnolang/gno/pull/1679',
+            createdAt: '2024-02-22T11:27:58Z',
+            labels: [],
+          },
+          {
+            title: 'chore(stdlibs): remove unused internal/os',
+            url: 'https://github.com/gnolang/gno/pull/1678',
+            createdAt: '2024-02-22T11:22:04Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(examples): fix tests',
+            url: 'https://github.com/gnolang/gno/pull/1669',
+            createdAt: '2024-02-19T19:13:22Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(sdk/vm): coerce MsgRun pkgpath to `gno.land/r/$addr/run`',
+            url: 'https://github.com/gnolang/gno/pull/1645',
+            createdAt: '2024-02-08T15:59:12Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'ci: use action to validate dependabot.yml',
+            url: 'https://github.com/gnolang/gno/pull/1642',
+            createdAt: '2024-02-08T15:25:52Z',
+            labels: [],
+          },
+          {
+            title: 'fix(misc/genstd): ignore gno generated files',
+            url: 'https://github.com/gnolang/gno/pull/1633',
+            createdAt: '2024-02-06T15:49:51Z',
+            labels: [],
+          },
+          {
+            title: 'chore(.github): dependabot group for all GH actions',
+            url: 'https://github.com/gnolang/gno/pull/1628',
+            createdAt: '2024-02-02T16:10:46Z',
+            labels: [],
+          },
+          {
+            title: 'chore(make): provide install.gnodev in root makefile ',
+            url: 'https://github.com/gnolang/gno/pull/1626',
+            createdAt: '2024-02-02T13:44:38Z',
+            labels: [],
+          },
+          {
+            title: 'feat(gnovm): add benchmark system',
+            url: 'https://github.com/gnolang/gno/pull/1624',
+            createdAt: '2024-02-02T10:56:50Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test: add regression integ test for gnolang/gnochess#97',
+            url: 'https://github.com/gnolang/gno/pull/1608',
+            createdAt: '2024-01-31T13:05:34Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(examples): prefer Go and Gno for respective language names',
+            url: 'https://github.com/gnolang/gno/pull/1607',
+            createdAt: '2024-01-31T12:16:45Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'refactor(tm2): make rpc client not depend on goleveldb',
+            url: 'https://github.com/gnolang/gno/pull/1603',
+            createdAt: '2024-01-30T15:57:54Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'refactor(tm2): split pkg/db into sub-packages',
+            url: 'https://github.com/gnolang/gno/pull/1602',
+            createdAt: '2024-01-30T14:04:22Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(cmd/gno): move test output within gno code ',
+            url: 'https://github.com/gnolang/gno/pull/1594',
+            createdAt: '2024-01-26T20:58:27Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'refactor: compile all regexes at init',
+            url: 'https://github.com/gnolang/gno/pull/1592',
+            createdAt: '2024-01-26T16:14:42Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(CODEOWNERS): prefix directories with root slash',
+            url: 'https://github.com/gnolang/gno/pull/1573',
+            createdAt: '2024-01-23T12:48:41Z',
+            labels: [],
+          },
+          {
+            title: 'feat(examples): add package cford32, add method `seqid.ID.String`',
+            url: 'https://github.com/gnolang/gno/pull/1572',
+            createdAt: '2024-01-23T12:41:01Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(CODEOWNERS): add rules for gnovm/cmd/gno, gnovm/tests',
+            url: 'https://github.com/gnolang/gno/pull/1561',
+            createdAt: '2024-01-18T18:18:26Z',
+            labels: [],
+          },
+          {
+            title: 'docs(PHILOSOPHY): update philosophy on short flags',
+            url: 'https://github.com/gnolang/gno/pull/1555',
+            createdAt: '2024-01-18T17:31:55Z',
+            labels: [],
+          },
+          {
+            title: 'chore: make gnokey consistent with the changes applied to gnokeykc',
+            url: 'https://github.com/gnolang/gno/pull/1554',
+            createdAt: '2024-01-18T17:17:28Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: remove leftover debugging printlns',
+            url: 'https://github.com/gnolang/gno/pull/1550',
+            createdAt: '2024-01-17T18:05:14Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: add docs to auto labeler',
+            url: 'https://github.com/gnolang/gno/pull/1549',
+            createdAt: '2024-01-17T17:58:51Z',
+            labels: [],
+          },
+          {
+            title: 'docs: s/Gnolang/Gno, s/Golang/Go',
+            url: 'https://github.com/gnolang/gno/pull/1548',
+            createdAt: '2024-01-17T17:55:53Z',
+            labels: [],
+          },
+          {
+            title: 'docs(gnoweb): remove reference to gnoteam domain',
+            url: 'https://github.com/gnolang/gno/pull/1512',
+            createdAt: '2024-01-10T12:41:33Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'refactor(gnolang): handle duplicate method decls using TryDefineMethod',
+            url: 'https://github.com/gnolang/gno/pull/1459',
+            createdAt: '2023-12-18T22:38:10Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(cmd/gno): log panic information in gno test',
+            url: 'https://github.com/gnolang/gno/pull/1397',
+            createdAt: '2023-11-29T15:29:01Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(examples): add p/demo/seqid',
+            url: 'https://github.com/gnolang/gno/pull/1378',
+            createdAt: '2023-11-16T15:49:43Z',
+            labels: [
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(mod): tidy all go mods',
+            url: 'https://github.com/gnolang/gno/pull/1370',
+            createdAt: '2023-11-13T18:35:14Z',
+            labels: [],
+          },
+          {
+            title: 'docs: update Go<>Gno compatibility document with up-to-date info',
+            url: 'https://github.com/gnolang/gno/pull/1311',
+            createdAt: '2023-10-27T15:29:13Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(misc/list-gnophers): make script work when called from any directory',
+            url: 'https://github.com/gnolang/gno/pull/1308',
+            createdAt: '2023-10-26T22:52:21Z',
+            labels: [],
+          },
+          {
+            title: 'fix(misc/gendocs): convert paths for async-loaded scripts',
+            url: 'https://github.com/gnolang/gno/pull/1307',
+            createdAt: '2023-10-26T22:10:01Z',
+            labels: [],
+          },
+          {
+            title: 'fix(cmd/gno): change set_exit_stauts flag to kebab-case',
+            url: 'https://github.com/gnolang/gno/pull/1304',
+            createdAt: '2023-10-26T17:51:46Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'ci: add workflow for automatic monthly snapshots',
+            url: 'https://github.com/gnolang/gno/pull/1260',
+            createdAt: '2023-10-19T20:49:52Z',
+            labels: [],
+          },
+          {
+            title: 'docs: publish static pkg-site generated docs for this repo on GH pages',
+            url: 'https://github.com/gnolang/gno/pull/1251',
+            createdAt: '2023-10-18T20:52:50Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(make): disable _test.gnoweb temporarily',
+            url: 'https://github.com/gnolang/gno/pull/1223',
+            createdAt: '2023-10-11T00:18:20Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnolang): allow floats in inc/dec statements',
+            url: 'https://github.com/gnolang/gno/pull/1221',
+            createdAt: '2023-10-10T23:19:00Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: update license',
+            url: 'https://github.com/gnolang/gno/pull/1200',
+            createdAt: '2023-10-06T03:18:22Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: improve README and CONTRIBUTING, add reference to testing guide',
+            url: 'https://github.com/gnolang/gno/pull/1199',
+            createdAt: '2023-10-05T19:08:17Z',
+            labels: [],
+          },
+          {
+            title: 'fix(tm2): make HTTPClient support https',
+            url: 'https://github.com/gnolang/gno/pull/1158',
+            createdAt: '2023-09-21T09:30:06Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(stdlibs): add math and math/bits',
+            url: 'https://github.com/gnolang/gno/pull/1153',
+            createdAt: '2023-09-18T17:43:16Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnolang): allow comparisons using uninitialized string values',
+            url: 'https://github.com/gnolang/gno/pull/1132',
+            createdAt: '2023-09-16T12:58:26Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs(contributing): change instructions for vim, reference gnols',
+            url: 'https://github.com/gnolang/gno/pull/1113',
+            createdAt: '2023-09-12T14:24:34Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(pkg/commands): readPassword support for windows',
+            url: 'https://github.com/gnolang/gno/pull/1089',
+            createdAt: '2023-08-30T20:00:36Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs(p/demo/ufmt): add documentation to package and Sprintf',
+            url: 'https://github.com/gnolang/gno/pull/989',
+            createdAt: '2023-07-22T16:58:48Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjUyMjI1MjU=',
@@ -30176,6 +42262,28 @@ const data = {
             createdAt: '2024-09-16T08:23:51Z',
             labels: [],
           },
+          {
+            title: 'feat(gnostats): add the agent',
+            url: 'https://github.com/gnolang/gno/pull/2706',
+            createdAt: '2024-08-16T22:22:27Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: small typo in gnodev documentation',
+            url: 'https://github.com/gnolang/gno/pull/2680',
+            createdAt: '2024-08-12T16:09:00Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
+        count: 2,
+        data: [
           {
             title: 'feat(gnostats): add the agent',
             url: 'https://github.com/gnolang/gno/pull/2706',
@@ -30337,6 +42445,44 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 3,
+        data: [
+          {
+            title: 'feat: add devx balances and validators',
+            url: 'https://github.com/gnolang/gno/pull/2528',
+            createdAt: '2024-07-06T19:27:55Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(telemetry): set otel service instance key id',
+            url: 'https://github.com/gnolang/gno/pull/2435',
+            createdAt: '2024-06-25T11:50:46Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add devx faucet account',
+            url: 'https://github.com/gnolang/gno/pull/1789',
+            createdAt: '2024-03-18T12:57:24Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjU3OTIyMzk=',
@@ -30375,6 +42521,134 @@ const data = {
               },
             ],
           },
+          {
+            title: 'feat(examples): a shifumi (rock, paper, scissors) smart contract',
+            url: 'https://github.com/gnolang/gno/pull/2629',
+            createdAt: '2024-07-25T09:39:11Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnovm): add /debug command in REPL',
+            url: 'https://github.com/gnolang/gno/pull/2567',
+            createdAt: '2024-07-10T12:00:33Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): source location always precise with line and column',
+            url: 'https://github.com/gnolang/gno/pull/2362',
+            createdAt: '2024-06-15T12:28:30Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm/debugger): support breakpoints in loop bodies',
+            url: 'https://github.com/gnolang/gno/pull/2251',
+            createdAt: '2024-05-31T12:15:45Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test(gnovm): improve gnovm/pkg/gnolang test coverage',
+            url: 'https://github.com/gnolang/gno/pull/2143',
+            createdAt: '2024-05-17T20:31:56Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: use atomic for global counter used for parallel testing',
+            url: 'https://github.com/gnolang/gno/pull/1932',
+            createdAt: '2024-04-15T21:03:38Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add an interactive debugger to GnoVM',
+            url: 'https://github.com/gnolang/gno/pull/1563',
+            createdAt: '2024-01-19T14:05:35Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: handle untyped constant expressions in append()',
+            url: 'https://github.com/gnolang/gno/pull/1177',
+            createdAt: '2023-09-27T07:57:53Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(repl): improve support of multi-line statements',
+            url: 'https://github.com/gnolang/gno/pull/1129',
+            createdAt: '2023-09-15T13:09:59Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
+        count: 9,
+        data: [
           {
             title: 'feat(examples): a shifumi (rock, paper, scissors) smart contract',
             url: 'https://github.com/gnolang/gno/pull/2629',
@@ -31023,6 +43297,218 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 19,
+        data: [
+          {
+            title: 'fix(gnovm): correct type comparison for bool type',
+            url: 'https://github.com/gnolang/gno/pull/2725',
+            createdAt: '2024-08-22T15:54:33Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): follow up works on loop scope(#2429)',
+            url: 'https://github.com/gnolang/gno/pull/2440',
+            createdAt: '2024-06-25T18:49:09Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gno.land): refine error message for  addpkg operation',
+            url: 'https://github.com/gnolang/gno/pull/2409',
+            createdAt: '2024-06-21T07:04:35Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(examples): correct the version number in upgrade demo',
+            url: 'https://github.com/gnolang/gno/pull/2390',
+            createdAt: '2024-06-19T04:08:43Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): Correct file test issue in zream12',
+            url: 'https://github.com/gnolang/gno/pull/2340',
+            createdAt: '2024-06-12T14:06:34Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(make): re-enable package testing',
+            url: 'https://github.com/gnolang/gno/pull/2269',
+            createdAt: '2024-06-03T15:53:56Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): prevent cyclic references in type declarations',
+            url: 'https://github.com/gnolang/gno/pull/2081',
+            createdAt: '2024-05-13T08:55:57Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): correct comparison between different types',
+            url: 'https://github.com/gnolang/gno/pull/1890',
+            createdAt: '2024-04-04T17:54:23Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add support for type declarations on pointer types',
+            url: 'https://github.com/gnolang/gno/pull/1733',
+            createdAt: '2024-03-05T03:12:07Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: Corrected the comparison between an untyped constant and an interface',
+            url: 'https://github.com/gnolang/gno/pull/1732',
+            createdAt: '2024-03-05T02:35:57Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: incorrect pointer value comparison',
+            url: 'https://github.com/gnolang/gno/pull/1601',
+            createdAt: '2024-01-30T09:43:26Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: []byte("xxx") should not be  treated as const',
+            url: 'https://github.com/gnolang/gno/pull/1597',
+            createdAt: '2024-01-29T12:10:28Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: gno type check',
+            url: 'https://github.com/gnolang/gno/pull/1426',
+            createdAt: '2023-12-08T10:30:00Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: bool type support for ufmt',
+            url: 'https://github.com/gnolang/gno/pull/574',
+            createdAt: '2023-03-08T08:05:02Z',
+            labels: [],
+          },
+          {
+            title: 'fix(gnolang): fix an indexExpr preprocess bug',
+            url: 'https://github.com/gnolang/gno/pull/514',
+            createdAt: '2023-02-13T11:02:30Z',
+            labels: [],
+          },
+          {
+            title: 'chore: Filetest optimization',
+            url: 'https://github.com/gnolang/gno/pull/304',
+            createdAt: '2022-07-27T07:57:19Z',
+            labels: [],
+          },
+          {
+            title: 'chore: add DefaultBaseOptions for gnofaucet',
+            url: 'https://github.com/gnolang/gno/pull/300',
+            createdAt: '2022-07-20T07:24:09Z',
+            labels: [],
+          },
+          {
+            title: 'Optimize : return meaningful message rather than NPE for boards;  Add some test files as well"',
+            url: 'https://github.com/gnolang/gno/pull/250',
+            createdAt: '2022-06-13T14:25:45Z',
+            labels: [],
+          },
+          {
+            title: 'chore: minimum registration fees with invites',
+            url: 'https://github.com/gnolang/gno/pull/243',
+            createdAt: '2022-06-09T07:52:53Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjYwMjMxMTc=',
@@ -31162,6 +43648,22 @@ const data = {
             labels: [
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'docs(readme): add play.gno.land',
+            url: 'https://github.com/gnolang/gno/pull/1489',
+            createdAt: '2023-12-27T21:20:55Z',
+            labels: [
+              {
+                name: ':book:  documentation',
                 color: 'ffffff',
               },
             ],
@@ -31352,6 +43854,59 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 4,
+        data: [
+          {
+            title: 'feat: add realm /r/demo/math_eval',
+            url: 'https://github.com/gnolang/gno/pull/965',
+            createdAt: '2023-07-10T22:10:10Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add realm r/demo/keystore',
+            url: 'https://github.com/gnolang/gno/pull/958',
+            createdAt: '2023-07-07T17:59:54Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add Sine + Cosine + Signbit',
+            url: 'https://github.com/gnolang/gno/pull/805',
+            createdAt: '2023-05-07T17:03:34Z',
+            labels: [
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: new realm /r/demo/microblog',
+            url: 'https://github.com/gnolang/gno/pull/791',
+            createdAt: '2023-04-30T15:31:08Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjY4NTg4MDE=',
@@ -31420,6 +43975,33 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 2,
+        data: [
+          {
+            title: 'test: add reverseiterator tests',
+            url: 'https://github.com/gnolang/gno/pull/1058',
+            createdAt: '2023-08-17T21:43:33Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test: refactor kvpair, add tests',
+            url: 'https://github.com/gnolang/gno/pull/1057',
+            createdAt: '2023-08-17T18:25:27Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjcwNDAzNTA=',
@@ -31452,6 +44034,23 @@ const data = {
         ],
       },
       prs: {
+        count: 2,
+        data: [
+          {
+            title: 'chore: rename `exts/token-metadata.gno`',
+            url: 'https://github.com/gnolang/gno/pull/318',
+            createdAt: '2022-08-14T16:56:27Z',
+            labels: [],
+          },
+          {
+            title: 'chore: fix typos in `gnoland/genesis` directory files',
+            url: 'https://github.com/gnolang/gno/pull/295',
+            createdAt: '2022-07-13T07:13:11Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
         count: 2,
         data: [
           {
@@ -31736,6 +44335,47 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 6,
+        data: [
+          {
+            title: 'Create dependabot.yml',
+            url: 'https://github.com/gnolang/gno/pull/180',
+            createdAt: '2022-05-09T06:02:09Z',
+            labels: [],
+          },
+          {
+            title: 'chore: update .gitignore',
+            url: 'https://github.com/gnolang/gno/pull/177',
+            createdAt: '2022-05-09T05:05:19Z',
+            labels: [],
+          },
+          {
+            title: 'ci: Database tests',
+            url: 'https://github.com/gnolang/gno/pull/150',
+            createdAt: '2022-04-30T04:10:18Z',
+            labels: [],
+          },
+          {
+            title: 'Update README.md',
+            url: 'https://github.com/gnolang/gno/pull/32',
+            createdAt: '2021-08-31T14:16:47Z',
+            labels: [],
+          },
+          {
+            title: 'Update README.md',
+            url: 'https://github.com/gnolang/gno/pull/7',
+            createdAt: '2021-02-10T18:07:26Z',
+            labels: [],
+          },
+          {
+            title: 'Update PHILOSOPHY.md',
+            url: 'https://github.com/gnolang/gno/pull/2',
+            createdAt: '2021-02-04T21:09:01Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjcxOTY5MTg=',
@@ -31749,6 +44389,17 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'chore: Add dockerfile and docker-compose',
+            url: 'https://github.com/gnolang/gno/pull/164',
+            createdAt: '2022-05-03T22:42:58Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -31856,6 +44507,23 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 2,
+        data: [
+          {
+            title: 'ci: create codeql.yml',
+            url: 'https://github.com/gnolang/gno/pull/1915',
+            createdAt: '2024-04-11T03:47:05Z',
+            labels: [],
+          },
+          {
+            title: 'chore(docs): Fix dead links in documentation',
+            url: 'https://github.com/gnolang/gno/pull/1401',
+            createdAt: '2023-12-01T19:23:10Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjc0ODIwNjU=',
@@ -31906,6 +44574,29 @@ const data = {
             title: 'chore: remove confusing unicode chars',
             url: 'https://github.com/gnolang/gno/pull/253',
             createdAt: '2022-06-20T19:39:49Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
+        count: 3,
+        data: [
+          {
+            title: 'chore: fix bunch of typos',
+            url: 'https://github.com/gnolang/gno/pull/259',
+            createdAt: '2022-06-21T09:27:18Z',
+            labels: [],
+          },
+          {
+            title: 'fix: potential nil dereferences',
+            url: 'https://github.com/gnolang/gno/pull/258',
+            createdAt: '2022-06-21T08:18:27Z',
+            labels: [],
+          },
+          {
+            title: 'chore: bump dependencies with vulnerabilities',
+            url: 'https://github.com/gnolang/gno/pull/254',
+            createdAt: '2022-06-20T19:56:56Z',
             labels: [],
           },
         ],
@@ -32095,6 +44786,153 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 15,
+        data: [
+          {
+            title: 'feat: render .md files from packages',
+            url: 'https://github.com/gnolang/gno/pull/2540',
+            createdAt: '2024-07-08T04:25:35Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnoweb): template and md style',
+            url: 'https://github.com/gnolang/gno/pull/2223',
+            createdAt: '2024-05-28T07:01:34Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: update logo color',
+            url: 'https://github.com/gnolang/gno/pull/2157',
+            createdAt: '2024-05-21T05:23:16Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: update favicon and og',
+            url: 'https://github.com/gnolang/gno/pull/2148',
+            createdAt: '2024-05-20T06:29:12Z',
+            labels: [
+              {
+                name: "don't merge",
+                color: 'b60205',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'style: logo and font update',
+            url: 'https://github.com/gnolang/gno/pull/2132',
+            createdAt: '2024-05-17T03:24:52Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: register hljs plaintext language',
+            url: 'https://github.com/gnolang/gno/pull/2103',
+            createdAt: '2024-05-14T15:04:39Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add edit page link and info',
+            url: 'https://github.com/gnolang/gno/pull/1629',
+            createdAt: '2024-02-04T00:19:48Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add links into navbar',
+            url: 'https://github.com/gnolang/gno/pull/1627',
+            createdAt: '2024-02-02T15:20:26Z',
+            labels: [],
+          },
+          {
+            title: 'style: fix navbar and add better meta description',
+            url: 'https://github.com/gnolang/gno/pull/1526',
+            createdAt: '2024-01-11T14:46:43Z',
+            labels: [],
+          },
+          {
+            title: 'docs: add basic custom meta',
+            url: 'https://github.com/gnolang/gno/pull/1524',
+            createdAt: '2024-01-11T12:48:35Z',
+            labels: [],
+          },
+          {
+            title: 'style: fix navbar on scroll',
+            url: 'https://github.com/gnolang/gno/pull/1518',
+            createdAt: '2024-01-10T19:42:28Z',
+            labels: [],
+          },
+          {
+            title: 'style: improve docs links, toc and icons',
+            url: 'https://github.com/gnolang/gno/pull/1516',
+            createdAt: '2024-01-10T17:36:03Z',
+            labels: [],
+          },
+          {
+            title: 'style: increase doc body max width',
+            url: 'https://github.com/gnolang/gno/pull/1485',
+            createdAt: '2023-12-22T20:57:25Z',
+            labels: [],
+          },
+          {
+            title: 'feat: new website v2',
+            url: 'https://github.com/gnolang/gno/pull/818',
+            createdAt: '2023-05-10T15:48:18Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: new website design',
+            url: 'https://github.com/gnolang/gno/pull/395',
+            createdAt: '2022-11-20T19:43:15Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjc4Nzc0MzA=',
@@ -32115,6 +44953,22 @@ const data = {
         ],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'feat: Evaluation DAO Kick Off ',
+            url: 'https://github.com/gnolang/gno/pull/792',
+            createdAt: '2023-04-30T17:02:47Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -32416,6 +45270,79 @@ const data = {
             labels: [
               {
                 name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
+        count: 6,
+        data: [
+          {
+            title: 'chore(test4): add teritori persistent peer',
+            url: 'https://github.com/gnolang/gno/pull/2575',
+            createdAt: '2024-07-11T18:55:43Z',
+            labels: [],
+          },
+          {
+            title: 'fix(vm): avoid "index out of range" in `convertArgToGno`',
+            url: 'https://github.com/gnolang/gno/pull/2500',
+            createdAt: '2024-07-04T11:31:26Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnodev): add /reload and /reset endpoints',
+            url: 'https://github.com/gnolang/gno/pull/2448',
+            createdAt: '2024-06-26T15:02:54Z',
+            labels: [],
+          },
+          {
+            title: 'chore(examples): rm inexistent dir in `make lint` targets; use `make` in ci',
+            url: 'https://github.com/gnolang/gno/pull/2034',
+            createdAt: '2024-05-04T10:18:03Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnoweb): prettify json code blocks in render',
+            url: 'https://github.com/gnolang/gno/pull/2033',
+            createdAt: '2024-05-03T17:47:12Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: expose InitChain tx responses',
+            url: 'https://github.com/gnolang/gno/pull/1941',
+            createdAt: '2024-04-17T13:54:32Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
               },
             ],
@@ -33070,6 +45997,352 @@ const data = {
             title: 'chore: convert AddressList into a HashSet',
             url: 'https://github.com/gnolang/gno/pull/195',
             createdAt: '2022-05-17T13:29:51Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
+        count: 37,
+        data: [
+          {
+            title: 'chore(tm2): crypto.Address json Marshal',
+            url: 'https://github.com/gnolang/gno/pull/2756',
+            createdAt: '2024-09-04T12:47:06Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(tm2): rpc status validator power',
+            url: 'https://github.com/gnolang/gno/pull/2447',
+            createdAt: '2024-06-26T10:36:16Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(tm2): OTEL / handle http metrics exporter',
+            url: 'https://github.com/gnolang/gno/pull/2402',
+            createdAt: '2024-06-20T12:34:36Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: portal-loop run master image',
+            url: 'https://github.com/gnolang/gno/pull/2238',
+            createdAt: '2024-05-28T21:24:33Z',
+            labels: [],
+          },
+          {
+            title: 'fix(misc/loop): edit volume path',
+            url: 'https://github.com/gnolang/gno/pull/2186',
+            createdAt: '2024-05-24T16:06:33Z',
+            labels: [],
+          },
+          {
+            title: 'fix(misc/loop): fix portal loop post goreleaser',
+            url: 'https://github.com/gnolang/gno/pull/2185',
+            createdAt: '2024-05-24T15:42:17Z',
+            labels: [],
+          },
+          {
+            title: 'chore: replace all occurence of port 3665{6,7,8} to 2665{6,7,8}',
+            url: 'https://github.com/gnolang/gno/pull/2178',
+            createdAt: '2024-05-23T14:43:18Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(docker): fix binary path for dockerfiles',
+            url: 'https://github.com/gnolang/gno/pull/2177',
+            createdAt: '2024-05-23T14:30:34Z',
+            labels: [],
+          },
+          {
+            title: 'chore(misc/loop): gnoweb host www.gno.land',
+            url: 'https://github.com/gnolang/gno/pull/2136',
+            createdAt: '2024-05-17T10:10:33Z',
+            labels: [],
+          },
+          {
+            title: 'fix(ci): typo on deploy-docs',
+            url: 'https://github.com/gnolang/gno/pull/2089',
+            createdAt: '2024-05-14T09:15:21Z',
+            labels: [],
+          },
+          {
+            title: 'chore(ci): CI test of portal-loop',
+            url: 'https://github.com/gnolang/gno/pull/2064',
+            createdAt: '2024-05-09T09:36:34Z',
+            labels: [],
+          },
+          {
+            title: 'chore: update portal-loop configurations urls',
+            url: 'https://github.com/gnolang/gno/pull/2039',
+            createdAt: '2024-05-06T09:08:14Z',
+            labels: [],
+          },
+          {
+            title: 'chore: simplify staging',
+            url: 'https://github.com/gnolang/gno/pull/2018',
+            createdAt: '2024-05-02T10:55:26Z',
+            labels: [],
+          },
+          {
+            title: 'chore: update faucet url',
+            url: 'https://github.com/gnolang/gno/pull/1980',
+            createdAt: '2024-04-25T07:27:55Z',
+            labels: [],
+          },
+          {
+            title: 'chore(misc/loop): updates images, fix flags config',
+            url: 'https://github.com/gnolang/gno/pull/1907',
+            createdAt: '2024-04-09T09:14:24Z',
+            labels: [],
+          },
+          {
+            title: 'chore: trigger docs deploy',
+            url: 'https://github.com/gnolang/gno/pull/1801',
+            createdAt: '2024-03-20T14:48:03Z',
+            labels: [],
+          },
+          {
+            title: 'chore(misc/autocounterd): init autocounterd',
+            url: 'https://github.com/gnolang/gno/pull/1612',
+            createdAt: '2024-02-01T11:25:56Z',
+            labels: [],
+          },
+          {
+            title: 'fix(gno.land/pkg/gnoclient): Signer takes chainID',
+            url: 'https://github.com/gnolang/gno/pull/1580',
+            createdAt: '2024-01-24T16:44:37Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: fix netlify docs deploy',
+            url: 'https://github.com/gnolang/gno/pull/1564',
+            createdAt: '2024-01-19T15:23:06Z',
+            labels: [],
+          },
+          {
+            title: 'fix(gnoweb): FaucetURL correct endpoint',
+            url: 'https://github.com/gnolang/gno/pull/1449',
+            createdAt: '2023-12-16T16:06:54Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(misc/loop): Setup the portal loop infra',
+            url: 'https://github.com/gnolang/gno/pull/1400',
+            createdAt: '2023-11-30T12:04:42Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnoland/cli): store skipFailingGenesisTxs in cfg',
+            url: 'https://github.com/gnolang/gno/pull/1395',
+            createdAt: '2023-11-28T21:39:23Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(misc/loop): upgrade tx-archive to v0.1.1',
+            url: 'https://github.com/gnolang/gno/pull/1368',
+            createdAt: '2023-11-13T14:21:42Z',
+            labels: [],
+          },
+          {
+            title: 'fix(cmd/gno): allow testing packages which contain test files with `package x_test`',
+            url: 'https://github.com/gnolang/gno/pull/1330',
+            createdAt: '2023-11-02T20:25:44Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(amino): improve error readability',
+            url: 'https://github.com/gnolang/gno/pull/1179',
+            createdAt: '2023-09-28T14:57:35Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: import secp256k1 for amino parsing',
+            url: 'https://github.com/gnolang/gno/pull/1178',
+            createdAt: '2023-09-28T09:55:21Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: use std.PrevRealm() in grc20 and grc721',
+            url: 'https://github.com/gnolang/gno/pull/895',
+            createdAt: '2023-06-14T15:10:27Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: std.CurrentRealm',
+            url: 'https://github.com/gnolang/gno/pull/893',
+            createdAt: '2023-06-14T13:46:52Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(gnovm): add test on std.GetOrigPkgAddr',
+            url: 'https://github.com/gnolang/gno/pull/809',
+            createdAt: '2023-05-08T17:41:14Z',
+            labels: [],
+          },
+          {
+            title: 'fix: wrong parent block for defer',
+            url: 'https://github.com/gnolang/gno/pull/779',
+            createdAt: '2023-04-25T18:46:17Z',
+            labels: [],
+          },
+          {
+            title: 'chore: add makefile rule install',
+            url: 'https://github.com/gnolang/gno/pull/693',
+            createdAt: '2023-04-03T15:17:15Z',
+            labels: [],
+          },
+          {
+            title: 'feat: add std.PrevRealm',
+            url: 'https://github.com/gnolang/gno/pull/667',
+            createdAt: '2023-03-28T19:00:17Z',
+            labels: [
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+              {
+                name: 'investigating',
+                color: '8c008c',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(tests): different address on test caller',
+            url: 'https://github.com/gnolang/gno/pull/662',
+            createdAt: '2023-03-28T14:50:28Z',
+            labels: [],
+          },
+          {
+            title: 'Pretty integers and floats with `_` #630',
+            url: 'https://github.com/gnolang/gno/pull/635',
+            createdAt: '2023-03-22T17:55:35Z',
+            labels: [],
+          },
+          {
+            title: 'feat(examples): add merkle tree package',
+            url: 'https://github.com/gnolang/gno/pull/631',
+            createdAt: '2023-03-21T16:59:47Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(stdlibs): import crypto/sha256',
+            url: 'https://github.com/gnolang/gno/pull/580',
+            createdAt: '2023-03-09T12:50:40Z',
+            labels: [],
+          },
+          {
+            title: 'chore: add make build && make install',
+            url: 'https://github.com/gnolang/gno/pull/330',
+            createdAt: '2022-09-12T15:25:40Z',
             labels: [],
           },
         ],
@@ -33885,6 +47158,536 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 46,
+        data: [
+          {
+            title: 'feat(gnobro): add json log format',
+            url: 'https://github.com/gnolang/gno/pull/2812',
+            createdAt: '2024-09-18T09:02:33Z',
+            labels: [],
+          },
+          {
+            title: 'fix(fmt): do not print a second line when printing file to stdout',
+            url: 'https://github.com/gnolang/gno/pull/2639',
+            createdAt: '2024-07-28T08:20:27Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: gnobro, a terminal-based realm browser ',
+            url: 'https://github.com/gnolang/gno/pull/2608',
+            createdAt: '2024-07-21T19:46:56Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: users namespace',
+            url: 'https://github.com/gnolang/gno/pull/2471',
+            createdAt: '2024-07-01T07:22:55Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(CI): ignored contribs folder on gno update - bis',
+            url: 'https://github.com/gnolang/gno/pull/2412',
+            createdAt: '2024-06-21T07:49:10Z',
+            labels: [],
+          },
+          {
+            title: 'feat(gnoland): Improve `gnoland config/secrets` command description',
+            url: 'https://github.com/gnolang/gno/pull/2399',
+            createdAt: '2024-06-20T09:30:20Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(coverage): Add back coverage support for `txtar`',
+            url: 'https://github.com/gnolang/gno/pull/2377',
+            createdAt: '2024-06-18T09:39:56Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: bad module naming in gov package',
+            url: 'https://github.com/gnolang/gno/pull/2339',
+            createdAt: '2024-06-12T13:55:43Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnodev): txs manipulation ability',
+            url: 'https://github.com/gnolang/gno/pull/2286',
+            createdAt: '2024-06-05T11:30:05Z',
+            labels: [],
+          },
+          {
+            title: 'fix(bft): potential deadlock in the consensus ticker on close',
+            url: 'https://github.com/gnolang/gno/pull/2264',
+            createdAt: '2024-06-03T10:12:21Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnovm): add `gno fmt` command',
+            url: 'https://github.com/gnolang/gno/pull/2156',
+            createdAt: '2024-05-20T22:01:13Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnodev): racy emitter test',
+            url: 'https://github.com/gnolang/gno/pull/2022',
+            createdAt: '2024-05-02T15:15:11Z',
+            labels: [],
+          },
+          {
+            title: 'fix: keep data as default gnohome keybase db',
+            url: 'https://github.com/gnolang/gno/pull/1984',
+            createdAt: '2024-04-25T15:12:02Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnodev): add balances & keybase support ',
+            url: 'https://github.com/gnolang/gno/pull/1938',
+            createdAt: '2024-04-16T12:39:52Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(docker): fix docker action by adding build target',
+            url: 'https://github.com/gnolang/gno/pull/1920',
+            createdAt: '2024-04-11T20:51:01Z',
+            labels: [],
+          },
+          {
+            title: 'fix: use docker buildx on ci to support multiple arch',
+            url: 'https://github.com/gnolang/gno/pull/1912',
+            createdAt: '2024-04-10T17:16:10Z',
+            labels: [],
+          },
+          {
+            title: 'feat: improve gnodev logging',
+            url: 'https://github.com/gnolang/gno/pull/1790',
+            createdAt: '2024-03-18T15:35:28Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(txtar): handle quote for gnokey',
+            url: 'https://github.com/gnolang/gno/pull/1745',
+            createdAt: '2024-03-07T10:16:28Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnodev): add node tests and lint',
+            url: 'https://github.com/gnolang/gno/pull/1668',
+            createdAt: '2024-02-19T15:21:48Z',
+            labels: [],
+          },
+          {
+            title: 'feat(go): bump go 1.20 to 1.21',
+            url: 'https://github.com/gnolang/gno/pull/1654',
+            createdAt: '2024-02-13T13:41:29Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnodev): add more configuration flags for server usage',
+            url: 'https://github.com/gnolang/gno/pull/1622',
+            createdAt: '2024-02-02T09:41:13Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(txtar): add `loadpkg` command',
+            url: 'https://github.com/gnolang/gno/pull/1598',
+            createdAt: '2024-01-29T15:39:37Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnodev): rewrite genesis with current state on reload',
+            url: 'https://github.com/gnolang/gno/pull/1566',
+            createdAt: '2024-01-22T15:18:23Z',
+            labels: [],
+          },
+          {
+            title: 'fix(bft): correctly drain channels events',
+            url: 'https://github.com/gnolang/gno/pull/1515',
+            createdAt: '2024-01-10T14:44:27Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnodev): time drifting in gnodev',
+            url: 'https://github.com/gnolang/gno/pull/1510',
+            createdAt: '2024-01-10T09:35:45Z',
+            labels: [],
+          },
+          {
+            title: 'feat: remove `gnovm` and `gno.land` dependencies from tm2',
+            url: 'https://github.com/gnolang/gno/pull/1483',
+            createdAt: '2023-12-21T23:46:04Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnodev): Add automatic page reload on save',
+            url: 'https://github.com/gnolang/gno/pull/1457',
+            createdAt: '2023-12-18T16:07:53Z',
+            labels: [],
+          },
+          {
+            title: 'fix(gnodev): skip failing tx instead of raising an error',
+            url: 'https://github.com/gnolang/gno/pull/1456',
+            createdAt: '2023-12-18T15:57:09Z',
+            labels: [],
+          },
+          {
+            title: 'fix: [gnoweb] fix unset binding',
+            url: 'https://github.com/gnolang/gno/pull/1446',
+            createdAt: '2023-12-16T10:40:56Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: Revert "Improve BFT Tests Stability (#1385)"',
+            url: 'https://github.com/gnolang/gno/pull/1441',
+            createdAt: '2023-12-15T09:43:07Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: Implement `./contribs/gnodev` command',
+            url: 'https://github.com/gnolang/gno/pull/1386',
+            createdAt: '2023-11-20T16:22:08Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: Improve BFT Tests Stability ',
+            url: 'https://github.com/gnolang/gno/pull/1385',
+            createdAt: '2023-11-20T15:22:04Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: improve error message output in integration tests',
+            url: 'https://github.com/gnolang/gno/pull/1349',
+            createdAt: '2023-11-09T17:52:53Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: setup testscripts coverage',
+            url: 'https://github.com/gnolang/gno/pull/1249',
+            createdAt: '2023-10-18T12:33:28Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add InMemory `gnoland` node',
+            url: 'https://github.com/gnolang/gno/pull/1241',
+            createdAt: '2023-10-12T15:52:29Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "feat: add 'gno env' subcommand",
+            url: 'https://github.com/gnolang/gno/pull/1233',
+            createdAt: '2023-10-11T10:12:44Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add `Ready` method to Node',
+            url: 'https://github.com/gnolang/gno/pull/1216',
+            createdAt: '2023-10-10T15:24:16Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: improve gno linter with basic errors support',
+            url: 'https://github.com/gnolang/gno/pull/1202',
+            createdAt: '2023-10-06T21:15:03Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(codecov): merge coverage for a single upload by workflow',
+            url: 'https://github.com/gnolang/gno/pull/1190',
+            createdAt: '2023-10-03T16:12:06Z',
+            labels: [],
+          },
+          {
+            title: 'fix(codecov): increase codecov upload attempt',
+            url: 'https://github.com/gnolang/gno/pull/1186',
+            createdAt: '2023-10-02T14:32:26Z',
+            labels: [],
+          },
+          {
+            title: 'feat: add txtar driver for gnoland integration test',
+            url: 'https://github.com/gnolang/gno/pull/1117',
+            createdAt: '2023-09-13T10:26:25Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "fix(mempkg): don't attempt to validate name of an empty package",
+            url: 'https://github.com/gnolang/gno/pull/1076',
+            createdAt: '2023-08-28T09:01:02Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(stdlib): add `net/url`',
+            url: 'https://github.com/gnolang/gno/pull/1066',
+            createdAt: '2023-08-23T14:37:11Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(stdlib): add `path` package',
+            url: 'https://github.com/gnolang/gno/pull/1065',
+            createdAt: '2023-08-23T14:20:35Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: fix outdated documentation in r/demo/boards',
+            url: 'https://github.com/gnolang/gno/pull/1019',
+            createdAt: '2023-08-02T15:14:50Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add GNOROOT environment variables',
+            url: 'https://github.com/gnolang/gno/pull/1014',
+            createdAt: '2023-08-01T17:58:07Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjEwMzAxNTAz',
@@ -33908,6 +47711,17 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'Groups realm package',
+            url: 'https://github.com/gnolang/gno/pull/388',
+            createdAt: '2022-11-10T11:07:01Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjEwNDk0Mzk3',
@@ -33921,6 +47735,22 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'fix: -broadcast true in doc',
+            url: 'https://github.com/gnolang/gno/pull/1288',
+            createdAt: '2023-10-24T08:00:45Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -34055,8 +47885,19 @@ const data = {
         ],
       },
       prs: {
-        count: 44,
+        count: 45,
         data: [
+          {
+            title: "feat(p/int256): Optimize `int256` with two's complement implementation",
+            url: 'https://github.com/gnolang/gno/pull/2846',
+            createdAt: '2024-09-25T07:18:44Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             title: 'fix(p/int256): "-0" Output When Calculating Basic Arithmetics',
             url: 'https://github.com/gnolang/gno/pull/2750',
@@ -34593,6 +48434,257 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 20,
+        data: [
+          {
+            title: 'fix(p/int256): "-0" Output When Calculating Basic Arithmetics',
+            url: 'https://github.com/gnolang/gno/pull/2750',
+            createdAt: '2024-09-02T05:14:31Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnovm): Fix panic when calling `len()`/`cap()` on pointer array',
+            url: 'https://github.com/gnolang/gno/pull/2709',
+            createdAt: '2024-08-19T03:35:27Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(p/uassert, p/diff): Support Diff in `p/uassert` Package',
+            url: 'https://github.com/gnolang/gno/pull/2490',
+            createdAt: '2024-07-03T07:41:19Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "chore(make): don't print bash comment",
+            url: 'https://github.com/gnolang/gno/pull/2080',
+            createdAt: '2024-05-13T02:42:50Z',
+            labels: [],
+          },
+          {
+            title: 'chore(gnovm, tm2): changed `reflect.PtrTo` to `reflect.PointerTo`',
+            url: 'https://github.com/gnolang/gno/pull/1894',
+            createdAt: '2024-04-05T09:17:22Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test(p/avl): increase test coverage',
+            url: 'https://github.com/gnolang/gno/pull/1881',
+            createdAt: '2024-04-03T06:58:29Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnoweb): Handle unicode characters in 404 page URL',
+            url: 'https://github.com/gnolang/gno/pull/1878',
+            createdAt: '2024-04-03T01:59:10Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(p/ufmt): Support `Println`',
+            url: 'https://github.com/gnolang/gno/pull/1819',
+            createdAt: '2024-03-25T05:09:23Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(stdlibs): Fuzz for String',
+            url: 'https://github.com/gnolang/gno/pull/1809',
+            createdAt: '2024-03-21T08:11:31Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(p/uint256): uint256',
+            url: 'https://github.com/gnolang/gno/pull/1778',
+            createdAt: '2024-03-15T08:38:51Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(p/math_eval, gnovm): Simplifying Previous Error Formatting with `Errorf`',
+            url: 'https://github.com/gnolang/gno/pull/1772',
+            createdAt: '2024-03-14T06:47:08Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(p/ufmt): add ufmt.Errorf',
+            url: 'https://github.com/gnolang/gno/pull/1767',
+            createdAt: '2024-03-13T14:04:17Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(stdlib): add `unicode/utf16` pacakge',
+            url: 'https://github.com/gnolang/gno/pull/1764',
+            createdAt: '2024-03-13T08:19:53Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(gnovm): add missing packages to `stdlibWhitelist`',
+            url: 'https://github.com/gnolang/gno/pull/1677',
+            createdAt: '2024-02-22T11:05:57Z',
+            labels: [],
+          },
+          {
+            title: 'feat(gnovm, tm2): implement event emission with `std.Emit`',
+            url: 'https://github.com/gnolang/gno/pull/1653',
+            createdAt: '2024-02-13T09:59:50Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: byte slice JSON parser',
+            url: 'https://github.com/gnolang/gno/pull/1415',
+            createdAt: '2023-12-06T10:52:32Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnolang): print nil slices as undefined',
+            url: 'https://github.com/gnolang/gno/pull/1380',
+            createdAt: '2023-11-17T07:40:57Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "feat(gnolang): add support for octals without 'o' (eg. `0755`)",
+            url: 'https://github.com/gnolang/gno/pull/1331',
+            createdAt: '2023-11-03T09:00:36Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: remove deprecated io/ioutil methods',
+            url: 'https://github.com/gnolang/gno/pull/1277',
+            createdAt: '2023-10-21T19:54:55Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add hash ',
+            url: 'https://github.com/gnolang/gno/pull/1273',
+            createdAt: '2023-10-21T13:11:49Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjEyMDIzNTg1',
@@ -34625,6 +48717,17 @@ const data = {
         ],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'chore(vm): fix a crash when requesting a missing file',
+            url: 'https://github.com/gnolang/gno/pull/172',
+            createdAt: '2022-05-07T05:44:08Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -34754,6 +48857,36 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 2,
+        data: [
+          {
+            title: 'docs: Gno.land to gno.land',
+            url: 'https://github.com/gnolang/gno/pull/2514',
+            createdAt: '2024-07-05T12:12:15Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: typo in portal-loop.md',
+            url: 'https://github.com/gnolang/gno/pull/1918',
+            createdAt: '2024-04-11T16:46:17Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjEzMDQ0ODA1',
@@ -34767,6 +48900,17 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'fix(grc20): handle errors in userToken.TransferFrom',
+            url: 'https://github.com/gnolang/gno/pull/534',
+            createdAt: '2023-02-22T01:37:17Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -34832,6 +48976,40 @@ const data = {
             title: 'feat: add Dockerfile in the contribs folder with gnodev and gnofaucet',
             url: 'https://github.com/gnolang/gno/pull/2009',
             createdAt: '2024-04-30T21:20:17Z',
+            labels: [],
+          },
+          {
+            title: 'fix: remove ambiguous import by downgrading btcutil v1.1.1 to v1.0.0',
+            url: 'https://github.com/gnolang/gno/pull/1064',
+            createdAt: '2023-08-23T13:18:48Z',
+            labels: [],
+          },
+          {
+            title: 'chore: use the Github version of the Boards realm',
+            url: 'https://github.com/gnolang/gno/pull/1049',
+            createdAt: '2023-08-11T14:48:30Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
+        count: 4,
+        data: [
+          {
+            title: 'fix(doc): add a missing rpcclient import',
+            url: 'https://github.com/gnolang/gno/pull/2020',
+            createdAt: '2024-05-02T14:24:44Z',
+            labels: [],
+          },
+          {
+            title: 'fix(docs): some NewHTTP functions were not renamed',
+            url: 'https://github.com/gnolang/gno/pull/2010',
+            createdAt: '2024-04-30T21:34:55Z',
             labels: [],
           },
           {
@@ -34926,6 +49104,53 @@ const data = {
             title: 'Add Mint to GRC721',
             url: 'https://github.com/gnolang/gno/pull/100',
             createdAt: '2022-03-29T22:36:31Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
+        count: 7,
+        data: [
+          {
+            title: 'Show query eval error',
+            url: 'https://github.com/gnolang/gno/pull/430',
+            createdAt: '2022-12-13T17:48:41Z',
+            labels: [],
+          },
+          {
+            title: 'Add homeDir flag',
+            url: 'https://github.com/gnolang/gno/pull/413',
+            createdAt: '2022-12-03T01:19:47Z',
+            labels: [],
+          },
+          {
+            title: 'Fix spend grc20 allowance',
+            url: 'https://github.com/gnolang/gno/pull/411',
+            createdAt: '2022-12-02T01:47:29Z',
+            labels: [],
+          },
+          {
+            title: 'Match Encode/DecodeBech32 address type',
+            url: 'https://github.com/gnolang/gno/pull/406',
+            createdAt: '2022-12-01T01:50:34Z',
+            labels: [],
+          },
+          {
+            title: 'Add Tx simulate option',
+            url: 'https://github.com/gnolang/gno/pull/367',
+            createdAt: '2022-10-22T21:22:15Z',
+            labels: [],
+          },
+          {
+            title: 'chore: improve Windows OS support',
+            url: 'https://github.com/gnolang/gno/pull/345',
+            createdAt: '2022-09-28T19:21:54Z',
+            labels: [],
+          },
+          {
+            title: 'boards: check post owner',
+            url: 'https://github.com/gnolang/gno/pull/137',
+            createdAt: '2022-04-23T20:27:55Z',
             labels: [],
           },
         ],
@@ -35159,6 +49384,112 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 7,
+        data: [
+          {
+            title: 'fix: set Loc Line on Decl',
+            url: 'https://github.com/gnolang/gno/pull/2221',
+            createdAt: '2024-05-27T22:37:16Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: missing length check in value declaration',
+            url: 'https://github.com/gnolang/gno/pull/2206',
+            createdAt: '2024-05-26T21:42:08Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnovm): add stacktraces and log them in panic messages',
+            url: 'https://github.com/gnolang/gno/pull/2145',
+            createdAt: '2024-05-18T15:25:20Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnolang): fix panic when using struct as index of map',
+            url: 'https://github.com/gnolang/gno/pull/2044',
+            createdAt: '2024-05-06T17:37:50Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(#2035): Prevent infinite loops caused by cyclic references on typedValue',
+            url: 'https://github.com/gnolang/gno/pull/2036',
+            createdAt: '2024-05-04T20:57:04Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(#1966): go2Gno loses type info',
+            url: 'https://github.com/gnolang/gno/pull/2016',
+            createdAt: '2024-05-01T21:50:47Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: support crypto/ed25519.Verify',
+            url: 'https://github.com/gnolang/gno/pull/1863',
+            createdAt: '2024-03-30T13:57:31Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjE1NjU0OTgw',
@@ -35191,6 +49522,17 @@ const data = {
               },
             ],
           },
+          {
+            title: 'docs(readme): fix bad link for `gno` for writing smart-contracts',
+            url: 'https://github.com/gnolang/gno/pull/813',
+            createdAt: '2023-05-09T11:09:53Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
+        count: 1,
+        data: [
           {
             title: 'docs(readme): fix bad link for `gno` for writing smart-contracts',
             url: 'https://github.com/gnolang/gno/pull/813',
@@ -37402,6 +51744,1105 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 85,
+        data: [
+          {
+            title: 'chore: update `gnolang/faucet` version to `v0.3.2`',
+            url: 'https://github.com/gnolang/gno/pull/2701',
+            createdAt: '2024-08-14T15:38:44Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: fixate `golangci-lint` CI version to `1.59`',
+            url: 'https://github.com/gnolang/gno/pull/2693',
+            createdAt: '2024-08-14T08:21:42Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add the `gnostats` server',
+            url: 'https://github.com/gnolang/gno/pull/2691',
+            createdAt: '2024-08-13T21:59:03Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: bump `gnolang/faucet` version to `v0.3.1`',
+            url: 'https://github.com/gnolang/gno/pull/2664',
+            createdAt: '2024-08-06T21:18:24Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: add test4 `persistent_peers`',
+            url: 'https://github.com/gnolang/gno/pull/2569',
+            createdAt: '2024-07-10T15:17:31Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: rollback docker go versions for portal loop',
+            url: 'https://github.com/gnolang/gno/pull/2545',
+            createdAt: '2024-07-08T08:56:37Z',
+            labels: [],
+          },
+          {
+            title: 'fix: regenerate output for `zrealm_tests0_stdlibs`',
+            url: 'https://github.com/gnolang/gno/pull/2527',
+            createdAt: '2024-07-06T16:49:37Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: Revert "feat: add p/nestedpkg (#2342)"',
+            url: 'https://github.com/gnolang/gno/pull/2525',
+            createdAt: '2024-07-06T16:09:26Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: update golden test `zrealm_tests0_stdlibs.gno`',
+            url: 'https://github.com/gnolang/gno/pull/2524',
+            createdAt: '2024-07-06T15:43:01Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: update `tx-archive` usage in portal loop',
+            url: 'https://github.com/gnolang/gno/pull/2521',
+            createdAt: '2024-07-06T14:32:08Z',
+            labels: [],
+          },
+          {
+            title: 'feat: improve `r/gnoland/valopers` implementation',
+            url: 'https://github.com/gnolang/gno/pull/2509',
+            createdAt: '2024-07-04T19:08:21Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: test4 `genesis.json` and suggested `config.toml`',
+            url: 'https://github.com/gnolang/gno/pull/2508',
+            createdAt: '2024-07-04T17:06:24Z',
+            labels: [
+              {
+                name: "don't merge",
+                color: 'b60205',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: `urequire` module path',
+            url: 'https://github.com/gnolang/gno/pull/2480',
+            createdAt: '2024-07-02T13:37:26Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add unit tests to `p/gov/proposal`',
+            url: 'https://github.com/gnolang/gno/pull/2475',
+            createdAt: '2024-07-01T15:44:19Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: update validator docs styling, links',
+            url: 'https://github.com/gnolang/gno/pull/2439',
+            createdAt: '2024-06-25T16:59:45Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: migrate the `libtm` repo to `tm2/pkg/libtm`',
+            url: 'https://github.com/gnolang/gno/pull/2424',
+            createdAt: '2024-06-24T09:02:23Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: overhaul `gnoland secrets` and `gnoland config` to output JSON',
+            url: 'https://github.com/gnolang/gno/pull/2393',
+            createdAt: '2024-06-19T14:40:05Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add support for displaying the P2P Address for node secrets info',
+            url: 'https://github.com/gnolang/gno/pull/2361',
+            createdAt: '2024-06-15T10:01:52Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: Add default ports for `net.Dial` if missing in RPC URL',
+            url: 'https://github.com/gnolang/gno/pull/2360',
+            createdAt: '2024-06-15T08:47:34Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add the ability to add packages to genesis transactions',
+            url: 'https://github.com/gnolang/gno/pull/2327',
+            createdAt: '2024-06-11T14:03:06Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: add `nightly` flag for `master` releases',
+            url: 'https://github.com/gnolang/gno/pull/2237',
+            createdAt: '2024-05-28T17:39:55Z',
+            labels: [],
+          },
+          {
+            title: 'feat: add Goreleaser `master` workflow',
+            url: 'https://github.com/gnolang/gno/pull/2235',
+            createdAt: '2024-05-28T16:59:18Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add valset injection through `r/sys/validators`',
+            url: 'https://github.com/gnolang/gno/pull/2229',
+            createdAt: '2024-05-28T11:06:26Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: fix up telemetry docker example',
+            url: 'https://github.com/gnolang/gno/pull/2200',
+            createdAt: '2024-05-26T09:48:15Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add `/r/sys/validators`',
+            url: 'https://github.com/gnolang/gno/pull/2130',
+            createdAt: '2024-05-16T17:41:19Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add more telemetry',
+            url: 'https://github.com/gnolang/gno/pull/2059',
+            createdAt: '2024-05-08T18:18:29Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: update `gnofaucet` dependencies',
+            url: 'https://github.com/gnolang/gno/pull/1996',
+            createdAt: '2024-04-29T13:38:24Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: overhaul lazy init in `gnoland start`',
+            url: 'https://github.com/gnolang/gno/pull/1985',
+            createdAt: '2024-04-25T17:29:43Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: bump max faucet drip amount',
+            url: 'https://github.com/gnolang/gno/pull/1977',
+            createdAt: '2024-04-24T10:14:42Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: `gnokey sign` should sign transactions',
+            url: 'https://github.com/gnolang/gno/pull/1976',
+            createdAt: '2024-04-24T09:47:20Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: remove gnofaucet leftover from gno.land Make',
+            url: 'https://github.com/gnolang/gno/pull/1957',
+            createdAt: '2024-04-19T10:24:51Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: move `gnofaucet` to `contribs`',
+            url: 'https://github.com/gnolang/gno/pull/1955',
+            createdAt: '2024-04-18T16:50:44Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'refactor!: move `genesis` to `gnoland genesis`',
+            url: 'https://github.com/gnolang/gno/pull/1954',
+            createdAt: '2024-04-18T16:20:44Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: standardize node directory structure',
+            url: 'https://github.com/gnolang/gno/pull/1944',
+            createdAt: '2024-04-17T18:40:37Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: remove empty timestamp from the tx signature payload',
+            url: 'https://github.com/gnolang/gno/pull/1939',
+            createdAt: '2024-04-16T14:32:47Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: slightly improve node log lines',
+            url: 'https://github.com/gnolang/gno/pull/1916',
+            createdAt: '2024-04-11T14:05:25Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: use original `goleveldb` package',
+            url: 'https://github.com/gnolang/gno/pull/1870',
+            createdAt: '2024-04-01T10:38:10Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: swap legacy faucet implementation',
+            url: 'https://github.com/gnolang/gno/pull/1614',
+            createdAt: '2024-02-01T12:51:09Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: remove legacy `gnotxsync`',
+            url: 'https://github.com/gnolang/gno/pull/1613',
+            createdAt: '2024-02-01T11:51:30Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add `gnoland config` command suite',
+            url: 'https://github.com/gnolang/gno/pull/1605',
+            createdAt: '2024-01-30T18:08:59Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add `gnoland secrets` command suite',
+            url: 'https://github.com/gnolang/gno/pull/1593',
+            createdAt: '2024-01-26T16:41:10Z',
+            labels: [
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: fix noop logger reference',
+            url: 'https://github.com/gnolang/gno/pull/1586',
+            createdAt: '2024-01-25T18:11:26Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add Dependabot groups',
+            url: 'https://github.com/gnolang/gno/pull/1553',
+            createdAt: '2024-01-18T15:30:43Z',
+            labels: [
+              {
+                name: 'dependencies',
+                color: '5319e7',
+              },
+            ],
+          },
+          {
+            title: 'fix: attempt to fix dependabot mod tidy',
+            url: 'https://github.com/gnolang/gno/pull/1551',
+            createdAt: '2024-01-18T14:17:51Z',
+            labels: [],
+          },
+          {
+            title: 'feat(tm2): store tx results and add endpoint to query them',
+            url: 'https://github.com/gnolang/gno/pull/1546',
+            createdAt: '2024-01-17T15:20:10Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: load config defaults if not specified in existing config',
+            url: 'https://github.com/gnolang/gno/pull/1544',
+            createdAt: '2024-01-17T13:18:28Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: add support for a ws client & batch processing over ws',
+            url: 'https://github.com/gnolang/gno/pull/1498',
+            createdAt: '2024-01-05T22:34:00Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'ci: add Dependabot recursive go mod tidy support',
+            url: 'https://github.com/gnolang/gno/pull/1412',
+            createdAt: '2023-12-05T10:25:22Z',
+            labels: [
+              {
+                name: ':star2:  improvement',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: tidy `gnokeykc` go mod',
+            url: 'https://github.com/gnolang/gno/pull/1355',
+            createdAt: '2023-11-10T13:54:51Z',
+            labels: [
+              {
+                name: ':star2:  improvement',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: resolve Docusaurus build',
+            url: 'https://github.com/gnolang/gno/pull/1351',
+            createdAt: '2023-11-09T22:34:57Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: make tests run in parallel',
+            url: 'https://github.com/gnolang/gno/pull/1312',
+            createdAt: '2023-10-27T15:32:26Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: standardize logging',
+            url: 'https://github.com/gnolang/gno/pull/1302',
+            createdAt: '2023-10-26T13:59:27Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add `unused` linter',
+            url: 'https://github.com/gnolang/gno/pull/1294',
+            createdAt: '2023-10-25T21:34:01Z',
+            labels: [
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add `genesis txs` subcommand',
+            url: 'https://github.com/gnolang/gno/pull/1278',
+            createdAt: '2023-10-21T22:53:10Z',
+            labels: [
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add `genesis balances` subcommand',
+            url: 'https://github.com/gnolang/gno/pull/1276',
+            createdAt: '2023-10-21T17:05:34Z',
+            labels: [
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add `genesis validator` subcommand',
+            url: 'https://github.com/gnolang/gno/pull/1259',
+            createdAt: '2023-10-19T19:56:55Z',
+            labels: [
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add `genesis verify`',
+            url: 'https://github.com/gnolang/gno/pull/1254',
+            createdAt: '2023-10-19T02:44:51Z',
+            labels: [
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add genesis command suite',
+            url: 'https://github.com/gnolang/gno/pull/1252',
+            createdAt: '2023-10-18T22:57:06Z',
+            labels: [
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: add support for custom node config file',
+            url: 'https://github.com/gnolang/gno/pull/1240',
+            createdAt: '2023-10-12T10:20:17Z',
+            labels: [
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add local dev setup script',
+            url: 'https://github.com/gnolang/gno/pull/1237',
+            createdAt: '2023-10-11T15:22:06Z',
+            labels: [],
+          },
+          {
+            title: 'feat: clean up `gnokey add` + add coverage',
+            url: 'https://github.com/gnolang/gno/pull/1212',
+            createdAt: '2023-10-09T12:50:47Z',
+            labels: [
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: change default rpc config + upgrade CORS library',
+            url: 'https://github.com/gnolang/gno/pull/1118',
+            createdAt: '2023-09-13T10:29:24Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: official documentation',
+            url: 'https://github.com/gnolang/gno/pull/1046',
+            createdAt: '2023-08-10T18:01:27Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: add `gofumpt` linter to `golangci-lint`',
+            url: 'https://github.com/gnolang/gno/pull/826',
+            createdAt: '2023-05-16T12:19:47Z',
+            labels: [],
+          },
+          {
+            title: 'fix: add missing `consensus_params` RPC call to HTTP clients',
+            url: 'https://github.com/gnolang/gno/pull/678',
+            createdAt: '2023-03-30T13:22:47Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'hotfix: apply `gnokey` subcommand flagset',
+            url: 'https://github.com/gnolang/gno/pull/608',
+            createdAt: '2023-03-16T11:06:43Z',
+            labels: [],
+          },
+          {
+            title: 'hotfix: set correct `deposit` flag in flagset for addpkg',
+            url: 'https://github.com/gnolang/gno/pull/578',
+            createdAt: '2023-03-09T11:10:38Z',
+            labels: [],
+          },
+          {
+            title: 'hotfix: apply CLI flags to entire subtree',
+            url: 'https://github.com/gnolang/gno/pull/563',
+            createdAt: '2023-03-06T12:13:45Z',
+            labels: [],
+          },
+          {
+            title: 'chore: fix workflow typo in `go-version` matrix',
+            url: 'https://github.com/gnolang/gno/pull/547',
+            createdAt: '2023-02-28T12:43:01Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add file-based transaction indexing',
+            url: 'https://github.com/gnolang/gno/pull/546',
+            createdAt: '2023-02-28T12:20:31Z',
+            labels: [
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add unsafe (unencrypted) private key import / export functionality',
+            url: 'https://github.com/gnolang/gno/pull/537',
+            createdAt: '2023-02-23T14:34:12Z',
+            labels: [
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: bump linter version to `v1.51`',
+            url: 'https://github.com/gnolang/gno/pull/536',
+            createdAt: '2023-02-23T12:45:32Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: utilize ffcli (CLI refactor)',
+            url: 'https://github.com/gnolang/gno/pull/497',
+            createdAt: '2023-01-31T12:58:25Z',
+            labels: [
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: remove unused `gnoview` module',
+            url: 'https://github.com/gnolang/gno/pull/476',
+            createdAt: '2023-01-23T17:27:53Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add linter support',
+            url: 'https://github.com/gnolang/gno/pull/472',
+            createdAt: '2023-01-20T12:03:40Z',
+            labels: [
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: add issue templates',
+            url: 'https://github.com/gnolang/gno/pull/471',
+            createdAt: '2023-01-20T11:28:39Z',
+            labels: [
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: remove the `data` folder',
+            url: 'https://github.com/gnolang/gno/pull/470',
+            createdAt: '2023-01-20T11:04:07Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: update the CONTRIBUTING.md file',
+            url: 'https://github.com/gnolang/gno/pull/469',
+            createdAt: '2023-01-20T10:15:12Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'Use relative link paths for the GNO website',
+            url: 'https://github.com/gnolang/gno/pull/459',
+            createdAt: '2023-01-16T14:52:48Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: remove outdated crypto backup files',
+            url: 'https://github.com/gnolang/gno/pull/443',
+            createdAt: '2022-12-23T11:29:52Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add support for importing private key armor',
+            url: 'https://github.com/gnolang/gno/pull/442',
+            createdAt: '2022-12-23T11:15:39Z',
+            labels: [
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add labels config for the repostitory',
+            url: 'https://github.com/gnolang/gno/pull/433',
+            createdAt: '2022-12-16T08:12:13Z',
+            labels: [],
+          },
+          {
+            title: 'feat: add support for private key exports',
+            url: 'https://github.com/gnolang/gno/pull/432',
+            createdAt: '2022-12-15T11:38:56Z',
+            labels: [],
+          },
+          {
+            title: 'chore: add Dependabot support for top level go modules',
+            url: 'https://github.com/gnolang/gno/pull/419',
+            createdAt: '2022-12-13T12:08:54Z',
+            labels: [],
+          },
+          {
+            title: 'chore: add base PR template',
+            url: 'https://github.com/gnolang/gno/pull/418',
+            createdAt: '2022-12-13T10:53:03Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjE3MDM4NzYw',
@@ -37425,6 +52866,17 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'ci: cancel previous CI runs on Pull Requests',
+            url: 'https://github.com/gnolang/gno/pull/961',
+            createdAt: '2023-07-10T02:13:57Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjE3NTk5ODY3',
@@ -37438,6 +52890,17 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'Trim whitespace from address',
+            url: 'https://github.com/gnolang/gno/pull/187',
+            createdAt: '2022-05-11T01:58:12Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -37644,6 +53107,76 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 6,
+        data: [
+          {
+            title: 'feat: add network configuration table',
+            url: 'https://github.com/gnolang/gno/pull/1707',
+            createdAt: '2024-02-29T07:04:54Z',
+            labels: [],
+          },
+          {
+            title: 'feat(pkg/std): ensure files are sorted in a `MemPackage`',
+            url: 'https://github.com/gnolang/gno/pull/1618',
+            createdAt: '2024-02-02T01:17:55Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: replace `fmt` with `ufmt` in realm examples (docs)',
+            url: 'https://github.com/gnolang/gno/pull/1559',
+            createdAt: '2024-01-18T18:06:58Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add links to subdir licenses',
+            url: 'https://github.com/gnolang/gno/pull/1218',
+            createdAt: '2023-10-10T20:31:52Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: update faucet link r/demo/boards',
+            url: 'https://github.com/gnolang/gno/pull/936',
+            createdAt: '2023-06-29T18:34:31Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(examples): update cmd/gno path in README',
+            url: 'https://github.com/gnolang/gno/pull/912',
+            createdAt: '2023-06-16T18:44:52Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjE4MzU3ODI3',
@@ -37657,6 +53190,22 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'docs: updated missing gnofaucet README',
+            url: 'https://github.com/gnolang/gno/pull/2783',
+            createdAt: '2024-09-11T17:56:47Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -38143,6 +53692,122 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 9,
+        data: [
+          {
+            title: 'fix: pointer eq',
+            url: 'https://github.com/gnolang/gno/pull/2627',
+            createdAt: '2024-07-24T20:27:03Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'perf: for loop and if',
+            url: 'https://github.com/gnolang/gno/pull/2140',
+            createdAt: '2024-05-17T12:48:03Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: value decl loop',
+            url: 'https://github.com/gnolang/gno/pull/2074',
+            createdAt: '2024-05-11T11:11:26Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: untyped to interface check',
+            url: 'https://github.com/gnolang/gno/pull/2042',
+            createdAt: '2024-05-06T12:30:23Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: add heads machine string',
+            url: 'https://github.com/gnolang/gno/pull/2037',
+            createdAt: '2024-05-05T12:45:46Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'perf: machine string',
+            url: 'https://github.com/gnolang/gno/pull/1994',
+            createdAt: '2024-04-29T11:44:14Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: labels error handling',
+            url: 'https://github.com/gnolang/gno/pull/1877',
+            createdAt: '2024-04-02T18:53:35Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: top sort var/const globals',
+            url: 'https://github.com/gnolang/gno/pull/1854',
+            createdAt: '2024-03-28T10:36:42Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: implement shadowing rules',
+            url: 'https://github.com/gnolang/gno/pull/1793',
+            createdAt: '2024-03-19T11:25:37Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjE5NDM1Mjcx',
@@ -38171,6 +53836,22 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'fix: custom boolean types in conditional statements',
+            url: 'https://github.com/gnolang/gno/pull/2147',
+            createdAt: '2024-05-20T04:11:57Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjIwMTM1NDc4',
@@ -38184,6 +53865,17 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'test: use `T.TempDir` to create temporary test directory',
+            url: 'https://github.com/gnolang/gno/pull/298',
+            createdAt: '2022-07-17T16:29:45Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -38226,6 +53918,26 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'fix: comment typos',
+            url: 'https://github.com/gnolang/gno/pull/1287',
+            createdAt: '2023-10-24T06:39:35Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjIxMTM5NDE2',
@@ -38247,6 +53959,17 @@ const data = {
             createdAt: '2022-05-07T12:49:48Z',
             labels: [],
           },
+          {
+            title: 'fix(cmd): small sets of fixes in cmd package',
+            url: 'https://github.com/gnolang/gno/pull/170',
+            createdAt: '2022-05-06T07:30:44Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
+        count: 1,
+        data: [
           {
             title: 'fix(cmd): small sets of fixes in cmd package',
             url: 'https://github.com/gnolang/gno/pull/170',
@@ -38397,6 +54120,33 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 2,
+        data: [
+          {
+            title: 'fix(gnovm): annotate specific reason a value does not implement an interface ',
+            url: 'https://github.com/gnolang/gno/pull/2492',
+            createdAt: '2024-07-03T11:56:33Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: printing all the errors from goparser',
+            url: 'https://github.com/gnolang/gno/pull/2011',
+            createdAt: '2024-05-01T08:55:37Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjIyMzYxNTAz',
@@ -38410,6 +54160,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -38429,6 +54183,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjIzNzAzNzQx',
@@ -38442,6 +54200,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -38503,6 +54265,41 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 2,
+        data: [
+          {
+            title: 'refactor: check key name validation for key import and export',
+            url: 'https://github.com/gnolang/gno/pull/1492',
+            createdAt: '2024-01-02T11:18:20Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: remove the annoying tail message shows on every command with -h or --help',
+            url: 'https://github.com/gnolang/gno/pull/1490',
+            createdAt: '2024-01-02T09:21:54Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjI1NDk3MDgz',
@@ -38531,6 +54328,10 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjI1NTE5Mzg5',
@@ -38544,6 +54345,17 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'There is a problem that gnoland cannot be run after a completely new clone',
+            url: 'https://github.com/gnolang/gno/pull/185',
+            createdAt: '2022-05-10T10:30:43Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -38598,6 +54410,36 @@ const data = {
             title: 'Fix typos',
             url: 'https://github.com/gnolang/gno/pull/598',
             createdAt: '2023-03-13T09:14:50Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
+        count: 2,
+        data: [
+          {
+            title: 'docs: fix typos',
+            url: 'https://github.com/gnolang/gno/pull/1428',
+            createdAt: '2023-12-09T04:45:29Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: fix typos',
+            url: 'https://github.com/gnolang/gno/pull/606',
+            createdAt: '2023-03-16T05:23:28Z',
             labels: [],
           },
         ],
@@ -40516,6 +56358,799 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 79,
+        data: [
+          {
+            title: 'fix(grc20): remove unused interface, fix typo',
+            url: 'https://github.com/gnolang/gno/pull/2793',
+            createdAt: '2024-09-13T09:37:03Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs(gnokey): add more info on `vm/qfile`',
+            url: 'https://github.com/gnolang/gno/pull/2770',
+            createdAt: '2024-09-09T11:38:27Z',
+            labels: [],
+          },
+          {
+            title: 'feat(examples): add `r/leon`',
+            url: 'https://github.com/gnolang/gno/pull/2740',
+            createdAt: '2024-08-28T16:43:53Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(gnokey): update long help',
+            url: 'https://github.com/gnolang/gno/pull/2712',
+            createdAt: '2024-08-20T08:23:33Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(examples): update home page, add add test for r/events',
+            url: 'https://github.com/gnolang/gno/pull/2697',
+            createdAt: '2024-08-14T12:31:47Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(docs): wrong `GetOrigCaller` usage reference',
+            url: 'https://github.com/gnolang/gno/pull/2659',
+            createdAt: '2024-08-05T14:05:35Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add test4 config & update testnets section',
+            url: 'https://github.com/gnolang/gno/pull/2576',
+            createdAt: '2024-07-12T01:12:23Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(docs): broken links',
+            url: 'https://github.com/gnolang/gno/pull/2431',
+            createdAt: '2024-06-25T10:58:38Z',
+            labels: [],
+          },
+          {
+            title: 'feat(docs-linter): add lint for local links',
+            url: 'https://github.com/gnolang/gno/pull/2416',
+            createdAt: '2024-06-21T18:42:43Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: docs linter improvements',
+            url: 'https://github.com/gnolang/gno/pull/2404',
+            createdAt: '2024-06-20T13:33:58Z',
+            labels: [],
+          },
+          {
+            title: 'docs: add 404 link checker / linter',
+            url: 'https://github.com/gnolang/gno/pull/2394',
+            createdAt: '2024-06-19T16:02:25Z',
+            labels: [],
+          },
+          {
+            title: 'feat(examples): implement `r/events`, `p/authorizable`',
+            url: 'https://github.com/gnolang/gno/pull/2372',
+            createdAt: '2024-06-17T20:43:44Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add `TestSetRealm` reference docs',
+            url: 'https://github.com/gnolang/gno/pull/2369',
+            createdAt: '2024-06-17T13:57:19Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(pages/events): update events',
+            url: 'https://github.com/gnolang/gno/pull/2347',
+            createdAt: '2024-06-12T21:57:10Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(makefile): `gnodev` with `make install`',
+            url: 'https://github.com/gnolang/gno/pull/2346',
+            createdAt: '2024-06-12T21:40:54Z',
+            labels: [],
+          },
+          {
+            title: 'fix(gnovm): incorrect `Emit` signature in stdshim',
+            url: 'https://github.com/gnolang/gno/pull/2292',
+            createdAt: '2024-06-05T16:07:04Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: Index missing pages & remove outdated ones',
+            url: 'https://github.com/gnolang/gno/pull/2291',
+            createdAt: '2024-06-05T15:14:14Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs(GRC721): remove outdated guide',
+            url: 'https://github.com/gnolang/gno/pull/2289',
+            createdAt: '2024-06-05T14:48:54Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(blog): add edit check',
+            url: 'https://github.com/gnolang/gno/pull/2271',
+            createdAt: '2024-06-04T09:01:58Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(examples): add event emit to Userbook realm',
+            url: 'https://github.com/gnolang/gno/pull/2228',
+            createdAt: '2024-05-28T10:42:47Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add `Using gnokey` tutorial',
+            url: 'https://github.com/gnolang/gno/pull/2226',
+            createdAt: '2024-05-28T09:40:19Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add infra section intro',
+            url: 'https://github.com/gnolang/gno/pull/2212',
+            createdAt: '2024-05-27T11:49:26Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(docs): warn banner',
+            url: 'https://github.com/gnolang/gno/pull/2210',
+            createdAt: '2024-05-27T07:48:38Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(docs): remove leftover wording',
+            url: 'https://github.com/gnolang/gno/pull/2203',
+            createdAt: '2024-05-26T17:17:18Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: add Golang Serbia meetup to events page',
+            url: 'https://github.com/gnolang/gno/pull/2163',
+            createdAt: '2024-05-22T08:57:17Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(blog): remove function',
+            url: 'https://github.com/gnolang/gno/pull/2154',
+            createdAt: '2024-05-20T19:22:38Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(blog): add remove functionality ',
+            url: 'https://github.com/gnolang/gno/pull/2153',
+            createdAt: '2024-05-20T17:34:45Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add disclaimer that `maketx call` is a state-changing call',
+            url: 'https://github.com/gnolang/gno/pull/2134',
+            createdAt: '2024-05-17T09:08:34Z',
+            labels: [],
+          },
+          {
+            title: 'feat(docs/home): Add Faucet Hub & `gno.land/faucet` mentions',
+            url: 'https://github.com/gnolang/gno/pull/2124',
+            createdAt: '2024-05-16T07:40:45Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnovm): add `Coin` constructor and more functionality',
+            url: 'https://github.com/gnolang/gno/pull/2104',
+            createdAt: '2024-05-14T15:49:35Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(docs): emit/event docs ',
+            url: 'https://github.com/gnolang/gno/pull/2047',
+            createdAt: '2024-05-06T19:34:37Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: add Gno license page',
+            url: 'https://github.com/gnolang/gno/pull/2005',
+            createdAt: '2024-04-30T14:24:28Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs(Portal Loop): add more info to Portal Loop concepts page',
+            url: 'https://github.com/gnolang/gno/pull/1969',
+            createdAt: '2024-04-22T11:34:49Z',
+            labels: [],
+          },
+          {
+            title: 'feat(examples): add simple userbook realm',
+            url: 'https://github.com/gnolang/gno/pull/1949',
+            createdAt: '2024-04-18T09:17:36Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs(getting-started): local setup with gnodev ',
+            url: 'https://github.com/gnolang/gno/pull/1936',
+            createdAt: '2024-04-16T05:44:48Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: `gnodev` in root `make install`',
+            url: 'https://github.com/gnolang/gno/pull/1934',
+            createdAt: '2024-04-16T04:25:59Z',
+            labels: [],
+          },
+          {
+            title: 'fix(docs): broken links',
+            url: 'https://github.com/gnolang/gno/pull/1911',
+            createdAt: '2024-04-10T11:32:46Z',
+            labels: [],
+          },
+          {
+            title: 'feat(gnoclient): support fetching blocks, block results, latest block number ',
+            url: 'https://github.com/gnolang/gno/pull/1910',
+            createdAt: '2024-04-10T06:23:07Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add missing index pages',
+            url: 'https://github.com/gnolang/gno/pull/1893',
+            createdAt: '2024-04-05T07:09:24Z',
+            labels: [],
+          },
+          {
+            title: 'feat(gnoclient): add support for `MsgAddPackage`',
+            url: 'https://github.com/gnolang/gno/pull/1892',
+            createdAt: '2024-04-05T03:54:15Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add testnets concepts & reference pages',
+            url: 'https://github.com/gnolang/gno/pull/1867',
+            createdAt: '2024-04-01T02:38:08Z',
+            labels: [],
+          },
+          {
+            title: 'fix(docs): wrongly named maketx options',
+            url: 'https://github.com/gnolang/gno/pull/1855',
+            createdAt: '2024-03-28T14:46:48Z',
+            labels: [],
+          },
+          {
+            title: 'chore(effective-gno): replace "native tokens" with "coins"',
+            url: 'https://github.com/gnolang/gno/pull/1853',
+            createdAt: '2024-03-28T07:38:12Z',
+            labels: [],
+          },
+          {
+            title: 'chore(memeland): add sorting condition',
+            url: 'https://github.com/gnolang/gno/pull/1817',
+            createdAt: '2024-03-24T12:46:34Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(memeland): sort by newest instead of by oldest',
+            url: 'https://github.com/gnolang/gno/pull/1800',
+            createdAt: '2024-03-20T12:35:41Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(docs): update blog link',
+            url: 'https://github.com/gnolang/gno/pull/1774',
+            createdAt: '2024-03-14T15:21:08Z',
+            labels: [],
+          },
+          {
+            title: 'docs: add Playground section to "Getting Started"',
+            url: 'https://github.com/gnolang/gno/pull/1773',
+            createdAt: '2024-03-14T13:47:50Z',
+            labels: [],
+          },
+          {
+            title: 'docs: update How-to section with Playground',
+            url: 'https://github.com/gnolang/gno/pull/1766',
+            createdAt: '2024-03-13T13:17:17Z',
+            labels: [],
+          },
+          {
+            title: 'chore(gnoweb/docs): better website connectivity',
+            url: 'https://github.com/gnolang/gno/pull/1763',
+            createdAt: '2024-03-12T20:26:24Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(gnoweb): update link to the docs',
+            url: 'https://github.com/gnolang/gno/pull/1753',
+            createdAt: '2024-03-11T14:54:08Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(examples): add memeland',
+            url: 'https://github.com/gnolang/gno/pull/1751',
+            createdAt: '2024-03-11T01:44:38Z',
+            labels: [
+              {
+                name: "don't merge",
+                color: 'b60205',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gno.land): update nebular text',
+            url: 'https://github.com/gnolang/gno/pull/1744',
+            createdAt: '2024-03-07T09:09:14Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(gnoweb): link header "start" button to docs: Getting Started',
+            url: 'https://github.com/gnolang/gno/pull/1743',
+            createdAt: '2024-03-06T18:28:42Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add index pages',
+            url: 'https://github.com/gnolang/gno/pull/1742',
+            createdAt: '2024-03-06T17:57:47Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(gno.land): add playground section, add GopherconUS to events page',
+            url: 'https://github.com/gnolang/gno/pull/1741',
+            createdAt: '2024-03-06T13:41:46Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(blog): make blog widget better',
+            url: 'https://github.com/gnolang/gno/pull/1740',
+            createdAt: '2024-03-06T13:05:33Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(gno.land): update content on pages',
+            url: 'https://github.com/gnolang/gno/pull/1735',
+            createdAt: '2024-03-05T11:35:59Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(stdlibs): add `math/overflow`',
+            url: 'https://github.com/gnolang/gno/pull/1698',
+            createdAt: '2024-02-27T21:48:39Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: Move Effective Gno, reorg Concepts ordering',
+            url: 'https://github.com/gnolang/gno/pull/1652',
+            createdAt: '2024-02-12T10:11:23Z',
+            labels: [],
+          },
+          {
+            title: 'chore(gnoclient): modify `Run` to use `baseTxCfg` & multiple `MsgRun` args',
+            url: 'https://github.com/gnolang/gno/pull/1637',
+            createdAt: '2024-02-07T21:40:33Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(docs): banker typo',
+            url: 'https://github.com/gnolang/gno/pull/1634',
+            createdAt: '2024-02-06T17:16:03Z',
+            labels: [],
+          },
+          {
+            title: 'fix: add missing args field to `gnoclient` Call',
+            url: 'https://github.com/gnolang/gno/pull/1616',
+            createdAt: '2024-02-01T18:24:45Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: gnodev reference',
+            url: 'https://github.com/gnolang/gno/pull/1599',
+            createdAt: '2024-01-29T15:56:18Z',
+            labels: [],
+          },
+          {
+            title: 'docs: add Portal Loop concept page',
+            url: 'https://github.com/gnolang/gno/pull/1582',
+            createdAt: '2024-01-24T23:44:06Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(docs): Update `GetOrigPkgAddr` reference',
+            url: 'https://github.com/gnolang/gno/pull/1578',
+            createdAt: '2024-01-24T14:31:00Z',
+            labels: [],
+          },
+          {
+            title: 'feat(gnoclient): add MultiCall',
+            url: 'https://github.com/gnolang/gno/pull/1565',
+            createdAt: '2024-01-20T17:58:08Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add gnoclient reference & how-to guide',
+            url: 'https://github.com/gnolang/gno/pull/1562',
+            createdAt: '2024-01-19T13:43:34Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(blog): add sorting, better rendering',
+            url: 'https://github.com/gnolang/gno/pull/1541',
+            createdAt: '2024-01-16T18:53:40Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs(fix): remove leftover paragraph',
+            url: 'https://github.com/gnolang/gno/pull/1529',
+            createdAt: '2024-01-12T16:20:50Z',
+            labels: [],
+          },
+          {
+            title: 'feat: add docs link to main README',
+            url: 'https://github.com/gnolang/gno/pull/1520',
+            createdAt: '2024-01-10T22:20:14Z',
+            labels: [],
+          },
+          {
+            title: 'docs: add analytics',
+            url: 'https://github.com/gnolang/gno/pull/1517',
+            createdAt: '2024-01-10T18:07:08Z',
+            labels: [],
+          },
+          {
+            title: 'docs: update docs overview',
+            url: 'https://github.com/gnolang/gno/pull/1480',
+            createdAt: '2023-12-21T13:07:02Z',
+            labels: [],
+          },
+          {
+            title: 'docs: standard library, banker, coins, address',
+            url: 'https://github.com/gnolang/gno/pull/1468',
+            createdAt: '2023-12-19T17:06:23Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: reorg & rename top level docs',
+            url: 'https://github.com/gnolang/gno/pull/1455',
+            createdAt: '2023-12-18T13:21:48Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: add more info on `maketx call` args',
+            url: 'https://github.com/gnolang/gno/pull/1413',
+            createdAt: '2023-12-05T14:58:30Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: migrate `peace.md` out of docs',
+            url: 'https://github.com/gnolang/gno/pull/1358',
+            createdAt: '2023-11-10T22:11:00Z',
+            labels: [],
+          },
+          {
+            title: 'feat: add p/demo/pausable',
+            url: 'https://github.com/gnolang/gno/pull/1328',
+            createdAt: '2023-11-02T13:20:07Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add p/demo/ownable',
+            url: 'https://github.com/gnolang/gno/pull/1314',
+            createdAt: '2023-10-28T09:23:10Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add simple address validity check',
+            url: 'https://github.com/gnolang/gno/pull/1303',
+            createdAt: '2023-10-26T16:14:56Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjM3MzQ1MDQw',
@@ -40529,6 +57164,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -41431,6 +58070,599 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 60,
+        data: [
+          {
+            title: 'fix(gno.land/Makefile): lazily start gnoland node',
+            url: 'https://github.com/gnolang/gno/pull/2293',
+            createdAt: '2024-06-05T22:27:58Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(stdlibs/net/url): avoid using `fmt`',
+            url: 'https://github.com/gnolang/gno/pull/2219',
+            createdAt: '2024-05-27T18:47:12Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(stdlibs/testing): remove unused imports and vars',
+            url: 'https://github.com/gnolang/gno/pull/2214',
+            createdAt: '2024-05-27T13:16:08Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(cmd/gnoland): `s/LongHelp/ShortHelp` in genesis commands',
+            url: 'https://github.com/gnolang/gno/pull/2052',
+            createdAt: '2024-05-07T18:41:49Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat!: remove flag `-transpile` from `gno test`',
+            url: 'https://github.com/gnolang/gno/pull/2050',
+            createdAt: '2024-05-07T14:05:13Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'refactor: use `stretchr/testify` throughout codebase',
+            url: 'https://github.com/gnolang/gno/pull/1931',
+            createdAt: '2024-04-15T19:10:12Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: namespaces concepts page',
+            url: 'https://github.com/gnolang/gno/pull/1909',
+            createdAt: '2024-04-09T22:36:21Z',
+            labels: [],
+          },
+          {
+            title: 'fix(stdlibs/io): handle potential overflow in `NewSectionReader`',
+            url: 'https://github.com/gnolang/gno/pull/1905',
+            createdAt: '2024-04-09T00:12:53Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(docs): replace `gno build` with `gno transpile --gobuild`',
+            url: 'https://github.com/gnolang/gno/pull/1903',
+            createdAt: '2024-04-08T11:10:18Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: correctly validate package/realm path',
+            url: 'https://github.com/gnolang/gno/pull/1813',
+            createdAt: '2024-03-22T09:45:04Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(docs): replace `verbose` with `v`',
+            url: 'https://github.com/gnolang/gno/pull/1738',
+            createdAt: '2024-03-05T16:53:08Z',
+            labels: [],
+          },
+          {
+            title: 'chore(cmd/gno): remove dead/dormant flags from `repl`',
+            url: 'https://github.com/gnolang/gno/pull/1737',
+            createdAt: '2024-03-05T16:36:11Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: decapitalize short help and flag usage',
+            url: 'https://github.com/gnolang/gno/pull/1701',
+            createdAt: '2024-02-28T14:23:29Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(docs/getting-started): `s/genesis_txs.txt/genesis_balances.txt`',
+            url: 'https://github.com/gnolang/gno/pull/1699',
+            createdAt: '2024-02-28T11:48:43Z',
+            labels: [],
+          },
+          {
+            title: 'chore: use `.jsonl` instead of `.txt` for genesis_txs file',
+            url: 'https://github.com/gnolang/gno/pull/1697',
+            createdAt: '2024-02-27T18:53:34Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: `s/use/loadpkg` and `s/example/examples`',
+            url: 'https://github.com/gnolang/gno/pull/1690',
+            createdAt: '2024-02-23T23:22:44Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(cmd/gno): correctly filter filetests in `listNonTestFiles`',
+            url: 'https://github.com/gnolang/gno/pull/1560',
+            createdAt: '2024-01-18T18:07:22Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: remove `gnodev` leftovers',
+            url: 'https://github.com/gnolang/gno/pull/1519',
+            createdAt: '2024-01-10T20:18:07Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs(gno-tooling/cli): remove `gno build`',
+            url: 'https://github.com/gnolang/gno/pull/1514',
+            createdAt: '2024-01-10T14:08:13Z',
+            labels: [],
+          },
+          {
+            title: 'refactor!: split `r/demo/users`',
+            url: 'https://github.com/gnolang/gno/pull/1433',
+            createdAt: '2023-12-12T11:39:17Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: implement `gno mod why`',
+            url: 'https://github.com/gnolang/gno/pull/1407',
+            createdAt: '2023-12-04T15:40:38Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: sort stdlib whitelist',
+            url: 'https://github.com/gnolang/gno/pull/1387',
+            createdAt: '2023-11-20T19:11:49Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(ci): remove unused func `parseBalance`',
+            url: 'https://github.com/gnolang/gno/pull/1344',
+            createdAt: '2023-11-08T09:02:50Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'ci(fix): tidy remaining gno.mod files',
+            url: 'https://github.com/gnolang/gno/pull/1338',
+            createdAt: '2023-11-06T16:57:45Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: implement `gno bug`',
+            url: 'https://github.com/gnolang/gno/pull/1325',
+            createdAt: '2023-10-31T21:08:09Z',
+            labels: [
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(gnomod): test package does not exist',
+            url: 'https://github.com/gnolang/gno/pull/1317',
+            createdAt: '2023-10-29T18:09:07Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: `gno test` support `/...` pattern',
+            url: 'https://github.com/gnolang/gno/pull/1078',
+            createdAt: '2023-08-29T09:13:07Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: use `modfile` package to write modfile',
+            url: 'https://github.com/gnolang/gno/pull/1077',
+            createdAt: '2023-08-28T10:31:08Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: correct panic message for ParseMemPackage()',
+            url: 'https://github.com/gnolang/gno/pull/1052',
+            createdAt: '2023-08-16T09:47:11Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: implement `gno mod tidy`',
+            url: 'https://github.com/gnolang/gno/pull/1035',
+            createdAt: '2023-08-09T08:44:34Z',
+            labels: [
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: use `PackageClauseOnly` for parsing pkg name',
+            url: 'https://github.com/gnolang/gno/pull/994',
+            createdAt: '2023-07-26T13:46:07Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: implement `gno mod init` command',
+            url: 'https://github.com/gnolang/gno/pull/955',
+            createdAt: '2023-07-06T21:33:05Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: fix `gno test` for `_test.gno` and `_filetest.gno` files',
+            url: 'https://github.com/gnolang/gno/pull/945',
+            createdAt: '2023-07-04T14:46:03Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: typo in p/demo/blog imports',
+            url: 'https://github.com/gnolang/gno/pull/921',
+            createdAt: '2023-06-20T19:19:07Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: support `gno clean` just like `go clean`',
+            url: 'https://github.com/gnolang/gno/pull/799',
+            createdAt: '2023-05-05T11:23:17Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: support marking pkg as Draft',
+            url: 'https://github.com/gnolang/gno/pull/790',
+            createdAt: '2023-04-30T15:04:30Z',
+            labels: [],
+          },
+          {
+            title: 'feat(gnomod): support parsing deprecated message',
+            url: 'https://github.com/gnolang/gno/pull/773',
+            createdAt: '2023-04-24T14:12:26Z',
+            labels: [],
+          },
+          {
+            title: 'fix(examples): use underscore instead of hyphen',
+            url: 'https://github.com/gnolang/gno/pull/766',
+            createdAt: '2023-04-20T20:20:00Z',
+            labels: [],
+          },
+          {
+            title: 'feat(gno.land/cmd): auto load and sort pkgs from examples',
+            url: 'https://github.com/gnolang/gno/pull/763',
+            createdAt: '2023-04-19T22:34:59Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnomod): only precompile if `.gno` file',
+            url: 'https://github.com/gnolang/gno/pull/752',
+            createdAt: '2023-04-18T18:40:45Z',
+            labels: [],
+          },
+          {
+            title: 'chore(gnolang/utils): change endsWith() args order',
+            url: 'https://github.com/gnolang/gno/pull/751',
+            createdAt: '2023-04-18T17:16:01Z',
+            labels: [],
+          },
+          {
+            title: 'refactor: ReadMemPackage() only process .gno files',
+            url: 'https://github.com/gnolang/gno/pull/740',
+            createdAt: '2023-04-13T14:22:44Z',
+            labels: [],
+          },
+          {
+            title: 'feat(mod): `verbose` flag for download',
+            url: 'https://github.com/gnolang/gno/pull/739',
+            createdAt: '2023-04-13T12:13:29Z',
+            labels: [],
+          },
+          {
+            title: 'feat(mod): utilize `~/.gno` dir',
+            url: 'https://github.com/gnolang/gno/pull/652',
+            createdAt: '2023-03-26T19:55:13Z',
+            labels: [],
+          },
+          {
+            title: 'feat(mod): fetch indirect dependencies',
+            url: 'https://github.com/gnolang/gno/pull/602',
+            createdAt: '2023-03-15T12:12:36Z',
+            labels: [],
+          },
+          {
+            title: 'feat(mod): make remote dynamic',
+            url: 'https://github.com/gnolang/gno/pull/553',
+            createdAt: '2023-03-03T08:27:30Z',
+            labels: [],
+          },
+          {
+            title: 'refactor(gnolang): remove unnecessary if-else',
+            url: 'https://github.com/gnolang/gno/pull/550',
+            createdAt: '2023-03-01T10:44:59Z',
+            labels: [],
+          },
+          {
+            title: 'feat: support replacing module with another module',
+            url: 'https://github.com/gnolang/gno/pull/549',
+            createdAt: '2023-02-28T18:14:08Z',
+            labels: [],
+          },
+          {
+            title: 'chore(gnolang/alloc.go): remove unnecessary else',
+            url: 'https://github.com/gnolang/gno/pull/545',
+            createdAt: '2023-02-27T07:31:29Z',
+            labels: [],
+          },
+          {
+            title: "feat: don't fetch module if replaced with dir",
+            url: 'https://github.com/gnolang/gno/pull/533',
+            createdAt: '2023-02-21T20:09:34Z',
+            labels: [],
+          },
+          {
+            title: 'feat: sanitize gno.mod',
+            url: 'https://github.com/gnolang/gno/pull/524',
+            createdAt: '2023-02-17T16:45:24Z',
+            labels: [],
+          },
+          {
+            title: 'chore: wrap precompile filename and tags logic',
+            url: 'https://github.com/gnolang/gno/pull/484',
+            createdAt: '2023-01-26T09:37:16Z',
+            labels: [],
+          },
+          {
+            title: 'chore: precompile skip build tags if empty',
+            url: 'https://github.com/gnolang/gno/pull/483',
+            createdAt: '2023-01-25T18:30:01Z',
+            labels: [],
+          },
+          {
+            title: 'feat: support gno.mod',
+            url: 'https://github.com/gnolang/gno/pull/479',
+            createdAt: '2023-01-25T08:22:31Z',
+            labels: [],
+          },
+          {
+            title: 'feat: implement p/demo/stack',
+            url: 'https://github.com/gnolang/gno/pull/456',
+            createdAt: '2023-01-13T09:45:29Z',
+            labels: [],
+          },
+          {
+            title: 'feat: precompile imports and fix `gnodev test`',
+            url: 'https://github.com/gnolang/gno/pull/431',
+            createdAt: '2022-12-13T21:43:55Z',
+            labels: [],
+          },
+          {
+            title: 'fix: `gnodev test --precompile`',
+            url: 'https://github.com/gnolang/gno/pull/417',
+            createdAt: '2022-12-08T15:15:10Z',
+            labels: [],
+          },
+          {
+            title: 'feat: implement grc721',
+            url: 'https://github.com/gnolang/gno/pull/414',
+            createdAt: '2022-12-06T12:21:04Z',
+            labels: [],
+          },
+          {
+            title: 'chore: get rid of deprecated package "io/ioutil"',
+            url: 'https://github.com/gnolang/gno/pull/405',
+            createdAt: '2022-11-30T14:50:01Z',
+            labels: [],
+          },
+          {
+            title: 'gnodev: minor refactoring and lint error fixes',
+            url: 'https://github.com/gnolang/gno/pull/404',
+            createdAt: '2022-11-30T14:21:17Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjQwMDI4NDkz',
@@ -41444,6 +58676,22 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'chore: fix typos',
+            url: 'https://github.com/gnolang/gno/pull/1300',
+            createdAt: '2023-10-26T05:59:29Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -41475,6 +58723,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjQxMzI2MzU1',
@@ -41491,6 +58743,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjQ1MTY2OTM3',
@@ -41504,6 +58760,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -41536,6 +58796,23 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 2,
+        data: [
+          {
+            title: 'Website: render usernames',
+            url: 'https://github.com/gnolang/gno/pull/175',
+            createdAt: '2022-05-08T18:33:26Z',
+            labels: [],
+          },
+          {
+            title: 'Website: Add syntax highlighting + security practices',
+            url: 'https://github.com/gnolang/gno/pull/167',
+            createdAt: '2022-05-05T11:04:57Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjQ4MzI1MzUy',
@@ -41549,6 +58826,17 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'update deprecated functions ioutil.ReadFile and ioutil.WriteFile',
+            url: 'https://github.com/gnolang/gno/pull/437',
+            createdAt: '2022-12-19T15:31:35Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -41656,6 +58944,66 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 6,
+        data: [
+          {
+            title: 'feat(gnoweb): Docs link to `gnokey list` with specific anchor',
+            url: 'https://github.com/gnolang/gno/pull/2428',
+            createdAt: '2024-06-24T23:29:50Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs(gno-js): Remove wrong param in getFileContent',
+            url: 'https://github.com/gnolang/gno/pull/2419',
+            createdAt: '2024-06-23T16:59:48Z',
+            labels: [],
+          },
+          {
+            title: 'docs(guides/grc20): Fix playground link with correct code',
+            url: 'https://github.com/gnolang/gno/pull/2315',
+            createdAt: '2024-06-10T12:25:06Z',
+            labels: [],
+          },
+          {
+            title: 'docs: Fix wrong indentation in concepts/packages',
+            url: 'https://github.com/gnolang/gno/pull/2287',
+            createdAt: '2024-06-05T13:12:11Z',
+            labels: [],
+          },
+          {
+            title: 'style: Fixing some typos',
+            url: 'https://github.com/gnolang/gno/pull/2279',
+            createdAt: '2024-06-04T20:37:07Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: Handle .mod files for realms in gnoweb',
+            url: 'https://github.com/gnolang/gno/pull/2278',
+            createdAt: '2024-06-04T20:27:50Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjU1ODQ2NjU0',
@@ -41679,6 +59027,17 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'ci: add auto assigner to unassigned PRs',
+            url: 'https://github.com/gnolang/gno/pull/804',
+            createdAt: '2023-05-07T06:49:11Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjU2OTI1MTYw',
@@ -41692,6 +59051,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -41747,6 +59110,17 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'docs: add private key of test address to ease Adena registering',
+            url: 'https://github.com/gnolang/gno/pull/1990',
+            createdAt: '2024-04-28T22:34:47Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjY2NDAxODE0',
@@ -41760,6 +59134,17 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'Fix typo in debug.go',
+            url: 'https://github.com/gnolang/gno/pull/168',
+            createdAt: '2022-05-05T11:09:29Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -41814,6 +59199,65 @@ const data = {
             labels: [
               {
                 name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnoweb): footer display',
+            url: 'https://github.com/gnolang/gno/pull/2462',
+            createdAt: '2024-06-28T20:12:57Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnoweb): added link to readme if present',
+            url: 'https://github.com/gnolang/gno/pull/2461',
+            createdAt: '2024-06-28T19:16:53Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "fix(docs): missing 'false' return in Iterate() methods",
+            url: 'https://github.com/gnolang/gno/pull/2356',
+            createdAt: '2024-06-13T18:19:23Z',
+            labels: [],
+          },
+          {
+            title: 'fix(gnoweb): Cursor pointer when hovering over dark mode theme',
+            url: 'https://github.com/gnolang/gno/pull/2280',
+            createdAt: '2024-06-04T20:40:42Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
+        count: 5,
+        data: [
+          {
+            title: 'feat(examples): add disperse (v2)',
+            url: 'https://github.com/gnolang/gno/pull/2613',
+            createdAt: '2024-07-22T14:37:29Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
               },
             ],
@@ -41934,6 +59378,22 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'feat(p/demo/merkle): add constructor w/ getter for merkle.Node struct',
+            url: 'https://github.com/gnolang/gno/pull/2784',
+            createdAt: '2024-09-11T22:55:13Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjcyMTU2NTM3',
@@ -41962,6 +59422,22 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'fix: ledger discover',
+            url: 'https://github.com/gnolang/gno/pull/1502',
+            createdAt: '2024-01-07T10:01:27Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjczOTgzNjc3',
@@ -41975,6 +59451,28 @@ const data = {
         data: [],
       },
       prs: {
+        count: 2,
+        data: [
+          {
+            title: 'docs: fix typos',
+            url: 'https://github.com/gnolang/gno/pull/2512',
+            createdAt: '2024-07-05T10:17:56Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: fix typos',
+            url: 'https://github.com/gnolang/gno/pull/349',
+            createdAt: '2022-09-30T13:17:04Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
         count: 2,
         data: [
           {
@@ -42063,6 +59561,10 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'MDQ6VXNlcjgwODAwNTI1',
@@ -42086,6 +59588,17 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'chore: fix broken link in README.md',
+            url: 'https://github.com/gnolang/gno/pull/485',
+            createdAt: '2023-01-26T16:51:54Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjg2NjgyNjgz',
@@ -42099,6 +59612,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -42127,6 +59644,17 @@ const data = {
             title: 'add address dimasik',
             url: 'https://github.com/gnolang/gno/pull/84',
             createdAt: '2022-01-13T21:14:13Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'add address dimasik',
+            url: 'https://github.com/gnolang/gno/pull/85',
+            createdAt: '2022-01-14T08:13:43Z',
             labels: [],
           },
         ],
@@ -42275,6 +59803,34 @@ const data = {
                 color: 'ffffff',
               },
             ],
+          },
+          {
+            title: 'docs: add new Prerequisites',
+            url: 'https://github.com/gnolang/gno/pull/1722',
+            createdAt: '2024-03-02T19:30:06Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
+        count: 3,
+        data: [
+          {
+            title: 'fix: wrong url syntax ',
+            url: 'https://github.com/gnolang/gno/pull/2724',
+            createdAt: '2024-08-22T13:19:09Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: fix code in creating-grc20.md',
+            url: 'https://github.com/gnolang/gno/pull/2246',
+            createdAt: '2024-05-30T16:07:27Z',
+            labels: [],
           },
           {
             title: 'docs: add new Prerequisites',
@@ -42945,6 +60501,154 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 17,
+        data: [
+          {
+            title: 'feat: named and unnamed type assignment 3 of 3',
+            url: 'https://github.com/gnolang/gno/pull/2367',
+            createdAt: '2024-06-17T03:22:56Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: consolidate vm gas consumption ',
+            url: 'https://github.com/gnolang/gno/pull/1430',
+            createdAt: '2023-12-11T11:18:21Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: named and unnamed type assignment 2 of 3',
+            url: 'https://github.com/gnolang/gno/pull/1246',
+            createdAt: '2023-10-15T23:33:42Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: print declared type in output',
+            url: 'https://github.com/gnolang/gno/pull/1143',
+            createdAt: '2023-09-18T01:40:03Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'refactor: tm2 clean up against the latest main branch',
+            url: 'https://github.com/gnolang/gno/pull/1080',
+            createdAt: '2023-08-30T04:42:11Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "migrated the faucet contract and it's dependencies  from main to test…",
+            url: 'https://github.com/gnolang/gno/pull/956',
+            createdAt: '2023-07-06T22:45:21Z',
+            labels: [],
+          },
+          {
+            title: 'refactor(gnovm): consistent map type evaluation for *IndexExpr',
+            url: 'https://github.com/gnolang/gno/pull/699',
+            createdAt: '2023-04-05T05:46:39Z',
+            labels: [],
+          },
+          {
+            title: 'feat: add `gnodev test -update-golden-tests` flag',
+            url: 'https://github.com/gnolang/gno/pull/449',
+            createdAt: '2023-01-05T23:53:08Z',
+            labels: [],
+          },
+          {
+            title: 'Fix: Some file tests that should have failed always pass in Github repo.',
+            url: 'https://github.com/gnolang/gno/pull/441',
+            createdAt: '2022-12-21T22:50:13Z',
+            labels: [],
+          },
+          {
+            title: 'fix: assign contract owner upon contract deployment',
+            url: 'https://github.com/gnolang/gno/pull/403',
+            createdAt: '2022-11-29T07:55:35Z',
+            labels: [],
+          },
+          {
+            title: 'chore:  updates for the faucet community bot',
+            url: 'https://github.com/gnolang/gno/pull/400',
+            createdAt: '2022-11-27T04:17:57Z',
+            labels: [],
+          },
+          {
+            title: 'Add internal mempool client interface check',
+            url: 'https://github.com/gnolang/gno/pull/332',
+            createdAt: '2022-09-12T18:59:14Z',
+            labels: [],
+          },
+          {
+            title: 'chore: create faucet’s README.md',
+            url: 'https://github.com/gnolang/gno/pull/302',
+            createdAt: '2022-07-24T23:05:57Z',
+            labels: [],
+          },
+          {
+            title: 'fixed CreatePost -> CreateThread issue',
+            url: 'https://github.com/gnolang/gno/pull/271',
+            createdAt: '2022-07-06T06:56:52Z',
+            labels: [],
+          },
+          {
+            title: 'replace gnot with ugnot,  import distribution as genesis balances ',
+            url: 'https://github.com/gnolang/gno/pull/270',
+            createdAt: '2022-07-03T11:03:05Z',
+            labels: [],
+          },
+          {
+            title: 'Fixed gnokey add public key failure',
+            url: 'https://github.com/gnolang/gno/pull/264',
+            createdAt: '2022-06-24T19:19:17Z',
+            labels: [],
+          },
+          {
+            title: 'chore: fix makefile rule for website, add —view flag',
+            url: 'https://github.com/gnolang/gno/pull/261',
+            createdAt: '2022-06-22T10:40:08Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'MDQ6VXNlcjkwOTE1OTIx',
@@ -42958,6 +60662,17 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'docs: fix typos',
+            url: 'https://github.com/gnolang/gno/pull/1533',
+            createdAt: '2024-01-14T13:26:55Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -42984,6 +60699,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOBXsI4w',
@@ -43000,6 +60719,10 @@ const data = {
         count: 0,
         data: [],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOBbB6MA',
@@ -43013,6 +60736,22 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'feat: Terminating analysis',
+            url: 'https://github.com/gnolang/gno/pull/1750',
+            createdAt: '2024-03-10T13:52:30Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -43115,6 +60854,22 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'chore(docs): fix example rpcclient.NewHTTPClient returning variables',
+            url: 'https://github.com/gnolang/gno/pull/2352',
+            createdAt: '2024-06-13T10:20:24Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'U_kgDOBfu5Yw',
@@ -43135,6 +60890,17 @@ const data = {
         ],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'feat: implement grc1155',
+            url: 'https://github.com/gnolang/gno/pull/520',
+            createdAt: '2023-02-17T10:06:57Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -43173,6 +60939,10 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 0,
+        data: [],
+      },
     },
     {
       id: 'U_kgDOBjxIAQ',
@@ -43186,6 +60956,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -44097,6 +61871,404 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 27,
+        data: [
+          {
+            title: 'feat: add onbloc validator',
+            url: 'https://github.com/gnolang/gno/pull/2533',
+            createdAt: '2024-07-07T14:29:53Z',
+            labels: [],
+          },
+          {
+            title: 'docs: new validator docs (+ updated docs for gnoland cli)',
+            url: 'https://github.com/gnolang/gno/pull/2285',
+            createdAt: '2024-06-05T07:54:22Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnoland): fix: wrong help message for balances add',
+            url: 'https://github.com/gnolang/gno/pull/2284',
+            createdAt: '2024-06-05T06:37:22Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'refactor(stdlibs/std): re-organize gnoEvent struct',
+            url: 'https://github.com/gnolang/gno/pull/2160',
+            createdAt: '2024-05-21T09:29:39Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: "fix: Increase 'max gas' and 'vm cycle limit' from 10M to 100M",
+            url: 'https://github.com/gnolang/gno/pull/2065',
+            createdAt: '2024-05-09T11:55:47Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: add separator to rpc `block_results` to identify msg & response pair',
+            url: 'https://github.com/gnolang/gno/pull/2063',
+            createdAt: '2024-05-09T09:35:41Z',
+            labels: [
+              {
+                name: 'help wanted',
+                color: '008672',
+              },
+              {
+                name: 'investigating',
+                color: '8c008c',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(tm2/gnovm): multi-msg overwrites previous event(s)',
+            url: 'https://github.com/gnolang/gno/pull/2030',
+            createdAt: '2024-05-03T10:53:42Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: map delete',
+            url: 'https://github.com/gnolang/gno/pull/2017',
+            createdAt: '2024-05-02T06:42:13Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(stdlibs/std): restrict Banker methods based on caller of GetBanker',
+            url: 'https://github.com/gnolang/gno/pull/1921',
+            createdAt: '2024-04-12T02:37:13Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(txtar): create user from passed mnemonic, account and index',
+            url: 'https://github.com/gnolang/gno/pull/1879',
+            createdAt: '2024-04-03T02:35:17Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(p/int256): int256',
+            url: 'https://github.com/gnolang/gno/pull/1848',
+            createdAt: '2024-03-27T06:17:35Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: full `std.Address` validation',
+            url: 'https://github.com/gnolang/gno/pull/1799',
+            createdAt: '2024-03-20T02:58:05Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(stdlibs/std): Banker should only send coins owned by the calling realm',
+            url: 'https://github.com/gnolang/gno/pull/1787',
+            createdAt: '2024-03-18T08:52:04Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: `ufmt` package to print all numeric primitive',
+            url: 'https://github.com/gnolang/gno/pull/1784',
+            createdAt: '2024-03-18T06:36:02Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: make `r/demo/wugnot` compatible with `r/demo/users`',
+            url: 'https://github.com/gnolang/gno/pull/1782',
+            createdAt: '2024-03-18T05:29:31Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: copy value in `cv.map`',
+            url: 'https://github.com/gnolang/gno/pull/1112',
+            createdAt: '2023-09-12T09:44:04Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: use std.PrevRealm() in grc721 package',
+            url: 'https://github.com/gnolang/gno/pull/992',
+            createdAt: '2023-07-24T04:58:49Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: foo20 check an error from grc20 package',
+            url: 'https://github.com/gnolang/gno/pull/977',
+            createdAt: '2023-07-17T10:19:22Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: regular block creation time (5s)',
+            url: 'https://github.com/gnolang/gno/pull/969',
+            createdAt: '2023-07-12T10:31:11Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: std.TestSetPrevRealm',
+            url: 'https://github.com/gnolang/gno/pull/891',
+            createdAt: '2023-06-13T07:42:47Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(stdlibs/std)!: namespace minted coins with realm path',
+            url: 'https://github.com/gnolang/gno/pull/875',
+            createdAt: '2023-06-07T09:36:53Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: encoding/binary (for encoding/base64)',
+            url: 'https://github.com/gnolang/gno/pull/816',
+            createdAt: '2023-05-10T04:36:11Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: fix typo in tm2 makefile',
+            url: 'https://github.com/gnolang/gno/pull/795',
+            createdAt: '2023-05-03T09:34:39Z',
+            labels: [],
+          },
+          {
+            title: 'fix: replace old realm path to current one',
+            url: 'https://github.com/gnolang/gno/pull/681',
+            createdAt: '2023-03-31T02:37:15Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: support timestamp skipping in test cases',
+            url: 'https://github.com/gnolang/gno/pull/569',
+            createdAt: '2023-03-07T09:12:04Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'faucet handle ipv6 loopback addr & typo fix',
+            url: 'https://github.com/gnolang/gno/pull/268',
+            createdAt: '2022-06-29T02:59:29Z',
+            labels: [],
+          },
+          {
+            title: 'feat(gnofaucet): add a captcha',
+            url: 'https://github.com/gnolang/gno/pull/242',
+            createdAt: '2022-06-09T05:53:22Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'U_kgDOBkuSbg',
@@ -44151,6 +62323,22 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'feat: add adena wallet in-app faucet account',
+            url: 'https://github.com/gnolang/gno/pull/1808',
+            createdAt: '2024-03-21T04:19:37Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'U_kgDOBloeWQ',
@@ -44174,6 +62362,17 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'fix grammer',
+            url: 'https://github.com/gnolang/gno/pull/445',
+            createdAt: '2022-12-30T19:53:46Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'U_kgDOBoSBBw',
@@ -44187,6 +62386,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -44368,6 +62571,51 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 5,
+        data: [
+          {
+            title: 'chore(docs): fix `gnodev.md` typo',
+            url: 'https://github.com/gnolang/gno/pull/2302',
+            createdAt: '2024-06-07T09:16:03Z',
+            labels: [],
+          },
+          {
+            title: 'fix(docs): update a typo in coins.md',
+            url: 'https://github.com/gnolang/gno/pull/2227',
+            createdAt: '2024-05-28T10:01:09Z',
+            labels: [],
+          },
+          {
+            title: 'fix: ufmt multi-byte fix.',
+            url: 'https://github.com/gnolang/gno/pull/1889',
+            createdAt: '2024-04-04T16:02:54Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(examples): add todolist package & realm',
+            url: 'https://github.com/gnolang/gno/pull/1811',
+            createdAt: '2024-03-21T17:26:54Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: update getting-started with `gno test`',
+            url: 'https://github.com/gnolang/gno/pull/1712',
+            createdAt: '2024-03-01T11:24:54Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'U_kgDOBrJ9Iw',
@@ -44388,6 +62636,10 @@ const data = {
         ],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -44453,6 +62705,37 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 2,
+        data: [
+          {
+            title: 'feat(r/gnoland/pages): substitute /game-of-realms with /contribute page',
+            url: 'https://github.com/gnolang/gno/pull/2742',
+            createdAt: '2024-08-29T09:42:28Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: update `page_ecosystem.gno`',
+            url: 'https://github.com/gnolang/gno/pull/2702',
+            createdAt: '2024-08-15T09:26:50Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'U_kgDOB2bfUw',
@@ -44466,6 +62749,22 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'fix(gnoweb): don\'t pre-fill help page address with "ADDRESS"',
+            url: 'https://github.com/gnolang/gno/pull/2196',
+            createdAt: '2024-05-25T12:40:26Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -44676,6 +62975,40 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 4,
+        data: [
+          {
+            title: 'docs: add doc for GetIsReal',
+            url: 'https://github.com/gnolang/gno/pull/980',
+            createdAt: '2023-07-17T22:05:40Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore: bcrypt cost adjustment',
+            url: 'https://github.com/gnolang/gno/pull/670',
+            createdAt: '2023-03-28T22:35:16Z',
+            labels: [],
+          },
+          {
+            title: '[performance] compile regexes globally',
+            url: 'https://github.com/gnolang/gno/pull/633',
+            createdAt: '2023-03-22T15:09:42Z',
+            labels: [],
+          },
+          {
+            title: 'perf: use a sync pool for machine constructor',
+            url: 'https://github.com/gnolang/gno/pull/625',
+            createdAt: '2023-03-20T22:57:52Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'U_kgDOCAENWw',
@@ -44799,6 +63132,28 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 2,
+        data: [
+          {
+            title: 'feat: add `irreverentsimplicity` to `persistent_peers`',
+            url: 'https://github.com/gnolang/gno/pull/2577',
+            createdAt: '2024-07-12T07:03:34Z',
+            labels: [],
+          },
+          {
+            title: 'feat(p/grc721): add SetTokenURI to `IGRC721`',
+            url: 'https://github.com/gnolang/gno/pull/1309',
+            createdAt: '2023-10-27T12:45:03Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'U_kgDOCH6X9g',
@@ -44812,6 +63167,17 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'docs(grammatical): correct typos and improve grammar',
+            url: 'https://github.com/gnolang/gno/pull/1321',
+            createdAt: '2023-10-30T20:24:15Z',
+            labels: [],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {
@@ -44844,6 +63210,10 @@ const data = {
             labels: [],
           },
         ],
+      },
+      mrs: {
+        count: 0,
+        data: [],
       },
     },
     {
@@ -44987,6 +63357,45 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 4,
+        data: [
+          {
+            title: 'feat: p/subscription',
+            url: 'https://github.com/gnolang/gno/pull/2116',
+            createdAt: '2024-05-15T14:17:09Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat: r/profile dapp',
+            url: 'https://github.com/gnolang/gno/pull/1983',
+            createdAt: '2024-04-25T15:04:58Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: Update creating-grc20.md',
+            url: 'https://github.com/gnolang/gno/pull/1771',
+            createdAt: '2024-03-13T21:47:41Z',
+            labels: [],
+          },
+          {
+            title: 'docs: update `write-simple-dapp.md`',
+            url: 'https://github.com/gnolang/gno/pull/1770',
+            createdAt: '2024-03-13T21:07:45Z',
+            labels: [],
+          },
+        ],
+      },
     },
     {
       id: 'U_kgDOCPiJEg',
@@ -45015,6 +63424,22 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            title: 'fix: some docs typos',
+            url: 'https://github.com/gnolang/gno/pull/1491',
+            createdAt: '2024-01-02T09:54:47Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'U_kgDOCQlyiA',
@@ -45028,6 +63453,10 @@ const data = {
         data: [],
       },
       prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
         count: 0,
         data: [],
       },
@@ -45651,6 +64080,195 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 15,
+        data: [
+          {
+            title: 'test(gnoland): test content mismatch for addpkg.txtar',
+            url: 'https://github.com/gnolang/gno/pull/2766',
+            createdAt: '2024-09-07T09:15:08Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnoland): Update error type for invalid deposit',
+            url: 'https://github.com/gnolang/gno/pull/2614',
+            createdAt: '2024-07-22T14:41:37Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'docs: Remove slash from test4 endpoint',
+            url: 'https://github.com/gnolang/gno/pull/2603',
+            createdAt: '2024-07-18T14:47:58Z',
+            labels: [],
+          },
+          {
+            title: 'fix(tm2): Fix request_id mismatch at http client',
+            url: 'https://github.com/gnolang/gno/pull/2589',
+            createdAt: '2024-07-15T02:50:56Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(testdata): wrong expectation at gnoweb_airgapped.txtar',
+            url: 'https://github.com/gnolang/gno/pull/2582',
+            createdAt: '2024-07-14T06:24:48Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'test(gnoclient): Fix a potential bug in the integration test',
+            url: 'https://github.com/gnolang/gno/pull/2558',
+            createdAt: '2024-07-09T14:52:30Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(examples): wrong module name of nestedpkg',
+            url: 'https://github.com/gnolang/gno/pull/2522',
+            createdAt: '2024-07-06T15:09:28Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(examples): fix output of uassert.Equal()',
+            url: 'https://github.com/gnolang/gno/pull/2507',
+            createdAt: '2024-07-04T15:46:04Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(examples): fix output of urequire.PanicsWithMessage()',
+            url: 'https://github.com/gnolang/gno/pull/2506',
+            createdAt: '2024-07-04T15:34:29Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'chore(examples): Use uassert/urequire instead of testing in some demo packages',
+            url: 'https://github.com/gnolang/gno/pull/2491',
+            createdAt: '2024-07-03T10:21:27Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(gnokey): Print out the transaction hash when maketx executes successfully',
+            url: 'https://github.com/gnolang/gno/pull/2309',
+            createdAt: '2024-06-08T03:27:48Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnoclient): Return error when getting keypair information',
+            url: 'https://github.com/gnolang/gno/pull/2300',
+            createdAt: '2024-06-07T08:44:54Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(gnokey): remove height and prove flags in `query`',
+            url: 'https://github.com/gnolang/gno/pull/2234',
+            createdAt: '2024-05-28T16:37:07Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(stdlibs/std)!: remove `std.CurrentRealmPath`',
+            url: 'https://github.com/gnolang/gno/pull/2087',
+            createdAt: '2024-05-13T15:05:29Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(examples): define metadata & royalty info for GRC721 realm',
+            url: 'https://github.com/gnolang/gno/pull/1962',
+            createdAt: '2024-04-20T13:17:31Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'U_kgDOCg4pdQ',
@@ -45840,6 +64458,59 @@ const data = {
           },
         ],
       },
+      mrs: {
+        count: 4,
+        data: [
+          {
+            title: 'chore(test):  update home_filetest.gno due to CI failed',
+            url: 'https://github.com/gnolang/gno/pull/2498',
+            createdAt: '2024-07-04T07:09:50Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix(examples): update /r/demo/bar20/gno.mod',
+            url: 'https://github.com/gnolang/gno/pull/2398',
+            createdAt: '2024-06-20T04:42:28Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'feat(sdk/vm)!: only allow using msgcall on realms',
+            url: 'https://github.com/gnolang/gno/pull/2242',
+            createdAt: '2024-05-30T08:54:17Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            title: 'fix: limitation for length of package/realm path',
+            url: 'https://github.com/gnolang/gno/pull/2108',
+            createdAt: '2024-05-15T03:00:20Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       id: 'U_kgDOCj0XyQ',
@@ -45853,6 +64524,22 @@ const data = {
         data: [],
       },
       prs: {
+        count: 1,
+        data: [
+          {
+            title: 'refactor(gnovm/gno/bug): sync bug template',
+            url: 'https://github.com/gnolang/gno/pull/2566',
+            createdAt: '2024-07-10T08:44:28Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
         count: 1,
         data: [
           {

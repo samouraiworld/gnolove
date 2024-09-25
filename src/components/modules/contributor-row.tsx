@@ -6,10 +6,13 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import { ExternalLinkIcon, InfoCircledIcon, StarFilledIcon } from '@radix-ui/react-icons';
-import { Flex, IconButton, Table } from '@radix-ui/themes';
+import { Flex, IconButton, Table, Text } from '@radix-ui/themes';
+import { formatDistanceToNow } from 'date-fns';
+import { CircleDotIcon, GitPullRequestIcon } from 'lucide-react';
 
 import ContributionsDialog from '@/module/contributions-dialog';
 
+import { cmpCreatedAt } from '@/util/github';
 import { cn } from '@/util/style';
 
 import { UserWithStats } from '@/type/github';
@@ -32,6 +35,13 @@ const ContributorRow = ({ contributor, score, rank }: ContributorRowProps) => {
       );
     return `${rank + 1} th`;
   }, [rank]);
+
+  const lastContribution = useMemo(() => {
+    return [
+      ...contributor.prs.data.map((obj) => ({ ...obj, type: 'PULL_REQUEST' })),
+      ...contributor.issues.data.map((obj) => ({ ...obj, type: 'ISSUE' })),
+    ].toSorted(cmpCreatedAt)[0];
+  }, [contributor]);
 
   const onClick = () => {
     router.push(contributor.url);
@@ -61,16 +71,37 @@ const ContributorRow = ({ contributor, score, rank }: ContributorRowProps) => {
         </Flex>
       </Table.Cell>
 
-      <Table.Cell data-href={contributor.url} onClick={onClick} className="text-center">
+      <Table.Cell data-href={contributor.url} onClick={onClick} className="hidden text-left lg:table-cell">
+        {lastContribution ? (
+          <Flex width="100%" height="100%" align="center" gap="2">
+            {lastContribution.type === 'ISSUE' ? (
+              <>
+                <CircleDotIcon className="size-3" />
+                <Text>Issue</Text>
+              </>
+            ) : (
+              <>
+                <GitPullRequestIcon className="size-3" />
+                <Text>PR</Text>
+              </>
+            )}
+            <Text color="gray">{formatDistanceToNow(lastContribution.createdAt)}</Text>
+          </Flex>
+        ) : (
+          <Text color="gray">-</Text>
+        )}
+      </Table.Cell>
+
+      <Table.Cell data-href={contributor.url} onClick={onClick} className="hidden text-center sm:table-cell">
         {contributor.commits}
       </Table.Cell>
 
-      <Table.Cell data-href={contributor.url} onClick={onClick} className="text-center">
+      <Table.Cell data-href={contributor.url} onClick={onClick} className="hidden text-center sm:table-cell">
         {contributor.issues.count}
       </Table.Cell>
 
-      <Table.Cell data-href={contributor.url} onClick={onClick} className="text-center">
-        {contributor.prs.count}
+      <Table.Cell data-href={contributor.url} onClick={onClick} className="hidden text-center sm:table-cell">
+        {contributor.prs.count} ({contributor.mrs.count})
       </Table.Cell>
 
       <Table.Cell data-href={contributor.url} onClick={onClick} className="text-center font-bold">
