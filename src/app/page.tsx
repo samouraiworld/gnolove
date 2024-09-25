@@ -12,12 +12,12 @@ import IssuesTable from '@/module/issues-table';
 import graphql from '@/instance/graphql';
 
 import {
-  getNewContributors,
   getLastIssuesWithLabel,
+  getLastMRs,
+  getNewContributors,
   getTimeFilterFromSearchParam,
   getUsersWithStats,
   TimeFilter,
-  getLastMRs,
 } from '@/util/github';
 
 import contributors from '@/constant/contributors';

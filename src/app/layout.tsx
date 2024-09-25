@@ -1,8 +1,12 @@
 import { ReactNode } from 'react';
 
+import { ThemeProvider } from 'next-themes';
+
 import { Theme } from '@radix-ui/themes';
 
 import '@/style/globals.css';
+
+import ThemeSwitch from '@/module/theme-switch';
 
 import Toaster from '@/element/toast';
 
@@ -16,11 +20,17 @@ const RootLayout = ({ children }: IProps) => {
   return (
     <html lang="en">
       <body>
-        <ToastProvider>
-          <Toaster />
+        <ThemeProvider attribute="class">
+          <Theme>
+            <ThemeSwitch />
 
-          <Theme>{children}</Theme>
-        </ToastProvider>
+            <ToastProvider>
+              <Toaster />
+
+              {children}
+            </ToastProvider>
+          </Theme>
+        </ThemeProvider>
       </body>
     </html>
   );
