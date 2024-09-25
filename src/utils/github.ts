@@ -91,13 +91,14 @@ export const getUserStats = async (
         }
       }
       
-      issues: search(query: $issuesQuery, type: ISSUE, first: 100, last: 100) {
+      issues: search(query: $issuesQuery, type: ISSUE, first: 100) {
         nodes {
           ... on Issue {
             id
             title
             url
             createdAt
+            updatedAt
             labels(first: 10) {
               nodes {
                 name
@@ -116,6 +117,7 @@ export const getUserStats = async (
             title
             url
             createdAt
+            updatedAt
             labels(first: 10) {
               nodes {
                 name
@@ -134,6 +136,7 @@ export const getUserStats = async (
             title
             url
             createdAt
+            updatedAt
             labels(first: 10) {
               nodes {
                 name
@@ -155,6 +158,7 @@ export const getUserStats = async (
     title: string;
     url: string;
     createdAt: string;
+    updatedAt: string;
     labels: { nodes: { name: string; color: string }[] };
   };
 
@@ -239,6 +243,15 @@ export const getTimeFilterFromSearchParam = (
 
 export const cmpCreatedAt = <T extends { createdAt: string | Date }>(objA: T, objB: T): number => {
   return new Date(objB.createdAt).getTime() - new Date(objA.createdAt).getTime();
+};
+
+export const cmpUpdatedAt = <T extends { createdAt: string | Date }>(objA: T, objB: T): number => {
+  return new Date(objB.createdAt).getTime() - new Date(objA.createdAt).getTime();
+};
+
+export const getLastMRs = (contributors: UserWithStats[], last: number) => {
+  const mrs = contributors.map(({ mrs }) => mrs.data).flat();
+  return mrs.toSorted(cmpUpdatedAt).slice(0, last);
 };
 
 export const getLastIssuesWithLabel = (contributors: UserWithStats[], labels: string[], last: number) => {

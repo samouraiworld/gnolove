@@ -17,6 +17,7 @@ import {
   getTimeFilterFromSearchParam,
   getUsersWithStats,
   TimeFilter,
+  getLastMRs,
 } from '@/util/github';
 
 import contributors from '@/constant/contributors';
@@ -67,6 +68,7 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
   const allTimeCachedContributors = await allTimeQuery();
   const cachedContributors = await query();
 
+  const lastMRs = getLastMRs(allTimeCachedContributors, 5);
   const lastIssues = getLastIssuesWithLabel(allTimeCachedContributors, ['good first issue', 'help wanted'], 5);
   const newContributors = getNewContributors(allTimeCachedContributors, 5);
 
@@ -86,6 +88,12 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
           </Heading>
 
           <IssuesTable issues={lastIssues} className="w-full" />
+
+          <Heading size="6" mt="6">
+            Last Merge Request
+          </Heading>
+
+          <IssuesTable issues={lastMRs} className="w-full" />
 
           <Heading size="6" mt="6">
             New Rising Contributors
