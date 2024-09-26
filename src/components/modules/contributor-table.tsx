@@ -1,10 +1,14 @@
-import { Table } from '@radix-ui/themes';
+import Image from 'next/image';
+
+import { Flex, Table } from '@radix-ui/themes';
 
 import ContributorRow from '@/module/contributor-row';
 
 import { getContributorsWithScore, getSortedContributorsWithScore } from '@/util/score';
 
 import { UserWithStats } from '@/type/github';
+
+import MinecraftHeart from '@/image/minecraft-heart.png';
 
 export interface ContributorTableProps {
   contributors: UserWithStats[];
@@ -32,7 +36,11 @@ const ContributorTable = ({ contributors, sort, showRank }: ContributorTableProp
           <Table.ColumnHeaderCell className="hidden text-center sm:table-cell">Commits</Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell className="hidden text-center sm:table-cell">Issues</Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell className="hidden text-center sm:table-cell">PRs (MRs)</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="text-center">Magic Power</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="text-center">
+            <Flex width="100%" height="100%" justify="center" align="center" gap="1">
+              Gno Love Power <Image src={MinecraftHeart} alt="minecraft heart " width={12} height={12} />
+            </Flex>
+          </Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell></Table.ColumnHeaderCell>
         </Table.Row>
       </Table.Header>
