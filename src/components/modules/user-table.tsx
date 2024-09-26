@@ -6,16 +6,20 @@ import { User } from '@/type/github';
 
 export interface UserTableProps {
   users: User[];
+
+  showHeader?: boolean;
 }
 
-const UserTable = ({ users }: UserTableProps) => {
+const UserTable = ({ users, showHeader }: UserTableProps) => {
   return (
     <Table.Root layout="auto">
-      <Table.Header>
-        <Table.Row>
-          <Table.ColumnHeaderCell className="w-full">Username</Table.ColumnHeaderCell>
-        </Table.Row>
-      </Table.Header>
+      {showHeader && (
+        <Table.Header>
+          <Table.Row>
+            <Table.ColumnHeaderCell className="w-full">Username</Table.ColumnHeaderCell>
+          </Table.Row>
+        </Table.Header>
+      )}
 
       <Table.Body>
         {users.map((user) => (

@@ -89,7 +89,7 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
             </Heading>
 
             <Heading size="6" mt="6">
-              Last Merge Request
+              Freshly Merged
             </Heading>
 
             <Heading size="6" mt="6">

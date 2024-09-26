@@ -10,10 +10,11 @@ import { Issue } from '@/type/github';
 export interface IssuesTableProps extends Table.RootProps {
   issues: Issue[];
 
+  showHeader?: boolean;
   showLabels?: boolean;
 }
 
-const IssuesTable = ({ issues, showLabels, ...props }: IssuesTableProps) => {
+const IssuesTable = ({ issues, showLabels, showHeader, ...props }: IssuesTableProps) => {
   const onClick = (url: string) => {
     if (typeof window === 'undefined') return;
     window.open(url, '_blank');
@@ -21,12 +22,14 @@ const IssuesTable = ({ issues, showLabels, ...props }: IssuesTableProps) => {
 
   return (
     <Table.Root {...props}>
-      <Table.Header>
-        <Table.Row>
-          <Table.ColumnHeaderCell>Title</Table.ColumnHeaderCell>
-          {showLabels && <Table.ColumnHeaderCell>Labels</Table.ColumnHeaderCell>}
-        </Table.Row>
-      </Table.Header>
+      {showHeader && (
+        <Table.Header>
+          <Table.Row>
+            <Table.ColumnHeaderCell>Title</Table.ColumnHeaderCell>
+            {showLabels && <Table.ColumnHeaderCell>Labels</Table.ColumnHeaderCell>}
+          </Table.Row>
+        </Table.Header>
+      )}
 
       <Table.Body>
         {issues.map(({ id, title, url, labels }) => (
