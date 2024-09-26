@@ -9,9 +9,11 @@ import { Issue } from '@/type/github';
 
 export interface IssuesTableProps extends Table.RootProps {
   issues: Issue[];
+
+  showLabels?: boolean;
 }
 
-const IssuesTable = ({ issues, ...props }: IssuesTableProps) => {
+const IssuesTable = ({ issues, showLabels, ...props }: IssuesTableProps) => {
   const onClick = (url: string) => {
     if (typeof window === 'undefined') return;
     window.open(url, '_blank');
@@ -22,7 +24,7 @@ const IssuesTable = ({ issues, ...props }: IssuesTableProps) => {
       <Table.Header>
         <Table.Row>
           <Table.ColumnHeaderCell>Title</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell>Labels</Table.ColumnHeaderCell>
+          {showLabels && <Table.ColumnHeaderCell>Labels</Table.ColumnHeaderCell>}
         </Table.Row>
       </Table.Header>
 
@@ -40,13 +42,16 @@ const IssuesTable = ({ issues, ...props }: IssuesTableProps) => {
                 <ExternalLinkIcon className="shrink-0 text-blue-10" />
               </Flex>
             </Table.Cell>
-            <Table.Cell>
-              <Flex gap="2" wrap="wrap">
-                {labels.map((label) => (
-                  <Label label={label} key={label.name + label.color} />
-                ))}
-              </Flex>
-            </Table.Cell>
+
+            {showLabels && (
+              <Table.Cell>
+                <Flex gap="2" wrap="wrap">
+                  {labels.map((label) => (
+                    <Label label={label} key={label.name + label.color} />
+                  ))}
+                </Flex>
+              </Table.Cell>
+            )}
           </Table.Row>
         ))}
       </Table.Body>

@@ -2,12 +2,12 @@ import { Metadata } from 'next';
 import { unstable_cache } from 'next/cache';
 import Image from 'next/image';
 
-import { Flex, Heading, ScrollArea } from '@radix-ui/themes';
+import { Flex, Grid, Heading, ScrollArea } from '@radix-ui/themes';
 
 import Scoreboard from '@/feature/scoreboard';
 
-import ContributorTable from '@/module/contributor-table';
 import IssuesTable from '@/module/issues-table';
+import UserTable from '@/module/user-table';
 
 import graphql from '@/instance/graphql';
 
@@ -83,23 +83,23 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
         >
           <Image src={HeaderImage} alt="Header Image" className="rounded-3" />
 
-          <Heading size="6" mt="6">
-            Help Wanted !
-          </Heading>
+          <Grid columns="3" rows="auto auto" gap="4">
+            <Heading size="6" mt="6">
+              Help Wanted !
+            </Heading>
 
-          <IssuesTable issues={lastIssues} className="w-full" />
+            <Heading size="6" mt="6">
+              Last Merge Request
+            </Heading>
 
-          <Heading size="6" mt="6">
-            Last Merge Request
-          </Heading>
+            <Heading size="6" mt="6">
+              New Rising Contributors
+            </Heading>
 
-          <IssuesTable issues={lastMRs} className="w-full" />
-
-          <Heading size="6" mt="6">
-            New Rising Contributors
-          </Heading>
-
-          <ContributorTable contributors={newContributors} />
+            <IssuesTable issues={lastIssues} />
+            <IssuesTable issues={lastMRs} />
+            <UserTable users={newContributors} />
+          </Grid>
 
           <Heading size="6" mt="6">
             Scoreboard
