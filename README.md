@@ -29,7 +29,7 @@ It could be useful later for the organization (community, managers, etc.) to acc
 - ... 🧠 'enter your ideas'
 
 #### Source:
-https://github.com/gnolang
+https://github.com/gnolang/gno
 
 
 ---
