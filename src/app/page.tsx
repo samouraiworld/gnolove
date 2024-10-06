@@ -85,15 +85,15 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
 
           <Grid columns="3" rows="auto auto" gap="4">
             <Heading size="6" mt="6">
-              Help Wanted !
+              👋 Help Wanted!
             </Heading>
 
             <Heading size="6" mt="6">
-              Freshly Merged
+              ✔️ Freshly Merged
             </Heading>
 
             <Heading size="6" mt="6">
-              New Rising Contributors
+              ⭐ New Rising gnome
             </Heading>
 
             <IssuesTable issues={lastIssues} />
@@ -101,8 +101,8 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
             <UserTable users={newContributors} />
           </Grid>
 
-          <Heading size="6" mt="6">
-            Scoreboard
+          <Heading size="6" mt="6" className="text-center">
+            🏅 Gnolove Scoreboard
           </Heading>
 
           <Scoreboard contributors={cachedContributors} timeFilter={timeFilter} />

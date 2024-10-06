@@ -16,7 +16,7 @@ export interface ScoreboardProps {
 const Scoreboard = ({ contributors, timeFilter, ...props }: ScoreboardProps & FlexProps) => {
   return (
     <Flex direction="column" {...props}>
-      <TabNav.Root mb="4">
+      <TabNav.Root justify="center" mb="4">
         {Object.keys(TimeFilter)
           .filter(isTimeFilter)
           .map((key) => (
