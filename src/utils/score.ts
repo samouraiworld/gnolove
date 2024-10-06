@@ -7,11 +7,16 @@ import { UserWithStats, UserWithStatsAndScore } from '@/type/github';
  * @param user The user to calculate the score from
  */
 export const getScore = (user: UserWithStats): number => {
+  const reviewedMrScore = user.reviewedMrs.count;
+  const mrScore = user.mrs.count - reviewedMrScore;
+  const prScore = user.prs.count - mrScore;
+
   return (
     user.commits * SCORE.COMMIT_FACTOR +
     user.issues.count * SCORE.ISSUES_FACTOR +
-    (user.prs.count - user.mrs.count) * SCORE.PR_FACTOR +
-    user.mrs.count * SCORE.MR_FACTOR
+    prScore * SCORE.PR_FACTOR +
+    mrScore * SCORE.MR_FACTOR +
+    reviewedMrScore * SCORE.REVIEWED_MR_FACTOR
   );
 };
 
