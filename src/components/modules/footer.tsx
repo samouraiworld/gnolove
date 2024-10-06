@@ -26,7 +26,7 @@ const Footer = ({ className, ...props }: FlexProps) => {
             </IconButton>
           </NextLink>
 
-          <NextLink href="discord.gg/YFtMjWwUN7" target="_blank">
+          <NextLink href="https://discord.gg/YFtMjWwUN7" target="_blank">
             <IconButton variant="ghost" size="2">
               <DiscordLogoIcon />
             </IconButton>
