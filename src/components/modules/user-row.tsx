@@ -26,10 +26,10 @@ const UserRow = ({ user }: UserRowProps) => {
             alt={`${user.login} avatar url`}
             height={24}
             width={24}
-            className="shrink-0 overflow-hidden rounded-full"
+            className="-my-1 shrink-0 overflow-hidden rounded-full"
           />
 
-          <Text className="whitespace-break-spaces text-wrap">{user.name ?? user.login}</Text>
+          <Text className="w-full truncate">{user.name ?? user.login}</Text>
 
           <ExternalLinkIcon className="shrink-0 text-blue-10" />
         </Flex>
