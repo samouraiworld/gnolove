@@ -137,7 +137,7 @@ const data = {
             title: 'feat: support custom VM domain',
             url: 'https://github.com/gnolang/gno/pull/2911',
             createdAt: '2024-10-05T12:18:03Z',
-            updatedAt: '2024-10-06T09:44:27Z',
+            updatedAt: '2024-10-06T11:00:20Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -3095,7 +3095,7 @@ const data = {
             title: 'feat: support custom VM domain',
             url: 'https://github.com/gnolang/gno/pull/2911',
             createdAt: '2024-10-05T12:18:03Z',
-            updatedAt: '2024-10-06T09:44:27Z',
+            updatedAt: '2024-10-06T11:00:20Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -7391,7 +7391,7 @@ const data = {
             title: 'feat: support custom VM domain',
             url: 'https://github.com/gnolang/gno/pull/2911',
             createdAt: '2024-10-05T12:18:03Z',
-            updatedAt: '2024-10-06T09:44:27Z',
+            updatedAt: '2024-10-06T11:00:20Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -37371,7 +37371,7 @@ const data = {
             title: 'feat: support custom VM domain',
             url: 'https://github.com/gnolang/gno/pull/2911',
             createdAt: '2024-10-05T12:18:03Z',
-            updatedAt: '2024-10-06T09:44:27Z',
+            updatedAt: '2024-10-06T11:00:20Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
