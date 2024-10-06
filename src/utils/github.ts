@@ -10,6 +10,11 @@ export enum TimeFilter {
   WEEKLY = 'Weekly',
 }
 
+/**
+ * Get the contributors (mentionable users) from a specific repository
+ * @param client The graphql client
+ * @param repo The repository to get the contributors from
+ */
 export const getContributors = async (client: graphql, repo: Repository): Promise<User[]> => {
   let hasNextPage = true;
   let endCursor = null;
@@ -55,6 +60,13 @@ export const getContributors = async (client: graphql, repo: Repository): Promis
   return contributors;
 };
 
+/**
+ * Build a search query for a specific user in a repository (can be tested in the "Search all issues" bar in GitHub)
+ * @param repo The repository
+ * @param user The user
+ * @param interval The interval
+ * @param is The type of issues (issue, pr, merged)
+ */
 export const buildSearchQuery = (
   repo: Repository,
   user: User,
@@ -71,6 +83,13 @@ export const buildSearchQuery = (
   return query.join(' ');
 };
 
+/**
+ * Get the stats of a specific user in a repository
+ * @param client The graphql client
+ * @param repo The repository
+ * @param user The user
+ * @param interval The interval
+ */
 export const getUserStats = async (
   client: graphql,
   repo: Repository,
@@ -210,6 +229,10 @@ export const getUsersWithStats = async (
   return Promise.all(users.map((user) => getUserStats(client, repo, user, interval)));
 };
 
+/**
+ * Get the interval of a specific time filter
+ * @param timeFilter The time filter
+ */
 export const getTimeFilterInterval = (timeFilter: TimeFilter | undefined): Interval | undefined => {
   const now = new Date();
 
@@ -228,10 +251,19 @@ export const getTimeFilterInterval = (timeFilter: TimeFilter | undefined): Inter
   }
 };
 
+/**
+ * Util function to check if the value is a TimeFilter
+ * @param value The value to check
+ */
 export const isTimeFilter = (value: string): value is keyof typeof TimeFilter => {
   return value in TimeFilter;
 };
 
+/**
+ * Get the time filter from a search parameter
+ * @param searchParam The search parameter
+ * @param fallback Default value in case the searchParam filter is invalid
+ */
 export const getTimeFilterFromSearchParam = (
   searchParam: string | string[] | undefined,
   fallback = TimeFilter.ALL_TIME,
@@ -241,19 +273,40 @@ export const getTimeFilterFromSearchParam = (
     : fallback;
 };
 
+/**
+ * Util function to compare the createdAt property of two objects
+ * @param objA Object A
+ * @param objB Object B
+ */
 export const cmpCreatedAt = <T extends { createdAt: string | Date }>(objA: T, objB: T): number => {
   return new Date(objB.createdAt).getTime() - new Date(objA.createdAt).getTime();
 };
 
+/**
+ * Util function to compare the updatedAt property of two objects
+ * @param objA Object A
+ * @param objB Object B
+ */
 export const cmpUpdatedAt = <T extends { createdAt: string | Date }>(objA: T, objB: T): number => {
   return new Date(objB.createdAt).getTime() - new Date(objA.createdAt).getTime();
 };
 
+/**
+ * Get the last MRs from a list of contributors
+ * @param contributors The contributors
+ * @param last The number of MRs to get
+ */
 export const getLastMRs = (contributors: UserWithStats[], last: number) => {
   const mrs = contributors.map(({ mrs }) => mrs.data).flat();
   return mrs.toSorted(cmpUpdatedAt).slice(0, last);
 };
 
+/**
+ * Get the last issues with a specific label from a list of contributors
+ * @param contributors The contributors
+ * @param labels The labels to filter
+ * @param last The number of issues to get
+ */
 export const getLastIssuesWithLabel = (contributors: UserWithStats[], labels: string[], last: number) => {
   const issues = contributors.map(({ issues }) => issues.data).flat();
 
@@ -269,6 +322,10 @@ export const getLastIssuesWithLabel = (contributors: UserWithStats[], labels: st
   return filteredIssues.slice(0, last);
 };
 
+/**
+ * Get the oldest contribution of a contributor
+ * @param contributor The contributor
+ */
 export const getContributorOldestContribution = (contributor: UserWithStats): Issue | PullRequest | undefined => {
   const contributions = [...contributor.issues.data, ...contributor.prs.data].toSorted(cmpCreatedAt);
   if (!contributions.length) return undefined;
@@ -276,6 +333,11 @@ export const getContributorOldestContribution = (contributor: UserWithStats): Is
   return contributions[contributions.length - 1];
 };
 
+/**
+ * Get the x newest contributors
+ * @param contributors The contributors
+ * @param last The number of contributors to get
+ */
 export const getNewContributors = (contributors: UserWithStats[], last: number) => {
   const sortedContributors = contributors.toSorted((contributor1, contributor2) => {
     const contributor1LastContribution = getContributorOldestContribution(contributor1);

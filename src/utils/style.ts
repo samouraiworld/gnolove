@@ -27,6 +27,10 @@ export const BREAKPOINTS = {
   [Breakpoint.xl]: 1640,
 };
 
+/**
+ * Convert a hex color to an RGB color
+ * @param hex The hex color to convert
+ */
 export const hexToRGB = (hex: string): [number, number, number] => {
   // Remove the '#' symbol if present
   hex = hex.replace('#', '');

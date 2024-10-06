@@ -8,6 +8,11 @@ export const arrayToString = (arr: string[]): string => {
   return `${arr.slice(0, arr.length - 1).join(', ')} and ${arr[arr.length - 1]}`;
 };
 
+/**
+ * Chunk an array into smaller arrays of a specific size.
+ * @param arr The array to chunk
+ * @param chunkSize The size of each chunk
+ */
 export const chunk = <T>(arr: T[], chunkSize: number): T[][] => {
   return [...Array(Math.ceil(arr.length / chunkSize))].map((_) => arr.splice(0, chunkSize));
 };

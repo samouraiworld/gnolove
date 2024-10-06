@@ -2,6 +2,10 @@ import SCORE from '@/constant/score';
 
 import { UserWithStats, UserWithStatsAndScore } from '@/type/github';
 
+/**
+ * Calculate the score of the user from its stats
+ * @param user The user to calculate the score from
+ */
 export const getScore = (user: UserWithStats): number => {
   return (
     user.commits * SCORE.COMMIT_FACTOR +
@@ -11,10 +15,18 @@ export const getScore = (user: UserWithStats): number => {
   );
 };
 
+/**
+ * Map the score to the contributors
+ * @param contributors The contributors to map the score to
+ */
 export const getContributorsWithScore = (contributors: UserWithStats[]): UserWithStatsAndScore[] => {
   return contributors.map((row) => ({ ...row, score: getScore(row) }));
 };
 
+/**
+ * Get the contributors sorted by score
+ * @param contributors The contributors to sort
+ */
 export const getSortedContributorsWithScore = (contributors: UserWithStats[]): UserWithStatsAndScore[] => {
   return getContributorsWithScore(contributors)
     .toSorted((a, b) => b.commits - a.commits)
