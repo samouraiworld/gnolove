@@ -6,6 +6,7 @@ import { Flex, Grid, Heading, ScrollArea } from '@radix-ui/themes';
 
 import Scoreboard from '@/feature/scoreboard';
 
+import Footer from '@/module/footer';
 import IssuesTable from '@/module/issues-table';
 import UserTable from '@/module/user-table';
 
@@ -107,6 +108,8 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
 
           <Scoreboard contributors={cachedContributors} timeFilter={timeFilter} />
         </Flex>
+
+        <Footer />
       </ScrollArea>
     </Flex>
   );
