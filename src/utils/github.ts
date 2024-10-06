@@ -91,7 +91,7 @@ export const getUserStats = async (
         }
       }
       
-      issues: search(query: $issuesQuery, type: ISSUE, first: 100) {
+      issues: search(query: $issuesQuery, type: ISSUE, last: 100) {
         nodes {
           ... on Issue {
             id
@@ -110,7 +110,7 @@ export const getUserStats = async (
         count: issueCount
       }
 
-      pullRequests: search(query: $pullRequestsQuery, type: ISSUE, first: 100) {
+      pullRequests: search(query: $pullRequestsQuery, type: ISSUE, last: 100) {
         nodes {
           ... on PullRequest {
             id
@@ -129,7 +129,7 @@ export const getUserStats = async (
         count: issueCount
       }
       
-      mergedRequests: search(query: $mergedRequestsQuery, type: ISSUE, first: 100) {
+      mergedRequests: search(query: $mergedRequestsQuery, type: ISSUE, last: 100) {
         nodes {
           ... on PullRequest {
             id
