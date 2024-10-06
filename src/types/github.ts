@@ -16,5 +16,6 @@ export type UserWithStats = User & {
   issues: { count: number; data: Issue[] };
   prs: { count: number; data: PullRequest[] };
   mrs: { count: number; data: PullRequest[] };
+  reviewedMrs: { count: number; data: PullRequest[] };
 };
 export type UserWithStatsAndScore = UserWithStats & { score: number };

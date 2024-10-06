@@ -139,7 +139,7 @@ const ContributorRow = ({ contributor, score, rank, showRank }: ContributorRowPr
       </Table.Cell>
 
       <Table.Cell data-href={contributor.url} onClick={onClick} className="text-center align-middle font-bold">
-        {score}
+        {score.toFixed(2)}
       </Table.Cell>
 
       <Table.Cell className="text-center">

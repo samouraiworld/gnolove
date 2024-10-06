@@ -66,18 +66,24 @@ export const getContributors = async (client: graphql, repo: Repository): Promis
  * @param user The user
  * @param interval The interval
  * @param is The type of issues (issue, pr, merged)
+ * @param reviewedBy If the user reviewed the PRs
  */
 export const buildSearchQuery = (
   repo: Repository,
   user: User,
   interval: Interval | undefined,
   is: ('issue' | 'pr' | 'merged')[],
+  reviewedBy?: boolean,
 ) => {
   const query = [`repo:${repo.owner}/${repo.repository}`, `author:${user.login}`, is.map((v) => `is:${v}`)];
 
   if (interval) {
     const stringyfiedInterval = [interval.start, interval.end].map((value) => format(value, 'yyyy-MM-dd')).join('..');
     query.push(`created:${stringyfiedInterval}`);
+  }
+
+  if (reviewedBy) {
+    query.push(`reviewed-by:${user.login}`);
   }
 
   return query.join(' ');
@@ -97,7 +103,7 @@ export const getUserStats = async (
   interval: Interval | undefined,
 ): Promise<UserWithStats> => {
   const query = `
-    query($owner: String!, $repository: String!, $id: ID!, $until: GitTimestamp, $since: GitTimestamp,  $issuesQuery: String!, $pullRequestsQuery: String!, $mergedRequestsQuery: String!) {
+    query($owner: String!, $repository: String!, $id: ID!, $until: GitTimestamp, $since: GitTimestamp,  $issuesQuery: String!, $pullRequestsQuery: String!, $mergedRequestsQuery: String!, $reviewedMergedRequestsQuery: String!) {
       commits: repository(owner: $owner, name: $repository) {
         defaultBranchRef {
           target {
@@ -166,11 +172,31 @@ export const getUserStats = async (
         }
         count: issueCount
       }
+      
+      reviewedMergedRequests: search(query: $reviewedMergedRequestsQuery, type: ISSUE, last: 100) {
+        nodes {
+          ... on PullRequest {
+            id
+            title
+            url
+            createdAt
+            updatedAt
+            labels(first: 10) {
+              nodes {
+                name
+                color
+              }
+            }
+          }
+        }
+        count: issueCount
+      }
     }`;
 
   const issuesQuery = buildSearchQuery(repo, user, interval, ['issue']);
   const pullRequestsQuery = buildSearchQuery(repo, user, interval, ['pr']);
   const mergedRequestsQuery = buildSearchQuery(repo, user, interval, ['merged']);
+  const reviewedMergedRequestsQuery = buildSearchQuery(repo, user, interval, ['merged'], true);
 
   type ReturnedNode = {
     id: string;
@@ -184,6 +210,7 @@ export const getUserStats = async (
   type ReturnedIssues = { nodes: ReturnedNode[]; count: number };
   type ReturnedPullRequests = { nodes: ReturnedNode[]; count: number };
   type ReturnedMergedRequests = { nodes: ReturnedNode[]; count: number };
+  type ReturnedReviewedMergedRequests = { nodes: ReturnedNode[]; count: number };
 
   type ReturnedCommits = { defaultBranchRef: { target: { history: { totalCount: number } } } };
 
@@ -192,6 +219,7 @@ export const getUserStats = async (
     issues: ReturnedIssues;
     pullRequests: ReturnedPullRequests;
     mergedRequests: ReturnedMergedRequests;
+    reviewedMergedRequests: ReturnedReviewedMergedRequests;
   }>(query, {
     owner: repo.owner,
     repository: repo.repository,
@@ -201,6 +229,7 @@ export const getUserStats = async (
     issuesQuery,
     pullRequestsQuery,
     mergedRequestsQuery,
+    reviewedMergedRequestsQuery,
   });
 
   const mapNodesAndLabels = (nodes: ReturnedNode[]) => {
@@ -215,6 +244,7 @@ export const getUserStats = async (
     issues: { count: res.issues.count, data: mapNodesAndLabels(res.issues.nodes) },
     prs: { count: res.pullRequests.count, data: mapNodesAndLabels(res.pullRequests.nodes) },
     mrs: { count: res.mergedRequests.count, data: mapNodesAndLabels(res.mergedRequests.nodes) },
+    reviewedMrs: { count: res.reviewedMergedRequests.count, data: mapNodesAndLabels(res.reviewedMergedRequests.nodes) },
   };
 };
 
