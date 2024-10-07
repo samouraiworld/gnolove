@@ -295,12 +295,30 @@ export const isTimeFilter = (value: string): value is keyof typeof TimeFilter =>
  * @param fallback Default value in case the searchParam filter is invalid
  */
 export const getTimeFilterFromSearchParam = (
-  searchParam: string | string[] | undefined,
+  searchParam: string | string[] | undefined | null,
   fallback = TimeFilter.ALL_TIME,
 ) => {
   return searchParam && typeof searchParam === 'string' && isTimeFilter(searchParam)
     ? TimeFilter[searchParam]
     : fallback;
+};
+
+export const getTimeFilterFromAPISearchParam = (
+  searchParam: string | string[] | undefined | null,
+  fallback = TimeFilter.ALL_TIME,
+) => {
+  switch (searchParam) {
+    case 'all_time':
+      return TimeFilter.ALL_TIME;
+    case 'yearly':
+      return TimeFilter.YEARLY;
+    case 'monthly':
+      return TimeFilter.MONTHLY;
+    case 'weekly':
+      return TimeFilter.WEEKLY;
+    default:
+      return fallback;
+  }
 };
 
 /**
