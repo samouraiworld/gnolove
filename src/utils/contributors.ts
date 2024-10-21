@@ -9,7 +9,7 @@ import REPOSITORY from '@/constant/repository';
 
 import { UserWithStats } from '@/type/github';
 
-const EXPIRES_AFTER = 1000 * 60; // expires after 1 minute
+const EXPIRES_AFTER = 1000 * 60 * 60; // expires after 1 hour
 
 const fetchAndSetCache = async (timeFilter: TimeFilter) => {
   const usersWithStats = await getUsersWithStats(graphql, REPOSITORY, timeFilter);
