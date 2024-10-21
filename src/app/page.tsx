@@ -9,7 +9,7 @@ import Footer from '@/module/footer';
 import IssuesTable from '@/module/issues-table';
 import UserTable from '@/module/user-table';
 
-import { getCachedContributorsQuery } from '@/util/contributors';
+import { getCachedContributors } from '@/util/contributors';
 import {
   getLastIssuesWithLabel,
   getLastMRs,
@@ -33,11 +33,8 @@ export interface HomePageParams {
 const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
   const timeFilter = getTimeFilterFromSearchParam(f, TimeFilter.MONTHLY);
 
-  const allTimeQuery = getCachedContributorsQuery(TimeFilter.ALL_TIME);
-  const query = getCachedContributorsQuery(timeFilter);
-
-  const allTimeCachedContributors = await allTimeQuery();
-  const cachedContributors = await query();
+  const allTimeCachedContributors = await getCachedContributors(TimeFilter.ALL_TIME);
+  const cachedContributors = await getCachedContributors(timeFilter);
 
   const lastMRs = getLastMRs(allTimeCachedContributors, 5);
   const lastIssues = getLastIssuesWithLabel(allTimeCachedContributors, ['good first issue', 'help wanted'], 5);

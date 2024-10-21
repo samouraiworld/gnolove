@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { getCachedContributorsFromTimeFilter } from '@/util/contributors';
+import { getCachedContributors } from '@/util/contributors';
 import { getTimeFilterFromAPISearchParam } from '@/util/github';
 import { getSortedContributorsWithScore } from '@/util/score';
 
@@ -12,7 +12,7 @@ export interface Params {
 
 export const GET = async (request: NextRequest, { params: { rank: rawRank } }: Params) => {
   const timeFilter = getTimeFilterFromAPISearchParam(request.nextUrl.searchParams.get('timeFilter'));
-  const cachedContributors = await getCachedContributorsFromTimeFilter(timeFilter);
+  const cachedContributors = await getCachedContributors(timeFilter);
   const contributorsWithScore = getSortedContributorsWithScore(cachedContributors);
 
   const parsedRank = parseInt(rawRank ?? '');

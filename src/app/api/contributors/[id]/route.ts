@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { getCachedContributorsFromTimeFilter } from '@/util/contributors';
+import { getCachedContributors } from '@/util/contributors';
 import { getTimeFilterFromAPISearchParam } from '@/util/github';
 
 export interface Params {
@@ -11,7 +11,7 @@ export interface Params {
 
 export const GET = async (request: NextRequest, { params: { id: contributorId } }: Params) => {
   const timeFilter = getTimeFilterFromAPISearchParam(request.nextUrl.searchParams.get('timeFilter'));
-  const cachedContributors = await getCachedContributorsFromTimeFilter(timeFilter);
+  const cachedContributors = await getCachedContributors(timeFilter);
 
   return NextResponse.json(
     cachedContributors.find(({ id }) => id === contributorId) ??

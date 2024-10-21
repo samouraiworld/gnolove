@@ -1,4 +1,4 @@
-import { unstable_cache } from 'next/cache';
+import CacheRepository from '@/class/cache-repository';
 
 import graphql from '@/instance/graphql';
 
@@ -9,28 +9,43 @@ import REPOSITORY from '@/constant/repository';
 
 import { UserWithStats } from '@/type/github';
 
-export const getCachedContributorsQuery = (timeFilter: TimeFilter) =>
-  unstable_cache(
-    async (): Promise<UserWithStats[]> => {
-      // ! The request takes time to load. Only use the dynamic feature in the production environment to avoid slow
-      // ! development process.
-      if (process.env.NODE_ENV !== 'production') return contributors[timeFilter];
+const EXPIRES_AFTER = 1000 * 60; // expires after 1 minute
 
-      try {
-        // ! Keep the 'await' otherwise, the try-catch block is not triggered.
-        return await getUsersWithStats(graphql, REPOSITORY, timeFilter);
-      } catch (err) {
-        console.error(err);
+const fetchAndSetCache = async (timeFilter: TimeFilter) => {
+  const usersWithStats = await getUsersWithStats(graphql, REPOSITORY, timeFilter);
+  await CacheRepository.setContributors(timeFilter, usersWithStats);
 
-        // eslint-disable-next-line
-        console.log('Failed to retrieve the contributors. Using the fallback file.');
-        return contributors[timeFilter];
-      }
-    },
-    ['contributors', timeFilter],
-    { revalidate: 60 * 60 }, // 60 * 60 = 3600 secs = 1 hour
-  );
+  // eslint-disable-next-line
+  console.log(`Setting the cache for contributors and time filter : '${timeFilter}'.`);
 
-export const getCachedContributorsFromTimeFilter = async (timeFilter: TimeFilter) => {
-  return getCachedContributorsQuery(timeFilter)();
+  return usersWithStats;
+};
+
+export const getCachedContributors = async (timeFilter: TimeFilter): Promise<UserWithStats[]> => {
+  const data = await CacheRepository.getContributors(timeFilter);
+
+  if (!data) {
+    try {
+      return await fetchAndSetCache(timeFilter);
+    } catch (err) {
+      console.error(err);
+
+      // eslint-disable-next-line
+      console.log('Failed to retrieve the contributors. Using the fallback file.');
+      return contributors[timeFilter];
+    }
+  }
+
+  const msSinceLastUpdate = Date.now() - data.lastUpdate;
+  if (msSinceLastUpdate < EXPIRES_AFTER) return data.usersWithStats;
+
+  try {
+    return await fetchAndSetCache(timeFilter);
+  } catch (err) {
+    console.error(err);
+
+    // eslint-disable-next-line
+    console.log('Failed to retrieve the contributors. Using the cached values file.');
+    return data.usersWithStats;
+  }
 };
