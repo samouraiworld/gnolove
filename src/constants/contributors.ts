@@ -102,10 +102,34 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/94029?u=e2b3fdebddae48d88892302430bd28b5b5f96133&v=4',
       url: 'https://github.com/moul',
       name: 'Manfred Touron',
-      commits: 2,
+      commits: 3,
       issues: {
-        count: 2,
+        count: 5,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6Z1z0y',
+            title: 'contract: curated (by a DAO) grc20 registry',
+            url: 'https://github.com/gnolang/gno/issues/2940',
+            createdAt: '2024-10-11T10:27:09Z',
+            updatedAt: '2024-10-11T10:30:04Z',
+            labels: [],
+          },
+          {
+            id: 'I_kwDOE-u6Jc6ZU7uy',
+            title: 'gno lint to run on the CI and annotate PRs',
+            url: 'https://github.com/gnolang/gno/issues/2924',
+            createdAt: '2024-10-08T07:56:19Z',
+            updatedAt: '2024-10-08T07:56:19Z',
+            labels: [],
+          },
+          {
+            id: 'I_kwDOE-u6Jc6ZU6-A',
+            title: 'update docs (and examples) regarding PrevRealm and OrigCaller',
+            url: 'https://github.com/gnolang/gno/issues/2923',
+            createdAt: '2024-10-08T07:55:00Z',
+            updatedAt: '2024-10-14T22:03:21Z',
+            labels: [],
+          },
           {
             id: 'I_kwDOE-u6Jc6ZGHgV',
             title: 'RFC(ci): async infra for slow non-essential checks (fuzz, bench)',
@@ -124,20 +148,114 @@ const data = {
             title: 'Compile audit areas',
             url: 'https://github.com/gnolang/gno/issues/2886',
             createdAt: '2024-10-02T16:25:38Z',
-            updatedAt: '2024-10-02T16:56:30Z',
-            labels: [],
+            updatedAt: '2024-10-08T21:20:12Z',
+            labels: [
+              {
+                name: 'security',
+                color: 'FF0000',
+              },
+            ],
           },
         ],
       },
       prs: {
-        count: 6,
+        count: 12,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_J9Y9',
+            title: 'feat(examples): grc20 refactor',
+            url: 'https://github.com/gnolang/gno/pull/2983',
+            createdAt: '2024-10-19T01:20:10Z',
+            updatedAt: '2024-10-20T17:42:23Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5_Hc2B',
+            title: 'bug -> chore(ci): run gno test with --print-runtime-metrics',
+            url: 'https://github.com/gnolang/gno/pull/2979',
+            createdAt: '2024-10-18T14:56:48Z',
+            updatedAt: '2024-10-19T17:09:44Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+              {
+                name: 'help wanted',
+                color: '006b75',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5_Bazq',
+            title: "feat(gnovm): add 'gno test -print-events' + cleanup machine between tests",
+            url: 'https://github.com/gnolang/gno/pull/2975',
+            createdAt: '2024-10-17T21:44:35Z',
+            updatedAt: '2024-10-18T19:33:43Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-3JeA',
+            title: 'feat(examples): add p/moul/udao package',
+            url: 'https://github.com/gnolang/gno/pull/2963',
+            createdAt: '2024-10-16T17:01:38Z',
+            updatedAt: '2024-10-16T18:09:56Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-r1Ew',
+            title: 'chore: farewell Dylan 👋',
+            url: 'https://github.com/gnolang/gno/pull/2951',
+            createdAt: '2024-10-15T14:22:41Z',
+            updatedAt: '2024-10-15T14:41:09Z',
+            labels: [],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc590YKQ',
+            title: 'feat(tm2): add sdk/params module',
+            url: 'https://github.com/gnolang/gno/pull/2920',
+            createdAt: '2024-10-07T13:34:57Z',
+            updatedAt: '2024-10-21T00:11:32Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc59uYDB',
             title: 'chore(ci): increase bench timeout to 6h',
             url: 'https://github.com/gnolang/gno/pull/2914',
             createdAt: '2024-10-06T07:30:08Z',
-            updatedAt: '2024-10-06T07:47:46Z',
+            updatedAt: '2024-10-17T08:44:37Z',
             labels: [],
           },
           {
@@ -174,7 +292,7 @@ const data = {
             title: 'chore: relocate tm2/std.MemFile in gnovm/std',
             url: 'https://github.com/gnolang/gno/pull/2910',
             createdAt: '2024-10-05T09:18:29Z',
-            updatedAt: '2024-10-06T08:08:47Z',
+            updatedAt: '2024-10-10T16:53:11Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -216,7 +334,7 @@ const data = {
             title: 'feat: add p/moul/helplink',
             url: 'https://github.com/gnolang/gno/pull/2887',
             createdAt: '2024-10-02T17:07:28Z',
-            updatedAt: '2024-10-03T13:43:32Z',
+            updatedAt: '2024-10-19T00:31:58Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -227,8 +345,16 @@ const data = {
         ],
       },
       mrs: {
-        count: 2,
+        count: 3,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-r1Ew',
+            title: 'chore: farewell Dylan 👋',
+            url: 'https://github.com/gnolang/gno/pull/2951',
+            createdAt: '2024-10-15T14:22:41Z',
+            updatedAt: '2024-10-15T14:41:09Z',
+            labels: [],
+          },
           {
             id: 'PR_kwDOE-u6Jc59tFOu',
             title: 'chore(ci): do not mark master as failing due to benchmark',
@@ -373,8 +499,48 @@ const data = {
         data: [],
       },
       prs: {
-        count: 0,
-        data: [],
+        count: 3,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_APWZ',
+            title: 'feat(gnovm): added crypto/blake3 in the same style as sha256',
+            url: 'https://github.com/gnolang/gno/pull/2972',
+            createdAt: '2024-10-17T18:19:56Z',
+            updatedAt: '2024-10-18T12:49:41Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5---Eg',
+            title: 'feat(examples): add blake3 to gno.land/p/demo/crypto/blake3',
+            url: 'https://github.com/gnolang/gno/pull/2970',
+            createdAt: '2024-10-17T15:07:08Z',
+            updatedAt: '2024-10-18T21:13:25Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-PeI_',
+            title: 'feat(stdlibs): add internal/compat/crypto/subtle',
+            url: 'https://github.com/gnolang/gno/pull/2937',
+            createdAt: '2024-10-10T15:40:19Z',
+            updatedAt: '2024-10-17T17:51:05Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
       },
       mrs: {
         count: 0,
@@ -463,14 +629,22 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/777866?v=4',
       url: 'https://github.com/sw360cab',
       name: 'Sergio Maria Matone',
-      commits: 2,
+      commits: 3,
       issues: {
         count: 0,
         data: [],
       },
       prs: {
-        count: 2,
+        count: 3,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-81Xt',
+            title: 'chore(ci): reducing folders spinning up benchmarks',
+            url: 'https://github.com/gnolang/gno/pull/2966',
+            createdAt: '2024-10-17T10:51:29Z',
+            updatedAt: '2024-10-18T10:05:59Z',
+            labels: [],
+          },
           {
             id: 'PR_kwDOE-u6Jc59gATb',
             title: 'ci: remove conflicting option to push benchmark on github pages',
@@ -490,8 +664,16 @@ const data = {
         ],
       },
       mrs: {
-        count: 2,
+        count: 3,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-81Xt',
+            title: 'chore(ci): reducing folders spinning up benchmarks',
+            url: 'https://github.com/gnolang/gno/pull/2966',
+            createdAt: '2024-10-17T10:51:29Z',
+            updatedAt: '2024-10-18T10:05:59Z',
+            labels: [],
+          },
           {
             id: 'PR_kwDOE-u6Jc59gATb',
             title: 'ci: remove conflicting option to push benchmark on github pages',
@@ -558,7 +740,7 @@ const data = {
             title: 'feat(boardsv2): experiment API - WIP',
             url: 'https://github.com/gnolang/gno/pull/2902',
             createdAt: '2024-10-04T13:11:08Z',
-            updatedAt: '2024-10-04T15:51:39Z',
+            updatedAt: '2024-10-11T14:47:06Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -600,18 +782,45 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/1196465?u=b32a9401bab7384dd6195eee8ba073a9b38db99b&v=4',
       url: 'https://github.com/ajnavarro',
       name: 'Antonio Navarro Perez',
-      commits: 0,
+      commits: 2,
       issues: {
-        count: 0,
-        data: [],
+        count: 1,
+        data: [
+          {
+            id: 'I_kwDOE-u6Jc6ZLVlo',
+            title: 'META: Benchmarks',
+            url: 'https://github.com/gnolang/gno/issues/2919',
+            createdAt: '2024-10-07T09:34:52Z',
+            updatedAt: '2024-10-17T12:23:07Z',
+            labels: [],
+          },
+        ],
       },
       prs: {
-        count: 0,
-        data: [],
+        count: 1,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-Deuv',
+            title: 'chore: Remove checkbox with the reminder of adding more Benchmarks.',
+            url: 'https://github.com/gnolang/gno/pull/2927',
+            createdAt: '2024-10-09T09:44:14Z',
+            updatedAt: '2024-10-16T09:47:30Z',
+            labels: [],
+          },
+        ],
       },
       mrs: {
-        count: 0,
-        data: [],
+        count: 1,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-Deuv',
+            title: 'chore: Remove checkbox with the reminder of adding more Benchmarks.',
+            url: 'https://github.com/gnolang/gno/pull/2927',
+            createdAt: '2024-10-09T09:44:14Z',
+            updatedAt: '2024-10-16T09:47:30Z',
+            labels: [],
+          },
+        ],
       },
       reviewedMrs: {
         count: 0,
@@ -648,7 +857,7 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/1999543?v=4',
       url: 'https://github.com/jefft0',
       name: 'Jeff Thompson',
-      commits: 0,
+      commits: 1,
       issues: {
         count: 0,
         data: [],
@@ -744,10 +953,27 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/4681308?u=5a240449a1a95bec5cfecd2295f4804fec207cdf&v=4',
       url: 'https://github.com/thehowl',
       name: 'Morgan',
-      commits: 2,
+      commits: 3,
       issues: {
-        count: 5,
+        count: 6,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6as43_',
+            title: 'can `break` out of a self-executing closure',
+            url: 'https://github.com/gnolang/gno/issues/2973',
+            createdAt: '2024-10-17T18:36:10Z',
+            updatedAt: '2024-10-17T18:37:02Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'I_kwDOE-u6Jc6ZCcsf',
             title: '`gno test -covermode`',
@@ -787,15 +1013,20 @@ const data = {
             title: 'rfc: the future of `gno.mod`',
             url: 'https://github.com/gnolang/gno/issues/2904',
             createdAt: '2024-10-04T14:22:22Z',
-            updatedAt: '2024-10-06T09:30:42Z',
-            labels: [],
+            updatedAt: '2024-10-11T11:27:26Z',
+            labels: [
+              {
+                name: 'gno-proposal',
+                color: '81AC09',
+              },
+            ],
           },
           {
             id: 'I_kwDOE-u6Jc6Yy_NN',
             title: 'META - Review Team Phase 1',
             url: 'https://github.com/gnolang/gno/issues/2890',
             createdAt: '2024-10-03T09:02:15Z',
-            updatedAt: '2024-10-03T09:18:44Z',
+            updatedAt: '2024-10-17T11:50:05Z',
             labels: [],
           },
           {
@@ -809,8 +1040,16 @@ const data = {
         ],
       },
       prs: {
-        count: 4,
+        count: 5,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-8ktW',
+            title: 'chore: remove misc/logos',
+            url: 'https://github.com/gnolang/gno/pull/2965',
+            createdAt: '2024-10-17T10:15:37Z',
+            updatedAt: '2024-10-17T10:36:17Z',
+            labels: [],
+          },
           {
             id: 'PR_kwDOE-u6Jc59fzWT',
             title: 'refactor: gnovm -> gno, pkg/gnolang -> vm, `package gnolang` -> `vm`',
@@ -841,7 +1080,7 @@ const data = {
             title: 'wip: use wal file to replay chain',
             url: 'https://github.com/gnolang/gno/pull/2885',
             createdAt: '2024-10-02T14:45:22Z',
-            updatedAt: '2024-10-02T15:15:58Z',
+            updatedAt: '2024-10-06T15:25:39Z',
             labels: [
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
@@ -943,18 +1182,105 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/5792239?u=8fa959d3dce1f26f43e80edb81ec0317f0a847c3&v=4',
       url: 'https://github.com/mvertes',
       name: 'Marc Vertes',
-      commits: 0,
+      commits: 1,
       issues: {
-        count: 0,
-        data: [],
+        count: 1,
+        data: [
+          {
+            id: 'I_kwDOE-u6Jc6aXW_f',
+            title: 'Running `go vet` on the project fails.',
+            url: 'https://github.com/gnolang/gno/issues/2954',
+            createdAt: '2024-10-15T20:30:35Z',
+            updatedAt: '2024-10-18T11:32:01Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
+              },
+            ],
+          },
+        ],
       },
       prs: {
-        count: 0,
-        data: [],
+        count: 2,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_IZHL',
+            title: 'fix(tm2): avoid mutex copy in marshal and unmarshal methods',
+            url: 'https://github.com/gnolang/gno/pull/2981',
+            createdAt: '2024-10-18T17:47:16Z',
+            updatedAt: '2024-10-18T18:07:05Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-tPpk',
+            title: 'chore: fix issues reported by `go vet`',
+            url: 'https://github.com/gnolang/gno/pull/2952',
+            createdAt: '2024-10-15T17:11:47Z',
+            updatedAt: '2024-10-15T20:56:00Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
       },
       mrs: {
-        count: 0,
-        data: [],
+        count: 1,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-tPpk',
+            title: 'chore: fix issues reported by `go vet`',
+            url: 'https://github.com/gnolang/gno/pull/2952',
+            createdAt: '2024-10-15T17:11:47Z',
+            updatedAt: '2024-10-15T20:56:00Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
       },
       reviewedMrs: {
         count: 0,
@@ -967,14 +1293,49 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/6007578?u=1bc18d55d60a5bcd60a217bc38963cf8d261aebe&v=4',
       url: 'https://github.com/ltzmaxwell',
       name: 'ltzmaxwell',
-      commits: 0,
+      commits: 1,
       issues: {
         count: 0,
         data: [],
       },
       prs: {
-        count: 0,
-        data: [],
+        count: 2,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-zlkW',
+            title: 'WIP fix(gnovm): add filetest for inter-realm spec',
+            url: 'https://github.com/gnolang/gno/pull/2958',
+            createdAt: '2024-10-16T10:22:03Z',
+            updatedAt: '2024-10-19T00:46:19Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-hWil',
+            title: 'WIP fix(gnovm): correct const type deduction',
+            url: 'https://github.com/gnolang/gno/pull/2948',
+            createdAt: '2024-10-14T10:31:16Z',
+            updatedAt: '2024-10-14T10:52:07Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
       },
       mrs: {
         count: 0,
@@ -1290,22 +1651,80 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/7622257?u=c80ea7720f1b43c1380a911c1588242f1d5f3497&v=4',
       url: 'https://github.com/alexiscolin',
       name: 'Alexis Colin',
-      commits: 0,
+      commits: 2,
       issues: {
         count: 0,
         data: [],
       },
       prs: {
-        count: 0,
-        data: [],
+        count: 2,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-9u-z',
+            title: 'chore: add alexiscolin as gnoweb reviewer',
+            url: 'https://github.com/gnolang/gno/pull/2967',
+            createdAt: '2024-10-17T12:45:25Z',
+            updatedAt: '2024-10-18T20:32:41Z',
+            labels: [],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-7IfK',
+            title: 'feat(gnoweb): disable html in markdown',
+            url: 'https://github.com/gnolang/gno/pull/2964',
+            createdAt: '2024-10-17T06:57:27Z',
+            updatedAt: '2024-10-20T13:07:25Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
       },
       mrs: {
-        count: 0,
-        data: [],
+        count: 2,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-9u-z',
+            title: 'chore: add alexiscolin as gnoweb reviewer',
+            url: 'https://github.com/gnolang/gno/pull/2967',
+            createdAt: '2024-10-17T12:45:25Z',
+            updatedAt: '2024-10-18T20:32:41Z',
+            labels: [],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-7IfK',
+            title: 'feat(gnoweb): disable html in markdown',
+            url: 'https://github.com/gnolang/gno/pull/2964',
+            createdAt: '2024-10-17T06:57:27Z',
+            updatedAt: '2024-10-20T13:07:25Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
       },
       reviewedMrs: {
-        count: 0,
-        data: [],
+        count: 1,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-7IfK',
+            title: 'feat(gnoweb): disable html in markdown',
+            url: 'https://github.com/gnolang/gno/pull/2964',
+            createdAt: '2024-10-17T06:57:27Z',
+            updatedAt: '2024-10-20T13:07:25Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
       },
     },
     {
@@ -1344,8 +1763,29 @@ const data = {
         data: [],
       },
       prs: {
-        count: 1,
+        count: 2,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-NX9i',
+            title: 'feat(gnovm): packages loader',
+            url: 'https://github.com/gnolang/gno/pull/2932',
+            createdAt: '2024-10-10T11:30:05Z',
+            updatedAt: '2024-10-17T19:15:43Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc59pJjZ',
             title: 'fix: deprecate std.GetOrigCaller',
@@ -1406,8 +1846,68 @@ const data = {
         data: [],
       },
       prs: {
-        count: 0,
-        data: [],
+        count: 3,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5--xP3',
+            title: 'feat(keeper): add `vm/qpath` query',
+            url: 'https://github.com/gnolang/gno/pull/2969',
+            createdAt: '2024-10-17T14:43:39Z',
+            updatedAt: '2024-10-17T15:32:45Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-jyx0',
+            title: 'wip(keeper): implement json primitive return',
+            url: 'https://github.com/gnolang/gno/pull/2949',
+            createdAt: '2024-10-14T15:08:31Z',
+            updatedAt: '2024-10-17T17:49:46Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-dD1P',
+            title: 'fix(gnodev): timstamps issue on reload',
+            url: 'https://github.com/gnolang/gno/pull/2943',
+            createdAt: '2024-10-13T17:40:04Z',
+            updatedAt: '2024-10-13T17:57:44Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
       },
       mrs: {
         count: 0,
@@ -1474,12 +1974,51 @@ const data = {
       name: 'Lee ByeongJun',
       commits: 3,
       issues: {
-        count: 0,
-        data: [],
-      },
-      prs: {
         count: 1,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6ZuHTV',
+            title: 'Slow execution of large byte slice/string operations ',
+            url: 'https://github.com/gnolang/gno/issues/2935',
+            createdAt: '2024-10-10T14:16:09Z',
+            updatedAt: '2024-10-10T14:16:09Z',
+            labels: [],
+          },
+        ],
+      },
+      prs: {
+        count: 3,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-UKjz',
+            title: 'feat(p/json): optimize json',
+            url: 'https://github.com/gnolang/gno/pull/2939',
+            createdAt: '2024-10-11T08:32:16Z',
+            updatedAt: '2024-10-21T03:07:06Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: 'review/triage-pending',
+                color: '5319e7',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-Kon_',
+            title: 'test(p/uint25): Increase Test Coverage for `uint256` Package',
+            url: 'https://github.com/gnolang/gno/pull/2931',
+            createdAt: '2024-10-10T05:54:49Z',
+            updatedAt: '2024-10-21T06:38:35Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc59k9eT',
             title: 'fix(stdlib): io test',
@@ -1536,14 +2075,22 @@ const data = {
       name: 'Nemanja Aleksic',
       commits: 0,
       issues: {
-        count: 1,
+        count: 2,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6a2I01',
+            title: 'Global GNOT lock',
+            url: 'https://github.com/gnolang/gno/issues/2980',
+            createdAt: '2024-10-18T15:53:15Z',
+            updatedAt: '2024-10-18T15:53:15Z',
+            labels: [],
+          },
           {
             id: 'I_kwDOE-u6Jc6ZDJWp',
             title: 'Migrate community-first repos to gnoverse',
             url: 'https://github.com/gnolang/gno/issues/2909',
             createdAt: '2024-10-05T08:36:25Z',
-            updatedAt: '2024-10-05T10:45:15Z',
+            updatedAt: '2024-10-17T12:44:41Z',
             labels: [],
           },
         ],
@@ -1641,8 +2188,24 @@ const data = {
       name: '6h057',
       commits: 0,
       issues: {
-        count: 1,
+        count: 3,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6aCI9A',
+            title: 'Type Conversion Error When Comparing String with Constant Type',
+            url: 'https://github.com/gnolang/gno/issues/2944',
+            createdAt: '2024-10-13T20:36:48Z',
+            updatedAt: '2024-10-13T20:36:48Z',
+            labels: [],
+          },
+          {
+            id: 'I_kwDOE-u6Jc6Zv4u8',
+            title: 'GnoVM Unexpected Crash When Panic Occurs in Tests',
+            url: 'https://github.com/gnolang/gno/issues/2938',
+            createdAt: '2024-10-10T17:45:26Z',
+            updatedAt: '2024-10-11T11:03:14Z',
+            labels: [],
+          },
           {
             id: 'I_kwDOE-u6Jc6YvxyW',
             title: 'Assigning Type as Value in Gno should be prohibited',
@@ -1654,14 +2217,45 @@ const data = {
         ],
       },
       prs: {
-        count: 1,
+        count: 3,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_Ll_Q',
+            title: 'fix(gnovm): forbid start expression when value is not a pointer',
+            url: 'https://github.com/gnolang/gno/pull/2984',
+            createdAt: '2024-10-19T15:33:56Z',
+            updatedAt: '2024-10-21T08:58:07Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: 'review/triage-pending',
+                color: '5319e7',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-NdVk',
+            title:
+              'fix(ghverify): ensure AVL tree iteration processes all items in Render and GetFeedDefinitions function',
+            url: 'https://github.com/gnolang/gno/pull/2933',
+            createdAt: '2024-10-10T11:42:10Z',
+            updatedAt: '2024-10-11T11:04:14Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc59hZwY',
             title: 'chore(gnovm): prevent assignment to non-assignable expressions',
             url: 'https://github.com/gnolang/gno/pull/2896',
             createdAt: '2024-10-03T16:12:47Z',
-            updatedAt: '2024-10-04T21:02:27Z',
+            updatedAt: '2024-10-18T16:12:29Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -1716,8 +2310,30 @@ const data = {
         data: [],
       },
       prs: {
-        count: 0,
-        data: [],
+        count: 1,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-Z-39',
+            title: 'feat: support metadata for genesis txs',
+            url: 'https://github.com/gnolang/gno/pull/2941',
+            createdAt: '2024-10-12T10:58:57Z',
+            updatedAt: '2024-10-18T11:35:34Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
+              },
+            ],
+          },
+        ],
       },
       mrs: {
         count: 0,
@@ -1950,7 +2566,7 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/22179290?u=55434bd982d7acd85dd204b344e86a20335f0285&v=4',
       url: 'https://github.com/Villaquiranm',
       name: 'Miguel Victoria Villaquiran',
-      commits: 2,
+      commits: 3,
       issues: {
         count: 1,
         data: [
@@ -1965,12 +2581,57 @@ const data = {
         ],
       },
       prs: {
-        count: 0,
-        data: [],
+        count: 2,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_MTuL',
+            title: 'feat(genesis): deployerAddress passed as parameter',
+            url: 'https://github.com/gnolang/gno/pull/2986',
+            createdAt: '2024-10-19T21:20:49Z',
+            updatedAt: '2024-10-21T07:36:07Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+              {
+                name: 'review/triage-pending',
+                color: '5319e7',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5_HOlO',
+            title: 'fix(gnovm): remove migration of old dir for gno tools',
+            url: 'https://github.com/gnolang/gno/pull/2978',
+            createdAt: '2024-10-18T14:26:23Z',
+            updatedAt: '2024-10-18T15:43:57Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
       },
       mrs: {
-        count: 0,
-        data: [],
+        count: 1,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_HOlO',
+            title: 'fix(gnovm): remove migration of old dir for gno tools',
+            url: 'https://github.com/gnolang/gno/pull/2978',
+            createdAt: '2024-10-18T14:26:23Z',
+            updatedAt: '2024-10-18T15:43:57Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
       },
       reviewedMrs: {
         count: 0,
@@ -2151,10 +2812,23 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/33522493?u=0b6173dfca632d2336983bbf379be59251ee3cb7&v=4',
       url: 'https://github.com/leohhhn',
       name: 'Leon Hudak',
-      commits: 0,
+      commits: 2,
       issues: {
-        count: 1,
+        count: 2,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6aV6MM',
+            title: 'docs.gno.land revamp',
+            url: 'https://github.com/gnolang/gno/issues/2953',
+            createdAt: '2024-10-15T17:34:07Z',
+            updatedAt: '2024-10-17T19:15:10Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'I_kwDOE-u6Jc6YhfAi',
             title: '[GnoVM] Dereference package level errors before returning them to the user',
@@ -2166,16 +2840,97 @@ const data = {
         ],
       },
       prs: {
-        count: 0,
-        data: [],
+        count: 3,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_I5sH',
+            title: 'chore(pages): update bounty Terms & Conditions link',
+            url: 'https://github.com/gnolang/gno/pull/2982',
+            createdAt: '2024-10-18T19:30:59Z',
+            updatedAt: '2024-10-18T19:52:06Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-OmGg',
+            title: 'fix(r/leon/config): fix config bug',
+            url: 'https://github.com/gnolang/gno/pull/2934',
+            createdAt: '2024-10-10T13:54:53Z',
+            updatedAt: '2024-10-15T17:55:19Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc599F2Y',
+            title: 'fix(gnoweb): fix broken link',
+            url: 'https://github.com/gnolang/gno/pull/2926',
+            createdAt: '2024-10-08T13:51:14Z',
+            updatedAt: '2024-10-08T14:41:38Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
       },
       mrs: {
-        count: 0,
-        data: [],
+        count: 2,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-OmGg',
+            title: 'fix(r/leon/config): fix config bug',
+            url: 'https://github.com/gnolang/gno/pull/2934',
+            createdAt: '2024-10-10T13:54:53Z',
+            updatedAt: '2024-10-15T17:55:19Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc599F2Y',
+            title: 'fix(gnoweb): fix broken link',
+            url: 'https://github.com/gnolang/gno/pull/2926',
+            createdAt: '2024-10-08T13:51:14Z',
+            updatedAt: '2024-10-08T14:41:38Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
       },
       reviewedMrs: {
-        count: 0,
-        data: [],
+        count: 1,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-OmGg',
+            title: 'fix(r/leon/config): fix config bug',
+            url: 'https://github.com/gnolang/gno/pull/2934',
+            createdAt: '2024-10-10T13:54:53Z',
+            updatedAt: '2024-10-15T17:55:19Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
       },
     },
     {
@@ -2362,10 +3117,10 @@ const data = {
         data: [
           {
             id: 'PR_kwDOE-u6Jc59s0ut',
-            title: 'feat(gno.land): Implement markdown package',
+            title: 'feat(examples): Implement markdown package',
             url: 'https://github.com/gnolang/gno/pull/2912',
             createdAt: '2024-10-05T12:59:27Z',
-            updatedAt: '2024-10-05T13:36:59Z',
+            updatedAt: '2024-10-14T14:19:00Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -2378,14 +3133,14 @@ const data = {
             title: 'fix(tm2): Enable coin benchmark tests after fixing panic error',
             url: 'https://github.com/gnolang/gno/pull/2884',
             createdAt: '2024-10-02T14:12:28Z',
-            updatedAt: '2024-10-05T15:48:50Z',
+            updatedAt: '2024-10-18T09:41:24Z',
             labels: [
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -2937,8 +3692,17 @@ const data = {
       name: 'Mustapha',
       commits: 0,
       issues: {
-        count: 0,
-        data: [],
+        count: 1,
+        data: [
+          {
+            id: 'I_kwDOE-u6Jc6a8ANK',
+            title: 'Proposal to Include Post-Merge Hook for Automatic Make Install',
+            url: 'https://github.com/gnolang/gno/issues/2985',
+            createdAt: '2024-10-19T17:13:15Z',
+            updatedAt: '2024-10-19T17:13:15Z',
+            labels: [],
+          },
+        ],
       },
       prs: {
         count: 0,
@@ -3079,29 +3843,71 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/111009238?u=283b68c4c4759d489bc3baeba8bd2cdfac2660a9&v=4',
       url: 'https://github.com/MalekLahbib',
       name: 'Malek Lahbib',
-      commits: 0,
+      commits: 3,
       issues: {
-        count: 1,
+        count: 2,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6ZWEiU',
+            title: 'bug: `gnokey list` on help page links to a bad url',
+            url: 'https://github.com/gnolang/gno/issues/2925',
+            createdAt: '2024-10-08T09:54:46Z',
+            updatedAt: '2024-10-08T14:16:43Z',
+            labels: [],
+          },
           {
             id: 'I_kwDOE-u6Jc6Y96VT',
             title: '[bug] bad import in manfred_outfmt realm',
             url: 'https://github.com/gnolang/gno/issues/2903',
             createdAt: '2024-10-04T13:21:00Z',
-            updatedAt: '2024-10-05T21:52:57Z',
+            updatedAt: '2024-10-07T10:02:20Z',
             labels: [],
           },
         ],
       },
       prs: {
-        count: 1,
+        count: 4,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_BC16',
+            title: 'docs: add `gno {env,fmt}` to go-gno-compatibility',
+            url: 'https://github.com/gnolang/gno/pull/2974',
+            createdAt: '2024-10-17T20:34:08Z',
+            updatedAt: '2024-10-18T10:16:48Z',
+            labels: [],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-PS2D',
+            title: 'fix(p/demo/uassert): amend ineffective assignment',
+            url: 'https://github.com/gnolang/gno/pull/2936',
+            createdAt: '2024-10-10T15:16:28Z',
+            updatedAt: '2024-10-15T17:34:02Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc590dMJ',
+            title: 'fix: Update json package README.md',
+            url: 'https://github.com/gnolang/gno/pull/2921',
+            createdAt: '2024-10-07T13:44:00Z',
+            updatedAt: '2024-10-10T09:24:36Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc59ojRn',
             title: 'feat: added Abs() funcs, support for overflow for uints + tests',
             url: 'https://github.com/gnolang/gno/pull/2905',
             createdAt: '2024-10-04T15:02:40Z',
-            updatedAt: '2024-10-04T15:20:29Z',
+            updatedAt: '2024-10-18T09:32:39Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -3112,12 +3918,61 @@ const data = {
         ],
       },
       mrs: {
-        count: 0,
-        data: [],
+        count: 3,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_BC16',
+            title: 'docs: add `gno {env,fmt}` to go-gno-compatibility',
+            url: 'https://github.com/gnolang/gno/pull/2974',
+            createdAt: '2024-10-17T20:34:08Z',
+            updatedAt: '2024-10-18T10:16:48Z',
+            labels: [],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-PS2D',
+            title: 'fix(p/demo/uassert): amend ineffective assignment',
+            url: 'https://github.com/gnolang/gno/pull/2936',
+            createdAt: '2024-10-10T15:16:28Z',
+            updatedAt: '2024-10-15T17:34:02Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc590dMJ',
+            title: 'fix: Update json package README.md',
+            url: 'https://github.com/gnolang/gno/pull/2921',
+            createdAt: '2024-10-07T13:44:00Z',
+            updatedAt: '2024-10-10T09:24:36Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
       },
       reviewedMrs: {
-        count: 0,
-        data: [],
+        count: 1,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc590dMJ',
+            title: 'fix: Update json package README.md',
+            url: 'https://github.com/gnolang/gno/pull/2921',
+            createdAt: '2024-10-07T13:44:00Z',
+            updatedAt: '2024-10-10T09:24:36Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
       },
     },
     {
@@ -3150,18 +4005,46 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/117160070?u=7c1a2ea4b569475fa66ef71e8ce2f31f0e9ceb2e&v=4',
       url: 'https://github.com/michelleellen',
       name: 'Michelle',
-      commits: 0,
+      commits: 1,
       issues: {
         count: 0,
         data: [],
       },
       prs: {
-        count: 0,
-        data: [],
+        count: 1,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc595-6q',
+            title: 'chore(gnoweb): update page_contribute.gno',
+            url: 'https://github.com/gnolang/gno/pull/2922',
+            createdAt: '2024-10-08T07:07:05Z',
+            updatedAt: '2024-10-08T15:10:26Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
       },
       mrs: {
-        count: 0,
-        data: [],
+        count: 1,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc595-6q',
+            title: 'chore(gnoweb): update page_contribute.gno',
+            url: 'https://github.com/gnolang/gno/pull/2922',
+            createdAt: '2024-10-08T07:07:05Z',
+            updatedAt: '2024-10-08T15:10:26Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
       },
       reviewedMrs: {
         count: 0,
@@ -3224,8 +4107,16 @@ const data = {
       name: null,
       commits: 0,
       issues: {
-        count: 1,
+        count: 2,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6adZv4',
+            title: 'tracking `r/sys/teams` work.',
+            url: 'https://github.com/gnolang/gno/issues/2959',
+            createdAt: '2024-10-16T10:23:00Z',
+            updatedAt: '2024-10-20T12:39:29Z',
+            labels: [],
+          },
           {
             id: 'I_kwDOE-u6Jc6YzXZO',
             title: 'discussion: passing params to realms during deployment',
@@ -3237,8 +4128,22 @@ const data = {
         ],
       },
       prs: {
-        count: 0,
-        data: [],
+        count: 1,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-ziAq',
+            title: 'tracking r/sys/teams work',
+            url: 'https://github.com/gnolang/gno/pull/2957',
+            createdAt: '2024-10-16T10:16:09Z',
+            updatedAt: '2024-10-20T14:23:23Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
       },
       mrs: {
         count: 0,
@@ -3401,12 +4306,40 @@ const data = {
       name: 'ThinhNX',
       commits: 0,
       issues: {
-        count: 0,
-        data: [],
+        count: 1,
+        data: [
+          {
+            id: 'I_kwDOE-u6Jc6afSd3',
+            title: 'Gnodev: The time.Now() timestamp is incorrect',
+            url: 'https://github.com/gnolang/gno/issues/2960',
+            createdAt: '2024-10-16T13:27:01Z',
+            updatedAt: '2024-10-17T20:37:49Z',
+            labels: [
+              {
+                name: 'review/triage-pending',
+                color: '5319e7',
+              },
+            ],
+          },
+        ],
       },
       prs: {
-        count: 0,
-        data: [],
+        count: 1,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-wgrh',
+            title: 'feat(examples): add sealed bidding package',
+            url: 'https://github.com/gnolang/gno/pull/2956',
+            createdAt: '2024-10-16T02:34:40Z',
+            updatedAt: '2024-10-16T02:53:42Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
       },
       mrs: {
         count: 0,
@@ -3435,6 +4368,58 @@ const data = {
       mrs: {
         count: 0,
         data: [],
+      },
+      reviewedMrs: {
+        count: 0,
+        data: [],
+      },
+    },
+    {
+      id: 'U_kgDOCpv_UQ',
+      login: 'rusttech',
+      avatarUrl: 'https://avatars.githubusercontent.com/u/177995601?u=239fd54e5a3b9f1634309b3553f487690b7dd811&v=4',
+      url: 'https://github.com/rusttech',
+      name: null,
+      commits: 1,
+      issues: {
+        count: 0,
+        data: [],
+      },
+      prs: {
+        count: 1,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-_jgq',
+            title: 'fix(cmd/aminoscan): set len=0 in a slice initialization',
+            url: 'https://github.com/gnolang/gno/pull/2971',
+            createdAt: '2024-10-17T16:26:07Z',
+            updatedAt: '2024-10-18T16:02:04Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-_jgq',
+            title: 'fix(cmd/aminoscan): set len=0 in a slice initialization',
+            url: 'https://github.com/gnolang/gno/pull/2971',
+            createdAt: '2024-10-17T16:26:07Z',
+            updatedAt: '2024-10-18T16:02:04Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
       },
       reviewedMrs: {
         count: 0,
@@ -3545,163 +4530,18 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/94029?u=e2b3fdebddae48d88892302430bd28b5b5f96133&v=4',
       url: 'https://github.com/moul',
       name: 'Manfred Touron',
-      commits: 2,
+      commits: 0,
       issues: {
-        count: 2,
-        data: [
-          {
-            id: 'I_kwDOE-u6Jc6ZGHgV',
-            title: 'RFC(ci): async infra for slow non-essential checks (fuzz, bench)',
-            url: 'https://github.com/gnolang/gno/issues/2915',
-            createdAt: '2024-10-06T07:41:01Z',
-            updatedAt: '2024-10-06T08:12:45Z',
-            labels: [
-              {
-                name: 'devops',
-                color: '6EA65B',
-              },
-            ],
-          },
-          {
-            id: 'I_kwDOE-u6Jc6Ytvip',
-            title: 'Compile audit areas',
-            url: 'https://github.com/gnolang/gno/issues/2886',
-            createdAt: '2024-10-02T16:25:38Z',
-            updatedAt: '2024-10-02T16:56:30Z',
-            labels: [],
-          },
-        ],
+        count: 0,
+        data: [],
       },
       prs: {
-        count: 6,
-        data: [
-          {
-            id: 'PR_kwDOE-u6Jc59uYDB',
-            title: 'chore(ci): increase bench timeout to 6h',
-            url: 'https://github.com/gnolang/gno/pull/2914',
-            createdAt: '2024-10-06T07:30:08Z',
-            updatedAt: '2024-10-06T07:47:46Z',
-            labels: [],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc59tFOu',
-            title: 'chore(ci): do not mark master as failing due to benchmark',
-            url: 'https://github.com/gnolang/gno/pull/2913',
-            createdAt: '2024-10-05T13:56:49Z',
-            updatedAt: '2024-10-05T20:48:37Z',
-            labels: [],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc59sofz',
-            title: 'feat: support custom VM domain',
-            url: 'https://github.com/gnolang/gno/pull/2911',
-            createdAt: '2024-10-05T12:18:03Z',
-            updatedAt: '2024-10-06T11:04:14Z',
-            labels: [
-              {
-                name: ':package: :robot: gnovm',
-                color: 'ffffff',
-              },
-              {
-                name: ':package: :globe_with_meridians:  tendermint v2',
-                color: 'ffffff',
-              },
-              {
-                name: ':package: :mountain:  gno.land',
-                color: 'ffffff',
-              },
-            ],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc59r7de',
-            title: 'chore: relocate tm2/std.MemFile in gnovm/std',
-            url: 'https://github.com/gnolang/gno/pull/2910',
-            createdAt: '2024-10-05T09:18:29Z',
-            updatedAt: '2024-10-06T08:08:47Z',
-            labels: [
-              {
-                name: ':package: :robot: gnovm',
-                color: 'ffffff',
-              },
-              {
-                name: ':package: :globe_with_meridians:  tendermint v2',
-                color: 'ffffff',
-              },
-              {
-                name: ':package: :mountain:  gno.land',
-                color: 'ffffff',
-              },
-            ],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc59hdPx',
-            title: 'docs: test3 -> portal loop',
-            url: 'https://github.com/gnolang/gno/pull/2897',
-            createdAt: '2024-10-03T16:21:55Z',
-            updatedAt: '2024-10-04T20:47:14Z',
-            labels: [
-              {
-                name: ':receipt:  package/realm',
-                color: 'ffffff',
-              },
-              {
-                name: ':package: :robot: gnovm',
-                color: 'ffffff',
-              },
-              {
-                name: ':package: :mountain:  gno.land',
-                color: 'ffffff',
-              },
-            ],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc59Z4RX',
-            title: 'feat: add p/moul/helplink',
-            url: 'https://github.com/gnolang/gno/pull/2887',
-            createdAt: '2024-10-02T17:07:28Z',
-            updatedAt: '2024-10-03T13:43:32Z',
-            labels: [
-              {
-                name: ':receipt:  package/realm',
-                color: 'ffffff',
-              },
-            ],
-          },
-        ],
+        count: 0,
+        data: [],
       },
       mrs: {
-        count: 2,
-        data: [
-          {
-            id: 'PR_kwDOE-u6Jc59tFOu',
-            title: 'chore(ci): do not mark master as failing due to benchmark',
-            url: 'https://github.com/gnolang/gno/pull/2913',
-            createdAt: '2024-10-05T13:56:49Z',
-            updatedAt: '2024-10-05T20:48:37Z',
-            labels: [],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc59hdPx',
-            title: 'docs: test3 -> portal loop',
-            url: 'https://github.com/gnolang/gno/pull/2897',
-            createdAt: '2024-10-03T16:21:55Z',
-            updatedAt: '2024-10-04T20:47:14Z',
-            labels: [
-              {
-                name: ':receipt:  package/realm',
-                color: 'ffffff',
-              },
-              {
-                name: ':package: :robot: gnovm',
-                color: 'ffffff',
-              },
-              {
-                name: ':package: :mountain:  gno.land',
-                color: 'ffffff',
-              },
-            ],
-          },
-        ],
+        count: 0,
+        data: [],
       },
       reviewedMrs: {
         count: 0,
@@ -3786,7 +4626,7 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/350354?v=4',
       url: 'https://github.com/grepsuzette',
       name: 'grepsuzette',
-      commits: 2,
+      commits: 0,
       issues: {
         count: 0,
         data: [],
@@ -3906,68 +4746,18 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/777866?v=4',
       url: 'https://github.com/sw360cab',
       name: 'Sergio Maria Matone',
-      commits: 3,
+      commits: 0,
       issues: {
         count: 0,
         data: [],
       },
       prs: {
-        count: 3,
-        data: [
-          {
-            id: 'PR_kwDOE-u6Jc59gATb',
-            title: 'ci: remove conflicting option to push benchmark on github pages',
-            url: 'https://github.com/gnolang/gno/pull/2895',
-            createdAt: '2024-10-03T13:13:05Z',
-            updatedAt: '2024-10-03T13:31:45Z',
-            labels: [],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc59ePQI',
-            title: 'ci(benchmarks): update benchmark workflow for push on master',
-            url: 'https://github.com/gnolang/gno/pull/2891',
-            createdAt: '2024-10-03T09:09:04Z',
-            updatedAt: '2024-10-03T09:26:35Z',
-            labels: [],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc59HoCZ',
-            title: 'feat(ops/gnobro): introducing Release workflow for the Gnobro tool',
-            url: 'https://github.com/gnolang/gno/pull/2872',
-            createdAt: '2024-09-30T13:22:37Z',
-            updatedAt: '2024-09-30T13:58:47Z',
-            labels: [],
-          },
-        ],
+        count: 0,
+        data: [],
       },
       mrs: {
-        count: 3,
-        data: [
-          {
-            id: 'PR_kwDOE-u6Jc59gATb',
-            title: 'ci: remove conflicting option to push benchmark on github pages',
-            url: 'https://github.com/gnolang/gno/pull/2895',
-            createdAt: '2024-10-03T13:13:05Z',
-            updatedAt: '2024-10-03T13:31:45Z',
-            labels: [],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc59ePQI',
-            title: 'ci(benchmarks): update benchmark workflow for push on master',
-            url: 'https://github.com/gnolang/gno/pull/2891',
-            createdAt: '2024-10-03T09:09:04Z',
-            updatedAt: '2024-10-03T09:26:35Z',
-            labels: [],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc59HoCZ',
-            title: 'feat(ops/gnobro): introducing Release workflow for the Gnobro tool',
-            url: 'https://github.com/gnolang/gno/pull/2872',
-            createdAt: '2024-09-30T13:22:37Z',
-            updatedAt: '2024-09-30T13:58:47Z',
-            labels: [],
-          },
-        ],
+        count: 0,
+        data: [],
       },
       reviewedMrs: {
         count: 0,
@@ -4010,39 +4800,8 @@ const data = {
         data: [],
       },
       prs: {
-        count: 2,
-        data: [
-          {
-            id: 'PR_kwDOE-u6Jc59ntxM',
-            title: 'feat(boardsv2): experiment API - WIP',
-            url: 'https://github.com/gnolang/gno/pull/2902',
-            createdAt: '2024-10-04T13:11:08Z',
-            updatedAt: '2024-10-04T15:51:39Z',
-            labels: [
-              {
-                name: ':receipt:  package/realm',
-                color: 'ffffff',
-              },
-            ],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc59PUrL',
-            title: 'feat: change `gnoweb` to add URL query string to render path',
-            url: 'https://github.com/gnolang/gno/pull/2876',
-            createdAt: '2024-10-01T11:20:36Z',
-            updatedAt: '2024-10-04T11:32:02Z',
-            labels: [
-              {
-                name: ':package: :mountain:  gno.land',
-                color: 'ffffff',
-              },
-              {
-                name: '🌍 gnoweb',
-                color: '1D76DB',
-              },
-            ],
-          },
-        ],
+        count: 0,
+        data: [],
       },
       mrs: {
         count: 0,
@@ -4203,145 +4962,18 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/4681308?u=5a240449a1a95bec5cfecd2295f4804fec207cdf&v=4',
       url: 'https://github.com/thehowl',
       name: 'Morgan',
-      commits: 2,
+      commits: 0,
       issues: {
-        count: 5,
-        data: [
-          {
-            id: 'I_kwDOE-u6Jc6ZCcsf',
-            title: '`gno test -covermode`',
-            url: 'https://github.com/gnolang/gno/issues/2908',
-            createdAt: '2024-10-05T00:21:36Z',
-            updatedAt: '2024-10-05T07:47:45Z',
-            labels: [
-              {
-                name: 'bounty',
-                color: 'fbca04',
-              },
-              {
-                name: 'bounty/M',
-                color: 'fbca04',
-              },
-            ],
-          },
-          {
-            id: 'I_kwDOE-u6Jc6ZCckI',
-            title: '`gno test -coverprofile`',
-            url: 'https://github.com/gnolang/gno/issues/2907',
-            createdAt: '2024-10-05T00:20:33Z',
-            updatedAt: '2024-10-05T00:20:33Z',
-            labels: [
-              {
-                name: 'bounty',
-                color: 'fbca04',
-              },
-              {
-                name: 'bounty/L',
-                color: 'fbca04',
-              },
-            ],
-          },
-          {
-            id: 'I_kwDOE-u6Jc6Y-deY',
-            title: 'rfc: the future of `gno.mod`',
-            url: 'https://github.com/gnolang/gno/issues/2904',
-            createdAt: '2024-10-04T14:22:22Z',
-            updatedAt: '2024-10-06T09:30:42Z',
-            labels: [],
-          },
-          {
-            id: 'I_kwDOE-u6Jc6Yy_NN',
-            title: 'META - Review Team Phase 1',
-            url: 'https://github.com/gnolang/gno/issues/2890',
-            createdAt: '2024-10-03T09:02:15Z',
-            updatedAt: '2024-10-03T09:18:44Z',
-            labels: [],
-          },
-          {
-            id: 'I_kwDOE-u6Jc6YqbHU',
-            title: 'Support amino JSON in current implementers of `json.Marshler`',
-            url: 'https://github.com/gnolang/gno/issues/2882',
-            createdAt: '2024-10-02T10:54:36Z',
-            updatedAt: '2024-10-02T10:54:36Z',
-            labels: [],
-          },
-        ],
+        count: 0,
+        data: [],
       },
       prs: {
-        count: 4,
-        data: [
-          {
-            id: 'PR_kwDOE-u6Jc59fzWT',
-            title: 'refactor: gnovm -> gno, pkg/gnolang -> vm, `package gnolang` -> `vm`',
-            url: 'https://github.com/gnolang/gno/pull/2894',
-            createdAt: '2024-10-03T12:46:22Z',
-            updatedAt: '2024-10-03T13:10:45Z',
-            labels: [
-              {
-                name: ':receipt:  package/realm',
-                color: 'ffffff',
-              },
-              {
-                name: ':package: :mountain:  gno.land',
-                color: 'ffffff',
-              },
-            ],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc59ea9R',
-            title: 'ci(hotfix): yaml whitespace',
-            url: 'https://github.com/gnolang/gno/pull/2892',
-            createdAt: '2024-10-03T09:35:07Z',
-            updatedAt: '2024-10-03T09:53:36Z',
-            labels: [],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc59YvBl',
-            title: 'wip: use wal file to replay chain',
-            url: 'https://github.com/gnolang/gno/pull/2885',
-            createdAt: '2024-10-02T14:45:22Z',
-            updatedAt: '2024-10-02T15:15:58Z',
-            labels: [
-              {
-                name: ':package: :globe_with_meridians:  tendermint v2',
-                color: 'ffffff',
-              },
-              {
-                name: ':package: :mountain:  gno.land',
-                color: 'ffffff',
-              },
-            ],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc59WZqd',
-            title: 'ci: change alert-threshold to 120%',
-            url: 'https://github.com/gnolang/gno/pull/2880',
-            createdAt: '2024-10-02T09:18:28Z',
-            updatedAt: '2024-10-03T09:44:20Z',
-            labels: [],
-          },
-        ],
+        count: 0,
+        data: [],
       },
       mrs: {
-        count: 2,
-        data: [
-          {
-            id: 'PR_kwDOE-u6Jc59ea9R',
-            title: 'ci(hotfix): yaml whitespace',
-            url: 'https://github.com/gnolang/gno/pull/2892',
-            createdAt: '2024-10-03T09:35:07Z',
-            updatedAt: '2024-10-03T09:53:36Z',
-            labels: [],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc59WZqd',
-            title: 'ci: change alert-threshold to 120%',
-            url: 'https://github.com/gnolang/gno/pull/2880',
-            createdAt: '2024-10-02T09:18:28Z',
-            updatedAt: '2024-10-03T09:44:20Z',
-            labels: [],
-          },
-        ],
+        count: 0,
+        data: [],
       },
       reviewedMrs: {
         count: 0,
@@ -4450,112 +5082,22 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/6023117?u=dd85f7413bc7794eb2190bcd2d1448400a2c9752&v=4',
       url: 'https://github.com/ilgooz',
       name: 'İlker G. Öztürk',
-      commits: 1,
+      commits: 0,
       issues: {
         count: 0,
         data: [],
       },
       prs: {
-        count: 3,
-        data: [
-          {
-            id: 'PR_kwDOE-u6Jc59nA6i',
-            title: 'feat(boardsv2): add boardsv2 - WIP',
-            url: 'https://github.com/gnolang/gno/pull/2901',
-            createdAt: '2024-10-04T11:25:17Z',
-            updatedAt: '2024-10-04T13:04:06Z',
-            labels: [
-              {
-                name: ':receipt:  package/realm',
-                color: 'ffffff',
-              },
-            ],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc59m-83',
-            title: 'feat(boardsv2): init',
-            url: 'https://github.com/gnolang/gno/pull/2900',
-            createdAt: '2024-10-04T11:20:26Z',
-            updatedAt: '2024-10-04T11:41:24Z',
-            labels: [
-              {
-                name: ':receipt:  package/realm',
-                color: 'ffffff',
-              },
-              {
-                name: ':package: :robot: gnovm',
-                color: 'ffffff',
-              },
-              {
-                name: ':package: :globe_with_meridians:  tendermint v2',
-                color: 'ffffff',
-              },
-              {
-                name: ':package: :mountain:  gno.land',
-                color: 'ffffff',
-              },
-            ],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc59Xs1z',
-            title: 'chore(codeowners): add codeowners for boardsv2',
-            url: 'https://github.com/gnolang/gno/pull/2883',
-            createdAt: '2024-10-02T12:35:31Z',
-            updatedAt: '2024-10-02T15:17:03Z',
-            labels: [],
-          },
-        ],
+        count: 0,
+        data: [],
       },
       mrs: {
-        count: 2,
-        data: [
-          {
-            id: 'PR_kwDOE-u6Jc59m-83',
-            title: 'feat(boardsv2): init',
-            url: 'https://github.com/gnolang/gno/pull/2900',
-            createdAt: '2024-10-04T11:20:26Z',
-            updatedAt: '2024-10-04T11:41:24Z',
-            labels: [
-              {
-                name: ':receipt:  package/realm',
-                color: 'ffffff',
-              },
-              {
-                name: ':package: :robot: gnovm',
-                color: 'ffffff',
-              },
-              {
-                name: ':package: :globe_with_meridians:  tendermint v2',
-                color: 'ffffff',
-              },
-              {
-                name: ':package: :mountain:  gno.land',
-                color: 'ffffff',
-              },
-            ],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc59Xs1z',
-            title: 'chore(codeowners): add codeowners for boardsv2',
-            url: 'https://github.com/gnolang/gno/pull/2883',
-            createdAt: '2024-10-02T12:35:31Z',
-            updatedAt: '2024-10-02T15:17:03Z',
-            labels: [],
-          },
-        ],
+        count: 0,
+        data: [],
       },
       reviewedMrs: {
-        count: 1,
-        data: [
-          {
-            id: 'PR_kwDOE-u6Jc59Xs1z',
-            title: 'chore(codeowners): add codeowners for boardsv2',
-            url: 'https://github.com/gnolang/gno/pull/2883',
-            createdAt: '2024-10-02T12:35:31Z',
-            updatedAt: '2024-10-02T15:17:03Z',
-            labels: [],
-          },
-        ],
+        count: 0,
+        data: [],
       },
     },
     {
@@ -4686,25 +5228,8 @@ const data = {
       name: 'Kristov Atlas',
       commits: 0,
       issues: {
-        count: 2,
-        data: [
-          {
-            id: 'I_kwDOE-u6Jc6Yn43o',
-            title: 'Auditing feedback: Tests need helper function to manipulate package names',
-            url: 'https://github.com/gnolang/gno/issues/2879',
-            createdAt: '2024-10-02T03:17:05Z',
-            updatedAt: '2024-10-02T03:17:05Z',
-            labels: [],
-          },
-          {
-            id: 'I_kwDOE-u6Jc6Yn4cs',
-            title: 'Auditing feedback: Tests are not run in independent context',
-            url: 'https://github.com/gnolang/gno/issues/2878',
-            createdAt: '2024-10-02T03:15:10Z',
-            updatedAt: '2024-10-02T07:55:19Z',
-            labels: [],
-          },
-        ],
+        count: 0,
+        data: [],
       },
       prs: {
         count: 0,
@@ -4803,22 +5328,8 @@ const data = {
         data: [],
       },
       prs: {
-        count: 1,
-        data: [
-          {
-            id: 'PR_kwDOE-u6Jc59pJjZ',
-            title: 'fix: deprecate std.GetOrigCaller',
-            url: 'https://github.com/gnolang/gno/pull/2906',
-            createdAt: '2024-10-04T16:40:13Z',
-            updatedAt: '2024-10-05T10:48:33Z',
-            labels: [
-              {
-                name: ':package: :robot: gnovm',
-                color: 'ffffff',
-              },
-            ],
-          },
-        ],
+        count: 0,
+        data: [],
       },
       mrs: {
         count: 0,
@@ -4931,28 +5442,14 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/11853918?u=5420c93d8c5dae1813664d50b853c1cbb4fe50ee&v=4',
       url: 'https://github.com/notJoon',
       name: 'Lee ByeongJun',
-      commits: 3,
+      commits: 0,
       issues: {
         count: 0,
         data: [],
       },
       prs: {
-        count: 1,
-        data: [
-          {
-            id: 'PR_kwDOE-u6Jc59k9eT',
-            title: 'fix(stdlib): io test',
-            url: 'https://github.com/gnolang/gno/pull/2898',
-            createdAt: '2024-10-04T05:58:20Z',
-            updatedAt: '2024-10-04T09:51:58Z',
-            labels: [
-              {
-                name: ':package: :robot: gnovm',
-                color: 'ffffff',
-              },
-            ],
-          },
-        ],
+        count: 0,
+        data: [],
       },
       mrs: {
         count: 0,
@@ -4995,17 +5492,8 @@ const data = {
       name: 'Nemanja Aleksic',
       commits: 0,
       issues: {
-        count: 1,
-        data: [
-          {
-            id: 'I_kwDOE-u6Jc6ZDJWp',
-            title: 'Migrate community-first repos to gnoverse',
-            url: 'https://github.com/gnolang/gno/issues/2909',
-            createdAt: '2024-10-05T08:36:25Z',
-            updatedAt: '2024-10-05T10:45:15Z',
-            labels: [],
-          },
-        ],
+        count: 0,
+        data: [],
       },
       prs: {
         count: 0,
@@ -5100,35 +5588,12 @@ const data = {
       name: '6h057',
       commits: 0,
       issues: {
-        count: 1,
-        data: [
-          {
-            id: 'I_kwDOE-u6Jc6YvxyW',
-            title: 'Assigning Type as Value in Gno should be prohibited',
-            url: 'https://github.com/gnolang/gno/issues/2889',
-            createdAt: '2024-10-02T21:22:47Z',
-            updatedAt: '2024-10-02T21:22:47Z',
-            labels: [],
-          },
-        ],
+        count: 0,
+        data: [],
       },
       prs: {
-        count: 1,
-        data: [
-          {
-            id: 'PR_kwDOE-u6Jc59hZwY',
-            title: 'chore(gnovm): prevent assignment to non-assignable expressions',
-            url: 'https://github.com/gnolang/gno/pull/2896',
-            createdAt: '2024-10-03T16:12:47Z',
-            updatedAt: '2024-10-04T21:02:27Z',
-            labels: [
-              {
-                name: ':package: :robot: gnovm',
-                color: 'ffffff',
-              },
-            ],
-          },
-        ],
+        count: 0,
+        data: [],
       },
       mrs: {
         count: 0,
@@ -5409,19 +5874,10 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/22179290?u=55434bd982d7acd85dd204b344e86a20335f0285&v=4',
       url: 'https://github.com/Villaquiranm',
       name: 'Miguel Victoria Villaquiran',
-      commits: 2,
+      commits: 0,
       issues: {
-        count: 1,
-        data: [
-          {
-            id: 'I_kwDOE-u6Jc6YvUaP',
-            title: 'Methods defined on _test.gno files are not recognised on test files',
-            url: 'https://github.com/gnolang/gno/issues/2888',
-            createdAt: '2024-10-02T20:05:59Z',
-            updatedAt: '2024-10-02T20:17:30Z',
-            labels: [],
-          },
-        ],
+        count: 0,
+        data: [],
       },
       prs: {
         count: 0,
@@ -5612,17 +6068,8 @@ const data = {
       name: 'Leon Hudak',
       commits: 0,
       issues: {
-        count: 1,
-        data: [
-          {
-            id: 'I_kwDOE-u6Jc6YhfAi',
-            title: '[GnoVM] Dereference package level errors before returning them to the user',
-            url: 'https://github.com/gnolang/gno/issues/2875',
-            createdAt: '2024-10-01T11:12:19Z',
-            updatedAt: '2024-10-01T11:12:31Z',
-            labels: [],
-          },
-        ],
+        count: 0,
+        data: [],
       },
       prs: {
         count: 0,
@@ -5811,45 +6258,14 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/48086732?v=4',
       url: 'https://github.com/sunspirit99',
       name: 'SunSpirit',
-      commits: 2,
+      commits: 0,
       issues: {
         count: 0,
         data: [],
       },
       prs: {
-        count: 2,
-        data: [
-          {
-            id: 'PR_kwDOE-u6Jc59s0ut',
-            title: 'feat(gno.land): Implement markdown package',
-            url: 'https://github.com/gnolang/gno/pull/2912',
-            createdAt: '2024-10-05T12:59:27Z',
-            updatedAt: '2024-10-05T13:36:59Z',
-            labels: [
-              {
-                name: ':receipt:  package/realm',
-                color: 'ffffff',
-              },
-            ],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc59Yd-p',
-            title: 'fix(tm2): Enable coin benchmark tests after fixing panic error',
-            url: 'https://github.com/gnolang/gno/pull/2884',
-            createdAt: '2024-10-02T14:12:28Z',
-            updatedAt: '2024-10-05T15:48:50Z',
-            labels: [
-              {
-                name: ':package: :globe_with_meridians:  tendermint v2',
-                color: 'ffffff',
-              },
-              {
-                name: 'review team',
-                color: '5319e7',
-              },
-            ],
-          },
-        ],
+        count: 0,
+        data: [],
       },
       mrs: {
         count: 0,
@@ -6540,56 +6956,12 @@ const data = {
       name: 'Malek Lahbib',
       commits: 0,
       issues: {
-        count: 2,
-        data: [
-          {
-            id: 'I_kwDOE-u6Jc6Y96VT',
-            title: '[bug] bad import in manfred_outfmt realm',
-            url: 'https://github.com/gnolang/gno/issues/2903',
-            createdAt: '2024-10-04T13:21:00Z',
-            updatedAt: '2024-10-05T21:52:57Z',
-            labels: [],
-          },
-          {
-            id: 'I_kwDOE-u6Jc6YaGis',
-            title: '[examples]: GRC20 underflow/overflow checking',
-            url: 'https://github.com/gnolang/gno/issues/2873',
-            createdAt: '2024-09-30T15:15:12Z',
-            updatedAt: '2024-09-30T16:54:42Z',
-            labels: [],
-          },
-        ],
+        count: 0,
+        data: [],
       },
       prs: {
-        count: 2,
-        data: [
-          {
-            id: 'PR_kwDOE-u6Jc59ojRn',
-            title: 'feat: added Abs() funcs, support for overflow for uints + tests',
-            url: 'https://github.com/gnolang/gno/pull/2905',
-            createdAt: '2024-10-04T15:02:40Z',
-            updatedAt: '2024-10-04T15:20:29Z',
-            labels: [
-              {
-                name: ':package: :robot: gnovm',
-                color: 'ffffff',
-              },
-            ],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc59JUwK',
-            title: 'feat(examples): added check for overflow/underflow',
-            url: 'https://github.com/gnolang/gno/pull/2874',
-            createdAt: '2024-09-30T16:43:25Z',
-            updatedAt: '2024-10-04T07:51:34Z',
-            labels: [
-              {
-                name: ':receipt:  package/realm',
-                color: 'ffffff',
-              },
-            ],
-          },
-        ],
+        count: 0,
+        data: [],
       },
       mrs: {
         count: 0,
@@ -6704,17 +7076,8 @@ const data = {
       name: null,
       commits: 0,
       issues: {
-        count: 1,
-        data: [
-          {
-            id: 'I_kwDOE-u6Jc6YzXZO',
-            title: 'discussion: passing params to realms during deployment',
-            url: 'https://github.com/gnolang/gno/issues/2893',
-            createdAt: '2024-10-03T09:50:21Z',
-            updatedAt: '2024-10-04T13:04:54Z',
-            labels: [],
-          },
-        ],
+        count: 0,
+        data: [],
       },
       prs: {
         count: 0,
@@ -6855,7 +7218,7 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/167175638?v=4',
       url: 'https://github.com/linhpn99',
       name: 'sunspirit',
-      commits: 1,
+      commits: 0,
       issues: {
         count: 0,
         data: [],
@@ -6903,6 +7266,30 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/171775945?u=a76a740e453478310889f8a70501288624565814&v=4',
       url: 'https://github.com/yukionfire',
       name: 'yukionfire',
+      commits: 0,
+      issues: {
+        count: 0,
+        data: [],
+      },
+      prs: {
+        count: 0,
+        data: [],
+      },
+      mrs: {
+        count: 0,
+        data: [],
+      },
+      reviewedMrs: {
+        count: 0,
+        data: [],
+      },
+    },
+    {
+      id: 'U_kgDOCpv_UQ',
+      login: 'rusttech',
+      avatarUrl: 'https://avatars.githubusercontent.com/u/177995601?u=239fd54e5a3b9f1634309b3553f487690b7dd811&v=4',
+      url: 'https://github.com/rusttech',
+      name: null,
       commits: 0,
       issues: {
         count: 0,
@@ -6975,7 +7362,7 @@ const data = {
             title: 'feat(examples): Add a useful set of high quality pseudo-random number generators',
             url: 'https://github.com/gnolang/gno/pull/2868',
             createdAt: '2024-09-28T08:50:05Z',
-            updatedAt: '2024-10-03T23:05:44Z',
+            updatedAt: '2024-10-17T18:22:00Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -7058,26 +7445,16 @@ const data = {
             title: 'main README should disambiguate with gnosis project',
             url: 'https://github.com/gnolang/gno/issues/2354',
             createdAt: '2024-06-13T16:33:59Z',
-            updatedAt: '2024-09-12T11:57:20Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:51:07Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6ChDZ8',
             title: 'Ensure no ValuePath depths exceed uint8/2',
             url: 'https://github.com/gnolang/gno/issues/1781',
             createdAt: '2024-03-16T02:22:39Z',
-            updatedAt: '2024-09-11T15:44:19Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:48:45Z',
+            labels: [],
           },
         ],
       },
@@ -7110,7 +7487,7 @@ const data = {
             title: 'feat(gnovm): handle loop variables',
             url: 'https://github.com/gnolang/gno/pull/2429',
             createdAt: '2024-06-25T08:22:01Z',
-            updatedAt: '2024-09-12T16:04:41Z',
+            updatedAt: '2024-10-18T11:42:14Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -7127,6 +7504,10 @@ const data = {
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
+              },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
               },
             ],
           },
@@ -7778,10 +8159,34 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/94029?u=e2b3fdebddae48d88892302430bd28b5b5f96133&v=4',
       url: 'https://github.com/moul',
       name: 'Manfred Touron',
-      commits: 44,
+      commits: 45,
       issues: {
-        count: 59,
+        count: 62,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6Z1z0y',
+            title: 'contract: curated (by a DAO) grc20 registry',
+            url: 'https://github.com/gnolang/gno/issues/2940',
+            createdAt: '2024-10-11T10:27:09Z',
+            updatedAt: '2024-10-11T10:30:04Z',
+            labels: [],
+          },
+          {
+            id: 'I_kwDOE-u6Jc6ZU7uy',
+            title: 'gno lint to run on the CI and annotate PRs',
+            url: 'https://github.com/gnolang/gno/issues/2924',
+            createdAt: '2024-10-08T07:56:19Z',
+            updatedAt: '2024-10-08T07:56:19Z',
+            labels: [],
+          },
+          {
+            id: 'I_kwDOE-u6Jc6ZU6-A',
+            title: 'update docs (and examples) regarding PrevRealm and OrigCaller',
+            url: 'https://github.com/gnolang/gno/issues/2923',
+            createdAt: '2024-10-08T07:55:00Z',
+            updatedAt: '2024-10-14T22:03:21Z',
+            labels: [],
+          },
           {
             id: 'I_kwDOE-u6Jc6ZGHgV',
             title: 'RFC(ci): async infra for slow non-essential checks (fuzz, bench)',
@@ -7800,8 +8205,13 @@ const data = {
             title: 'Compile audit areas',
             url: 'https://github.com/gnolang/gno/issues/2886',
             createdAt: '2024-10-02T16:25:38Z',
-            updatedAt: '2024-10-02T16:56:30Z',
-            labels: [],
+            updatedAt: '2024-10-08T21:20:12Z',
+            labels: [
+              {
+                name: 'security',
+                color: 'FF0000',
+              },
+            ],
           },
           {
             id: 'I_kwDOE-u6Jc6YMJkQ',
@@ -7824,7 +8234,7 @@ const data = {
             title: '`r/sys/users` Mainnet v1 (mvp) & v2',
             url: 'https://github.com/gnolang/gno/issues/2827',
             createdAt: '2024-09-21T13:42:50Z',
-            updatedAt: '2024-09-21T14:45:32Z',
+            updatedAt: '2024-10-21T03:58:10Z',
             labels: [],
           },
           {
@@ -7848,7 +8258,7 @@ const data = {
             title: 'feedback needed: how are you using `gnoland genesis ...`?',
             url: 'https://github.com/gnolang/gno/issues/2824',
             createdAt: '2024-09-21T01:52:25Z',
-            updatedAt: '2024-10-03T12:58:43Z',
+            updatedAt: '2024-10-20T12:15:59Z',
             labels: [
               {
                 name: ':question:  question',
@@ -7903,7 +8313,7 @@ const data = {
             title: 'Markdown/UI templating framework competition',
             url: 'https://github.com/gnolang/gno/issues/2753',
             createdAt: '2024-09-03T11:54:36Z',
-            updatedAt: '2024-10-04T10:52:44Z',
+            updatedAt: '2024-10-19T20:37:06Z',
             labels: [
               {
                 name: 'bounty',
@@ -7979,11 +8389,11 @@ const data = {
             title: 'Gno Realm and Ownership Spec',
             url: 'https://github.com/gnolang/gno/issues/2743',
             createdAt: '2024-08-29T17:34:29Z',
-            updatedAt: '2024-09-11T14:46:52Z',
+            updatedAt: '2024-10-18T11:32:26Z',
             labels: [
               {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
+                name: 'in focus',
+                color: 'FBCA04',
               },
             ],
           },
@@ -7992,7 +8402,7 @@ const data = {
             title: 'Anti-squatting System for gno.land namespaces',
             url: 'https://github.com/gnolang/gno/issues/2727',
             createdAt: '2024-08-24T09:38:42Z',
-            updatedAt: '2024-10-04T10:54:48Z',
+            updatedAt: '2024-10-16T12:20:04Z',
             labels: [
               {
                 name: 'bounty',
@@ -8002,10 +8412,6 @@ const data = {
                 name: 'bounty/XXL',
                 color: 'fbca04',
               },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
             ],
           },
           {
@@ -8013,11 +8419,15 @@ const data = {
             title: 'integrate p/demo/avl/pager with existing examples',
             url: 'https://github.com/gnolang/gno/issues/2586',
             createdAt: '2024-07-14T11:58:43Z',
-            updatedAt: '2024-07-14T11:58:44Z',
+            updatedAt: '2024-10-07T15:29:59Z',
             labels: [
               {
                 name: '🗺️good first issue🗺️',
                 color: '7057ff',
+              },
+              {
+                name: 'hacktoberfest',
+                color: '50da4c',
               },
             ],
           },
@@ -8094,15 +8504,11 @@ const data = {
             title: 'Improve `p/uassert` and `p/urequire`',
             url: 'https://github.com/gnolang/gno/issues/2481',
             createdAt: '2024-07-02T14:31:31Z',
-            updatedAt: '2024-10-02T09:54:31Z',
+            updatedAt: '2024-10-16T12:50:03Z',
             labels: [
               {
                 name: '🗺️good first issue🗺️',
                 color: '7057ff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -8180,13 +8586,8 @@ const data = {
             title: 'feat: Rerun Codecov independently from the rest of the CI checks',
             url: 'https://github.com/gnolang/gno/issues/2414',
             createdAt: '2024-06-21T16:03:25Z',
-            updatedAt: '2024-09-11T15:13:52Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:49:59Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6M-dBF',
@@ -8214,39 +8615,24 @@ const data = {
             title: 'RFC(gnovm): make all gno unit tests independent (and parallel)',
             url: 'https://github.com/gnolang/gno/issues/2376',
             createdAt: '2024-06-18T09:34:41Z',
-            updatedAt: '2024-09-11T15:15:07Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:51:08Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6L9hM3',
             title: 'RFC(philosophy): Merge some standalone repos into this monorepo',
             url: 'https://github.com/gnolang/gno/issues/2337',
             createdAt: '2024-06-12T08:33:32Z',
-            updatedAt: '2024-09-12T11:57:41Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:51:07Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6L9cE6',
             title: 'RFC(philosophy): Limiting depth of commands and subcommands in CLIs',
             url: 'https://github.com/gnolang/gno/issues/2336',
             createdAt: '2024-06-12T08:23:10Z',
-            updatedAt: '2024-09-11T15:17:05Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:51:06Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6KKIdw',
@@ -8261,7 +8647,7 @@ const data = {
             title: 'gnoland: team support',
             url: 'https://github.com/gnolang/gno/issues/2195',
             createdAt: '2024-05-25T10:13:06Z',
-            updatedAt: '2024-09-20T16:09:08Z',
+            updatedAt: '2024-10-20T12:46:56Z',
             labels: [],
           },
           {
@@ -8285,7 +8671,7 @@ const data = {
             title: 'gnoland/gnovm: purify `p/` even more',
             url: 'https://github.com/gnolang/gno/issues/2192',
             createdAt: '2024-05-25T09:33:35Z',
-            updatedAt: '2024-09-11T15:25:12Z',
+            updatedAt: '2024-10-16T12:46:19Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -8294,10 +8680,6 @@ const data = {
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -8319,12 +8701,8 @@ const data = {
             title: 'gnovm: support for `/internal/` subfolders',
             url: 'https://github.com/gnolang/gno/issues/2190',
             createdAt: '2024-05-25T09:19:45Z',
-            updatedAt: '2024-09-12T12:05:00Z',
+            updatedAt: '2024-10-16T12:51:01Z',
             labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
               {
                 name: 'help wanted',
                 color: '006b75',
@@ -8370,15 +8748,11 @@ const data = {
             title: 'Add a documentation section on how to interact with the chain without using Gnoweb or Gnokey',
             url: 'https://github.com/gnolang/gno/issues/2026',
             createdAt: '2024-05-03T08:56:25Z',
-            updatedAt: '2024-09-12T12:04:12Z',
+            updatedAt: '2024-10-16T12:50:56Z',
             labels: [
               {
                 name: ':book:  documentation',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -8391,15 +8765,11 @@ const data = {
             title: 'Clarify gRPC and Amino',
             url: 'https://github.com/gnolang/gno/issues/2025',
             createdAt: '2024-05-03T08:54:08Z',
-            updatedAt: '2024-09-12T12:04:20Z',
+            updatedAt: '2024-10-16T12:50:56Z',
             labels: [
               {
                 name: ':book:  documentation',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -8445,13 +8815,8 @@ const data = {
             title: 'Creating a `r/sys/config` realm for runtime configuration',
             url: 'https://github.com/gnolang/gno/issues/1856',
             createdAt: '2024-03-28T17:43:13Z',
-            updatedAt: '2024-09-11T15:39:54Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:48:47Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6C3w7l',
@@ -8510,14 +8875,103 @@ const data = {
         ],
       },
       prs: {
-        count: 69,
+        count: 75,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_J9Y9',
+            title: 'feat(examples): grc20 refactor',
+            url: 'https://github.com/gnolang/gno/pull/2983',
+            createdAt: '2024-10-19T01:20:10Z',
+            updatedAt: '2024-10-20T17:42:23Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5_Hc2B',
+            title: 'bug -> chore(ci): run gno test with --print-runtime-metrics',
+            url: 'https://github.com/gnolang/gno/pull/2979',
+            createdAt: '2024-10-18T14:56:48Z',
+            updatedAt: '2024-10-19T17:09:44Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+              {
+                name: 'help wanted',
+                color: '006b75',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5_Bazq',
+            title: "feat(gnovm): add 'gno test -print-events' + cleanup machine between tests",
+            url: 'https://github.com/gnolang/gno/pull/2975',
+            createdAt: '2024-10-17T21:44:35Z',
+            updatedAt: '2024-10-18T19:33:43Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-3JeA',
+            title: 'feat(examples): add p/moul/udao package',
+            url: 'https://github.com/gnolang/gno/pull/2963',
+            createdAt: '2024-10-16T17:01:38Z',
+            updatedAt: '2024-10-16T18:09:56Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-r1Ew',
+            title: 'chore: farewell Dylan 👋',
+            url: 'https://github.com/gnolang/gno/pull/2951',
+            createdAt: '2024-10-15T14:22:41Z',
+            updatedAt: '2024-10-15T14:41:09Z',
+            labels: [],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc590YKQ',
+            title: 'feat(tm2): add sdk/params module',
+            url: 'https://github.com/gnolang/gno/pull/2920',
+            createdAt: '2024-10-07T13:34:57Z',
+            updatedAt: '2024-10-21T00:11:32Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc59uYDB',
             title: 'chore(ci): increase bench timeout to 6h',
             url: 'https://github.com/gnolang/gno/pull/2914',
             createdAt: '2024-10-06T07:30:08Z',
-            updatedAt: '2024-10-06T07:47:46Z',
+            updatedAt: '2024-10-17T08:44:37Z',
             labels: [],
           },
           {
@@ -8554,7 +9008,7 @@ const data = {
             title: 'chore: relocate tm2/std.MemFile in gnovm/std',
             url: 'https://github.com/gnolang/gno/pull/2910',
             createdAt: '2024-10-05T09:18:29Z',
-            updatedAt: '2024-10-06T08:08:47Z',
+            updatedAt: '2024-10-10T16:53:11Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -8596,7 +9050,7 @@ const data = {
             title: 'feat: add p/moul/helplink',
             url: 'https://github.com/gnolang/gno/pull/2887',
             createdAt: '2024-10-02T17:07:28Z',
-            updatedAt: '2024-10-03T13:43:32Z',
+            updatedAt: '2024-10-19T00:31:58Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -8724,7 +9178,7 @@ const data = {
             title: 'feat: add p/avl/pager',
             url: 'https://github.com/gnolang/gno/pull/2584',
             createdAt: '2024-07-14T11:43:50Z',
-            updatedAt: '2024-10-05T20:51:49Z',
+            updatedAt: '2024-10-09T04:54:15Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -8776,7 +9230,7 @@ const data = {
             title: 'dev/moul/examples',
             url: 'https://github.com/gnolang/gno/pull/2551',
             createdAt: '2024-07-09T00:28:39Z',
-            updatedAt: '2024-09-21T19:19:26Z',
+            updatedAt: '2024-10-20T12:12:45Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -9458,8 +9912,16 @@ const data = {
         ],
       },
       mrs: {
-        count: 40,
+        count: 41,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-r1Ew',
+            title: 'chore: farewell Dylan 👋',
+            url: 'https://github.com/gnolang/gno/pull/2951',
+            createdAt: '2024-10-15T14:22:41Z',
+            updatedAt: '2024-10-15T14:41:09Z',
+            labels: [],
+          },
           {
             id: 'PR_kwDOE-u6Jc59tFOu',
             title: 'chore(ci): do not mark master as failing due to benchmark',
@@ -10263,15 +10725,11 @@ const data = {
             title: 'amino.WithTypes accepts types being given the same name',
             url: 'https://github.com/gnolang/gno/issues/2326',
             createdAt: '2024-06-11T12:11:24Z',
-            updatedAt: '2024-09-12T12:05:23Z',
+            updatedAt: '2024-10-16T12:51:06Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -10387,7 +10845,7 @@ const data = {
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -10438,7 +10896,7 @@ const data = {
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -10455,7 +10913,7 @@ const data = {
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -10497,7 +10955,7 @@ const data = {
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -10841,8 +11299,48 @@ const data = {
         data: [],
       },
       prs: {
-        count: 0,
-        data: [],
+        count: 3,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_APWZ',
+            title: 'feat(gnovm): added crypto/blake3 in the same style as sha256',
+            url: 'https://github.com/gnolang/gno/pull/2972',
+            createdAt: '2024-10-17T18:19:56Z',
+            updatedAt: '2024-10-18T12:49:41Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5---Eg',
+            title: 'feat(examples): add blake3 to gno.land/p/demo/crypto/blake3',
+            url: 'https://github.com/gnolang/gno/pull/2970',
+            createdAt: '2024-10-17T15:07:08Z',
+            updatedAt: '2024-10-18T21:13:25Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-PeI_',
+            title: 'feat(stdlibs): add internal/compat/crypto/subtle',
+            url: 'https://github.com/gnolang/gno/pull/2937',
+            createdAt: '2024-10-10T15:40:19Z',
+            updatedAt: '2024-10-17T17:51:05Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
       },
       mrs: {
         count: 0,
@@ -10993,7 +11491,7 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/777866?v=4',
       url: 'https://github.com/sw360cab',
       name: 'Sergio Maria Matone',
-      commits: 8,
+      commits: 9,
       issues: {
         count: 4,
         data: [
@@ -11007,10 +11505,6 @@ const data = {
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -11028,10 +11522,6 @@ const data = {
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -11052,23 +11542,27 @@ const data = {
             title: '[infra] Minimal Setup of Observability node running monitoring service',
             url: 'https://github.com/gnolang/gno/issues/2632',
             createdAt: '2024-07-26T09:25:58Z',
-            updatedAt: '2024-09-11T14:55:17Z',
+            updatedAt: '2024-10-18T09:42:16Z',
             labels: [
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
         ],
       },
       prs: {
-        count: 8,
+        count: 9,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-81Xt',
+            title: 'chore(ci): reducing folders spinning up benchmarks',
+            url: 'https://github.com/gnolang/gno/pull/2966',
+            createdAt: '2024-10-17T10:51:29Z',
+            updatedAt: '2024-10-18T10:05:59Z',
+            labels: [],
+          },
           {
             id: 'PR_kwDOE-u6Jc59gATb',
             title: 'ci: remove conflicting option to push benchmark on github pages',
@@ -11106,7 +11600,7 @@ const data = {
             title: 'chore(benchmarks): Rehauling Benchmark Workloads',
             url: 'https://github.com/gnolang/gno/pull/2716',
             createdAt: '2024-08-20T16:17:58Z',
-            updatedAt: '2024-09-26T09:10:41Z',
+            updatedAt: '2024-10-18T09:57:28Z',
             labels: [],
           },
           {
@@ -11141,8 +11635,16 @@ const data = {
         ],
       },
       mrs: {
-        count: 8,
+        count: 9,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-81Xt',
+            title: 'chore(ci): reducing folders spinning up benchmarks',
+            url: 'https://github.com/gnolang/gno/pull/2966',
+            createdAt: '2024-10-17T10:51:29Z',
+            updatedAt: '2024-10-18T10:05:59Z',
+            labels: [],
+          },
           {
             id: 'PR_kwDOE-u6Jc59gATb',
             title: 'ci: remove conflicting option to push benchmark on github pages',
@@ -11180,7 +11682,7 @@ const data = {
             title: 'chore(benchmarks): Rehauling Benchmark Workloads',
             url: 'https://github.com/gnolang/gno/pull/2716',
             createdAt: '2024-08-20T16:17:58Z',
-            updatedAt: '2024-09-26T09:10:41Z',
+            updatedAt: '2024-10-18T09:57:28Z',
             labels: [],
           },
           {
@@ -11222,7 +11724,7 @@ const data = {
             title: 'chore(benchmarks): Rehauling Benchmark Workloads',
             url: 'https://github.com/gnolang/gno/pull/2716',
             createdAt: '2024-08-20T16:17:58Z',
-            updatedAt: '2024-09-26T09:10:41Z',
+            updatedAt: '2024-10-18T09:57:28Z',
             labels: [],
           },
           {
@@ -11365,7 +11867,7 @@ const data = {
             title: 'feat(boardsv2): experiment API - WIP',
             url: 'https://github.com/gnolang/gno/pull/2902',
             createdAt: '2024-10-04T13:11:08Z',
-            updatedAt: '2024-10-04T15:51:39Z',
+            updatedAt: '2024-10-11T14:47:06Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -11407,10 +11909,18 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/1196465?u=b32a9401bab7384dd6195eee8ba073a9b38db99b&v=4',
       url: 'https://github.com/ajnavarro',
       name: 'Antonio Navarro Perez',
-      commits: 15,
+      commits: 17,
       issues: {
-        count: 13,
+        count: 14,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6ZLVlo',
+            title: 'META: Benchmarks',
+            url: 'https://github.com/gnolang/gno/issues/2919',
+            createdAt: '2024-10-07T09:34:52Z',
+            updatedAt: '2024-10-17T12:23:07Z',
+            labels: [],
+          },
           {
             id: 'I_kwDOE-u6Jc6YCjwr',
             title: 'error: panic: Orphan expires before it comes alive. 1 > 0',
@@ -11471,39 +11981,24 @@ const data = {
             title: 'CI: Build binaries and serve them as artifacts on every PR',
             url: 'https://github.com/gnolang/gno/issues/2098',
             createdAt: '2024-05-14T10:16:47Z',
-            updatedAt: '2024-09-11T15:30:15Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-18T10:22:57Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6Iy2Ry',
             title: 'CI: Fix race conditions and run tests with -race flag',
             url: 'https://github.com/gnolang/gno/issues/2097',
             createdAt: '2024-05-14T10:14:33Z',
-            updatedAt: '2024-09-27T12:29:39Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:58Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6Iy10q',
             title: 'CI: Add cache where it makes sense',
             url: 'https://github.com/gnolang/gno/issues/2096',
             createdAt: '2024-05-14T10:13:34Z',
-            updatedAt: '2024-09-11T15:30:39Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:58Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6Iy1Tn',
@@ -11555,20 +12050,45 @@ const data = {
             title: 'Proposal: Implementing Versioning Across Application Serialization Structures',
             url: 'https://github.com/gnolang/gno/issues/1838',
             createdAt: '2024-03-25T14:42:41Z',
-            updatedAt: '2024-09-11T13:24:03Z',
-            labels: [],
+            updatedAt: '2024-10-18T11:42:08Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
+              },
+            ],
           },
         ],
       },
       prs: {
-        count: 20,
+        count: 21,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-Deuv',
+            title: 'chore: Remove checkbox with the reminder of adding more Benchmarks.',
+            url: 'https://github.com/gnolang/gno/pull/2927',
+            createdAt: '2024-10-09T09:44:14Z',
+            updatedAt: '2024-10-16T09:47:30Z',
+            labels: [],
+          },
           {
             id: 'PR_kwDOE-u6Jc586kMt',
             title: 'chore: Run stdlib tests in parallel to make gnovm tests run faster',
             url: 'https://github.com/gnolang/gno/pull/2864',
             createdAt: '2024-09-27T12:24:06Z',
-            updatedAt: '2024-09-27T12:45:24Z',
+            updatedAt: '2024-10-18T13:51:10Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -11808,8 +12328,29 @@ const data = {
         ],
       },
       mrs: {
-        count: 15,
+        count: 17,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-Deuv',
+            title: 'chore: Remove checkbox with the reminder of adding more Benchmarks.',
+            url: 'https://github.com/gnolang/gno/pull/2927',
+            createdAt: '2024-10-09T09:44:14Z',
+            updatedAt: '2024-10-16T09:47:30Z',
+            labels: [],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc586kMt',
+            title: 'chore: Run stdlib tests in parallel to make gnovm tests run faster',
+            url: 'https://github.com/gnolang/gno/pull/2864',
+            createdAt: '2024-09-27T12:24:06Z',
+            updatedAt: '2024-10-18T13:51:10Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc58zttP',
             title: 'fix: stop LevelDB benchmark due to an error',
@@ -12099,7 +12640,7 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/1999543?v=4',
       url: 'https://github.com/jefft0',
       name: 'Jeff Thompson',
-      commits: 17,
+      commits: 18,
       issues: {
         count: 9,
         data: [
@@ -12129,7 +12670,7 @@ const data = {
             title: 'feature request: Include tx-indexer in gnodev, automatically refresh on reload',
             url: 'https://github.com/gnolang/gno/issues/2082',
             createdAt: '2024-05-13T12:01:11Z',
-            updatedAt: '2024-10-04T10:55:33Z',
+            updatedAt: '2024-10-21T07:11:09Z',
             labels: [
               {
                 name: 'bounty',
@@ -12142,6 +12683,10 @@ const data = {
               {
                 name: 'help wanted',
                 color: '006b75',
+              },
+              {
+                name: 'hacktoberfest',
+                color: '50da4c',
               },
             ],
           },
@@ -12229,7 +12774,7 @@ const data = {
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -12256,7 +12801,7 @@ const data = {
             title: 'feat: In the gnokey CLI, add command to update the password',
             url: 'https://github.com/gnolang/gno/pull/2700',
             createdAt: '2024-08-14T14:52:23Z',
-            updatedAt: '2024-10-04T07:44:26Z',
+            updatedAt: '2024-10-16T12:52:36Z',
             labels: [
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
@@ -12280,7 +12825,7 @@ const data = {
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -12356,7 +12901,7 @@ const data = {
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -12377,7 +12922,7 @@ const data = {
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -12594,7 +13139,7 @@ const data = {
         ],
       },
       mrs: {
-        count: 17,
+        count: 18,
         data: [
           {
             id: 'PR_kwDOE-u6Jc543rnd',
@@ -12606,6 +13151,23 @@ const data = {
               {
                 name: 'breaking change',
                 color: 'a7327e',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc54X1sc',
+            title: 'feat: In the gnokey CLI, add command to update the password',
+            url: 'https://github.com/gnolang/gno/pull/2700',
+            createdAt: '2024-08-14T14:52:23Z',
+            updatedAt: '2024-10-16T12:52:36Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
               },
               {
                 name: ':package: :mountain:  gno.land',
@@ -12809,7 +13371,7 @@ const data = {
         ],
       },
       reviewedMrs: {
-        count: 5,
+        count: 6,
         data: [
           {
             id: 'PR_kwDOE-u6Jc543rnd',
@@ -12821,6 +13383,23 @@ const data = {
               {
                 name: 'breaking change',
                 color: 'a7327e',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc54X1sc',
+            title: 'feat: In the gnokey CLI, add command to update the password',
+            url: 'https://github.com/gnolang/gno/pull/2700',
+            createdAt: '2024-08-14T14:52:23Z',
+            updatedAt: '2024-10-16T12:52:36Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
               },
               {
                 name: ':package: :mountain:  gno.land',
@@ -12914,15 +13493,11 @@ const data = {
             title: 'bug(gnovm): prohibit conversion of non-convertible typed constants',
             url: 'https://github.com/gnolang/gno/issues/2681',
             createdAt: '2024-08-12T19:33:13Z',
-            updatedAt: '2024-09-11T14:52:54Z',
+            updatedAt: '2024-10-16T12:46:30Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -12931,13 +13506,8 @@ const data = {
             title: 'Better Gno Error Handling',
             url: 'https://github.com/gnolang/gno/issues/2653',
             createdAt: '2024-08-01T17:06:44Z',
-            updatedAt: '2024-09-12T11:56:32Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:07Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6QmVNx',
@@ -12952,15 +13522,11 @@ const data = {
             title: 'Clarify allowed files and extensions when adding a package',
             url: 'https://github.com/gnolang/gno/issues/2421',
             createdAt: '2024-06-24T00:55:10Z',
-            updatedAt: '2024-10-01T00:53:34Z',
+            updatedAt: '2024-10-16T12:50:00Z',
             labels: [
               {
                 name: ':book:  documentation',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -12977,20 +13543,15 @@ const data = {
             title: '[GnoVM]: Do not allow realms to store references to objects owned by other realms',
             url: 'https://github.com/gnolang/gno/issues/2332',
             createdAt: '2024-06-11T21:27:17Z',
-            updatedAt: '2024-09-11T15:17:45Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:46:22Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6Lbqfm',
             title: '[bug/gnovm] arrays returned by functions should not be addressable',
             url: 'https://github.com/gnolang/gno/issues/2299',
             createdAt: '2024-06-06T23:13:42Z',
-            updatedAt: '2024-09-11T15:18:44Z',
+            updatedAt: '2024-10-16T12:46:21Z',
             labels: [
               {
                 name: '🐞 bug',
@@ -12999,10 +13560,6 @@ const data = {
               {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -13019,7 +13576,7 @@ const data = {
             title: '[GnoVM] bug: inconsistent map key',
             url: 'https://github.com/gnolang/gno/issues/2060',
             createdAt: '2024-05-08T20:53:45Z',
-            updatedAt: '2024-09-11T15:31:51Z',
+            updatedAt: '2024-10-16T12:48:53Z',
             labels: [
               {
                 name: '🐞 bug',
@@ -13028,10 +13585,6 @@ const data = {
               {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -13057,7 +13610,7 @@ const data = {
             title: 'Add gno `std` package function `GasUsed`',
             url: 'https://github.com/gnolang/gno/issues/1998',
             createdAt: '2024-04-29T15:44:27Z',
-            updatedAt: '2024-09-11T15:34:48Z',
+            updatedAt: '2024-10-16T12:55:20Z',
             labels: [
               {
                 name: '🗺️good first issue🗺️',
@@ -13066,10 +13619,6 @@ const data = {
               {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
             ],
           },
@@ -13086,13 +13635,8 @@ const data = {
             title: 'Accounts should be locked and unlockable',
             url: 'https://github.com/gnolang/gno/issues/1837',
             createdAt: '2024-03-25T14:25:36Z',
-            updatedAt: '2024-09-11T15:41:41Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:19:34Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6DC2T1',
@@ -13150,15 +13694,11 @@ const data = {
             title: 'Unable to call modifying methods on types imported from other realms',
             url: 'https://github.com/gnolang/gno/issues/1671',
             createdAt: '2024-02-20T20:25:45Z',
-            updatedAt: '2024-09-11T15:46:53Z',
+            updatedAt: '2024-10-16T12:42:28Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -13206,7 +13746,7 @@ const data = {
             title: 'feat: add flag to execute filetests with prefix',
             url: 'https://github.com/gnolang/gno/pull/2837',
             createdAt: '2024-09-23T21:24:46Z',
-            updatedAt: '2024-09-26T12:47:38Z',
+            updatedAt: '2024-10-08T00:07:03Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -13253,7 +13793,7 @@ const data = {
             title: 'fix: addressability',
             url: 'https://github.com/gnolang/gno/pull/2731',
             createdAt: '2024-08-27T00:21:03Z',
-            updatedAt: '2024-09-25T17:25:52Z',
+            updatedAt: '2024-10-07T23:51:41Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -13266,7 +13806,7 @@ const data = {
             title: 'feat: add a global params store module',
             url: 'https://github.com/gnolang/gno/pull/2710',
             createdAt: '2024-08-19T20:52:01Z',
-            updatedAt: '2024-08-20T15:00:32Z',
+            updatedAt: '2024-10-08T00:01:45Z',
             labels: [
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
@@ -13292,7 +13832,7 @@ const data = {
             title: 'feat: restrict sending gnot by default',
             url: 'https://github.com/gnolang/gno/pull/2667',
             createdAt: '2024-08-07T20:38:46Z',
-            updatedAt: '2024-08-29T17:55:01Z',
+            updatedAt: '2024-10-08T00:03:06Z',
             labels: [
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
@@ -14596,10 +15136,27 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/4681308?u=5a240449a1a95bec5cfecd2295f4804fec207cdf&v=4',
       url: 'https://github.com/thehowl',
       name: 'Morgan',
-      commits: 86,
+      commits: 87,
       issues: {
-        count: 38,
+        count: 39,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6as43_',
+            title: 'can `break` out of a self-executing closure',
+            url: 'https://github.com/gnolang/gno/issues/2973',
+            createdAt: '2024-10-17T18:36:10Z',
+            updatedAt: '2024-10-17T18:37:02Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'I_kwDOE-u6Jc6ZCcsf',
             title: '`gno test -covermode`',
@@ -14639,15 +15196,20 @@ const data = {
             title: 'rfc: the future of `gno.mod`',
             url: 'https://github.com/gnolang/gno/issues/2904',
             createdAt: '2024-10-04T14:22:22Z',
-            updatedAt: '2024-10-06T09:30:42Z',
-            labels: [],
+            updatedAt: '2024-10-11T11:27:26Z',
+            labels: [
+              {
+                name: 'gno-proposal',
+                color: '81AC09',
+              },
+            ],
           },
           {
             id: 'I_kwDOE-u6Jc6Yy_NN',
             title: 'META - Review Team Phase 1',
             url: 'https://github.com/gnolang/gno/issues/2890',
             createdAt: '2024-10-03T09:02:15Z',
-            updatedAt: '2024-10-03T09:18:44Z',
+            updatedAt: '2024-10-17T11:50:05Z',
             labels: [],
           },
           {
@@ -14717,7 +15279,7 @@ const data = {
             title: 'Move standard library initialization to genesis transactions',
             url: 'https://github.com/gnolang/gno/issues/2730',
             createdAt: '2024-08-26T18:32:42Z',
-            updatedAt: '2024-09-11T14:49:11Z',
+            updatedAt: '2024-10-16T12:46:31Z',
             labels: [
               {
                 name: ':package: :mountain:  gno.land',
@@ -14727,10 +15289,6 @@ const data = {
                 name: ':star2:  improvement',
                 color: 'ffffff',
               },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
             ],
           },
           {
@@ -14738,26 +15296,16 @@ const data = {
             title: 'change default genesis package creator, and add way to configure it',
             url: 'https://github.com/gnolang/gno/issues/2573',
             createdAt: '2024-07-10T18:19:15Z',
-            updatedAt: '2024-09-11T14:58:58Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-18T07:11:01Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6PAx7v',
             title: 'Move GnoVM testing logic within pkg/gnolang; separate from `gno test` logic',
             url: 'https://github.com/gnolang/gno/issues/2561',
             createdAt: '2024-07-09T22:39:54Z',
-            updatedAt: '2024-09-11T14:59:25Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:04Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6O2jzh',
@@ -14807,7 +15355,7 @@ const data = {
             title: 'proposal: testable markdown documentation',
             url: 'https://github.com/gnolang/gno/issues/2245',
             createdAt: '2024-05-30T15:59:34Z',
-            updatedAt: '2024-10-02T09:54:38Z',
+            updatedAt: '2024-10-16T12:51:02Z',
             labels: [
               {
                 name: ':seedling:  feature',
@@ -14816,10 +15364,6 @@ const data = {
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -14832,7 +15376,7 @@ const data = {
             title: '"User Flow" integration test',
             url: 'https://github.com/gnolang/gno/issues/2159',
             createdAt: '2024-05-21T08:42:10Z',
-            updatedAt: '2024-05-21T08:42:10Z',
+            updatedAt: '2024-10-18T11:06:52Z',
             labels: [
               {
                 name: ':star2:  improvement',
@@ -14845,13 +15389,8 @@ const data = {
             title: 'Expect full denoms in Banker.IssueCoin and Banker.RemoveCoin',
             url: 'https://github.com/gnolang/gno/issues/2107',
             createdAt: '2024-05-14T19:34:05Z',
-            updatedAt: '2024-09-11T15:29:40Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:48:54Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6IZJqN',
@@ -14889,7 +15428,7 @@ const data = {
               'vm: variable declaration code in `AssignStmt` and `ValueDecl` should be synced (issues with map index / type assertion tuple assignment)',
             url: 'https://github.com/gnolang/gno/issues/1958',
             createdAt: '2024-04-19T11:12:43Z',
-            updatedAt: '2024-09-11T15:35:23Z',
+            updatedAt: '2024-10-16T12:48:52Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -14899,10 +15438,6 @@ const data = {
                 name: ':star2:  improvement',
                 color: 'ffffff',
               },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
             ],
           },
           {
@@ -14910,13 +15445,8 @@ const data = {
             title: "[chain] move `gnoland start`'s genesis generation to cmd/genesis",
             url: 'https://github.com/gnolang/gno/issues/1952',
             createdAt: '2024-04-18T15:12:23Z',
-            updatedAt: '2024-10-04T09:24:45Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:21:47Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6FyjQT',
@@ -14965,11 +15495,11 @@ const data = {
             title: 'gnolang/overflow repo and `math/overflow` (ex `p/demo/maths`) should be synced up',
             url: 'https://github.com/gnolang/gno/issues/1729',
             createdAt: '2024-03-04T15:33:29Z',
-            updatedAt: '2024-09-11T15:44:57Z',
+            updatedAt: '2024-10-16T12:48:44Z',
             labels: [
               {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
+                name: '🗺️good first issue🗺️',
+                color: '7057ff',
               },
             ],
           },
@@ -15033,7 +15563,7 @@ const data = {
             title: 'support variadic types as function args in MsgCall',
             url: 'https://github.com/gnolang/gno/issues/1611',
             createdAt: '2024-02-01T10:05:59Z',
-            updatedAt: '2024-09-11T15:47:16Z',
+            updatedAt: '2024-10-16T12:35:45Z',
             labels: [
               {
                 name: ':seedling:  feature',
@@ -15042,10 +15572,6 @@ const data = {
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -15091,7 +15617,7 @@ const data = {
             title: 'rfc: enforce package name == last element of import path in `maketx addpkg`',
             url: 'https://github.com/gnolang/gno/issues/1571',
             createdAt: '2024-01-23T12:34:47Z',
-            updatedAt: '2024-01-23T12:34:47Z',
+            updatedAt: '2024-10-16T13:00:25Z',
             labels: [
               {
                 name: ':package: :mountain:  gno.land',
@@ -15140,8 +15666,16 @@ const data = {
         ],
       },
       prs: {
-        count: 104,
+        count: 105,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-8ktW',
+            title: 'chore: remove misc/logos',
+            url: 'https://github.com/gnolang/gno/pull/2965',
+            createdAt: '2024-10-17T10:15:37Z',
+            updatedAt: '2024-10-17T10:36:17Z',
+            labels: [],
+          },
           {
             id: 'PR_kwDOE-u6Jc59fzWT',
             title: 'refactor: gnovm -> gno, pkg/gnolang -> vm, `package gnolang` -> `vm`',
@@ -15172,7 +15706,7 @@ const data = {
             title: 'wip: use wal file to replay chain',
             url: 'https://github.com/gnolang/gno/pull/2885',
             createdAt: '2024-10-02T14:45:22Z',
-            updatedAt: '2024-10-02T15:15:58Z',
+            updatedAt: '2024-10-06T15:25:39Z',
             labels: [
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
@@ -16487,19 +17021,6 @@ const data = {
             createdAt: '2024-01-18T17:31:55Z',
             updatedAt: '2024-01-18T17:32:39Z',
             labels: [],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc5kct98',
-            title: 'chore: make gnokey consistent with the changes applied to gnokeykc',
-            url: 'https://github.com/gnolang/gno/pull/1554',
-            createdAt: '2024-01-18T17:17:28Z',
-            updatedAt: '2024-01-23T17:29:48Z',
-            labels: [
-              {
-                name: ':package: :mountain:  gno.land',
-                color: 'ffffff',
-              },
-            ],
           },
         ],
       },
@@ -17860,8 +18381,13 @@ const data = {
             title: 'feat(github): add a stale bot for PRs',
             url: 'https://github.com/gnolang/gno/pull/2804',
             createdAt: '2024-09-16T08:23:51Z',
-            updatedAt: '2024-09-19T07:55:17Z',
-            labels: [],
+            updatedAt: '2024-10-18T11:24:10Z',
+            labels: [
+              {
+                name: 'in focus',
+                color: 'FBCA04',
+              },
+            ],
           },
           {
             id: 'PR_kwDOE-u6Jc54nvR_',
@@ -17946,15 +18472,11 @@ const data = {
             title: 'Validator resolves old IP address after sentry IP change when using FQDN',
             url: 'https://github.com/gnolang/gno/issues/2580',
             createdAt: '2024-07-12T20:47:27Z',
-            updatedAt: '2024-10-01T15:42:40Z',
+            updatedAt: '2024-10-16T12:50:04Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -17979,28 +18501,19 @@ const data = {
             title: 'Encoding error of  `priv_validator_key.json` when sharding for Horcrux',
             url: 'https://github.com/gnolang/gno/issues/2460',
             createdAt: '2024-06-28T18:46:44Z',
-            updatedAt: '2024-09-11T15:11:05Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:02Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6NZHh9',
             title: 'Sentry Nodes lagging behind validator in consensus process',
             url: 'https://github.com/gnolang/gno/issues/2430',
             createdAt: '2024-06-25T09:28:10Z',
-            updatedAt: '2024-09-11T15:12:42Z',
+            updatedAt: '2024-10-18T16:20:18Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -18025,13 +18538,8 @@ const data = {
             title: 'Incompatibility of `gnoland secrets init` with Read-Only mounted k8s Secrets',
             url: 'https://github.com/gnolang/gno/issues/2370',
             createdAt: '2024-06-17T15:41:27Z',
-            updatedAt: '2024-09-11T15:15:18Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-15T14:11:51Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6L6NbA',
@@ -18156,38 +18664,100 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/5792239?u=8fa959d3dce1f26f43e80edb81ec0317f0a847c3&v=4',
       url: 'https://github.com/mvertes',
       name: 'Marc Vertes',
-      commits: 8,
+      commits: 9,
       issues: {
-        count: 1,
+        count: 2,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6aXW_f',
+            title: 'Running `go vet` on the project fails.',
+            url: 'https://github.com/gnolang/gno/issues/2954',
+            createdAt: '2024-10-15T20:30:35Z',
+            updatedAt: '2024-10-18T11:32:01Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
+              },
+            ],
+          },
           {
             id: 'I_kwDOE-u6Jc6Kv0T0',
             title: 'gnovm debugger: a breakpoint may be ignored on a multiple statements line',
             url: 'https://github.com/gnolang/gno/issues/2252',
             createdAt: '2024-05-31T13:00:44Z',
-            updatedAt: '2024-09-11T15:21:22Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:51:02Z',
+            labels: [],
           },
         ],
       },
       prs: {
-        count: 8,
+        count: 10,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_IZHL',
+            title: 'fix(tm2): avoid mutex copy in marshal and unmarshal methods',
+            url: 'https://github.com/gnolang/gno/pull/2981',
+            createdAt: '2024-10-18T17:47:16Z',
+            updatedAt: '2024-10-18T18:07:05Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-tPpk',
+            title: 'chore: fix issues reported by `go vet`',
+            url: 'https://github.com/gnolang/gno/pull/2952',
+            createdAt: '2024-10-15T17:11:47Z',
+            updatedAt: '2024-10-15T20:56:00Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc58VZDw',
             title: 'docs: Add Realm ABI Specification',
             url: 'https://github.com/gnolang/gno/pull/2833',
             createdAt: '2024-09-23T08:50:20Z',
-            updatedAt: '2024-09-30T07:57:45Z',
+            updatedAt: '2024-10-18T11:33:54Z',
             labels: [
               {
                 name: ':book:  documentation',
                 color: 'ffffff',
+              },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
               },
             ],
           },
@@ -18305,8 +18875,29 @@ const data = {
         ],
       },
       mrs: {
-        count: 7,
+        count: 8,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-tPpk',
+            title: 'chore: fix issues reported by `go vet`',
+            url: 'https://github.com/gnolang/gno/pull/2952',
+            createdAt: '2024-10-15T17:11:47Z',
+            updatedAt: '2024-10-15T20:56:00Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc52cPG6',
             title: 'feat(examples): a shifumi (rock, paper, scissors) smart contract',
@@ -18458,7 +19049,7 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/6007578?u=1bc18d55d60a5bcd60a217bc38963cf8d261aebe&v=4',
       url: 'https://github.com/ltzmaxwell',
       name: 'ltzmaxwell',
-      commits: 12,
+      commits: 13,
       issues: {
         count: 6,
         data: [
@@ -18467,7 +19058,7 @@ const data = {
             title: 'test store polluted by native object',
             url: 'https://github.com/gnolang/gno/issues/2268',
             createdAt: '2024-06-03T15:05:40Z',
-            updatedAt: '2024-09-11T15:19:46Z',
+            updatedAt: '2024-10-16T12:46:21Z',
             labels: [
               {
                 name: '🐞 bug',
@@ -18477,10 +19068,6 @@ const data = {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
               },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
             ],
           },
           {
@@ -18488,15 +19075,11 @@ const data = {
             title: 'incorrect type while define native value',
             url: 'https://github.com/gnolang/gno/issues/2267',
             createdAt: '2024-06-03T14:57:26Z',
-            updatedAt: '2024-09-11T15:19:55Z',
+            updatedAt: '2024-10-16T12:46:20Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -18543,23 +19126,53 @@ const data = {
             title: 'blank identifier "_" should not be used as value or type',
             url: 'https://github.com/gnolang/gno/issues/1946',
             createdAt: '2024-04-18T01:51:02Z',
-            updatedAt: '2024-09-11T15:36:16Z',
+            updatedAt: '2024-10-16T12:48:51Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
         ],
       },
       prs: {
-        count: 17,
+        count: 19,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-zlkW',
+            title: 'WIP fix(gnovm): add filetest for inter-realm spec',
+            url: 'https://github.com/gnolang/gno/pull/2958',
+            createdAt: '2024-10-16T10:22:03Z',
+            updatedAt: '2024-10-19T00:46:19Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-hWil',
+            title: 'WIP fix(gnovm): correct const type deduction',
+            url: 'https://github.com/gnolang/gno/pull/2948',
+            createdAt: '2024-10-14T10:31:16Z',
+            updatedAt: '2024-10-14T10:52:07Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc55JVoj',
             title: 'fix(gnovm): correct type comparison for bool type',
@@ -18715,7 +19328,7 @@ const data = {
             title: 'fix(gnovm): correct type for shift expression',
             url: 'https://github.com/gnolang/gno/pull/1775',
             createdAt: '2024-03-14T16:15:44Z',
-            updatedAt: '2024-09-16T15:08:08Z',
+            updatedAt: '2024-10-15T17:26:32Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -18816,7 +19429,7 @@ const data = {
         ],
       },
       mrs: {
-        count: 12,
+        count: 13,
         data: [
           {
             id: 'PR_kwDOE-u6Jc55JVoj',
@@ -18939,6 +19552,23 @@ const data = {
             ],
           },
           {
+            id: 'PR_kwDOE-u6Jc5ppwy8',
+            title: 'fix(gnovm): correct type for shift expression',
+            url: 'https://github.com/gnolang/gno/pull/1775',
+            createdAt: '2024-03-14T16:15:44Z',
+            updatedAt: '2024-10-15T17:26:32Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
             id: 'PR_kwDOE-u6Jc5oqb1q',
             title: 'feat: add support for type declarations on pointer types',
             url: 'https://github.com/gnolang/gno/pull/1733',
@@ -18993,7 +19623,7 @@ const data = {
         ],
       },
       reviewedMrs: {
-        count: 6,
+        count: 7,
         data: [
           {
             id: 'PR_kwDOE-u6Jc55JVoj',
@@ -19052,6 +19682,23 @@ const data = {
             url: 'https://github.com/gnolang/gno/pull/1890',
             createdAt: '2024-04-04T17:54:23Z',
             updatedAt: '2024-08-16T09:50:41Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5ppwy8',
+            title: 'fix(gnovm): correct type for shift expression',
+            url: 'https://github.com/gnolang/gno/pull/1775',
+            createdAt: '2024-03-14T16:15:44Z',
+            updatedAt: '2024-10-15T17:26:32Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -19370,7 +20017,7 @@ const data = {
             title: 'feature request: Ledger hardware wallet support for validator addresses',
             url: 'https://github.com/gnolang/gno/issues/2560',
             createdAt: '2024-07-09T21:28:38Z',
-            updatedAt: '2024-09-11T14:59:39Z',
+            updatedAt: '2024-10-18T19:29:55Z',
             labels: [
               {
                 name: ':seedling:  feature',
@@ -19380,10 +20027,6 @@ const data = {
                 name: 'security',
                 color: 'FF0000',
               },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
             ],
           },
           {
@@ -19391,15 +20034,11 @@ const data = {
             title: 'task: check the lexical restrictions on gno module paths and compare to go',
             url: 'https://github.com/gnolang/gno/issues/2426',
             createdAt: '2024-06-24T16:50:35Z',
-            updatedAt: '2024-09-11T15:13:16Z',
+            updatedAt: '2024-10-16T12:46:23Z',
             labels: [
               {
                 name: 'security',
                 color: 'FF0000',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -19501,14 +20140,35 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/7622257?u=c80ea7720f1b43c1380a911c1588242f1d5f3497&v=4',
       url: 'https://github.com/alexiscolin',
       name: 'Alexis Colin',
-      commits: 12,
+      commits: 14,
       issues: {
         count: 0,
         data: [],
       },
       prs: {
-        count: 13,
+        count: 15,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-9u-z',
+            title: 'chore: add alexiscolin as gnoweb reviewer',
+            url: 'https://github.com/gnolang/gno/pull/2967',
+            createdAt: '2024-10-17T12:45:25Z',
+            updatedAt: '2024-10-18T20:32:41Z',
+            labels: [],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-7IfK',
+            title: 'feat(gnoweb): disable html in markdown',
+            url: 'https://github.com/gnolang/gno/pull/2964',
+            createdAt: '2024-10-17T06:57:27Z',
+            updatedAt: '2024-10-20T13:07:25Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc50o70F',
             title: 'feat: render .md files from packages',
@@ -19664,8 +20324,29 @@ const data = {
         ],
       },
       mrs: {
-        count: 12,
+        count: 14,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-9u-z',
+            title: 'chore: add alexiscolin as gnoweb reviewer',
+            url: 'https://github.com/gnolang/gno/pull/2967',
+            createdAt: '2024-10-17T12:45:25Z',
+            updatedAt: '2024-10-18T20:32:41Z',
+            labels: [],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-7IfK',
+            title: 'feat(gnoweb): disable html in markdown',
+            url: 'https://github.com/gnolang/gno/pull/2964',
+            createdAt: '2024-10-17T06:57:27Z',
+            updatedAt: '2024-10-20T13:07:25Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc50o70F',
             title: 'feat: render .md files from packages',
@@ -19808,8 +20489,21 @@ const data = {
         ],
       },
       reviewedMrs: {
-        count: 3,
+        count: 4,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-7IfK',
+            title: 'feat(gnoweb): disable html in markdown',
+            url: 'https://github.com/gnolang/gno/pull/2964',
+            createdAt: '2024-10-17T06:57:27Z',
+            updatedAt: '2024-10-20T13:07:25Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc5wuUl-',
             title: 'fix(gnoweb): template and md style',
@@ -19907,23 +20601,40 @@ const data = {
             title: 'PrevRealm within init() functions in `gno test` is invalid',
             url: 'https://github.com/gnolang/gno/issues/1852',
             createdAt: '2024-03-27T15:18:39Z',
-            updatedAt: '2024-09-11T15:40:20Z',
+            updatedAt: '2024-10-16T12:59:27Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
         ],
       },
       prs: {
-        count: 9,
+        count: 10,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-NX9i',
+            title: 'feat(gnovm): packages loader',
+            url: 'https://github.com/gnolang/gno/pull/2932',
+            createdAt: '2024-10-10T11:30:05Z',
+            updatedAt: '2024-10-17T19:15:43Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc59pJjZ',
             title: 'fix: deprecate std.GetOrigCaller',
@@ -20193,26 +20904,16 @@ const data = {
             title: 'CONSENSUS FAILURE - fix error message',
             url: 'https://github.com/gnolang/gno/issues/2773',
             createdAt: '2024-09-09T13:17:01Z',
-            updatedAt: '2024-09-11T14:44:35Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:10Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6LjC5n',
             title: 'Network peering discovery - Seed mode - Addrbook.json',
             url: 'https://github.com/gnolang/gno/issues/2308',
             createdAt: '2024-06-07T21:57:56Z',
-            updatedAt: '2024-10-03T13:52:18Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T14:24:17Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6I0-aV',
@@ -20436,7 +21137,7 @@ const data = {
             title: 'chore(ci): setup docker build cache',
             url: 'https://github.com/gnolang/gno/pull/2062',
             createdAt: '2024-05-09T07:32:25Z',
-            updatedAt: '2024-07-22T13:11:00Z',
+            updatedAt: '2024-10-08T13:58:31Z',
             labels: [],
           },
           {
@@ -20833,24 +21534,19 @@ const data = {
             title: '[GnoVM] Implement JSON marshalling on `gnoland.TypedValue`',
             url: 'https://github.com/gnolang/gno/issues/2029',
             createdAt: '2024-05-03T10:12:18Z',
-            updatedAt: '2024-09-11T15:33:16Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:48:53Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6EBtLz',
             title: '[Keeper] JSON - Gas Consumption',
             url: 'https://github.com/gnolang/gno/issues/1860',
             createdAt: '2024-03-29T09:56:57Z',
-            updatedAt: '2024-09-11T15:39:21Z',
+            updatedAt: '2024-10-18T07:10:44Z',
             labels: [
               {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
+                name: 'security',
+                color: 'FF0000',
               },
             ],
           },
@@ -20859,7 +21555,7 @@ const data = {
             title: '[Keeper] JSON - potential DDoS and perfomance issue',
             url: 'https://github.com/gnolang/gno/issues/1859',
             createdAt: '2024-03-29T09:53:13Z',
-            updatedAt: '2024-09-11T15:39:33Z',
+            updatedAt: '2024-10-16T12:48:48Z',
             labels: [
               {
                 name: 'investigating',
@@ -20868,10 +21564,6 @@ const data = {
               {
                 name: 'security',
                 color: 'FF0000',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -20886,8 +21578,67 @@ const data = {
         ],
       },
       prs: {
-        count: 32,
+        count: 35,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5--xP3',
+            title: 'feat(keeper): add `vm/qpath` query',
+            url: 'https://github.com/gnolang/gno/pull/2969',
+            createdAt: '2024-10-17T14:43:39Z',
+            updatedAt: '2024-10-17T15:32:45Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-jyx0',
+            title: 'wip(keeper): implement json primitive return',
+            url: 'https://github.com/gnolang/gno/pull/2949',
+            createdAt: '2024-10-14T15:08:31Z',
+            updatedAt: '2024-10-17T17:49:46Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-dD1P',
+            title: 'fix(gnodev): timstamps issue on reload',
+            url: 'https://github.com/gnolang/gno/pull/2943',
+            createdAt: '2024-10-13T17:40:04Z',
+            updatedAt: '2024-10-13T17:57:44Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc573oaj',
             title: 'feat(gnobro): add json log format',
@@ -21879,8 +22630,16 @@ const data = {
       name: 'Lee ByeongJun',
       commits: 19,
       issues: {
-        count: 8,
+        count: 9,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6ZuHTV',
+            title: 'Slow execution of large byte slice/string operations ',
+            url: 'https://github.com/gnolang/gno/issues/2935',
+            createdAt: '2024-10-10T14:16:09Z',
+            updatedAt: '2024-10-10T14:16:09Z',
+            labels: [],
+          },
           {
             id: 'I_kwDOE-u6Jc6Vl6Lq',
             title:
@@ -21903,15 +22662,11 @@ const data = {
             title: 'Memory Leaks',
             url: 'https://github.com/gnolang/gno/issues/2713',
             createdAt: '2024-08-20T08:30:18Z',
-            updatedAt: '2024-09-11T14:50:40Z',
+            updatedAt: '2024-10-16T12:46:30Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -21920,15 +22675,11 @@ const data = {
             title: '`Time.Now()` always return initial UNIX time',
             url: 'https://github.com/gnolang/gno/issues/2348',
             createdAt: '2024-06-13T04:45:29Z',
-            updatedAt: '2024-09-11T15:16:02Z',
+            updatedAt: '2024-10-17T07:11:14Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -21972,8 +22723,38 @@ const data = {
         ],
       },
       prs: {
-        count: 35,
+        count: 37,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-UKjz',
+            title: 'feat(p/json): optimize json',
+            url: 'https://github.com/gnolang/gno/pull/2939',
+            createdAt: '2024-10-11T08:32:16Z',
+            updatedAt: '2024-10-21T03:07:06Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: 'review/triage-pending',
+                color: '5319e7',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-Kon_',
+            title: 'test(p/uint25): Increase Test Coverage for `uint256` Package',
+            url: 'https://github.com/gnolang/gno/pull/2931',
+            createdAt: '2024-10-10T05:54:49Z',
+            updatedAt: '2024-10-21T06:38:35Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc59k9eT',
             title: 'fix(stdlib): io test',
@@ -22082,7 +22863,7 @@ const data = {
             title: 'fix(gnovm): Prevent use of blank identifier as Value or Type',
             url: 'https://github.com/gnolang/gno/pull/2699',
             createdAt: '2024-08-14T14:45:16Z',
-            updatedAt: '2024-10-04T14:05:05Z',
+            updatedAt: '2024-10-18T19:44:29Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -22095,7 +22876,7 @@ const data = {
             title: 'fix(gnovm): Improve Error Message in `evalStaticTypeOf` function',
             url: 'https://github.com/gnolang/gno/pull/2695',
             createdAt: '2024-08-14T09:21:37Z',
-            updatedAt: '2024-10-04T07:44:11Z',
+            updatedAt: '2024-10-18T16:22:43Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -22108,7 +22889,7 @@ const data = {
             title: 'feat(gnovm): Test Coverage Support',
             url: 'https://github.com/gnolang/gno/pull/2616',
             createdAt: '2024-07-23T08:14:42Z',
-            updatedAt: '2024-10-05T12:37:17Z',
+            updatedAt: '2024-10-21T08:18:23Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -22147,7 +22928,7 @@ const data = {
             title: 'feat(gnovm): Executable Markdown',
             url: 'https://github.com/gnolang/gno/pull/2357',
             createdAt: '2024-06-14T05:41:35Z',
-            updatedAt: '2024-10-04T07:50:21Z',
+            updatedAt: '2024-10-15T07:45:49Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -22233,7 +23014,7 @@ const data = {
             title: 'feat(p/json): JSON path support',
             url: 'https://github.com/gnolang/gno/pull/1937',
             createdAt: '2024-04-16T10:04:16Z',
-            updatedAt: '2024-09-03T07:47:53Z',
+            updatedAt: '2024-10-21T08:28:21Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -22242,6 +23023,10 @@ const data = {
               {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
+              },
+              {
+                name: 'review/triage-pending',
+                color: '5319e7',
               },
             ],
           },
@@ -22897,14 +23682,22 @@ const data = {
       name: 'Nemanja Aleksic',
       commits: 2,
       issues: {
-        count: 9,
+        count: 10,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6a2I01',
+            title: 'Global GNOT lock',
+            url: 'https://github.com/gnolang/gno/issues/2980',
+            createdAt: '2024-10-18T15:53:15Z',
+            updatedAt: '2024-10-18T15:53:15Z',
+            labels: [],
+          },
           {
             id: 'I_kwDOE-u6Jc6ZDJWp',
             title: 'Migrate community-first repos to gnoverse',
             url: 'https://github.com/gnolang/gno/issues/2909',
             createdAt: '2024-10-05T08:36:25Z',
-            updatedAt: '2024-10-05T10:45:15Z',
+            updatedAt: '2024-10-17T12:44:41Z',
             labels: [],
           },
           {
@@ -22925,15 +23718,11 @@ const data = {
             title: '[Docs] gnodev command in Getting Started',
             url: 'https://github.com/gnolang/gno/issues/2128',
             createdAt: '2024-05-16T12:30:34Z',
-            updatedAt: '2024-09-11T15:28:27Z',
+            updatedAt: '2024-10-16T12:51:01Z',
             labels: [
               {
                 name: ':book:  documentation',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
             ],
           },
@@ -22942,15 +23731,11 @@ const data = {
             title: '[Docs] gnoland command in Getting Started',
             url: 'https://github.com/gnolang/gno/issues/2127',
             createdAt: '2024-05-16T12:29:10Z',
-            updatedAt: '2024-09-11T15:28:37Z',
+            updatedAt: '2024-10-16T12:51:00Z',
             labels: [
               {
                 name: ':book:  documentation',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
             ],
           },
@@ -22991,13 +23776,8 @@ const data = {
             title: '[chain] Gas Fee Equation MVP',
             url: 'https://github.com/gnolang/gno/issues/1917',
             createdAt: '2024-04-11T16:06:59Z',
-            updatedAt: '2024-09-11T15:36:37Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:48:50Z',
+            labels: [],
           },
         ],
       },
@@ -23204,8 +23984,24 @@ const data = {
       name: '6h057',
       commits: 8,
       issues: {
-        count: 10,
+        count: 12,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6aCI9A',
+            title: 'Type Conversion Error When Comparing String with Constant Type',
+            url: 'https://github.com/gnolang/gno/issues/2944',
+            createdAt: '2024-10-13T20:36:48Z',
+            updatedAt: '2024-10-13T20:36:48Z',
+            labels: [],
+          },
+          {
+            id: 'I_kwDOE-u6Jc6Zv4u8',
+            title: 'GnoVM Unexpected Crash When Panic Occurs in Tests',
+            url: 'https://github.com/gnolang/gno/issues/2938',
+            createdAt: '2024-10-10T17:45:26Z',
+            updatedAt: '2024-10-11T11:03:14Z',
+            labels: [],
+          },
           {
             id: 'I_kwDOE-u6Jc6YvxyW',
             title: 'Assigning Type as Value in Gno should be prohibited',
@@ -23264,15 +24060,11 @@ const data = {
             title: 'Constant Declaration with Slice Type Compiles Without Error',
             url: 'https://github.com/gnolang/gno/issues/2628',
             createdAt: '2024-07-24T23:14:41Z',
-            updatedAt: '2024-09-11T14:55:41Z',
+            updatedAt: '2024-10-16T12:46:28Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -23312,14 +24104,45 @@ const data = {
         ],
       },
       prs: {
-        count: 13,
+        count: 15,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_Ll_Q',
+            title: 'fix(gnovm): forbid start expression when value is not a pointer',
+            url: 'https://github.com/gnolang/gno/pull/2984',
+            createdAt: '2024-10-19T15:33:56Z',
+            updatedAt: '2024-10-21T08:58:07Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: 'review/triage-pending',
+                color: '5319e7',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-NdVk',
+            title:
+              'fix(ghverify): ensure AVL tree iteration processes all items in Render and GetFeedDefinitions function',
+            url: 'https://github.com/gnolang/gno/pull/2933',
+            createdAt: '2024-10-10T11:42:10Z',
+            updatedAt: '2024-10-11T11:04:14Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc59hZwY',
             title: 'chore(gnovm): prevent assignment to non-assignable expressions',
             url: 'https://github.com/gnolang/gno/pull/2896',
             createdAt: '2024-10-03T16:12:47Z',
-            updatedAt: '2024-10-04T21:02:27Z',
+            updatedAt: '2024-10-18T16:12:29Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -23345,7 +24168,7 @@ const data = {
             title: 'fix(gonative):  add constant information when we define a go native value',
             url: 'https://github.com/gnolang/gno/pull/2848',
             createdAt: '2024-09-25T14:13:47Z',
-            updatedAt: '2024-10-04T07:47:03Z',
+            updatedAt: '2024-10-18T16:13:08Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -23358,7 +24181,7 @@ const data = {
             title: 'feat(gnovm): align Gno constant handling with Go specifications',
             url: 'https://github.com/gnolang/gno/pull/2828',
             createdAt: '2024-09-21T14:11:15Z',
-            updatedAt: '2024-09-26T10:34:30Z',
+            updatedAt: '2024-10-19T10:03:42Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -23367,6 +24190,10 @@ const data = {
               {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
+              },
+              {
+                name: 'review/triage-pending',
+                color: '5319e7',
               },
             ],
           },
@@ -23793,7 +24620,7 @@ const data = {
             title: '[feature]  Implement the VSCode Editor gno plugin',
             url: 'https://github.com/gnolang/gno/issues/2733',
             createdAt: '2024-08-27T08:58:05Z',
-            updatedAt: '2024-10-02T09:54:14Z',
+            updatedAt: '2024-10-16T12:50:08Z',
             labels: [
               {
                 name: '🗺️good first issue🗺️',
@@ -23802,10 +24629,6 @@ const data = {
               {
                 name: ':seedling:  feature',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -23818,7 +24641,7 @@ const data = {
             title: '[feature] Implement the IntelliJ IDE gno plugin',
             url: 'https://github.com/gnolang/gno/issues/2732',
             createdAt: '2024-08-27T08:54:52Z',
-            updatedAt: '2024-09-23T10:56:47Z',
+            updatedAt: '2024-10-16T12:50:08Z',
             labels: [
               {
                 name: '🗺️good first issue🗺️',
@@ -23827,10 +24650,6 @@ const data = {
               {
                 name: ':seedling:  feature',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -23843,15 +24662,11 @@ const data = {
             title: '[infra] Set up GitOps',
             url: 'https://github.com/gnolang/gno/issues/2623',
             createdAt: '2024-07-23T16:41:06Z',
-            updatedAt: '2024-09-11T14:56:01Z',
+            updatedAt: '2024-10-16T13:03:38Z',
             labels: [
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -23860,15 +24675,11 @@ const data = {
             title: '[infra] Define IaC Terraform code for gno infra deployment',
             url: 'https://github.com/gnolang/gno/issues/2622',
             createdAt: '2024-07-23T16:37:56Z',
-            updatedAt: '2024-09-11T14:56:10Z',
+            updatedAt: '2024-10-18T16:20:34Z',
             labels: [
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -23877,15 +24688,11 @@ const data = {
             title: '[infra] Create and share institutionalized Helm charts for orchestrating gno services',
             url: 'https://github.com/gnolang/gno/issues/2621',
             createdAt: '2024-07-23T16:28:32Z',
-            updatedAt: '2024-09-11T14:56:21Z',
+            updatedAt: '2024-10-16T12:50:06Z',
             labels: [
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
             ],
           },
@@ -23894,15 +24701,11 @@ const data = {
             title: '[infra] Set up a load testing workflow for PRs',
             url: 'https://github.com/gnolang/gno/issues/2620',
             createdAt: '2024-07-23T16:13:18Z',
-            updatedAt: '2024-09-11T14:56:31Z',
+            updatedAt: '2024-10-16T12:59:22Z',
             labels: [
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -23919,15 +24722,15 @@ const data = {
             title: '[infra] Observability overhaul',
             url: 'https://github.com/gnolang/gno/issues/2618',
             createdAt: '2024-07-23T15:42:06Z',
-            updatedAt: '2024-09-11T14:57:32Z',
+            updatedAt: '2024-10-18T11:21:07Z',
             labels: [
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
               },
               {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
+                name: 'in focus',
+                color: 'FBCA04',
               },
             ],
           },
@@ -23937,12 +24740,7 @@ const data = {
             url: 'https://github.com/gnolang/gno/issues/2615',
             createdAt: '2024-07-22T16:49:01Z',
             updatedAt: '2024-10-05T01:13:14Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6O89Eo',
@@ -23962,7 +24760,7 @@ const data = {
             title: '[chain] Add a more robust e2e node / cluster testing framework',
             url: 'https://github.com/gnolang/gno/issues/2530',
             createdAt: '2024-07-07T12:46:46Z',
-            updatedAt: '2024-09-11T15:00:26Z',
+            updatedAt: '2024-10-15T14:12:11Z',
             labels: [
               {
                 name: ':seedling:  feature',
@@ -23972,10 +24770,6 @@ const data = {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
               },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
             ],
           },
           {
@@ -23983,15 +24777,11 @@ const data = {
             title: '[govdao] Make `r/gov/dao` proposals fee-based for non-members',
             url: 'https://github.com/gnolang/gno/issues/2520',
             createdAt: '2024-07-06T11:59:11Z',
-            updatedAt: '2024-09-11T15:10:03Z',
+            updatedAt: '2024-10-16T12:50:03Z',
             labels: [
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
             ],
           },
@@ -24000,11 +24790,11 @@ const data = {
             title: '[chain] Audit the Gno.land storage layer',
             url: 'https://github.com/gnolang/gno/issues/2445',
             createdAt: '2024-06-26T07:45:02Z',
-            updatedAt: '2024-09-11T15:11:32Z',
+            updatedAt: '2024-10-18T11:18:45Z',
             labels: [
               {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
+                name: 'in focus',
+                color: 'FBCA04',
               },
             ],
           },
@@ -24013,39 +24803,24 @@ const data = {
             title: '[chain] Add OTEL tracing functionality + Jaeger',
             url: 'https://github.com/gnolang/gno/issues/2434',
             createdAt: '2024-06-25T11:46:13Z',
-            updatedAt: '2024-09-11T15:11:56Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-18T09:43:12Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6NaRno',
             title: '[chain] Refactor and revise the `gnolang/benchmarks` repository',
             url: 'https://github.com/gnolang/gno/issues/2433',
             createdAt: '2024-06-25T11:42:34Z',
-            updatedAt: '2024-09-11T15:12:24Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:01Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6NaO6n',
             title: '[chain] Upload and display benchmarks for the gno monorepo',
             url: 'https://github.com/gnolang/gno/issues/2432',
             createdAt: '2024-06-25T11:38:21Z',
-            updatedAt: '2024-09-11T15:12:09Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-18T09:58:29Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6LeOOF',
@@ -24160,13 +24935,8 @@ const data = {
             title: '[chain] Drops file paths from `config.toml`',
             url: 'https://github.com/gnolang/gno/issues/1884',
             createdAt: '2024-04-03T10:40:55Z',
-            updatedAt: '2024-09-11T15:37:55Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:59:31Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6EeatJ',
@@ -24216,11 +24986,11 @@ const data = {
             title: '[chain] ABI-like support for Realm / Package requests / responses',
             url: 'https://github.com/gnolang/gno/issues/1842',
             createdAt: '2024-03-26T09:41:22Z',
-            updatedAt: '2024-09-11T15:41:04Z',
+            updatedAt: '2024-10-18T11:31:41Z',
             labels: [
               {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
+                name: 'in focus',
+                color: 'FBCA04',
               },
             ],
           },
@@ -24285,12 +25055,8 @@ const data = {
             title: '[chain] GRCx (GRC20 / GRC721 / …) Realm Improvements',
             url: 'https://github.com/gnolang/gno/issues/1832',
             createdAt: '2024-03-25T12:23:52Z',
-            updatedAt: '2024-10-02T10:00:38Z',
+            updatedAt: '2024-10-16T12:33:30Z',
             labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
               {
                 name: 'help wanted',
                 color: '006b75',
@@ -24302,7 +25068,7 @@ const data = {
             title: '[tm2] Simplified Consensus Engine',
             url: 'https://github.com/gnolang/gno/issues/1831',
             createdAt: '2024-03-25T12:20:46Z',
-            updatedAt: '2024-09-11T13:24:03Z',
+            updatedAt: '2024-10-16T13:10:16Z',
             labels: [],
           },
           {
@@ -24310,15 +25076,11 @@ const data = {
             title: '[tm2] Improved Mempool Logic',
             url: 'https://github.com/gnolang/gno/issues/1830',
             createdAt: '2024-03-25T12:15:33Z',
-            updatedAt: '2024-09-11T15:42:38Z',
+            updatedAt: '2024-10-16T12:39:37Z',
             labels: [
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -24340,7 +25102,7 @@ const data = {
             title: '[chain] Gas Fee Equation',
             url: 'https://github.com/gnolang/gno/issues/1828',
             createdAt: '2024-03-25T12:11:07Z',
-            updatedAt: '2024-09-11T15:42:45Z',
+            updatedAt: '2024-10-16T13:07:33Z',
             labels: [
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
@@ -24349,10 +25111,6 @@ const data = {
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -24361,15 +25119,11 @@ const data = {
             title: '[chain] Backup / Restore Functionality',
             url: 'https://github.com/gnolang/gno/issues/1827',
             createdAt: '2024-03-25T12:09:16Z',
-            updatedAt: '2024-09-11T15:42:54Z',
+            updatedAt: '2024-10-15T14:11:08Z',
             labels: [
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -24378,20 +25132,15 @@ const data = {
             title: '[chain] Gas Estimations',
             url: 'https://github.com/gnolang/gno/issues/1826',
             createdAt: '2024-03-25T12:08:07Z',
-            updatedAt: '2024-09-11T15:43:04Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:48:45Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6DdsSA',
             title: '[chain] Revised Chain Storage',
             url: 'https://github.com/gnolang/gno/issues/1825',
             createdAt: '2024-03-25T12:06:32Z',
-            updatedAt: '2024-09-11T15:43:22Z',
+            updatedAt: '2024-10-16T12:41:26Z',
             labels: [
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
@@ -24400,10 +25149,6 @@ const data = {
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -24454,13 +25199,8 @@ const data = {
             title: '[infra] Add multinode orchestration',
             url: 'https://github.com/gnolang/gno/issues/1821',
             createdAt: '2024-03-25T10:26:35Z',
-            updatedAt: '2024-09-11T15:43:39Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:42:09Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6Dc5vg',
@@ -24473,14 +25213,35 @@ const data = {
         ],
       },
       prs: {
-        count: 54,
+        count: 55,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-Z-39',
+            title: 'feat: support metadata for genesis txs',
+            url: 'https://github.com/gnolang/gno/pull/2941',
+            createdAt: '2024-10-12T10:58:57Z',
+            updatedAt: '2024-10-18T11:35:34Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc58xcox',
             title: 'feat: clean up `p2p` & implement bootnode (`seed` peers) support',
             url: 'https://github.com/gnolang/gno/pull/2852',
             createdAt: '2024-09-26T10:10:03Z',
-            updatedAt: '2024-10-06T14:01:34Z',
+            updatedAt: '2024-10-18T11:45:46Z',
             labels: [
               {
                 name: ':seedling:  feature',
@@ -24494,6 +25255,10 @@ const data = {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
               },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
+              },
             ],
           },
           {
@@ -24501,7 +25266,7 @@ const data = {
             title: 'feat: add support for `genesis download`',
             url: 'https://github.com/gnolang/gno/pull/2841',
             createdAt: '2024-09-24T12:38:59Z',
-            updatedAt: '2024-09-27T15:29:36Z',
+            updatedAt: '2024-10-18T09:16:46Z',
             labels: [
               {
                 name: ':seedling:  feature',
@@ -24605,10 +25370,10 @@ const data = {
           },
           {
             id: 'PR_kwDOE-u6Jc51TImB',
-            title: 'feat: `r/gov/dao` v2 + `r/sys/vars`',
+            title: 'feat: `r/gov/dao` v2',
             url: 'https://github.com/gnolang/gno/pull/2581',
             createdAt: '2024-07-13T16:21:19Z',
-            updatedAt: '2024-09-23T19:15:26Z',
+            updatedAt: '2024-10-18T11:19:59Z',
             labels: [
               {
                 name: "don't merge",
@@ -24621,6 +25386,10 @@ const data = {
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
+              },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
               },
             ],
           },
@@ -26786,11 +27555,11 @@ const data = {
             title: 'Propagate Constant Values:',
             url: 'https://github.com/gnolang/gno/issues/2798',
             createdAt: '2024-09-13T18:11:05Z',
-            updatedAt: '2024-09-14T07:29:02Z',
+            updatedAt: '2024-10-16T14:10:47Z',
             labels: [
               {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
               },
             ],
           },
@@ -26799,11 +27568,11 @@ const data = {
             title: 'VM: optimization step into the gnovm pipeline',
             url: 'https://github.com/gnolang/gno/issues/2796',
             createdAt: '2024-09-13T15:31:56Z',
-            updatedAt: '2024-10-01T09:22:57Z',
+            updatedAt: '2024-10-16T14:10:56Z',
             labels: [
               {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
               },
             ],
           },
@@ -26812,26 +27581,16 @@ const data = {
             title: 'VM: optimizing slice',
             url: 'https://github.com/gnolang/gno/issues/2791',
             createdAt: '2024-09-12T21:37:47Z',
-            updatedAt: '2024-09-13T15:18:11Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:11Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6WZ-9f',
             title: 'VM: reduce test noise and improve test output',
             url: 'https://github.com/gnolang/gno/issues/2790',
             createdAt: '2024-09-12T21:30:12Z',
-            updatedAt: '2024-09-13T15:17:58Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:11Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6J_AC8',
@@ -26884,10 +27643,6 @@ const data = {
               {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -26981,11 +27736,15 @@ const data = {
             title: 'feat(VM): propagate values from immutable variables',
             url: 'https://github.com/gnolang/gno/pull/2801',
             createdAt: '2024-09-14T17:39:12Z',
-            updatedAt: '2024-10-03T21:52:54Z',
+            updatedAt: '2024-10-18T11:17:58Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
+              },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
               },
             ],
           },
@@ -26994,7 +27753,7 @@ const data = {
             title: 'feat: GC',
             url: 'https://github.com/gnolang/gno/pull/2735',
             createdAt: '2024-08-27T16:05:48Z',
-            updatedAt: '2024-10-02T14:29:19Z',
+            updatedAt: '2024-10-20T23:15:28Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -27007,6 +27766,10 @@ const data = {
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
+              },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
               },
             ],
           },
@@ -27647,7 +28410,7 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/22179290?u=55434bd982d7acd85dd204b344e86a20335f0285&v=4',
       url: 'https://github.com/Villaquiranm',
       name: 'Miguel Victoria Villaquiran',
-      commits: 4,
+      commits: 5,
       issues: {
         count: 2,
         data: [
@@ -27670,14 +28433,44 @@ const data = {
         ],
       },
       prs: {
-        count: 11,
+        count: 13,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_MTuL',
+            title: 'feat(genesis): deployerAddress passed as parameter',
+            url: 'https://github.com/gnolang/gno/pull/2986',
+            createdAt: '2024-10-19T21:20:49Z',
+            updatedAt: '2024-10-21T07:36:07Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+              {
+                name: 'review/triage-pending',
+                color: '5319e7',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5_HOlO',
+            title: 'fix(gnovm): remove migration of old dir for gno tools',
+            url: 'https://github.com/gnolang/gno/pull/2978',
+            createdAt: '2024-10-18T14:26:23Z',
+            updatedAt: '2024-10-18T15:43:57Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc59BieJ',
             title: 'feat: Add the stdlib_diff tool to compare gno and go standard libraries',
             url: 'https://github.com/gnolang/gno/pull/2869',
             createdAt: '2024-09-29T10:54:25Z',
-            updatedAt: '2024-10-05T22:31:14Z',
+            updatedAt: '2024-10-09T19:18:45Z',
             labels: [],
           },
           {
@@ -27711,7 +28504,7 @@ const data = {
             title: 'feat: emit event on ghverify realm when user request verification',
             url: 'https://github.com/gnolang/gno/pull/2778',
             createdAt: '2024-09-09T20:42:39Z',
-            updatedAt: '2024-10-04T07:45:24Z',
+            updatedAt: '2024-10-18T23:21:54Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -27724,15 +28517,11 @@ const data = {
             title: 'feat: verifySignature function',
             url: 'https://github.com/gnolang/gno/pull/2776',
             createdAt: '2024-09-09T20:09:16Z',
-            updatedAt: '2024-10-03T10:49:11Z',
+            updatedAt: '2024-10-18T09:50:35Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
-              },
-              {
-                name: 'review team',
-                color: '5319e7',
               },
             ],
           },
@@ -27771,7 +28560,7 @@ const data = {
             title: 'feat: avoid Instantiation of banker on pure packages',
             url: 'https://github.com/gnolang/gno/pull/2248',
             createdAt: '2024-05-30T21:54:00Z',
-            updatedAt: '2024-10-04T07:51:20Z',
+            updatedAt: '2024-10-17T19:29:33Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -27784,7 +28573,7 @@ const data = {
             title: 'feat: lint all files in folder before panicking',
             url: 'https://github.com/gnolang/gno/pull/2202',
             createdAt: '2024-05-26T13:46:48Z',
-            updatedAt: '2024-07-23T09:32:24Z',
+            updatedAt: '2024-10-18T07:15:45Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -27825,8 +28614,21 @@ const data = {
         ],
       },
       mrs: {
-        count: 4,
+        count: 5,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_HOlO',
+            title: 'fix(gnovm): remove migration of old dir for gno tools',
+            url: 'https://github.com/gnolang/gno/pull/2978',
+            createdAt: '2024-10-18T14:26:23Z',
+            updatedAt: '2024-10-18T15:43:57Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc578sCZ',
             title: 'feat: add strings.Replacer structure on native libraries',
@@ -28159,7 +28961,7 @@ const data = {
             title: 'chore(gno.land): enh homepage description',
             url: 'https://github.com/gnolang/gno/pull/2144',
             createdAt: '2024-05-17T21:19:27Z',
-            updatedAt: '2024-05-29T12:19:59Z',
+            updatedAt: '2024-10-08T10:31:57Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -28232,10 +29034,23 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/33522493?u=0b6173dfca632d2336983bbf379be59251ee3cb7&v=4',
       url: 'https://github.com/leohhhn',
       name: 'Leon Hudak',
-      commits: 72,
+      commits: 74,
       issues: {
-        count: 93,
+        count: 94,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6aV6MM',
+            title: 'docs.gno.land revamp',
+            url: 'https://github.com/gnolang/gno/issues/2953',
+            createdAt: '2024-10-15T17:34:07Z',
+            updatedAt: '2024-10-17T19:15:10Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'I_kwDOE-u6Jc6YhfAi',
             title: '[GnoVM] Dereference package level errors before returning them to the user',
@@ -28266,13 +29081,8 @@ const data = {
             title: 'docs: Create a glossary of common terms',
             url: 'https://github.com/gnolang/gno/issues/2782',
             createdAt: '2024-09-11T09:27:55Z',
-            updatedAt: '2024-09-11T14:41:26Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:10Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6VWdOF',
@@ -28309,12 +29119,8 @@ const data = {
             title: '[gnokey] Ledger device not found',
             url: 'https://github.com/gnolang/gno/issues/2737',
             createdAt: '2024-08-28T12:11:09Z',
-            updatedAt: '2024-10-01T00:34:06Z',
+            updatedAt: '2024-10-16T12:50:09Z',
             labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
               {
                 name: 'help wanted',
                 color: '006b75',
@@ -28330,12 +29136,8 @@ const data = {
             title: '[Debugger] Debug realms during transaction execution',
             url: 'https://github.com/gnolang/gno/issues/2683',
             createdAt: '2024-08-13T11:19:30Z',
-            updatedAt: '2024-10-01T00:52:01Z',
+            updatedAt: '2024-10-16T12:50:07Z',
             labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
               {
                 name: 'help wanted',
                 color: '006b75',
@@ -28380,26 +29182,16 @@ const data = {
             title: '[gno.mod] Add `replace`',
             url: 'https://github.com/gnolang/gno/issues/2601',
             createdAt: '2024-07-17T16:15:16Z',
-            updatedAt: '2024-09-11T14:58:04Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:06Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6P4vu4',
             title: '[Namespaces] Permit additional addresses to a single namespace',
             url: 'https://github.com/gnolang/gno/issues/2600',
             createdAt: '2024-07-17T16:10:16Z',
-            updatedAt: '2024-09-11T14:58:19Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:05Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6PBQug',
@@ -28488,13 +29280,8 @@ const data = {
             title: '[docs] Update outdated images & gifs',
             url: 'https://github.com/gnolang/gno/issues/2392',
             createdAt: '2024-06-19T09:54:18Z',
-            updatedAt: '2024-09-12T12:05:42Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:49:58Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6MqSpp',
@@ -28509,13 +29296,8 @@ const data = {
             title: '[GnoVM] `TestSetRealm` not working properly in `gno test`',
             url: 'https://github.com/gnolang/gno/issues/2371',
             createdAt: '2024-06-17T17:33:22Z',
-            updatedAt: '2024-09-12T11:56:59Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:51:08Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6MGDyk',
@@ -28562,15 +29344,11 @@ const data = {
             title: '[docs] Add `supernova` to the docs',
             url: 'https://github.com/gnolang/gno/issues/2298',
             createdAt: '2024-06-06T09:55:26Z',
-            updatedAt: '2024-09-11T15:18:54Z',
+            updatedAt: '2024-10-16T12:51:05Z',
             labels: [
               {
                 name: ':book:  documentation',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
             ],
           },
@@ -28579,15 +29357,11 @@ const data = {
             title: '[docs] Add `tx-archive` to the docs',
             url: 'https://github.com/gnolang/gno/issues/2297',
             createdAt: '2024-06-06T09:53:45Z',
-            updatedAt: '2024-09-11T15:19:03Z',
+            updatedAt: '2024-10-16T12:51:04Z',
             labels: [
               {
                 name: ':book:  documentation',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
             ],
           },
@@ -28596,13 +29370,8 @@ const data = {
             title: '[docs] Add a guide on tx-indexer',
             url: 'https://github.com/gnolang/gno/issues/2295',
             createdAt: '2024-06-06T09:29:19Z',
-            updatedAt: '2024-09-11T15:19:16Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:51:04Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6LV7Yz',
@@ -28635,15 +29404,11 @@ const data = {
             title: '[docs] Add GRC721 how-to guide',
             url: 'https://github.com/gnolang/gno/issues/2288',
             createdAt: '2024-06-05T14:46:20Z',
-            updatedAt: '2024-09-11T15:19:23Z',
+            updatedAt: '2024-10-16T12:51:03Z',
             labels: [
               {
                 name: ':book:  documentation',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
             ],
           },
@@ -28673,7 +29438,7 @@ const data = {
             title: '[gnovm/avl] Removing keys from AVL trees does not work',
             url: 'https://github.com/gnolang/gno/issues/2266',
             createdAt: '2024-06-03T13:45:29Z',
-            updatedAt: '2024-09-11T15:20:12Z',
+            updatedAt: '2024-10-16T12:46:20Z',
             labels: [
               {
                 name: '🐞 bug',
@@ -28683,10 +29448,6 @@ const data = {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
               },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
             ],
           },
           {
@@ -28694,20 +29455,15 @@ const data = {
             title: '[docs] Refactor page IDs to be more consistent',
             url: 'https://github.com/gnolang/gno/issues/2262',
             createdAt: '2024-06-03T07:58:24Z',
-            updatedAt: '2024-09-11T15:20:46Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:51:03Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6KYGam',
             title: '[gnokey] `vm/qeval` inconvenient parsing and non-existent erroring',
             url: 'https://github.com/gnolang/gno/issues/2236',
             createdAt: '2024-05-28T17:22:22Z',
-            updatedAt: '2024-10-02T09:58:50Z',
+            updatedAt: '2024-10-09T14:12:00Z',
             labels: [
               {
                 name: '🐞 bug',
@@ -28716,6 +29472,10 @@ const data = {
               {
                 name: 'help wanted',
                 color: '006b75',
+              },
+              {
+                name: 'hacktoberfest',
+                color: '50da4c',
               },
             ],
           },
@@ -28818,15 +29578,11 @@ const data = {
             title: '[docs] Add gnolang/faucet',
             url: 'https://github.com/gnolang/gno/issues/2120',
             createdAt: '2024-05-16T07:18:59Z',
-            updatedAt: '2024-09-11T15:28:48Z',
+            updatedAt: '2024-10-16T12:50:59Z',
             labels: [
               {
                 name: ':book:  documentation',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
             ],
           },
@@ -28851,28 +29607,19 @@ const data = {
             title: '[GnoVM] Panics in tests do not revert state',
             url: 'https://github.com/gnolang/gno/issues/2043',
             createdAt: '2024-05-06T12:39:22Z',
-            updatedAt: '2024-09-12T11:57:55Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:57Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6HvN4u',
             title: '[docs] Document `map` usage & its pros & cons over AVL tree',
             url: 'https://github.com/gnolang/gno/issues/2027',
             createdAt: '2024-05-03T09:39:04Z',
-            updatedAt: '2024-09-12T12:04:31Z',
+            updatedAt: '2024-10-16T12:50:57Z',
             labels: [
               {
                 name: ':book:  documentation',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -28885,12 +29632,8 @@ const data = {
             title: '[GnoVM] Add Event support when testing or running expressions',
             url: 'https://github.com/gnolang/gno/issues/2007',
             createdAt: '2024-04-30T16:57:17Z',
-            updatedAt: '2024-09-12T12:03:57Z',
+            updatedAt: '2024-10-16T12:50:55Z',
             labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
               {
                 name: 'help wanted',
                 color: '006b75',
@@ -28902,15 +29645,11 @@ const data = {
             title: '[GnoVM] Reset machine context & realm state after each Test function',
             url: 'https://github.com/gnolang/gno/issues/1982',
             createdAt: '2024-04-25T14:38:33Z',
-            updatedAt: '2024-09-25T09:45:45Z',
+            updatedAt: '2024-10-15T14:56:24Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -28964,13 +29703,8 @@ const data = {
             title: '[docs] Docusaurus deployment preview',
             url: 'https://github.com/gnolang/gno/issues/1888',
             createdAt: '2024-04-04T04:15:48Z',
-            updatedAt: '2024-09-11T15:37:04Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:55:19Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6EX5WX',
@@ -29174,26 +29908,16 @@ const data = {
             title: 'Replacing `GetOrigCaller()` with `PrevRealm.Addr()`',
             url: 'https://github.com/gnolang/gno/issues/1577',
             createdAt: '2024-01-23T22:51:21Z',
-            updatedAt: '2024-09-11T15:48:59Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:35:58Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc58_QZ7',
             title: 'Making the `std` package API more user-friendly',
             url: 'https://github.com/gnolang/gno/issues/1576',
             createdAt: '2024-01-23T20:51:23Z',
-            updatedAt: '2024-09-11T15:49:10Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:36:19Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc58INF9',
@@ -29240,13 +29964,8 @@ const data = {
             title: 'Issues with `std.TestXYZ` functions',
             url: 'https://github.com/gnolang/gno/issues/1521',
             createdAt: '2024-01-11T00:24:30Z',
-            updatedAt: '2024-09-12T09:18:33Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-15T15:24:53Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc57pZY2',
@@ -29284,14 +30003,53 @@ const data = {
         ],
       },
       prs: {
-        count: 93,
+        count: 96,
         data: [
           {
+            id: 'PR_kwDOE-u6Jc5_I5sH',
+            title: 'chore(pages): update bounty Terms & Conditions link',
+            url: 'https://github.com/gnolang/gno/pull/2982',
+            createdAt: '2024-10-18T19:30:59Z',
+            updatedAt: '2024-10-18T19:52:06Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-OmGg',
+            title: 'fix(r/leon/config): fix config bug',
+            url: 'https://github.com/gnolang/gno/pull/2934',
+            createdAt: '2024-10-10T13:54:53Z',
+            updatedAt: '2024-10-15T17:55:19Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc599F2Y',
+            title: 'fix(gnoweb): fix broken link',
+            url: 'https://github.com/gnolang/gno/pull/2926',
+            createdAt: '2024-10-08T13:51:14Z',
+            updatedAt: '2024-10-08T14:41:38Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
             id: 'PR_kwDOE-u6Jc58hT1B',
-            title: 'feat(examples): gno.land hall of fame',
+            title: 'feat(examples): hall of fame',
             url: 'https://github.com/gnolang/gno/pull/2842',
             createdAt: '2024-09-24T13:31:02Z',
-            updatedAt: '2024-10-04T13:42:08Z',
+            updatedAt: '2024-10-18T20:31:58Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -29377,7 +30135,7 @@ const data = {
             title: 'fix(gnovm): display error string properly for package-level errors',
             url: 'https://github.com/gnolang/gno/pull/2734',
             createdAt: '2024-08-27T10:47:02Z',
-            updatedAt: '2024-08-27T11:04:59Z',
+            updatedAt: '2024-10-15T20:22:06Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -29757,7 +30515,7 @@ const data = {
             title: 'docs: add `gnoland` tutorial',
             url: 'https://github.com/gnolang/gno/pull/2162',
             createdAt: '2024-05-21T15:47:07Z',
-            updatedAt: '2024-06-27T23:36:27Z',
+            updatedAt: '2024-10-15T10:36:23Z',
             labels: [
               {
                 name: ':book:  documentation',
@@ -29833,7 +30591,7 @@ const data = {
             title: 'docs: add `gnolang/faucet`',
             url: 'https://github.com/gnolang/gno/pull/2122',
             createdAt: '2024-05-16T07:28:14Z',
-            updatedAt: '2024-06-18T12:26:18Z',
+            updatedAt: '2024-10-08T10:49:23Z',
             labels: [
               {
                 name: ':book:  documentation',
@@ -30426,8 +31184,34 @@ const data = {
         ],
       },
       mrs: {
-        count: 71,
+        count: 73,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-OmGg',
+            title: 'fix(r/leon/config): fix config bug',
+            url: 'https://github.com/gnolang/gno/pull/2934',
+            createdAt: '2024-10-10T13:54:53Z',
+            updatedAt: '2024-10-15T17:55:19Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc599F2Y',
+            title: 'fix(gnoweb): fix broken link',
+            url: 'https://github.com/gnolang/gno/pull/2926',
+            createdAt: '2024-10-08T13:51:14Z',
+            updatedAt: '2024-10-08T14:41:38Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc57aPgr',
             title: 'fix(grc20): remove unused interface, fix typo',
@@ -31279,8 +32063,21 @@ const data = {
         ],
       },
       reviewedMrs: {
-        count: 28,
+        count: 29,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-OmGg',
+            title: 'fix(r/leon/config): fix config bug',
+            url: 'https://github.com/gnolang/gno/pull/2934',
+            createdAt: '2024-10-10T13:54:53Z',
+            updatedAt: '2024-10-15T17:55:19Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc55vApz',
             title: 'feat(examples): add `r/leon`',
@@ -32489,10 +33286,10 @@ const data = {
         data: [
           {
             id: 'PR_kwDOE-u6Jc59s0ut',
-            title: 'feat(gno.land): Implement markdown package',
+            title: 'feat(examples): Implement markdown package',
             url: 'https://github.com/gnolang/gno/pull/2912',
             createdAt: '2024-10-05T12:59:27Z',
-            updatedAt: '2024-10-05T13:36:59Z',
+            updatedAt: '2024-10-14T14:19:00Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -32505,14 +33302,14 @@ const data = {
             title: 'fix(tm2): Enable coin benchmark tests after fixing panic error',
             url: 'https://github.com/gnolang/gno/pull/2884',
             createdAt: '2024-10-02T14:12:28Z',
-            updatedAt: '2024-10-05T15:48:50Z',
+            updatedAt: '2024-10-18T09:41:24Z',
             labels: [
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -32919,7 +33716,7 @@ const data = {
             title: 'feat: B-Tree added',
             url: 'https://github.com/gnolang/gno/pull/2677',
             createdAt: '2024-08-11T20:09:24Z',
-            updatedAt: '2024-10-04T07:43:14Z',
+            updatedAt: '2024-10-19T21:08:05Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -33214,10 +34011,6 @@ const data = {
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -33763,15 +34556,11 @@ const data = {
             title: "Datatype's underline array is persisted as *uint8 pointer value ",
             url: 'https://github.com/gnolang/gno/issues/2704',
             createdAt: '2024-08-15T18:07:42Z',
-            updatedAt: '2024-09-11T14:51:30Z',
+            updatedAt: '2024-10-14T05:35:12Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -33780,15 +34569,11 @@ const data = {
             title: 'error: primitive type int cannot be indexed',
             url: 'https://github.com/gnolang/gno/issues/2660',
             createdAt: '2024-08-05T19:33:10Z',
-            updatedAt: '2024-09-11T14:53:37Z',
+            updatedAt: '2024-10-16T12:46:29Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -33805,39 +34590,24 @@ const data = {
             title: 'Backward compatibility ',
             url: 'https://github.com/gnolang/gno/issues/1896',
             createdAt: '2024-04-06T20:54:11Z',
-            updatedAt: '2024-09-16T09:17:02Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:48:50Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6DpywJ',
             title: "msg run command's main package source code are hidden ",
             url: 'https://github.com/gnolang/gno/issues/1843',
             createdAt: '2024-03-26T16:43:30Z',
-            updatedAt: '2024-09-11T15:40:52Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T18:55:17Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6ADoJI',
             title: 'Discussion: persist a pointer to an array element ',
             url: 'https://github.com/gnolang/gno/issues/1675',
             createdAt: '2024-02-22T07:48:26Z',
-            updatedAt: '2024-09-11T15:46:29Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:55:18Z',
+            labels: [],
           },
         ],
       },
@@ -33849,7 +34619,7 @@ const data = {
             title: 'feat: dynamic gas price, keeper implementation',
             url: 'https://github.com/gnolang/gno/pull/2838',
             createdAt: '2024-09-24T09:20:37Z',
-            updatedAt: '2024-09-28T07:43:55Z',
+            updatedAt: '2024-10-18T15:37:38Z',
             labels: [
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
@@ -33859,6 +34629,10 @@ const data = {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
               },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
+              },
             ],
           },
           {
@@ -33866,7 +34640,7 @@ const data = {
             title: 'fix: catch the out of gas exception in preprocess',
             url: 'https://github.com/gnolang/gno/pull/2638',
             createdAt: '2024-07-28T04:36:07Z',
-            updatedAt: '2024-10-04T17:06:25Z',
+            updatedAt: '2024-10-07T10:26:17Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -33917,7 +34691,7 @@ const data = {
             title: 'feat: gnovm benchmarking tool',
             url: 'https://github.com/gnolang/gno/pull/2241',
             createdAt: '2024-05-30T08:34:57Z',
-            updatedAt: '2024-08-06T00:11:54Z',
+            updatedAt: '2024-10-18T15:38:16Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -33930,6 +34704,10 @@ const data = {
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
+              },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
               },
             ],
           },
@@ -34216,7 +34994,7 @@ const data = {
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -34291,8 +35069,17 @@ const data = {
       name: 'Mustapha',
       commits: 0,
       issues: {
-        count: 0,
-        data: [],
+        count: 1,
+        data: [
+          {
+            id: 'I_kwDOE-u6Jc6a8ANK',
+            title: 'Proposal to Include Post-Merge Hook for Automatic Make Install',
+            url: 'https://github.com/gnolang/gno/issues/2985',
+            createdAt: '2024-10-19T17:13:15Z',
+            updatedAt: '2024-10-19T17:13:15Z',
+            labels: [],
+          },
+        ],
       },
       prs: {
         count: 1,
@@ -34382,15 +35169,11 @@ const data = {
             title: '[gnovm/bug] deploying same contract to longer pkg_path spends more gas',
             url: 'https://github.com/gnolang/gno/issues/2083',
             createdAt: '2024-05-13T12:03:06Z',
-            updatedAt: '2024-10-04T09:35:36Z',
+            updatedAt: '2024-10-16T12:20:55Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -34449,13 +35232,8 @@ const data = {
             title: '[chain] Add `unconditional_peer_ids` to gnoland configuration',
             url: 'https://github.com/gnolang/gno/issues/1923',
             createdAt: '2024-04-12T05:07:58Z',
-            updatedAt: '2024-09-11T15:36:28Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-18T16:19:38Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6FdBOC',
@@ -34535,13 +35313,8 @@ const data = {
             title: 'handling memory allocation limit for query eval',
             url: 'https://github.com/gnolang/gno/issues/1506',
             createdAt: '2024-01-09T02:47:54Z',
-            updatedAt: '2024-09-12T09:20:32Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:36:45Z',
+            labels: [],
           },
         ],
       },
@@ -35311,15 +36084,11 @@ const data = {
             title: 'Incorrect Timestamps in Gno Chains',
             url: 'https://github.com/gnolang/gno/issues/1950',
             createdAt: '2024-04-18T09:30:15Z',
-            updatedAt: '2024-10-04T09:34:41Z',
+            updatedAt: '2024-10-17T04:07:45Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -35420,16 +36189,24 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/111009238?u=283b68c4c4759d489bc3baeba8bd2cdfac2660a9&v=4',
       url: 'https://github.com/MalekLahbib',
       name: 'Malek Lahbib',
-      commits: 5,
+      commits: 8,
       issues: {
-        count: 13,
+        count: 14,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6ZWEiU',
+            title: 'bug: `gnokey list` on help page links to a bad url',
+            url: 'https://github.com/gnolang/gno/issues/2925',
+            createdAt: '2024-10-08T09:54:46Z',
+            updatedAt: '2024-10-08T14:16:43Z',
+            labels: [],
+          },
           {
             id: 'I_kwDOE-u6Jc6Y96VT',
             title: '[bug] bad import in manfred_outfmt realm',
             url: 'https://github.com/gnolang/gno/issues/2903',
             createdAt: '2024-10-04T13:21:00Z',
-            updatedAt: '2024-10-05T21:52:57Z',
+            updatedAt: '2024-10-07T10:02:20Z',
             labels: [],
           },
           {
@@ -35546,14 +36323,48 @@ const data = {
         ],
       },
       prs: {
-        count: 11,
+        count: 14,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_BC16',
+            title: 'docs: add `gno {env,fmt}` to go-gno-compatibility',
+            url: 'https://github.com/gnolang/gno/pull/2974',
+            createdAt: '2024-10-17T20:34:08Z',
+            updatedAt: '2024-10-18T10:16:48Z',
+            labels: [],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-PS2D',
+            title: 'fix(p/demo/uassert): amend ineffective assignment',
+            url: 'https://github.com/gnolang/gno/pull/2936',
+            createdAt: '2024-10-10T15:16:28Z',
+            updatedAt: '2024-10-15T17:34:02Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc590dMJ',
+            title: 'fix: Update json package README.md',
+            url: 'https://github.com/gnolang/gno/pull/2921',
+            createdAt: '2024-10-07T13:44:00Z',
+            updatedAt: '2024-10-10T09:24:36Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc59ojRn',
             title: 'feat: added Abs() funcs, support for overflow for uints + tests',
             url: 'https://github.com/gnolang/gno/pull/2905',
             createdAt: '2024-10-04T15:02:40Z',
-            updatedAt: '2024-10-04T15:20:29Z',
+            updatedAt: '2024-10-18T09:32:39Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -35605,7 +36416,7 @@ const data = {
             title: 'chore(docs): fix `gnodev.md` typo',
             url: 'https://github.com/gnolang/gno/pull/2302',
             createdAt: '2024-06-07T09:16:03Z',
-            updatedAt: '2024-06-07T12:04:24Z',
+            updatedAt: '2024-10-07T13:40:31Z',
             labels: [],
           },
           {
@@ -35613,7 +36424,7 @@ const data = {
             title: 'fix(docs): update a typo in coins.md',
             url: 'https://github.com/gnolang/gno/pull/2227',
             createdAt: '2024-05-28T10:01:09Z',
-            updatedAt: '2024-05-28T10:09:29Z',
+            updatedAt: '2024-10-07T13:40:26Z',
             labels: [],
           },
           {
@@ -35621,7 +36432,7 @@ const data = {
             title: 'feat(examples): Gnofundme',
             url: 'https://github.com/gnolang/gno/pull/2085',
             createdAt: '2024-05-13T13:11:35Z',
-            updatedAt: '2024-10-02T09:38:37Z',
+            updatedAt: '2024-10-14T08:34:38Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -35647,7 +36458,7 @@ const data = {
             title: 'fix: ufmt multi-byte fix.',
             url: 'https://github.com/gnolang/gno/pull/1889',
             createdAt: '2024-04-04T16:02:54Z',
-            updatedAt: '2024-04-08T01:58:27Z',
+            updatedAt: '2024-10-07T13:40:08Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -35679,14 +36490,48 @@ const data = {
         ],
       },
       mrs: {
-        count: 5,
+        count: 8,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_BC16',
+            title: 'docs: add `gno {env,fmt}` to go-gno-compatibility',
+            url: 'https://github.com/gnolang/gno/pull/2974',
+            createdAt: '2024-10-17T20:34:08Z',
+            updatedAt: '2024-10-18T10:16:48Z',
+            labels: [],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-PS2D',
+            title: 'fix(p/demo/uassert): amend ineffective assignment',
+            url: 'https://github.com/gnolang/gno/pull/2936',
+            createdAt: '2024-10-10T15:16:28Z',
+            updatedAt: '2024-10-15T17:34:02Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc590dMJ',
+            title: 'fix: Update json package README.md',
+            url: 'https://github.com/gnolang/gno/pull/2921',
+            createdAt: '2024-10-07T13:44:00Z',
+            updatedAt: '2024-10-10T09:24:36Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc5xxeZG',
             title: 'chore(docs): fix `gnodev.md` typo',
             url: 'https://github.com/gnolang/gno/pull/2302',
             createdAt: '2024-06-07T09:16:03Z',
-            updatedAt: '2024-06-07T12:04:24Z',
+            updatedAt: '2024-10-07T13:40:31Z',
             labels: [],
           },
           {
@@ -35694,7 +36539,7 @@ const data = {
             title: 'fix(docs): update a typo in coins.md',
             url: 'https://github.com/gnolang/gno/pull/2227',
             createdAt: '2024-05-28T10:01:09Z',
-            updatedAt: '2024-05-28T10:09:29Z',
+            updatedAt: '2024-10-07T13:40:26Z',
             labels: [],
           },
           {
@@ -35702,7 +36547,7 @@ const data = {
             title: 'fix: ufmt multi-byte fix.',
             url: 'https://github.com/gnolang/gno/pull/1889',
             createdAt: '2024-04-04T16:02:54Z',
-            updatedAt: '2024-04-08T01:58:27Z',
+            updatedAt: '2024-10-07T13:40:08Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -35734,14 +36579,27 @@ const data = {
         ],
       },
       reviewedMrs: {
-        count: 2,
+        count: 3,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc590dMJ',
+            title: 'fix: Update json package README.md',
+            url: 'https://github.com/gnolang/gno/pull/2921',
+            createdAt: '2024-10-07T13:44:00Z',
+            updatedAt: '2024-10-10T09:24:36Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc5ruvZ3',
             title: 'fix: ufmt multi-byte fix.',
             url: 'https://github.com/gnolang/gno/pull/1889',
             createdAt: '2024-04-04T16:02:54Z',
-            updatedAt: '2024-04-08T01:58:27Z',
+            updatedAt: '2024-10-07T13:40:08Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -35804,14 +36662,27 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/117160070?u=7c1a2ea4b569475fa66ef71e8ce2f31f0e9ceb2e&v=4',
       url: 'https://github.com/michelleellen',
       name: 'Michelle',
-      commits: 2,
+      commits: 3,
       issues: {
         count: 0,
         data: [],
       },
       prs: {
-        count: 2,
+        count: 3,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc595-6q',
+            title: 'chore(gnoweb): update page_contribute.gno',
+            url: 'https://github.com/gnolang/gno/pull/2922',
+            createdAt: '2024-10-08T07:07:05Z',
+            updatedAt: '2024-10-08T15:10:26Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc55zp25',
             title: 'feat(r/gnoland/pages): substitute /game-of-realms with /contribute page',
@@ -35845,8 +36716,21 @@ const data = {
         ],
       },
       mrs: {
-        count: 2,
+        count: 3,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc595-6q',
+            title: 'chore(gnoweb): update page_contribute.gno',
+            url: 'https://github.com/gnolang/gno/pull/2922',
+            createdAt: '2024-10-08T07:07:05Z',
+            updatedAt: '2024-10-08T15:10:26Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc55zp25',
             title: 'feat(r/gnoland/pages): substitute /game-of-realms with /contribute page',
@@ -35986,8 +36870,16 @@ const data = {
       name: null,
       commits: 1,
       issues: {
-        count: 3,
+        count: 4,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6adZv4',
+            title: 'tracking `r/sys/teams` work.',
+            url: 'https://github.com/gnolang/gno/issues/2959',
+            createdAt: '2024-10-16T10:23:00Z',
+            updatedAt: '2024-10-20T12:39:29Z',
+            labels: [],
+          },
           {
             id: 'I_kwDOE-u6Jc6YzXZO',
             title: 'discussion: passing params to realms during deployment',
@@ -36010,37 +36902,46 @@ const data = {
               '"VM call panic: unexpected object with id" when re-adding the same key to an avl.Tree after previously deleting it',
             url: 'https://github.com/gnolang/gno/issues/1543',
             createdAt: '2024-01-17T10:47:33Z',
-            updatedAt: '2024-09-11T15:49:52Z',
+            updatedAt: '2024-10-21T03:53:29Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
               },
               {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
               },
             ],
           },
         ],
       },
       prs: {
-        count: 5,
+        count: 6,
         data: [
           {
-            id: 'PR_kwDOE-u6Jc58Q5c4',
-            title: 'feat: p/zteams implementation',
-            url: 'https://github.com/gnolang/gno/pull/2830',
-            createdAt: '2024-09-22T06:18:01Z',
-            updatedAt: '2024-10-05T04:40:34Z',
+            id: 'PR_kwDOE-u6Jc5-ziAq',
+            title: 'tracking r/sys/teams work',
+            url: 'https://github.com/gnolang/gno/pull/2957',
+            createdAt: '2024-10-16T10:16:09Z',
+            updatedAt: '2024-10-20T14:23:23Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
                 color: 'ffffff',
               },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc58Q5c4',
+            title: 'feat: p/zteams implementation',
+            url: 'https://github.com/gnolang/gno/pull/2830',
+            createdAt: '2024-09-22T06:18:01Z',
+            updatedAt: '2024-10-17T16:09:04Z',
+            labels: [
               {
-                name: 'review team',
-                color: '5319e7',
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
               },
             ],
           },
@@ -36049,7 +36950,7 @@ const data = {
             title: 'feat: minimal teams package',
             url: 'https://github.com/gnolang/gno/pull/2654',
             createdAt: '2024-08-02T05:04:08Z',
-            updatedAt: '2024-09-22T06:20:47Z',
+            updatedAt: '2024-10-09T05:15:39Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -36074,14 +36975,14 @@ const data = {
             title: 'Zentasktic - the project management suite',
             url: 'https://github.com/gnolang/gno/pull/2649',
             createdAt: '2024-07-31T06:56:01Z',
-            updatedAt: '2024-10-03T10:49:11Z',
+            updatedAt: '2024-10-21T03:52:38Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -36091,7 +36992,7 @@ const data = {
             title: 'Flippando - the game',
             url: 'https://github.com/gnolang/gno/pull/2648',
             createdAt: '2024-07-31T06:28:47Z',
-            updatedAt: '2024-10-03T10:51:55Z',
+            updatedAt: '2024-10-21T03:51:49Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -36102,7 +37003,7 @@ const data = {
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -36231,15 +37132,11 @@ const data = {
             title: 'docs: tm2-js-client & gno-js-client are incomplete',
             url: 'https://github.com/gnolang/gno/issues/1880',
             createdAt: '2024-04-03T05:47:32Z',
-            updatedAt: '2024-09-11T15:38:13Z',
+            updatedAt: '2024-10-16T12:55:19Z',
             labels: [
               {
                 name: ':book:  documentation',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
             ],
           },
@@ -36298,7 +37195,7 @@ const data = {
             title: 'feat: p/demo/accesscontrol & p/demo/timelock',
             url: 'https://github.com/gnolang/gno/pull/2307',
             createdAt: '2024-06-07T21:09:17Z',
-            updatedAt: '2024-10-04T07:50:54Z',
+            updatedAt: '2024-10-19T13:52:33Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -36337,11 +37234,15 @@ const data = {
             title: 'feat: Adding a lottery to examples',
             url: 'https://github.com/gnolang/gno/pull/1850',
             createdAt: '2024-03-27T12:26:31Z',
-            updatedAt: '2024-08-31T12:45:32Z',
+            updatedAt: '2024-10-08T16:49:43Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
                 color: 'ffffff',
+              },
+              {
+                name: 'review/triage-pending',
+                color: '5319e7',
               },
             ],
           },
@@ -36745,14 +37646,14 @@ const data = {
             title: 'feat(gnoclient): Add Transaction and PendingTransaction methods',
             url: 'https://github.com/gnolang/gno/pull/2643',
             createdAt: '2024-07-30T16:17:24Z',
-            updatedAt: '2024-10-03T10:51:48Z',
+            updatedAt: '2024-10-11T08:20:17Z',
             labels: [
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -36781,7 +37682,7 @@ const data = {
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -36815,7 +37716,7 @@ const data = {
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -37591,8 +38492,21 @@ const data = {
       name: 'ThinhNX',
       commits: 4,
       issues: {
-        count: 5,
+        count: 6,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6afSd3',
+            title: 'Gnodev: The time.Now() timestamp is incorrect',
+            url: 'https://github.com/gnolang/gno/issues/2960',
+            createdAt: '2024-10-16T13:27:01Z',
+            updatedAt: '2024-10-17T20:37:49Z',
+            labels: [
+              {
+                name: 'review/triage-pending',
+                color: '5319e7',
+              },
+            ],
+          },
           {
             id: 'I_kwDOE-u6Jc6LpJGy',
             title: 'Proposal: Zero-Knowledge Proofs (ZKPs) for Login Process - Adena',
@@ -37636,8 +38550,21 @@ const data = {
         ],
       },
       prs: {
-        count: 11,
+        count: 12,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-wgrh',
+            title: 'feat(examples): add sealed bidding package',
+            url: 'https://github.com/gnolang/gno/pull/2956',
+            createdAt: '2024-10-16T02:34:40Z',
+            updatedAt: '2024-10-16T02:53:42Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc536a0P',
             title: 'feat: TotalCoin and TotalCoinKeeper implementation',
@@ -37952,6 +38879,58 @@ const data = {
         data: [],
       },
     },
+    {
+      id: 'U_kgDOCpv_UQ',
+      login: 'rusttech',
+      avatarUrl: 'https://avatars.githubusercontent.com/u/177995601?u=239fd54e5a3b9f1634309b3553f487690b7dd811&v=4',
+      url: 'https://github.com/rusttech',
+      name: null,
+      commits: 1,
+      issues: {
+        count: 0,
+        data: [],
+      },
+      prs: {
+        count: 1,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-_jgq',
+            title: 'fix(cmd/aminoscan): set len=0 in a slice initialization',
+            url: 'https://github.com/gnolang/gno/pull/2971',
+            createdAt: '2024-10-17T16:26:07Z',
+            updatedAt: '2024-10-18T16:02:04Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-_jgq',
+            title: 'fix(cmd/aminoscan): set len=0 in a slice initialization',
+            url: 'https://github.com/gnolang/gno/pull/2971',
+            createdAt: '2024-10-17T16:26:07Z',
+            updatedAt: '2024-10-18T16:02:04Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      reviewedMrs: {
+        count: 0,
+        data: [],
+      },
+    },
   ],
   'All Time': [
     {
@@ -37969,7 +38948,7 @@ const data = {
             title: '[Proposal] Realm path & address',
             url: 'https://github.com/gnolang/gno/issues/709',
             createdAt: '2023-04-06T15:17:31Z',
-            updatedAt: '2023-12-01T19:01:21Z',
+            updatedAt: '2024-10-16T13:00:04Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -37995,7 +38974,7 @@ const data = {
             title: 'A simple implementation for multi-validator ',
             url: 'https://github.com/gnolang/gno/pull/889',
             createdAt: '2023-06-12T13:55:22Z',
-            updatedAt: '2023-10-11T00:19:56Z',
+            updatedAt: '2024-10-16T13:00:10Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -38257,7 +39236,7 @@ const data = {
             title: 'feat(examples): Add a useful set of high quality pseudo-random number generators',
             url: 'https://github.com/gnolang/gno/pull/2868',
             createdAt: '2024-09-28T08:50:05Z',
-            updatedAt: '2024-10-03T23:05:44Z',
+            updatedAt: '2024-10-17T18:22:00Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -38340,39 +39319,24 @@ const data = {
             title: 'main README should disambiguate with gnosis project',
             url: 'https://github.com/gnolang/gno/issues/2354',
             createdAt: '2024-06-13T16:33:59Z',
-            updatedAt: '2024-09-12T11:57:20Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:51:07Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6ChDZ8',
             title: 'Ensure no ValuePath depths exceed uint8/2',
             url: 'https://github.com/gnolang/gno/issues/1781',
             createdAt: '2024-03-16T02:22:39Z',
-            updatedAt: '2024-09-11T15:44:19Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:48:45Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc52kI8R',
             title: '[chore] Remove NativeValue and NativeType from the VM entirely',
             url: 'https://github.com/gnolang/gno/issues/1361',
             createdAt: '2023-11-12T01:16:52Z',
-            updatedAt: '2024-09-12T09:29:07Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-15T15:17:54Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc52kIxz',
@@ -38380,13 +39344,8 @@ const data = {
               '[chore] review all usage of copy(), TypedValue assignment, and replace with TV.Copy() and call .DidUpdate()',
             url: 'https://github.com/gnolang/gno/issues/1360',
             createdAt: '2023-11-12T01:13:45Z',
-            updatedAt: '2024-09-12T09:29:25Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-18T16:23:39Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc50XpdB',
@@ -38409,7 +39368,7 @@ const data = {
             title: 'TM2 Result/Response clarifications',
             url: 'https://github.com/gnolang/gno/issues/968',
             createdAt: '2023-07-12T06:58:11Z',
-            updatedAt: '2023-09-08T07:25:12Z',
+            updatedAt: '2024-10-16T13:00:16Z',
             labels: [],
           },
           {
@@ -38505,7 +39464,7 @@ const data = {
             title: 'GOR phase 2 — Various Topics',
             url: 'https://github.com/gnolang/gno/issues/357',
             createdAt: '2022-10-17T17:07:37Z',
-            updatedAt: '2023-12-15T10:51:15Z',
+            updatedAt: '2024-10-16T12:59:48Z',
             labels: [
               {
                 name: '⚔️🤝 Game of Realms 🤝⚔️',
@@ -38552,13 +39511,8 @@ const data = {
             title: '[gno] synchronous garbage collection',
             url: 'https://github.com/gnolang/gno/issues/266',
             createdAt: '2022-06-27T23:16:20Z',
-            updatedAt: '2024-09-12T09:54:15Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:46:01Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc5LZuXb',
@@ -38589,7 +39543,7 @@ const data = {
             title: 'bech32 lower vs UPPER distinction',
             url: 'https://github.com/gnolang/gno/issues/163',
             createdAt: '2022-05-03T20:58:59Z',
-            updatedAt: '2023-09-08T07:25:17Z',
+            updatedAt: '2024-10-16T12:59:45Z',
             labels: [],
           },
           {
@@ -38631,7 +39585,7 @@ const data = {
             title: 'feat(gnovm): handle loop variables',
             url: 'https://github.com/gnolang/gno/pull/2429',
             createdAt: '2024-06-25T08:22:01Z',
-            updatedAt: '2024-09-12T16:04:41Z',
+            updatedAt: '2024-10-18T11:42:14Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -38648,6 +39602,10 @@ const data = {
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
+              },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
               },
             ],
           },
@@ -38905,7 +39863,7 @@ const data = {
             title: 'WIP workshop',
             url: 'https://github.com/gnolang/gno/pull/639',
             createdAt: '2023-03-23T19:49:04Z',
-            updatedAt: '2023-10-11T00:19:56Z',
+            updatedAt: '2024-10-16T13:00:00Z',
             labels: [],
           },
           {
@@ -38913,7 +39871,7 @@ const data = {
             title: 'WIP p/jaekwon/...',
             url: 'https://github.com/gnolang/gno/pull/461',
             createdAt: '2023-01-16T20:22:57Z',
-            updatedAt: '2024-05-16T13:04:16Z',
+            updatedAt: '2024-10-16T12:59:51Z',
             labels: [],
           },
           {
@@ -38929,7 +39887,7 @@ const data = {
             title: 'WIP: r/demo/boards pagination',
             url: 'https://github.com/gnolang/gno/pull/447',
             createdAt: '2023-01-02T21:14:03Z',
-            updatedAt: '2024-10-02T10:05:21Z',
+            updatedAt: '2024-10-16T12:59:51Z',
             labels: [
               {
                 name: '🗺️good first issue🗺️',
@@ -40074,7 +41032,7 @@ const data = {
             title: 'refactor(gnovm): make `IsOriginCall`/`AssertOriginCall` rely on `PrevRealm`',
             url: 'https://github.com/gnolang/gno/pull/1048',
             createdAt: '2023-08-11T14:38:58Z',
-            updatedAt: '2024-02-17T22:01:45Z',
+            updatedAt: '2024-10-16T13:00:19Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -41161,10 +42119,34 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/94029?u=e2b3fdebddae48d88892302430bd28b5b5f96133&v=4',
       url: 'https://github.com/moul',
       name: 'Manfred Touron',
-      commits: 256,
+      commits: 257,
       issues: {
-        count: 177,
+        count: 180,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6Z1z0y',
+            title: 'contract: curated (by a DAO) grc20 registry',
+            url: 'https://github.com/gnolang/gno/issues/2940',
+            createdAt: '2024-10-11T10:27:09Z',
+            updatedAt: '2024-10-11T10:30:04Z',
+            labels: [],
+          },
+          {
+            id: 'I_kwDOE-u6Jc6ZU7uy',
+            title: 'gno lint to run on the CI and annotate PRs',
+            url: 'https://github.com/gnolang/gno/issues/2924',
+            createdAt: '2024-10-08T07:56:19Z',
+            updatedAt: '2024-10-08T07:56:19Z',
+            labels: [],
+          },
+          {
+            id: 'I_kwDOE-u6Jc6ZU6-A',
+            title: 'update docs (and examples) regarding PrevRealm and OrigCaller',
+            url: 'https://github.com/gnolang/gno/issues/2923',
+            createdAt: '2024-10-08T07:55:00Z',
+            updatedAt: '2024-10-14T22:03:21Z',
+            labels: [],
+          },
           {
             id: 'I_kwDOE-u6Jc6ZGHgV',
             title: 'RFC(ci): async infra for slow non-essential checks (fuzz, bench)',
@@ -41183,8 +42165,13 @@ const data = {
             title: 'Compile audit areas',
             url: 'https://github.com/gnolang/gno/issues/2886',
             createdAt: '2024-10-02T16:25:38Z',
-            updatedAt: '2024-10-02T16:56:30Z',
-            labels: [],
+            updatedAt: '2024-10-08T21:20:12Z',
+            labels: [
+              {
+                name: 'security',
+                color: 'FF0000',
+              },
+            ],
           },
           {
             id: 'I_kwDOE-u6Jc6YMJkQ',
@@ -41207,7 +42194,7 @@ const data = {
             title: '`r/sys/users` Mainnet v1 (mvp) & v2',
             url: 'https://github.com/gnolang/gno/issues/2827',
             createdAt: '2024-09-21T13:42:50Z',
-            updatedAt: '2024-09-21T14:45:32Z',
+            updatedAt: '2024-10-21T03:58:10Z',
             labels: [],
           },
           {
@@ -41231,7 +42218,7 @@ const data = {
             title: 'feedback needed: how are you using `gnoland genesis ...`?',
             url: 'https://github.com/gnolang/gno/issues/2824',
             createdAt: '2024-09-21T01:52:25Z',
-            updatedAt: '2024-10-03T12:58:43Z',
+            updatedAt: '2024-10-20T12:15:59Z',
             labels: [
               {
                 name: ':question:  question',
@@ -41286,7 +42273,7 @@ const data = {
             title: 'Markdown/UI templating framework competition',
             url: 'https://github.com/gnolang/gno/issues/2753',
             createdAt: '2024-09-03T11:54:36Z',
-            updatedAt: '2024-10-04T10:52:44Z',
+            updatedAt: '2024-10-19T20:37:06Z',
             labels: [
               {
                 name: 'bounty',
@@ -41362,11 +42349,11 @@ const data = {
             title: 'Gno Realm and Ownership Spec',
             url: 'https://github.com/gnolang/gno/issues/2743',
             createdAt: '2024-08-29T17:34:29Z',
-            updatedAt: '2024-09-11T14:46:52Z',
+            updatedAt: '2024-10-18T11:32:26Z',
             labels: [
               {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
+                name: 'in focus',
+                color: 'FBCA04',
               },
             ],
           },
@@ -41375,7 +42362,7 @@ const data = {
             title: 'Anti-squatting System for gno.land namespaces',
             url: 'https://github.com/gnolang/gno/issues/2727',
             createdAt: '2024-08-24T09:38:42Z',
-            updatedAt: '2024-10-04T10:54:48Z',
+            updatedAt: '2024-10-16T12:20:04Z',
             labels: [
               {
                 name: 'bounty',
@@ -41385,10 +42372,6 @@ const data = {
                 name: 'bounty/XXL',
                 color: 'fbca04',
               },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
             ],
           },
           {
@@ -41396,11 +42379,15 @@ const data = {
             title: 'integrate p/demo/avl/pager with existing examples',
             url: 'https://github.com/gnolang/gno/issues/2586',
             createdAt: '2024-07-14T11:58:43Z',
-            updatedAt: '2024-07-14T11:58:44Z',
+            updatedAt: '2024-10-07T15:29:59Z',
             labels: [
               {
                 name: '🗺️good first issue🗺️',
                 color: '7057ff',
+              },
+              {
+                name: 'hacktoberfest',
+                color: '50da4c',
               },
             ],
           },
@@ -41477,15 +42464,11 @@ const data = {
             title: 'Improve `p/uassert` and `p/urequire`',
             url: 'https://github.com/gnolang/gno/issues/2481',
             createdAt: '2024-07-02T14:31:31Z',
-            updatedAt: '2024-10-02T09:54:31Z',
+            updatedAt: '2024-10-16T12:50:03Z',
             labels: [
               {
                 name: '🗺️good first issue🗺️',
                 color: '7057ff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -41563,13 +42546,8 @@ const data = {
             title: 'feat: Rerun Codecov independently from the rest of the CI checks',
             url: 'https://github.com/gnolang/gno/issues/2414',
             createdAt: '2024-06-21T16:03:25Z',
-            updatedAt: '2024-09-11T15:13:52Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:49:59Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6M-dBF',
@@ -41597,39 +42575,24 @@ const data = {
             title: 'RFC(gnovm): make all gno unit tests independent (and parallel)',
             url: 'https://github.com/gnolang/gno/issues/2376',
             createdAt: '2024-06-18T09:34:41Z',
-            updatedAt: '2024-09-11T15:15:07Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:51:08Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6L9hM3',
             title: 'RFC(philosophy): Merge some standalone repos into this monorepo',
             url: 'https://github.com/gnolang/gno/issues/2337',
             createdAt: '2024-06-12T08:33:32Z',
-            updatedAt: '2024-09-12T11:57:41Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:51:07Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6L9cE6',
             title: 'RFC(philosophy): Limiting depth of commands and subcommands in CLIs',
             url: 'https://github.com/gnolang/gno/issues/2336',
             createdAt: '2024-06-12T08:23:10Z',
-            updatedAt: '2024-09-11T15:17:05Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:51:06Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6KKIdw',
@@ -41644,7 +42607,7 @@ const data = {
             title: 'gnoland: team support',
             url: 'https://github.com/gnolang/gno/issues/2195',
             createdAt: '2024-05-25T10:13:06Z',
-            updatedAt: '2024-09-20T16:09:08Z',
+            updatedAt: '2024-10-20T12:46:56Z',
             labels: [],
           },
           {
@@ -41668,7 +42631,7 @@ const data = {
             title: 'gnoland/gnovm: purify `p/` even more',
             url: 'https://github.com/gnolang/gno/issues/2192',
             createdAt: '2024-05-25T09:33:35Z',
-            updatedAt: '2024-09-11T15:25:12Z',
+            updatedAt: '2024-10-16T12:46:19Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -41677,10 +42640,6 @@ const data = {
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -41702,12 +42661,8 @@ const data = {
             title: 'gnovm: support for `/internal/` subfolders',
             url: 'https://github.com/gnolang/gno/issues/2190',
             createdAt: '2024-05-25T09:19:45Z',
-            updatedAt: '2024-09-12T12:05:00Z',
+            updatedAt: '2024-10-16T12:51:01Z',
             labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
               {
                 name: 'help wanted',
                 color: '006b75',
@@ -41753,15 +42708,11 @@ const data = {
             title: 'Add a documentation section on how to interact with the chain without using Gnoweb or Gnokey',
             url: 'https://github.com/gnolang/gno/issues/2026',
             createdAt: '2024-05-03T08:56:25Z',
-            updatedAt: '2024-09-12T12:04:12Z',
+            updatedAt: '2024-10-16T12:50:56Z',
             labels: [
               {
                 name: ':book:  documentation',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -41774,15 +42725,11 @@ const data = {
             title: 'Clarify gRPC and Amino',
             url: 'https://github.com/gnolang/gno/issues/2025',
             createdAt: '2024-05-03T08:54:08Z',
-            updatedAt: '2024-09-12T12:04:20Z',
+            updatedAt: '2024-10-16T12:50:56Z',
             labels: [
               {
                 name: ':book:  documentation',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -41828,13 +42775,8 @@ const data = {
             title: 'Creating a `r/sys/config` realm for runtime configuration',
             url: 'https://github.com/gnolang/gno/issues/1856',
             createdAt: '2024-03-28T17:43:13Z',
-            updatedAt: '2024-09-11T15:39:54Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:48:47Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6C3w7l',
@@ -41912,7 +42854,7 @@ const data = {
             title: 'avlorm: a package that makes the equivalent of SQL indices with avl.Trees',
             url: 'https://github.com/gnolang/gno/issues/1467',
             createdAt: '2023-12-19T16:29:03Z',
-            updatedAt: '2023-12-19T16:29:04Z',
+            updatedAt: '2024-10-09T14:07:24Z',
             labels: [
               {
                 name: '🗺️good first issue🗺️',
@@ -41922,6 +42864,10 @@ const data = {
                 name: ':receipt:  package/realm',
                 color: 'ffffff',
               },
+              {
+                name: 'hacktoberfest',
+                color: '50da4c',
+              },
             ],
           },
           {
@@ -41929,15 +42875,11 @@ const data = {
             title: 'Create a .github/CODEFACILITATORS file and its system',
             url: 'https://github.com/gnolang/gno/issues/1466',
             createdAt: '2023-12-19T14:16:33Z',
-            updatedAt: '2024-10-02T09:54:48Z',
+            updatedAt: '2024-10-17T18:02:21Z',
             labels: [
               {
                 name: '🗺️good first issue🗺️',
                 color: '7057ff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -41958,13 +42900,8 @@ const data = {
             title: 'Setup "nice" stale PRs\' bot',
             url: 'https://github.com/gnolang/gno/issues/1445',
             createdAt: '2023-12-15T16:56:16Z',
-            updatedAt: '2024-09-16T08:27:25Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-17T15:33:41Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc55zOGJ',
@@ -42142,7 +43079,7 @@ const data = {
             title: 'META Gnoweb improvements',
             url: 'https://github.com/gnolang/gno/issues/1187',
             createdAt: '2023-10-02T20:44:28Z',
-            updatedAt: '2023-10-09T14:52:46Z',
+            updatedAt: '2024-10-16T13:00:24Z',
             labels: [
               {
                 name: '🗺️good first issue🗺️',
@@ -42167,12 +43104,8 @@ const data = {
             title: "Incorporating gno test into gnovm's Coverage Metrics",
             url: 'https://github.com/gnolang/gno/issues/1145',
             createdAt: '2023-09-18T13:45:42Z',
-            updatedAt: '2024-09-19T10:28:58Z',
+            updatedAt: '2024-10-16T12:55:14Z',
             labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
               {
                 name: 'help wanted',
                 color: '006b75',
@@ -42184,7 +43117,7 @@ const data = {
             title: 'code coverage reports are flappy due to non-deterministic tests',
             url: 'https://github.com/gnolang/gno/issues/1139',
             createdAt: '2023-09-16T22:45:59Z',
-            updatedAt: '2024-10-02T10:03:52Z',
+            updatedAt: '2024-10-16T13:48:08Z',
             labels: [
               {
                 name: '🗺️good first issue🗺️',
@@ -42198,6 +43131,10 @@ const data = {
                 name: 'help wanted',
                 color: '006b75',
               },
+              {
+                name: 'hacktoberfest',
+                color: '50da4c',
+              },
             ],
           },
           {
@@ -42205,7 +43142,7 @@ const data = {
             title: 'META GitHub oracle & `r/gh`',
             url: 'https://github.com/gnolang/gno/issues/1133',
             createdAt: '2023-09-16T13:04:14Z',
-            updatedAt: '2024-08-19T09:28:14Z',
+            updatedAt: '2024-10-16T13:00:22Z',
             labels: [],
           },
           {
@@ -42234,7 +43171,7 @@ const data = {
             title: '`gno test -cover ...`',
             url: 'https://github.com/gnolang/gno/issues/1121',
             createdAt: '2023-09-14T16:48:48Z',
-            updatedAt: '2024-10-05T00:20:22Z',
+            updatedAt: '2024-10-16T13:00:21Z',
             labels: [
               {
                 name: 'bounty',
@@ -42251,7 +43188,7 @@ const data = {
             title: 'META QA improvement ideas',
             url: 'https://github.com/gnolang/gno/issues/1115',
             createdAt: '2023-09-13T09:43:35Z',
-            updatedAt: '2024-01-11T13:55:07Z',
+            updatedAt: '2024-10-16T13:00:21Z',
             labels: [],
           },
           {
@@ -42299,60 +43236,106 @@ const data = {
             updatedAt: '2023-09-06T15:47:09Z',
             labels: [],
           },
-          {
-            id: 'I_kwDOE-u6Jc5t9m_d',
-            title: '`gno lint` should provide warnings for exported global variables',
-            url: 'https://github.com/gnolang/gno/issues/1042',
-            createdAt: '2023-08-10T10:08:10Z',
-            updatedAt: '2024-09-30T17:52:21Z',
-            labels: [
-              {
-                name: '🗺️good first issue🗺️',
-                color: '7057ff',
-              },
-              {
-                name: 'hacktoberfest',
-                color: '50da4c',
-              },
-            ],
-          },
-          {
-            id: 'I_kwDOE-u6Jc5t9g5G',
-            title: 'Panic when addpkg a Realm with subpaths',
-            url: 'https://github.com/gnolang/gno/issues/1041',
-            createdAt: '2023-08-10T09:55:25Z',
-            updatedAt: '2024-06-04T09:06:19Z',
-            labels: [
-              {
-                name: '🗺️good first issue🗺️',
-                color: '7057ff',
-              },
-            ],
-          },
-          {
-            id: 'I_kwDOE-u6Jc5t8sSf',
-            title: 'GitHub Actions: do not trigger code-related tasks when only examples/**.md files are updated',
-            url: 'https://github.com/gnolang/gno/issues/1040',
-            createdAt: '2023-08-10T07:52:41Z',
-            updatedAt: '2023-09-06T15:47:08Z',
-            labels: [
-              {
-                name: '🗺️good first issue🗺️',
-                color: '7057ff',
-              },
-            ],
-          },
         ],
       },
       prs: {
-        count: 337,
+        count: 343,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_J9Y9',
+            title: 'feat(examples): grc20 refactor',
+            url: 'https://github.com/gnolang/gno/pull/2983',
+            createdAt: '2024-10-19T01:20:10Z',
+            updatedAt: '2024-10-20T17:42:23Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5_Hc2B',
+            title: 'bug -> chore(ci): run gno test with --print-runtime-metrics',
+            url: 'https://github.com/gnolang/gno/pull/2979',
+            createdAt: '2024-10-18T14:56:48Z',
+            updatedAt: '2024-10-19T17:09:44Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+              {
+                name: 'help wanted',
+                color: '006b75',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5_Bazq',
+            title: "feat(gnovm): add 'gno test -print-events' + cleanup machine between tests",
+            url: 'https://github.com/gnolang/gno/pull/2975',
+            createdAt: '2024-10-17T21:44:35Z',
+            updatedAt: '2024-10-18T19:33:43Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-3JeA',
+            title: 'feat(examples): add p/moul/udao package',
+            url: 'https://github.com/gnolang/gno/pull/2963',
+            createdAt: '2024-10-16T17:01:38Z',
+            updatedAt: '2024-10-16T18:09:56Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-r1Ew',
+            title: 'chore: farewell Dylan 👋',
+            url: 'https://github.com/gnolang/gno/pull/2951',
+            createdAt: '2024-10-15T14:22:41Z',
+            updatedAt: '2024-10-15T14:41:09Z',
+            labels: [],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc590YKQ',
+            title: 'feat(tm2): add sdk/params module',
+            url: 'https://github.com/gnolang/gno/pull/2920',
+            createdAt: '2024-10-07T13:34:57Z',
+            updatedAt: '2024-10-21T00:11:32Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc59uYDB',
             title: 'chore(ci): increase bench timeout to 6h',
             url: 'https://github.com/gnolang/gno/pull/2914',
             createdAt: '2024-10-06T07:30:08Z',
-            updatedAt: '2024-10-06T07:47:46Z',
+            updatedAt: '2024-10-17T08:44:37Z',
             labels: [],
           },
           {
@@ -42389,7 +43372,7 @@ const data = {
             title: 'chore: relocate tm2/std.MemFile in gnovm/std',
             url: 'https://github.com/gnolang/gno/pull/2910',
             createdAt: '2024-10-05T09:18:29Z',
-            updatedAt: '2024-10-06T08:08:47Z',
+            updatedAt: '2024-10-10T16:53:11Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -42431,7 +43414,7 @@ const data = {
             title: 'feat: add p/moul/helplink',
             url: 'https://github.com/gnolang/gno/pull/2887',
             createdAt: '2024-10-02T17:07:28Z',
-            updatedAt: '2024-10-03T13:43:32Z',
+            updatedAt: '2024-10-19T00:31:58Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -42559,7 +43542,7 @@ const data = {
             title: 'feat: add p/avl/pager',
             url: 'https://github.com/gnolang/gno/pull/2584',
             createdAt: '2024-07-14T11:43:50Z',
-            updatedAt: '2024-10-05T20:51:49Z',
+            updatedAt: '2024-10-09T04:54:15Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -42611,7 +43594,7 @@ const data = {
             title: 'dev/moul/examples',
             url: 'https://github.com/gnolang/gno/pull/2551',
             createdAt: '2024-07-09T00:28:39Z',
-            updatedAt: '2024-09-21T19:19:26Z',
+            updatedAt: '2024-10-20T12:12:45Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -43579,90 +44562,19 @@ const data = {
               },
             ],
           },
-          {
-            id: 'PR_kwDOE-u6Jc5cfX8d',
-            title: 'chore: improve tests',
-            url: 'https://github.com/gnolang/gno/pull/1232',
-            createdAt: '2023-10-11T09:33:48Z',
-            updatedAt: '2023-10-11T11:10:12Z',
-            labels: [
-              {
-                name: ':package: :mountain:  gno.land',
-                color: 'ffffff',
-              },
-            ],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc5b0pRK',
-            title: 'chore: fix fossa action',
-            url: 'https://github.com/gnolang/gno/pull/1192',
-            createdAt: '2023-10-03T18:54:59Z',
-            updatedAt: '2023-10-03T19:07:54Z',
-            labels: [],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc5bq80F',
-            title: 'chore: update fossa config',
-            url: 'https://github.com/gnolang/gno/pull/1184',
-            createdAt: '2023-10-02T13:04:27Z',
-            updatedAt: '2023-10-03T18:44:11Z',
-            labels: [],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc5bqyC6',
-            title: 'chore: configure fossa license detector',
-            url: 'https://github.com/gnolang/gno/pull/1183',
-            createdAt: '2023-10-02T12:34:59Z',
-            updatedAt: '2023-10-02T12:42:46Z',
-            labels: [],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc5bTKWt',
-            title: "feat: portal loop's main contracts and gnoweb improvements",
-            url: 'https://github.com/gnolang/gno/pull/1176',
-            createdAt: '2023-09-27T06:27:45Z',
-            updatedAt: '2023-10-20T03:08:36Z',
-            labels: [
-              {
-                name: ':receipt:  package/realm',
-                color: 'ffffff',
-              },
-              {
-                name: ':package: :mountain:  gno.land',
-                color: 'ffffff',
-              },
-            ],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc5bKOA1',
-            title: 'chore: try to automate bug in gnolang/gnochess#97',
-            url: 'https://github.com/gnolang/gno/pull/1172',
-            createdAt: '2023-09-25T19:34:39Z',
-            updatedAt: '2024-01-31T13:00:20Z',
-            labels: [
-              {
-                name: ':receipt:  package/realm',
-                color: 'ffffff',
-              },
-              {
-                name: ':package: :robot: gnovm',
-                color: 'ffffff',
-              },
-              {
-                name: ':package: :globe_with_meridians:  tendermint v2',
-                color: 'ffffff',
-              },
-              {
-                name: ':package: :mountain:  gno.land',
-                color: 'ffffff',
-              },
-            ],
-          },
         ],
       },
       mrs: {
-        count: 252,
+        count: 253,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-r1Ew',
+            title: 'chore: farewell Dylan 👋',
+            url: 'https://github.com/gnolang/gno/pull/2951',
+            createdAt: '2024-10-15T14:22:41Z',
+            updatedAt: '2024-10-15T14:41:09Z',
+            labels: [],
+          },
           {
             id: 'PR_kwDOE-u6Jc59tFOu',
             title: 'chore(ci): do not mark master as failing due to benchmark',
@@ -44833,14 +45745,6 @@ const data = {
             updatedAt: '2023-09-18T16:03:15Z',
             labels: [],
           },
-          {
-            id: 'PR_kwDOE-u6Jc5QZ7Zv',
-            title: 'test: set up Codecov',
-            url: 'https://github.com/gnolang/gno/pull/819',
-            createdAt: '2023-05-12T17:11:16Z',
-            updatedAt: '2023-09-18T16:03:39Z',
-            labels: [],
-          },
         ],
       },
       reviewedMrs: {
@@ -45610,15 +46514,11 @@ const data = {
             title: 'amino.WithTypes accepts types being given the same name',
             url: 'https://github.com/gnolang/gno/issues/2326',
             createdAt: '2024-06-11T12:11:24Z',
-            updatedAt: '2024-09-12T12:05:23Z',
+            updatedAt: '2024-10-16T12:51:06Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -45717,7 +46617,7 @@ const data = {
             title: 'Gnoland shows an input instead of a textarea when body.type=textarea',
             url: 'https://github.com/gnolang/gno/issues/591',
             createdAt: '2023-03-12T14:56:09Z',
-            updatedAt: '2023-09-08T07:25:18Z',
+            updatedAt: '2024-10-16T12:59:58Z',
             labels: [],
           },
           {
@@ -45725,7 +46625,7 @@ const data = {
             title: 'Cosmos-sdk vulnerability retrospective',
             url: 'https://github.com/gnolang/gno/issues/587',
             createdAt: '2023-03-10T10:24:20Z',
-            updatedAt: '2024-01-17T12:32:33Z',
+            updatedAt: '2024-10-16T13:40:12Z',
             labels: [],
           },
           {
@@ -45792,7 +46692,7 @@ const data = {
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -45843,7 +46743,7 @@ const data = {
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -45860,7 +46760,7 @@ const data = {
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -45902,7 +46802,7 @@ const data = {
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -46053,7 +46953,7 @@ const data = {
             title: 'feat: `X()` replacement prototype using joeson ',
             url: 'https://github.com/gnolang/gno/pull/1156',
             createdAt: '2023-09-20T04:23:01Z',
-            updatedAt: '2023-11-16T16:40:17Z',
+            updatedAt: '2024-10-16T13:00:23Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -46123,7 +47023,7 @@ const data = {
             title: 'feat: WIP GNO mail (no render)',
             url: 'https://github.com/gnolang/gno/pull/641',
             createdAt: '2023-03-24T08:36:11Z',
-            updatedAt: '2023-10-11T00:19:56Z',
+            updatedAt: '2024-10-16T13:00:01Z',
             labels: [],
           },
           {
@@ -46549,8 +47449,48 @@ const data = {
         data: [],
       },
       prs: {
-        count: 0,
-        data: [],
+        count: 3,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_APWZ',
+            title: 'feat(gnovm): added crypto/blake3 in the same style as sha256',
+            url: 'https://github.com/gnolang/gno/pull/2972',
+            createdAt: '2024-10-17T18:19:56Z',
+            updatedAt: '2024-10-18T12:49:41Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5---Eg',
+            title: 'feat(examples): add blake3 to gno.land/p/demo/crypto/blake3',
+            url: 'https://github.com/gnolang/gno/pull/2970',
+            createdAt: '2024-10-17T15:07:08Z',
+            updatedAt: '2024-10-18T21:13:25Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-PeI_',
+            title: 'feat(stdlibs): add internal/compat/crypto/subtle',
+            url: 'https://github.com/gnolang/gno/pull/2937',
+            createdAt: '2024-10-10T15:40:19Z',
+            updatedAt: '2024-10-17T17:51:05Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
       },
       mrs: {
         count: 0,
@@ -46808,7 +47748,7 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/777866?v=4',
       url: 'https://github.com/sw360cab',
       name: 'Sergio Maria Matone',
-      commits: 8,
+      commits: 9,
       issues: {
         count: 4,
         data: [
@@ -46822,10 +47762,6 @@ const data = {
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -46843,10 +47779,6 @@ const data = {
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -46867,23 +47799,27 @@ const data = {
             title: '[infra] Minimal Setup of Observability node running monitoring service',
             url: 'https://github.com/gnolang/gno/issues/2632',
             createdAt: '2024-07-26T09:25:58Z',
-            updatedAt: '2024-09-11T14:55:17Z',
+            updatedAt: '2024-10-18T09:42:16Z',
             labels: [
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
         ],
       },
       prs: {
-        count: 8,
+        count: 9,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-81Xt',
+            title: 'chore(ci): reducing folders spinning up benchmarks',
+            url: 'https://github.com/gnolang/gno/pull/2966',
+            createdAt: '2024-10-17T10:51:29Z',
+            updatedAt: '2024-10-18T10:05:59Z',
+            labels: [],
+          },
           {
             id: 'PR_kwDOE-u6Jc59gATb',
             title: 'ci: remove conflicting option to push benchmark on github pages',
@@ -46921,7 +47857,7 @@ const data = {
             title: 'chore(benchmarks): Rehauling Benchmark Workloads',
             url: 'https://github.com/gnolang/gno/pull/2716',
             createdAt: '2024-08-20T16:17:58Z',
-            updatedAt: '2024-09-26T09:10:41Z',
+            updatedAt: '2024-10-18T09:57:28Z',
             labels: [],
           },
           {
@@ -46956,8 +47892,16 @@ const data = {
         ],
       },
       mrs: {
-        count: 8,
+        count: 9,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-81Xt',
+            title: 'chore(ci): reducing folders spinning up benchmarks',
+            url: 'https://github.com/gnolang/gno/pull/2966',
+            createdAt: '2024-10-17T10:51:29Z',
+            updatedAt: '2024-10-18T10:05:59Z',
+            labels: [],
+          },
           {
             id: 'PR_kwDOE-u6Jc59gATb',
             title: 'ci: remove conflicting option to push benchmark on github pages',
@@ -46995,7 +47939,7 @@ const data = {
             title: 'chore(benchmarks): Rehauling Benchmark Workloads',
             url: 'https://github.com/gnolang/gno/pull/2716',
             createdAt: '2024-08-20T16:17:58Z',
-            updatedAt: '2024-09-26T09:10:41Z',
+            updatedAt: '2024-10-18T09:57:28Z',
             labels: [],
           },
           {
@@ -47037,7 +47981,7 @@ const data = {
             title: 'chore(benchmarks): Rehauling Benchmark Workloads',
             url: 'https://github.com/gnolang/gno/pull/2716',
             createdAt: '2024-08-20T16:17:58Z',
-            updatedAt: '2024-09-26T09:10:41Z',
+            updatedAt: '2024-10-18T09:57:28Z',
             labels: [],
           },
           {
@@ -47206,7 +48150,7 @@ const data = {
             title: 'feat(boardsv2): experiment API - WIP',
             url: 'https://github.com/gnolang/gno/pull/2902',
             createdAt: '2024-10-04T13:11:08Z',
-            updatedAt: '2024-10-04T15:51:39Z',
+            updatedAt: '2024-10-11T14:47:06Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -47248,10 +48192,18 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/1196465?u=b32a9401bab7384dd6195eee8ba073a9b38db99b&v=4',
       url: 'https://github.com/ajnavarro',
       name: 'Antonio Navarro Perez',
-      commits: 30,
+      commits: 32,
       issues: {
-        count: 21,
+        count: 22,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6ZLVlo',
+            title: 'META: Benchmarks',
+            url: 'https://github.com/gnolang/gno/issues/2919',
+            createdAt: '2024-10-07T09:34:52Z',
+            updatedAt: '2024-10-17T12:23:07Z',
+            labels: [],
+          },
           {
             id: 'I_kwDOE-u6Jc6YCjwr',
             title: 'error: panic: Orphan expires before it comes alive. 1 > 0',
@@ -47312,39 +48264,24 @@ const data = {
             title: 'CI: Build binaries and serve them as artifacts on every PR',
             url: 'https://github.com/gnolang/gno/issues/2098',
             createdAt: '2024-05-14T10:16:47Z',
-            updatedAt: '2024-09-11T15:30:15Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-18T10:22:57Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6Iy2Ry',
             title: 'CI: Fix race conditions and run tests with -race flag',
             url: 'https://github.com/gnolang/gno/issues/2097',
             createdAt: '2024-05-14T10:14:33Z',
-            updatedAt: '2024-09-27T12:29:39Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:58Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6Iy10q',
             title: 'CI: Add cache where it makes sense',
             url: 'https://github.com/gnolang/gno/issues/2096',
             createdAt: '2024-05-14T10:13:34Z',
-            updatedAt: '2024-09-11T15:30:39Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:58Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6Iy1Tn',
@@ -47396,8 +48333,25 @@ const data = {
             title: 'Proposal: Implementing Versioning Across Application Serialization Structures',
             url: 'https://github.com/gnolang/gno/issues/1838',
             createdAt: '2024-03-25T14:42:41Z',
-            updatedAt: '2024-09-11T13:24:03Z',
-            labels: [],
+            updatedAt: '2024-10-18T11:42:08Z',
+            labels: [
+              {
+                name: 'breaking change',
+                color: 'a7327e',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
+              },
+            ],
           },
           {
             id: 'I_kwDOE-u6Jc5pMyF5',
@@ -47412,7 +48366,7 @@ const data = {
             title: 'BenchmarkWalRead* failing for data corruption errors.',
             url: 'https://github.com/gnolang/gno/issues/910',
             createdAt: '2023-06-16T14:34:08Z',
-            updatedAt: '2024-09-12T12:02:41Z',
+            updatedAt: '2024-10-16T12:55:13Z',
             labels: [
               {
                 name: '🐞 bug',
@@ -47421,10 +48375,6 @@ const data = {
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -47437,7 +48387,7 @@ const data = {
             title: 'BenchmarkBinaryPBBindings panicking with nil pointer dereference',
             url: 'https://github.com/gnolang/gno/issues/909',
             createdAt: '2023-06-16T14:30:18Z',
-            updatedAt: '2024-10-01T13:44:46Z',
+            updatedAt: '2024-10-16T12:55:12Z',
             labels: [
               {
                 name: '🐞 bug',
@@ -47446,10 +48396,6 @@ const data = {
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -47479,7 +48425,7 @@ const data = {
             title: 'BenchmarkCoinsAdditionIntersect panicking with the message invalid denom: COINZ_0',
             url: 'https://github.com/gnolang/gno/issues/907',
             createdAt: '2023-06-16T14:04:45Z',
-            updatedAt: '2024-10-01T13:44:30Z',
+            updatedAt: '2024-10-16T12:55:12Z',
             labels: [
               {
                 name: '🐞 bug',
@@ -47488,10 +48434,6 @@ const data = {
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -47521,7 +48463,7 @@ const data = {
             title: 'gnovm store: `SetCachePackage` stores packages on memory. Possible OOM errors.',
             url: 'https://github.com/gnolang/gno/issues/812',
             createdAt: '2023-05-09T09:48:42Z',
-            updatedAt: '2024-09-12T09:49:28Z',
+            updatedAt: '2024-10-16T12:34:52Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -47531,10 +48473,6 @@ const data = {
                 name: ':star2:  improvement',
                 color: 'ffffff',
               },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
             ],
           },
           {
@@ -47542,20 +48480,28 @@ const data = {
             title: 'Gnoland is 45% faster using GOMAXPROCS=1 on multithreaded computers.',
             url: 'https://github.com/gnolang/gno/issues/748',
             createdAt: '2023-04-17T10:46:08Z',
-            updatedAt: '2023-09-08T07:26:30Z',
+            updatedAt: '2024-10-16T13:00:07Z',
             labels: [],
           },
         ],
       },
       prs: {
-        count: 45,
+        count: 46,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-Deuv',
+            title: 'chore: Remove checkbox with the reminder of adding more Benchmarks.',
+            url: 'https://github.com/gnolang/gno/pull/2927',
+            createdAt: '2024-10-09T09:44:14Z',
+            updatedAt: '2024-10-16T09:47:30Z',
+            labels: [],
+          },
           {
             id: 'PR_kwDOE-u6Jc586kMt',
             title: 'chore: Run stdlib tests in parallel to make gnovm tests run faster',
             url: 'https://github.com/gnolang/gno/pull/2864',
             createdAt: '2024-09-27T12:24:06Z',
-            updatedAt: '2024-09-27T12:45:24Z',
+            updatedAt: '2024-10-18T13:51:10Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -48080,8 +49026,29 @@ const data = {
         ],
       },
       mrs: {
-        count: 30,
+        count: 32,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-Deuv',
+            title: 'chore: Remove checkbox with the reminder of adding more Benchmarks.',
+            url: 'https://github.com/gnolang/gno/pull/2927',
+            createdAt: '2024-10-09T09:44:14Z',
+            updatedAt: '2024-10-16T09:47:30Z',
+            labels: [],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc586kMt',
+            title: 'chore: Run stdlib tests in parallel to make gnovm tests run faster',
+            url: 'https://github.com/gnolang/gno/pull/2864',
+            createdAt: '2024-09-27T12:24:06Z',
+            updatedAt: '2024-10-18T13:51:10Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc58zttP',
             title: 'fix: stop LevelDB benchmark due to an error',
@@ -48625,7 +49592,7 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/1999543?v=4',
       url: 'https://github.com/jefft0',
       name: 'Jeff Thompson',
-      commits: 27,
+      commits: 28,
       issues: {
         count: 16,
         data: [
@@ -48655,7 +49622,7 @@ const data = {
             title: 'feature request: Include tx-indexer in gnodev, automatically refresh on reload',
             url: 'https://github.com/gnolang/gno/issues/2082',
             createdAt: '2024-05-13T12:01:11Z',
-            updatedAt: '2024-10-04T10:55:33Z',
+            updatedAt: '2024-10-21T07:11:09Z',
             labels: [
               {
                 name: 'bounty',
@@ -48668,6 +49635,10 @@ const data = {
               {
                 name: 'help wanted',
                 color: '006b75',
+              },
+              {
+                name: 'hacktoberfest',
+                color: '50da4c',
               },
             ],
           },
@@ -48805,7 +49776,7 @@ const data = {
             title: '"Gas used" seems unrelated to the number of coins subtracted',
             url: 'https://github.com/gnolang/gno/issues/1070',
             createdAt: '2023-08-25T14:07:54Z',
-            updatedAt: '2024-08-28T11:03:30Z',
+            updatedAt: '2024-10-16T13:44:19Z',
             labels: [
               {
                 name: ':question:  question',
@@ -48838,7 +49809,7 @@ const data = {
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -48865,7 +49836,7 @@ const data = {
             title: 'feat: In the gnokey CLI, add command to update the password',
             url: 'https://github.com/gnolang/gno/pull/2700',
             createdAt: '2024-08-14T14:52:23Z',
-            updatedAt: '2024-10-04T07:44:26Z',
+            updatedAt: '2024-10-16T12:52:36Z',
             labels: [
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
@@ -48889,7 +49860,7 @@ const data = {
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -48965,7 +49936,7 @@ const data = {
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -48986,7 +49957,7 @@ const data = {
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -49354,7 +50325,7 @@ const data = {
         ],
       },
       mrs: {
-        count: 27,
+        count: 28,
         data: [
           {
             id: 'PR_kwDOE-u6Jc543rnd',
@@ -49366,6 +50337,23 @@ const data = {
               {
                 name: 'breaking change',
                 color: 'a7327e',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc54X1sc',
+            title: 'feat: In the gnokey CLI, add command to update the password',
+            url: 'https://github.com/gnolang/gno/pull/2700',
+            createdAt: '2024-08-14T14:52:23Z',
+            updatedAt: '2024-10-16T12:52:36Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
               },
               {
                 name: ':package: :mountain:  gno.land',
@@ -49707,7 +50695,7 @@ const data = {
         ],
       },
       reviewedMrs: {
-        count: 6,
+        count: 7,
         data: [
           {
             id: 'PR_kwDOE-u6Jc543rnd',
@@ -49719,6 +50707,23 @@ const data = {
               {
                 name: 'breaking change',
                 color: 'a7327e',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc54X1sc',
+            title: 'feat: In the gnokey CLI, add command to update the password',
+            url: 'https://github.com/gnolang/gno/pull/2700',
+            createdAt: '2024-08-14T14:52:23Z',
+            updatedAt: '2024-10-16T12:52:36Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
               },
               {
                 name: ':package: :mountain:  gno.land',
@@ -49833,15 +50838,11 @@ const data = {
             title: 'bug(gnovm): prohibit conversion of non-convertible typed constants',
             url: 'https://github.com/gnolang/gno/issues/2681',
             createdAt: '2024-08-12T19:33:13Z',
-            updatedAt: '2024-09-11T14:52:54Z',
+            updatedAt: '2024-10-16T12:46:30Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -49850,13 +50851,8 @@ const data = {
             title: 'Better Gno Error Handling',
             url: 'https://github.com/gnolang/gno/issues/2653',
             createdAt: '2024-08-01T17:06:44Z',
-            updatedAt: '2024-09-12T11:56:32Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:07Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6QmVNx',
@@ -49871,15 +50867,11 @@ const data = {
             title: 'Clarify allowed files and extensions when adding a package',
             url: 'https://github.com/gnolang/gno/issues/2421',
             createdAt: '2024-06-24T00:55:10Z',
-            updatedAt: '2024-10-01T00:53:34Z',
+            updatedAt: '2024-10-16T12:50:00Z',
             labels: [
               {
                 name: ':book:  documentation',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -49896,20 +50888,15 @@ const data = {
             title: '[GnoVM]: Do not allow realms to store references to objects owned by other realms',
             url: 'https://github.com/gnolang/gno/issues/2332',
             createdAt: '2024-06-11T21:27:17Z',
-            updatedAt: '2024-09-11T15:17:45Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:46:22Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6Lbqfm',
             title: '[bug/gnovm] arrays returned by functions should not be addressable',
             url: 'https://github.com/gnolang/gno/issues/2299',
             createdAt: '2024-06-06T23:13:42Z',
-            updatedAt: '2024-09-11T15:18:44Z',
+            updatedAt: '2024-10-16T12:46:21Z',
             labels: [
               {
                 name: '🐞 bug',
@@ -49918,10 +50905,6 @@ const data = {
               {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -49938,7 +50921,7 @@ const data = {
             title: '[GnoVM] bug: inconsistent map key',
             url: 'https://github.com/gnolang/gno/issues/2060',
             createdAt: '2024-05-08T20:53:45Z',
-            updatedAt: '2024-09-11T15:31:51Z',
+            updatedAt: '2024-10-16T12:48:53Z',
             labels: [
               {
                 name: '🐞 bug',
@@ -49947,10 +50930,6 @@ const data = {
               {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -49976,7 +50955,7 @@ const data = {
             title: 'Add gno `std` package function `GasUsed`',
             url: 'https://github.com/gnolang/gno/issues/1998',
             createdAt: '2024-04-29T15:44:27Z',
-            updatedAt: '2024-09-11T15:34:48Z',
+            updatedAt: '2024-10-16T12:55:20Z',
             labels: [
               {
                 name: '🗺️good first issue🗺️',
@@ -49985,10 +50964,6 @@ const data = {
               {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
             ],
           },
@@ -50005,13 +50980,8 @@ const data = {
             title: 'Accounts should be locked and unlockable',
             url: 'https://github.com/gnolang/gno/issues/1837',
             createdAt: '2024-03-25T14:25:36Z',
-            updatedAt: '2024-09-11T15:41:41Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:19:34Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6DC2T1',
@@ -50069,15 +51039,11 @@ const data = {
             title: 'Unable to call modifying methods on types imported from other realms',
             url: 'https://github.com/gnolang/gno/issues/1671',
             createdAt: '2024-02-20T20:25:45Z',
-            updatedAt: '2024-09-11T15:46:53Z',
+            updatedAt: '2024-10-16T12:42:28Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -50120,13 +51086,8 @@ const data = {
             title: 'Remove shared VM memory so tests can run concurrently',
             url: 'https://github.com/gnolang/gno/issues/1369',
             createdAt: '2023-11-13T15:56:13Z',
-            updatedAt: '2024-09-12T09:28:34Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:55:16Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc51VEE0',
@@ -50146,7 +51107,7 @@ const data = {
             title: 'feat: add flag to execute filetests with prefix',
             url: 'https://github.com/gnolang/gno/pull/2837',
             createdAt: '2024-09-23T21:24:46Z',
-            updatedAt: '2024-09-26T12:47:38Z',
+            updatedAt: '2024-10-08T00:07:03Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -50193,7 +51154,7 @@ const data = {
             title: 'fix: addressability',
             url: 'https://github.com/gnolang/gno/pull/2731',
             createdAt: '2024-08-27T00:21:03Z',
-            updatedAt: '2024-09-25T17:25:52Z',
+            updatedAt: '2024-10-07T23:51:41Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -50206,7 +51167,7 @@ const data = {
             title: 'feat: add a global params store module',
             url: 'https://github.com/gnolang/gno/pull/2710',
             createdAt: '2024-08-19T20:52:01Z',
-            updatedAt: '2024-08-20T15:00:32Z',
+            updatedAt: '2024-10-08T00:01:45Z',
             labels: [
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
@@ -50232,7 +51193,7 @@ const data = {
             title: 'feat: restrict sending gnot by default',
             url: 'https://github.com/gnolang/gno/pull/2667',
             createdAt: '2024-08-07T20:38:46Z',
-            updatedAt: '2024-08-29T17:55:01Z',
+            updatedAt: '2024-10-08T00:03:06Z',
             labels: [
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
@@ -52014,10 +52975,27 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/4681308?u=5a240449a1a95bec5cfecd2295f4804fec207cdf&v=4',
       url: 'https://github.com/thehowl',
       name: 'Morgan',
-      commits: 131,
+      commits: 132,
       issues: {
-        count: 93,
+        count: 94,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6as43_',
+            title: 'can `break` out of a self-executing closure',
+            url: 'https://github.com/gnolang/gno/issues/2973',
+            createdAt: '2024-10-17T18:36:10Z',
+            updatedAt: '2024-10-17T18:37:02Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'I_kwDOE-u6Jc6ZCcsf',
             title: '`gno test -covermode`',
@@ -52057,15 +53035,20 @@ const data = {
             title: 'rfc: the future of `gno.mod`',
             url: 'https://github.com/gnolang/gno/issues/2904',
             createdAt: '2024-10-04T14:22:22Z',
-            updatedAt: '2024-10-06T09:30:42Z',
-            labels: [],
+            updatedAt: '2024-10-11T11:27:26Z',
+            labels: [
+              {
+                name: 'gno-proposal',
+                color: '81AC09',
+              },
+            ],
           },
           {
             id: 'I_kwDOE-u6Jc6Yy_NN',
             title: 'META - Review Team Phase 1',
             url: 'https://github.com/gnolang/gno/issues/2890',
             createdAt: '2024-10-03T09:02:15Z',
-            updatedAt: '2024-10-03T09:18:44Z',
+            updatedAt: '2024-10-17T11:50:05Z',
             labels: [],
           },
           {
@@ -52135,7 +53118,7 @@ const data = {
             title: 'Move standard library initialization to genesis transactions',
             url: 'https://github.com/gnolang/gno/issues/2730',
             createdAt: '2024-08-26T18:32:42Z',
-            updatedAt: '2024-09-11T14:49:11Z',
+            updatedAt: '2024-10-16T12:46:31Z',
             labels: [
               {
                 name: ':package: :mountain:  gno.land',
@@ -52145,10 +53128,6 @@ const data = {
                 name: ':star2:  improvement',
                 color: 'ffffff',
               },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
             ],
           },
           {
@@ -52156,26 +53135,16 @@ const data = {
             title: 'change default genesis package creator, and add way to configure it',
             url: 'https://github.com/gnolang/gno/issues/2573',
             createdAt: '2024-07-10T18:19:15Z',
-            updatedAt: '2024-09-11T14:58:58Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-18T07:11:01Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6PAx7v',
             title: 'Move GnoVM testing logic within pkg/gnolang; separate from `gno test` logic',
             url: 'https://github.com/gnolang/gno/issues/2561',
             createdAt: '2024-07-09T22:39:54Z',
-            updatedAt: '2024-09-11T14:59:25Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:04Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6O2jzh',
@@ -52225,7 +53194,7 @@ const data = {
             title: 'proposal: testable markdown documentation',
             url: 'https://github.com/gnolang/gno/issues/2245',
             createdAt: '2024-05-30T15:59:34Z',
-            updatedAt: '2024-10-02T09:54:38Z',
+            updatedAt: '2024-10-16T12:51:02Z',
             labels: [
               {
                 name: ':seedling:  feature',
@@ -52234,10 +53203,6 @@ const data = {
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -52250,7 +53215,7 @@ const data = {
             title: '"User Flow" integration test',
             url: 'https://github.com/gnolang/gno/issues/2159',
             createdAt: '2024-05-21T08:42:10Z',
-            updatedAt: '2024-05-21T08:42:10Z',
+            updatedAt: '2024-10-18T11:06:52Z',
             labels: [
               {
                 name: ':star2:  improvement',
@@ -52263,13 +53228,8 @@ const data = {
             title: 'Expect full denoms in Banker.IssueCoin and Banker.RemoveCoin',
             url: 'https://github.com/gnolang/gno/issues/2107',
             createdAt: '2024-05-14T19:34:05Z',
-            updatedAt: '2024-09-11T15:29:40Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:48:54Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6IZJqN',
@@ -52307,7 +53267,7 @@ const data = {
               'vm: variable declaration code in `AssignStmt` and `ValueDecl` should be synced (issues with map index / type assertion tuple assignment)',
             url: 'https://github.com/gnolang/gno/issues/1958',
             createdAt: '2024-04-19T11:12:43Z',
-            updatedAt: '2024-09-11T15:35:23Z',
+            updatedAt: '2024-10-16T12:48:52Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -52317,10 +53277,6 @@ const data = {
                 name: ':star2:  improvement',
                 color: 'ffffff',
               },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
             ],
           },
           {
@@ -52328,13 +53284,8 @@ const data = {
             title: "[chain] move `gnoland start`'s genesis generation to cmd/genesis",
             url: 'https://github.com/gnolang/gno/issues/1952',
             createdAt: '2024-04-18T15:12:23Z',
-            updatedAt: '2024-10-04T09:24:45Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:21:47Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6FyjQT',
@@ -52383,11 +53334,11 @@ const data = {
             title: 'gnolang/overflow repo and `math/overflow` (ex `p/demo/maths`) should be synced up',
             url: 'https://github.com/gnolang/gno/issues/1729',
             createdAt: '2024-03-04T15:33:29Z',
-            updatedAt: '2024-09-11T15:44:57Z',
+            updatedAt: '2024-10-16T12:48:44Z',
             labels: [
               {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
+                name: '🗺️good first issue🗺️',
+                color: '7057ff',
               },
             ],
           },
@@ -52451,7 +53402,7 @@ const data = {
             title: 'support variadic types as function args in MsgCall',
             url: 'https://github.com/gnolang/gno/issues/1611',
             createdAt: '2024-02-01T10:05:59Z',
-            updatedAt: '2024-09-11T15:47:16Z',
+            updatedAt: '2024-10-16T12:35:45Z',
             labels: [
               {
                 name: ':seedling:  feature',
@@ -52460,10 +53411,6 @@ const data = {
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -52509,7 +53456,7 @@ const data = {
             title: 'rfc: enforce package name == last element of import path in `maketx addpkg`',
             url: 'https://github.com/gnolang/gno/issues/1571',
             createdAt: '2024-01-23T12:34:47Z',
-            updatedAt: '2024-01-23T12:34:47Z',
+            updatedAt: '2024-10-16T13:00:25Z',
             labels: [
               {
                 name: ':package: :mountain:  gno.land',
@@ -52577,7 +53524,7 @@ const data = {
             title: 'in variable initialization, dependencies within functions are not recursively resolved',
             url: 'https://github.com/gnolang/gno/issues/1463',
             createdAt: '2023-12-19T11:29:11Z',
-            updatedAt: '2024-09-12T09:23:33Z',
+            updatedAt: '2024-10-16T12:48:43Z',
             labels: [
               {
                 name: '🐞 bug',
@@ -52586,10 +53533,6 @@ const data = {
               {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -52615,7 +53558,7 @@ const data = {
             title: 'Store all markdown files on-chain and within ReadMemPackage',
             url: 'https://github.com/gnolang/gno/issues/1458',
             createdAt: '2023-12-18T21:19:21Z',
-            updatedAt: '2024-09-12T09:24:20Z',
+            updatedAt: '2024-10-16T12:55:17Z',
             labels: [
               {
                 name: '🗺️good first issue🗺️',
@@ -52628,10 +53571,6 @@ const data = {
               {
                 name: ':star2:  improvement',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
             ],
           },
@@ -52852,13 +53791,8 @@ const data = {
             title: '[META] Standard Library wishlist',
             url: 'https://github.com/gnolang/gno/issues/1267',
             createdAt: '2023-10-20T15:30:33Z',
-            updatedAt: '2024-09-12T09:30:47Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:55:16Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc5zbL_v',
@@ -52899,7 +53833,7 @@ const data = {
             title: "can't use unexported struct fields when converting using gno2go",
             url: 'https://github.com/gnolang/gno/issues/1155',
             createdAt: '2023-09-19T17:40:12Z',
-            updatedAt: '2024-09-11T13:24:03Z',
+            updatedAt: '2024-10-16T13:01:04Z',
             labels: [],
           },
           {
@@ -52975,7 +53909,7 @@ const data = {
             title: 'division by zero panics cannot be recovered',
             url: 'https://github.com/gnolang/gno/issues/1148',
             createdAt: '2023-09-18T14:54:53Z',
-            updatedAt: '2024-09-12T09:33:14Z',
+            updatedAt: '2024-10-16T12:48:41Z',
             labels: [
               {
                 name: '🐞 bug',
@@ -52984,10 +53918,6 @@ const data = {
               {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -53014,7 +53944,7 @@ const data = {
               'for loops maintain the same block on iteration, which is referenced in any closures generated within',
             url: 'https://github.com/gnolang/gno/issues/1135',
             createdAt: '2023-09-16T14:21:19Z',
-            updatedAt: '2024-09-12T09:34:35Z',
+            updatedAt: '2024-10-16T12:46:06Z',
             labels: [
               {
                 name: '🐞 bug',
@@ -53024,10 +53954,6 @@ const data = {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
               },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
             ],
           },
           {
@@ -53035,7 +53961,7 @@ const data = {
             title: 'proposal: code-tested specs',
             url: 'https://github.com/gnolang/gno/issues/1125',
             createdAt: '2023-09-14T21:01:37Z',
-            updatedAt: '2023-11-28T11:00:15Z',
+            updatedAt: '2024-10-16T13:00:22Z',
             labels: [
               {
                 name: ':book:  documentation',
@@ -53107,15 +54033,11 @@ const data = {
             title: 'cryptic error: invalid dereferences (`*<Expr>`) panic with `should not happen`',
             url: 'https://github.com/gnolang/gno/issues/1088',
             createdAt: '2023-08-30T18:09:26Z',
-            updatedAt: '2024-09-12T09:36:48Z',
+            updatedAt: '2024-10-19T15:35:00Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -53175,7 +54097,7 @@ const data = {
             title: 'test files cannot contain a `tests` variable',
             url: 'https://github.com/gnolang/gno/issues/1084',
             createdAt: '2023-08-30T15:29:59Z',
-            updatedAt: '2024-09-12T12:09:36Z',
+            updatedAt: '2024-10-16T12:55:14Z',
             labels: [
               {
                 name: '🐞 bug',
@@ -53184,10 +54106,6 @@ const data = {
               {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
             ],
           },
@@ -53214,7 +54132,7 @@ const data = {
               'cryptic error: `v := f()`, when f returns no values, panics with `evalStaticTypeOf() only supports *CallExpr with 1 result`',
             url: 'https://github.com/gnolang/gno/issues/1082',
             createdAt: '2023-08-30T15:00:20Z',
-            updatedAt: '2024-09-13T15:16:51Z',
+            updatedAt: '2024-10-16T12:46:04Z',
             labels: [
               {
                 name: '🐞 bug',
@@ -53228,10 +54146,6 @@ const data = {
                 name: ':star2:  improvement',
                 color: 'ffffff',
               },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
             ],
           },
           {
@@ -53239,7 +54153,7 @@ const data = {
             title: 'gno test log output is buffered, and joined for subtests',
             url: 'https://github.com/gnolang/gno/issues/1081',
             createdAt: '2023-08-30T14:55:32Z',
-            updatedAt: '2024-10-01T13:45:44Z',
+            updatedAt: '2024-10-16T18:41:24Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -53248,10 +54162,6 @@ const data = {
               {
                 name: ':star2:  improvement',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -53268,7 +54178,7 @@ const data = {
             title: 'proposal(avl): make nil interface same as "no value"',
             url: 'https://github.com/gnolang/gno/issues/1071',
             createdAt: '2023-08-25T14:47:55Z',
-            updatedAt: '2023-12-01T18:58:40Z',
+            updatedAt: '2024-10-16T13:00:20Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -53318,8 +54228,12 @@ const data = {
             title: 'rfc: change the `time` stdlib package',
             url: 'https://github.com/gnolang/gno/issues/851',
             createdAt: '2023-05-25T15:22:05Z',
-            updatedAt: '2024-09-12T09:47:28Z',
+            updatedAt: '2024-10-16T12:46:03Z',
             labels: [
+              {
+                name: '🗺️good first issue🗺️',
+                color: '7057ff',
+              },
               {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
@@ -53328,10 +54242,6 @@ const data = {
                 name: ':star2:  improvement',
                 color: 'ffffff',
               },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
             ],
           },
           {
@@ -53339,7 +54249,7 @@ const data = {
             title: 'gno-specific code linters',
             url: 'https://github.com/gnolang/gno/issues/850',
             createdAt: '2023-05-25T14:19:49Z',
-            updatedAt: '2024-09-12T12:08:02Z',
+            updatedAt: '2024-10-16T12:55:11Z',
             labels: [
               {
                 name: ':seedling:  feature',
@@ -53352,10 +54262,6 @@ const data = {
               {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -53389,15 +54295,11 @@ const data = {
             title: 'tests should not rely on network connections',
             url: 'https://github.com/gnolang/gno/issues/836',
             createdAt: '2023-05-19T16:38:32Z',
-            updatedAt: '2024-09-12T09:48:35Z',
+            updatedAt: '2024-10-16T12:55:11Z',
             labels: [
               {
                 name: ':star2:  improvement',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
             ],
           },
@@ -53414,7 +54316,7 @@ const data = {
             title: 'remove `tm2/pkg/crypto/keys/client/migration.go` after test4',
             url: 'https://github.com/gnolang/gno/issues/800',
             createdAt: '2023-05-05T12:27:53Z',
-            updatedAt: '2024-09-12T09:50:06Z',
+            updatedAt: '2024-10-18T15:42:52Z',
             labels: [
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
@@ -53423,10 +54325,6 @@ const data = {
               {
                 name: ':star2:  improvement',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -53467,14 +54365,22 @@ const data = {
             title: 'rfc: gno doc command',
             url: 'https://github.com/gnolang/gno/issues/522',
             createdAt: '2023-02-17T12:08:19Z',
-            updatedAt: '2024-09-11T13:24:03Z',
+            updatedAt: '2024-10-16T12:59:56Z',
             labels: [],
           },
         ],
       },
       prs: {
-        count: 157,
+        count: 158,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-8ktW',
+            title: 'chore: remove misc/logos',
+            url: 'https://github.com/gnolang/gno/pull/2965',
+            createdAt: '2024-10-17T10:15:37Z',
+            updatedAt: '2024-10-17T10:36:17Z',
+            labels: [],
+          },
           {
             id: 'PR_kwDOE-u6Jc59fzWT',
             title: 'refactor: gnovm -> gno, pkg/gnolang -> vm, `package gnolang` -> `vm`',
@@ -53505,7 +54411,7 @@ const data = {
             title: 'wip: use wal file to replay chain',
             url: 'https://github.com/gnolang/gno/pull/2885',
             createdAt: '2024-10-02T14:45:22Z',
-            updatedAt: '2024-10-02T15:15:58Z',
+            updatedAt: '2024-10-06T15:25:39Z',
             labels: [
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
@@ -54821,23 +55727,10 @@ const data = {
             updatedAt: '2024-01-18T17:32:39Z',
             labels: [],
           },
-          {
-            id: 'PR_kwDOE-u6Jc5kct98',
-            title: 'chore: make gnokey consistent with the changes applied to gnokeykc',
-            url: 'https://github.com/gnolang/gno/pull/1554',
-            createdAt: '2024-01-18T17:17:28Z',
-            updatedAt: '2024-01-23T17:29:48Z',
-            labels: [
-              {
-                name: ':package: :mountain:  gno.land',
-                color: 'ffffff',
-              },
-            ],
-          },
         ],
       },
       mrs: {
-        count: 132,
+        count: 133,
         data: [
           {
             id: 'PR_kwDOE-u6Jc59ea9R',
@@ -55965,6 +56858,27 @@ const data = {
             ],
           },
           {
+            id: 'PR_kwDOE-u6Jc5iXVPT',
+            title: 'feat(stdlibs): add package `strconv`',
+            url: 'https://github.com/gnolang/gno/pull/1464',
+            createdAt: '2023-12-19T12:27:18Z',
+            updatedAt: '2024-10-17T19:19:13Z',
+            labels: [
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
             id: 'PR_kwDOE-u6Jc5iUA_8',
             title: 'refactor(gnolang): handle duplicate method decls using TryDefineMethod',
             url: 'https://github.com/gnolang/gno/pull/1459',
@@ -56158,23 +57072,10 @@ const data = {
               },
             ],
           },
-          {
-            id: 'PR_kwDOE-u6Jc5amL-q',
-            title: 'feat(stdlibs): add math and math/bits',
-            url: 'https://github.com/gnolang/gno/pull/1153',
-            createdAt: '2023-09-18T17:43:16Z',
-            updatedAt: '2023-11-23T17:50:41Z',
-            labels: [
-              {
-                name: ':package: :robot: gnovm',
-                color: 'ffffff',
-              },
-            ],
-          },
         ],
       },
       reviewedMrs: {
-        count: 23,
+        count: 24,
         data: [
           {
             id: 'PR_kwDOE-u6Jc56Q5C0',
@@ -56379,6 +57280,27 @@ const data = {
             ],
           },
           {
+            id: 'PR_kwDOE-u6Jc5iXVPT',
+            title: 'feat(stdlibs): add package `strconv`',
+            url: 'https://github.com/gnolang/gno/pull/1464',
+            createdAt: '2023-12-19T12:27:18Z',
+            updatedAt: '2024-10-17T19:19:13Z',
+            labels: [
+              {
+                name: ':seedling:  feature',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
             id: 'PR_kwDOE-u6Jc5cCvFa',
             title: 'docs: improve README and CONTRIBUTING, add reference to testing guide',
             url: 'https://github.com/gnolang/gno/pull/1199',
@@ -56520,8 +57442,13 @@ const data = {
             title: 'feat(github): add a stale bot for PRs',
             url: 'https://github.com/gnolang/gno/pull/2804',
             createdAt: '2024-09-16T08:23:51Z',
-            updatedAt: '2024-09-19T07:55:17Z',
-            labels: [],
+            updatedAt: '2024-10-18T11:24:10Z',
+            labels: [
+              {
+                name: 'in focus',
+                color: 'FBCA04',
+              },
+            ],
           },
           {
             id: 'PR_kwDOE-u6Jc54nvR_',
@@ -56606,15 +57533,11 @@ const data = {
             title: 'Validator resolves old IP address after sentry IP change when using FQDN',
             url: 'https://github.com/gnolang/gno/issues/2580',
             createdAt: '2024-07-12T20:47:27Z',
-            updatedAt: '2024-10-01T15:42:40Z',
+            updatedAt: '2024-10-16T12:50:04Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -56639,28 +57562,19 @@ const data = {
             title: 'Encoding error of  `priv_validator_key.json` when sharding for Horcrux',
             url: 'https://github.com/gnolang/gno/issues/2460',
             createdAt: '2024-06-28T18:46:44Z',
-            updatedAt: '2024-09-11T15:11:05Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:02Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6NZHh9',
             title: 'Sentry Nodes lagging behind validator in consensus process',
             url: 'https://github.com/gnolang/gno/issues/2430',
             createdAt: '2024-06-25T09:28:10Z',
-            updatedAt: '2024-09-11T15:12:42Z',
+            updatedAt: '2024-10-18T16:20:18Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -56685,13 +57599,8 @@ const data = {
             title: 'Incompatibility of `gnoland secrets init` with Read-Only mounted k8s Secrets',
             url: 'https://github.com/gnolang/gno/issues/2370',
             createdAt: '2024-06-17T15:41:27Z',
-            updatedAt: '2024-09-11T15:15:18Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-15T14:11:51Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6L6NbA',
@@ -56829,38 +57738,100 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/5792239?u=8fa959d3dce1f26f43e80edb81ec0317f0a847c3&v=4',
       url: 'https://github.com/mvertes',
       name: 'Marc Vertes',
-      commits: 9,
+      commits: 10,
       issues: {
-        count: 1,
+        count: 2,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6aXW_f',
+            title: 'Running `go vet` on the project fails.',
+            url: 'https://github.com/gnolang/gno/issues/2954',
+            createdAt: '2024-10-15T20:30:35Z',
+            updatedAt: '2024-10-18T11:32:01Z',
+            labels: [
+              {
+                name: '🐞 bug',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
+              },
+            ],
+          },
           {
             id: 'I_kwDOE-u6Jc6Kv0T0',
             title: 'gnovm debugger: a breakpoint may be ignored on a multiple statements line',
             url: 'https://github.com/gnolang/gno/issues/2252',
             createdAt: '2024-05-31T13:00:44Z',
-            updatedAt: '2024-09-11T15:21:22Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:51:02Z',
+            labels: [],
           },
         ],
       },
       prs: {
-        count: 10,
+        count: 12,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_IZHL',
+            title: 'fix(tm2): avoid mutex copy in marshal and unmarshal methods',
+            url: 'https://github.com/gnolang/gno/pull/2981',
+            createdAt: '2024-10-18T17:47:16Z',
+            updatedAt: '2024-10-18T18:07:05Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-tPpk',
+            title: 'chore: fix issues reported by `go vet`',
+            url: 'https://github.com/gnolang/gno/pull/2952',
+            createdAt: '2024-10-15T17:11:47Z',
+            updatedAt: '2024-10-15T20:56:00Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc58VZDw',
             title: 'docs: Add Realm ABI Specification',
             url: 'https://github.com/gnolang/gno/pull/2833',
             createdAt: '2024-09-23T08:50:20Z',
-            updatedAt: '2024-09-30T07:57:45Z',
+            updatedAt: '2024-10-18T11:33:54Z',
             labels: [
               {
                 name: ':book:  documentation',
                 color: 'ffffff',
+              },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
               },
             ],
           },
@@ -57008,8 +57979,29 @@ const data = {
         ],
       },
       mrs: {
-        count: 9,
+        count: 10,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-tPpk',
+            title: 'chore: fix issues reported by `go vet`',
+            url: 'https://github.com/gnolang/gno/pull/2952',
+            createdAt: '2024-10-15T17:11:47Z',
+            updatedAt: '2024-10-15T20:56:00Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc52cPG6',
             title: 'feat(examples): a shifumi (rock, paper, scissors) smart contract',
@@ -57204,7 +58196,7 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/6007578?u=1bc18d55d60a5bcd60a217bc38963cf8d261aebe&v=4',
       url: 'https://github.com/ltzmaxwell',
       name: 'ltzmaxwell',
-      commits: 18,
+      commits: 19,
       issues: {
         count: 7,
         data: [
@@ -57213,7 +58205,7 @@ const data = {
             title: 'test store polluted by native object',
             url: 'https://github.com/gnolang/gno/issues/2268',
             createdAt: '2024-06-03T15:05:40Z',
-            updatedAt: '2024-09-11T15:19:46Z',
+            updatedAt: '2024-10-16T12:46:21Z',
             labels: [
               {
                 name: '🐞 bug',
@@ -57223,10 +58215,6 @@ const data = {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
               },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
             ],
           },
           {
@@ -57234,15 +58222,11 @@ const data = {
             title: 'incorrect type while define native value',
             url: 'https://github.com/gnolang/gno/issues/2267',
             createdAt: '2024-06-03T14:57:26Z',
-            updatedAt: '2024-09-11T15:19:55Z',
+            updatedAt: '2024-10-16T12:46:20Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -57289,15 +58273,11 @@ const data = {
             title: 'blank identifier "_" should not be used as value or type',
             url: 'https://github.com/gnolang/gno/issues/1946',
             createdAt: '2024-04-18T01:51:02Z',
-            updatedAt: '2024-09-11T15:36:16Z',
+            updatedAt: '2024-10-16T12:48:51Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -57306,23 +58286,53 @@ const data = {
             title: 'Gno type check',
             url: 'https://github.com/gnolang/gno/issues/1424',
             createdAt: '2023-12-08T09:32:40Z',
-            updatedAt: '2024-09-12T09:25:37Z',
+            updatedAt: '2024-10-16T12:37:16Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
         ],
       },
       prs: {
-        count: 36,
+        count: 38,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-zlkW',
+            title: 'WIP fix(gnovm): add filetest for inter-realm spec',
+            url: 'https://github.com/gnolang/gno/pull/2958',
+            createdAt: '2024-10-16T10:22:03Z',
+            updatedAt: '2024-10-19T00:46:19Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-hWil',
+            title: 'WIP fix(gnovm): correct const type deduction',
+            url: 'https://github.com/gnolang/gno/pull/2948',
+            createdAt: '2024-10-14T10:31:16Z',
+            updatedAt: '2024-10-14T10:52:07Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc55JVoj',
             title: 'fix(gnovm): correct type comparison for bool type',
@@ -57478,7 +58488,7 @@ const data = {
             title: 'fix(gnovm): correct type for shift expression',
             url: 'https://github.com/gnolang/gno/pull/1775',
             createdAt: '2024-03-14T16:15:44Z',
-            updatedAt: '2024-09-16T15:08:08Z',
+            updatedAt: '2024-10-15T17:26:32Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -57710,7 +58720,7 @@ const data = {
             title: '[WIP]feat: Protocol to support contract-contract interaction',
             url: 'https://github.com/gnolang/gno/pull/473',
             createdAt: '2023-01-21T12:05:19Z',
-            updatedAt: '2023-10-13T09:32:47Z',
+            updatedAt: '2024-10-16T12:59:52Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -57751,7 +58761,7 @@ const data = {
             title: 'WIP add examples/gno.land/p/governance ',
             url: 'https://github.com/gnolang/gno/pull/319',
             createdAt: '2022-08-14T17:58:38Z',
-            updatedAt: '2023-12-18T17:41:20Z',
+            updatedAt: '2024-10-16T12:59:47Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -57803,7 +58813,7 @@ const data = {
         ],
       },
       mrs: {
-        count: 19,
+        count: 20,
         data: [
           {
             id: 'PR_kwDOE-u6Jc55JVoj',
@@ -57914,6 +58924,23 @@ const data = {
             url: 'https://github.com/gnolang/gno/pull/1890',
             createdAt: '2024-04-04T17:54:23Z',
             updatedAt: '2024-08-16T09:50:41Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5ppwy8',
+            title: 'fix(gnovm): correct type for shift expression',
+            url: 'https://github.com/gnolang/gno/pull/1775',
+            createdAt: '2024-03-14T16:15:44Z',
+            updatedAt: '2024-10-15T17:26:32Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -58053,7 +59080,7 @@ const data = {
         ],
       },
       reviewedMrs: {
-        count: 10,
+        count: 11,
         data: [
           {
             id: 'PR_kwDOE-u6Jc55JVoj',
@@ -58112,6 +59139,23 @@ const data = {
             url: 'https://github.com/gnolang/gno/pull/1890',
             createdAt: '2024-04-04T17:54:23Z',
             updatedAt: '2024-08-16T09:50:41Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5ppwy8',
+            title: 'fix(gnovm): correct type for shift expression',
+            url: 'https://github.com/gnolang/gno/pull/1775',
+            createdAt: '2024-03-14T16:15:44Z',
+            updatedAt: '2024-10-15T17:26:32Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -58539,7 +59583,7 @@ const data = {
             title: 'unknown import path `encoding/binary` when adding package',
             url: 'https://github.com/gnolang/gno/issues/820',
             createdAt: '2023-05-15T00:44:14Z',
-            updatedAt: '2023-09-08T07:25:31Z',
+            updatedAt: '2024-10-16T13:00:08Z',
             labels: [
               {
                 name: ':seedling:  feature',
@@ -58585,7 +59629,7 @@ const data = {
             title: 'io.Writer panic: name Write not declared',
             url: 'https://github.com/gnolang/gno/issues/788',
             createdAt: '2023-04-28T13:39:19Z',
-            updatedAt: '2023-09-06T15:45:38Z',
+            updatedAt: '2024-10-16T13:41:51Z',
             labels: [
               {
                 name: '🐞 bug',
@@ -58610,7 +59654,7 @@ const data = {
             title: '`sort.Slice` implementation',
             url: 'https://github.com/gnolang/gno/issues/750',
             createdAt: '2023-04-18T14:06:51Z',
-            updatedAt: '2023-09-08T07:25:31Z',
+            updatedAt: '2024-10-16T13:00:07Z',
             labels: [],
           },
         ],
@@ -58649,7 +59693,7 @@ const data = {
             title: 'feat: new realm /r/demo/art/haiku',
             url: 'https://github.com/gnolang/gno/pull/860',
             createdAt: '2023-05-30T19:05:40Z',
-            updatedAt: '2023-10-11T00:19:56Z',
+            updatedAt: '2024-10-16T13:00:09Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -58662,7 +59706,7 @@ const data = {
             title: 'feat: new realm /r/demo/bytebeat',
             url: 'https://github.com/gnolang/gno/pull/840',
             createdAt: '2023-05-22T21:57:22Z',
-            updatedAt: '2023-10-11T00:19:56Z',
+            updatedAt: '2024-10-16T13:00:09Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -58923,7 +59967,7 @@ const data = {
             title: "`grc20.Token` doesn't implement `IGRC20` interface",
             url: 'https://github.com/gnolang/gno/issues/320',
             createdAt: '2022-08-14T19:02:52Z',
-            updatedAt: '2023-09-08T07:25:34Z',
+            updatedAt: '2024-10-16T12:59:47Z',
             labels: [],
           },
           {
@@ -58931,7 +59975,7 @@ const data = {
             title: 'Utility package to specify general function conditions',
             url: 'https://github.com/gnolang/gno/issues/301',
             createdAt: '2022-07-23T15:57:50Z',
-            updatedAt: '2023-09-08T07:25:12Z',
+            updatedAt: '2024-10-16T12:59:47Z',
             labels: [],
           },
           {
@@ -59477,7 +60521,7 @@ const data = {
             title: 'feature request: Ledger hardware wallet support for validator addresses',
             url: 'https://github.com/gnolang/gno/issues/2560',
             createdAt: '2024-07-09T21:28:38Z',
-            updatedAt: '2024-09-11T14:59:39Z',
+            updatedAt: '2024-10-18T19:29:55Z',
             labels: [
               {
                 name: ':seedling:  feature',
@@ -59487,10 +60531,6 @@ const data = {
                 name: 'security',
                 color: 'FF0000',
               },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
             ],
           },
           {
@@ -59498,15 +60538,11 @@ const data = {
             title: 'task: check the lexical restrictions on gno module paths and compare to go',
             url: 'https://github.com/gnolang/gno/issues/2426',
             createdAt: '2024-06-24T16:50:35Z',
-            updatedAt: '2024-09-11T15:13:16Z',
+            updatedAt: '2024-10-16T12:46:23Z',
             labels: [
               {
                 name: 'security',
                 color: 'FF0000',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -59699,14 +60735,35 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/7622257?u=c80ea7720f1b43c1380a911c1588242f1d5f3497&v=4',
       url: 'https://github.com/alexiscolin',
       name: 'Alexis Colin',
-      commits: 15,
+      commits: 17,
       issues: {
         count: 0,
         data: [],
       },
       prs: {
-        count: 17,
+        count: 19,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-9u-z',
+            title: 'chore: add alexiscolin as gnoweb reviewer',
+            url: 'https://github.com/gnolang/gno/pull/2967',
+            createdAt: '2024-10-17T12:45:25Z',
+            updatedAt: '2024-10-18T20:32:41Z',
+            labels: [],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-7IfK',
+            title: 'feat(gnoweb): disable html in markdown',
+            url: 'https://github.com/gnolang/gno/pull/2964',
+            createdAt: '2024-10-17T06:57:27Z',
+            updatedAt: '2024-10-20T13:07:25Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc50o70F',
             title: 'feat: render .md files from packages',
@@ -59912,8 +60969,29 @@ const data = {
         ],
       },
       mrs: {
-        count: 15,
+        count: 17,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-9u-z',
+            title: 'chore: add alexiscolin as gnoweb reviewer',
+            url: 'https://github.com/gnolang/gno/pull/2967',
+            createdAt: '2024-10-17T12:45:25Z',
+            updatedAt: '2024-10-18T20:32:41Z',
+            labels: [],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-7IfK',
+            title: 'feat(gnoweb): disable html in markdown',
+            url: 'https://github.com/gnolang/gno/pull/2964',
+            createdAt: '2024-10-17T06:57:27Z',
+            updatedAt: '2024-10-20T13:07:25Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc50o70F',
             title: 'feat: render .md files from packages',
@@ -60089,8 +61167,21 @@ const data = {
         ],
       },
       reviewedMrs: {
-        count: 4,
+        count: 5,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-7IfK',
+            title: 'feat(gnoweb): disable html in markdown',
+            url: 'https://github.com/gnolang/gno/pull/2964',
+            createdAt: '2024-10-17T06:57:27Z',
+            updatedAt: '2024-10-20T13:07:25Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc5wuUl-',
             title: 'fix(gnoweb): template and md style',
@@ -60256,15 +61347,11 @@ const data = {
             title: 'PrevRealm within init() functions in `gno test` is invalid',
             url: 'https://github.com/gnolang/gno/issues/1852',
             createdAt: '2024-03-27T15:18:39Z',
-            updatedAt: '2024-09-11T15:40:20Z',
+            updatedAt: '2024-10-16T12:59:27Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -60300,10 +61387,6 @@ const data = {
                 name: '🐞 bug',
                 color: 'ffffff',
               },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
             ],
           },
           {
@@ -60322,8 +61405,29 @@ const data = {
         ],
       },
       prs: {
-        count: 18,
+        count: 19,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-NX9i',
+            title: 'feat(gnovm): packages loader',
+            url: 'https://github.com/gnolang/gno/pull/2932',
+            createdAt: '2024-10-10T11:30:05Z',
+            updatedAt: '2024-10-17T19:15:43Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc59pJjZ',
             title: 'fix: deprecate std.GetOrigCaller',
@@ -60722,26 +61826,16 @@ const data = {
             title: 'CONSENSUS FAILURE - fix error message',
             url: 'https://github.com/gnolang/gno/issues/2773',
             createdAt: '2024-09-09T13:17:01Z',
-            updatedAt: '2024-09-11T14:44:35Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:10Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6LjC5n',
             title: 'Network peering discovery - Seed mode - Addrbook.json',
             url: 'https://github.com/gnolang/gno/issues/2308',
             createdAt: '2024-06-07T21:57:56Z',
-            updatedAt: '2024-10-03T13:52:18Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T14:24:17Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6I0-aV',
@@ -60794,7 +61888,7 @@ const data = {
             title: 'Support `std.GetOrigPkgAddr()` in init() function (tests)',
             url: 'https://github.com/gnolang/gno/issues/656',
             createdAt: '2023-03-27T16:48:58Z',
-            updatedAt: '2023-09-06T15:44:59Z',
+            updatedAt: '2024-10-16T13:03:37Z',
             labels: [],
           },
           {
@@ -60802,7 +61896,7 @@ const data = {
             title: '[question] How to handle contract grc20 treasury ?',
             url: 'https://github.com/gnolang/gno/issues/634',
             createdAt: '2023-03-22T16:15:56Z',
-            updatedAt: '2023-09-08T07:26:29Z',
+            updatedAt: '2024-10-16T13:00:00Z',
             labels: [
               {
                 name: ':question:  question',
@@ -61040,7 +62134,7 @@ const data = {
             title: 'chore(ci): setup docker build cache',
             url: 'https://github.com/gnolang/gno/pull/2062',
             createdAt: '2024-05-09T07:32:25Z',
-            updatedAt: '2024-07-22T13:11:00Z',
+            updatedAt: '2024-10-08T13:58:31Z',
             labels: [],
           },
           {
@@ -61266,7 +62360,7 @@ const data = {
             title: 'fix(gnovm): binary.Write',
             url: 'https://github.com/gnolang/gno/pull/911',
             createdAt: '2023-06-16T17:42:45Z',
-            updatedAt: '2023-10-11T00:19:56Z',
+            updatedAt: '2024-10-16T13:42:50Z',
             labels: [
               {
                 name: '🐞 bug',
@@ -61283,7 +62377,7 @@ const data = {
             title: 'feat: r/demo/foo20airdrop - Merkle Airdrop contract example',
             url: 'https://github.com/gnolang/gno/pull/906',
             createdAt: '2023-06-16T13:00:52Z',
-            updatedAt: '2024-10-04T19:42:58Z',
+            updatedAt: '2024-10-16T13:00:13Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -62151,24 +63245,19 @@ const data = {
             title: '[GnoVM] Implement JSON marshalling on `gnoland.TypedValue`',
             url: 'https://github.com/gnolang/gno/issues/2029',
             createdAt: '2024-05-03T10:12:18Z',
-            updatedAt: '2024-09-11T15:33:16Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:48:53Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6EBtLz',
             title: '[Keeper] JSON - Gas Consumption',
             url: 'https://github.com/gnolang/gno/issues/1860',
             createdAt: '2024-03-29T09:56:57Z',
-            updatedAt: '2024-09-11T15:39:21Z',
+            updatedAt: '2024-10-18T07:10:44Z',
             labels: [
               {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
+                name: 'security',
+                color: 'FF0000',
               },
             ],
           },
@@ -62177,7 +63266,7 @@ const data = {
             title: '[Keeper] JSON - potential DDoS and perfomance issue',
             url: 'https://github.com/gnolang/gno/issues/1859',
             createdAt: '2024-03-29T09:53:13Z',
-            updatedAt: '2024-09-11T15:39:33Z',
+            updatedAt: '2024-10-16T12:48:48Z',
             labels: [
               {
                 name: 'investigating',
@@ -62186,10 +63275,6 @@ const data = {
               {
                 name: 'security',
                 color: 'FF0000',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -62244,15 +63329,11 @@ const data = {
             title: 'Runtime Panic in `gno` when Built with `-trimpath` build flag due to Amino Package Path Resolution',
             url: 'https://github.com/gnolang/gno/issues/1236',
             createdAt: '2023-10-11T12:38:01Z',
-            updatedAt: '2024-09-12T09:31:36Z',
+            updatedAt: '2024-10-16T12:55:15Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
             ],
           },
@@ -62261,7 +63342,7 @@ const data = {
             title: 'Add the ability to call exposed struct methods on realm variables',
             url: 'https://github.com/gnolang/gno/issues/1045',
             createdAt: '2023-08-10T16:02:22Z',
-            updatedAt: '2023-09-08T08:51:50Z',
+            updatedAt: '2024-10-16T13:00:19Z',
             labels: [],
           },
           {
@@ -62269,7 +63350,7 @@ const data = {
             title: 'Unexpected Panic Error When Fetching Height',
             url: 'https://github.com/gnolang/gno/issues/1037',
             createdAt: '2023-08-09T10:31:51Z',
-            updatedAt: '2023-09-06T15:45:47Z',
+            updatedAt: '2024-10-16T13:43:21Z',
             labels: [
               {
                 name: '🐞 bug',
@@ -62284,8 +63365,67 @@ const data = {
         ],
       },
       prs: {
-        count: 56,
+        count: 59,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5--xP3',
+            title: 'feat(keeper): add `vm/qpath` query',
+            url: 'https://github.com/gnolang/gno/pull/2969',
+            createdAt: '2024-10-17T14:43:39Z',
+            updatedAt: '2024-10-17T15:32:45Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-jyx0',
+            title: 'wip(keeper): implement json primitive return',
+            url: 'https://github.com/gnolang/gno/pull/2949',
+            createdAt: '2024-10-14T15:08:31Z',
+            updatedAt: '2024-10-17T17:49:46Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-dD1P',
+            title: 'fix(gnodev): timstamps issue on reload',
+            url: 'https://github.com/gnolang/gno/pull/2943',
+            createdAt: '2024-10-13T17:40:04Z',
+            updatedAt: '2024-10-13T17:57:44Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc573oaj',
             title: 'feat(gnobro): add json log format',
@@ -63021,7 +64161,7 @@ const data = {
             title: 'wip: use `filetests` folder instead of `_filetest` suffix',
             url: 'https://github.com/gnolang/gno/pull/1062',
             createdAt: '2023-08-22T16:30:38Z',
-            updatedAt: '2023-10-11T00:19:55Z',
+            updatedAt: '2024-10-16T13:00:20Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -64110,8 +65250,16 @@ const data = {
       name: 'Lee ByeongJun',
       commits: 23,
       issues: {
-        count: 12,
+        count: 13,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6ZuHTV',
+            title: 'Slow execution of large byte slice/string operations ',
+            url: 'https://github.com/gnolang/gno/issues/2935',
+            createdAt: '2024-10-10T14:16:09Z',
+            updatedAt: '2024-10-10T14:16:09Z',
+            labels: [],
+          },
           {
             id: 'I_kwDOE-u6Jc6Vl6Lq',
             title:
@@ -64134,15 +65282,11 @@ const data = {
             title: 'Memory Leaks',
             url: 'https://github.com/gnolang/gno/issues/2713',
             createdAt: '2024-08-20T08:30:18Z',
-            updatedAt: '2024-09-11T14:50:40Z',
+            updatedAt: '2024-10-16T12:46:30Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -64151,15 +65295,11 @@ const data = {
             title: '`Time.Now()` always return initial UNIX time',
             url: 'https://github.com/gnolang/gno/issues/2348',
             createdAt: '2024-06-13T04:45:29Z',
-            updatedAt: '2024-09-11T15:16:02Z',
+            updatedAt: '2024-10-17T07:11:14Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -64205,15 +65345,11 @@ const data = {
             title: 'Recognition of `_` in Initial Condition of for Loop',
             url: 'https://github.com/gnolang/gno/issues/1461',
             createdAt: '2023-12-19T06:19:19Z',
-            updatedAt: '2024-09-12T09:24:04Z',
+            updatedAt: '2024-10-16T12:48:42Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -64244,8 +65380,38 @@ const data = {
         ],
       },
       prs: {
-        count: 46,
+        count: 48,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-UKjz',
+            title: 'feat(p/json): optimize json',
+            url: 'https://github.com/gnolang/gno/pull/2939',
+            createdAt: '2024-10-11T08:32:16Z',
+            updatedAt: '2024-10-21T03:07:06Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+              {
+                name: 'review/triage-pending',
+                color: '5319e7',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-Kon_',
+            title: 'test(p/uint25): Increase Test Coverage for `uint256` Package',
+            url: 'https://github.com/gnolang/gno/pull/2931',
+            createdAt: '2024-10-10T05:54:49Z',
+            updatedAt: '2024-10-21T06:38:35Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc59k9eT',
             title: 'fix(stdlib): io test',
@@ -64354,7 +65520,7 @@ const data = {
             title: 'fix(gnovm): Prevent use of blank identifier as Value or Type',
             url: 'https://github.com/gnolang/gno/pull/2699',
             createdAt: '2024-08-14T14:45:16Z',
-            updatedAt: '2024-10-04T14:05:05Z',
+            updatedAt: '2024-10-18T19:44:29Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -64367,7 +65533,7 @@ const data = {
             title: 'fix(gnovm): Improve Error Message in `evalStaticTypeOf` function',
             url: 'https://github.com/gnolang/gno/pull/2695',
             createdAt: '2024-08-14T09:21:37Z',
-            updatedAt: '2024-10-04T07:44:11Z',
+            updatedAt: '2024-10-18T16:22:43Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -64380,7 +65546,7 @@ const data = {
             title: 'feat(gnovm): Test Coverage Support',
             url: 'https://github.com/gnolang/gno/pull/2616',
             createdAt: '2024-07-23T08:14:42Z',
-            updatedAt: '2024-10-05T12:37:17Z',
+            updatedAt: '2024-10-21T08:18:23Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -64419,7 +65585,7 @@ const data = {
             title: 'feat(gnovm): Executable Markdown',
             url: 'https://github.com/gnolang/gno/pull/2357',
             createdAt: '2024-06-14T05:41:35Z',
-            updatedAt: '2024-10-04T07:50:21Z',
+            updatedAt: '2024-10-15T07:45:49Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -64505,7 +65671,7 @@ const data = {
             title: 'feat(p/json): JSON path support',
             url: 'https://github.com/gnolang/gno/pull/1937',
             createdAt: '2024-04-16T10:04:16Z',
-            updatedAt: '2024-09-03T07:47:53Z',
+            updatedAt: '2024-10-21T08:28:21Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -64514,6 +65680,10 @@ const data = {
               {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
+              },
+              {
+                name: 'review/triage-pending',
+                color: '5319e7',
               },
             ],
           },
@@ -65504,14 +66674,22 @@ const data = {
       name: 'Nemanja Aleksic',
       commits: 2,
       issues: {
-        count: 9,
+        count: 10,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6a2I01',
+            title: 'Global GNOT lock',
+            url: 'https://github.com/gnolang/gno/issues/2980',
+            createdAt: '2024-10-18T15:53:15Z',
+            updatedAt: '2024-10-18T15:53:15Z',
+            labels: [],
+          },
           {
             id: 'I_kwDOE-u6Jc6ZDJWp',
             title: 'Migrate community-first repos to gnoverse',
             url: 'https://github.com/gnolang/gno/issues/2909',
             createdAt: '2024-10-05T08:36:25Z',
-            updatedAt: '2024-10-05T10:45:15Z',
+            updatedAt: '2024-10-17T12:44:41Z',
             labels: [],
           },
           {
@@ -65532,15 +66710,11 @@ const data = {
             title: '[Docs] gnodev command in Getting Started',
             url: 'https://github.com/gnolang/gno/issues/2128',
             createdAt: '2024-05-16T12:30:34Z',
-            updatedAt: '2024-09-11T15:28:27Z',
+            updatedAt: '2024-10-16T12:51:01Z',
             labels: [
               {
                 name: ':book:  documentation',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
             ],
           },
@@ -65549,15 +66723,11 @@ const data = {
             title: '[Docs] gnoland command in Getting Started',
             url: 'https://github.com/gnolang/gno/issues/2127',
             createdAt: '2024-05-16T12:29:10Z',
-            updatedAt: '2024-09-11T15:28:37Z',
+            updatedAt: '2024-10-16T12:51:00Z',
             labels: [
               {
                 name: ':book:  documentation',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
             ],
           },
@@ -65598,13 +66768,8 @@ const data = {
             title: '[chain] Gas Fee Equation MVP',
             url: 'https://github.com/gnolang/gno/issues/1917',
             createdAt: '2024-04-11T16:06:59Z',
-            updatedAt: '2024-09-11T15:36:37Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:48:50Z',
+            labels: [],
           },
         ],
       },
@@ -66040,8 +67205,24 @@ const data = {
       name: '6h057',
       commits: 8,
       issues: {
-        count: 10,
+        count: 12,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6aCI9A',
+            title: 'Type Conversion Error When Comparing String with Constant Type',
+            url: 'https://github.com/gnolang/gno/issues/2944',
+            createdAt: '2024-10-13T20:36:48Z',
+            updatedAt: '2024-10-13T20:36:48Z',
+            labels: [],
+          },
+          {
+            id: 'I_kwDOE-u6Jc6Zv4u8',
+            title: 'GnoVM Unexpected Crash When Panic Occurs in Tests',
+            url: 'https://github.com/gnolang/gno/issues/2938',
+            createdAt: '2024-10-10T17:45:26Z',
+            updatedAt: '2024-10-11T11:03:14Z',
+            labels: [],
+          },
           {
             id: 'I_kwDOE-u6Jc6YvxyW',
             title: 'Assigning Type as Value in Gno should be prohibited',
@@ -66100,15 +67281,11 @@ const data = {
             title: 'Constant Declaration with Slice Type Compiles Without Error',
             url: 'https://github.com/gnolang/gno/issues/2628',
             createdAt: '2024-07-24T23:14:41Z',
-            updatedAt: '2024-09-11T14:55:41Z',
+            updatedAt: '2024-10-16T12:46:28Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -66148,14 +67325,45 @@ const data = {
         ],
       },
       prs: {
-        count: 13,
+        count: 15,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_Ll_Q',
+            title: 'fix(gnovm): forbid start expression when value is not a pointer',
+            url: 'https://github.com/gnolang/gno/pull/2984',
+            createdAt: '2024-10-19T15:33:56Z',
+            updatedAt: '2024-10-21T08:58:07Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+              {
+                name: 'review/triage-pending',
+                color: '5319e7',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-NdVk',
+            title:
+              'fix(ghverify): ensure AVL tree iteration processes all items in Render and GetFeedDefinitions function',
+            url: 'https://github.com/gnolang/gno/pull/2933',
+            createdAt: '2024-10-10T11:42:10Z',
+            updatedAt: '2024-10-11T11:04:14Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc59hZwY',
             title: 'chore(gnovm): prevent assignment to non-assignable expressions',
             url: 'https://github.com/gnolang/gno/pull/2896',
             createdAt: '2024-10-03T16:12:47Z',
-            updatedAt: '2024-10-04T21:02:27Z',
+            updatedAt: '2024-10-18T16:12:29Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -66181,7 +67389,7 @@ const data = {
             title: 'fix(gonative):  add constant information when we define a go native value',
             url: 'https://github.com/gnolang/gno/pull/2848',
             createdAt: '2024-09-25T14:13:47Z',
-            updatedAt: '2024-10-04T07:47:03Z',
+            updatedAt: '2024-10-18T16:13:08Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -66194,7 +67402,7 @@ const data = {
             title: 'feat(gnovm): align Gno constant handling with Go specifications',
             url: 'https://github.com/gnolang/gno/pull/2828',
             createdAt: '2024-09-21T14:11:15Z',
-            updatedAt: '2024-09-26T10:34:30Z',
+            updatedAt: '2024-10-19T10:03:42Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -66203,6 +67411,10 @@ const data = {
               {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
+              },
+              {
+                name: 'review/triage-pending',
+                color: '5319e7',
               },
             ],
           },
@@ -66668,7 +67880,7 @@ const data = {
             title: '[feature]  Implement the VSCode Editor gno plugin',
             url: 'https://github.com/gnolang/gno/issues/2733',
             createdAt: '2024-08-27T08:58:05Z',
-            updatedAt: '2024-10-02T09:54:14Z',
+            updatedAt: '2024-10-16T12:50:08Z',
             labels: [
               {
                 name: '🗺️good first issue🗺️',
@@ -66677,10 +67889,6 @@ const data = {
               {
                 name: ':seedling:  feature',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -66693,7 +67901,7 @@ const data = {
             title: '[feature] Implement the IntelliJ IDE gno plugin',
             url: 'https://github.com/gnolang/gno/issues/2732',
             createdAt: '2024-08-27T08:54:52Z',
-            updatedAt: '2024-09-23T10:56:47Z',
+            updatedAt: '2024-10-16T12:50:08Z',
             labels: [
               {
                 name: '🗺️good first issue🗺️',
@@ -66702,10 +67910,6 @@ const data = {
               {
                 name: ':seedling:  feature',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -66718,15 +67922,11 @@ const data = {
             title: '[infra] Set up GitOps',
             url: 'https://github.com/gnolang/gno/issues/2623',
             createdAt: '2024-07-23T16:41:06Z',
-            updatedAt: '2024-09-11T14:56:01Z',
+            updatedAt: '2024-10-16T13:03:38Z',
             labels: [
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -66735,15 +67935,11 @@ const data = {
             title: '[infra] Define IaC Terraform code for gno infra deployment',
             url: 'https://github.com/gnolang/gno/issues/2622',
             createdAt: '2024-07-23T16:37:56Z',
-            updatedAt: '2024-09-11T14:56:10Z',
+            updatedAt: '2024-10-18T16:20:34Z',
             labels: [
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -66752,15 +67948,11 @@ const data = {
             title: '[infra] Create and share institutionalized Helm charts for orchestrating gno services',
             url: 'https://github.com/gnolang/gno/issues/2621',
             createdAt: '2024-07-23T16:28:32Z',
-            updatedAt: '2024-09-11T14:56:21Z',
+            updatedAt: '2024-10-16T12:50:06Z',
             labels: [
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
             ],
           },
@@ -66769,15 +67961,11 @@ const data = {
             title: '[infra] Set up a load testing workflow for PRs',
             url: 'https://github.com/gnolang/gno/issues/2620',
             createdAt: '2024-07-23T16:13:18Z',
-            updatedAt: '2024-09-11T14:56:31Z',
+            updatedAt: '2024-10-16T12:59:22Z',
             labels: [
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -66794,15 +67982,15 @@ const data = {
             title: '[infra] Observability overhaul',
             url: 'https://github.com/gnolang/gno/issues/2618',
             createdAt: '2024-07-23T15:42:06Z',
-            updatedAt: '2024-09-11T14:57:32Z',
+            updatedAt: '2024-10-18T11:21:07Z',
             labels: [
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
               },
               {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
+                name: 'in focus',
+                color: 'FBCA04',
               },
             ],
           },
@@ -66812,12 +68000,7 @@ const data = {
             url: 'https://github.com/gnolang/gno/issues/2615',
             createdAt: '2024-07-22T16:49:01Z',
             updatedAt: '2024-10-05T01:13:14Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6O89Eo',
@@ -66837,7 +68020,7 @@ const data = {
             title: '[chain] Add a more robust e2e node / cluster testing framework',
             url: 'https://github.com/gnolang/gno/issues/2530',
             createdAt: '2024-07-07T12:46:46Z',
-            updatedAt: '2024-09-11T15:00:26Z',
+            updatedAt: '2024-10-15T14:12:11Z',
             labels: [
               {
                 name: ':seedling:  feature',
@@ -66847,10 +68030,6 @@ const data = {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
               },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
             ],
           },
           {
@@ -66858,15 +68037,11 @@ const data = {
             title: '[govdao] Make `r/gov/dao` proposals fee-based for non-members',
             url: 'https://github.com/gnolang/gno/issues/2520',
             createdAt: '2024-07-06T11:59:11Z',
-            updatedAt: '2024-09-11T15:10:03Z',
+            updatedAt: '2024-10-16T12:50:03Z',
             labels: [
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
             ],
           },
@@ -66875,11 +68050,11 @@ const data = {
             title: '[chain] Audit the Gno.land storage layer',
             url: 'https://github.com/gnolang/gno/issues/2445',
             createdAt: '2024-06-26T07:45:02Z',
-            updatedAt: '2024-09-11T15:11:32Z',
+            updatedAt: '2024-10-18T11:18:45Z',
             labels: [
               {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
+                name: 'in focus',
+                color: 'FBCA04',
               },
             ],
           },
@@ -66888,39 +68063,24 @@ const data = {
             title: '[chain] Add OTEL tracing functionality + Jaeger',
             url: 'https://github.com/gnolang/gno/issues/2434',
             createdAt: '2024-06-25T11:46:13Z',
-            updatedAt: '2024-09-11T15:11:56Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-18T09:43:12Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6NaRno',
             title: '[chain] Refactor and revise the `gnolang/benchmarks` repository',
             url: 'https://github.com/gnolang/gno/issues/2433',
             createdAt: '2024-06-25T11:42:34Z',
-            updatedAt: '2024-09-11T15:12:24Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:01Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6NaO6n',
             title: '[chain] Upload and display benchmarks for the gno monorepo',
             url: 'https://github.com/gnolang/gno/issues/2432',
             createdAt: '2024-06-25T11:38:21Z',
-            updatedAt: '2024-09-11T15:12:09Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-18T09:58:29Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6LeOOF',
@@ -67035,13 +68195,8 @@ const data = {
             title: '[chain] Drops file paths from `config.toml`',
             url: 'https://github.com/gnolang/gno/issues/1884',
             createdAt: '2024-04-03T10:40:55Z',
-            updatedAt: '2024-09-11T15:37:55Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:59:31Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6EeatJ',
@@ -67091,11 +68246,11 @@ const data = {
             title: '[chain] ABI-like support for Realm / Package requests / responses',
             url: 'https://github.com/gnolang/gno/issues/1842',
             createdAt: '2024-03-26T09:41:22Z',
-            updatedAt: '2024-09-11T15:41:04Z',
+            updatedAt: '2024-10-18T11:31:41Z',
             labels: [
               {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
+                name: 'in focus',
+                color: 'FBCA04',
               },
             ],
           },
@@ -67160,12 +68315,8 @@ const data = {
             title: '[chain] GRCx (GRC20 / GRC721 / …) Realm Improvements',
             url: 'https://github.com/gnolang/gno/issues/1832',
             createdAt: '2024-03-25T12:23:52Z',
-            updatedAt: '2024-10-02T10:00:38Z',
+            updatedAt: '2024-10-16T12:33:30Z',
             labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
               {
                 name: 'help wanted',
                 color: '006b75',
@@ -67177,7 +68328,7 @@ const data = {
             title: '[tm2] Simplified Consensus Engine',
             url: 'https://github.com/gnolang/gno/issues/1831',
             createdAt: '2024-03-25T12:20:46Z',
-            updatedAt: '2024-09-11T13:24:03Z',
+            updatedAt: '2024-10-16T13:10:16Z',
             labels: [],
           },
           {
@@ -67185,15 +68336,11 @@ const data = {
             title: '[tm2] Improved Mempool Logic',
             url: 'https://github.com/gnolang/gno/issues/1830',
             createdAt: '2024-03-25T12:15:33Z',
-            updatedAt: '2024-09-11T15:42:38Z',
+            updatedAt: '2024-10-16T12:39:37Z',
             labels: [
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -67215,7 +68362,7 @@ const data = {
             title: '[chain] Gas Fee Equation',
             url: 'https://github.com/gnolang/gno/issues/1828',
             createdAt: '2024-03-25T12:11:07Z',
-            updatedAt: '2024-09-11T15:42:45Z',
+            updatedAt: '2024-10-16T13:07:33Z',
             labels: [
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
@@ -67224,10 +68371,6 @@ const data = {
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -67236,15 +68379,11 @@ const data = {
             title: '[chain] Backup / Restore Functionality',
             url: 'https://github.com/gnolang/gno/issues/1827',
             createdAt: '2024-03-25T12:09:16Z',
-            updatedAt: '2024-09-11T15:42:54Z',
+            updatedAt: '2024-10-15T14:11:08Z',
             labels: [
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -67253,20 +68392,15 @@ const data = {
             title: '[chain] Gas Estimations',
             url: 'https://github.com/gnolang/gno/issues/1826',
             createdAt: '2024-03-25T12:08:07Z',
-            updatedAt: '2024-09-11T15:43:04Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:48:45Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6DdsSA',
             title: '[chain] Revised Chain Storage',
             url: 'https://github.com/gnolang/gno/issues/1825',
             createdAt: '2024-03-25T12:06:32Z',
-            updatedAt: '2024-09-11T15:43:22Z',
+            updatedAt: '2024-10-16T12:41:26Z',
             labels: [
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
@@ -67275,10 +68409,6 @@ const data = {
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -67329,13 +68459,8 @@ const data = {
             title: '[infra] Add multinode orchestration',
             url: 'https://github.com/gnolang/gno/issues/1821',
             createdAt: '2024-03-25T10:26:35Z',
-            updatedAt: '2024-09-11T15:43:39Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:42:09Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6Dc5vg',
@@ -67397,7 +68522,7 @@ const data = {
             title: 'Significantly long GnoVM test runtime',
             url: 'https://github.com/gnolang/gno/issues/1406',
             createdAt: '2023-12-04T10:45:56Z',
-            updatedAt: '2024-06-11T08:15:14Z',
+            updatedAt: '2024-10-16T13:10:21Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -67602,7 +68727,7 @@ const data = {
             title: '[META] Gno Wishlist / Feature Request Dump',
             url: 'https://github.com/gnolang/gno/issues/975',
             createdAt: '2023-07-14T10:01:30Z',
-            updatedAt: '2024-10-02T10:04:42Z',
+            updatedAt: '2024-10-16T13:00:16Z',
             labels: [
               {
                 name: '🗺️good first issue🗺️',
@@ -67636,8 +68761,12 @@ const data = {
             title: 'Uninitialized accounts are unmarshalled with invalid data',
             url: 'https://github.com/gnolang/gno/issues/661',
             createdAt: '2023-03-28T14:28:59Z',
-            updatedAt: '2024-10-02T10:04:32Z',
+            updatedAt: '2024-10-16T12:24:36Z',
             labels: [
+              {
+                name: '🗺️good first issue🗺️',
+                color: '7057ff',
+              },
               {
                 name: '🐞 bug',
                 color: 'ffffff',
@@ -67645,10 +68774,6 @@ const data = {
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
               {
                 name: 'help wanted',
@@ -67703,12 +68828,8 @@ const data = {
             title: 'Support `errors.Is` and `errors.As` in the standard gno `errors` package',
             url: 'https://github.com/gnolang/gno/issues/486',
             createdAt: '2023-01-26T17:28:42Z',
-            updatedAt: '2024-10-01T13:43:23Z',
+            updatedAt: '2024-10-16T12:55:10Z',
             labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
               {
                 name: 'help wanted',
                 color: '006b75',
@@ -67748,14 +68869,35 @@ const data = {
         ],
       },
       prs: {
-        count: 92,
+        count: 93,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-Z-39',
+            title: 'feat: support metadata for genesis txs',
+            url: 'https://github.com/gnolang/gno/pull/2941',
+            createdAt: '2024-10-12T10:58:57Z',
+            updatedAt: '2024-10-18T11:35:34Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc58xcox',
             title: 'feat: clean up `p2p` & implement bootnode (`seed` peers) support',
             url: 'https://github.com/gnolang/gno/pull/2852',
             createdAt: '2024-09-26T10:10:03Z',
-            updatedAt: '2024-10-06T14:01:34Z',
+            updatedAt: '2024-10-18T11:45:46Z',
             labels: [
               {
                 name: ':seedling:  feature',
@@ -67769,6 +68911,10 @@ const data = {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
               },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
+              },
             ],
           },
           {
@@ -67776,7 +68922,7 @@ const data = {
             title: 'feat: add support for `genesis download`',
             url: 'https://github.com/gnolang/gno/pull/2841',
             createdAt: '2024-09-24T12:38:59Z',
-            updatedAt: '2024-09-27T15:29:36Z',
+            updatedAt: '2024-10-18T09:16:46Z',
             labels: [
               {
                 name: ':seedling:  feature',
@@ -67880,10 +69026,10 @@ const data = {
           },
           {
             id: 'PR_kwDOE-u6Jc51TImB',
-            title: 'feat: `r/gov/dao` v2 + `r/sys/vars`',
+            title: 'feat: `r/gov/dao` v2',
             url: 'https://github.com/gnolang/gno/pull/2581',
             createdAt: '2024-07-13T16:21:19Z',
-            updatedAt: '2024-09-23T19:15:26Z',
+            updatedAt: '2024-10-18T11:19:59Z',
             labels: [
               {
                 name: "don't merge",
@@ -67896,6 +69042,10 @@ const data = {
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
+              },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
               },
             ],
           },
@@ -71244,7 +72394,7 @@ const data = {
             title: 'Create /licenses/ page on gnoweb',
             url: 'https://github.com/gnolang/gno/issues/996',
             createdAt: '2023-07-27T23:57:03Z',
-            updatedAt: '2023-10-06T02:57:36Z',
+            updatedAt: '2024-10-16T13:00:17Z',
             labels: [
               {
                 name: ':book:  documentation',
@@ -71578,11 +72728,11 @@ const data = {
             title: 'Propagate Constant Values:',
             url: 'https://github.com/gnolang/gno/issues/2798',
             createdAt: '2024-09-13T18:11:05Z',
-            updatedAt: '2024-09-14T07:29:02Z',
+            updatedAt: '2024-10-16T14:10:47Z',
             labels: [
               {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
               },
             ],
           },
@@ -71591,11 +72741,11 @@ const data = {
             title: 'VM: optimization step into the gnovm pipeline',
             url: 'https://github.com/gnolang/gno/issues/2796',
             createdAt: '2024-09-13T15:31:56Z',
-            updatedAt: '2024-10-01T09:22:57Z',
+            updatedAt: '2024-10-16T14:10:56Z',
             labels: [
               {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
               },
             ],
           },
@@ -71604,26 +72754,16 @@ const data = {
             title: 'VM: optimizing slice',
             url: 'https://github.com/gnolang/gno/issues/2791',
             createdAt: '2024-09-12T21:37:47Z',
-            updatedAt: '2024-09-13T15:18:11Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:11Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6WZ-9f',
             title: 'VM: reduce test noise and improve test output',
             url: 'https://github.com/gnolang/gno/issues/2790',
             createdAt: '2024-09-12T21:30:12Z',
-            updatedAt: '2024-09-13T15:17:58Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:11Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6J_AC8',
@@ -71676,10 +72816,6 @@ const data = {
               {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -71773,11 +72909,15 @@ const data = {
             title: 'feat(VM): propagate values from immutable variables',
             url: 'https://github.com/gnolang/gno/pull/2801',
             createdAt: '2024-09-14T17:39:12Z',
-            updatedAt: '2024-10-03T21:52:54Z',
+            updatedAt: '2024-10-18T11:17:58Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
+              },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
               },
             ],
           },
@@ -71786,7 +72926,7 @@ const data = {
             title: 'feat: GC',
             url: 'https://github.com/gnolang/gno/pull/2735',
             createdAt: '2024-08-27T16:05:48Z',
-            updatedAt: '2024-10-02T14:29:19Z',
+            updatedAt: '2024-10-20T23:15:28Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -71799,6 +72939,10 @@ const data = {
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
+              },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
               },
             ],
           },
@@ -72536,7 +73680,7 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/22179290?u=55434bd982d7acd85dd204b344e86a20335f0285&v=4',
       url: 'https://github.com/Villaquiranm',
       name: 'Miguel Victoria Villaquiran',
-      commits: 4,
+      commits: 5,
       issues: {
         count: 2,
         data: [
@@ -72559,14 +73703,44 @@ const data = {
         ],
       },
       prs: {
-        count: 11,
+        count: 13,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_MTuL',
+            title: 'feat(genesis): deployerAddress passed as parameter',
+            url: 'https://github.com/gnolang/gno/pull/2986',
+            createdAt: '2024-10-19T21:20:49Z',
+            updatedAt: '2024-10-21T07:36:07Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+              {
+                name: 'review/triage-pending',
+                color: '5319e7',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5_HOlO',
+            title: 'fix(gnovm): remove migration of old dir for gno tools',
+            url: 'https://github.com/gnolang/gno/pull/2978',
+            createdAt: '2024-10-18T14:26:23Z',
+            updatedAt: '2024-10-18T15:43:57Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc59BieJ',
             title: 'feat: Add the stdlib_diff tool to compare gno and go standard libraries',
             url: 'https://github.com/gnolang/gno/pull/2869',
             createdAt: '2024-09-29T10:54:25Z',
-            updatedAt: '2024-10-05T22:31:14Z',
+            updatedAt: '2024-10-09T19:18:45Z',
             labels: [],
           },
           {
@@ -72600,7 +73774,7 @@ const data = {
             title: 'feat: emit event on ghverify realm when user request verification',
             url: 'https://github.com/gnolang/gno/pull/2778',
             createdAt: '2024-09-09T20:42:39Z',
-            updatedAt: '2024-10-04T07:45:24Z',
+            updatedAt: '2024-10-18T23:21:54Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -72613,15 +73787,11 @@ const data = {
             title: 'feat: verifySignature function',
             url: 'https://github.com/gnolang/gno/pull/2776',
             createdAt: '2024-09-09T20:09:16Z',
-            updatedAt: '2024-10-03T10:49:11Z',
+            updatedAt: '2024-10-18T09:50:35Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
-              },
-              {
-                name: 'review team',
-                color: '5319e7',
               },
             ],
           },
@@ -72660,7 +73830,7 @@ const data = {
             title: 'feat: avoid Instantiation of banker on pure packages',
             url: 'https://github.com/gnolang/gno/pull/2248',
             createdAt: '2024-05-30T21:54:00Z',
-            updatedAt: '2024-10-04T07:51:20Z',
+            updatedAt: '2024-10-17T19:29:33Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -72673,7 +73843,7 @@ const data = {
             title: 'feat: lint all files in folder before panicking',
             url: 'https://github.com/gnolang/gno/pull/2202',
             createdAt: '2024-05-26T13:46:48Z',
-            updatedAt: '2024-07-23T09:32:24Z',
+            updatedAt: '2024-10-18T07:15:45Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -72714,8 +73884,21 @@ const data = {
         ],
       },
       mrs: {
-        count: 4,
+        count: 5,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_HOlO',
+            title: 'fix(gnovm): remove migration of old dir for gno tools',
+            url: 'https://github.com/gnolang/gno/pull/2978',
+            createdAt: '2024-10-18T14:26:23Z',
+            updatedAt: '2024-10-18T15:43:57Z',
+            labels: [
+              {
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc578sCZ',
             title: 'feat: add strings.Replacer structure on native libraries',
@@ -73048,7 +74231,7 @@ const data = {
             title: 'chore(gno.land): enh homepage description',
             url: 'https://github.com/gnolang/gno/pull/2144',
             createdAt: '2024-05-17T21:19:27Z',
-            updatedAt: '2024-05-29T12:19:59Z',
+            updatedAt: '2024-10-08T10:31:57Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -73207,10 +74390,23 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/33522493?u=0b6173dfca632d2336983bbf379be59251ee3cb7&v=4',
       url: 'https://github.com/leohhhn',
       name: 'Leon Hudak',
-      commits: 79,
+      commits: 81,
       issues: {
-        count: 96,
+        count: 97,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6aV6MM',
+            title: 'docs.gno.land revamp',
+            url: 'https://github.com/gnolang/gno/issues/2953',
+            createdAt: '2024-10-15T17:34:07Z',
+            updatedAt: '2024-10-17T19:15:10Z',
+            labels: [
+              {
+                name: ':book:  documentation',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'I_kwDOE-u6Jc6YhfAi',
             title: '[GnoVM] Dereference package level errors before returning them to the user',
@@ -73241,13 +74437,8 @@ const data = {
             title: 'docs: Create a glossary of common terms',
             url: 'https://github.com/gnolang/gno/issues/2782',
             createdAt: '2024-09-11T09:27:55Z',
-            updatedAt: '2024-09-11T14:41:26Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:10Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6VWdOF',
@@ -73284,12 +74475,8 @@ const data = {
             title: '[gnokey] Ledger device not found',
             url: 'https://github.com/gnolang/gno/issues/2737',
             createdAt: '2024-08-28T12:11:09Z',
-            updatedAt: '2024-10-01T00:34:06Z',
+            updatedAt: '2024-10-16T12:50:09Z',
             labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
               {
                 name: 'help wanted',
                 color: '006b75',
@@ -73305,12 +74492,8 @@ const data = {
             title: '[Debugger] Debug realms during transaction execution',
             url: 'https://github.com/gnolang/gno/issues/2683',
             createdAt: '2024-08-13T11:19:30Z',
-            updatedAt: '2024-10-01T00:52:01Z',
+            updatedAt: '2024-10-16T12:50:07Z',
             labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
               {
                 name: 'help wanted',
                 color: '006b75',
@@ -73355,26 +74538,16 @@ const data = {
             title: '[gno.mod] Add `replace`',
             url: 'https://github.com/gnolang/gno/issues/2601',
             createdAt: '2024-07-17T16:15:16Z',
-            updatedAt: '2024-09-11T14:58:04Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:06Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6P4vu4',
             title: '[Namespaces] Permit additional addresses to a single namespace',
             url: 'https://github.com/gnolang/gno/issues/2600',
             createdAt: '2024-07-17T16:10:16Z',
-            updatedAt: '2024-09-11T14:58:19Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:05Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6PBQug',
@@ -73463,13 +74636,8 @@ const data = {
             title: '[docs] Update outdated images & gifs',
             url: 'https://github.com/gnolang/gno/issues/2392',
             createdAt: '2024-06-19T09:54:18Z',
-            updatedAt: '2024-09-12T12:05:42Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:49:58Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6MqSpp',
@@ -73484,13 +74652,8 @@ const data = {
             title: '[GnoVM] `TestSetRealm` not working properly in `gno test`',
             url: 'https://github.com/gnolang/gno/issues/2371',
             createdAt: '2024-06-17T17:33:22Z',
-            updatedAt: '2024-09-12T11:56:59Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:51:08Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6MGDyk',
@@ -73537,15 +74700,11 @@ const data = {
             title: '[docs] Add `supernova` to the docs',
             url: 'https://github.com/gnolang/gno/issues/2298',
             createdAt: '2024-06-06T09:55:26Z',
-            updatedAt: '2024-09-11T15:18:54Z',
+            updatedAt: '2024-10-16T12:51:05Z',
             labels: [
               {
                 name: ':book:  documentation',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
             ],
           },
@@ -73554,15 +74713,11 @@ const data = {
             title: '[docs] Add `tx-archive` to the docs',
             url: 'https://github.com/gnolang/gno/issues/2297',
             createdAt: '2024-06-06T09:53:45Z',
-            updatedAt: '2024-09-11T15:19:03Z',
+            updatedAt: '2024-10-16T12:51:04Z',
             labels: [
               {
                 name: ':book:  documentation',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
             ],
           },
@@ -73571,13 +74726,8 @@ const data = {
             title: '[docs] Add a guide on tx-indexer',
             url: 'https://github.com/gnolang/gno/issues/2295',
             createdAt: '2024-06-06T09:29:19Z',
-            updatedAt: '2024-09-11T15:19:16Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:51:04Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6LV7Yz',
@@ -73610,15 +74760,11 @@ const data = {
             title: '[docs] Add GRC721 how-to guide',
             url: 'https://github.com/gnolang/gno/issues/2288',
             createdAt: '2024-06-05T14:46:20Z',
-            updatedAt: '2024-09-11T15:19:23Z',
+            updatedAt: '2024-10-16T12:51:03Z',
             labels: [
               {
                 name: ':book:  documentation',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
             ],
           },
@@ -73648,7 +74794,7 @@ const data = {
             title: '[gnovm/avl] Removing keys from AVL trees does not work',
             url: 'https://github.com/gnolang/gno/issues/2266',
             createdAt: '2024-06-03T13:45:29Z',
-            updatedAt: '2024-09-11T15:20:12Z',
+            updatedAt: '2024-10-16T12:46:20Z',
             labels: [
               {
                 name: '🐞 bug',
@@ -73658,10 +74804,6 @@ const data = {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
               },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
             ],
           },
           {
@@ -73669,20 +74811,15 @@ const data = {
             title: '[docs] Refactor page IDs to be more consistent',
             url: 'https://github.com/gnolang/gno/issues/2262',
             createdAt: '2024-06-03T07:58:24Z',
-            updatedAt: '2024-09-11T15:20:46Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:51:03Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6KYGam',
             title: '[gnokey] `vm/qeval` inconvenient parsing and non-existent erroring',
             url: 'https://github.com/gnolang/gno/issues/2236',
             createdAt: '2024-05-28T17:22:22Z',
-            updatedAt: '2024-10-02T09:58:50Z',
+            updatedAt: '2024-10-09T14:12:00Z',
             labels: [
               {
                 name: '🐞 bug',
@@ -73691,6 +74828,10 @@ const data = {
               {
                 name: 'help wanted',
                 color: '006b75',
+              },
+              {
+                name: 'hacktoberfest',
+                color: '50da4c',
               },
             ],
           },
@@ -73793,15 +74934,11 @@ const data = {
             title: '[docs] Add gnolang/faucet',
             url: 'https://github.com/gnolang/gno/issues/2120',
             createdAt: '2024-05-16T07:18:59Z',
-            updatedAt: '2024-09-11T15:28:48Z',
+            updatedAt: '2024-10-16T12:50:59Z',
             labels: [
               {
                 name: ':book:  documentation',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
             ],
           },
@@ -73826,28 +74963,19 @@ const data = {
             title: '[GnoVM] Panics in tests do not revert state',
             url: 'https://github.com/gnolang/gno/issues/2043',
             createdAt: '2024-05-06T12:39:22Z',
-            updatedAt: '2024-09-12T11:57:55Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:50:57Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6HvN4u',
             title: '[docs] Document `map` usage & its pros & cons over AVL tree',
             url: 'https://github.com/gnolang/gno/issues/2027',
             createdAt: '2024-05-03T09:39:04Z',
-            updatedAt: '2024-09-12T12:04:31Z',
+            updatedAt: '2024-10-16T12:50:57Z',
             labels: [
               {
                 name: ':book:  documentation',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
               {
                 name: 'help wanted',
@@ -73860,12 +74988,8 @@ const data = {
             title: '[GnoVM] Add Event support when testing or running expressions',
             url: 'https://github.com/gnolang/gno/issues/2007',
             createdAt: '2024-04-30T16:57:17Z',
-            updatedAt: '2024-09-12T12:03:57Z',
+            updatedAt: '2024-10-16T12:50:55Z',
             labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
               {
                 name: 'help wanted',
                 color: '006b75',
@@ -73877,15 +75001,11 @@ const data = {
             title: '[GnoVM] Reset machine context & realm state after each Test function',
             url: 'https://github.com/gnolang/gno/issues/1982',
             createdAt: '2024-04-25T14:38:33Z',
-            updatedAt: '2024-09-25T09:45:45Z',
+            updatedAt: '2024-10-15T14:56:24Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -73939,13 +75059,8 @@ const data = {
             title: '[docs] Docusaurus deployment preview',
             url: 'https://github.com/gnolang/gno/issues/1888',
             createdAt: '2024-04-04T04:15:48Z',
-            updatedAt: '2024-09-11T15:37:04Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:55:19Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6EX5WX',
@@ -74149,26 +75264,16 @@ const data = {
             title: 'Replacing `GetOrigCaller()` with `PrevRealm.Addr()`',
             url: 'https://github.com/gnolang/gno/issues/1577',
             createdAt: '2024-01-23T22:51:21Z',
-            updatedAt: '2024-09-11T15:48:59Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:35:58Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc58_QZ7',
             title: 'Making the `std` package API more user-friendly',
             url: 'https://github.com/gnolang/gno/issues/1576',
             createdAt: '2024-01-23T20:51:23Z',
-            updatedAt: '2024-09-11T15:49:10Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:36:19Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc58INF9',
@@ -74215,13 +75320,8 @@ const data = {
             title: 'Issues with `std.TestXYZ` functions',
             url: 'https://github.com/gnolang/gno/issues/1521',
             createdAt: '2024-01-11T00:24:30Z',
-            updatedAt: '2024-09-12T09:18:33Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-15T15:24:53Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc57pZY2',
@@ -74261,13 +75361,8 @@ const data = {
             title: 'Discussion: `"std"` package naming',
             url: 'https://github.com/gnolang/gno/issues/1475',
             createdAt: '2023-12-20T14:10:43Z',
-            updatedAt: '2024-09-20T13:59:04Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:25:12Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc50-p48',
@@ -74282,7 +75377,7 @@ const data = {
             title: 'Time & block height manipulation in tests',
             url: 'https://github.com/gnolang/gno/issues/1165',
             createdAt: '2023-09-22T15:04:52Z',
-            updatedAt: '2024-09-23T10:05:01Z',
+            updatedAt: '2024-10-16T13:00:17Z',
             labels: [
               {
                 name: ':question:  question',
@@ -74293,14 +75388,53 @@ const data = {
         ],
       },
       prs: {
-        count: 105,
+        count: 108,
         data: [
           {
+            id: 'PR_kwDOE-u6Jc5_I5sH',
+            title: 'chore(pages): update bounty Terms & Conditions link',
+            url: 'https://github.com/gnolang/gno/pull/2982',
+            createdAt: '2024-10-18T19:30:59Z',
+            updatedAt: '2024-10-18T19:52:06Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-OmGg',
+            title: 'fix(r/leon/config): fix config bug',
+            url: 'https://github.com/gnolang/gno/pull/2934',
+            createdAt: '2024-10-10T13:54:53Z',
+            updatedAt: '2024-10-15T17:55:19Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc599F2Y',
+            title: 'fix(gnoweb): fix broken link',
+            url: 'https://github.com/gnolang/gno/pull/2926',
+            createdAt: '2024-10-08T13:51:14Z',
+            updatedAt: '2024-10-08T14:41:38Z',
+            labels: [
+              {
+                name: ':package: :mountain:  gno.land',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
             id: 'PR_kwDOE-u6Jc58hT1B',
-            title: 'feat(examples): gno.land hall of fame',
+            title: 'feat(examples): hall of fame',
             url: 'https://github.com/gnolang/gno/pull/2842',
             createdAt: '2024-09-24T13:31:02Z',
-            updatedAt: '2024-10-04T13:42:08Z',
+            updatedAt: '2024-10-18T20:31:58Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -74386,7 +75520,7 @@ const data = {
             title: 'fix(gnovm): display error string properly for package-level errors',
             url: 'https://github.com/gnolang/gno/pull/2734',
             createdAt: '2024-08-27T10:47:02Z',
-            updatedAt: '2024-08-27T11:04:59Z',
+            updatedAt: '2024-10-15T20:22:06Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -74766,7 +75900,7 @@ const data = {
             title: 'docs: add `gnoland` tutorial',
             url: 'https://github.com/gnolang/gno/pull/2162',
             createdAt: '2024-05-21T15:47:07Z',
-            updatedAt: '2024-06-27T23:36:27Z',
+            updatedAt: '2024-10-15T10:36:23Z',
             labels: [
               {
                 name: ':book:  documentation',
@@ -74842,7 +75976,7 @@ const data = {
             title: 'docs: add `gnolang/faucet`',
             url: 'https://github.com/gnolang/gno/pull/2122',
             createdAt: '2024-05-16T07:28:14Z',
-            updatedAt: '2024-06-18T12:26:18Z',
+            updatedAt: '2024-10-08T10:49:23Z',
             labels: [
               {
                 name: ':book:  documentation',
@@ -75479,54 +76613,37 @@ const data = {
               },
             ],
           },
+        ],
+      },
+      mrs: {
+        count: 81,
+        data: [
           {
-            id: 'PR_kwDOE-u6Jc5hMcpC',
-            title: 'feat(examples): add disperse',
-            url: 'https://github.com/gnolang/gno/pull/1414',
-            createdAt: '2023-12-05T15:38:29Z',
-            updatedAt: '2024-07-21T01:00:38Z',
+            id: 'PR_kwDOE-u6Jc5-OmGg',
+            title: 'fix(r/leon/config): fix config bug',
+            url: 'https://github.com/gnolang/gno/pull/2934',
+            createdAt: '2024-10-10T13:54:53Z',
+            updatedAt: '2024-10-15T17:55:19Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
                 color: 'ffffff',
               },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc599F2Y',
+            title: 'fix(gnoweb): fix broken link',
+            url: 'https://github.com/gnolang/gno/pull/2926',
+            createdAt: '2024-10-08T13:51:14Z',
+            updatedAt: '2024-10-08T14:41:38Z',
+            labels: [
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
               },
             ],
           },
-          {
-            id: 'PR_kwDOE-u6Jc5hMJYU',
-            title: 'docs: add more info on `maketx call` args',
-            url: 'https://github.com/gnolang/gno/pull/1413',
-            createdAt: '2023-12-05T14:58:30Z',
-            updatedAt: '2023-12-18T13:52:01Z',
-            labels: [
-              {
-                name: ':book:  documentation',
-                color: 'ffffff',
-              },
-            ],
-          },
-          {
-            id: 'PR_kwDOE-u6Jc5fTHZi',
-            title: 'feat(blog): store posts in slices & include chronological sorting',
-            url: 'https://github.com/gnolang/gno/pull/1367',
-            createdAt: '2023-11-13T13:10:32Z',
-            updatedAt: '2024-01-22T11:08:25Z',
-            labels: [
-              {
-                name: ':receipt:  package/realm',
-                color: 'ffffff',
-              },
-            ],
-          },
-        ],
-      },
-      mrs: {
-        count: 79,
-        data: [
           {
             id: 'PR_kwDOE-u6Jc57aPgr',
             title: 'fix(grc20): remove unused interface, fix typo',
@@ -76476,8 +77593,21 @@ const data = {
         ],
       },
       reviewedMrs: {
-        count: 34,
+        count: 35,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-OmGg',
+            title: 'fix(r/leon/config): fix config bug',
+            url: 'https://github.com/gnolang/gno/pull/2934',
+            createdAt: '2024-10-10T13:54:53Z',
+            updatedAt: '2024-10-15T17:55:19Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc55vApz',
             title: 'feat(examples): add `r/leon`',
@@ -77678,7 +78808,7 @@ const data = {
             title: 'feat: addpkg command respects gno.mod file',
             url: 'https://github.com/gnolang/gno/pull/922',
             createdAt: '2023-06-21T14:38:54Z',
-            updatedAt: '2024-06-14T11:54:37Z',
+            updatedAt: '2024-10-16T13:00:14Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -77840,7 +78970,7 @@ const data = {
             title: 'feat: `gno test` support external pkgs',
             url: 'https://github.com/gnolang/gno/pull/682',
             createdAt: '2023-03-31T12:34:57Z',
-            updatedAt: '2024-06-14T09:19:32Z',
+            updatedAt: '2024-10-16T13:00:02Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -79212,10 +80342,10 @@ const data = {
         data: [
           {
             id: 'PR_kwDOE-u6Jc59s0ut',
-            title: 'feat(gno.land): Implement markdown package',
+            title: 'feat(examples): Implement markdown package',
             url: 'https://github.com/gnolang/gno/pull/2912',
             createdAt: '2024-10-05T12:59:27Z',
-            updatedAt: '2024-10-05T13:36:59Z',
+            updatedAt: '2024-10-14T14:19:00Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -79228,14 +80358,14 @@ const data = {
             title: 'fix(tm2): Enable coin benchmark tests after fixing panic error',
             url: 'https://github.com/gnolang/gno/pull/2884',
             createdAt: '2024-10-02T14:12:28Z',
-            updatedAt: '2024-10-05T15:48:50Z',
+            updatedAt: '2024-10-18T09:41:24Z',
             labels: [
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -79678,7 +80808,7 @@ const data = {
             title: 'feat: B-Tree added',
             url: 'https://github.com/gnolang/gno/pull/2677',
             createdAt: '2024-08-11T20:09:24Z',
-            updatedAt: '2024-10-04T07:43:14Z',
+            updatedAt: '2024-10-19T21:08:05Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -79992,10 +81122,6 @@ const data = {
                 name: '🐞 bug',
                 color: 'ffffff',
               },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
             ],
           },
           {
@@ -80273,7 +81399,7 @@ const data = {
             title: 'Gnoland Wallet Policy Proposal',
             url: 'https://github.com/gnolang/gno/issues/360',
             createdAt: '2022-10-20T02:40:36Z',
-            updatedAt: '2024-01-17T12:32:38Z',
+            updatedAt: '2024-10-16T12:59:48Z',
             labels: [],
           },
         ],
@@ -80659,15 +81785,11 @@ const data = {
             title: "Datatype's underline array is persisted as *uint8 pointer value ",
             url: 'https://github.com/gnolang/gno/issues/2704',
             createdAt: '2024-08-15T18:07:42Z',
-            updatedAt: '2024-09-11T14:51:30Z',
+            updatedAt: '2024-10-14T05:35:12Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -80676,15 +81798,11 @@ const data = {
             title: 'error: primitive type int cannot be indexed',
             url: 'https://github.com/gnolang/gno/issues/2660',
             createdAt: '2024-08-05T19:33:10Z',
-            updatedAt: '2024-09-11T14:53:37Z',
+            updatedAt: '2024-10-16T12:46:29Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -80701,52 +81819,32 @@ const data = {
             title: 'Backward compatibility ',
             url: 'https://github.com/gnolang/gno/issues/1896',
             createdAt: '2024-04-06T20:54:11Z',
-            updatedAt: '2024-09-16T09:17:02Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:48:50Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6DpywJ',
             title: "msg run command's main package source code are hidden ",
             url: 'https://github.com/gnolang/gno/issues/1843',
             createdAt: '2024-03-26T16:43:30Z',
-            updatedAt: '2024-09-11T15:40:52Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T18:55:17Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6ADoJI',
             title: 'Discussion: persist a pointer to an array element ',
             url: 'https://github.com/gnolang/gno/issues/1675',
             createdAt: '2024-02-22T07:48:26Z',
-            updatedAt: '2024-09-11T15:46:29Z',
-            labels: [
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
-              },
-            ],
+            updatedAt: '2024-10-16T12:55:18Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc55AO5p',
             title: 'Critical  Issue: configurable VM parameter could halt the chain.',
             url: 'https://github.com/gnolang/gno/issues/1418',
             createdAt: '2023-12-07T07:48:15Z',
-            updatedAt: '2024-09-12T09:26:47Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:38:38Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc512PF5',
@@ -80769,7 +81867,7 @@ const data = {
             title: 'issue: gnovm/cmd/TestGnoDoc failed with incompatible gno packages from the earlier build',
             url: 'https://github.com/gnolang/gno/issues/1142',
             createdAt: '2023-09-18T01:04:17Z',
-            updatedAt: '2023-09-19T13:31:45Z',
+            updatedAt: '2024-10-16T13:47:02Z',
             labels: [
               {
                 name: '🐞 bug',
@@ -80782,11 +81880,11 @@ const data = {
             title: 'Feature: support named and unnamed type assignment',
             url: 'https://github.com/gnolang/gno/issues/1141',
             createdAt: '2023-09-17T23:48:00Z',
-            updatedAt: '2024-09-12T09:34:04Z',
+            updatedAt: '2024-10-16T12:48:40Z',
             labels: [
               {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
+                name: '🐞 bug',
+                color: 'ffffff',
               },
             ],
           },
@@ -80795,28 +81893,19 @@ const data = {
             title: 'Reminder: need to set VerifyGenesisSignatures to true  on mainnet, ',
             url: 'https://github.com/gnolang/gno/issues/1104',
             createdAt: '2023-09-06T16:34:41Z',
-            updatedAt: '2024-09-12T09:36:14Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:46:05Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc5wPKYj',
             title: 'Issue: we should not allow injecting methods on a non-exist PackageNode',
             url: 'https://github.com/gnolang/gno/issues/1099',
             createdAt: '2023-09-06T02:08:24Z',
-            updatedAt: '2024-09-12T09:36:30Z',
+            updatedAt: '2024-10-16T12:46:05Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -80825,11 +81914,11 @@ const data = {
             title: 'Bug: contract execution fee is added on top of the transaction fee.',
             url: 'https://github.com/gnolang/gno/issues/1067',
             createdAt: '2023-08-24T16:03:10Z',
-            updatedAt: '2024-09-12T09:38:46Z',
+            updatedAt: '2024-10-16T13:39:33Z',
             labels: [
               {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
+                name: '🐞 bug',
+                color: 'ffffff',
               },
             ],
           },
@@ -80862,7 +81951,7 @@ const data = {
             title: 'The new setting significantly reduce the response time for maketx addpkg and maketx call',
             url: 'https://github.com/gnolang/gno/issues/1029',
             createdAt: '2023-08-07T05:38:34Z',
-            updatedAt: '2023-09-06T15:45:49Z',
+            updatedAt: '2024-10-16T13:03:38Z',
             labels: [
               {
                 name: '🐞 bug',
@@ -80887,7 +81976,7 @@ const data = {
             title: 'Include max memory size of GVM in genesis parameters?',
             url: 'https://github.com/gnolang/gno/issues/761',
             createdAt: '2023-04-19T18:27:14Z',
-            updatedAt: '2023-09-06T15:45:00Z',
+            updatedAt: '2024-10-16T13:40:54Z',
             labels: [
               {
                 name: ':seedling:  feature',
@@ -80904,7 +81993,7 @@ const data = {
             title: 'hard code "user1.gno" breaks the file tests and our  CI should have failed it.',
             url: 'https://github.com/gnolang/gno/issues/697',
             createdAt: '2023-04-05T04:48:21Z',
-            updatedAt: '2023-09-08T07:25:18Z',
+            updatedAt: '2024-10-16T13:00:03Z',
             labels: [],
           },
           {
@@ -80920,7 +82009,7 @@ const data = {
             title: 'Disclaimer, suggest to include or link in Game of Realm discussions. ',
             url: 'https://github.com/gnolang/gno/issues/556',
             createdAt: '2023-03-04T18:54:47Z',
-            updatedAt: '2023-09-08T07:25:28Z',
+            updatedAt: '2024-10-16T12:59:57Z',
             labels: [],
           },
           {
@@ -80928,7 +82017,7 @@ const data = {
             title: 'Evaluation DAO, Decentralist DAO, and GNO chain Governance Proposal',
             url: 'https://github.com/gnolang/gno/issues/519',
             createdAt: '2023-02-15T18:21:36Z',
-            updatedAt: '2023-09-08T07:26:28Z',
+            updatedAt: '2024-10-16T12:59:55Z',
             labels: [],
           },
           {
@@ -81036,7 +82125,7 @@ const data = {
               'Will this create inconsistent private keys and addresses when ledger users import the same mnemonic or vice versa?',
             url: 'https://github.com/gnolang/gno/issues/38',
             createdAt: '2021-11-20T07:16:24Z',
-            updatedAt: '2024-10-02T10:05:13Z',
+            updatedAt: '2024-10-16T13:13:22Z',
             labels: [
               {
                 name: ':question:  question',
@@ -81062,7 +82151,7 @@ const data = {
             title: 'feat: dynamic gas price, keeper implementation',
             url: 'https://github.com/gnolang/gno/pull/2838',
             createdAt: '2024-09-24T09:20:37Z',
-            updatedAt: '2024-09-28T07:43:55Z',
+            updatedAt: '2024-10-18T15:37:38Z',
             labels: [
               {
                 name: ':package: :globe_with_meridians:  tendermint v2',
@@ -81072,6 +82161,10 @@ const data = {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
               },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
+              },
             ],
           },
           {
@@ -81079,7 +82172,7 @@ const data = {
             title: 'fix: catch the out of gas exception in preprocess',
             url: 'https://github.com/gnolang/gno/pull/2638',
             createdAt: '2024-07-28T04:36:07Z',
-            updatedAt: '2024-10-04T17:06:25Z',
+            updatedAt: '2024-10-07T10:26:17Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -81130,7 +82223,7 @@ const data = {
             title: 'feat: gnovm benchmarking tool',
             url: 'https://github.com/gnolang/gno/pull/2241',
             createdAt: '2024-05-30T08:34:57Z',
-            updatedAt: '2024-08-06T00:11:54Z',
+            updatedAt: '2024-10-18T15:38:16Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -81143,6 +82236,10 @@ const data = {
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
+              },
+              {
+                name: 'in focus',
+                color: 'FBCA04',
               },
             ],
           },
@@ -81968,7 +83065,7 @@ const data = {
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -82079,8 +83176,17 @@ const data = {
       name: 'Mustapha',
       commits: 0,
       issues: {
-        count: 0,
-        data: [],
+        count: 1,
+        data: [
+          {
+            id: 'I_kwDOE-u6Jc6a8ANK',
+            title: 'Proposal to Include Post-Merge Hook for Automatic Make Install',
+            url: 'https://github.com/gnolang/gno/issues/2985',
+            createdAt: '2024-10-19T17:13:15Z',
+            updatedAt: '2024-10-19T17:13:15Z',
+            labels: [],
+          },
+        ],
       },
       prs: {
         count: 1,
@@ -82170,15 +83276,11 @@ const data = {
             title: '[gnovm/bug] deploying same contract to longer pkg_path spends more gas',
             url: 'https://github.com/gnolang/gno/issues/2083',
             createdAt: '2024-05-13T12:03:06Z',
-            updatedAt: '2024-10-04T09:35:36Z',
+            updatedAt: '2024-10-16T12:20:55Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -82237,13 +83339,8 @@ const data = {
             title: '[chain] Add `unconditional_peer_ids` to gnoland configuration',
             url: 'https://github.com/gnolang/gno/issues/1923',
             createdAt: '2024-04-12T05:07:58Z',
-            updatedAt: '2024-09-11T15:36:28Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-18T16:19:38Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc6FdBOC',
@@ -82323,13 +83420,8 @@ const data = {
             title: 'handling memory allocation limit for query eval',
             url: 'https://github.com/gnolang/gno/issues/1506',
             createdAt: '2024-01-09T02:47:54Z',
-            updatedAt: '2024-09-12T09:20:32Z',
-            labels: [
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
-            ],
+            updatedAt: '2024-10-16T12:36:45Z',
+            labels: [],
           },
           {
             id: 'I_kwDOE-u6Jc5oCgay',
@@ -82427,10 +83519,6 @@ const data = {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
               },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
-              },
             ],
           },
           {
@@ -82447,7 +83535,7 @@ const data = {
               '[Bug ??] panic: interface conversion: gnolang.Type is *gnolang.SliceType, not *gnolang.DeclaredType',
             url: 'https://github.com/gnolang/gno/issues/651',
             createdAt: '2023-03-25T17:57:07Z',
-            updatedAt: '2024-09-13T15:17:11Z',
+            updatedAt: '2024-10-16T12:46:02Z',
             labels: [
               {
                 name: '🐞 bug',
@@ -82460,10 +83548,6 @@ const data = {
               {
                 name: ':package: :robot: gnovm',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -83851,15 +84935,11 @@ const data = {
             title: 'Incorrect Timestamps in Gno Chains',
             url: 'https://github.com/gnolang/gno/issues/1950',
             createdAt: '2024-04-18T09:30:15Z',
-            updatedAt: '2024-10-04T09:34:41Z',
+            updatedAt: '2024-10-17T04:07:45Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
-              },
-              {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
               },
             ],
           },
@@ -83868,7 +84948,7 @@ const data = {
             title: 'GOR Governance Module Proposal',
             url: 'https://github.com/gnolang/gno/issues/503',
             createdAt: '2023-02-08T13:40:45Z',
-            updatedAt: '2023-12-02T12:25:48Z',
+            updatedAt: '2024-10-16T12:59:53Z',
             labels: [
               {
                 name: ':seedling:  feature',
@@ -83999,16 +85079,24 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/111009238?u=283b68c4c4759d489bc3baeba8bd2cdfac2660a9&v=4',
       url: 'https://github.com/MalekLahbib',
       name: 'Malek Lahbib',
-      commits: 5,
+      commits: 8,
       issues: {
-        count: 13,
+        count: 14,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6ZWEiU',
+            title: 'bug: `gnokey list` on help page links to a bad url',
+            url: 'https://github.com/gnolang/gno/issues/2925',
+            createdAt: '2024-10-08T09:54:46Z',
+            updatedAt: '2024-10-08T14:16:43Z',
+            labels: [],
+          },
           {
             id: 'I_kwDOE-u6Jc6Y96VT',
             title: '[bug] bad import in manfred_outfmt realm',
             url: 'https://github.com/gnolang/gno/issues/2903',
             createdAt: '2024-10-04T13:21:00Z',
-            updatedAt: '2024-10-05T21:52:57Z',
+            updatedAt: '2024-10-07T10:02:20Z',
             labels: [],
           },
           {
@@ -84125,14 +85213,48 @@ const data = {
         ],
       },
       prs: {
-        count: 11,
+        count: 14,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_BC16',
+            title: 'docs: add `gno {env,fmt}` to go-gno-compatibility',
+            url: 'https://github.com/gnolang/gno/pull/2974',
+            createdAt: '2024-10-17T20:34:08Z',
+            updatedAt: '2024-10-18T10:16:48Z',
+            labels: [],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-PS2D',
+            title: 'fix(p/demo/uassert): amend ineffective assignment',
+            url: 'https://github.com/gnolang/gno/pull/2936',
+            createdAt: '2024-10-10T15:16:28Z',
+            updatedAt: '2024-10-15T17:34:02Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc590dMJ',
+            title: 'fix: Update json package README.md',
+            url: 'https://github.com/gnolang/gno/pull/2921',
+            createdAt: '2024-10-07T13:44:00Z',
+            updatedAt: '2024-10-10T09:24:36Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc59ojRn',
             title: 'feat: added Abs() funcs, support for overflow for uints + tests',
             url: 'https://github.com/gnolang/gno/pull/2905',
             createdAt: '2024-10-04T15:02:40Z',
-            updatedAt: '2024-10-04T15:20:29Z',
+            updatedAt: '2024-10-18T09:32:39Z',
             labels: [
               {
                 name: ':package: :robot: gnovm',
@@ -84184,7 +85306,7 @@ const data = {
             title: 'chore(docs): fix `gnodev.md` typo',
             url: 'https://github.com/gnolang/gno/pull/2302',
             createdAt: '2024-06-07T09:16:03Z',
-            updatedAt: '2024-06-07T12:04:24Z',
+            updatedAt: '2024-10-07T13:40:31Z',
             labels: [],
           },
           {
@@ -84192,7 +85314,7 @@ const data = {
             title: 'fix(docs): update a typo in coins.md',
             url: 'https://github.com/gnolang/gno/pull/2227',
             createdAt: '2024-05-28T10:01:09Z',
-            updatedAt: '2024-05-28T10:09:29Z',
+            updatedAt: '2024-10-07T13:40:26Z',
             labels: [],
           },
           {
@@ -84200,7 +85322,7 @@ const data = {
             title: 'feat(examples): Gnofundme',
             url: 'https://github.com/gnolang/gno/pull/2085',
             createdAt: '2024-05-13T13:11:35Z',
-            updatedAt: '2024-10-02T09:38:37Z',
+            updatedAt: '2024-10-14T08:34:38Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -84226,7 +85348,7 @@ const data = {
             title: 'fix: ufmt multi-byte fix.',
             url: 'https://github.com/gnolang/gno/pull/1889',
             createdAt: '2024-04-04T16:02:54Z',
-            updatedAt: '2024-04-08T01:58:27Z',
+            updatedAt: '2024-10-07T13:40:08Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -84258,14 +85380,48 @@ const data = {
         ],
       },
       mrs: {
-        count: 5,
+        count: 8,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5_BC16',
+            title: 'docs: add `gno {env,fmt}` to go-gno-compatibility',
+            url: 'https://github.com/gnolang/gno/pull/2974',
+            createdAt: '2024-10-17T20:34:08Z',
+            updatedAt: '2024-10-18T10:16:48Z',
+            labels: [],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc5-PS2D',
+            title: 'fix(p/demo/uassert): amend ineffective assignment',
+            url: 'https://github.com/gnolang/gno/pull/2936',
+            createdAt: '2024-10-10T15:16:28Z',
+            updatedAt: '2024-10-15T17:34:02Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc590dMJ',
+            title: 'fix: Update json package README.md',
+            url: 'https://github.com/gnolang/gno/pull/2921',
+            createdAt: '2024-10-07T13:44:00Z',
+            updatedAt: '2024-10-10T09:24:36Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc5xxeZG',
             title: 'chore(docs): fix `gnodev.md` typo',
             url: 'https://github.com/gnolang/gno/pull/2302',
             createdAt: '2024-06-07T09:16:03Z',
-            updatedAt: '2024-06-07T12:04:24Z',
+            updatedAt: '2024-10-07T13:40:31Z',
             labels: [],
           },
           {
@@ -84273,7 +85429,7 @@ const data = {
             title: 'fix(docs): update a typo in coins.md',
             url: 'https://github.com/gnolang/gno/pull/2227',
             createdAt: '2024-05-28T10:01:09Z',
-            updatedAt: '2024-05-28T10:09:29Z',
+            updatedAt: '2024-10-07T13:40:26Z',
             labels: [],
           },
           {
@@ -84281,7 +85437,7 @@ const data = {
             title: 'fix: ufmt multi-byte fix.',
             url: 'https://github.com/gnolang/gno/pull/1889',
             createdAt: '2024-04-04T16:02:54Z',
-            updatedAt: '2024-04-08T01:58:27Z',
+            updatedAt: '2024-10-07T13:40:08Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -84313,14 +85469,27 @@ const data = {
         ],
       },
       reviewedMrs: {
-        count: 2,
+        count: 3,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc590dMJ',
+            title: 'fix: Update json package README.md',
+            url: 'https://github.com/gnolang/gno/pull/2921',
+            createdAt: '2024-10-07T13:44:00Z',
+            updatedAt: '2024-10-10T09:24:36Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc5ruvZ3',
             title: 'fix: ufmt multi-byte fix.',
             url: 'https://github.com/gnolang/gno/pull/1889',
             createdAt: '2024-04-04T16:02:54Z',
-            updatedAt: '2024-04-08T01:58:27Z',
+            updatedAt: '2024-10-07T13:40:08Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -84383,7 +85552,7 @@ const data = {
       avatarUrl: 'https://avatars.githubusercontent.com/u/117160070?u=7c1a2ea4b569475fa66ef71e8ce2f31f0e9ceb2e&v=4',
       url: 'https://github.com/michelleellen',
       name: 'Michelle',
-      commits: 2,
+      commits: 3,
       issues: {
         count: 1,
         data: [
@@ -84398,8 +85567,21 @@ const data = {
         ],
       },
       prs: {
-        count: 4,
+        count: 5,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc595-6q',
+            title: 'chore(gnoweb): update page_contribute.gno',
+            url: 'https://github.com/gnolang/gno/pull/2922',
+            createdAt: '2024-10-08T07:07:05Z',
+            updatedAt: '2024-10-08T15:10:26Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc55zp25',
             title: 'feat(r/gnoland/pages): substitute /game-of-realms with /contribute page',
@@ -84449,8 +85631,21 @@ const data = {
         ],
       },
       mrs: {
-        count: 2,
+        count: 3,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc595-6q',
+            title: 'chore(gnoweb): update page_contribute.gno',
+            url: 'https://github.com/gnolang/gno/pull/2922',
+            createdAt: '2024-10-08T07:07:05Z',
+            updatedAt: '2024-10-08T15:10:26Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc55zp25',
             title: 'feat(r/gnoland/pages): substitute /game-of-realms with /contribute page',
@@ -84655,7 +85850,7 @@ const data = {
             title: '[performance] AST walking twice',
             url: 'https://github.com/gnolang/gno/issues/671',
             createdAt: '2023-03-28T23:36:20Z',
-            updatedAt: '2023-09-08T07:26:25Z',
+            updatedAt: '2024-10-16T13:00:01Z',
             labels: [],
           },
           {
@@ -84663,7 +85858,7 @@ const data = {
             title: '[performance] improve string allocations',
             url: 'https://github.com/gnolang/gno/issues/632',
             createdAt: '2023-03-21T23:35:19Z',
-            updatedAt: '2023-09-08T07:26:24Z',
+            updatedAt: '2024-10-16T12:59:59Z',
             labels: [],
           },
           {
@@ -84671,7 +85866,7 @@ const data = {
             title: '[performance] too many calls to `NewMachineWithOptions`',
             url: 'https://github.com/gnolang/gno/issues/624',
             createdAt: '2023-03-20T19:16:57Z',
-            updatedAt: '2023-09-08T07:26:24Z',
+            updatedAt: '2024-10-16T12:59:59Z',
             labels: [],
           },
           {
@@ -84730,7 +85925,7 @@ const data = {
             title: 'feat: garbage collector',
             url: 'https://github.com/gnolang/gno/pull/713',
             createdAt: '2023-04-06T22:32:13Z',
-            updatedAt: '2023-10-11T00:19:57Z',
+            updatedAt: '2024-10-16T13:42:34Z',
             labels: [
               {
                 name: ':seedling:  feature',
@@ -84747,7 +85942,7 @@ const data = {
             title: 'perf: use swiss map for the object cache',
             url: 'https://github.com/gnolang/gno/pull/677',
             createdAt: '2023-03-30T13:14:36Z',
-            updatedAt: '2023-10-11T00:19:56Z',
+            updatedAt: '2024-10-16T13:00:01Z',
             labels: [],
           },
           {
@@ -84864,8 +86059,16 @@ const data = {
       name: null,
       commits: 2,
       issues: {
-        count: 4,
+        count: 5,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6adZv4',
+            title: 'tracking `r/sys/teams` work.',
+            url: 'https://github.com/gnolang/gno/issues/2959',
+            createdAt: '2024-10-16T10:23:00Z',
+            updatedAt: '2024-10-20T12:39:29Z',
+            labels: [],
+          },
           {
             id: 'I_kwDOE-u6Jc6YzXZO',
             title: 'discussion: passing params to realms during deployment',
@@ -84888,15 +86091,15 @@ const data = {
               '"VM call panic: unexpected object with id" when re-adding the same key to an avl.Tree after previously deleting it',
             url: 'https://github.com/gnolang/gno/issues/1543',
             createdAt: '2024-01-17T10:47:33Z',
-            updatedAt: '2024-09-11T15:49:52Z',
+            updatedAt: '2024-10-21T03:53:29Z',
             labels: [
               {
                 name: '🐞 bug',
                 color: 'ffffff',
               },
               {
-                name: '🌟 must have 🌟',
-                color: '1D76DB',
+                name: ':package: :robot: gnovm',
+                color: 'ffffff',
               },
             ],
           },
@@ -84911,22 +86114,31 @@ const data = {
         ],
       },
       prs: {
-        count: 6,
+        count: 7,
         data: [
           {
-            id: 'PR_kwDOE-u6Jc58Q5c4',
-            title: 'feat: p/zteams implementation',
-            url: 'https://github.com/gnolang/gno/pull/2830',
-            createdAt: '2024-09-22T06:18:01Z',
-            updatedAt: '2024-10-05T04:40:34Z',
+            id: 'PR_kwDOE-u6Jc5-ziAq',
+            title: 'tracking r/sys/teams work',
+            url: 'https://github.com/gnolang/gno/pull/2957',
+            createdAt: '2024-10-16T10:16:09Z',
+            updatedAt: '2024-10-20T14:23:23Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
                 color: 'ffffff',
               },
+            ],
+          },
+          {
+            id: 'PR_kwDOE-u6Jc58Q5c4',
+            title: 'feat: p/zteams implementation',
+            url: 'https://github.com/gnolang/gno/pull/2830',
+            createdAt: '2024-09-22T06:18:01Z',
+            updatedAt: '2024-10-17T16:09:04Z',
+            labels: [
               {
-                name: 'review team',
-                color: '5319e7',
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
               },
             ],
           },
@@ -84935,7 +86147,7 @@ const data = {
             title: 'feat: minimal teams package',
             url: 'https://github.com/gnolang/gno/pull/2654',
             createdAt: '2024-08-02T05:04:08Z',
-            updatedAt: '2024-09-22T06:20:47Z',
+            updatedAt: '2024-10-09T05:15:39Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -84960,14 +86172,14 @@ const data = {
             title: 'Zentasktic - the project management suite',
             url: 'https://github.com/gnolang/gno/pull/2649',
             createdAt: '2024-07-31T06:56:01Z',
-            updatedAt: '2024-10-03T10:49:11Z',
+            updatedAt: '2024-10-21T03:52:38Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -84977,7 +86189,7 @@ const data = {
             title: 'Flippando - the game',
             url: 'https://github.com/gnolang/gno/pull/2648',
             createdAt: '2024-07-31T06:28:47Z',
-            updatedAt: '2024-10-03T10:51:55Z',
+            updatedAt: '2024-10-21T03:51:49Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -84988,7 +86200,7 @@ const data = {
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -85175,15 +86387,11 @@ const data = {
             title: 'docs: tm2-js-client & gno-js-client are incomplete',
             url: 'https://github.com/gnolang/gno/issues/1880',
             createdAt: '2024-04-03T05:47:32Z',
-            updatedAt: '2024-09-11T15:38:13Z',
+            updatedAt: '2024-10-16T12:55:19Z',
             labels: [
               {
                 name: ':book:  documentation',
                 color: 'ffffff',
-              },
-              {
-                name: '⭐️ could have ⭐️',
-                color: '1BFAAD',
               },
             ],
           },
@@ -85242,7 +86450,7 @@ const data = {
             title: 'feat: p/demo/accesscontrol & p/demo/timelock',
             url: 'https://github.com/gnolang/gno/pull/2307',
             createdAt: '2024-06-07T21:09:17Z',
-            updatedAt: '2024-10-04T07:50:54Z',
+            updatedAt: '2024-10-19T13:52:33Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
@@ -85281,11 +86489,15 @@ const data = {
             title: 'feat: Adding a lottery to examples',
             url: 'https://github.com/gnolang/gno/pull/1850',
             createdAt: '2024-03-27T12:26:31Z',
-            updatedAt: '2024-08-31T12:45:32Z',
+            updatedAt: '2024-10-08T16:49:43Z',
             labels: [
               {
                 name: ':receipt:  package/realm',
                 color: 'ffffff',
+              },
+              {
+                name: 'review/triage-pending',
+                color: '5319e7',
               },
             ],
           },
@@ -85689,14 +86901,14 @@ const data = {
             title: 'feat(gnoclient): Add Transaction and PendingTransaction methods',
             url: 'https://github.com/gnolang/gno/pull/2643',
             createdAt: '2024-07-30T16:17:24Z',
-            updatedAt: '2024-10-03T10:51:48Z',
+            updatedAt: '2024-10-11T08:20:17Z',
             labels: [
               {
                 name: ':package: :mountain:  gno.land',
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -85725,7 +86937,7 @@ const data = {
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -85759,7 +86971,7 @@ const data = {
                 color: 'ffffff',
               },
               {
-                name: 'review team',
+                name: 'review/triage-pending',
                 color: '5319e7',
               },
             ],
@@ -86535,8 +87747,21 @@ const data = {
       name: 'ThinhNX',
       commits: 4,
       issues: {
-        count: 5,
+        count: 6,
         data: [
+          {
+            id: 'I_kwDOE-u6Jc6afSd3',
+            title: 'Gnodev: The time.Now() timestamp is incorrect',
+            url: 'https://github.com/gnolang/gno/issues/2960',
+            createdAt: '2024-10-16T13:27:01Z',
+            updatedAt: '2024-10-17T20:37:49Z',
+            labels: [
+              {
+                name: 'review/triage-pending',
+                color: '5319e7',
+              },
+            ],
+          },
           {
             id: 'I_kwDOE-u6Jc6LpJGy',
             title: 'Proposal: Zero-Knowledge Proofs (ZKPs) for Login Process - Adena',
@@ -86580,8 +87805,21 @@ const data = {
         ],
       },
       prs: {
-        count: 11,
+        count: 12,
         data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-wgrh',
+            title: 'feat(examples): add sealed bidding package',
+            url: 'https://github.com/gnolang/gno/pull/2956',
+            createdAt: '2024-10-16T02:34:40Z',
+            updatedAt: '2024-10-16T02:53:42Z',
+            labels: [
+              {
+                name: ':receipt:  package/realm',
+                color: 'ffffff',
+              },
+            ],
+          },
           {
             id: 'PR_kwDOE-u6Jc536a0P',
             title: 'feat: TotalCoin and TotalCoinKeeper implementation',
@@ -86885,6 +88123,58 @@ const data = {
             labels: [
               {
                 name: ':package: :robot: gnovm',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      reviewedMrs: {
+        count: 0,
+        data: [],
+      },
+    },
+    {
+      id: 'U_kgDOCpv_UQ',
+      login: 'rusttech',
+      avatarUrl: 'https://avatars.githubusercontent.com/u/177995601?u=239fd54e5a3b9f1634309b3553f487690b7dd811&v=4',
+      url: 'https://github.com/rusttech',
+      name: null,
+      commits: 1,
+      issues: {
+        count: 0,
+        data: [],
+      },
+      prs: {
+        count: 1,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-_jgq',
+            title: 'fix(cmd/aminoscan): set len=0 in a slice initialization',
+            url: 'https://github.com/gnolang/gno/pull/2971',
+            createdAt: '2024-10-17T16:26:07Z',
+            updatedAt: '2024-10-18T16:02:04Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
+                color: 'ffffff',
+              },
+            ],
+          },
+        ],
+      },
+      mrs: {
+        count: 1,
+        data: [
+          {
+            id: 'PR_kwDOE-u6Jc5-_jgq',
+            title: 'fix(cmd/aminoscan): set len=0 in a slice initialization',
+            url: 'https://github.com/gnolang/gno/pull/2971',
+            createdAt: '2024-10-17T16:26:07Z',
+            updatedAt: '2024-10-18T16:02:04Z',
+            labels: [
+              {
+                name: ':package: :globe_with_meridians:  tendermint v2',
                 color: 'ffffff',
               },
             ],
