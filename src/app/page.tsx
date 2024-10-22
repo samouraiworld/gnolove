@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import NextLink from 'next/link';
 
-import { Flex, Grid, Heading, ScrollArea } from '@radix-ui/themes';
+import { Flex, Grid, Heading, ScrollArea, Text } from '@radix-ui/themes';
 
 import MilestoneProgress from '@/feature/milestone-progress';
 import Scoreboard from '@/feature/scoreboard';
@@ -23,6 +23,7 @@ import { getMilestone } from '@/util/milestones';
 import { getContributorsWithScore } from '@/util/score';
 
 import MILESTONE from '@/constant/milestone';
+import REPOSITORY from '@/constant/repository';
 
 import HeaderImage from '@/image/header.png';
 
@@ -68,17 +69,19 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
           )}
 
           <Grid columns="3" rows="auto auto" gap="4">
-            <Heading size="6" mt="6">
-              👋 Help Wanted!
-            </Heading>
+            <Text weight="bold" size="6" mt="6" asChild>
+              <NextLink href={`https://github.com/${REPOSITORY.owner}/${REPOSITORY.repository}/issues`} target="_blank">
+                👋 Help Wanted!
+              </NextLink>
+            </Text>
 
-            <Heading size="6" mt="6">
+            <Text weight="bold" size="6" mt="6">
               ✔️ Freshly Merged
-            </Heading>
+            </Text>
 
-            <Heading size="6" mt="6">
+            <Text weight="bold" size="6" mt="6">
               ⭐ New Rising gnome
-            </Heading>
+            </Text>
 
             <IssuesTable issues={lastIssues} />
             <IssuesTable issues={lastMRs} />
