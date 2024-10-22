@@ -1,8 +1,10 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
+import NextLink from 'next/link';
 
 import { Flex, Grid, Heading, ScrollArea } from '@radix-ui/themes';
 
+import MilestoneProgress from '@/feature/milestone-progress';
 import Scoreboard from '@/feature/scoreboard';
 
 import Footer from '@/module/footer';
@@ -17,7 +19,10 @@ import {
   getTimeFilterFromSearchParam,
   TimeFilter,
 } from '@/util/github';
+import { getMilestone } from '@/util/milestones';
 import { getContributorsWithScore } from '@/util/score';
+
+import MILESTONE from '@/constant/milestone';
 
 import HeaderImage from '@/image/header.png';
 
@@ -37,6 +42,8 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
   const allTimeCachedContributors = await getCachedContributors(TimeFilter.ALL_TIME);
   const cachedContributors = await getCachedContributors(timeFilter);
 
+  const milestone = await getMilestone(MILESTONE.number);
+
   const filteredContributors = getContributorsWithScore(cachedContributors).filter(({ score }) => score);
 
   const lastMRs = getLastMRs(allTimeCachedContributors, 5);
@@ -53,6 +60,12 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
           className="max-w-screen mx-auto w-full min-w-0 max-w-5xl overflow-hidden"
         >
           <Image src={HeaderImage} alt="Header Image" className="rounded-3" />
+
+          {milestone && (
+            <NextLink href="/milestone">
+              <MilestoneProgress milestone={milestone} />
+            </NextLink>
+          )}
 
           <Grid columns="3" rows="auto auto" gap="4">
             <Heading size="6" mt="6">

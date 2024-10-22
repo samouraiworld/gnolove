@@ -9,6 +9,8 @@ declare global {
     children?: ReactNode;
   }
 
+  type NoUndefined<T> = T extends undefined ? never : T;
+
   export type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType extends readonly (infer ElementType)[]
     ? ElementType
     : never;

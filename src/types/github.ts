@@ -1,3 +1,5 @@
+import { getMilestone } from '@/util/milestones';
+
 export type Label = { name: string; color: string };
 export type Issue = { id: string; title: string; url: string; createdAt: string; updatedAt: string; labels: Label[] };
 export type PullRequest = {
@@ -19,3 +21,5 @@ export type UserWithStats = User & {
   reviewedMrs: { count: number; data: PullRequest[] };
 };
 export type UserWithStatsAndScore = UserWithStats & { score: number };
+
+export type Milestone = NoUndefined<Awaited<ReturnType<typeof getMilestone>>>;
