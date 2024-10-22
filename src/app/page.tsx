@@ -60,7 +60,7 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
           p={{ initial: '2', sm: '4', lg: '7' }}
           gap="2"
           direction="column"
-          className="max-w-screen mx-auto w-full min-w-0 max-w-5xl overflow-hidden"
+          className="max-w-screen mx-auto w-full min-w-0 max-w-7xl overflow-hidden"
         >
           <Image src={HeaderImage} alt="Header Image" className="rounded-3" />
 

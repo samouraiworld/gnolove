@@ -5,7 +5,7 @@ import { useMemo } from 'react';
 import Image from 'next/image';
 
 import { ExternalLinkIcon, MagnifyingGlassIcon, StarFilledIcon } from '@radix-ui/react-icons';
-import { Flex, IconButton, Table, Text } from '@radix-ui/themes';
+import { Badge, Flex, IconButton, Table, Text } from '@radix-ui/themes';
 import { formatDistanceToNow } from 'date-fns';
 import { CircleDotIcon, GitPullRequestIcon } from 'lucide-react';
 
@@ -13,6 +13,8 @@ import ContributionsDialog from '@/module/contributions-dialog';
 
 import { cmpCreatedAt } from '@/util/github';
 import { cn } from '@/util/style';
+
+import TEAMS from '@/constant/teams';
 
 import { UserWithStats } from '@/type/github';
 
@@ -34,6 +36,14 @@ const ContributorRow = ({ contributor, score, rank, showRank }: ContributorRowPr
       );
     return `${rank + 1} th`;
   }, [rank]);
+
+  const team = useMemo(() => {
+    for (const TEAM of TEAMS) {
+      if (TEAM.members.includes(contributor.login)) return TEAM;
+    }
+
+    return undefined;
+  }, [contributor]);
 
   const lastContribution = useMemo(() => {
     return [
@@ -73,6 +83,11 @@ const ContributorRow = ({ contributor, score, rank, showRank }: ContributorRowPr
           />
 
           <Text className="whitespace-break-spaces text-wrap">{contributor.name ?? contributor.login}</Text>
+          {team && (
+            <Badge color={team.color} size="1">
+              {team.name}
+            </Badge>
+          )}
 
           <ExternalLinkIcon className="shrink-0 text-blue-10" />
         </Flex>
