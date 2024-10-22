@@ -1,3 +1,5 @@
+import { unstable_noStore as noStore } from 'next/cache';
+
 import { kv } from '@vercel/kv';
 import { z } from 'zod';
 
@@ -6,7 +8,6 @@ import { UserWithStatsSchema } from '@/util/schemas';
 import { snakeCase } from '@/util/string';
 
 import { UserWithStats } from '@/type/github';
-import { unstable_noStore as noStore } from 'next/cache';
 
 class CacheRepository {
   static getKey(dataKey: string, timeFilter: TimeFilter, kind: 'data' | 'timestamp') {
@@ -15,11 +16,14 @@ class CacheRepository {
 
   static async getContributors(timeFilter: TimeFilter) {
     noStore();
-    
+
     const baseKey = CacheRepository.getKey.bind(null, 'contributors', timeFilter);
 
     const rawData = await kv.get(baseKey('data'));
     const rawTimestamp = await kv.get(baseKey('timestamp'));
+
+    // eslint-disable-next-line
+    console.log(`Key: ${baseKey('timestamp')}, Value: ${rawData}`);
 
     const { data: usersWithStats } = z.array(UserWithStatsSchema).safeParse(rawData);
     const { data: timestamp } = z.number().safeParse(rawTimestamp);
@@ -31,7 +35,7 @@ class CacheRepository {
 
   static async setContributors(timeFilter: TimeFilter, contributors: UserWithStats[]) {
     noStore();
-    
+
     const baseKey = CacheRepository.getKey.bind(null, 'contributors', timeFilter);
 
     await kv.set(baseKey('data'), JSON.stringify(contributors));
