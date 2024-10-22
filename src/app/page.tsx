@@ -83,7 +83,7 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
               ⭐ New Rising gnome
             </Text>
 
-            <IssuesTable issues={lastIssues} />
+            <IssuesTable issues={lastIssues} showLabels="on-hover" />
             <IssuesTable issues={lastMRs} />
             <UserTable users={newContributors} />
           </Grid>
