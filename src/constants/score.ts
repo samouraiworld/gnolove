@@ -3,7 +3,7 @@ const SCORE = {
   PR_FACTOR: 2,
   REVIEWED_MR_FACTOR: 2,
   ISSUES_FACTOR: 0.5,
-  COMMIT_FACTOR: 0.01,
+  COMMIT_FACTOR: 0.1,
 };
 
 export default SCORE;
