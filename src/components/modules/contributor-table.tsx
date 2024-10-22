@@ -4,14 +4,14 @@ import { Flex, Table } from '@radix-ui/themes';
 
 import ContributorRow from '@/module/contributor-row';
 
-import { getContributorsWithScore, getSortedContributorsWithScore } from '@/util/score';
+import { getSortedContributors } from '@/util/score';
 
-import { UserWithStats } from '@/type/github';
+import { UserWithStatsAndScore } from '@/type/github';
 
 import MinecraftHeart from '@/image/minecraft-heart.png';
 
 export interface ContributorTableProps {
-  contributors: UserWithStats[];
+  contributors: UserWithStatsAndScore[];
 
   sort?: boolean;
 
@@ -19,12 +19,6 @@ export interface ContributorTableProps {
 }
 
 const ContributorTable = ({ contributors, sort, showRank }: ContributorTableProps) => {
-  const contributorsWithScore = sort
-    ? getSortedContributorsWithScore(contributors)
-    : getContributorsWithScore(contributors);
-
-  const slicedContributorsWithScore = contributorsWithScore.slice(0, 50);
-
   return (
     <Table.Root layout="auto">
       <Table.Header>
@@ -46,9 +40,11 @@ const ContributorTable = ({ contributors, sort, showRank }: ContributorTableProp
       </Table.Header>
 
       <Table.Body>
-        {slicedContributorsWithScore.map(({ score, ...contributor }, rank) => (
-          <ContributorRow key={contributor.id} {...{ contributor, score, rank, showRank }} />
-        ))}
+        {(sort ? getSortedContributors(contributors) : contributors)
+          .slice(0, 50)
+          .map(({ score, ...contributor }, rank) => (
+            <ContributorRow key={contributor.id} {...{ contributor, score, rank, showRank }} />
+          ))}
       </Table.Body>
     </Table.Root>
   );

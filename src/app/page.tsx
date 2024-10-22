@@ -17,6 +17,7 @@ import {
   getTimeFilterFromSearchParam,
   TimeFilter,
 } from '@/util/github';
+import { getContributorsWithScore } from '@/util/score';
 
 import HeaderImage from '@/image/header.png';
 
@@ -35,6 +36,8 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
 
   const allTimeCachedContributors = await getCachedContributors(TimeFilter.ALL_TIME);
   const cachedContributors = await getCachedContributors(timeFilter);
+
+  const filteredContributors = getContributorsWithScore(cachedContributors).filter(({ score }) => score);
 
   const lastMRs = getLastMRs(allTimeCachedContributors, 5);
   const lastIssues = getLastIssuesWithLabel(allTimeCachedContributors, ['good first issue', 'help wanted'], 5);
@@ -73,7 +76,7 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
             🏅 Gnolove Scoreboard
           </Heading>
 
-          <Scoreboard contributors={cachedContributors} timeFilter={timeFilter} />
+          <Scoreboard contributors={filteredContributors} timeFilter={timeFilter} />
         </Flex>
 
         <Footer />

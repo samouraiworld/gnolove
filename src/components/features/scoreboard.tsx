@@ -1,15 +1,15 @@
 import Link from 'next/link';
 
-import { Flex, FlexProps, TabNav } from '@radix-ui/themes';
+import { Flex, FlexProps, TabNav, Text } from '@radix-ui/themes';
 
 import ContributorTable from '@/module/contributor-table';
 
 import { isTimeFilter, TimeFilter } from '@/util/github';
 
-import { UserWithStats } from '@/type/github';
+import { UserWithStatsAndScore } from '@/type/github';
 
 export interface ScoreboardProps {
-  contributors: UserWithStats[];
+  contributors: UserWithStatsAndScore[];
   timeFilter: TimeFilter;
 }
 
@@ -26,7 +26,15 @@ const Scoreboard = ({ contributors, timeFilter, ...props }: ScoreboardProps & Fl
           ))}
       </TabNav.Root>
 
-      <ContributorTable contributors={contributors} sort showRank />
+      {contributors.length ? (
+        <ContributorTable contributors={contributors} sort showRank />
+      ) : (
+        <Flex my="9" justify="center" align="center">
+          <Text className="italic" color="gray">
+            Could not find any contributors... 😢
+          </Text>
+        </Flex>
+      )}
     </Flex>
   );
 };

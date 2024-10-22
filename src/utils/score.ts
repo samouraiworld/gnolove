@@ -32,8 +32,8 @@ export const getContributorsWithScore = (contributors: UserWithStats[]): UserWit
  * Get the contributors sorted by score
  * @param contributors The contributors to sort
  */
-export const getSortedContributorsWithScore = (contributors: UserWithStats[]): UserWithStatsAndScore[] => {
-  return getContributorsWithScore(contributors)
+export const getSortedContributors = (contributors: UserWithStatsAndScore[]): UserWithStatsAndScore[] => {
+  return contributors
     .toSorted((a, b) => b.commits - a.commits)
     .toSorted((a, b) => b.prs.count - a.prs.count)
     .toSorted((a, b) => b.mrs.count - a.mrs.count)
