@@ -22,6 +22,9 @@ const fetchAndSetCache = async (timeFilter: TimeFilter) => {
 };
 
 export const getCachedContributors = async (timeFilter: TimeFilter): Promise<UserWithStats[]> => {
+  // eslint-disable-next-line
+  console.log('==============================');
+
   const data = await CacheRepository.getContributors(timeFilter);
 
   if (!data) {
@@ -40,6 +43,9 @@ export const getCachedContributors = async (timeFilter: TimeFilter): Promise<Use
   }
 
   const msSinceLastUpdate = Date.now() - data.lastUpdate;
+
+  // eslint-disable-next-line
+  console.log('Secs since last update :', msSinceLastUpdate / 1000);
 
   if (msSinceLastUpdate < EXPIRES_AFTER) {
     // eslint-disable-next-line
