@@ -46,6 +46,9 @@ export const getCachedContributors = async (timeFilter: TimeFilter): Promise<Use
 
   // eslint-disable-next-line
   console.log(
+    'Timestamp :',
+    data.lastUpdate,
+    ' | ',
     'Secs since last update :',
     msSinceLastUpdate / 1000,
     'secs | Expires after :',
