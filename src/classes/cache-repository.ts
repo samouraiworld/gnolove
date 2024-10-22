@@ -22,9 +22,6 @@ class CacheRepository {
     const rawData = await kv.get(baseKey('data'));
     const rawTimestamp = await kv.get(baseKey('timestamp'));
 
-    // eslint-disable-next-line
-    console.log(`Key: ${baseKey('timestamp')}, Value: ${rawTimestamp}`);
-
     const { data: usersWithStats } = z.array(UserWithStatsSchema).safeParse(rawData);
     const { data: timestamp } = z.number().safeParse(rawTimestamp);
 

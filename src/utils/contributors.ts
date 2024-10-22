@@ -15,22 +15,13 @@ const fetchAndSetCache = async (timeFilter: TimeFilter) => {
   const usersWithStats = await getUsersWithStats(graphql, REPOSITORY, timeFilter);
   await CacheRepository.setContributors(timeFilter, usersWithStats);
 
-  // eslint-disable-next-line
-  console.log(`Setting the cache for contributors and time filter : '${timeFilter}'.`);
-
   return usersWithStats;
 };
 
 export const getCachedContributors = async (timeFilter: TimeFilter): Promise<UserWithStats[]> => {
-  // eslint-disable-next-line
-  console.log('==============================');
-
   const data = await CacheRepository.getContributors(timeFilter);
 
   if (!data) {
-    // eslint-disable-next-line
-    console.log('No cached contributors found.');
-
     try {
       return await fetchAndSetCache(timeFilter);
     } catch (err) {
@@ -43,28 +34,7 @@ export const getCachedContributors = async (timeFilter: TimeFilter): Promise<Use
   }
 
   const msSinceLastUpdate = Date.now() - data.lastUpdate;
-
-  // eslint-disable-next-line
-  console.log(
-    'Now:',
-    Date.now(),
-    ' | ',
-    'Timestamp :',
-    data.lastUpdate,
-    ' | ',
-    'Secs since last update :',
-    msSinceLastUpdate / 1000,
-    'secs | Expires after :',
-    EXPIRES_AFTER / 1000,
-    'secs',
-  );
-
-  if (msSinceLastUpdate < EXPIRES_AFTER) {
-    // eslint-disable-next-line
-    console.log('Using the cached contributors.');
-
-    return data.usersWithStats;
-  }
+  if (msSinceLastUpdate < EXPIRES_AFTER) return data.usersWithStats;
 
   try {
     return await fetchAndSetCache(timeFilter);
