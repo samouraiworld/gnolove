@@ -41,10 +41,12 @@ export const getCachedContributors = async (timeFilter: TimeFilter): Promise<Use
 
   const msSinceLastUpdate = Date.now() - data.lastUpdate;
 
-  // eslint-disable-next-line
-  console.log('Using the cached contributors.');
+  if (msSinceLastUpdate < EXPIRES_AFTER) {
+    // eslint-disable-next-line
+    console.log('Using the cached contributors.');
 
-  if (msSinceLastUpdate < EXPIRES_AFTER) return data.usersWithStats;
+    return data.usersWithStats;
+  }
 
   try {
     return await fetchAndSetCache(timeFilter);
