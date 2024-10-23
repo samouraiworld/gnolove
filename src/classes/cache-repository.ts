@@ -56,7 +56,10 @@ class CacheRepository {
   static async setMilestone(num: number, milestone: any) {
     noStore();
 
-    await kv.set(`milestone:${num}:data`, JSON.stringify(milestone));
+    const { data: milestoneData } = MilestoneSchema.safeParse(milestone);
+    if (!milestoneData) return;
+
+    await kv.set(`milestone:${num}:data`, JSON.stringify(milestoneData));
     await kv.set(`milestone:${num}:timestamp`, Date.now().toString());
   }
 }
