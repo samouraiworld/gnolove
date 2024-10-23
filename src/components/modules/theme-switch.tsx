@@ -14,7 +14,9 @@ const ThemeSwitch = () => {
 
   return (
     <Flex position="fixed" top="4" right="4" className="z-50">
-      <IconButton onClick={onClick}>{theme === 'light' ? <MoonIcon /> : <SunIcon />}</IconButton>
+      <IconButton onClick={onClick} suppressHydrationWarning>
+        {theme === 'light' ? <MoonIcon /> : <SunIcon />}
+      </IconButton>
     </Flex>
   );
 };
