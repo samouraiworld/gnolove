@@ -100,7 +100,7 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
             🎥 Latest gnoland videos
           </Text>
 
-          <Grid columns="3" rows="2" gap="2">
+          <Grid columns={{ initial: '1', xs: '2', md: '3'}} rows="auto" gap="2">
             <YoutubeEmbeddedVideo
               className="overflow-hidden rounded-4"
               src="https://www.youtube.com/embed/-io_Fu7qKrs?si=EjpiUa-fffFmslZx"
