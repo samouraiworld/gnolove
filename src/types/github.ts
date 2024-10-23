@@ -1,5 +1,3 @@
-import { getMilestone } from '@/util/milestones';
-
 export type Label = { name: string; color: string };
 export type Issue = { id: string; title: string; url: string; createdAt: string; updatedAt: string; labels: Label[] };
 export type PullRequest = {
