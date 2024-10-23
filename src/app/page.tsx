@@ -65,7 +65,10 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
 
       <Grid columns="3" rows="auto auto" gap="4">
         <Text weight="bold" size="6" mt="6" asChild>
-          <NextLink href={`https://github.com/${REPOSITORY.owner}/${REPOSITORY.repository}/issues`} target="_blank">
+          <NextLink
+            href={`https://github.com/${REPOSITORY.owner}/${REPOSITORY.repository}/labels/help%20wanted`}
+            target="_blank"
+          >
             👋 Help Wanted!
           </NextLink>
         </Text>
