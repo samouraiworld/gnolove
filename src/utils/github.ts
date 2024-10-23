@@ -1,8 +1,6 @@
 import { graphql } from '@octokit/graphql/types';
-import { Octokit } from '@octokit/rest';
+import { Octokit, RestEndpointMethodTypes } from '@octokit/rest';
 import { endOfMonth, endOfWeek, endOfYear, format, Interval, startOfMonth, startOfWeek, startOfYear } from 'date-fns';
-
-import MILESTONE from '@/constant/milestone';
 
 import { Issue, PullRequest, Repository, User, UserWithStats } from '@/type/github';
 
@@ -329,8 +327,14 @@ export const getTimeFilterFromAPISearchParam = (
  * @param objA Object A
  * @param objB Object B
  */
-export const cmpCreatedAt = <T extends { createdAt: string | Date }>(objA: T, objB: T): number => {
-  return new Date(objB.createdAt).getTime() - new Date(objA.createdAt).getTime();
+export const cmpCreatedAt = <T extends { createdAt: string | Date } | { created_at: string | Date }>(
+  objA: T,
+  objB: T,
+): number => {
+  return (
+    new Date('createdAt' in objB ? objB.createdAt : objB.created_at).getTime() -
+    new Date('createdAt' in objA ? objA.createdAt : objA.created_at).getTime()
+  );
 };
 
 /**
@@ -401,6 +405,37 @@ export const getNewContributors = (contributors: UserWithStats[], last: number) 
   return sortedContributors.slice(0, last);
 };
 
+export const getMilestoneIssues = async (octokit: Octokit, repo: Repository, num: number) => {
+  type OctokitIssues = RestEndpointMethodTypes['issues']['listForRepo']['response']['data'];
+
+  const issues: OctokitIssues = [];
+
+  let res: OctokitIssues = [];
+  let page = 1;
+
+  do {
+    try {
+      const issuesRes = await octokit.issues.listForRepo({
+        owner: repo.owner,
+        repo: repo.repository,
+        milestone: num.toString(),
+        per_page: 100,
+        state: 'all',
+        page: page++,
+      });
+
+      res = issuesRes.data;
+      issues.push(...res);
+    } catch (err) {
+      console.error(err);
+
+      break;
+    }
+  } while (res.length === 100);
+
+  return issues;
+};
+
 export const getMilestone = async (octokit: Octokit, repo: Repository, num: number) => {
   try {
     const milestoneRes = await octokit.issues.getMilestone({
@@ -409,13 +444,8 @@ export const getMilestone = async (octokit: Octokit, repo: Repository, num: numb
       owner: repo.owner,
     });
 
-    const issuesRes = await octokit.issues.listForRepo({
-      owner: repo.owner,
-      repo: repo.repository,
-      milestone: MILESTONE.number.toString(),
-    });
-
-    return { ...milestoneRes.data, issues: issuesRes.data };
+    const issues = await getMilestoneIssues(octokit, repo, num);
+    return { ...milestoneRes.data, issues };
   } catch (err) {
     console.error(err);
 
