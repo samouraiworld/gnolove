@@ -22,10 +22,9 @@ import {
   getTimeFilterFromSearchParam,
   TimeFilter,
 } from '@/util/github';
-import { getMilestone } from '@/util/milestones';
+import { getCachedMilestone } from '@/util/milestones';
 import { getContributorsWithScore } from '@/util/score';
 
-import MILESTONE from '@/constant/milestone';
 import REPOSITORY from '@/constant/repository';
 
 import HeaderImage from '@/image/header.png';
@@ -46,7 +45,7 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
   const allTimeCachedContributors = await getCachedContributors(TimeFilter.ALL_TIME);
   const cachedContributors = await getCachedContributors(timeFilter);
 
-  const milestone = await getMilestone(MILESTONE.number);
+  const milestone = await getCachedMilestone();
 
   const filteredContributors = getContributorsWithScore(cachedContributors).filter(({ score }) => score);
 
