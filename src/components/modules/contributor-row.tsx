@@ -39,7 +39,7 @@ const ContributorRow = ({ contributor, score, rank, showRank }: ContributorRowPr
 
   const team = useMemo(() => {
     for (const TEAM of TEAMS) {
-      if (TEAM.members.includes(contributor.login)) return TEAM;
+      if (TEAM.members.map((member) => member.toLowerCase()).includes(contributor.login.toLowerCase())) return TEAM;
     }
 
     return undefined;
