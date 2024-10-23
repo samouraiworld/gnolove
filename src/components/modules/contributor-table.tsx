@@ -33,7 +33,7 @@ const ContributorTable = ({ contributors, sort, showRank }: ContributorTableProp
     };
 
     const keys = Object.keys(values) as (keyof typeof values)[];
-    const sortedKeys = keys.sort((a, b) => values[b] - values[a]);
+    const sortedKeys = keys.filter((k) => values[k]).sort((a, b) => values[b] - values[a]);
     const strKeys = sortedKeys.map((k) => `${k} * ${values[k]}`);
 
     return `score = ${strKeys.join(' + ')}`;
