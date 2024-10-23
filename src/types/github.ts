@@ -1,3 +1,5 @@
+import { getCachedMilestone } from '@/util/milestones';
+
 export type Label = { name: string; color: string };
 export type Issue = { id: string; title: string; url: string; createdAt: string; updatedAt: string; labels: Label[] };
 export type PullRequest = {
@@ -20,4 +22,4 @@ export type UserWithStats = User & {
 };
 export type UserWithStatsAndScore = UserWithStats & { score: number };
 
-export type Milestone = NoUndefined<Awaited<ReturnType<typeof getMilestone>>>;
+export type Milestone = NoUndefined<Awaited<ReturnType<typeof getCachedMilestone>>>;
