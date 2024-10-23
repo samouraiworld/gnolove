@@ -1,5 +1,8 @@
 import { graphql } from '@octokit/graphql/types';
+import { Octokit } from '@octokit/rest';
 import { endOfMonth, endOfWeek, endOfYear, format, Interval, startOfMonth, startOfWeek, startOfYear } from 'date-fns';
+
+import MILESTONE from '@/constant/milestone';
 
 import { Issue, PullRequest, Repository, User, UserWithStats } from '@/type/github';
 
@@ -396,4 +399,26 @@ export const getNewContributors = (contributors: UserWithStats[], last: number) 
   });
 
   return sortedContributors.slice(0, last);
+};
+
+export const getMilestone = async (octokit: Octokit, repo: Repository, num: number) => {
+  try {
+    const milestoneRes = await octokit.issues.getMilestone({
+      milestone_number: num,
+      repo: repo.repository,
+      owner: repo.owner,
+    });
+
+    const issuesRes = await octokit.issues.listForRepo({
+      owner: repo.owner,
+      repo: repo.repository,
+      milestone: MILESTONE.number.toString(),
+    });
+
+    return { ...milestoneRes.data, issues: issuesRes.data };
+  } catch (err) {
+    console.error(err);
+
+    return undefined;
+  }
 };
