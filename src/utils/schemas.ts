@@ -98,7 +98,7 @@ export const MilestoneIssueSchema = z.object({
   title: z.string(),
   user: GHUserSchema,
   labels: z.array(GHLabelSchema),
-  state: z.string(),
+  state: z.literal('open').or(z.literal('closed')),
   locked: z.boolean(),
   assignee: GHUserSchema.nullable(),
   assignees: z.array(GHUserSchema),
@@ -110,7 +110,7 @@ export const MilestoneIssueSchema = z.object({
   updated_at: z.string(),
   author_association: z.string(),
   draft: z.boolean().nullish(),
-  body: z.string(),
+  body: z.string().nullable(),
   timeline_url: z.string().url(),
 
   // TODO: Type the following fields
