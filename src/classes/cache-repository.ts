@@ -10,7 +10,7 @@ import { snakeCase } from '@/util/string';
 import { UserWithStats } from '@/type/github';
 
 class CacheRepository {
-  static getKey(dataKey: string, timeFilter: TimeFilter, kind: 'data' | 'timestamp') {
+  static getKey(dataKey: string, timeFilter: TimeFilter, kind: 'data' | 'timestamp' | 'use-cache-until') {
     return `${dataKey}:${snakeCase(timeFilter)}:${kind}`;
   }
 
@@ -21,13 +21,23 @@ class CacheRepository {
 
     const rawData = await kv.get(baseKey('data'));
     const rawTimestamp = await kv.get(baseKey('timestamp'));
+    const rawUseCacheUntil = await kv.get(baseKey('use-cache-until'));
 
     const { data: usersWithStats } = z.array(UserWithStatsSchema).safeParse(rawData);
     const { data: timestamp } = z.number().safeParse(rawTimestamp);
+    const { data: useCacheUntil } = z.number().safeParse(rawUseCacheUntil);
 
-    if (!usersWithStats || !timestamp) return null;
+    const useCache = useCacheUntil ? Date.now() - useCacheUntil <= 0 : false;
 
-    return { usersWithStats, lastUpdate: timestamp };
+    if (!usersWithStats || !timestamp) return { usersWithStats: null, timestamp: null, useCache };
+
+    return { usersWithStats, lastUpdate: timestamp, useCache };
+  }
+
+  static async setContributorsCacheUntil(timeFilter: TimeFilter, date: Date) {
+    noStore();
+
+    await kv.set(CacheRepository.getKey('contributors', timeFilter, 'use-cache-until'), date.getTime().toString());
   }
 
   static async setContributors(timeFilter: TimeFilter, contributors: UserWithStats[]) {
@@ -44,13 +54,17 @@ class CacheRepository {
 
     const rawData = await kv.get(`milestone:${num}:data`);
     const rawTimestamp = await kv.get(`milestone:${num}:timestamp`);
+    const rawUseCacheUntil = await kv.get(`milestone:${num}:use-cache-until`);
 
     const { data: milestone } = MilestoneSchema.safeParse(rawData);
     const { data: timestamp } = z.number().safeParse(rawTimestamp);
+    const { data: useCacheUntil } = z.number().safeParse(rawUseCacheUntil);
 
-    if (!milestone || !timestamp) return null;
+    const useCache = useCacheUntil ? Date.now() - useCacheUntil <= 0 : false;
 
-    return { milestone, lastUpdate: timestamp };
+    if (!milestone || !timestamp) return { milestone: null, timestamp: null, useCache };
+
+    return { milestone, lastUpdate: timestamp, useCache };
   }
 
   static async setMilestone(num: number, milestone: any) {
@@ -61,6 +75,12 @@ class CacheRepository {
 
     await kv.set(`milestone:${num}:data`, JSON.stringify(milestoneData));
     await kv.set(`milestone:${num}:timestamp`, Date.now().toString());
+  }
+
+  static async setMilestoneCacheUntil(num: number, date: Date) {
+    noStore();
+
+    await kv.set(`milestone:${num}:use-cache-until`, date.getTime().toString());
   }
 }
 
