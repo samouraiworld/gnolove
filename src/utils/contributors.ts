@@ -1,3 +1,5 @@
+import { addMinutes } from 'date-fns';
+
 import CacheRepository from '@/class/cache-repository';
 
 import graphql from '@/instance/graphql';
@@ -19,13 +21,17 @@ const fetchAndSetCache = async (timeFilter: TimeFilter) => {
 };
 
 export const getCachedContributors = async (timeFilter: TimeFilter): Promise<UserWithStats[]> => {
-  const data = await CacheRepository.getContributors(timeFilter);
+  const { usersWithStats, lastUpdate, useCache } = await CacheRepository.getContributors(timeFilter);
 
-  if (!data) {
+  if (!usersWithStats || !lastUpdate) {
+    if (useCache) return contributors[timeFilter];
+
     try {
       return await fetchAndSetCache(timeFilter);
     } catch (err) {
       console.error(err);
+
+      await CacheRepository.setContributorsCacheUntil(timeFilter, addMinutes(new Date(), 10));
 
       // eslint-disable-next-line
       console.log('Failed to retrieve the contributors. Using the fallback file.');
@@ -33,16 +39,20 @@ export const getCachedContributors = async (timeFilter: TimeFilter): Promise<Use
     }
   }
 
-  const msSinceLastUpdate = Date.now() - data.lastUpdate;
-  if (msSinceLastUpdate < EXPIRES_AFTER) return data.usersWithStats;
+  if (useCache) return usersWithStats;
+
+  const msSinceLastUpdate = Date.now() - lastUpdate;
+  if (msSinceLastUpdate < EXPIRES_AFTER) return usersWithStats;
 
   try {
     return await fetchAndSetCache(timeFilter);
   } catch (err) {
     console.error(err);
 
+    await CacheRepository.setContributorsCacheUntil(timeFilter, addMinutes(new Date(), 10));
+
     // eslint-disable-next-line
     console.log('Failed to retrieve the contributors. Using the cached values file.');
-    return data.usersWithStats;
+    return usersWithStats;
   }
 };

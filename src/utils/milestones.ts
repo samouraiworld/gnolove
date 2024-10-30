@@ -17,12 +17,12 @@ const fetchAndSetCache = async () => {
 };
 
 export const getCachedMilestone = async () => {
-  const data = await CacheRepository.getMilestone(MILESTONE.number);
+  const { milestone, lastUpdate } = await CacheRepository.getMilestone(MILESTONE.number);
 
-  if (!data) return await fetchAndSetCache();
+  if (!milestone || !lastUpdate) return await fetchAndSetCache();
 
-  const msSinceLastUpdate = Date.now() - data.lastUpdate;
-  if (msSinceLastUpdate < EXPIRES_AFTER) return data.milestone;
+  const msSinceLastUpdate = Date.now() - lastUpdate;
+  if (msSinceLastUpdate < EXPIRES_AFTER) return milestone;
 
   return await fetchAndSetCache();
 };
