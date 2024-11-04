@@ -1,0 +1,32 @@
+# @/gqlgen.yml
+schema:
+  - graph/typeDefs/*.gql
+
+exec:
+  filename: graph/generated/generated.go
+  package: generated
+
+model:
+  filename: graph/customTypes/types_gen.go
+  package: customTypes
+
+resolver:
+  layout: follow-schema
+  dir: graph/resolvers
+  package: graph
+  filename_template: "{name}.resolvers.go"
+
+autobind:
+
+models:
+  ID:
+    model:
+      - github.com/99designs/gqlgen/graphql.Int
+      - github.com/99designs/gqlgen/graphql.ID
+      - github.com/99designs/gqlgen/graphql.Int64
+      - github.com/99designs/gqlgen/graphql.Int32
+  Int:
+    model:
+      - github.com/99designs/gqlgen/graphql.Int
+      - github.com/99designs/gqlgen/graphql.Int64
+      - github.com/99designs/gqlgen/graphql.Int32
