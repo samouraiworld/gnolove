@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -15,6 +16,8 @@ import (
 )
 
 var database *gorm.DB
+
+const port = 3333
 
 func main() {
 	gotenv.Load()
@@ -46,7 +49,8 @@ func main() {
 	http.HandleFunc("/getStats", handler.HandleGetUserStats(database))
 	http.HandleFunc("/getIssues", getIssues)
 
-	err = http.ListenAndServe(":3333", nil)
+	fmt.Printf("Server running on port %d", port)
+	err = http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
 	if err != nil {
 		panic(err)
 	}
