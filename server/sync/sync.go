@@ -2,13 +2,13 @@ package sync
 
 import (
 	"context"
-	"fmt"
 	"os"
 	"time"
 
 	"github.com/lib/pq"
 	"github.com/samouraiworld/topofgnomes/server/models"
 	"github.com/shurcooL/githubv4"
+	"go.uber.org/zap"
 	"golang.org/x/oauth2"
 
 	"gorm.io/gorm"
@@ -19,9 +19,10 @@ type Syncer struct {
 	client *githubv4.Client
 	owner  string
 	repo   string
+	logger *zap.SugaredLogger
 }
 
-func NewSyncer(db *gorm.DB, graphqlEndpoint, repository, owner string) *Syncer {
+func NewSyncer(db *gorm.DB, graphqlEndpoint, repository, owner string, logger *zap.SugaredLogger) *Syncer {
 	src := oauth2.StaticTokenSource(
 		&oauth2.Token{AccessToken: os.Getenv("GITHUB_TOKEN")},
 	)
@@ -33,6 +34,7 @@ func NewSyncer(db *gorm.DB, graphqlEndpoint, repository, owner string) *Syncer {
 		client: client,
 		owner:  owner,
 		repo:   repository,
+		logger: logger,
 	}
 }
 
@@ -48,7 +50,32 @@ func getLastUpdatedIssue(db gorm.DB) time.Time {
 	return lastIssue.UpdatedAt
 }
 
-func (s *Syncer) SyncPRs() error {
+func (s *Syncer) StartSynchonizing() {
+	go func() {
+		for {
+			s.logger.Info("Starting synchronization...")
+			err := s.syncUsers()
+			if err != nil {
+				s.logger.Errorf("error while syncing users %s", err.Error())
+			}
+
+			err = s.syncIssues()
+			if err != nil {
+				s.logger.Errorf("error while syncing issues %s", err.Error())
+			}
+
+			err = s.syncPRs()
+			if err != nil {
+				s.logger.Errorf("error while syncing PRs %s", err.Error())
+			}
+
+			s.logger.Info("synchronization Finished...")
+			<-time.Tick(time.Minute * 3)
+		}
+	}()
+
+}
+func (s *Syncer) syncPRs() error {
 	lastUpdatedTime := getLastUpdatedPR(*s.db)
 
 	var q struct {
@@ -76,7 +103,7 @@ func (s *Syncer) SyncPRs() error {
 
 		for _, pr := range q.Repository.PullRequests.Nodes {
 			if lastUpdatedTime.After(pr.UpdatedAt) {
-				fmt.Println("pullRequests: All updated")
+				s.logger.Info("PULL REQUESTS: All updated...")
 				return nil
 			}
 
@@ -114,7 +141,7 @@ func (s *Syncer) SyncPRs() error {
 	return nil
 }
 
-func (s *Syncer) SyncUsers() error {
+func (s *Syncer) syncUsers() error {
 	var q struct {
 		Repository struct {
 			Users struct {
@@ -138,7 +165,7 @@ func (s *Syncer) SyncUsers() error {
 	return nil
 }
 
-func (s *Syncer) SyncIssues() error {
+func (s *Syncer) syncIssues() error {
 	lastUpdatedTime := getLastUpdatedIssue(*s.db)
 
 	var q struct {
@@ -170,7 +197,7 @@ func (s *Syncer) SyncIssues() error {
 				labels[index] = label.Name
 			}
 			if lastUpdatedTime.After(issue.UpdatedAt) {
-				fmt.Println("issues: All updated exiting...")
+				s.logger.Info("ISSUES: All updated...")
 				return nil
 			}
 			issue := models.Issue{
