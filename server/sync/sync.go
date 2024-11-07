@@ -50,6 +50,12 @@ func getLastUpdatedIssue(db gorm.DB) time.Time {
 	return lastIssue.UpdatedAt
 }
 
+func getLastUpdatedMilestone(db gorm.DB) time.Time {
+	var lastMilestone models.Milestone
+	db.Model(&lastMilestone).Order("updated_at desc").First(&lastMilestone)
+	return lastMilestone.UpdatedAt
+}
+
 func (s *Syncer) StartSynchonizing() {
 	go func() {
 		for {
@@ -67,6 +73,11 @@ func (s *Syncer) StartSynchonizing() {
 			err = s.syncPRs()
 			if err != nil {
 				s.logger.Errorf("error while syncing PRs %s", err.Error())
+			}
+
+			err = s.syncMilestones()
+			if err != nil {
+				s.logger.Errorf("error while syncing Milestones %s", err.Error())
 			}
 
 			s.logger.Info("synchronization Finished...")
@@ -119,14 +130,15 @@ func (s *Syncer) syncPRs() error {
 			}
 
 			pr := models.PullRequest{
-				CreatedAt: pr.CreatedAt,
-				UpdatedAt: pr.UpdatedAt,
-				ID:        pr.ID,
-				Number:    pr.Number,
-				State:     pr.State,
-				Title:     pr.Title,
-				AuthorID:  pr.Author.User.ID,
-				Reviews:   reviews,
+				CreatedAt:   pr.CreatedAt,
+				UpdatedAt:   pr.UpdatedAt,
+				ID:          pr.ID,
+				Number:      pr.Number,
+				State:       pr.State,
+				Title:       pr.Title,
+				AuthorID:    pr.Author.User.ID,
+				Reviews:     reviews,
+				MilestoneID: pr.Milestone.ID,
 			}
 			err = s.db.Save(pr).Error
 			if err != nil {
@@ -201,14 +213,15 @@ func (s *Syncer) syncIssues() error {
 				return nil
 			}
 			issue := models.Issue{
-				CreatedAt: issue.CreatedAt,
-				UpdatedAt: issue.UpdatedAt,
-				ID:        issue.ID,
-				Number:    issue.Number,
-				State:     issue.State,
-				Title:     issue.Title,
-				AuthorID:  issue.Author.User.ID,
-				Labels:    labels,
+				CreatedAt:   issue.CreatedAt,
+				UpdatedAt:   issue.UpdatedAt,
+				ID:          issue.ID,
+				Number:      issue.Number,
+				State:       issue.State,
+				Title:       issue.Title,
+				AuthorID:    issue.Author.User.ID,
+				Labels:      labels,
+				MilestoneID: issue.Milestone.ID,
 			}
 			err = s.db.Save(issue).Error
 			if err != nil {
@@ -223,6 +236,73 @@ func (s *Syncer) syncIssues() error {
 	return nil
 }
 
+func (s *Syncer) syncMilestones() error {
+	lastUpdatedTime := getLastUpdatedMilestone(*s.db)
+
+	var q struct {
+		Repository struct {
+			Milestones struct {
+				Nodes    []milestone
+				PageInfo struct {
+					EndCursor   githubv4.String
+					HasNextPage bool
+				}
+			} `graphql:"milestones(first: 100 after:$cursor orderBy: { field: UPDATED_AT, direction: DESC } )"`
+		} `graphql:"repository(owner: \"gnolang\", name: \"gno\")"`
+	}
+
+	hasNextPage := true
+	variables := map[string]interface{}{
+		"cursor": (*githubv4.String)(nil), // Null after argument to get first page.
+	}
+	for hasNextPage {
+
+		err := s.client.Query(context.Background(), &q, variables)
+		if err != nil {
+			return err
+		}
+
+		for _, milestone := range q.Repository.Milestones.Nodes {
+
+			if lastUpdatedTime.After(milestone.UpdatedAt) {
+				s.logger.Info("Milestones: All updated...")
+				return nil
+			}
+			issue := models.Milestone{
+				CreatedAt:   milestone.CreatedAt,
+				UpdatedAt:   milestone.UpdatedAt,
+				ID:          milestone.ID,
+				Number:      milestone.Number,
+				State:       milestone.State,
+				Title:       milestone.Title,
+				AuthorID:    milestone.Creator.User.ID,
+				Description: milestone.Description,
+			}
+			err = s.db.Save(issue).Error
+			if err != nil {
+				return err
+			}
+		}
+
+		hasNextPage = q.Repository.Milestones.PageInfo.HasNextPage
+		variables["cursor"] = githubv4.NewString(q.Repository.Milestones.PageInfo.EndCursor)
+	}
+
+	return nil
+}
+
+type milestone struct {
+	ID          string
+	CreatedAt   time.Time
+	UpdatedAt   time.Time
+	Number      int
+	Title       string
+	State       string
+	Description string
+	Url         string
+	Creator     Author
+}
+
 type issue struct {
 	CreatedAt time.Time
 	UpdatedAt time.Time
@@ -231,6 +311,7 @@ type issue struct {
 	State     string
 	Title     string
 	Author    Author
+	Milestone milestone
 	Labels    struct {
 		Nodes []struct {
 			Name  string
@@ -253,6 +334,7 @@ type pullRequest struct {
 	State     string
 	Title     string
 	Author    Author
+	Milestone milestone
 	Reviews   struct {
 		Nodes []review
 	} `graphql:"reviews(first: 100)"`

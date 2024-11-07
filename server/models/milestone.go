@@ -2,15 +2,15 @@ package models
 
 import "time"
 
-type PullRequest struct {
+type Milestone struct {
+	ID          string
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
-	ID          string
 	Number      int
-	State       string
 	Title       string
+	State       string
 	AuthorID    string
 	Author      User
-	Reviews     []Review
-	MilestoneID string
+	Description string
+	Url         string
 }

@@ -21,6 +21,7 @@ func InitDB() (*gorm.DB, error) {
 		&models.Review{},
 		&models.PullRequest{},
 		&models.Issue{},
+		&models.Milestone{},
 	)
 	if err != nil {
 		panic(err)
