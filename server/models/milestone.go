@@ -13,4 +13,5 @@ type Milestone struct {
 	Author      User
 	Description string
 	Url         string
+	Issues      []Issue
 }

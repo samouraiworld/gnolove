@@ -277,6 +277,7 @@ func (s *Syncer) syncMilestones() error {
 				Title:       milestone.Title,
 				AuthorID:    milestone.Creator.User.ID,
 				Description: milestone.Description,
+				Url:         milestone.Url,
 			}
 			err = s.db.Save(issue).Error
 			if err != nil {

@@ -39,6 +39,8 @@ func main() {
 
 	http.HandleFunc("/getStats", handler.HandleGetUserStats(database))
 	http.HandleFunc("/getIssues", handler.GetIssues(database))
+	http.HandleFunc("/milestones/{number}", handler.GetMilestone(database))
+	http.HandleFunc("/contributors/newest", handler.HandleGetNewestContributors(database))
 
 	logger.Sugar().Infof("Server running on port %d", port)
 	err = http.ListenAndServe(fmt.Sprintf(":%d", port), nil)

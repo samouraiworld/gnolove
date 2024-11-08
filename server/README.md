@@ -32,7 +32,7 @@ Server running on port 3333
 This command will start indexing all important elements on the repository then starting serving the api:
 
 ### API
-Currently there are 2 functional endpoints
+Currently there are 4 functional endpoints
 - get stats (curl http://localhost:3333/getStats?time=x): where x in (daily|weekly|monthly|yearly)
 ```json
 [
@@ -50,7 +50,7 @@ Currently there are 2 functional endpoints
 ]
 ```
 
-- get Issues (curl http://localhost:3333/getIssues): where x in (daily|weekly|monthly|yearly)
+- get Issues (curl http://localhost:3333/getIssues?label=help wanted):
 ```json
 [
     {
@@ -74,5 +74,62 @@ Currently there are 2 functional endpoints
         ]
     },
 ]
+```
+
+- get Issues (curl http://localhost:3333/contributors/newest?number=5):
+```json
+[
+    {
+        "Login": "XXX",
+        "ID": "XXX==",
+        "AvatarUrl": "https://avatars.githubusercontent.com/u/XXX=4",
+        "URL": "https://github.com/XXX",
+        "Name": "XXX"
+    },
+    ...
+]
+```
+
+- get Milestone (curl http://localhost:3333/milestones/{MilestoneNumber}}):
+```json
+{
+    "ID": "MI_kwDOE-u6Jc4AgqQL",
+    "CreatedAt": "2022-10-20T09:37:02Z",
+    "UpdatedAt": "2024-10-22T02:49:37Z",
+    "Number": 4,
+    "Title": "🏗4️⃣ test4.gno.land",
+    "State": "CLOSED",
+    "AuthorID": "MDQ6VXNlcjk0MDI5",
+    "Author": {
+        "Login": "moul",
+        "ID": "MDQ6VXNlcjk0MDI5",
+        "AvatarUrl": "https://avatars.githubusercontent.com/u/94029?u=2acc3ed56cc696b595a069aef15cc975d8662e79&v=4",
+        "URL": "https://github.com/moul",
+        "Name": "Manfred Touron"
+    },
+    "Description": "This milestone encompasses the PRs / issues needed to launch a multi-node Gno testnet",
+    "Url": "https://github.com/gnolang/gno/milestone/4",
+    "Issues": [
+        {
+            "CreatedAt": "2024-03-25T10:23:09Z",
+            "UpdatedAt": "2024-10-22T14:17:29Z",
+            "ID": "I_kwDOE-u6Jc6Dc5vg",
+            "Number": 1820,
+            "State": "CLOSED",
+            "Title": "[docs] Create documentation for multinode clusters",
+            "AuthorID": "MDQ6VXNlcjE2NzEyNjYz",
+            "Author": {
+                "Login": "",
+                "ID": "",
+                "AvatarUrl": "",
+                "URL": "",
+                "Name": ""
+            },
+            "Labels": [],
+            "MilestoneID": "MI_kwDOE-u6Jc4AgqQL"
+        },
+        ...
+    ]
+}
 ```
 

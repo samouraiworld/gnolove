@@ -110,3 +110,45 @@ func HandleGetUserStats(db *gorm.DB) func(w http.ResponseWriter, r *http.Request
 		json.NewEncoder(w).Encode(stats)
 	}
 }
+
+func HandleGetNewestContributors(db *gorm.DB) func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		number := r.URL.Query().Get("number")
+
+		query := `
+		with users_with_oldest_contribution as (
+			select 
+				min(
+					CASE 
+						WHEN pr.created_at is null then i.created_at 
+						WHEN i.created_at < pr.created_at  THEN i.created_at
+						ELSE pr.created_at  
+					END 
+				) oldest_contribution,u.id 
+				from users u
+				left join issues i on i.author_id =u.id 
+				left join pull_requests pr on pr.author_id =u.id 
+				where pr.created_at is not null OR i.created_at is not null
+				group by u.id
+				order by oldest_contribution desc
+				limit $1
+		)
+		select * from users u 
+		inner join users_with_oldest_contribution uc on uc.id =u.id 
+		order by uc.oldest_contribution desc
+		`
+		var users []models.User
+
+		err := db.Model(&models.User{}).Raw(query, number).
+			Find(&users).Error
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte(err.Error()))
+
+			return
+		}
+
+		json.NewEncoder(w).Encode(users)
+	}
+}
