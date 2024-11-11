@@ -2,6 +2,7 @@ package sync
 
 import (
 	"context"
+	"fmt"
 	"os"
 	"time"
 
@@ -75,6 +76,11 @@ func (s *Syncer) StartSynchonizing() {
 			}
 
 			err = s.syncMilestones()
+			if err != nil {
+				s.logger.Errorf("error while syncing Milestones %s", err.Error())
+			}
+
+			err = s.syncCommits()
 			if err != nil {
 				s.logger.Errorf("error while syncing Milestones %s", err.Error())
 			}
@@ -164,7 +170,7 @@ func (s *Syncer) syncUsers() error {
 		var q struct {
 			Repository struct {
 				Users struct {
-					Nodes    []models.User
+					Nodes    []user
 					PageInfo struct {
 						EndCursor   githubv4.String
 						HasNextPage bool
@@ -179,9 +185,15 @@ func (s *Syncer) syncUsers() error {
 		}
 
 		for _, user := range q.Repository.Users.Nodes {
-			err = s.db.Save(user).Error
+			err = s.db.Save(&models.User{
+				ID:        user.ID,
+				Login:     user.Login,
+				AvatarUrl: user.AvatarUrl,
+				URL:       user.URL,
+				Name:      user.Name,
+			}).Error
 			if err != nil {
-				return err
+				return fmt.Errorf("error save %s", err.Error())
 			}
 		}
 
@@ -326,6 +338,57 @@ func (s *Syncer) syncMilestones() error {
 
 	return nil
 }
+func (s *Syncer) syncCommits() error {
+
+	var q struct {
+		Repository struct {
+			Ref struct {
+				Target struct {
+					Commit struct {
+						History struct {
+							Nodes    []Commit
+							PageInfo struct {
+								EndCursor   githubv4.String
+								HasNextPage bool
+							}
+						} `graphql:"history(first: 100 after:$cursor)"`
+					} `graphql:"... on Commit"`
+				}
+			} `graphql:"ref(qualifiedName: \"master\")"`
+		} `graphql:"repository(owner: \"gnolang\", name: \"gno\")"`
+	}
+
+	hasNextPage := true
+	variables := map[string]interface{}{
+		"cursor": (*githubv4.String)(nil), // Null after argument to get first page.
+	}
+	for hasNextPage {
+
+		err := s.client.Query(context.Background(), &q, variables)
+		if err != nil {
+			return err
+		}
+
+		for _, c := range q.Repository.Ref.Target.Commit.History.Nodes {
+			commit := models.Commit{
+				ID:        c.ID,
+				AuthorID:  c.Author.User.ID,
+				Url:       c.Url,
+				CreatedAt: c.CommittedDate,
+				UpdatedAt: c.CommittedDate,
+			}
+			err = s.db.Save(commit).Error
+			if err != nil {
+				return err
+			}
+		}
+
+		hasNextPage = q.Repository.Ref.Target.Commit.History.PageInfo.HasNextPage
+		variables["cursor"] = githubv4.NewString(q.Repository.Ref.Target.Commit.History.PageInfo.EndCursor)
+	}
+
+	return nil
+}
 
 type milestone struct {
 	ID          string
@@ -360,8 +423,7 @@ type issue struct {
 	} `graphql:"labels(first: 10)"`
 }
 type Author struct {
-	Login string
-	User  struct {
+	User struct {
 		ID string
 	} `graphql:"... on User"`
 }
@@ -383,4 +445,24 @@ type review struct {
 	Author    Author
 	ID        string
 	CreatedAt time.Time
+}
+
+type Commit struct {
+	Author struct {
+		User struct {
+			ID   string
+			Name string
+		}
+	}
+	ID            string
+	Url           string
+	CommittedDate time.Time
+}
+
+type user struct {
+	ID        string `gorm:"primarykey"`
+	Login     string
+	AvatarUrl string
+	URL       string
+	Name      string
 }

@@ -10,7 +10,7 @@ type PullRequest struct {
 	State       string
 	Title       string
 	AuthorID    string
-	Author      User
+	Author      *User
 	Reviews     []Review
 	MilestoneID string
 }

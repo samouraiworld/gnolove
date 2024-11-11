@@ -8,6 +8,6 @@ type Review struct {
 	PullRequestID string
 	CreatedAt     time.Time
 
-	PullRequest PullRequest
-	Author      User
+	PullRequest *PullRequest
+	Author      *User
 }

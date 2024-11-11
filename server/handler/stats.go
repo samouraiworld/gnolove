@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"slices"
 	"time"
 
 	"github.com/samouraiworld/topofgnomes/server/models"
@@ -11,77 +12,43 @@ import (
 )
 
 func getUserStats(db *gorm.DB, startTime time.Time) ([]UserWithStats, error) {
-	query := `
-	with last_issues as (
-		select count(*) total_issues,author_id from issues i 
-		where date(i.created_at) > $1
-		GROUP BY author_id
-	),
-	last_prs as (
-		select * from pull_requests pr
-		where date(created_at) > $1
-	),
-	last_merged as (
-		select count(*) total_merged, author_id from last_prs 
-		where state = 'MERGED'
-		GROUP BY author_id
-	),
-	distinct_review AS (
-		select DISTINCT r.author_id, r.pull_request_id   from reviews r 
-		inner join last_prs lp on r.pull_request_id = lp.id
-		where lp.state = 'MERGED'
-	),
-	last_reviews_on_merged_requests as (
-		SELECT count (*) total_review,author_id 
-		FROM distinct_review 
-		GROUP BY author_id
-	)
-	select u.*,
-	COALESCE(li.total_issues,0) total_issues,
-	COALESCE(lm.total_merged,0) total_merged,
-	COALESCE(lr.total_review,0) total_review
-	from users u 
-	left JOIN last_issues li ON li.author_id = u.id
-	left JOIN last_merged lm ON lm.author_id = li.author_id 
-	left JOIN last_reviews_on_merged_requests lr ON lr.author_id = li.author_id 
-	`
-	database, err := db.DB()
+	users := make([]models.User, 0)
+	err := db.Model(&models.User{}).
+		Preload("Commits", "created_at > ? order by created_at desc", startTime).
+		Preload("PullRequests", "created_at > ? order by created_at desc", startTime).
+		Preload("Reviews", "created_at > ? ", startTime).
+		Preload("Reviews.PullRequest").
+		Preload("Issues", "created_at > ? order by created_at desc", startTime).
+		Find(&users).Error
 	if err != nil {
 		return nil, err
 	}
-	rows, err := database.Query(query, startTime)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
+	res := make([]UserWithStats, len(users))
 
-	res := make([]UserWithStats, 0)
+	for index, user := range users {
+		user.Reviews = slices.DeleteFunc(user.Reviews, func(review models.Review) bool {
+			return review.PullRequest.State != "MERGED"
+		})
 
-	for rows.Next() {
-		var userWithStats UserWithStats
-		err = rows.Scan(
-			&userWithStats.Login,
-			&userWithStats.ID,
-			&userWithStats.AvatarUrl,
-			&userWithStats.URL,
-			&userWithStats.Name,
-			&userWithStats.TotalIssues,
-			&userWithStats.TotalMerged,
-			&userWithStats.TotalReviewed,
-		)
-		if err != nil {
-			return nil, err
+		res[index] = UserWithStats{
+			User:                      user,
+			TotalCommits:              len(user.Commits),
+			TotalPrs:                  len(user.PullRequests),
+			TotalIssues:               len(user.Issues),
+			TotalReviewedPullRequests: len(user.Reviews),
+			LastContribution:          getLastContribution(user),
 		}
-		res = append(res, userWithStats)
 	}
 	return res, nil
 }
 
 type UserWithStats struct {
 	models.User
-	TotalIssues   int
-	TotalMerged   int
-	TotalReviewed int
+	TotalCommits              int
+	TotalPrs                  int
+	TotalIssues               int
+	TotalReviewedPullRequests int
+	LastContribution          interface{}
 }
 
 func HandleGetUserStats(db *gorm.DB) func(w http.ResponseWriter, r *http.Request) {
@@ -151,4 +118,24 @@ func HandleGetNewestContributors(db *gorm.DB) func(w http.ResponseWriter, r *htt
 
 		json.NewEncoder(w).Encode(users)
 	}
+}
+
+func getLastContribution(user models.User) interface{} {
+	var newest interface{}
+	var lastTime time.Time
+	if len(user.Commits) > 0 {
+		newest = user.Commits[0]
+		lastTime = user.Commits[0].CreatedAt
+	}
+
+	if len(user.Issues) > 0 && user.Issues[0].CreatedAt.After(lastTime) {
+		newest = user.Issues[0]
+		lastTime = user.Issues[0].CreatedAt
+	}
+
+	if len(user.PullRequests) > 0 && user.PullRequests[0].CreatedAt.After(lastTime) {
+		newest = user.PullRequests[0]
+	}
+
+	return newest
 }

@@ -12,7 +12,7 @@ type Issue struct {
 	State       string
 	Title       string
 	AuthorID    string
-	Author      User
+	Author      *User
 	Labels      []Label `gorm:"many2many:issue_labels"`
 	MilestoneID string
 	URL         string
