@@ -3,14 +3,14 @@ package models
 import "time"
 
 type PullRequest struct {
-	CreatedAt   time.Time
-	UpdatedAt   time.Time
-	ID          string
-	Number      int
-	State       string
-	Title       string
-	AuthorID    string
-	Author      *User
-	Reviews     []Review
-	MilestoneID string
+	CreatedAt   time.Time `json:"createdAt"`
+	UpdatedAt   time.Time `json:"updatedAt"`
+	ID          string    `json:"id"`
+	Number      int       `json:"number"`
+	State       string    `json:"state"`
+	Title       string    `json:"title"`
+	AuthorID    string    `json:"authorID"`
+	Author      *User     `json:"author"`
+	Reviews     []Review  `json:"reviews"`
+	MilestoneID string    `json:"milestoneID"`
 }

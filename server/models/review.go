@@ -3,11 +3,11 @@ package models
 import "time"
 
 type Review struct {
-	ID            string
-	AuthorID      string
-	PullRequestID string
-	CreatedAt     time.Time
+	ID            string    `gorm:"primaryKey" json:"id"`
+	AuthorID      string    `json:"authorID"`
+	PullRequestID string    `json:"pullRequestID"`
+	CreatedAt     time.Time `json:"createdAt"`
 
-	PullRequest *PullRequest
-	Author      *User
+	PullRequest *PullRequest `json:"pullRequest"`
+	Author      *User        `json:"author"`
 }

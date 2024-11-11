@@ -5,29 +5,29 @@ import (
 )
 
 type Issue struct {
-	CreatedAt   time.Time
-	UpdatedAt   time.Time
-	ID          string
-	Number      int
-	State       string
-	Title       string
-	AuthorID    string
-	Author      *User
-	Labels      []Label `gorm:"many2many:issue_labels"`
-	MilestoneID string
-	URL         string
-	Assignees   []Assignee `gorm:"many2many:issue_assignees"`
+	CreatedAt   time.Time  `json:"createdAt"`
+	UpdatedAt   time.Time  `json:"updatedAt"`
+	ID          string     `json:"id"`
+	Number      int        `json:"number"`
+	State       string     `json:"state"`
+	Title       string     `json:"title"`
+	AuthorID    string     `json:"authorID"`
+	Author      *User      `json:"author"`
+	Labels      []Label    `gorm:"many2many:issue_labels" json:"labels"`
+	MilestoneID string     `json:"milestoneID"`
+	URL         string     `json:"URL"`
+	Assignees   []Assignee `gorm:"many2many:issue_assignees" json:"assignees"`
 }
 
 type Assignee struct {
-	ID      uint `gorm:"primaryKey"`
-	UserID  string
-	IssueID string
-	User    *User
+	ID      uint   `gorm:"primaryKey" json:"id"`
+	UserID  string `json:"userID"`
+	IssueID string `json:"issueID"`
+	User    *User  `json:"user"`
 }
 
 type Label struct {
-	ID    uint `gorm:"primaryKey"`
-	Name  string
-	Color string
+	ID    uint   `gorm:"primaryKey" json:"id"`
+	Name  string `json:"name"`
+	Color string `json:"color"`
 }
