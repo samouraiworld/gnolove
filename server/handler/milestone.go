@@ -16,7 +16,8 @@ func GetMilestone(db *gorm.DB) func(w http.ResponseWriter, r *http.Request) {
 		var milestone models.Milestone
 
 		err := db.Model(&models.Milestone{}).
-			Preload("Author").Preload("Issues").Where("number = ?", milestoneNumber).First(&milestone).Error
+			Preload("Author").Preload("Issues").Preload("Issues.Author").Preload("Issues.Assignees.User").Preload("Issues.Labels").
+			Where("number = ?", milestoneNumber).First(&milestone).Error
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			w.Write([]byte(err.Error()))

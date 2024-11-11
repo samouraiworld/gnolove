@@ -5,7 +5,6 @@ import (
 	"os"
 	"time"
 
-	"github.com/lib/pq"
 	"github.com/samouraiworld/topofgnomes/server/models"
 	"github.com/shurcooL/githubv4"
 	"go.uber.org/zap"
@@ -154,24 +153,40 @@ func (s *Syncer) syncPRs() error {
 }
 
 func (s *Syncer) syncUsers() error {
-	var q struct {
-		Repository struct {
-			Users struct {
-				Nodes []models.User
-			} `graphql:"mentionableUsers(first: 100)"`
-		} `graphql:"repository(owner: \"gnolang\", name: \"gno\")"`
+	variables := map[string]interface{}{
+		"cursor": (*githubv4.String)(nil), // Null after argument to get first page.
 	}
 
-	err := s.client.Query(context.Background(), &q, nil)
-	if err != nil {
-		return err
-	}
+	hasNextPage := true
 
-	for _, user := range q.Repository.Users.Nodes {
-		err = s.db.Save(user).Error
+	for hasNextPage {
+
+		var q struct {
+			Repository struct {
+				Users struct {
+					Nodes    []models.User
+					PageInfo struct {
+						EndCursor   githubv4.String
+						HasNextPage bool
+					}
+				} `graphql:"mentionableUsers(first: 100 after:$cursor )"`
+			} `graphql:"repository(owner: \"gnolang\", name: \"gno\")"`
+		}
+
+		err := s.client.Query(context.Background(), &q, variables)
 		if err != nil {
 			return err
 		}
+
+		for _, user := range q.Repository.Users.Nodes {
+			err = s.db.Save(user).Error
+			if err != nil {
+				return err
+			}
+		}
+
+		hasNextPage = q.Repository.Users.PageInfo.HasNextPage
+		variables["cursor"] = githubv4.NewString(q.Repository.Users.PageInfo.EndCursor)
 	}
 
 	return nil
@@ -204,10 +219,28 @@ func (s *Syncer) syncIssues() error {
 		}
 
 		for _, issue := range q.Repository.Issues.Nodes {
-			labels := make(pq.StringArray, len(issue.Labels.Nodes))
+			labels := make([]models.Label, len(issue.Labels.Nodes))
 			for index, label := range issue.Labels.Nodes {
-				labels[index] = label.Name
+				labels[index] = models.Label{
+					Name:  label.Name,
+					Color: label.Color,
+				}
 			}
+
+			assignesMap := map[string]bool{}
+			assignees := make([]models.Assignee, 0, len(issue.Assignees.Nodes))
+			for _, assignee := range issue.Assignees.Nodes {
+				if assignesMap[assignee.User.ID] {
+					continue
+				}
+				assignees = append(assignees, models.Assignee{
+					UserID:  assignee.User.ID,
+					IssueID: issue.ID,
+				})
+
+				assignesMap[assignee.User.ID] = true
+			}
+
 			if lastUpdatedTime.After(issue.UpdatedAt) {
 				s.logger.Info("ISSUES: All updated...")
 				return nil
@@ -222,6 +255,8 @@ func (s *Syncer) syncIssues() error {
 				AuthorID:    issue.Author.User.ID,
 				Labels:      labels,
 				MilestoneID: issue.Milestone.ID,
+				URL:         issue.Url,
+				Assignees:   assignees,
 			}
 			err = s.db.Save(issue).Error
 			if err != nil {
@@ -312,6 +347,10 @@ type issue struct {
 	State     string
 	Title     string
 	Author    Author
+	Assignees struct {
+		Nodes []Author
+	} `graphql:"assignees(first: 10)"`
+	Url       string
 	Milestone milestone
 	Labels    struct {
 		Nodes []struct {

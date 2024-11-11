@@ -2,8 +2,6 @@ package models
 
 import (
 	"time"
-
-	"github.com/lib/pq"
 )
 
 type Issue struct {
@@ -15,6 +13,21 @@ type Issue struct {
 	Title       string
 	AuthorID    string
 	Author      User
-	Labels      pq.StringArray `gorm:"type:text[]"`
+	Labels      []Label `gorm:"many2many:issue_labels"`
 	MilestoneID string
+	URL         string
+	Assignees   []Assignee `gorm:"many2many:issue_assignees"`
+}
+
+type Assignee struct {
+	ID      uint `gorm:"primaryKey"`
+	UserID  string
+	IssueID string
+	User    *User
+}
+
+type Label struct {
+	ID    uint `gorm:"primaryKey"`
+	Name  string
+	Color string
 }
