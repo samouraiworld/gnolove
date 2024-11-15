@@ -19,6 +19,8 @@ func getUserStats(db *gorm.DB, startTime time.Time) ([]UserWithStats, error) {
 		Preload("Reviews", "created_at > ? ", startTime).
 		Preload("Reviews.PullRequest").
 		Preload("Issues", "created_at > ? order by created_at desc", startTime).
+		Preload("Issues.Assignees.User").
+		Preload("Issues.Labels").
 		Find(&users).Error
 	if err != nil {
 		return nil, err

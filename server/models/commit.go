@@ -7,6 +7,6 @@ type Commit struct {
 	CreatedAt time.Time `json:"createdAt"`
 	UpdatedAt time.Time `json:"updatedAt"`
 	AuthorID  string    `json:"authorID"`
-	Url       string    `json:"URL" `
+	URL       string    `json:"URL" `
 	Author    *User     `json:"author"`
 }

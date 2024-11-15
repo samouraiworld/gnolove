@@ -13,4 +13,5 @@ type PullRequest struct {
 	Author      *User     `json:"author"`
 	Reviews     []Review  `json:"reviews"`
 	MilestoneID string    `json:"milestoneID"`
+	URL         string    `json:"URL"`
 }

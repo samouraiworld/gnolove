@@ -144,6 +144,7 @@ func (s *Syncer) syncPRs() error {
 				AuthorID:    pr.Author.User.ID,
 				Reviews:     reviews,
 				MilestoneID: pr.Milestone.ID,
+				URL:         pr.Url,
 			}
 			err = s.db.Save(pr).Error
 			if err != nil {
@@ -373,7 +374,7 @@ func (s *Syncer) syncCommits() error {
 			commit := models.Commit{
 				ID:        c.ID,
 				AuthorID:  c.Author.User.ID,
-				Url:       c.Url,
+				URL:       c.Url,
 				CreatedAt: c.CommittedDate,
 				UpdatedAt: c.CommittedDate,
 			}
@@ -435,6 +436,7 @@ type pullRequest struct {
 	Number    int
 	State     string
 	Title     string
+	Url       string
 	Author    Author
 	Milestone milestone
 	Reviews   struct {
