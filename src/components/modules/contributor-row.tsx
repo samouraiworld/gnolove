@@ -62,7 +62,7 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
         </Table.Cell>
       )}
 
-      <Table.Cell data-href={/* TODO: contributor.url */ '#'} onClick={onClick}>
+      <Table.Cell data-href={contributor.url} onClick={onClick}>
         <Flex width="100%" height="100%" align="center" gap="2">
           <Image
             src={contributor.avatarUrl}
@@ -85,7 +85,7 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
 
       {contributor.LastContribution && 'title' in contributor.LastContribution ? (
         <Table.Cell
-          data-href={/* TODO: contributor.LastContribution.url */ '#'}
+          data-href={contributor.LastContribution.url}
           onClick={onLastContributionClick}
           className="group hidden text-left lg:table-cell"
         >
@@ -108,17 +108,13 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
           </Flex>
         </Table.Cell>
       ) : (
-        <Table.Cell
-          data-href={/* TODO: contributor.url */ '#'}
-          onClick={onClick}
-          className="hidden text-left lg:table-cell"
-        >
+        <Table.Cell data-href={contributor.url} onClick={onClick} className="hidden text-left lg:table-cell">
           <Text color="gray">-</Text>
         </Table.Cell>
       )}
 
       <Table.Cell
-        data-href={/* TODO: contributor.url */ '#'}
+        data-href={contributor.url}
         onClick={onClick}
         className="hidden text-center align-middle sm:table-cell"
       >
@@ -126,7 +122,7 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
       </Table.Cell>
 
       <Table.Cell
-        data-href={/* TODO: contributor.url */ '#'}
+        data-href={contributor.url}
         onClick={onClick}
         className="hidden text-center align-middle sm:table-cell"
       >
@@ -134,18 +130,14 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
       </Table.Cell>
 
       <Table.Cell
-        data-href={/* TODO: contributor.url */ '#'}
+        data-href={contributor.url}
         onClick={onClick}
         className="hidden text-center align-middle sm:table-cell"
       >
         {contributor.TotalPrs}
       </Table.Cell>
 
-      <Table.Cell
-        data-href={/* TODO: contributor.url */ '#'}
-        onClick={onClick}
-        className="text-center align-middle font-bold"
-      >
+      <Table.Cell data-href={contributor.url} onClick={onClick} className="text-center align-middle font-bold">
         {contributor.score.toFixed(2)}
       </Table.Cell>
 

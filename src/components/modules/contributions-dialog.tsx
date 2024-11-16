@@ -58,8 +58,7 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
                   className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-grayA-2"
                   asChild
                 >
-                  {/* TODO: Add the href */}
-                  <Link href="#" target="_blank">
+                  <Link href={issueOrPR.url} target="_blank">
                     <Text size="1">{issueOrPR.title}</Text>
                     <Flex gap="1" wrap="wrap">
                       {'labels' in issueOrPR &&

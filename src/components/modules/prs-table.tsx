@@ -28,10 +28,7 @@ const PrsTable = ({ prs, showHeader, ...props }: IssuesTableProps) => {
       )}
 
       <Table.Body>
-        {prs.map(({ id, title }) => {
-          // TODO: Add URL
-          const url = '#';
-
+        {prs.map(({ id, title, url }) => {
           return (
             <Table.Row
               data-href={url}
