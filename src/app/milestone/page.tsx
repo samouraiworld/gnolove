@@ -15,14 +15,23 @@ import Label from '@/element/label';
 import RadixMarkdown from '@/element/radix-markdown';
 
 import { cmpCreatedAt } from '@/util/github';
-import { getCachedMilestone } from '@/util/milestones';
+import { MilestoneSchema } from '@/util/schemas';
+
+import MILESTONE from '@/constant/milestone';
 
 export const metadata: Metadata = {
   title: 'Top of Gnome',
 };
 
+const getMilestone = async () => {
+  const res = await fetch(`http://localhost:3333/milestones/${MILESTONE.number}`, { cache: 'no-cache' });
+  const data = await res.json();
+
+  return MilestoneSchema.parse(data);
+};
+
 const MilestonePage = async () => {
-  const milestone = await getCachedMilestone();
+  const milestone = await getMilestone();
   if (!milestone) return notFound();
 
   return (
@@ -69,27 +78,23 @@ const MilestonePage = async () => {
                     </Text>
 
                     <Flex gap="2">
-                      {issue.labels.map((label) => {
-                        if (typeof label === 'string')
-                          return <Label label={{ color: 'ffffff', name: label }} key={label} />;
-
-                        if (!label.name) return <></>;
-                        return <Label label={{ color: label.color ?? 'ffffff', name: label.name }} key={label.id} />;
-                      })}
+                      {issue.labels.map((label) => (
+                        <Label label={label} key={label.id} />
+                      ))}
                     </Flex>
                   </Flex>
 
                   <Text color="gray">
-                    #{issue.number} opened {formatDistanceToNow(issue.created_at, { addSuffix: true })} by{' '}
-                    {issue.user?.login ?? 'unknown'}
+                    #{issue.number} opened {formatDistanceToNow(issue.createdAt, { addSuffix: true })} by{' '}
+                    {issue.author?.login ?? 'unknown'}
                   </Text>
                 </Flex>
               </Table.Cell>
 
               <Table.Cell>
                 <Flex gap="2" height="100%" align="center" justify="center">
-                  {(issue.assignees ?? []).map((assignee) => (
-                    <Avatar fallback={assignee.login} src={assignee.avatar_url} key={assignee.id} size="1" />
+                  {(issue.assignees ?? []).map(({ user: assignee }) => (
+                    <Avatar fallback={assignee.login} src={assignee.avatarUrl} key={assignee.id} size="1" />
                   ))}
                 </Flex>
               </Table.Cell>

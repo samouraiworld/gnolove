@@ -1,22 +1,17 @@
-import SCORE from '@/constant/score';
+import { TEnhancedUserWithStats, TEnhancedUserWithStatsAndScore } from '@/util/schemas';
 
-import { UserWithStats, UserWithStatsAndScore } from '@/type/github';
+import SCORE from '@/constant/score';
 
 /**
  * Calculate the score of the user from its stats
  * @param user The user to calculate the score from
  */
-export const getScore = (user: UserWithStats): number => {
-  const reviewedMrScore = user.reviewedMrs.count;
-  const mrScore = user.mrs.count - reviewedMrScore;
-  const prScore = user.prs.count - mrScore;
-
+export const getScore = (user: TEnhancedUserWithStats): number => {
   return (
-    user.commits * SCORE.COMMIT_FACTOR +
-    user.issues.count * SCORE.ISSUES_FACTOR +
-    prScore * SCORE.PR_FACTOR +
-    mrScore * SCORE.MR_FACTOR +
-    reviewedMrScore * SCORE.REVIEWED_MR_FACTOR
+    user.TotalCommits * SCORE.COMMIT_FACTOR +
+    user.TotalIssues * SCORE.ISSUES_FACTOR +
+    user.TotalPrs * SCORE.PR_FACTOR +
+    user.TotalReviewedPullRequests * SCORE.REVIEWED_MR_FACTOR
   );
 };
 
@@ -24,7 +19,7 @@ export const getScore = (user: UserWithStats): number => {
  * Map the score to the contributors
  * @param contributors The contributors to map the score to
  */
-export const getContributorsWithScore = (contributors: UserWithStats[]): UserWithStatsAndScore[] => {
+export const getContributorsWithScore = (contributors: TEnhancedUserWithStats[]): TEnhancedUserWithStatsAndScore[] => {
   return contributors.map((row) => ({ ...row, score: getScore(row) }));
 };
 
@@ -32,10 +27,13 @@ export const getContributorsWithScore = (contributors: UserWithStats[]): UserWit
  * Get the contributors sorted by score
  * @param contributors The contributors to sort
  */
-export const getSortedContributors = (contributors: UserWithStatsAndScore[]): UserWithStatsAndScore[] => {
+export const getSortedContributors = (
+  contributors: TEnhancedUserWithStatsAndScore[],
+): TEnhancedUserWithStatsAndScore[] => {
   return contributors
-    .toSorted((a, b) => b.commits - a.commits)
-    .toSorted((a, b) => b.prs.count - a.prs.count)
-    .toSorted((a, b) => b.mrs.count - a.mrs.count)
+    .toSorted((a, b) => b.TotalCommits - a.TotalCommits)
+    .toSorted((a, b) => b.TotalReviewedPullRequests - a.TotalReviewedPullRequests)
+    .toSorted((a, b) => b.TotalPrs - a.TotalPrs)
+    .toSorted((a, b) => b.TotalIssues - a.TotalIssues)
     .toSorted((a, b) => b.score - a.score);
 };

@@ -5,11 +5,10 @@ import { Flex, FlexProps, TabNav, Text } from '@radix-ui/themes';
 import ContributorTable from '@/module/contributor-table';
 
 import { isTimeFilter, TimeFilter } from '@/util/github';
-
-import { UserWithStatsAndScore } from '@/type/github';
+import { TEnhancedUserWithStatsAndScore } from '@/util/schemas';
 
 export interface ScoreboardProps {
-  contributors: UserWithStatsAndScore[];
+  contributors: TEnhancedUserWithStatsAndScore[];
   timeFilter: TimeFilter;
 }
 

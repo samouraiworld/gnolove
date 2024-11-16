@@ -6,16 +6,15 @@ import { Flex, Table, Tooltip } from '@radix-ui/themes';
 
 import ContributorRow from '@/module/contributor-row';
 
+import { TEnhancedUserWithStatsAndScore } from '@/util/schemas';
 import { getSortedContributors } from '@/util/score';
 
 import SCORE from '@/constant/score';
 
-import { UserWithStatsAndScore } from '@/type/github';
-
 import MinecraftHeart from '@/image/minecraft-heart.png';
 
 export interface ContributorTableProps {
-  contributors: UserWithStatsAndScore[];
+  contributors: TEnhancedUserWithStatsAndScore[];
 
   sort?: boolean;
 
@@ -28,7 +27,6 @@ const ContributorTable = ({ contributors, sort, showRank }: ContributorTableProp
       commits: SCORE.COMMIT_FACTOR,
       issues: SCORE.ISSUES_FACTOR,
       pull_requests: SCORE.PR_FACTOR,
-      merge_requests: SCORE.MR_FACTOR,
       reviewed_merge_requests: SCORE.REVIEWED_MR_FACTOR,
     };
 
@@ -48,7 +46,7 @@ const ContributorTable = ({ contributors, sort, showRank }: ContributorTableProp
           <Table.ColumnHeaderCell className="hidden lg:table-cell">Last Activity</Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell className="hidden text-center sm:table-cell">Commits</Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell className="hidden text-center sm:table-cell">Issues</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="hidden text-center sm:table-cell">PRs (MRs)</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="hidden text-center sm:table-cell">PRs</Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell className="text-center">
             <Tooltip className="text-center font-mono" content={tooltipContent}>
               <Flex width="100%" height="100%" justify="center" align="center" gap="1">
@@ -61,11 +59,9 @@ const ContributorTable = ({ contributors, sort, showRank }: ContributorTableProp
       </Table.Header>
 
       <Table.Body>
-        {(sort ? getSortedContributors(contributors) : contributors)
-          .slice(0, 50)
-          .map(({ score, ...contributor }, rank) => (
-            <ContributorRow key={contributor.id} {...{ contributor, score, rank, showRank }} />
-          ))}
+        {(sort ? getSortedContributors(contributors) : contributors).slice(0, 50).map((contributor, rank) => (
+          <ContributorRow key={contributor.id} {...{ contributor, rank, showRank }} />
+        ))}
       </Table.Body>
     </Table.Root>
   );

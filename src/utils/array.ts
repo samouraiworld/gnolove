@@ -16,3 +16,5 @@ export const arrayToString = (arr: string[]): string => {
 export const chunk = <T>(arr: T[], chunkSize: number): T[][] => {
   return [...Array(Math.ceil(arr.length / chunkSize))].map((_) => arr.splice(0, chunkSize));
 };
+
+export const isDefined = <T>(el: T | undefined | null): el is T => el !== undefined && el !== null;

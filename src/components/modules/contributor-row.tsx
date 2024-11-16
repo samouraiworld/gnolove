@@ -7,26 +7,23 @@ import Image from 'next/image';
 import { ExternalLinkIcon, MagnifyingGlassIcon, StarFilledIcon } from '@radix-ui/react-icons';
 import { Badge, Flex, IconButton, Table, Text } from '@radix-ui/themes';
 import { formatDistanceToNow } from 'date-fns';
-import { CircleDotIcon, GitPullRequestIcon } from 'lucide-react';
+import { CircleDotIcon } from 'lucide-react';
 
 import ContributionsDialog from '@/module/contributions-dialog';
 
-import { cmpCreatedAt } from '@/util/github';
+import { TEnhancedUserWithStatsAndScore } from '@/util/schemas';
 import { cn } from '@/util/style';
 
 import TEAMS from '@/constant/teams';
 
-import { UserWithStats } from '@/type/github';
-
 export interface ContributorRowProps {
-  contributor: UserWithStats;
-  score: number;
+  contributor: TEnhancedUserWithStatsAndScore;
   rank: number;
 
   showRank?: boolean;
 }
 
-const ContributorRow = ({ contributor, score, rank, showRank }: ContributorRowProps) => {
+const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) => {
   const rankElement = useMemo(() => {
     if (rank < 3)
       return (
@@ -45,21 +42,14 @@ const ContributorRow = ({ contributor, score, rank, showRank }: ContributorRowPr
     return undefined;
   }, [contributor]);
 
-  const lastContribution = useMemo(() => {
-    return [
-      ...contributor.prs.data.map((obj) => ({ ...obj, type: 'PULL_REQUEST' })),
-      ...contributor.issues.data.map((obj) => ({ ...obj, type: 'ISSUE' })),
-    ].toSorted(cmpCreatedAt)[0];
-  }, [contributor]);
-
   const onClick = () => {
     if (typeof window === 'undefined') return;
     window.open(contributor.url, '_blank');
   };
 
   const onLastContributionClick = () => {
-    if (typeof window === 'undefined' || !lastContribution) return;
-    window.open(lastContribution.url, '_blank');
+    if (typeof window === 'undefined' || !contributor.LastContribution) return;
+    window.open(contributor.LastContribution.url, '_blank');
   };
 
   return (
@@ -72,7 +62,7 @@ const ContributorRow = ({ contributor, score, rank, showRank }: ContributorRowPr
         </Table.Cell>
       )}
 
-      <Table.Cell data-href={contributor.url} onClick={onClick}>
+      <Table.Cell data-href={/* TODO: contributor.url */ '#'} onClick={onClick}>
         <Flex width="100%" height="100%" align="center" gap="2">
           <Image
             src={contributor.avatarUrl}
@@ -93,68 +83,70 @@ const ContributorRow = ({ contributor, score, rank, showRank }: ContributorRowPr
         </Flex>
       </Table.Cell>
 
-      {lastContribution ? (
+      {contributor.LastContribution && 'title' in contributor.LastContribution ? (
         <Table.Cell
-          data-href={lastContribution.url}
+          data-href={/* TODO: contributor.LastContribution.url */ '#'}
           onClick={onLastContributionClick}
           className="group hidden text-left lg:table-cell"
         >
           <Flex width="100%" height="100%" align="center" gap="2" className="text-1">
             <Flex direction="column">
               <Flex align="center" gap="1">
-                {lastContribution.type === 'ISSUE' ? (
-                  <>
-                    <CircleDotIcon className="size-3 group-hover:text-accent-10" />
-                    <Text className="group-hover:text-accent-10">Issue</Text>
-                  </>
-                ) : (
-                  <>
-                    <GitPullRequestIcon className="size-3 group-hover:text-accent-10" />
-                    <Text className="group-hover:text-accent-10">PR</Text>
-                  </>
-                )}
+                {/*<GitPullRequestIcon className="size-3 group-hover:text-accent-10" />*/}
+                {/*<Text className="group-hover:text-accent-10">PR</Text>*/}
 
-                <Text color="gray">{formatDistanceToNow(lastContribution.createdAt)}</Text>
+                <CircleDotIcon className="size-3 group-hover:text-accent-10" />
+                <Text className="group-hover:text-accent-10">Last Contrib</Text>
+
+                <Text color="gray">{formatDistanceToNow(contributor.LastContribution.createdAt)}</Text>
               </Flex>
 
               <Text color="gray" className="max-w-52 truncate">
-                {lastContribution.title}
+                {contributor.LastContribution.title}
               </Text>
             </Flex>
           </Flex>
         </Table.Cell>
       ) : (
-        <Table.Cell data-href={contributor.url} onClick={onClick} className="hidden text-left lg:table-cell">
+        <Table.Cell
+          data-href={/* TODO: contributor.url */ '#'}
+          onClick={onClick}
+          className="hidden text-left lg:table-cell"
+        >
           <Text color="gray">-</Text>
         </Table.Cell>
       )}
 
       <Table.Cell
-        data-href={contributor.url}
+        data-href={/* TODO: contributor.url */ '#'}
         onClick={onClick}
         className="hidden text-center align-middle sm:table-cell"
       >
-        {contributor.commits}
+        {contributor.TotalCommits}
       </Table.Cell>
 
       <Table.Cell
-        data-href={contributor.url}
+        data-href={/* TODO: contributor.url */ '#'}
         onClick={onClick}
         className="hidden text-center align-middle sm:table-cell"
       >
-        {contributor.issues.count}
+        {contributor.TotalIssues}
       </Table.Cell>
 
       <Table.Cell
-        data-href={contributor.url}
+        data-href={/* TODO: contributor.url */ '#'}
         onClick={onClick}
         className="hidden text-center align-middle sm:table-cell"
       >
-        {contributor.prs.count} ({contributor.mrs.count})
+        {contributor.TotalPrs}
       </Table.Cell>
 
-      <Table.Cell data-href={contributor.url} onClick={onClick} className="text-center align-middle font-bold">
-        {score.toFixed(2)}
+      <Table.Cell
+        data-href={/* TODO: contributor.url */ '#'}
+        onClick={onClick}
+        className="text-center align-middle font-bold"
+      >
+        {contributor.score.toFixed(2)}
       </Table.Cell>
 
       <Table.Cell className="text-center">

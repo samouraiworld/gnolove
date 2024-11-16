@@ -2,10 +2,10 @@ import { Table } from '@radix-ui/themes';
 
 import UserRow from '@/module/user-row';
 
-import { User } from '@/type/github';
+import { TUser } from '@/util/schemas';
 
 export interface UserTableProps {
-  users: User[];
+  users: TUser[];
 
   showHeader?: boolean;
 }
