@@ -19,12 +19,15 @@ import { MilestoneSchema } from '@/util/schemas';
 
 import MILESTONE from '@/constant/milestone';
 
+import ENV from '@/env';
+
 export const metadata: Metadata = {
   title: 'Top of Gnome',
 };
 
 const getMilestone = async () => {
-  const res = await fetch(`http://localhost:3333/milestones/${MILESTONE.number}`, { cache: 'no-cache' });
+  const url = new URL(`/milestones/${MILESTONE.number}`, ENV.NEXT_PUBLIC_API_URL);
+  const res = await fetch(url.toString(), { cache: 'no-cache' });
   const data = await res.json();
 
   return MilestoneSchema.parse(data);

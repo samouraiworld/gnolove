@@ -25,6 +25,8 @@ import REPOSITORY from '@/constant/repository';
 
 import HeaderImage from '@/image/header.png';
 
+import ENV from '@/env';
+
 export const metadata: Metadata = {
   title: 'Top of Gnome',
 };
@@ -49,7 +51,7 @@ const getParameterFromTimeFilter = (timeFilter: TimeFilter) => {
 };
 
 const getContributors = async (timeFilter: TimeFilter) => {
-  const url = new URL('http://localhost:3333/getStats');
+  const url = new URL('/getStats', ENV.NEXT_PUBLIC_API_URL);
 
   const timeParameter = getParameterFromTimeFilter(timeFilter);
   if (timeParameter !== 'all') url.searchParams.set('time', timeParameter);
@@ -61,7 +63,7 @@ const getContributors = async (timeFilter: TimeFilter) => {
 };
 
 const getLastIssues = async () => {
-  const url = new URL('http://localhost:3333/getIssues?labels=help wanted,bounty');
+  const url = new URL('/getIssues?labels=help wanted,bounty', ENV.NEXT_PUBLIC_API_URL);
 
   const res = await fetch(url.toString(), { cache: 'no-cache' });
   const data = await res.json();
@@ -70,7 +72,7 @@ const getLastIssues = async () => {
 };
 
 const getNewContributors = async () => {
-  const url = new URL('http://localhost:3333/contributors/newest?number=5');
+  const url = new URL('/contributors/newest?number=5', ENV.NEXT_PUBLIC_API_URL);
 
   const res = await fetch(url.toString(), { cache: 'no-cache' });
   const data = await res.json();
@@ -79,7 +81,7 @@ const getNewContributors = async () => {
 };
 
 const getMilestone = async () => {
-  const url = new URL(`http://localhost:3333/milestones/${MILESTONE.number}`);
+  const url = new URL(`/milestones/${MILESTONE.number}`, ENV.NEXT_PUBLIC_API_URL);
 
   const res = await fetch(url.toString(), { cache: 'no-cache' });
   const data = await res.json();
