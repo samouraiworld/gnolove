@@ -1,10 +1,10 @@
 DOCKER_REGISTRY=rg.nl-ams.scw.cloud/teritori
-AGENT_DOCKER_IMAGE=$(DOCKER_REGISTRY)/gnolove-server:$(shell git rev-parse --short HEAD)
+SERVER_DOCKER_IMAGE=$(DOCKER_REGISTRY)/gnolove-server:$(shell git rev-parse --short HEAD)
 
 .PHONY: publish
 publish:
-	docker build .  --platform linux/amd64 -t $(AGENT_DOCKER_IMAGE)
-	docker push $(AGENT_DOCKER_IMAGE)
+	docker build .  --platform linux/amd64 -t $(SERVER_DOCKER_IMAGE)
+	docker push $(SERVER_DOCKER_IMAGE)
 	
 generate.graphql:
 	go run github.com/Khan/genqlient@85e2e8dffd211c83a2be626474993ef68e44a242 graph/genclient.yaml

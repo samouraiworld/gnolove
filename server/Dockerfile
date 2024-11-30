@@ -1,14 +1,37 @@
-# Start from the latest golang base image
-FROM golang:1.23-bullseye
+# syntax=docker/dockerfile:1
 
-# Set the Current Working Directory inside the container
+ARG GO_VERSION="1.23"
+ARG RUNNER_IMAGE="gcr.io/distroless/static"
+
+# --------------------------------------------------------
+# Builder
+# --------------------------------------------------------
+
+FROM golang:${GO_VERSION}-alpine as builder
+
+RUN set -eux; apk add --no-cache ca-certificates build-base; apk add git linux-headers
+
+# Download go dependencies
 WORKDIR /app
+COPY go.* ./
+RUN --mount=type=cache,target=/root/.cache/go-build \
+  --mount=type=cache,target=/root/go/pkg/mod \
+  go mod download
 
-# Copy everything from the current directory to the Working Directory inside the container
+# Copy the remaining files
 COPY . .
 
-ENV CGO_ENABLED=1
-RUN --mount=type=cache,target=/root/.cache/go-build --mount=type=cache,target=/go go build -o bin/main main.go
+# Build teritorid binary
+RUN --mount=type=cache,target=/root/.cache/go-build \
+  --mount=type=cache,target=/root/go/pkg/mod \
+  go build \
+  -mod=readonly \
+  -trimpath \
+  -o /app/build/main \
+  .
+# --------------------------------------------------------
+# Runner
+# --------------------------------------------------------
+RUN chmod a+x /app/build/main
 
-CMD [ "/app/bin/main" ]
-
+ENTRYPOINT ["/app/build/main"]

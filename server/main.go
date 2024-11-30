@@ -33,6 +33,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	logger.Info("graphqlEndpoint")
 
 	syncer := sync.NewSyncer(database, graphqlEndpoint, repository, owner, logger.Sugar())
 	syncer.StartSynchonizing()
