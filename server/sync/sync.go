@@ -27,7 +27,6 @@ func NewSyncer(db *gorm.DB, graphqlEndpoint, repository, owner string, logger *z
 		&oauth2.Token{AccessToken: os.Getenv("GITHUB_TOKEN")},
 	)
 	httpClient := oauth2.NewClient(context.Background(), src)
-	logger.Info(os.Getenv("GITHUB_TOKEN"))
 	client := githubv4.NewClient(httpClient)
 	return &Syncer{
 		db:     db,
