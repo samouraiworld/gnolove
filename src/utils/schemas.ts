@@ -1,7 +1,5 @@
 import { z } from 'zod';
 
-import { isDefined } from '@/util/array';
-
 export const LabelSchema = z.object({
   id: z.coerce.string(),
   name: z.string(),
