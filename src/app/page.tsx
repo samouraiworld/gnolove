@@ -62,13 +62,13 @@ const getContributors = async (timeFilter: TimeFilter) => {
   return z.array(EnhancedUserWithStatsSchema).parse(data);
 };
 
-const getLastIssues = async () => {
+const getLastIssues = async (last: number) => {
   const url = new URL('/getIssues?labels=help wanted,bounty', ENV.NEXT_PUBLIC_API_URL);
 
   const res = await fetch(url.toString(), { cache: 'no-cache' });
   const data = await res.json();
 
-  return z.array(IssueSchema).parse(data);
+  return z.array(IssueSchema).parse(data).slice(0, last);
 };
 
 const getNewContributors = async () => {
@@ -94,7 +94,7 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
 
   const allTimeCachedContributors = await getContributors(TimeFilter.ALL_TIME);
   const cachedContributors = await getContributors(timeFilter);
-  const issues = await getLastIssues();
+  const issues = await getLastIssues(5);
   const newContributors = await getNewContributors();
   const milestone = await getMilestone();
 
