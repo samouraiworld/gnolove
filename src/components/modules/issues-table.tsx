@@ -5,10 +5,10 @@ import { Flex, HoverCard, Table, Text } from '@radix-ui/themes';
 
 import Label from '@/element/label';
 
-import { Issue } from '@/type/github';
+import { TIssue } from '@/util/schemas';
 
 export interface IssuesTableProps extends Table.RootProps {
-  issues: Issue[];
+  issues: TIssue[];
 
   showHeader?: boolean;
   showLabels?: 'on-hover' | 'as-column';
@@ -32,7 +32,7 @@ const IssuesTable = ({ issues, showLabels, showHeader, ...props }: IssuesTablePr
       )}
 
       <Table.Body>
-        {issues.map(({ id, title, url, labels }) => (
+        {issues.map(({ id, title, labels, url }) => (
           <Table.Row
             data-href={url}
             onClick={onClick.bind(null, url)}
@@ -51,9 +51,7 @@ const IssuesTable = ({ issues, showLabels, showHeader, ...props }: IssuesTablePr
 
                     <Flex gap="2" wrap="wrap" asChild>
                       <HoverCard.Content size="1">
-                        {labels.map((label) => (
-                          <Label label={label} key={label.name + label.color} />
-                        ))}
+                        {labels && labels.map((label) => <Label label={label} key={label.name + label.color} />)}
                       </HoverCard.Content>
                     </Flex>
                   </HoverCard.Root>

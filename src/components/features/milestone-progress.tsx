@@ -1,14 +1,17 @@
 import { ExternalLinkIcon } from '@radix-ui/react-icons';
 import { Flex, FlexProps, Progress, Text } from '@radix-ui/themes';
 
-import { Milestone } from '@/type/github';
+import { TMilestone } from '@/util/schemas';
 
 export interface MilestoneProgressProps {
-  milestone: Milestone;
+  milestone: TMilestone;
 }
 
 const MilestoneProgress = ({ milestone, ...props }: MilestoneProgressProps & FlexProps) => {
-  const progress = (milestone.closed_issues / (milestone.open_issues + milestone.closed_issues)) * 100;
+  const closedIssues = milestone.issues.filter(({ state }) => state === 'CLOSED');
+  const openIssues = milestone.issues.filter(({ state }) => state === 'OPEN');
+
+  const progress = (closedIssues.length / (openIssues.length + closedIssues.length)) * 100;
 
   return (
     <Flex direction="column" gap="2" {...props}>

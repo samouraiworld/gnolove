@@ -3,6 +3,7 @@ import Image from 'next/image';
 import NextLink from 'next/link';
 
 import { Grid, Heading, Text } from '@radix-ui/themes';
+import { z } from 'zod';
 
 import MilestoneProgress from '@/feature/milestone-progress';
 import Scoreboard from '@/feature/scoreboard';
@@ -10,24 +11,21 @@ import Scoreboard from '@/feature/scoreboard';
 import LayoutContainer from '@/layout/layout-container';
 
 import IssuesTable from '@/module/issues-table';
+import PrsTable from '@/module/prs-table';
 import UserTable from '@/module/user-table';
 
 import YoutubeEmbeddedVideo from '@/element/youtube-embedded-video';
 
-import { getCachedContributors } from '@/util/contributors';
-import {
-  getLastIssuesWithLabel,
-  getLastMRs,
-  getNewContributors,
-  getTimeFilterFromSearchParam,
-  TimeFilter,
-} from '@/util/github';
-import { getCachedMilestone } from '@/util/milestones';
+import { getLastMRs, getTimeFilterFromSearchParam, TimeFilter } from '@/util/github';
+import { EnhancedUserWithStatsSchema, IssueSchema, MilestoneSchema, UserSchema } from '@/util/schemas';
 import { getContributorsWithScore } from '@/util/score';
 
+import MILESTONE from '@/constant/milestone';
 import REPOSITORY from '@/constant/repository';
 
 import HeaderImage from '@/image/header.png';
+
+import ENV from '@/env';
 
 export const metadata: Metadata = {
   title: 'Top of Gnome',
@@ -39,19 +37,70 @@ export interface HomePageParams {
   };
 }
 
+const getParameterFromTimeFilter = (timeFilter: TimeFilter) => {
+  switch (timeFilter) {
+    case TimeFilter.MONTHLY:
+      return 'monthly';
+    case TimeFilter.WEEKLY:
+      return 'weekly';
+    case TimeFilter.ALL_TIME:
+      return 'all';
+    default:
+      return 'all';
+  }
+};
+
+const getContributors = async (timeFilter: TimeFilter) => {
+  const url = new URL('/getStats', ENV.NEXT_PUBLIC_API_URL);
+
+  const timeParameter = getParameterFromTimeFilter(timeFilter);
+  if (timeParameter !== 'all') url.searchParams.set('time', timeParameter);
+
+  const res = await fetch(url.toString(), { cache: 'no-cache' });
+  const data = await res.json();
+
+  return z.array(EnhancedUserWithStatsSchema).parse(data);
+};
+
+const getLastIssues = async (last: number) => {
+  const url = new URL('/getIssues?labels=help wanted,bounty', ENV.NEXT_PUBLIC_API_URL);
+
+  const res = await fetch(url.toString(), { cache: 'no-cache' });
+  const data = await res.json();
+
+  return z.array(IssueSchema).parse(data).slice(0, last);
+};
+
+const getNewContributors = async () => {
+  const url = new URL('/contributors/newest?number=5', ENV.NEXT_PUBLIC_API_URL);
+
+  const res = await fetch(url.toString(), { cache: 'no-cache' });
+  const data = await res.json();
+
+  return z.array(UserSchema).parse(data);
+};
+
+const getMilestone = async () => {
+  const url = new URL(`/milestones/${MILESTONE.number}`, ENV.NEXT_PUBLIC_API_URL);
+
+  const res = await fetch(url.toString(), { cache: 'no-cache' });
+  const data = await res.json();
+
+  return MilestoneSchema.parse(data);
+};
+
 const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
   const timeFilter = getTimeFilterFromSearchParam(f, TimeFilter.MONTHLY);
 
-  const allTimeCachedContributors = await getCachedContributors(TimeFilter.ALL_TIME);
-  const cachedContributors = await getCachedContributors(timeFilter);
-
-  const milestone = await getCachedMilestone();
+  const allTimeCachedContributors = await getContributors(TimeFilter.ALL_TIME);
+  const cachedContributors = await getContributors(timeFilter);
+  const issues = await getLastIssues(5);
+  const newContributors = await getNewContributors();
+  const milestone = await getMilestone();
 
   const filteredContributors = getContributorsWithScore(cachedContributors).filter(({ score }) => score);
 
   const lastMRs = getLastMRs(allTimeCachedContributors, 5);
-  const lastIssues = getLastIssuesWithLabel(allTimeCachedContributors, ['good first issue', 'help wanted'], 5);
-  const newContributors = getNewContributors(allTimeCachedContributors, 5);
 
   return (
     <LayoutContainer>
@@ -81,8 +130,8 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
           ⭐ New Rising gnome
         </Text>
 
-        <IssuesTable issues={lastIssues} showLabels="on-hover" />
-        <IssuesTable issues={lastMRs} />
+        <IssuesTable issues={issues} showLabels="on-hover" />
+        <PrsTable prs={lastMRs} />
         <UserTable users={newContributors} />
       </Grid>
 

@@ -5,10 +5,10 @@ import Image from 'next/image';
 import { ExternalLinkIcon } from '@radix-ui/react-icons';
 import { Flex, Table, Text } from '@radix-ui/themes';
 
-import { User } from '@/type/github';
+import { TUser } from '@/util/schemas';
 
 export interface UserRowProps {
-  user: User;
+  user: TUser;
 }
 
 const UserRow = ({ user }: UserRowProps) => {

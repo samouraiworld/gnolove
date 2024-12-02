@@ -1,149 +1,196 @@
 import { z } from 'zod';
 
 export const LabelSchema = z.object({
+  id: z.coerce.string(),
   name: z.string(),
   color: z.string(),
 });
 
-export type LabelSchemaType = z.infer<typeof LabelSchema>;
+export type TLabel = z.infer<typeof LabelSchema>;
 
-export const IssueSchema = z.object({
-  id: z.string(),
-  title: z.string(),
-  url: z.string().url(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
-  labels: z.array(LabelSchema),
-});
+const preprocessUser = (data: unknown) => {
+  if (!data || typeof data !== 'object') return data;
+  const _data = data as any;
+  return {
+    ..._data,
+    name: _data.name ?? _data.Name,
+    login: _data.login ?? _data.Login,
+    id: _data.id ?? _data.ID,
+    avatarUrl: _data.avatarUrl ?? _data.AvatarURL ?? _data.AvatarUrl ?? _data.avatarURL,
+    url: _data.url ?? _data.URL,
+  };
+};
 
-export type IssueSchemaType = z.infer<typeof IssueSchema>;
-
-export const PullRequestSchema = z.object({
-  id: z.string(),
-  title: z.string(),
-  url: z.string().url(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
-  labels: z.array(LabelSchema),
-});
-
-export type PullRequestSchemaType = z.infer<typeof PullRequestSchema>;
-
-export const UserSchema = z.object({
+export const UserBaseSchema = z.object({
   login: z.string(),
-  id: z.string(),
+  id: z.coerce.string(),
   avatarUrl: z.string().url(),
   url: z.string().url(),
-  name: z.string().nullable(),
+  name: z.string(),
 });
 
-export type UserSchemaType = z.infer<typeof UserSchema>;
+export const UserSchema = z.preprocess(preprocessUser, UserBaseSchema);
 
-export const UserWithStatsSchema = UserSchema.merge(
-  z.object({
-    commits: z.number(),
-    issues: z.object({ count: z.number(), data: z.array(IssueSchema) }),
-    prs: z.object({ count: z.number(), data: z.array(PullRequestSchema) }),
-    mrs: z.object({ count: z.number(), data: z.array(PullRequestSchema) }),
-    reviewedMrs: z.object({ count: z.number(), data: z.array(PullRequestSchema) }),
+export type TUser = z.infer<typeof UserSchema>;
+
+const preprocessIssue = (data: unknown) => {
+  if (!data || typeof data !== 'object') return data;
+  const _data = data as any;
+
+  const author = preprocessUser(_data.author ?? _data.Author);
+
+  return {
+    ..._data,
+    createdAt: _data.createdAt ?? _data.CreatedAt,
+    updatedAt: _data.updatedAt ?? _data.UpdatedAt,
+    id: _data.id ?? _data.ID,
+    number: _data.number ?? _data.Number,
+    state: _data.state ?? _data.State,
+    title: _data.title ?? _data.Title,
+    url: _data.url ?? _data.URL,
+    authorID: _data.authorID ?? _data.AuthorID,
+    author: author?.id === '' ? undefined : author,
+    labels: _data.labels ?? _data.Labels,
+    milestoneID: _data.milestoneID ?? _data.MilestoneID,
+  };
+};
+
+export const IssueBaseSchema = z.object({
+  createdAt: z.string(),
+  updatedAt: z.string(),
+  id: z.coerce.string(),
+  number: z.number(),
+  state: z.string(),
+  title: z.string(),
+  authorID: z.string().nullish(),
+  url: z.string().url(),
+  author: UserSchema.nullish(),
+  labels: z.array(LabelSchema).default([]),
+  assignees: z.preprocess(
+    (obj: unknown) => (Array.isArray(obj) ? obj.filter((el) => 'user' in el && el.user !== null) : []),
+    z.array(z.object({ id: z.coerce.string(), user: UserSchema })).default([]),
+  ),
+});
+
+export const IssueSchema = z.preprocess(preprocessIssue, IssueBaseSchema);
+
+export type TIssue = z.infer<typeof IssueSchema>;
+
+const preprocessPullRequest = (data: unknown) => {
+  if (!data || typeof data !== 'object') return data;
+  const _data = data as any;
+  return {
+    ..._data,
+    createdAt: _data.createdAt ?? _data.CreatedAt,
+    updatedAt: _data.updatedAt ?? _data.UpdatedAt,
+    id: _data.id ?? _data.ID,
+    number: _data.number ?? _data.Number,
+    state: _data.state ?? _data.State,
+    title: _data.title ?? _data.Title,
+    url: _data.url ?? _data.URL,
+    authorID: _data.authorID ?? _data.AuthorID,
+  };
+};
+
+export const PullRequestBaseSchema = z.object({
+  createdAt: z.string(),
+  updatedAt: z.string(),
+  id: z.coerce.string(),
+  number: z.number(),
+  state: z.string(),
+  title: z.string(),
+  url: z.string().url(),
+  authorID: z.string(),
+  author: UserSchema.nullish(),
+  reviews: z.literal(null),
+  milestoneID: z.string(),
+});
+
+export const PullRequestSchema = z.preprocess(preprocessPullRequest, PullRequestBaseSchema);
+
+export type TPullRequest = z.infer<typeof PullRequestSchema>;
+
+export const ReviewSchema = z.object({
+  id: z.coerce.string(),
+  authorID: z.string(),
+  pullRequestID: z.string(),
+  createdAt: z.string(),
+  pullRequest: PullRequestSchema,
+  author: UserSchema.nullish(),
+});
+
+export type TReview = z.infer<typeof ReviewSchema>;
+
+const preprocessCommit = (data: unknown) => {
+  if (!data || typeof data !== 'object') return data;
+  const _data = data as any;
+  return {
+    ..._data,
+    createdAt: _data.createdAt ?? _data.CreatedAt,
+    updatedAt: _data.updatedAt ?? _data.UpdatedAt,
+    id: _data.id ?? _data.ID,
+    authorID: _data.authorID ?? _data.AuthorID,
+    url: _data.url ?? _data.URL,
+  };
+};
+
+export const CommitBaseSchema = z.object({
+  id: z.string(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+  authorID: z.string(),
+  url: z.string().url(),
+  author: UserSchema.nullish(),
+});
+
+export const CommitSchema = z.preprocess(preprocessCommit, CommitBaseSchema);
+
+export type TCommit = z.infer<typeof CommitSchema>;
+
+export const EnhancedBaseUserSchema = UserBaseSchema.extend({
+  issues: z.array(IssueSchema).nullish(),
+  pullRequests: z.array(PullRequestSchema).nullish(),
+  LastContribution: IssueSchema.or(PullRequestSchema).or(CommitSchema).nullish(),
+});
+
+export const EnhancedUserSchema = z.preprocess(preprocessUser, EnhancedBaseUserSchema);
+
+export type TEnhancedUser = z.infer<typeof EnhancedUserSchema>;
+
+export const EnhancedUserWithStatsSchema = z.preprocess(
+  preprocessUser,
+  EnhancedBaseUserSchema.extend({
+    TotalCommits: z.number().default(0),
+    TotalPrs: z.number().default(0),
+    TotalIssues: z.number().default(0),
+    TotalReviewedPullRequests: z.number().default(0),
   }),
 );
 
-export type UserWithStatsSchemaType = z.infer<typeof UserWithStatsSchema>;
+export type TEnhancedUserWithStats = z.infer<typeof EnhancedUserWithStatsSchema>;
+export type TEnhancedUserWithStatsAndScore = TEnhancedUserWithStats & { score: number };
 
-export const GHUserSchema = z.object({
-  login: z.string(),
-  id: z.number(),
-  node_id: z.string(),
-  avatar_url: z.string().url(),
-  gravatar_id: z.string(),
-  url: z.string().url(),
-  html_url: z.string().url(),
-  followers_url: z.string().url(),
-  following_url: z.string().url(),
-  gists_url: z.string().url(),
-  starred_url: z.string().url(),
-  subscriptions_url: z.string().url(),
-  organizations_url: z.string().url(),
-  repos_url: z.string().url(),
-  events_url: z.string().url(),
-  received_events_url: z.string().url(),
-  type: z.string(),
-  user_view_type: z.string(),
-  site_admin: z.boolean(),
-});
+const preprocessMilestone = (data: unknown) => {
+  if (!data || typeof data !== 'object') return data;
+  const _data = data as any;
+  return { ..._data, user: _data.user, url: _data.url ?? _data.URL };
+};
 
-export type GHUserSchemaType = z.infer<typeof GHUserSchema>;
+export const MilestoneSchema = z.preprocess(
+  preprocessMilestone,
+  z.object({
+    id: z.coerce.string(),
+    createdAt: z.string(),
+    updatedAt: z.string(),
+    number: z.number(),
+    title: z.string(),
+    state: z.string(),
+    authorID: z.string(),
+    author: UserSchema.nullish(),
+    description: z.string(),
+    url: z.string(),
+    issues: z.array(IssueSchema),
+  }),
+);
 
-export const GHLabelSchema = z.object({
-  id: z.number(),
-  node_id: z.string(),
-  url: z.string().url(),
-  name: z.string(),
-  color: z.string(),
-  default: z.boolean(),
-  description: z.string(),
-});
-
-export const MilestoneIssueSchema = z.object({
-  url: z.string().url(),
-  repository_url: z.string().url(),
-  labels_url: z.string().url(),
-  comments_url: z.string().url(),
-  events_url: z.string().url(),
-  html_url: z.string().url(),
-  id: z.number(),
-  node_id: z.string(),
-  number: z.number(),
-  title: z.string(),
-  user: GHUserSchema,
-  labels: z.array(GHLabelSchema),
-  state: z.literal('open').or(z.literal('closed')),
-  locked: z.boolean(),
-  assignee: GHUserSchema.nullable(),
-  assignees: z.array(GHUserSchema),
-
-  // milestone: MilestoneSchema,
-
-  comments: z.number(),
-  created_at: z.string(),
-  updated_at: z.string(),
-  author_association: z.string(),
-  draft: z.boolean().nullish(),
-  body: z.string().nullable(),
-  timeline_url: z.string().url(),
-
-  // TODO: Type the following fields
-  // closed_by: null,
-  // closed_at: null,
-  // active_lock_reason: null,
-  // performed_via_github_app: null,
-  // state_reason: null,
-});
-
-export type MilestoneIssueSchemaType = z.infer<typeof MilestoneIssueSchema>;
-
-export const MilestoneSchema = z.object({
-  url: z.string().url(),
-  html_url: z.string().url(),
-  labels_url: z.string().url(),
-  id: z.number(),
-  node_id: z.string(),
-  number: z.number(),
-  title: z.string(),
-  description: z.string(),
-  creator: GHUserSchema,
-  open_issues: z.number(),
-  closed_issues: z.number(),
-  state: z.string(),
-  created_at: z.string(),
-  updated_at: z.string(),
-
-  issues: z.array(MilestoneIssueSchema),
-
-  // TODO: Type due_on and closed_at
-  // due_on: null,
-  // closed_at: null
-});
-
-export type MilestoneSchemaType = z.infer<typeof MilestoneSchema>;
+export type TMilestone = z.infer<typeof MilestoneSchema>;

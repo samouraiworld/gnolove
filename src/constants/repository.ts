@@ -1,4 +1,7 @@
-import { Repository } from '@/type/github';
+export interface Repository {
+  owner: string;
+  repository: string;
+}
 
 const REPOSITORY: Repository = {
   owner: 'gnolang',

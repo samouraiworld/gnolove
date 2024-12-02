@@ -10,22 +10,22 @@ import { Button, Dialog, Flex, Text } from '@radix-ui/themes';
 import Label from '@/element/label';
 
 import { chunk } from '@/util/array';
-
-import { UserWithStats } from '@/type/github';
+import { TEnhancedUserWithStats, TIssue, TPullRequest } from '@/util/schemas';
 
 export interface ContributionsDialogProps extends Dialog.RootProps {
-  user: UserWithStats;
+  user: TEnhancedUserWithStats;
 }
 
 const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogProps) => {
   const [page, setPage] = useState(0);
 
-  const issuesAndPRsChunks = useMemo(() => {
-    const sortedIssuesAndPRs = [...user.issues.data, ...user.prs.data].toSorted(
+  const issuesAndPRsChunks = useMemo((): (TIssue | TPullRequest)[][] => {
+    const sortedIssuesAndPRs = [...(user.issues ?? []), ...(user.pullRequests ?? [])].toSorted(
       (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
     );
+
     return chunk(sortedIssuesAndPRs, 10);
-  }, [user.issues.data, user.prs.data]);
+  }, [user.issues, user.pullRequests]);
 
   const issuesAndPRs = useMemo(() => issuesAndPRsChunks[page] ?? [], [issuesAndPRsChunks, page]);
   const maxPage = useMemo(() => issuesAndPRsChunks.length, [issuesAndPRsChunks]);
@@ -49,21 +49,20 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
         ) : (
           <>
             <Flex direction="column" className="divide-y divide-gray-4">
-              {issuesAndPRs.map(({ title, url, labels }) => (
+              {issuesAndPRs.map((issueOrPR) => (
                 <Flex
-                  key={url}
+                  key={issueOrPR.id}
                   direction="column"
                   py="2"
                   gap="1"
                   className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-grayA-2"
                   asChild
                 >
-                  <Link href={url} target="_blank">
-                    <Text size="1">{title}</Text>
+                  <Link href={issueOrPR.url} target="_blank">
+                    <Text size="1">{issueOrPR.title}</Text>
                     <Flex gap="1" wrap="wrap">
-                      {labels.map((label) => (
-                        <Label key={label.name + label.color} label={label} />
-                      ))}
+                      {'labels' in issueOrPR &&
+                        issueOrPR.labels.map((label) => <Label key={label.name + label.color} label={label} />)}
                     </Flex>
                   </Link>
                 </Flex>
