@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+import { isDefined } from '@/util/array';
+
 export const LabelSchema = z.object({
   id: z.coerce.string(),
   name: z.string(),
@@ -66,7 +68,10 @@ export const IssueBaseSchema = z.object({
   url: z.string().url(),
   author: UserSchema.nullish(),
   labels: z.array(LabelSchema).default([]),
-  assignees: z.array(z.object({ id: z.coerce.string(), user: UserSchema })).default([]),
+  assignees: z.preprocess(
+    (obj: unknown) => (Array.isArray(obj) ? obj.filter((el) => 'user' in el && el.user !== null) : []),
+    z.array(z.object({ id: z.coerce.string(), user: UserSchema })).default([]),
+  ),
 });
 
 export const IssueSchema = z.preprocess(preprocessIssue, IssueBaseSchema);
