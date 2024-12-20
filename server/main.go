@@ -25,7 +25,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	graphqlEndpoint := os.Getenv("GRAPHQL_ENDPOINT")
+
 	repository := os.Getenv("REPOSITORY")
 	owner := os.Getenv("OWNER")
 
@@ -34,7 +34,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	syncer := sync.NewSyncer(database, graphqlEndpoint, repository, owner, logger.Sugar())
+	syncer := sync.NewSyncer(database, repository, owner, logger.Sugar())
 	syncer.StartSynchonizing()
 
 	http.HandleFunc("/getStats", handler.HandleGetUserStats(database))
