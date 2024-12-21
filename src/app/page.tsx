@@ -22,6 +22,7 @@ import { getContributorsWithScore } from '@/util/score';
 
 import MILESTONE from '@/constant/milestone';
 import REPOSITORY from '@/constant/repository';
+import teams from '@/constant/teams';
 
 import HeaderImage from '@/image/header.png';
 
@@ -34,6 +35,7 @@ export const metadata: Metadata = {
 export interface HomePageParams {
   searchParams: {
     f?: string | string[] | undefined;
+    e?: string | string[] | undefined;
   };
 }
 
@@ -50,11 +52,13 @@ const getParameterFromTimeFilter = (timeFilter: TimeFilter) => {
   }
 };
 
-const getContributors = async (timeFilter: TimeFilter) => {
+const getContributors = async (timeFilter: TimeFilter, exclude?: string[]) => {
   const url = new URL('/getStats', ENV.NEXT_PUBLIC_API_URL);
 
   const timeParameter = getParameterFromTimeFilter(timeFilter);
   if (timeParameter !== 'all') url.searchParams.set('time', timeParameter);
+
+  if (exclude) for (const login of exclude) url.searchParams.append('exclude', login);
 
   const res = await fetch(url.toString(), { cache: 'no-cache' });
   const data = await res.json();
@@ -89,16 +93,21 @@ const getMilestone = async () => {
   return MilestoneSchema.parse(data);
 };
 
-const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
+const coreTeam = teams.find(({ name }) => name === 'Core Team');
+
+const HomePage = async ({ searchParams: { f, e } }: HomePageParams) => {
   const timeFilter = getTimeFilterFromSearchParam(f, TimeFilter.MONTHLY);
 
+  const exclude = !!e && coreTeam ? coreTeam.members : undefined;
+
   const allTimeCachedContributors = await getContributors(TimeFilter.ALL_TIME);
-  const cachedContributors = await getContributors(timeFilter);
+
+  const contributors = await getContributors(timeFilter, exclude);
   const issues = await getLastIssues(5);
   const newContributors = await getNewContributors();
   const milestone = await getMilestone();
 
-  const filteredContributors = getContributorsWithScore(cachedContributors).filter(({ score }) => score);
+  const filteredContributors = getContributorsWithScore(contributors).filter(({ score }) => score);
 
   const lastMRs = getLastMRs(allTimeCachedContributors, 5);
 
@@ -139,7 +148,7 @@ const HomePage = async ({ searchParams: { f } }: HomePageParams) => {
         🏅 Gnolove Scoreboard
       </Heading>
 
-      <Scoreboard contributors={filteredContributors} timeFilter={timeFilter} />
+      <Scoreboard contributors={filteredContributors} excludeCoreTeam={!!e} timeFilter={timeFilter} />
 
       <Text weight="bold" size="6" mt="6">
         🎥 Latest gnoland videos
