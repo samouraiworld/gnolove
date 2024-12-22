@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"slices"
 	"time"
+	"strings"
 
 	"github.com/samouraiworld/topofgnomes/server/models"
 	"gorm.io/gorm"
@@ -15,8 +16,13 @@ func getUserStats(db *gorm.DB, startTime time.Time, exclude []string) ([]UserWit
 	users := make([]models.User, 0)
 	query := db.Model(&models.User{})
 
+
 	if len(exclude) > 0 {
-		query = query.Where("login NOT IN ?", exclude)
+        for i, login := range exclude {
+            exclude[i] = strings.ToLower(login)
+        }
+
+		query = query.Where("LOWER(login) NOT IN ?", exclude)
 	}
 
 	err := query.
