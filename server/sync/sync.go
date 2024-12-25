@@ -22,7 +22,7 @@ type Syncer struct {
 	logger *zap.SugaredLogger
 }
 
-func NewSyncer(db *gorm.DB, graphqlEndpoint, repository, owner string, logger *zap.SugaredLogger) *Syncer {
+func NewSyncer(db *gorm.DB, repository string, owner string, logger *zap.SugaredLogger) *Syncer {
 	src := oauth2.StaticTokenSource(
 		&oauth2.Token{AccessToken: os.Getenv("GITHUB_TOKEN")},
 	)

@@ -6,14 +6,26 @@ import (
 	"net/http"
 	"slices"
 	"time"
+	"strings"
 
 	"github.com/samouraiworld/topofgnomes/server/models"
 	"gorm.io/gorm"
 )
 
-func getUserStats(db *gorm.DB, startTime time.Time) ([]UserWithStats, error) {
+func getUserStats(db *gorm.DB, startTime time.Time, exclude []string) ([]UserWithStats, error) {
 	users := make([]models.User, 0)
-	err := db.Model(&models.User{}).
+	query := db.Model(&models.User{})
+
+
+	if len(exclude) > 0 {
+        for i, login := range exclude {
+            exclude[i] = strings.ToLower(login)
+        }
+
+		query = query.Where("LOWER(login) NOT IN ?", exclude)
+	}
+
+	err := query.
 		Preload("Commits", "created_at > ? order by created_at desc", startTime).
 		Preload("PullRequests", "created_at > ? order by created_at desc", startTime).
 		Preload("Reviews", "created_at > ? ", startTime).
@@ -56,6 +68,7 @@ type UserWithStats struct {
 func HandleGetUserStats(db *gorm.DB) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
+
 		var startTime time.Time
 		switch r.URL.Query().Get("time") {
 		case "daily":
@@ -69,7 +82,9 @@ func HandleGetUserStats(db *gorm.DB) func(w http.ResponseWriter, r *http.Request
 		}
 		fmt.Println(startTime)
 
-		stats, err := getUserStats(db, startTime)
+		exclude := r.URL.Query()["exclude"]
+
+		stats, err := getUserStats(db, startTime, exclude)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			w.Write([]byte(err.Error()))
@@ -87,24 +102,24 @@ func HandleGetNewestContributors(db *gorm.DB) func(w http.ResponseWriter, r *htt
 
 		query := `
 		with users_with_oldest_contribution as (
-			select 
+			select
 				min(
-					CASE 
-						WHEN pr.created_at is null then i.created_at 
+					CASE
+						WHEN pr.created_at is null then i.created_at
 						WHEN i.created_at < pr.created_at  THEN i.created_at
-						ELSE pr.created_at  
-					END 
-				) oldest_contribution,u.id 
+						ELSE pr.created_at
+					END
+				) oldest_contribution,u.id
 				from users u
-				left join issues i on i.author_id =u.id 
-				left join pull_requests pr on pr.author_id =u.id 
+				left join issues i on i.author_id =u.id
+				left join pull_requests pr on pr.author_id =u.id
 				where pr.created_at is not null OR i.created_at is not null
 				group by u.id
 				order by oldest_contribution desc
 				limit $1
 		)
-		select * from users u 
-		inner join users_with_oldest_contribution uc on uc.id =u.id 
+		select * from users u
+		inner join users_with_oldest_contribution uc on uc.id =u.id
 		order by uc.oldest_contribution desc
 		`
 		var users []models.User
