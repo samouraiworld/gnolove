@@ -30,6 +30,9 @@ const TEAMS: Team[] = [
       'kouteki',
       'kristovatlas',
       'aeddi',
+      'whyhaines',
+      'n5p5',
+      'michelleellen',
     ],
   },
   {
@@ -55,7 +58,7 @@ const TEAMS: Team[] = [
   {
     name: 'DevX',
     color: 'brown',
-    members: ['ilgooz', 'jeronimoalbi'],
+    members: ['ilgooz', 'jeronimoalbi', 'salmad3'],
   },
 ];
 
