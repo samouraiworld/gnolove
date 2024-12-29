@@ -1,4 +1,4 @@
-import { TEnhancedUserWithStats, TEnhancedUserWithStatsAndScore } from '@/util/schemas';
+import { TEnhancedUserWithStats, TEnhancedUserWithStatsAndScore, TIssue, TPullRequest } from '@/util/schemas';
 
 import SCORE from '@/constant/score';
 
@@ -13,6 +13,17 @@ export const getScore = (user: TEnhancedUserWithStats): number => {
     user.TotalPrs * SCORE.PR_FACTOR +
     user.TotalReviewedPullRequests * SCORE.REVIEWED_MR_FACTOR
   );
+};
+
+/**
+ * Get the score of an issue or PR
+ * @param issueOrPR The issue or PR to get the score from
+ */
+export const getIssueOrPRScore = (issueOrPR: TIssue | TPullRequest) => {
+  const isIssue = 'assignees' in issueOrPR;
+
+  if (isIssue) return SCORE.ISSUES_FACTOR;
+  return SCORE.PR_FACTOR;
 };
 
 /**
