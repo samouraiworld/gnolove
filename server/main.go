@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/samouraiworld/topofgnomes/server/db"
 	"github.com/samouraiworld/topofgnomes/server/handler"
+	"github.com/samouraiworld/topofgnomes/server/models"
 	"github.com/samouraiworld/topofgnomes/server/sync"
 	"github.com/subosito/gotenv"
 	"go.uber.org/zap"
@@ -26,17 +26,23 @@ func main() {
 		panic(err)
 	}
 
-	repository := os.Getenv("REPOSITORY")
-	owner := os.Getenv("OWNER")
+	repositories, err := models.GetRepositoriesFromConfig()
+	if err != nil {
+		panic(err)
+	}
 
 	database, err = db.InitDB()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	syncer := sync.NewSyncer(database, repository, owner, logger.Sugar())
-	syncer.StartSynchonizing()
+	syncer := sync.NewSyncer(database, repositories, logger.Sugar())
+	err = syncer.StartSynchonizing()
+	if err != nil {
+		panic(err)
+	}
 
+	http.HandleFunc("/getRepositories", handler.HandleGetRepository(database))
 	http.HandleFunc("/getStats", handler.HandleGetUserStats(database))
 	http.HandleFunc("/getIssues", handler.GetIssues(database))
 	http.HandleFunc("/milestones/{number}", handler.GetMilestone(database))

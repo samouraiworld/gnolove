@@ -13,12 +13,12 @@ import (
 func GetIssues(db *gorm.DB) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-
+		repositories := getRepositoriesWithRequest(r)
 		labels := r.URL.Query().Get("labels")
 		var issues []models.Issue
 		filteredLabels := strings.Split(labels, ",")
 
-		query := db.Model(&models.Issue{}).Preload("Author").Preload("Assignees").Preload("Assignees.User").
+		query := db.Model(&models.Issue{}).Where("repository_id IN ?", repositories).Preload("Author").Preload("Assignees").Preload("Assignees.User").
 			Preload("Labels").Order("created_at desc")
 
 		err := query.Find(&issues).Error
@@ -28,17 +28,18 @@ func GetIssues(db *gorm.DB) func(w http.ResponseWriter, r *http.Request) {
 
 			return
 		}
+		if labels != "" {
+			issues = slices.DeleteFunc(issues, func(issue models.Issue) bool {
+				for _, label := range issue.Labels {
+					if slices.Contains(filteredLabels, label.Name) {
+						return false
+					}
 
-		res := slices.DeleteFunc(issues, func(issue models.Issue) bool {
-			for _, label := range issue.Labels {
-				if slices.Contains(filteredLabels, label.Name) {
-					return false
 				}
+				return true
+			})
+		}
 
-			}
-			return true
-		})
-
-		json.NewEncoder(w).Encode(res)
+		json.NewEncoder(w).Encode(issues)
 	}
 }
