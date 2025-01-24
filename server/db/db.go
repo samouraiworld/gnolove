@@ -9,7 +9,7 @@ import (
 
 func InitDB() (*gorm.DB, error) {
 	var err error
-	db, err := gorm.Open(sqlite.Open("/db/dev.db"), &gorm.Config{
+	db, err := gorm.Open(sqlite.Open("/db/gh.db"), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Silent),
 	})
 	if err != nil {
