@@ -43,8 +43,6 @@ func getUserStats(db *gorm.DB, startTime time.Time, exclude, repositories []stri
 				Order("created_at DESC")
 		}).
 		Preload("Reviews.PullRequest").
-		Preload("Issues.Assignees.User").
-		Preload("Issues.Labels").
 		Find(&users).Error
 	if err != nil {
 		return nil, err
@@ -60,7 +58,7 @@ func getUserStats(db *gorm.DB, startTime time.Time, exclude, repositories []stri
 		}
 
 		res = append(res, UserWithStats{
-			User:                      user,
+			User:                      models.User{Login: user.Login, ID: user.ID, AvatarUrl: user.AvatarUrl, URL: user.URL, Name: user.Name},
 			TotalCommits:              len(user.Commits),
 			TotalPrs:                  len(user.PullRequests),
 			TotalIssues:               len(user.Issues),
@@ -68,7 +66,20 @@ func getUserStats(db *gorm.DB, startTime time.Time, exclude, repositories []stri
 			LastContribution:          getLastContribution(user),
 		})
 	}
-	return res, nil
+
+	slices.SortFunc(res, func(a, b UserWithStats) int {
+		return (b.TotalCommits + b.TotalPrs + b.TotalIssues + b.TotalReviewedPullRequests) -
+			(a.TotalCommits + a.TotalPrs + a.TotalIssues + a.TotalReviewedPullRequests)
+	})
+
+	return trucateSlice(res), nil
+}
+
+func trucateSlice(slice []UserWithStats) []UserWithStats {
+	if len(slice) > 70 {
+		return slice[:70]
+	}
+	return slice
 }
 
 type UserWithStats struct {
