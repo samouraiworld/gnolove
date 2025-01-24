@@ -17,7 +17,14 @@ import UserTable from '@/module/user-table';
 import YoutubeEmbeddedVideo from '@/element/youtube-embedded-video';
 
 import { getLastMRs, getTimeFilterFromSearchParam, TimeFilter } from '@/util/github';
-import { EnhancedUserWithStatsSchema, IssueSchema, MilestoneSchema, UserSchema } from '@/util/schemas';
+import {
+  EnhancedUserWithStatsSchema,
+  IssueSchema,
+  MilestoneSchema,
+  RepositorySchema,
+  TRepository,
+  UserSchema,
+} from '@/util/schemas';
 import { getContributorsWithScore } from '@/util/score';
 
 import MILESTONE from '@/constant/milestone';
@@ -36,6 +43,7 @@ export interface HomePageParams {
   searchParams: {
     f?: string | string[] | undefined;
     e?: string | string[] | undefined;
+    r?: string | string[] | undefined;
   };
 }
 
@@ -52,13 +60,14 @@ const getParameterFromTimeFilter = (timeFilter: TimeFilter) => {
   }
 };
 
-const getContributors = async (timeFilter: TimeFilter, exclude?: string[]) => {
+const getContributors = async (timeFilter: TimeFilter, exclude?: string[], repositories?: string[]) => {
   const url = new URL('/getStats', ENV.NEXT_PUBLIC_API_URL);
 
   const timeParameter = getParameterFromTimeFilter(timeFilter);
   if (timeParameter !== 'all') url.searchParams.set('time', timeParameter);
 
   if (exclude) for (const login of exclude) url.searchParams.append('exclude', login);
+  if (repositories) for (const repository of repositories) url.searchParams.append('repositories', repository);
 
   const res = await fetch(url.toString(), { cache: 'no-cache' });
   const data = await res.json();
@@ -93,16 +102,42 @@ const getMilestone = async () => {
   return MilestoneSchema.parse(data);
 };
 
+const getRepositories = async () => {
+  const url = new URL('/getRepositories', ENV.NEXT_PUBLIC_API_URL);
+
+  const res = await fetch(url.toString(), { cache: 'no-cache' });
+  const data = await res.json();
+
+  return z.array(RepositorySchema).parse(data);
+};
+
+const getSelectedRepositoriesFromSearchParam = (
+  searchParam: string | string[] | undefined,
+  repositories: TRepository[],
+) => {
+  if (!searchParam) return [];
+
+  const names = Array.isArray(searchParam) ? searchParam : [searchParam];
+  return repositories.filter(({ id }) => names.includes(id));
+};
+
 const coreTeam = teams.find(({ name }) => name === 'Core Team');
 
-const HomePage = async ({ searchParams: { f, e } }: HomePageParams) => {
+const HomePage = async ({ searchParams: { f, e, r } }: HomePageParams) => {
   const timeFilter = getTimeFilterFromSearchParam(f, TimeFilter.MONTHLY);
 
   const exclude = !!e && coreTeam ? coreTeam.members : undefined;
 
+  const repositories = await getRepositories();
+  const selectedRepositories = getSelectedRepositoriesFromSearchParam(r, repositories);
+
   const allTimeCachedContributors = await getContributors(TimeFilter.ALL_TIME);
 
-  const contributors = await getContributors(timeFilter, exclude);
+  const contributors = await getContributors(
+    timeFilter,
+    exclude,
+    selectedRepositories.map(({ id }) => id),
+  );
   const issues = await getLastIssues(5);
   const newContributors = await getNewContributors();
   const milestone = await getMilestone();
@@ -148,7 +183,13 @@ const HomePage = async ({ searchParams: { f, e } }: HomePageParams) => {
         🏅 Gnolove Scoreboard
       </Heading>
 
-      <Scoreboard contributors={filteredContributors} excludeCoreTeam={!!e} timeFilter={timeFilter} />
+      <Scoreboard
+        repositories={repositories}
+        contributors={filteredContributors}
+        excludeCoreTeam={!!e}
+        selectedRepositories={selectedRepositories}
+        timeFilter={timeFilter}
+      />
 
       <Text weight="bold" size="6" mt="6">
         🎥 Latest gnoland videos
