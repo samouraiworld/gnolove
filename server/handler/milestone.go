@@ -17,7 +17,7 @@ func GetMilestone(db *gorm.DB) func(w http.ResponseWriter, r *http.Request) {
 
 		err := db.Model(&models.Milestone{}).
 			Preload("Author").Preload("Issues").Preload("Issues.Author").Preload("Issues.Assignees.User").Preload("Issues.Labels").
-			Where("number = ?", milestoneNumber).First(&milestone).Error
+			Where("number = ? and repository_id = 'gnolang/gno'", milestoneNumber).First(&milestone).Error
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			w.Write([]byte(err.Error()))

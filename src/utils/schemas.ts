@@ -194,3 +194,12 @@ export const MilestoneSchema = z.preprocess(
 );
 
 export type TMilestone = z.infer<typeof MilestoneSchema>;
+
+export const RepositorySchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  owner: z.string(),
+  baseBranch: z.string(),
+});
+
+export type TRepository = z.infer<typeof RepositorySchema>;

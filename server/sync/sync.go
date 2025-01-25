@@ -15,83 +15,90 @@ import (
 )
 
 type Syncer struct {
-	db     *gorm.DB
-	client *githubv4.Client
-	owner  string
-	repo   string
-	logger *zap.SugaredLogger
+	db           *gorm.DB
+	client       *githubv4.Client
+	repositories []models.Repository
+	logger       *zap.SugaredLogger
 }
 
-func NewSyncer(db *gorm.DB, repository string, owner string, logger *zap.SugaredLogger) *Syncer {
+func NewSyncer(db *gorm.DB, repositories []models.Repository, logger *zap.SugaredLogger) *Syncer {
 	src := oauth2.StaticTokenSource(
 		&oauth2.Token{AccessToken: os.Getenv("GITHUB_TOKEN")},
 	)
 	httpClient := oauth2.NewClient(context.Background(), src)
 	client := githubv4.NewClient(httpClient)
 	return &Syncer{
-		db:     db,
-		client: client,
-		owner:  owner,
-		repo:   repository,
-		logger: logger,
+		db:           db,
+		client:       client,
+		repositories: repositories,
+		logger:       logger,
 	}
 }
 
-func getLastUpdatedPR(db gorm.DB) time.Time {
+func getLastUpdatedPR(db gorm.DB, repositoryID string) time.Time {
 	var lastPR models.PullRequest
-	db.Model(&lastPR).Order("updated_at desc").First(&lastPR)
+	db.Model(&lastPR).Where("repository_id = ?", repositoryID).Order("updated_at desc").First(&lastPR)
 	return lastPR.UpdatedAt
 }
 
-func getLastUpdatedIssue(db gorm.DB) time.Time {
+func getLastUpdatedIssue(db gorm.DB, repositoryID string) time.Time {
 	var lastIssue models.Issue
-	db.Model(&lastIssue).Order("updated_at desc").First(&lastIssue)
+	db.Model(&lastIssue).Where("repository_id = ?", repositoryID).Order("updated_at desc").First(&lastIssue)
 	return lastIssue.UpdatedAt
 }
 
-func getLastUpdatedMilestone(db gorm.DB) time.Time {
+func getLastUpdatedMilestone(db gorm.DB, repositoryID string) time.Time {
 	var lastMilestone models.Milestone
-	db.Model(&lastMilestone).Order("updated_at desc").First(&lastMilestone)
+	db.Model(&lastMilestone).Where("repository_id = ?", repositoryID).Order("updated_at desc").First(&lastMilestone)
 	return lastMilestone.UpdatedAt
 }
 
-func (s *Syncer) StartSynchonizing() {
+func (s *Syncer) StartSynchonizing() error {
+	for _, repository := range s.repositories {
+		err := s.db.Save(&repository).Error
+		if err != nil {
+			return err
+		}
+	}
 	go func() {
 		for {
-			s.logger.Info("Starting synchronization...")
-			err := s.syncUsers()
-			if err != nil {
-				s.logger.Errorf("error while syncing users %s", err.Error())
-			}
+			for _, repository := range s.repositories {
+				fmt.Printf("repository: %#v", repository)
+				s.logger.Info("Starting synchronization for ", repository.ID)
+				err := s.syncUsers(repository)
+				if err != nil {
+					s.logger.Errorf("error while syncing users %s", err.Error())
+				}
 
-			err = s.syncIssues()
-			if err != nil {
-				s.logger.Errorf("error while syncing issues %s", err.Error())
-			}
+				err = s.syncIssues(repository)
+				if err != nil {
+					s.logger.Errorf("error while syncing issues %s", err.Error())
+				}
 
-			err = s.syncPRs()
-			if err != nil {
-				s.logger.Errorf("error while syncing PRs %s", err.Error())
-			}
+				err = s.syncPRs(repository)
+				if err != nil {
+					s.logger.Errorf("error while syncing PRs %s", err.Error())
+				}
 
-			err = s.syncMilestones()
-			if err != nil {
-				s.logger.Errorf("error while syncing Milestones %s", err.Error())
-			}
+				err = s.syncMilestones(repository)
+				if err != nil {
+					s.logger.Errorf("error while syncing Milestones %s", err.Error())
+				}
 
-			err = s.syncCommits()
-			if err != nil {
-				s.logger.Errorf("error while syncing Milestones %s", err.Error())
+				err = s.syncCommits(repository)
+				if err != nil {
+					s.logger.Errorf("error while syncing Milestones %s", err.Error())
+				}
 			}
-
 			s.logger.Info("synchronization Finished...")
 			<-time.Tick(time.Minute * 3)
 		}
 	}()
 
+	return nil
 }
-func (s *Syncer) syncPRs() error {
-	lastUpdatedTime := getLastUpdatedPR(*s.db)
+func (s *Syncer) syncPRs(repository models.Repository) error {
+	lastUpdatedTime := getLastUpdatedPR(*s.db, repository.ID)
 
 	var q struct {
 		Repository struct {
@@ -102,12 +109,14 @@ func (s *Syncer) syncPRs() error {
 					HasNextPage bool
 				}
 			} `graphql:"pullRequests(first: 100 after:$cursor orderBy: { field: UPDATED_AT, direction: DESC } )"`
-		} `graphql:"repository(owner: \"gnolang\", name: \"gno\")"`
+		} `graphql:"repository(owner: $owner, name: $name)"`
 	}
 
 	hasNextPage := true
 	variables := map[string]interface{}{
 		"cursor": (*githubv4.String)(nil), // Null after argument to get first page.
+		"owner":  githubv4.String(repository.Owner),
+		"name":   githubv4.String(repository.Name),
 	}
 
 	for hasNextPage {
@@ -127,6 +136,7 @@ func (s *Syncer) syncPRs() error {
 			for index, review := range pr.Reviews.Nodes {
 				reviews[index] = models.Review{
 					AuthorID:      review.Author.User.ID,
+					RepositoryID:  repository.ID,
 					ID:            review.ID,
 					CreatedAt:     review.CreatedAt,
 					PullRequestID: pr.ID,
@@ -134,16 +144,17 @@ func (s *Syncer) syncPRs() error {
 			}
 
 			pr := models.PullRequest{
-				CreatedAt:   pr.CreatedAt,
-				UpdatedAt:   pr.UpdatedAt,
-				ID:          pr.ID,
-				Number:      pr.Number,
-				State:       pr.State,
-				Title:       pr.Title,
-				AuthorID:    pr.Author.User.ID,
-				Reviews:     reviews,
-				MilestoneID: pr.Milestone.ID,
-				URL:         pr.Url,
+				CreatedAt:    pr.CreatedAt,
+				UpdatedAt:    pr.UpdatedAt,
+				RepositoryID: repository.ID,
+				ID:           pr.ID,
+				Number:       pr.Number,
+				State:        pr.State,
+				Title:        pr.Title,
+				AuthorID:     pr.Author.User.ID,
+				Reviews:      reviews,
+				MilestoneID:  pr.Milestone.ID,
+				URL:          pr.Url,
 			}
 			err = s.db.Save(pr).Error
 			if err != nil {
@@ -158,9 +169,11 @@ func (s *Syncer) syncPRs() error {
 	return nil
 }
 
-func (s *Syncer) syncUsers() error {
+func (s *Syncer) syncUsers(repository models.Repository) error {
 	variables := map[string]interface{}{
 		"cursor": (*githubv4.String)(nil), // Null after argument to get first page.
+		"owner":  githubv4.String(repository.Owner),
+		"name":   githubv4.String(repository.Name),
 	}
 
 	hasNextPage := true
@@ -176,7 +189,7 @@ func (s *Syncer) syncUsers() error {
 						HasNextPage bool
 					}
 				} `graphql:"mentionableUsers(first: 100 after:$cursor )"`
-			} `graphql:"repository(owner: \"gnolang\", name: \"gno\")"`
+			} `graphql:"repository(owner: $owner, name: $name)"`
 		}
 
 		err := s.client.Query(context.Background(), &q, variables)
@@ -204,8 +217,8 @@ func (s *Syncer) syncUsers() error {
 	return nil
 }
 
-func (s *Syncer) syncIssues() error {
-	lastUpdatedTime := getLastUpdatedIssue(*s.db)
+func (s *Syncer) syncIssues(repository models.Repository) error {
+	lastUpdatedTime := getLastUpdatedIssue(*s.db, repository.ID)
 
 	var q struct {
 		Repository struct {
@@ -216,12 +229,14 @@ func (s *Syncer) syncIssues() error {
 					HasNextPage bool
 				}
 			} `graphql:"issues(first: 100 after:$cursor orderBy: { field: UPDATED_AT, direction: DESC } )"`
-		} `graphql:"repository(owner: \"gnolang\", name: \"gno\")"`
+		} `graphql:"repository(owner: $owner, name: $name)"`
 	}
 
 	hasNextPage := true
 	variables := map[string]interface{}{
 		"cursor": (*githubv4.String)(nil), // Null after argument to get first page.
+		"owner":  githubv4.String(repository.Owner),
+		"name":   githubv4.String(repository.Name),
 	}
 	for hasNextPage {
 
@@ -258,17 +273,18 @@ func (s *Syncer) syncIssues() error {
 				return nil
 			}
 			issue := models.Issue{
-				CreatedAt:   issue.CreatedAt,
-				UpdatedAt:   issue.UpdatedAt,
-				ID:          issue.ID,
-				Number:      issue.Number,
-				State:       issue.State,
-				Title:       issue.Title,
-				AuthorID:    issue.Author.User.ID,
-				Labels:      labels,
-				MilestoneID: issue.Milestone.ID,
-				URL:         issue.Url,
-				Assignees:   assignees,
+				CreatedAt:    issue.CreatedAt,
+				UpdatedAt:    issue.UpdatedAt,
+				ID:           issue.ID,
+				RepositoryID: repository.ID,
+				Number:       issue.Number,
+				State:        issue.State,
+				Title:        issue.Title,
+				AuthorID:     issue.Author.User.ID,
+				Labels:       labels,
+				MilestoneID:  issue.Milestone.ID,
+				URL:          issue.Url,
+				Assignees:    assignees,
 			}
 			err = s.db.Save(issue).Error
 			if err != nil {
@@ -283,8 +299,8 @@ func (s *Syncer) syncIssues() error {
 	return nil
 }
 
-func (s *Syncer) syncMilestones() error {
-	lastUpdatedTime := getLastUpdatedMilestone(*s.db)
+func (s *Syncer) syncMilestones(repository models.Repository) error {
+	lastUpdatedTime := getLastUpdatedMilestone(*s.db, repository.ID)
 
 	var q struct {
 		Repository struct {
@@ -295,12 +311,14 @@ func (s *Syncer) syncMilestones() error {
 					HasNextPage bool
 				}
 			} `graphql:"milestones(first: 100 after:$cursor orderBy: { field: UPDATED_AT, direction: DESC } )"`
-		} `graphql:"repository(owner: \"gnolang\", name: \"gno\")"`
+		} `graphql:"repository(owner: $owner, name: $name)"`
 	}
 
 	hasNextPage := true
 	variables := map[string]interface{}{
 		"cursor": (*githubv4.String)(nil), // Null after argument to get first page.
+		"owner":  githubv4.String(repository.Owner),
+		"name":   githubv4.String(repository.Name),
 	}
 	for hasNextPage {
 
@@ -316,15 +334,16 @@ func (s *Syncer) syncMilestones() error {
 				return nil
 			}
 			issue := models.Milestone{
-				CreatedAt:   milestone.CreatedAt,
-				UpdatedAt:   milestone.UpdatedAt,
-				ID:          milestone.ID,
-				Number:      milestone.Number,
-				State:       milestone.State,
-				Title:       milestone.Title,
-				AuthorID:    milestone.Creator.User.ID,
-				Description: milestone.Description,
-				Url:         milestone.Url,
+				CreatedAt:    milestone.CreatedAt,
+				UpdatedAt:    milestone.UpdatedAt,
+				RepositoryID: repository.ID,
+				ID:           milestone.ID,
+				Number:       milestone.Number,
+				State:        milestone.State,
+				Title:        milestone.Title,
+				AuthorID:     milestone.Creator.User.ID,
+				Description:  milestone.Description,
+				Url:          milestone.Url,
 			}
 			err = s.db.Save(issue).Error
 			if err != nil {
@@ -338,7 +357,7 @@ func (s *Syncer) syncMilestones() error {
 
 	return nil
 }
-func (s *Syncer) syncCommits() error {
+func (s *Syncer) syncCommits(repository models.Repository) error {
 
 	var q struct {
 		Repository struct {
@@ -354,13 +373,16 @@ func (s *Syncer) syncCommits() error {
 						} `graphql:"history(first: 100 after:$cursor)"`
 					} `graphql:"... on Commit"`
 				}
-			} `graphql:"ref(qualifiedName: \"master\")"`
-		} `graphql:"repository(owner: \"gnolang\", name: \"gno\")"`
+			} `graphql:"ref(qualifiedName: $branch)"`
+		} `graphql:"repository(owner: $owner, name: $name)"`
 	}
 
 	hasNextPage := true
 	variables := map[string]interface{}{
 		"cursor": (*githubv4.String)(nil), // Null after argument to get first page.
+		"owner":  githubv4.String(repository.Owner),
+		"name":   githubv4.String(repository.Name),
+		"branch": githubv4.String(repository.BaseBranch),
 	}
 	for hasNextPage {
 
@@ -371,11 +393,12 @@ func (s *Syncer) syncCommits() error {
 
 		for _, c := range q.Repository.Ref.Target.Commit.History.Nodes {
 			commit := models.Commit{
-				ID:        c.ID,
-				AuthorID:  c.Author.User.ID,
-				URL:       c.Url,
-				CreatedAt: c.CommittedDate,
-				UpdatedAt: c.CommittedDate,
+				ID:           c.ID,
+				RepositoryID: repository.ID,
+				AuthorID:     c.Author.User.ID,
+				URL:          c.Url,
+				CreatedAt:    c.CommittedDate,
+				UpdatedAt:    c.CommittedDate,
 			}
 			err = s.db.Save(commit).Error
 			if err != nil {
