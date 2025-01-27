@@ -16,8 +16,6 @@ import { getIds } from '@/util/array';
 import { getTimeFilterFromSearchParam, TimeFilter } from '@/util/github';
 import { getSelectedRepositoriesFromSearchParam } from '@/util/repositories';
 
-import teams from '@/constant/teams';
-
 export const metadata: Metadata = {
   title: 'Top of Gnome',
 };
@@ -30,11 +28,9 @@ export interface HomePageParams {
   };
 }
 
-const coreTeam = teams.find(({ name }) => name === 'Core Team');
-
 const HomePage = async ({ searchParams: { f, e, r } }: HomePageParams) => {
   const timeFilter = getTimeFilterFromSearchParam(f, TimeFilter.MONTHLY);
-  const exclude = !!e && coreTeam ? coreTeam.members : undefined;
+  const exclude = !!e;
 
   const queryClient = new QueryClient();
 

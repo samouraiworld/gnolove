@@ -13,16 +13,21 @@ import {
 } from '@/util/schemas';
 
 import MILESTONE from '@/constant/milestone';
+import TEAMS from '@/constant/teams';
 
 import ENV from '@/env';
 
-export const getContributors = async (timeFilter: TimeFilter, exclude?: string[], repositories?: string[]) => {
+export const getContributors = async (timeFilter: TimeFilter, excludeCoreTeam?: boolean, repositories?: string[]) => {
   const url = new URL('/getStats', ENV.NEXT_PUBLIC_API_URL);
 
   const timeParameter = getParameterFromTimeFilter(timeFilter);
   if (timeParameter !== 'all') url.searchParams.set('time', timeParameter);
 
-  if (exclude) for (const login of exclude) url.searchParams.append('exclude', login);
+  if (excludeCoreTeam) {
+    const coreTeam = TEAMS.find((team) => team.name === 'Core Team');
+    if (coreTeam) for (const login of coreTeam.members) url.searchParams.append('exclude', login);
+  }
+
   if (repositories) for (const repository of repositories) url.searchParams.append('repositories', repository);
 
   const res = await fetch(url.toString(), { cache: 'no-cache' });

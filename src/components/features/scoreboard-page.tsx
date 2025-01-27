@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import Image from 'next/image';
 import NextLink from 'next/link';
@@ -35,20 +35,30 @@ import HeaderImage from '@/image/header.png';
 
 export interface ScoreboardPageProps {
   timeFilter: TimeFilter;
-  exclude: string[] | undefined;
+  exclude: boolean;
 
   selectedRepositories: TRepository[];
 }
 
-const ScoreboardPage = ({ timeFilter, exclude, selectedRepositories }: ScoreboardPageProps) => {
+const ScoreboardPage = ({
+  timeFilter: defaultTimeFilter,
+  exclude: defaultExclude,
+  selectedRepositories: defaultSelectedRepositories,
+}: ScoreboardPageProps) => {
+  const [selectedRepositories, setSelectedRepositories] = useState(getIds(defaultSelectedRepositories));
+  const [exclude, setExclude] = useState(defaultExclude);
+  const [timeFilter, setTimeFilter] = useState(defaultTimeFilter);
+
   const { data: allTimeContributors, isPending: isAllTimeContributorsPending } = useGetContributors({
     timeFilter: TimeFilter.ALL_TIME,
   });
+
   const { data: contributors, isPending: isContributorsPending } = useGetContributors({
     timeFilter,
     exclude,
-    repositories: getIds(selectedRepositories),
+    repositories: selectedRepositories,
   });
+
   const { data: milestone, isPending: isMilestonePending } = useGetMilestone();
   const { data: issues, isPending: isIssuesPending } = useGetLastIssues();
   const { data: newContributors, isPending: isNewContributorsPending } = useGetNewContributors();
@@ -115,9 +125,12 @@ const ScoreboardPage = ({ timeFilter, exclude, selectedRepositories }: Scoreboar
       <Scoreboard
         repositories={repositories ?? []}
         contributors={filteredContributors}
-        excludeCoreTeam={!!exclude}
+        exclude={exclude}
+        setExclude={setExclude}
         selectedRepositories={selectedRepositories}
+        setSelectedRepositories={setSelectedRepositories}
         timeFilter={timeFilter}
+        setTimeFilter={setTimeFilter}
       />
 
       <Text weight="bold" size="6" mt="6">
