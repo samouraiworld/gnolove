@@ -72,7 +72,7 @@ func getUserStats(db *gorm.DB, startTime time.Time, exclude, repositories []stri
 			(a.TotalCommits + a.TotalPrs + a.TotalIssues + a.TotalReviewedPullRequests)
 	})
 
-	return trucateSlice(res), nil
+	return res, nil
 }
 
 func trucateSlice(slice []UserWithStats) []UserWithStats {
