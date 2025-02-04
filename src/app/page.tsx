@@ -8,6 +8,8 @@ import { z } from 'zod';
 import MilestoneProgress from '@/feature/milestone-progress';
 import Scoreboard from '@/feature/scoreboard';
 
+import LinkGithubFunction from '@/feature/link-github-function';
+
 import LayoutContainer from '@/layout/layout-container';
 
 import IssuesTable from '@/module/issues-table';
@@ -148,6 +150,7 @@ const HomePage = async ({ searchParams: { f, e, r } }: HomePageParams) => {
 
   return (
     <LayoutContainer>
+      <LinkGithubFunction/>
       <Image src={HeaderImage} alt="Header Image" className="rounded-3" />
 
       {milestone && (

@@ -6,6 +6,7 @@ type User struct {
 	AvatarUrl string `json:"avatarURL"`
 	URL       string `json:"URL"`
 	Name      string `json:"name"`
+	Wallet    string `json:"wallet"`
 
 	Issues       []Issue       `gorm:"foreignKey:AuthorID" json:"issues"`
 	PullRequests []PullRequest `gorm:"foreignKey:AuthorID" json:"pullRequests"`
