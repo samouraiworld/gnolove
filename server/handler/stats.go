@@ -57,8 +57,18 @@ func getUserStats(db *gorm.DB, startTime time.Time, exclude, repositories []stri
 			continue
 		}
 
+		// truncate to max 5 prs by contributor
+		user.PullRequests = truncatePr(user.PullRequests)
+
 		res = append(res, UserWithStats{
-			User:                      models.User{Login: user.Login, ID: user.ID, AvatarUrl: user.AvatarUrl, URL: user.URL, Name: user.Name},
+			User: models.User{
+				Login:        user.Login,
+				ID:           user.ID,
+				AvatarUrl:    user.AvatarUrl,
+				URL:          user.URL,
+				Name:         user.Name,
+				PullRequests: user.PullRequests,
+			},
 			TotalCommits:              len(user.Commits),
 			TotalPrs:                  len(user.PullRequests),
 			TotalIssues:               len(user.Issues),
@@ -80,6 +90,16 @@ func trucateSlice(slice []UserWithStats) []UserWithStats {
 		return slice[:70]
 	}
 	return slice
+}
+func truncatePr(prs []models.PullRequest) []models.PullRequest {
+	prs = slices.DeleteFunc(prs, func(pr models.PullRequest) bool {
+		return pr.State != "MERGED"
+	})
+
+	if len(prs) > 5 {
+		prs = prs[:5]
+	}
+	return prs
 }
 
 type UserWithStats struct {
