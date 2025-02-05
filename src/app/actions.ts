@@ -28,7 +28,7 @@ export const getContributors = async (timeFilter: TimeFilter, excludeCoreTeam?: 
     if (coreTeam) for (const login of coreTeam.members) url.searchParams.append('exclude', login);
   }
 
-  if (repositories) for (const repository of repositories) url.searchParams.append('repositories', repository);
+  if (repositories) url.searchParams.append('repositories', repositories.join(','));
 
   const res = await fetch(url.toString(), { cache: 'no-cache' });
   const data = await res.json();
