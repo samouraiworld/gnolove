@@ -31,7 +31,7 @@ export interface HomePageParams {
 const debugTime = async <T,>(label: string, fn: (() => Promise<T>) | (() => Promise<T[]>)) => {
   console.time(label);
   const res = await fn();
-  if (Array.isArray(res)) console.timeLog(`${res.length} records found`);
+  if (Array.isArray(res)) console.timeLog(label, `${res.length} records found`);
   console.timeEnd(label);
 
   return res;
