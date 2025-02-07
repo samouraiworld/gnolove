@@ -5,16 +5,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/google/go-github/v64/github"
 	"github.com/samouraiworld/topofgnomes/server/signer"
-)
-
-const (
-	clientID     = "Ov23liMorBdfpgk1Ojzz"
-	clientSecret = "24f350a5c25e2ab5cf638abfa3d87e7e155a2ee8"
-	redirectURI  = "http://localhost:5500"
 )
 
 type GitHubTokenResponse struct {
@@ -23,7 +18,7 @@ type GitHubTokenResponse struct {
 
 func exchangeCodeForToken(code string) (*GitHubTokenResponse, error) {
 	url := "https://github.com/login/oauth/access_token"
-	body := fmt.Sprintf("client_id=%s&client_secret=%s&code=%s", clientID, clientSecret, code)
+	body := fmt.Sprintf("client_id=%s&client_secret=%s&code=%s", os.Getenv("OAUTH_CLIENT_ID"), os.Getenv("OAUTH_CLIENT_SECRET"), code)
 
 	req, err := http.NewRequest("POST", url, strings.NewReader(body))
 	if err != nil {
@@ -51,7 +46,7 @@ type resCallback struct {
 	Error   string `json:"error"`
 }
 
-func CallbackHandler(signer *signer.Signer) func(w http.ResponseWriter, r *http.Request) {
+func HandleGithubCallback(signer *signer.Signer) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		err := verifyTokenBelongsToUser(r)

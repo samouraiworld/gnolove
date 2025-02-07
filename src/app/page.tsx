@@ -8,7 +8,6 @@ import { z } from 'zod';
 import MilestoneProgress from '@/feature/milestone-progress';
 import Scoreboard from '@/feature/scoreboard';
 
-import LinkGithubFunction from '@/feature/link-github-function';
 
 import LayoutContainer from '@/layout/layout-container';
 
@@ -126,6 +125,7 @@ const getSelectedRepositoriesFromSearchParam = (
 const coreTeam = teams.find(({ name }) => name === 'Core Team');
 
 const HomePage = async ({ searchParams: { f, e, r } }: HomePageParams) => {
+
   const timeFilter = getTimeFilterFromSearchParam(f, TimeFilter.MONTHLY);
 
   const exclude = !!e && coreTeam ? coreTeam.members : undefined;
@@ -147,10 +147,9 @@ const HomePage = async ({ searchParams: { f, e, r } }: HomePageParams) => {
   const filteredContributors = getContributorsWithScore(contributors).filter(({ score }) => score);
 
   const lastMRs = getLastMRs(allTimeCachedContributors, 5);
-
+  
   return (
     <LayoutContainer>
-      <LinkGithubFunction/>
       <Image src={HeaderImage} alt="Header Image" className="rounded-3" />
 
       {milestone && (

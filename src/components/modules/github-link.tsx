@@ -17,12 +17,9 @@ const LinkGithub = ({ user, children, ...props }: ContributionsDialogProps) => {
   useEffect(() => {
     if (typeof window !== "undefined" && (window as any).adena) {
       setWallet((window as any).adena);
-    } else {
-      console.log("Adena Wallet not found. Please install it.");
-    }
-  }, []);
-
-
+    } 
+  })
+  
   return (
     <Dialog.Root {...props} >
       <Dialog.Trigger>{children}</Dialog.Trigger>
@@ -68,12 +65,12 @@ async function linkGithub(wallet: any, user: TEnhancedUserWithStats, address: st
     localStorage.setItem("github_login", user.login);
     localStorage.setItem("gno_address", address);
   }
-  if (wallet) {
-    const connexion = await wallet.AddEstablish('Adena');
+    if (wallet) {
+      const connexion = await wallet.AddEstablish('Adena');
 
-    if (connexion) {
-      const account = await wallet.GetAccount()
-
+      if (connexion) {
+        const account = await wallet.GetAccount()
+      
       localStorage.setItem("gno_address", account.data.address);
       const res = await wallet.DoContract({
         messages: [
@@ -82,7 +79,7 @@ async function linkGithub(wallet: any, user: TEnhancedUserWithStats, address: st
             value: {
               caller: account.data.address, // your Adena address
               send: "",
-              pkg_path: "gno.land/r/villaquiranm/ghverify", // Gnoland package path
+              pkg_path: process.env.NEXT_PUBLIC_CONTRACT_PATH, // Gnoland package path
               func: "RequestVerification", // Function name
               args: [ // Arguments
                 user.login,
@@ -100,8 +97,8 @@ async function linkGithub(wallet: any, user: TEnhancedUserWithStats, address: st
       }
 
     }
-  }
-  const authUrl = `https://github.com/login/oauth/authorize?client_id=${"Ov23liMorBdfpgk1Ojzz"}&redirect_uri=${"http://localhost:3000"}&scope=read:user`;
+    }
+  const authUrl = `https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_OAUTH_REDIRECT_URL}&scope=read:user`;
   window.location.href = authUrl;
 }
 
@@ -109,7 +106,7 @@ export default LinkGithub;
 
 function getCommand(login: string) :string{
   return `gnokey maketx call \\
-  -pkgpath "gno.land/r/villaquiranm/ghverify" \\
+  -pkgpath "${process.env.NEXT_PUBLIC_CONTRACT_PATH}" \\
   -func RequestVerification \\
   -gas-fee 1000000ugnot -gas-wanted 2000000 \\
   -broadcast \\
