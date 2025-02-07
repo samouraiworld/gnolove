@@ -1,10 +1,9 @@
 'use client';
 
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Dispatch, SetStateAction } from 'react';
 
 import { MixerHorizontalIcon } from '@radix-ui/react-icons';
-import { Badge, Button, CheckboxGroup, Flex, FlexProps, Popover, Switch, TabNav, Text } from '@radix-ui/themes';
+import { Badge, Button, CheckboxGroup, Flex, FlexProps, Popover, Switch, Tabs, Text } from '@radix-ui/themes';
 
 import ContributorTable from '@/module/contributor-table';
 
@@ -13,67 +12,47 @@ import { TEnhancedUserWithStatsAndScore, TRepository } from '@/util/schemas';
 
 export interface ScoreboardProps {
   repositories: TRepository[];
-  selectedRepositories: TRepository[];
-  contributors: TEnhancedUserWithStatsAndScore[];
+
+  selectedRepositories: string[];
+  setSelectedRepositories: Dispatch<SetStateAction<string[]>>;
+
+  exclude: boolean;
+  setExclude: Dispatch<SetStateAction<boolean>>;
+
   timeFilter: TimeFilter;
-  excludeCoreTeam: boolean;
+  setTimeFilter: Dispatch<SetStateAction<TimeFilter>>;
+
+  contributors: TEnhancedUserWithStatsAndScore[];
 }
 
 const Scoreboard = ({
   repositories,
   selectedRepositories,
+  setSelectedRepositories,
   contributors,
   timeFilter,
-  excludeCoreTeam,
+  setTimeFilter,
+  exclude,
+  setExclude,
   ...props
 }: ScoreboardProps & FlexProps) => {
-  const router = useRouter();
-
-  const selectedRepositoriesId = selectedRepositories.map(({ id }) => id);
-
-  const getSearchParams = ({ f, e, r }: { f?: string; e?: boolean; r?: string[] }) => {
-    const filter = f || timeFilter;
-    const repositories = r || selectedRepositoriesId;
-    const exclude = e || excludeCoreTeam;
-
-    const searchParams = new URLSearchParams();
-    searchParams.set('f', filter);
-    for (const repo of repositories) searchParams.append('r', repo);
-    if (exclude) searchParams.set('e', '1');
-    return searchParams;
-  };
-
-  const onCheckedChange = (value: boolean) => {
-    const search = getSearchParams({ e: value });
-    router.push(`?${search.toString()}`);
-  };
-
-  const onValueChange = (value: string[]) => {
-    const filteredRepositories = repositories.map(({ id }) => id).filter((id) => value.includes(id));
-    const search = getSearchParams({ r: filteredRepositories });
-    router.push(`?${search.toString()}`);
-  };
-
   return (
     <Flex direction="column" {...props}>
-      <TabNav.Root justify="center" mb="4">
-        {Object.keys(TimeFilter)
-          .filter(isTimeFilter)
-          .map((key) => {
-            const href = `?${getSearchParams({ f: key })}`;
-            const active = timeFilter.toString() === TimeFilter[key];
-
-            return (
-              <TabNav.Link key={key} {...{ href, active }} asChild>
-                <Link href={href}>{TimeFilter[key]}</Link>
-              </TabNav.Link>
-            );
-          })}
-      </TabNav.Root>
+      <Tabs.Root value={timeFilter.toString()} onValueChange={(value) => setTimeFilter(value as TimeFilter)} mb="4">
+        <Tabs.List justify="center">
+          {Object.keys(TimeFilter)
+            .filter(isTimeFilter)
+            .map((key) => (
+              <Tabs.Trigger value={TimeFilter[key]} key={key}>
+                {TimeFilter[key]}
+              </Tabs.Trigger>
+            ))}
+        </Tabs.List>
+      </Tabs.Root>
 
       <Flex width="100%" justify="between" align="center">
         <label htmlFor="excludeCoreTeam" className="my-2 flex items-center gap-1">
-          <Switch defaultChecked={excludeCoreTeam} onCheckedChange={onCheckedChange} id="excludeCoreTeam" />
+          <Switch defaultChecked={exclude} onCheckedChange={setExclude} id="excludeCoreTeam" />
           <span className="flex items-center gap-2">
             Hide the
             <Badge>Core team</Badge>
@@ -89,7 +68,10 @@ const Scoreboard = ({
           </Popover.Trigger>
 
           <Popover.Content>
-            <CheckboxGroup.Root defaultValue={['gnolang/gno', ...selectedRepositoriesId]} onValueChange={onValueChange}>
+            <CheckboxGroup.Root
+              defaultValue={['gnolang/gno', ...selectedRepositories]}
+              onValueChange={setSelectedRepositories}
+            >
               {repositories.map(({ id, name, owner }) => (
                 <CheckboxGroup.Item disabled={id === 'gnolang/gno'} value={id} key={id}>
                   {owner}/{name}

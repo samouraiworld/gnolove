@@ -18,3 +18,7 @@ export const chunk = <T>(arr: T[], chunkSize: number): T[][] => {
 };
 
 export const isDefined = <T>(el: T | undefined | null): el is T => el !== undefined && el !== null;
+
+export const getIds = <T extends { id: string }>(arr: T[]): string[] => {
+  return arr.map(({ id }) => id);
+};
