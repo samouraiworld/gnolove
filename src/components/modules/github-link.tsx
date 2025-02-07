@@ -13,12 +13,13 @@ export interface ContributionsDialogProps extends Dialog.RootProps {
 const LinkGithub = ({ user, children, ...props }: ContributionsDialogProps) => {
   const [address, setAddress] = useState("");
   const [wallet, setWallet] = useState<any>(null);
-
+  const adenaIsDefined = typeof window !== "undefined" && (window as any).adena
+  
   useEffect(() => {
-    if (typeof window !== "undefined" && (window as any).adena) {
+    if (adenaIsDefined) {
       setWallet((window as any).adena);
     } 
-  })
+  },[adenaIsDefined])
   
   return (
     <Dialog.Root {...props} >

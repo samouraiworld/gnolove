@@ -20,7 +20,7 @@ export function useLinkGithub () {
 function processLink(code:string) {
     const login = localStorage.getItem("github_login");
     const address = localStorage.getItem("gno_address");
-  
+    
     if (login && address) {
       postCode(code, login, address);
     }
