@@ -4,6 +4,7 @@ go 1.23.0
 
 require (
 	github.com/dgraph-io/ristretto v0.2.0
+	github.com/go-chi/chi/v5 v5.2.1
 	github.com/shurcooL/githubv4 v0.0.0-20240727222349-48295856cce7
 	github.com/subosito/gotenv v1.6.0
 	go.uber.org/zap v1.27.0

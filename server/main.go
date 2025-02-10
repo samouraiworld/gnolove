@@ -7,6 +7,9 @@ import (
 	"time"
 
 	"github.com/dgraph-io/ristretto"
+	"github.com/go-chi/chi/v5"
+
+	"github.com/go-chi/chi/v5/middleware"
 	"github.com/samouraiworld/topofgnomes/server/db"
 	"github.com/samouraiworld/topofgnomes/server/handler"
 	"github.com/samouraiworld/topofgnomes/server/models"
@@ -65,18 +68,22 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	mux := http.NewServeMux()
-
-	mux.HandleFunc("/getRepositories", handler.HandleGetRepository(database))
-	mux.HandleFunc("/getStats", handler.HandleGetUserStats(database, cache))
-	mux.HandleFunc("/getIssues", handler.GetIssues(database))
-	mux.HandleFunc("/milestones/{number}", handler.GetMilestone(database))
-	mux.HandleFunc("/contributors/newest", handler.HandleGetNewestContributors(database))
-	loggedMux := LoggingMiddleware(mux)
+	router := chi.NewRouter()
+	router.Use(LoggingMiddleware)
+	router.Use(Compress())
+	router.HandleFunc("/getRepositories", handler.HandleGetRepository(database))
+	router.HandleFunc("/getStats", handler.HandleGetUserStats(database, cache))
+	router.HandleFunc("/getIssues", handler.GetIssues(database))
+	router.HandleFunc("/milestones/{number}", handler.GetMilestone(database))
+	router.HandleFunc("/contributors/newest", handler.HandleGetNewestContributors(database))
 
 	logger.Infof("Server running on port %d", port)
-	err = http.ListenAndServe(fmt.Sprintf(":%d", port), loggedMux)
+	err = http.ListenAndServe(fmt.Sprintf(":%d", port), router)
 	if err != nil {
 		panic(err)
 	}
+}
+
+func Compress() func(next http.Handler) http.Handler {
+	return middleware.Compress(5)
 }
