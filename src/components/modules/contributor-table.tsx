@@ -55,6 +55,7 @@ const ContributorTable = ({ contributors, sort, showRank }: ContributorTableProp
             </Tooltip>
           </Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell></Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell></Table.ColumnHeaderCell>
         </Table.Row>
       </Table.Header>
 

@@ -10,7 +10,7 @@ export interface ContributionsDialogProps extends Dialog.RootProps {
   user: TEnhancedUserWithStats;
 }
 
-const LinkGithub = ({ user, children, ...props }: ContributionsDialogProps) => {
+const GithubLink = ({ user, children, ...props }: ContributionsDialogProps) => {
   const [address, setAddress] = useState("");
   const [wallet, setWallet] = useState<any>(null);
   const adenaIsDefined = typeof window !== "undefined" && (window as any).adena
@@ -103,7 +103,7 @@ async function linkGithub(wallet: any, user: TEnhancedUserWithStats, address: st
   window.location.href = authUrl;
 }
 
-export default LinkGithub;
+export default GithubLink;
 
 function getCommand(login: string) :string{
   return `gnokey maketx call \\
