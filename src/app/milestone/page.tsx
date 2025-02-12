@@ -60,7 +60,7 @@ const MilestonePage = async () => {
         <Table.Header>
           <Table.Row>
             <Table.ColumnHeaderCell className="w-full">Issue</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Assignee(s)</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell align="center">Assignee(s)</Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
 
