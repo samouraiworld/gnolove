@@ -5,7 +5,8 @@ import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import NextLink from 'next/link';
 
-import { Flex, Grid, Heading, Spinner, Text } from '@radix-ui/themes';
+import { Link2Icon } from '@radix-ui/react-icons';
+import { Button, Flex, Grid, Heading, IconButton, Link, Spinner, Text } from '@radix-ui/themes';
 
 import MilestoneProgress from '@/feature/milestone-progress';
 import Scoreboard from '@/feature/scoreboard';
@@ -32,6 +33,8 @@ import { getContributorsWithScore } from '@/util/score';
 import REPOSITORY from '@/constant/repository';
 
 import HeaderImage from '@/image/header.png';
+
+import { GithubLink } from '@/module/github-link';
 
 export interface ScoreboardPageProps {
   timeFilter: TimeFilter;
@@ -118,9 +121,19 @@ const ScoreboardPage = ({
         <UserTable users={newContributors ?? []} />
       </Grid>
 
-      <Heading size="6" mt="6" className="text-center">
-        🏅 Gnolove Scoreboard
-      </Heading>
+      <Flex justify="between" align="center" mt="6">
+        <div />
+        <Heading size="6" className="text-center">
+          🏅 Gnolove Scoreboard
+        </Heading>
+
+        <GithubLink>
+          <Button>
+            <Link2Icon />
+            Link Github Account
+          </Button>
+        </GithubLink>
+      </Flex>
 
       <Scoreboard
         repositories={repositories ?? []}

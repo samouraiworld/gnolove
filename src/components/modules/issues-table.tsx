@@ -6,7 +6,6 @@ import { Flex, HoverCard, Table, Text } from '@radix-ui/themes';
 import Label from '@/element/label';
 
 import { TIssue } from '@/util/schemas';
-import {useLinkGithub}  from '@/components/features/link-github-function';
 
 export interface IssuesTableProps extends Table.RootProps {
   issues: TIssue[];
@@ -20,8 +19,7 @@ const IssuesTable = ({ issues, showLabels, showHeader, ...props }: IssuesTablePr
     if (typeof window === 'undefined') return;
     window.open(url, '_blank');
   };
-  useLinkGithub();
-
+  
   return (
     <Table.Root {...props}>
       {showHeader && (

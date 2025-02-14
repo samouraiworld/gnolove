@@ -10,7 +10,6 @@ import { formatDistanceToNow } from 'date-fns';
 import { CircleDotIcon } from 'lucide-react';
 
 import ContributionsDialog from '@/module/contributions-dialog';
-import LinkGithub from '@/module/github-link';
 
 import { TEnhancedUserWithStatsAndScore } from '@/util/schemas';
 import { cn } from '@/util/style';
@@ -151,16 +150,6 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
           </ContributionsDialog>
         </Flex>
       </Table.Cell>
-      <Table.Cell className="text-center">
-        <Flex height="100%" align="center" justify="center">
-          <LinkGithub user={contributor}>
-            <IconButton variant="ghost">
-              <Link2Icon />              
-            </IconButton>
-          </LinkGithub>
-        </Flex>
-      </Table.Cell>
-      
     </Table.Row>
   );
 };

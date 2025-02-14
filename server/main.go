@@ -37,14 +37,21 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if os.Getenv("OAUTH_CLIENT_ID") == "" {
-		panic("OAUTH_CLIENT_ID is not set")
+	if os.Getenv("GITHUB_OAUTH_CLIENT_ID") == "" {
+		panic("GITHUB_OAUTH_CLIENT_ID is not set")
 	}
-	if os.Getenv("OAUTH_CLIENT_SECRET") == "" {
-		panic("OAUTH_CLIENT_SECRET is not set")
+	if os.Getenv("GITHUB_OAUTH_CLIENT_SECRET") == "" {
+		panic("GITHUB_OAUTH_CLIENT_SECRET is not set")
 	}
 
-	signer := signer.New(database, logger.Sugar(), os.Getenv("MNEMONIC"), os.Getenv("CHAIN_ID"), os.Getenv("RPC_ADDR"), os.Getenv("REALM_PATH"))
+	signer := signer.New(
+		database,
+		logger.Sugar(),
+		os.Getenv("GHVERIFY_OWNER_MNEMONIC"),
+		os.Getenv("GNO_CHAIN_ID"),
+		os.Getenv("GNO_RPC_ENDPOINT"),
+		os.Getenv("GHVERIFY_REALM_PATH"),
+	)
 
 	syncer := sync.NewSyncer(database, repositories, logger.Sugar())
 	err = syncer.StartSynchonizing()
@@ -57,7 +64,8 @@ func main() {
 	http.HandleFunc("/getIssues", handler.GetIssues(database))
 	http.HandleFunc("/milestones/{number}", handler.GetMilestone(database))
 	http.HandleFunc("/contributors/newest", handler.HandleGetNewestContributors(database))
-	http.HandleFunc("/ghtoken", handler.HandleGithubCallback(signer))
+	http.HandleFunc("/verifyGithubAccount", handler.HandleVerifyGithubAccount(signer))
+	http.HandleFunc("/getGithubUserAndTokenByCode", handler.HandleGetGithubUserAndTokenByCode(signer, database))
 
 	logger.Sugar().Infof("Server running on port %d", port)
 	err = http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
