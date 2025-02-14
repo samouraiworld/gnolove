@@ -13,7 +13,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func getUserStats(db *gorm.DB, startTime time.Time, exclude, repositories []string) ([]UserWithStats, error) {
+func GetUserStats(db *gorm.DB, startTime time.Time, exclude, repositories []string) ([]UserWithStats, error) {
 	users := make([]models.User, 0)
 	query := db.Model(&models.User{})
 
@@ -131,7 +131,7 @@ func HandleGetUserStats(db *gorm.DB) func(w http.ResponseWriter, r *http.Request
 		exclude := r.URL.Query()["exclude"]
 		repositories := getRepositoriesWithRequest(r)
 
-		stats, err := getUserStats(db, startTime, exclude, repositories)
+		stats, err := GetUserStats(db, startTime, exclude, repositories)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			w.Write([]byte(err.Error()))
