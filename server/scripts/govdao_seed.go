@@ -43,7 +43,7 @@ func CreateSeed(db *gorm.DB) error {
 		var tier string
 		if i < t1 {
 			tier = "T1"
-		} else if i < t2 {
+		} else if i < t1+t2 {
 			tier = "T2"
 		} else {
 			tier = "T3"
