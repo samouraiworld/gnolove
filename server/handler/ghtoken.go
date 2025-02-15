@@ -10,6 +10,7 @@ import (
 
 	"github.com/google/go-github/v64/github"
 	"github.com/samouraiworld/topofgnomes/server/signer"
+	"gorm.io/gorm"
 )
 
 type GitHubTokenResponse struct {
@@ -18,7 +19,7 @@ type GitHubTokenResponse struct {
 
 func exchangeCodeForToken(code string) (*GitHubTokenResponse, error) {
 	url := "https://github.com/login/oauth/access_token"
-	body := fmt.Sprintf("client_id=%s&client_secret=%s&code=%s", os.Getenv("OAUTH_CLIENT_ID"), os.Getenv("OAUTH_CLIENT_SECRET"), code)
+	body := fmt.Sprintf("client_id=%s&client_secret=%s&code=%s", os.Getenv("GITHUB_OAUTH_CLIENT_ID"), os.Getenv("GITHUB_OAUTH_CLIENT_SECRET"), code)
 
 	req, err := http.NewRequest("POST", url, strings.NewReader(body))
 	if err != nil {
@@ -46,10 +47,15 @@ type resCallback struct {
 	Error   string `json:"error"`
 }
 
-func HandleGithubCallback(signer *signer.Signer) func(w http.ResponseWriter, r *http.Request) {
+type GithubInfo struct {
+	GithubUser  *github.User `json:"github_user"`
+	GithubToken string       `json:"github_token"`
+}
+
+func HandleVerifyGithubAccount(signer *signer.Signer) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
-		err := verifyTokenBelongsToUser(r)
+		err := verifyGithubLoginBelongsToUser(r)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			json.NewEncoder(w).Encode(resCallback{Error: err.Error()})
@@ -67,10 +73,27 @@ func HandleGithubCallback(signer *signer.Signer) func(w http.ResponseWriter, r *
 	}
 }
 
-func verifyTokenBelongsToUser(r *http.Request) error {
-	code := r.URL.Query().Get("code")
-	if code == "" {
-		return fmt.Errorf("code not found")
+func HandleGetGithubUserAndTokenByCode(signer *signer.Signer, database *gorm.DB) func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+
+		code := r.URL.Query().Get("code")
+		ghUser, token, err := getGithubUserByCode(code)
+
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(resCallback{Error: err.Error()})
+			return
+		}
+
+		json.NewEncoder(w).Encode(GithubInfo{GithubUser: ghUser, GithubToken: token})
+	}
+}
+
+func verifyGithubLoginBelongsToUser(r *http.Request) error {
+	token := r.URL.Query().Get("token")
+	if token == "" {
+		return fmt.Errorf("token not found")
 	}
 	login := r.URL.Query().Get("login")
 	address := r.URL.Query().Get("address")
@@ -81,20 +104,34 @@ func verifyTokenBelongsToUser(r *http.Request) error {
 		return fmt.Errorf("address not found")
 	}
 
-	token, err := exchangeCodeForToken(code)
-	if err != nil {
-		return fmt.Errorf("failed to exchange code for token: %w", err)
-	}
-
-	client := github.NewClient(nil).WithAuthToken(token.AccessToken)
+	client := github.NewClient(nil).WithAuthToken(token)
 	user, _, err := client.Users.Get(context.Background(), "")
 	if err != nil {
 		return fmt.Errorf("failed to get user: %w", err)
 	}
 
 	if *user.Login != login {
-		return fmt.Errorf("token does not belong to user")
+		return fmt.Errorf("github login does not belong to user")
 	}
 
 	return nil
+}
+
+func getGithubUserByCode(code string) (*github.User, string, error) {
+	if code == "" {
+		return nil, "", fmt.Errorf("code not found")
+	}
+
+	token, err := exchangeCodeForToken(code)
+	if err != nil {
+		return nil, "", fmt.Errorf("failed to exchange code for token: %w", err)
+	}
+
+	client := github.NewClient(nil).WithAuthToken(token.AccessToken)
+	user, _, err := client.Users.Get(context.Background(), "")
+	if err != nil {
+		return nil, "", fmt.Errorf("failed to get user: %w", err)
+	}
+
+	return user, token.AccessToken, nil
 }

@@ -14,7 +14,7 @@ type Repository struct {
 }
 
 func GetRepositoriesFromConfig() ([]Repository, error) {
-	repositoriesCfg := strings.Split(os.Getenv("REPOSITORIES"), " ")
+	repositoriesCfg := strings.Split(os.Getenv("GITHUB_REPOSITORIES"), " ")
 	repositories := make([]Repository, len(repositoriesCfg))
 	for index, repository := range repositoriesCfg {
 		parts := strings.Split(repository, "/")

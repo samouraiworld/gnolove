@@ -23,8 +23,9 @@ type Signer struct {
 func New(
 	db *gorm.DB,
 	logger *zap.SugaredLogger,
-	mnemonic, chainID,
-	rpcAddr,
+	mnemonic,
+	chainID,
+	rpcEndpoint,
 	realmPath string,
 ) *Signer {
 	signer, err := gnoclient.SignerFromBip39(mnemonic, chainID, "", 0, 0)
@@ -38,7 +39,7 @@ func New(
 	}
 
 	// Initialize the RPC client
-	rpc, err := rpcclient.NewHTTPClient(rpcAddr)
+	rpc, err := rpcclient.NewHTTPClient(rpcEndpoint)
 	if err != nil {
 		panic(err)
 	}
