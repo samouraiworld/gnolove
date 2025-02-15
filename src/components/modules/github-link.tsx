@@ -37,7 +37,7 @@ export const GithubLink = (props: Dialog.RootProps) => {
   };
 
   const redirectToGithubOauth = () => {
-    const authUrl = `https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_OAUTH_REDIRECT_URL}&scope=read:user`;
+    const authUrl = `https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_VERCEL_URL}&scope=read:user`;
     window.location.href = authUrl;
   };
 
