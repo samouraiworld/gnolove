@@ -30,6 +30,7 @@ export const useLinkGithub = () => {
     const processedCode = localStorage.getItem('processedCode');
     if (!code || isLinking || !wallet) return;
     if (processedCode === code) {
+      // eslint-disable-next-line no-console
       console.warn('Already processed code');
       return;
     }
@@ -114,15 +115,15 @@ export const useLinkGithub = () => {
       // 1. Get github user and token by exchanging github code for a token
       setLinkingState('Getting github user and token');
       const ghData: GhUser = await getGithubUserAndToken(code);
-  
+
       // 2. Get the Adena account address
       setLinkingState('Getting Adena account address');
       const userAddress = await getAdenaAddress(wallet);
-  
+
       // 3. Once we get the user, address we make the request RequestVerification
       setLinkingState('Requesting verification');
       await requestVerification(wallet, userAddress, ghData.github_user);
-  
+
       // 4. Once we get the verification request, we verify with the back the github login and address are correct
       setLinkingState('Verifying github account');
       await verifyGithubAccount(ghData.github_token, ghData.github_user.login, userAddress);

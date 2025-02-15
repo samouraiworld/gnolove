@@ -19,7 +19,7 @@ const IssuesTable = ({ issues, showLabels, showHeader, ...props }: IssuesTablePr
     if (typeof window === 'undefined') return;
     window.open(url, '_blank');
   };
-  
+
   return (
     <Table.Root {...props}>
       {showHeader && (

@@ -18,7 +18,9 @@ export const GithubLink = (props: Dialog.RootProps) => {
       message: linkingState,
       mode: 'info',
     });
-    return () => toastId && removeToast(toastId);
+    return () => {
+      toastId && removeToast(toastId);
+    };
   }, [linkingState]);
 
   const generateCommand = (login: string) => {

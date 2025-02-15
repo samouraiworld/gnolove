@@ -6,13 +6,14 @@ import Image from 'next/image';
 import NextLink from 'next/link';
 
 import { Link2Icon } from '@radix-ui/react-icons';
-import { Button, Flex, Grid, Heading, IconButton, Link, Spinner, Text } from '@radix-ui/themes';
+import { Button, Flex, Grid, Heading, Spinner, Text } from '@radix-ui/themes';
 
 import MilestoneProgress from '@/feature/milestone-progress';
 import Scoreboard from '@/feature/scoreboard';
 
 import LayoutContainer from '@/layout/layout-container';
 
+import { GithubLink } from '@/module/github-link';
 import IssuesTable from '@/module/issues-table';
 import PrsTable from '@/module/prs-table';
 import UserTable from '@/module/user-table';
@@ -33,8 +34,6 @@ import { getContributorsWithScore } from '@/util/score';
 import REPOSITORY from '@/constant/repository';
 
 import HeaderImage from '@/image/header.png';
-
-import { GithubLink } from '@/module/github-link';
 
 export interface ScoreboardPageProps {
   timeFilter: TimeFilter;

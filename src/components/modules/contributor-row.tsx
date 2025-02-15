@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 
 import Image from 'next/image';
 
-import { ExternalLinkIcon, MagnifyingGlassIcon, StarFilledIcon, Link2Icon } from '@radix-ui/react-icons';
+import { ExternalLinkIcon, MagnifyingGlassIcon, StarFilledIcon } from '@radix-ui/react-icons';
 import { Badge, Flex, IconButton, Table, Text } from '@radix-ui/themes';
 import { formatDistanceToNow } from 'date-fns';
 import { CircleDotIcon } from 'lucide-react';
