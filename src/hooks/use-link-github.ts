@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 
 import { useSearchParams } from 'next/navigation';
 
+import { useToast } from '@/contexts/toast-context';
+
 type GhUser = {
   github_user: any;
   github_token: string;
@@ -14,6 +16,7 @@ export const useLinkGithub = () => {
   const [wallet, setWallet] = useState<any>(null);
   const [ghUser, setGhUser] = useState<any>();
   const [linkingState, setLinkingState] = useState('');
+  const { addToast } = useToast();
 
   const searchParams = useSearchParams();
   const code = searchParams.get('code');
@@ -40,11 +43,16 @@ export const useLinkGithub = () => {
   }, [code, isLinking, wallet]);
 
   const getAdenaAddress = async (wallet: any) => {
-    const connexion = await wallet.AddEstablish('Adena');
-    if (connexion.status === 'failure') throw Error(connexion.message);
+    const connection = await wallet.AddEstablish('Adena');
+    if (connection.status === 'failure') throw Error(connection.message);
 
     const account = await wallet.GetAccount();
     if (account.status === 'failure') throw Error(account.message);
+
+    if (account.data.chainId !== process.env.NEXT_PUBLIC_GNO_CHAIN_ID) {
+      const res = await wallet.SwitchNetwork(process.env.NEXT_PUBLIC_GNO_CHAIN_ID);
+      if (res.status === 'failure') throw Error(res.message);
+    }
 
     setAddress(account.data.address);
     return account.data.address;
@@ -81,6 +89,16 @@ export const useLinkGithub = () => {
             pkg_path: process.env.NEXT_PUBLIC_PROFILE_REALM_PATH,
             func: 'SetStringField',
             args: ['Avatar', ghUser.avatar_url],
+          },
+        },
+        {
+          type: '/vm.m_call',
+          value: {
+            caller: userAddress,
+            send: '',
+            pkg_path: process.env.NEXT_PUBLIC_PROFILE_REALM_PATH,
+            func: 'SetStringField',
+            args: ['Bio', ghUser.bio],
           },
         },
       ],
@@ -129,8 +147,13 @@ export const useLinkGithub = () => {
       await verifyGithubAccount(ghData.github_token, ghData.github_user.login, userAddress);
 
       setLinkingState(`Your github account: ${ghData.github_user.login} has been linked to your Adena account`);
-    } catch (error) {
-      alert(`Error: ${JSON.stringify(error)}`);
+    } catch (e: any) {
+      console.error(e);
+      addToast({
+        title: 'Error',
+        message: e.message,
+        mode: 'negative',
+      });
     }
   };
 
