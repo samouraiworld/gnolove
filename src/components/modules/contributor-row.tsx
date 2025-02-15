@@ -146,7 +146,7 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
         <Flex height="100%" align="center" justify="center">
           <ContributionsDialog user={contributor}>
             <IconButton variant="ghost">
-              <MagnifyingGlassIcon />              
+              <MagnifyingGlassIcon />
             </IconButton>
           </ContributionsDialog>
         </Flex>
@@ -155,12 +155,11 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
         <Flex height="100%" align="center" justify="center">
           <LinkGithub user={contributor}>
             <IconButton variant="ghost">
-              <Link2Icon />              
+              <Link2Icon />
             </IconButton>
           </LinkGithub>
         </Flex>
       </Table.Cell>
-      
     </Table.Row>
   );
 };

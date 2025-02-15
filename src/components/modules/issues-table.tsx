@@ -6,7 +6,8 @@ import { Flex, HoverCard, Table, Text } from '@radix-ui/themes';
 import Label from '@/element/label';
 
 import { TIssue } from '@/util/schemas';
-import {useLinkGithub}  from '@/components/features/link-github-function';
+
+import { useLinkGithub } from '@/components/features/link-github-function';
 
 export interface IssuesTableProps extends Table.RootProps {
   issues: TIssue[];

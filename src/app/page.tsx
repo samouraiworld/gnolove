@@ -29,7 +29,6 @@ export interface HomePageParams {
 }
 
 const HomePage = async ({ searchParams: { f, e, r } }: HomePageParams) => {
-
   const timeFilter = getTimeFilterFromSearchParam(f, TimeFilter.MONTHLY);
   const exclude = !!e;
 
