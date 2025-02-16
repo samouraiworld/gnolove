@@ -1,13 +1,22 @@
 'use client';
 
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 
 import { Button, Dialog } from '@radix-ui/themes';
 
 import { useToast } from '@/contexts/toast-context';
 import { useLinkGithub } from '@/hooks/use-link-github';
 
+// We have to wrap the GithubLink in a Suspense because it use useSearchParams
 export const GithubLink = (props: Dialog.RootProps) => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <GithubLinkWithoutSuspense {...props} />
+    </Suspense>
+  );
+};
+
+const GithubLinkWithoutSuspense = (props: Dialog.RootProps) => {
   const { address, setAddress, adena, ghUser, linkingState } = useLinkGithub();
   const { addToast, removeToast } = useToast();
 
