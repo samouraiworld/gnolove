@@ -1,6 +1,6 @@
 'use client';
 
-import { redirect } from "next/navigation";
+import { redirect, RedirectType } from 'next/navigation';
 
 type RedirectPageProps = {
   searchParams: {
@@ -14,7 +14,9 @@ const RedirectPage = (props: RedirectPageProps) => {
     searchParams: { code, target },
   } = props;
 
-  return redirect(`${target}?code=${code}`);
+  // FIXME: if using `${target}?code=${code}` we will have
+  // Error: Strings must use singlequote. quotes.
+  return redirect(target + '?code=' + code, RedirectType.replace);
 };
 
 export default RedirectPage;
