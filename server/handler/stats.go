@@ -78,11 +78,24 @@ func GetUserStats(db *gorm.DB, startTime time.Time, exclude, repositories []stri
 	}
 
 	slices.SortFunc(res, func(a, b UserWithStats) int {
-		return (b.TotalCommits + b.TotalPrs + b.TotalIssues + b.TotalReviewedPullRequests) -
-			(a.TotalCommits + a.TotalPrs + a.TotalIssues + a.TotalReviewedPullRequests)
+		return computeScore(b) - computeScore(a)
 	})
 
 	return trucateSlice(res, limit), nil
+}
+
+const (
+	COMMIT_FACTOR      = 10
+	ISSUES_FACTOR      = 0.5
+	PR_FACTOR          = 2
+	REVIEWED_MR_FACTOR = 2
+)
+
+func computeScore(user UserWithStats) int {
+	return user.TotalCommits*COMMIT_FACTOR +
+		int(float64(user.TotalIssues)*ISSUES_FACTOR) +
+		user.TotalPrs*PR_FACTOR +
+		user.TotalReviewedPullRequests*REVIEWED_MR_FACTOR
 }
 
 func trucateSlice(slice []UserWithStats, limit int) []UserWithStats {
