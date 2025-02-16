@@ -5,15 +5,13 @@ import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import NextLink from 'next/link';
 
-import { Link2Icon } from '@radix-ui/react-icons';
-import { Button, Flex, Grid, Heading, Spinner, Text } from '@radix-ui/themes';
+import { Flex, Grid, Heading, Spinner, Text } from '@radix-ui/themes';
 
 import MilestoneProgress from '@/feature/milestone-progress';
 import Scoreboard from '@/feature/scoreboard';
 
 import LayoutContainer from '@/layout/layout-container';
 
-import { GithubLink } from '@/module/github-link';
 import IssuesTable from '@/module/issues-table';
 import PrsTable from '@/module/prs-table';
 import UserTable from '@/module/user-table';
@@ -120,18 +118,10 @@ const ScoreboardPage = ({
         <UserTable users={newContributors ?? []} />
       </Grid>
 
-      <Flex justify="between" align="center" mt="6">
-        <div />
+      <Flex justify="center" align="center" mt="6">
         <Heading size="6" className="text-center">
           🏅 Gnolove Scoreboard
         </Heading>
-
-        <GithubLink>
-          <Button>
-            <Link2Icon />
-            Link Github Account
-          </Button>
-        </GithubLink>
       </Flex>
 
       <Scoreboard

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 
 import { useSearchParams } from 'next/navigation';
 
+import { useAdena } from '@/contexts/adena-context';
 import { useToast } from '@/contexts/toast-context';
 
 type GhUser = {
@@ -12,8 +13,9 @@ type GhUser = {
 };
 
 export const useLinkGithub = () => {
+  const { adena, isLoading } = useAdena();
+
   const [address, setAddress] = useState('');
-  const [wallet, setWallet] = useState<any>(null);
   const [ghUser, setGhUser] = useState<any>();
   const [linkingState, setLinkingState] = useState('');
   const { addToast } = useToast();
@@ -24,14 +26,9 @@ export const useLinkGithub = () => {
   const [isLinking, setIsLinking] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setWallet((window as any).adena);
-    }
-  }, []);
-
-  useEffect(() => {
     const processedCode = localStorage.getItem('processedCode');
-    if (!code || isLinking || !wallet) return;
+
+    if (!code || isLinking || isLoading || !adena) return;
     if (processedCode === code) {
       // eslint-disable-next-line no-console
       console.warn('Already processed code');
@@ -39,18 +36,18 @@ export const useLinkGithub = () => {
     }
 
     setIsLinking(true);
-    linkGithubAccount(code, wallet);
-  }, [code, isLinking, wallet]);
+    linkGithubAccount(code, adena);
+  }, [code, isLinking, adena, isLoading]);
 
-  const getAdenaAddress = async (wallet: any) => {
-    const connection = await wallet.AddEstablish('Adena');
+  const getAdenaAddress = async (adena: any) => {
+    const connection = await adena.AddEstablish('Adena');
     if (connection.status === 'failure') throw Error(connection.message);
 
-    const account = await wallet.GetAccount();
+    const account = await adena.GetAccount();
     if (account.status === 'failure') throw Error(account.message);
 
     if (account.data.chainId !== process.env.NEXT_PUBLIC_GNO_CHAIN_ID) {
-      const res = await wallet.SwitchNetwork(process.env.NEXT_PUBLIC_GNO_CHAIN_ID);
+      const res = await adena.SwitchNetwork(process.env.NEXT_PUBLIC_GNO_CHAIN_ID);
       if (res.status === 'failure') throw Error(res.message);
     }
 
@@ -162,8 +159,6 @@ export const useLinkGithub = () => {
     const res = await fetch(url.toString(), { cache: 'no-cache' });
     const data = await res.json();
 
-    if (!data) throw Error('Failed to get github user and token');
-
     if (res.status !== 200) {
       throw Error(data.error);
     }
@@ -172,5 +167,5 @@ export const useLinkGithub = () => {
     return data;
   };
 
-  return { address, setAddress, wallet, ghUser, linkingState };
+  return { address, setAddress, adena, ghUser, linkingState };
 };

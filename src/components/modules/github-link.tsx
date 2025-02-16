@@ -8,7 +8,7 @@ import { useToast } from '@/contexts/toast-context';
 import { useLinkGithub } from '@/hooks/use-link-github';
 
 export const GithubLink = (props: Dialog.RootProps) => {
-  const { address, setAddress, wallet, ghUser, linkingState } = useLinkGithub();
+  const { address, setAddress, adena, ghUser, linkingState } = useLinkGithub();
   const { addToast, removeToast } = useToast();
 
   useEffect(() => {
@@ -51,7 +51,7 @@ export const GithubLink = (props: Dialog.RootProps) => {
           We will use Github Oauth to ensure you are the owner of this github account
         </Dialog.Description>
 
-        {!wallet && (
+        {!adena && (
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '10px' }}>
             <span style={{ marginRight: '10px' }}>Gno Address</span>
             <input
@@ -64,7 +64,7 @@ export const GithubLink = (props: Dialog.RootProps) => {
           </div>
         )}
 
-        {!wallet && (
+        {!adena && (
           <div className="bg-gray-800 inset-0 flex items-center justify-center bg-opacity-50">
             <div className="bg-white rounded-lg shadow-xl w-full max-w-lg p-6">
               <h4 className="text-red-600 mb-2 font-bold" style={{ color: 'red' }}>
@@ -80,7 +80,7 @@ export const GithubLink = (props: Dialog.RootProps) => {
         )}
 
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <Button style={{ backgroundColor: 'green' }} onClick={redirectToGithubOauth} disabled={!wallet && !address}>
+          <Button style={{ backgroundColor: 'green' }} onClick={redirectToGithubOauth} disabled={!adena && !address}>
             Link
           </Button>
         </div>
