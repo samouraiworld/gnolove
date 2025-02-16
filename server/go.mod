@@ -3,7 +3,9 @@ module github.com/samouraiworld/topofgnomes/server
 go 1.23.0
 
 require (
+	github.com/dgraph-io/ristretto v0.2.0
 	github.com/gnolang/gno v0.0.0-20250214130904-9884ba10e8b0
+	github.com/go-chi/chi/v5 v5.2.1
 	github.com/google/go-github/v64 v64.0.0
 	github.com/shurcooL/githubv4 v0.0.0-20240727222349-48295856cce7
 	github.com/subosito/gotenv v1.6.0
@@ -17,10 +19,12 @@ require (
 	github.com/btcsuite/btcd/btcec/v2 v2.3.4 // indirect
 	github.com/btcsuite/btcd/btcutil v1.1.6 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
+	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/cockroachdb/apd/v3 v3.2.1 // indirect
 	github.com/cosmos/ledger-cosmos-go v0.14.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.3.0 // indirect
+	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect

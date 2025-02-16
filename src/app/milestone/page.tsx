@@ -60,7 +60,7 @@ const MilestonePage = async () => {
         <Table.Header>
           <Table.Row>
             <Table.ColumnHeaderCell className="w-full">Issue</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell>Assignee(s)</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell align="center">Assignee(s)</Table.ColumnHeaderCell>
           </Table.Row>
         </Table.Header>
 
@@ -82,7 +82,7 @@ const MilestonePage = async () => {
 
                     <Flex gap="2">
                       {issue.labels.map((label) => (
-                        <Label label={label} key={label.id} />
+                        <Label label={label} key={issue.id + label.id}/>
                       ))}
                     </Flex>
                   </Flex>
@@ -97,7 +97,7 @@ const MilestonePage = async () => {
               <Table.Cell>
                 <Flex gap="2" height="100%" align="center" justify="center">
                   {(issue.assignees ?? []).map(({ user: assignee }) => (
-                    <Avatar fallback={assignee.login} src={assignee.avatarUrl} key={assignee.id} size="1" />
+                    <Avatar fallback={assignee.login} src={assignee.avatarUrl} key={issue.id + assignee.id} size="1" />
                   ))}
                 </Flex>
               </Table.Cell>

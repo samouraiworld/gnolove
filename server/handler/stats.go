@@ -9,6 +9,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/dgraph-io/ristretto"
+
 	"github.com/samouraiworld/topofgnomes/server/models"
 	"gorm.io/gorm"
 )
@@ -86,8 +88,8 @@ func getUserStats(db *gorm.DB, startTime time.Time, exclude, repositories []stri
 }
 
 func trucateSlice(slice []UserWithStats) []UserWithStats {
-	if len(slice) > 70 {
-		return slice[:70]
+	if len(slice) > 60 {
+		return slice[:60]
 	}
 	return slice
 }
@@ -111,7 +113,7 @@ type UserWithStats struct {
 	LastContribution          interface{}
 }
 
-func HandleGetUserStats(db *gorm.DB) func(w http.ResponseWriter, r *http.Request) {
+func HandleGetUserStats(db *gorm.DB, cache *ristretto.Cache) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
@@ -126,19 +128,27 @@ func HandleGetUserStats(db *gorm.DB) func(w http.ResponseWriter, r *http.Request
 		case "yearly":
 			startTime = time.Now().AddDate(-1, 0, 0)
 		}
-		fmt.Println(startTime)
 
 		exclude := r.URL.Query()["exclude"]
 		repositories := getRepositoriesWithRequest(r)
 
-		stats, err := getUserStats(db, startTime, exclude, repositories)
-		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			w.Write([]byte(err.Error()))
+		cacheKey := fmt.Sprintf("stats:%s:%s:%s", strings.Join(repositories, ","), strings.Join(exclude, ","), r.URL.Query().Get("time"))
+		data, ok := cache.Get(cacheKey)
+		if ok {
+			json.NewEncoder(w).Encode(data.([]UserWithStats))
+		} else {
+			stats, err := getUserStats(db, startTime, exclude, repositories)
+			if err != nil {
+				w.WriteHeader(http.StatusInternalServerError)
+				w.Write([]byte(err.Error()))
 
-			return
+				return
+			}
+
+			cache.SetWithTTL(cacheKey, stats, 0, time.Minute*5)
+			json.NewEncoder(w).Encode(stats)
 		}
-		json.NewEncoder(w).Encode(stats)
+
 	}
 }
 

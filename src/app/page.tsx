@@ -28,22 +28,38 @@ export interface HomePageParams {
   };
 }
 
+const debugTime = async <T,>(label: string, fn: (() => Promise<T>) | (() => Promise<T[]>)) => {
+  console.time(label);
+  const res = await fn();
+  if (Array.isArray(res)) console.timeLog(label, `${res.length} records found`);
+  console.timeEnd(label);
+
+  return res;
+};
+
 const HomePage = async ({ searchParams: { f, e, r } }: HomePageParams) => {
   const timeFilter = getTimeFilterFromSearchParam(f, TimeFilter.MONTHLY);
   const exclude = !!e;
 
   const queryClient = new QueryClient();
 
+  console.time('prefetchRepositories');
   const allRepositories = await prefetchRepositories(queryClient);
+  console.timeEnd('prefetchRepositories');
+
   const selectedRepositories = getSelectedRepositoriesFromSearchParam(r, allRepositories);
 
+  console.time('allPromises');
   await Promise.all([
-    prefetchMilestone(queryClient),
-    prefetchContributors(queryClient, { timeFilter: TimeFilter.ALL_TIME }),
-    prefetchContributors(queryClient, { timeFilter, exclude, repositories: getIds(selectedRepositories) }),
-    prefetchLastIssues(queryClient),
-    prefetchNewContributors(queryClient),
+    debugTime('prefetchMilestone', () => prefetchMilestone(queryClient)),
+    debugTime('prefetchAllContributors', () => prefetchContributors(queryClient, { timeFilter: TimeFilter.ALL_TIME })),
+    debugTime('prefetchContributors', () =>
+      prefetchContributors(queryClient, { timeFilter, exclude, repositories: getIds(selectedRepositories) }),
+    ),
+    debugTime('prefetchLastIssues', () => prefetchLastIssues(queryClient)),
+    debugTime('prefetchNewContributors', () => prefetchNewContributors(queryClient)),
   ]);
+  console.timeEnd('allPromises');
 
   return (
     <QueryClientWrapper>
