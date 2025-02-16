@@ -13,7 +13,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func GetUserStats(db *gorm.DB, startTime time.Time, exclude, repositories []string) ([]UserWithStats, error) {
+func GetUserStats(db *gorm.DB, startTime time.Time, exclude, repositories []string, limit int) ([]UserWithStats, error) {
 	users := make([]models.User, 0)
 	query := db.Model(&models.User{})
 
@@ -82,12 +82,12 @@ func GetUserStats(db *gorm.DB, startTime time.Time, exclude, repositories []stri
 			(a.TotalCommits + a.TotalPrs + a.TotalIssues + a.TotalReviewedPullRequests)
 	})
 
-	return trucateSlice(res), nil
+	return trucateSlice(res, limit), nil
 }
 
-func trucateSlice(slice []UserWithStats) []UserWithStats {
-	if len(slice) > 70 {
-		return slice[:70]
+func trucateSlice(slice []UserWithStats, limit int) []UserWithStats {
+	if len(slice) > limit {
+		return slice[:limit]
 	}
 	return slice
 }
@@ -131,7 +131,7 @@ func HandleGetUserStats(db *gorm.DB) func(w http.ResponseWriter, r *http.Request
 		exclude := r.URL.Query()["exclude"]
 		repositories := getRepositoriesWithRequest(r)
 
-		stats, err := GetUserStats(db, startTime, exclude, repositories)
+		stats, err := GetUserStats(db, startTime, exclude, repositories, 70)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			w.Write([]byte(err.Error()))

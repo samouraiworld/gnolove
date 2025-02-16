@@ -13,12 +13,12 @@ import (
 )
 
 const (
-	fileName    = "usertiers.go"
+	fileName    = "usertiers.gno"
 	packageName = "govdao"
 )
 
 func CreateSeed(db *gorm.DB) error {
-	userWithStats, err := handler.GetUserStats(db, time.Time{}, nil, []string{"gnolang/gno"})
+	userWithStats, err := handler.GetUserStats(db, time.Time{}, nil, []string{"gnolang/gno"}, 100)
 	if err != nil {
 		return err
 	}
@@ -46,7 +46,7 @@ func CreateSeed(db *gorm.DB) error {
 		} else if i < t1+t2 {
 			tier = "T2"
 		} else {
-			tier = "T3"
+			break
 		}
 		_, _ = fmt.Fprintf(outputFile, "\t\"%s\": \"%s\",\n", user.Login, tier)
 	}
@@ -54,7 +54,6 @@ func CreateSeed(db *gorm.DB) error {
 	fmt.Println("Created %s with %d users", fileName, len(userWithStats))
 	fmt.Println("Created %d T1", t1)
 	fmt.Println("Created %d T2", t2)
-	fmt.Println("Created %d T3", len(userWithStats)-t1-t2)
 
 	_, err = fmt.Fprintln(outputFile, "}")
 	return err
