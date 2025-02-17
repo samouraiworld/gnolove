@@ -69,6 +69,7 @@ func main() {
 		os.Getenv("GNO_CHAIN_ID"),
 		os.Getenv("GNO_RPC_ENDPOINT"),
 		os.Getenv("GHVERIFY_REALM_PATH"),
+		os.Getenv("GOVDAO_REALM_PATH"),
 	)
 
 	syncer := sync.NewSyncer(database, repositories, logger)

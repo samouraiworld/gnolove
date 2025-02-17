@@ -69,6 +69,13 @@ func HandleVerifyGithubAccount(signer *signer.Signer) func(w http.ResponseWriter
 			return
 		}
 
+		err = signer.ClaimTier(r.URL.Query().Get("login"))
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(resCallback{Error: err.Error()})
+			return
+		}
+
 		json.NewEncoder(w).Encode(resCallback{Success: "true"})
 	}
 }
