@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useLayoutEffect, useState } from 'react';
+import { createContext, FC, ReactNode, useContext, useLayoutEffect, useState } from 'react';
 
 interface AdenaContext {
   adena: any;
@@ -20,7 +20,7 @@ export const AdenaContext = createContext<AdenaContext>(defaultContext);
 
 export const useAdena = () => useContext(AdenaContext);
 
-const AdenaProvider = ({ children }: IPropsWithChildren) => {
+const AdenaProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [adena, setAdena] = useState<any>(defaultContext.adena);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
