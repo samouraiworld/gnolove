@@ -119,9 +119,11 @@ const ScoreboardPage = ({
         <UserTable users={newContributors ?? []} />
       </Grid>
 
-      <Heading size="6" mt="6" className="text-center">
-        🏅 Gnolove Scoreboard
-      </Heading>
+      <Flex justify="center" align="center" mt="6">
+        <Heading size="6" className="text-center">
+          🏅 Gnolove Scoreboard
+        </Heading>
+      </Flex>
 
       <Scoreboard
         repositories={repositories ?? []}

@@ -2,7 +2,8 @@ import { ReactNode } from 'react';
 
 import { ThemeProvider } from 'next-themes';
 
-import { Theme } from '@radix-ui/themes';
+import { LinkNone2Icon } from '@radix-ui/react-icons';
+import { Button, Flex, Theme } from '@radix-ui/themes';
 
 import '@/style/globals.css';
 
@@ -11,6 +12,10 @@ import ThemeSwitch from '@/module/theme-switch';
 import Toaster from '@/element/toast';
 
 import ToastProvider from '@/context/toast-context';
+
+import { AdenaAddress } from '@/components/modules/adena-address';
+import { GithubLink } from '@/components/modules/github-link';
+import AdenaProvider from '@/contexts/adena-context';
 
 interface RootLayoutProps {
   children?: ReactNode;
@@ -31,12 +36,25 @@ const RootLayout = ({ children }: RootLayoutProps) => {
       <body>
         <ThemeProvider defaultTheme="light" attribute="class">
           <Theme>
-            <ThemeSwitch />
-
             <ToastProvider>
-              <Toaster />
+              <AdenaProvider>
+                <Toaster />
 
-              {children}
+                <Flex position="fixed" top="4" right="4" className="z-50" gap="2" align="center" justify="center">
+                  <AdenaAddress />
+
+                  <GithubLink>
+                    <Button variant="soft">
+                      <LinkNone2Icon />
+                      Link Github Account
+                    </Button>
+                  </GithubLink>
+
+                  <ThemeSwitch />
+                </Flex>
+
+                {children}
+              </AdenaProvider>
             </ToastProvider>
           </Theme>
         </ThemeProvider>

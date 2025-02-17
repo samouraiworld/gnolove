@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/dgraph-io/ristretto"
@@ -13,6 +14,7 @@ import (
 	"github.com/samouraiworld/topofgnomes/server/db"
 	"github.com/samouraiworld/topofgnomes/server/handler"
 	"github.com/samouraiworld/topofgnomes/server/models"
+	"github.com/samouraiworld/topofgnomes/server/signer"
 	"github.com/samouraiworld/topofgnomes/server/sync"
 	"github.com/subosito/gotenv"
 	"go.uber.org/zap"
@@ -53,6 +55,22 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	if os.Getenv("GITHUB_OAUTH_CLIENT_ID") == "" {
+		panic("GITHUB_OAUTH_CLIENT_ID is not set")
+	}
+	if os.Getenv("GITHUB_OAUTH_CLIENT_SECRET") == "" {
+		panic("GITHUB_OAUTH_CLIENT_SECRET is not set")
+	}
+
+	signer := signer.New(
+		database,
+		logger,
+		os.Getenv("GHVERIFY_OWNER_MNEMONIC"),
+		os.Getenv("GNO_CHAIN_ID"),
+		os.Getenv("GNO_RPC_ENDPOINT"),
+		os.Getenv("GHVERIFY_REALM_PATH"),
+		os.Getenv("GOVDAO_REALM_PATH"),
+	)
 
 	syncer := sync.NewSyncer(database, repositories, logger)
 	err = syncer.StartSynchonizing()
@@ -76,6 +94,8 @@ func main() {
 	router.HandleFunc("/getIssues", handler.GetIssues(database))
 	router.HandleFunc("/milestones/{number}", handler.GetMilestone(database))
 	router.HandleFunc("/contributors/newest", handler.HandleGetNewestContributors(database))
+	router.HandleFunc("/verifyGithubAccount", handler.HandleVerifyGithubAccount(signer))
+	router.HandleFunc("/getGithubUserAndTokenByCode", handler.HandleGetGithubUserAndTokenByCode(signer, database))
 
 	logger.Infof("Server running on port %d", port)
 	err = http.ListenAndServe(fmt.Sprintf(":%d", port), router)

@@ -16,8 +16,8 @@ sudo apt-get install go
 - Have a valid .env file
 ```
 ## you'll ned to create a new file on /server folder named .env with the following variables (present on .env.example):
-GRAPHQL_ENDPOINT = (commonly: https://api.github.com/graphql)
-GITHUB_TOKEN = a personal token as auth for github API
+GITHUB_GRAPHQL_ENDPOINT = (commonly: https://api.github.com/graphql)
+GITHUB_API_TOKEN = a personal token as auth for github API
 
 ```
 

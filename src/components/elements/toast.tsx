@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 
 import * as Toast from '@radix-ui/react-toast';
-import { Theme } from '@radix-ui/themes';
+import { Text, Theme } from '@radix-ui/themes';
 
 import { useToast } from '@/context/toast-context';
 
@@ -19,7 +19,7 @@ const Toaster = () => {
           <SingleToast {...toast} key={toast.id} />
         ))}
 
-        <Toast.Viewport className="max-w-screen fixed bottom-0 right-0 !z-50 m-0 flex w-96 list-none flex-col gap-3 p-8 outline-none" />
+        <Toast.Viewport className="max-w-screen fixed right-0 top-0 !z-50 m-0 flex w-96 list-none flex-col gap-3 p-8 outline-none" />
       </Toast.Provider>
     </Theme>
   );
@@ -35,7 +35,14 @@ interface ISingleToastProps {
   infinite?: boolean;
 }
 
-const SingleToast = ({ id, title = '', message = '', timer = 5000, infinite = false }: ISingleToastProps) => {
+const SingleToast = ({
+  id,
+  title = '',
+  message = '',
+  timer = 5000,
+  mode = 'info',
+  infinite = false,
+}: ISingleToastProps) => {
   const { removeToast } = useToast();
   const timerRef = useRef<NodeJS.Timeout | undefined>();
 
@@ -55,12 +62,16 @@ const SingleToast = ({ id, title = '', message = '', timer = 5000, infinite = fa
     !infinite && setTimer();
   }, []);
 
+  const titleColor = mode === 'negative' ? 'red' : mode === 'positive' ? 'green' : 'blue';
+
   return (
     <Toast.Root
       className="rt-ToastRoot pointer-events-auto flex flex-col items-start gap-x-4 rounded-4 bg-whiteA-12 p-5 shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] [grid-template-areas:_'title_action'_'description_action']"
       duration={Infinity}
     >
-      <Toast.Title className={cn('text-3 font-medium')}>{title}</Toast.Title>
+      <Toast.Title className={cn('text-3 font-medium')}>
+        <Text color={titleColor}>{title}</Text>
+      </Toast.Title>
       <Toast.Description className="text-2 text-grayA-11">{message}</Toast.Description>
     </Toast.Root>
   );

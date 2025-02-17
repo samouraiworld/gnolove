@@ -82,7 +82,7 @@ const MilestonePage = async () => {
 
                     <Flex gap="2">
                       {issue.labels.map((label) => (
-                        <Label label={label} key={issue.id + label.id}/>
+                        <Label label={label} key={issue.id + label.id} />
                       ))}
                     </Flex>
                   </Flex>

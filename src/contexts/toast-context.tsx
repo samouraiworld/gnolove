@@ -6,13 +6,13 @@ import { IToast } from '@/type/radix-ui';
 
 interface IContext {
   toasts: IToast[];
-  addToast: (toast: IToast) => void;
+  addToast: (toast: IToast) => number | undefined;
   removeToast: (id: number) => void;
 }
 
 const defaultContext = {
   toasts: [],
-  addToast: () => null,
+  addToast: () => 0,
   removeToast: () => null,
 } satisfies IContext;
 
@@ -30,6 +30,7 @@ const ToastProvider = ({ children }: ToastProviderProps) => {
   const addToast = (_toast: IToast) => {
     const toast = 'id' in _toast ? _toast : { ..._toast, id: Date.now() };
     setToasts((prev) => [...prev, toast]);
+    return toast.id;
   };
 
   const removeToast = (id: number) => {

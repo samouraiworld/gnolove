@@ -23,7 +23,7 @@ type Syncer struct {
 
 func NewSyncer(db *gorm.DB, repositories []models.Repository, logger *zap.SugaredLogger) *Syncer {
 	src := oauth2.StaticTokenSource(
-		&oauth2.Token{AccessToken: os.Getenv("GITHUB_TOKEN")},
+		&oauth2.Token{AccessToken: os.Getenv("GITHUB_API_TOKEN")},
 	)
 	httpClient := oauth2.NewClient(context.Background(), src)
 	client := githubv4.NewClient(httpClient)

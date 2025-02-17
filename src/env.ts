@@ -6,13 +6,13 @@ const projectDir = process.cwd();
 loadEnvConfig(projectDir);
 
 const EnvSchema = z.object({
-  GITHUB_TOKEN: z.string(),
+  GITHUB_API_TOKEN: z.string(),
 
   NEXT_PUBLIC_API_URL: z.string(),
 });
 
 const ENV = EnvSchema.parse({
-  GITHUB_TOKEN: process.env.GITHUB_TOKEN,
+  GITHUB_API_TOKEN: process.env.GITHUB_API_TOKEN,
 
   NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
 });
