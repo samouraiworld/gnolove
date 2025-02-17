@@ -17,11 +17,11 @@ import { AdenaAddress } from '@/components/modules/adena-address';
 import { GithubLink } from '@/components/modules/github-link';
 import AdenaProvider from '@/contexts/adena-context';
 
-interface IProps {
+interface RootLayoutProps {
   children?: ReactNode;
 }
 
-const RootLayout = ({ children }: IProps) => {
+const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <html lang="en">
       <head>
