@@ -55,8 +55,6 @@ export const useLinkGithub = () => {
     return account.data.address;
   };
 
-  const displayName = ghUser.name || ghUser.login;
-
   const requestVerification = async (wallet: any, userAddress: string, ghUser: any) => {
     const messages = [
       {
@@ -70,6 +68,8 @@ export const useLinkGithub = () => {
         },
       },
     ];
+
+    const displayName = ghUser.name || ghUser.login;
 
     if (displayName) {
       messages.push({
