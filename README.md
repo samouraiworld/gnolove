@@ -37,12 +37,11 @@ https://github.com/gnolang/gno
 #### Current Love Power Equation: 
 
 | Contribution Type | Points |
-| -------- | -------- | 
-| PR Merged     | 10     | 
-| PR Created     | 2     | 
-| Review done    | 2  | 
-| Issue openned    | 0,5    | 
-| Comment on PR    | 0,01    | 
+|-------------------|--------| 
+| PR                | 2      | 
+| Review done       | 2      | 
+| Issue opened      | 0,5    | 
+| Commit            | 10     | 
 
 #### Later we would like to add: 
 - Emojis Points: Points when some positive Emojis are posted by others (🔥❤️🚀...)
