@@ -55,46 +55,46 @@ export const useLinkGithub = () => {
     return account.data.address;
   };
 
-  const displayName = ghUser.name || ghUser.login
+  const displayName = ghUser.name || ghUser.login;
 
   const requestVerification = async (wallet: any, userAddress: string, ghUser: any) => {
-    const messages = [{
-      type: '/vm.m_call',
-      value: {
-        caller: userAddress,
-        send: '',
-        pkg_path: process.env.NEXT_PUBLIC_GHVERIFY_REALM_PATH,
-        func: 'RequestVerification',
-        args: [ghUser.login],
+    const messages = [
+      {
+        type: '/vm.m_call',
+        value: {
+          caller: userAddress,
+          send: '',
+          pkg_path: process.env.NEXT_PUBLIC_GHVERIFY_REALM_PATH,
+          func: 'RequestVerification',
+          args: [ghUser.login],
+        },
       },
-    }]
+    ];
 
     if (displayName) {
-      messages.push(
-        {
-          type: '/vm.m_call',
-          value: {
-            caller: userAddress,
-            send: '',
-            pkg_path: process.env.NEXT_PUBLIC_PROFILE_REALM_PATH,
-            func: 'SetStringField',
-            args: ['DisplayName', displayName],
-          },
-        })
+      messages.push({
+        type: '/vm.m_call',
+        value: {
+          caller: userAddress,
+          send: '',
+          pkg_path: process.env.NEXT_PUBLIC_PROFILE_REALM_PATH,
+          func: 'SetStringField',
+          args: ['DisplayName', displayName],
+        },
+      });
     }
 
     if (ghUser.avatar_url) {
-      messages.push(
-        {
-          type: '/vm.m_call',
-          value: {
-            caller: userAddress,
-            send: '',
-            pkg_path: process.env.NEXT_PUBLIC_PROFILE_REALM_PATH,
-            func: 'SetStringField',
-            args: ['Avatar', ghUser.avatar_url],
-          },
-        })
+      messages.push({
+        type: '/vm.m_call',
+        value: {
+          caller: userAddress,
+          send: '',
+          pkg_path: process.env.NEXT_PUBLIC_PROFILE_REALM_PATH,
+          func: 'SetStringField',
+          args: ['Avatar', ghUser.avatar_url],
+        },
+      });
     }
 
     if (ghUser.bio) {
@@ -107,7 +107,7 @@ export const useLinkGithub = () => {
           func: 'SetStringField',
           args: ['Bio', ghUser.bio],
         },
-      })
+      });
     }
 
     const res = await wallet.DoContract({
