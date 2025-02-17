@@ -30,6 +30,7 @@ import { TRepository } from '@/util/schemas';
 import { getContributorsWithScore } from '@/util/score';
 
 import REPOSITORY from '@/constant/repository';
+import VIDEOS from '@/constant/videos';
 
 import HeaderImage from '@/image/header.png';
 
@@ -138,35 +139,9 @@ const ScoreboardPage = ({
       </Text>
 
       <Grid columns={{ initial: '1', xs: '2', md: '3' }} rows="auto" gap="2">
-        <YoutubeEmbeddedVideo
-          className="overflow-hidden rounded-4"
-          src="https://www.youtube.com/embed/-io_Fu7qKrs?si=EjpiUa-fffFmslZx"
-        />
-
-        <YoutubeEmbeddedVideo
-          className="overflow-hidden rounded-4"
-          src="https://www.youtube.com/embed/b3zRbVcJxyE?si=XFl4uW9yt5pj7eYU"
-        />
-
-        <YoutubeEmbeddedVideo
-          className="overflow-hidden rounded-4"
-          src="https://www.youtube.com/embed/3czMK3s30KQ?si=Uu9zTyhRNYABOEni"
-        />
-
-        <YoutubeEmbeddedVideo
-          className="overflow-hidden rounded-4"
-          src="https://www.youtube.com/embed/4YUOTt5bDJc?si=VLT1lD9vT4pO2Kt5"
-        />
-
-        <YoutubeEmbeddedVideo
-          className="overflow-hidden rounded-4"
-          src="https://www.youtube.com/embed/ZI0ZGDMbj-U?si=Eu01gxNcbY69y6QU"
-        />
-
-        <YoutubeEmbeddedVideo
-          className="overflow-hidden rounded-4"
-          src="https://www.youtube.com/embed/hTGeG0z09NU?si=Mx4To7XyyJF1rQm2"
-        />
+        {VIDEOS.map((src) => (
+          <YoutubeEmbeddedVideo key={src} className="overflow-hidden rounded-4" src={src} />
+        ))}
       </Grid>
     </LayoutContainer>
   );
