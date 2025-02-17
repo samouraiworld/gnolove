@@ -12,11 +12,11 @@ import Toaster from '@/element/toast';
 
 import ToastProvider from '@/context/toast-context';
 
-interface IProps {
+interface RootLayoutProps {
   children?: ReactNode;
 }
 
-const RootLayout = ({ children }: IProps) => {
+const RootLayout = ({ children }: RootLayoutProps) => {
   return (
     <html lang="en">
       <head>

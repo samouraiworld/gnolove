@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext, useState } from 'react';
 
 import { IToast } from '@/type/radix-ui';
 
@@ -20,7 +20,11 @@ export const ToastContext = createContext<IContext>(defaultContext);
 
 export const useToast = () => useContext(ToastContext);
 
-const ToastProvider = ({ children }: IPropsWithChildren) => {
+export interface ToastProviderProps {
+  children: ReactNode;
+}
+
+const ToastProvider = ({ children }: ToastProviderProps) => {
   const [toasts, setToasts] = useState<IToast[]>(defaultContext.toasts);
 
   const addToast = (_toast: IToast) => {

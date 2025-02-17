@@ -1,5 +1,7 @@
 'use client';
 
+import { ReactNode } from 'react';
+
 import { isServer, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const makeQueryClient = () => {
@@ -22,7 +24,9 @@ const getQueryClient = () => {
   }
 };
 
-export interface QueryClientWrapperProps extends IPropsWithChildren {}
+export interface QueryClientWrapperProps {
+  children?: ReactNode;
+}
 
 const QueryClientWrapper = ({ children }: QueryClientWrapperProps) => {
   const queryClient = getQueryClient();

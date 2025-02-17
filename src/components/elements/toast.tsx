@@ -62,13 +62,6 @@ const SingleToast = ({ id, title = '', message = '', timer = 5000, infinite = fa
     >
       <Toast.Title className={cn('text-3 font-medium')}>{title}</Toast.Title>
       <Toast.Description className="text-2 text-grayA-11">{message}</Toast.Description>
-      {/*<Toast.Action className="[grid-area:_action]" asChild altText="Dismiss">*/}
-      {/*  <Toast.Close aria-label="Close" onClick={handleRemoveToast} asChild>*/}
-      {/*    <Button type="button" variant="soft" color="tomato">*/}
-      {/*      Close*/}
-      {/*    </Button>*/}
-      {/*  </Toast.Close>*/}
-      {/*</Toast.Action>*/}
     </Toast.Root>
   );
 };
