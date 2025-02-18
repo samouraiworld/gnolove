@@ -43,12 +43,12 @@ const RootLayout = ({ children }: RootLayoutProps) => {
                 <Flex
                   position="fixed"
                   p="2"
-                  className="z-50"
+                  className="z-50 z-[99]"
                   gap="2"
                   align="center"
                   justify="end"
                   width="100%"
-                  style={{ zIndex: 1000, background: 'var(--accent-1)', borderBottom: '1px solid var(--gray-a3)' }}
+                  style={{ background: 'var(--accent-1)', borderBottom: '1px solid var(--gray-a3)' }}
                 >
                   <AdenaAddress />
 
