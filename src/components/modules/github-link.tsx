@@ -1,12 +1,36 @@
 'use client';
 
+<<<<<<< Updated upstream
 import { Button, Dialog } from '@radix-ui/themes';
+=======
+import { Suspense, useEffect } from 'react';
+
+import { GithubLinkDescriptionDialog } from './github-link-description-dialog';
+import { GithubLinkGhVerifyDialog } from './github-link-ghverify-dialog';
+import { Dialog } from '@radix-ui/themes';
+
+import { useToast } from '@/contexts/toast-context';
+>>>>>>> Stashed changes
 import { useLinkGithub } from '@/hooks/use-link-github';
 import { useToast } from '@/contexts/toast-context';
 import { useEffect } from 'react';
 
 export const GithubLink = (props: Dialog.RootProps) => {
+<<<<<<< Updated upstream
   const { address, setAddress, wallet, ghUser, linkingState } = useLinkGithub();
+=======
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <GithubLinkWithoutSuspense {...props} />
+    </Suspense>
+  );
+};
+
+const GithubLinkWithoutSuspense = (props: Dialog.RootProps) => {
+  const { linkingState, ghUser, resolveRef, isShowGhVerifyDialog, showGhVerifyDialog } =
+    useLinkGithub();
+
+>>>>>>> Stashed changes
   const { addToast, removeToast } = useToast();
 
   useEffect(() => {
@@ -19,6 +43,7 @@ export const GithubLink = (props: Dialog.RootProps) => {
     return () => toastId && removeToast(toastId);
   }, [linkingState]);
 
+<<<<<<< Updated upstream
   const generateCommand = (login: string) => {
     return `gnokey maketx call \\
     -pkgpath "${process.env.NEXT_PUBLIC_GHVERIFY_REALM_PATH}" \\
@@ -37,10 +62,13 @@ export const GithubLink = (props: Dialog.RootProps) => {
     window.location.href = authUrl;
   };
 
+=======
+>>>>>>> Stashed changes
   return (
-    <Dialog.Root {...props}>
-      <Dialog.Trigger>{props.children}</Dialog.Trigger>
+    <>
+      <GithubLinkDescriptionDialog {...props} />
 
+<<<<<<< Updated upstream
       <Dialog.Content maxWidth="800px">
         <Dialog.Title>Link your Github account to your Gno Wallet </Dialog.Title>
         <Dialog.Description size="2" mb="4">
@@ -82,5 +110,16 @@ export const GithubLink = (props: Dialog.RootProps) => {
         </div>
       </Dialog.Content>
     </Dialog.Root>
+=======
+      <GithubLinkGhVerifyDialog
+        onContinue={(address) => {
+          resolveRef.current(address);
+          showGhVerifyDialog(false);
+        }}
+        ghLogin={ghUser?.login}
+        open={isShowGhVerifyDialog}
+      />
+    </>
+>>>>>>> Stashed changes
   );
 };

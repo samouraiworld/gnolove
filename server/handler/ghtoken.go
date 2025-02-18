@@ -63,6 +63,7 @@ func HandleVerifyGithubAccount(signer *signer.Signer) func(w http.ResponseWriter
 		}
 
 		err = signer.CallVerify(r.URL.Query().Get("address"), r.URL.Query().Get("login"))
+		fmt.Sprintf("===%s===", r.URL.Query().Get("login"))
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			json.NewEncoder(w).Encode(resCallback{Error: err.Error()})

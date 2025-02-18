@@ -36,7 +36,34 @@ const RootLayout = ({ children }: IProps) => {
             <ToastProvider>
               <Toaster />
 
+<<<<<<< Updated upstream
               {children}
+=======
+                <Flex
+                  position="fixed"
+                  p="2"
+                  className="z-50"
+                  gap="2"
+                  align="center"
+                  justify="end"
+                  width="100%"
+                  style={{ zIndex: 1000, background: 'var(--accent-1)', borderBottom: '1px solid var(--gray-a3)' }}
+                >
+                  <AdenaAddress />
+
+                  <GithubLink>
+                    <Button variant="soft">
+                      <LinkNone2Icon />
+                      Link Github Account
+                    </Button>
+                  </GithubLink>
+
+                  <ThemeSwitch />
+                </Flex>
+
+                {children}
+              </AdenaProvider>
+>>>>>>> Stashed changes
             </ToastProvider>
           </Theme>
         </ThemeProvider>
