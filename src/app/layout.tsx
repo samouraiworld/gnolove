@@ -40,7 +40,16 @@ const RootLayout = ({ children }: RootLayoutProps) => {
               <AdenaProvider>
                 <Toaster />
 
-                <Flex position="fixed" top="4" right="4" className="z-50" gap="2" align="center" justify="center">
+                <Flex
+                  position="fixed"
+                  p="2"
+                  className="z-50 z-[99]"
+                  gap="2"
+                  align="center"
+                  justify="end"
+                  width="100%"
+                  style={{ background: 'var(--accent-1)', borderBottom: '1px solid var(--gray-a3)' }}
+                >
                   <AdenaAddress />
 
                   <GithubLink>

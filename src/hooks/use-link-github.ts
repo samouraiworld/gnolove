@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import { useSearchParams } from 'next/navigation';
 
@@ -15,6 +15,10 @@ type GhUser = {
 export const useLinkGithub = () => {
   const { adena, isLoading } = useAdena();
 
+  const [isShowGhVerifyDialog, showGhVerifyDialog] = useState(false);
+  const resolveRef = useRef<any>();
+  const rejectRef = useRef<any>();
+
   const [address, setAddress] = useState('');
   const [ghUser, setGhUser] = useState<any>();
   const [linkingState, setLinkingState] = useState('');
@@ -28,7 +32,7 @@ export const useLinkGithub = () => {
   useEffect(() => {
     const processedCode = localStorage.getItem('processedCode');
 
-    if (!code || isLinking || isLoading || !adena) return;
+    if (!code || isLinking || isLoading) return;
     if (processedCode === code) {
       // eslint-disable-next-line no-console
       console.warn('Already processed code');
@@ -56,6 +60,8 @@ export const useLinkGithub = () => {
   };
 
   const requestVerification = async (wallet: any, userAddress: string, ghUser: any) => {
+    const shouldUpdateGnoProfile = localStorage.getItem('shouldUpdateGnoProfile') === 'true';
+
     const messages = [
       {
         type: '/vm.m_call',
@@ -71,7 +77,7 @@ export const useLinkGithub = () => {
 
     const displayName = ghUser.name || ghUser.login;
 
-    if (displayName) {
+    if (shouldUpdateGnoProfile && displayName) {
       messages.push({
         type: '/vm.m_call',
         value: {
@@ -84,7 +90,7 @@ export const useLinkGithub = () => {
       });
     }
 
-    if (ghUser.avatar_url) {
+    if (shouldUpdateGnoProfile && ghUser.avatar_url) {
       messages.push({
         type: '/vm.m_call',
         value: {
@@ -97,7 +103,7 @@ export const useLinkGithub = () => {
       });
     }
 
-    if (ghUser.bio) {
+    if (shouldUpdateGnoProfile && ghUser.bio) {
       messages.push({
         type: '/vm.m_call',
         value: {
@@ -136,7 +142,15 @@ export const useLinkGithub = () => {
     return data;
   };
 
-  const linkGithubAccount = async (code: string, wallet: any) => {
+  const requestVerificationViaGnokey = async (): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      resolveRef.current = resolve;
+      rejectRef.current = reject;
+      showGhVerifyDialog(true);
+    });
+  };
+
+  const linkGithubAccount = async (code: string, adena: any) => {
     try {
       localStorage.setItem('processedCode', code);
 
@@ -144,13 +158,21 @@ export const useLinkGithub = () => {
       setLinkingState('Getting github user and token');
       const ghData: GhUser = await getGithubUserAndToken(code);
 
-      // 2. Get the Adena account address
-      setLinkingState('Getting Adena account address');
-      const userAddress = await getAdenaAddress(wallet);
+      let userAddress: string;
+      if (!adena) {
+        // 2a: If has not adena, we show the verification request dialog and stop the process here
+        // and continue with the verification request dialog
+        setLinkingState('Requesting verification via gnokey');
+        userAddress = await requestVerificationViaGnokey();
+      } else {
+        // 2b. If has Adena: Get the Adena account address
+        setLinkingState('Getting Adena account address');
+        userAddress = await getAdenaAddress(adena);
 
-      // 3. Once we get the user, address we make the request RequestVerification
-      setLinkingState('Requesting verification');
-      await requestVerification(wallet, userAddress, ghData.github_user);
+        // 3b. Once we get the user, address we make the request RequestVerification
+        setLinkingState('Requesting verification');
+        await requestVerification(adena, userAddress, ghData.github_user);
+      }
 
       // 4. Once we get the verification request, we verify with the back the github login and address are correct
       setLinkingState('Verifying github account');
@@ -180,5 +202,5 @@ export const useLinkGithub = () => {
     return data;
   };
 
-  return { address, setAddress, adena, ghUser, linkingState };
+  return { address, setAddress, adena, ghUser, linkingState, resolveRef, isShowGhVerifyDialog, showGhVerifyDialog };
 };
