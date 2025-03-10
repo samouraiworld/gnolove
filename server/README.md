@@ -39,9 +39,9 @@ Currently there are 4 functional endpoints
     {
         "Login": "xxxx",
         "ID": "sdsds",
-        "AvatarUrl": "https://avatars.githubusercontent.com/u/12271?u=5062f99bcd25d8116ff99e0a87e92a80733b8aea&v=4",
-        "URL": "https://github.com/anarcher",
-        "Name": "myoung-soo,shin",
+        "AvatarUrl": "https://avatars.githubusercontent.com/u/...",
+        "URL": "https://github.com/SOME_LOGIN",
+        "Name": "...",
         "TotalIssues": 0,
         "TotalMerged": 0,
         "TotalReviewed": 0
@@ -101,11 +101,11 @@ Currently there are 4 functional endpoints
     "State": "CLOSED",
     "AuthorID": "MDQ6VXNlcjk0MDI5",
     "Author": {
-        "Login": "moul",
-        "ID": "MDQ6VXNlcjk0MDI5",
-        "AvatarUrl": "https://avatars.githubusercontent.com/u/94029?u=2acc3ed56cc696b595a069aef15cc975d8662e79&v=4",
-        "URL": "https://github.com/moul",
-        "Name": "Manfred Touron"
+        "Login": "...",
+        "ID": "...",
+        "AvatarUrl": "https://avatars.githubusercontent.com/...",
+        "URL": "https://github.com/...",
+        "Name": "..."
     },
     "Description": "This milestone encompasses the PRs / issues needed to launch a multi-node Gno testnet",
     "Url": "https://github.com/gnolang/gno/milestone/4",
