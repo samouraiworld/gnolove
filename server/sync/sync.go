@@ -399,6 +399,7 @@ func (s *Syncer) syncCommits(repository models.Repository) error {
 				URL:          c.Url,
 				CreatedAt:    c.CommittedDate,
 				UpdatedAt:    c.CommittedDate,
+				Title:        c.MessageHeadline,
 			}
 			err = s.db.Save(commit).Error
 			if err != nil {
@@ -478,9 +479,10 @@ type Commit struct {
 			Name string
 		}
 	}
-	ID            string
-	Url           string
-	CommittedDate time.Time
+	ID              string
+	Url             string
+	MessageHeadline string
+	CommittedDate   time.Time
 }
 
 type user struct {
