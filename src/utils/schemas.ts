@@ -141,6 +141,7 @@ export const CommitBaseSchema = z.object({
   authorID: z.string(),
   url: z.string().url(),
   author: UserSchema.nullish(),
+  title: z.string(),
 });
 
 export const CommitSchema = z.preprocess(preprocessCommit, CommitBaseSchema);
