@@ -96,6 +96,7 @@ func main() {
 	router.HandleFunc("/contributors/newest", handler.HandleGetNewestContributors(database))
 	router.HandleFunc("/verifyGithubAccount", handler.HandleVerifyGithubAccount(signer))
 	router.HandleFunc("/getGithubUserAndTokenByCode", handler.HandleGetGithubUserAndTokenByCode(signer, database))
+	router.HandleFunc("/contributors/{login}", handler.HandleGetContributor(database))
 
 	logger.Infof("Server running on port %d", port)
 	err = http.ListenAndServe(fmt.Sprintf(":%d", port), router)

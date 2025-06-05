@@ -15,6 +15,7 @@ import { TEnhancedUserWithStatsAndScore } from '@/util/schemas';
 import { cn } from '@/util/style';
 
 import TEAMS from '@/constant/teams';
+import Link from 'next/link';
 
 export interface ContributorRowProps {
   contributor: TEnhancedUserWithStatsAndScore;
@@ -42,11 +43,6 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
     return undefined;
   }, [contributor]);
 
-  const onClick = () => {
-    if (typeof window === 'undefined') return;
-    window.open(contributor.url, '_blank');
-  };
-
   const onLastContributionClick = () => {
     if (typeof window === 'undefined' || !contributor.LastContribution) return;
     window.open(contributor.LastContribution.url, '_blank');
@@ -55,14 +51,14 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
   return (
     <Table.Row className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-grayA-2" key={contributor.id}>
       {showRank && (
-        <Table.Cell data-href={contributor.url} onClick={onClick} className="text-center">
+        <Table.Cell className="text-center">
           <Flex height="100%" align="center" justify="center">
             {rankElement}
           </Flex>
         </Table.Cell>
       )}
 
-      <Table.Cell data-href={contributor.url} onClick={onClick}>
+      <Table.Cell>
         <Flex width="100%" height="100%" align="center" gap="2">
           <Image
             src={contributor.avatarUrl}
@@ -72,7 +68,10 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
             className="shrink-0 overflow-hidden rounded-full"
           />
 
-          <Text className="whitespace-break-spaces text-wrap">{contributor.name ?? contributor.login}</Text>
+          <Link href={`/contributors/${contributor.login}`}>
+            <Text className="whitespace-break-spaces text-wrap">{contributor.name ?? contributor.login}</Text>
+          </Link>
+
           {team && (
             <Badge color={team.color} size="1">
               {team.name}
@@ -84,11 +83,7 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
       </Table.Cell>
 
       {contributor.LastContribution && 'title' in contributor.LastContribution ? (
-        <Table.Cell
-          data-href={contributor.LastContribution.url}
-          onClick={onLastContributionClick}
-          className="group hidden text-left lg:table-cell"
-        >
+        <Table.Cell onClick={onLastContributionClick} className="group hidden text-left lg:table-cell">
           <Flex width="100%" height="100%" align="center" gap="2" className="text-1">
             <Flex direction="column">
               <Flex align="center" gap="1">
@@ -108,38 +103,20 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
           </Flex>
         </Table.Cell>
       ) : (
-        <Table.Cell data-href={contributor.url} onClick={onClick} className="hidden text-left lg:table-cell">
+        <Table.Cell className="hidden text-left lg:table-cell">
           <Text color="gray">-</Text>
         </Table.Cell>
       )}
 
-      <Table.Cell
-        data-href={contributor.url}
-        onClick={onClick}
-        className="hidden text-center align-middle sm:table-cell"
-      >
+      <Table.Cell className="hidden text-center align-middle sm:table-cell">
         {contributor.TotalCommits}
       </Table.Cell>
 
-      <Table.Cell
-        data-href={contributor.url}
-        onClick={onClick}
-        className="hidden text-center align-middle sm:table-cell"
-      >
-        {contributor.TotalIssues}
-      </Table.Cell>
+      <Table.Cell className="hidden text-center align-middle sm:table-cell">{contributor.TotalIssues}</Table.Cell>
 
-      <Table.Cell
-        data-href={contributor.url}
-        onClick={onClick}
-        className="hidden text-center align-middle sm:table-cell"
-      >
-        {contributor.TotalPrs}
-      </Table.Cell>
+      <Table.Cell className="hidden text-center align-middle sm:table-cell">{contributor.TotalPrs}</Table.Cell>
 
-      <Table.Cell data-href={contributor.url} onClick={onClick} className="text-center align-middle font-bold">
-        {contributor.score.toFixed(2)}
-      </Table.Cell>
+      <Table.Cell className="text-center align-middle font-bold">{contributor.score.toFixed(2)}</Table.Cell>
 
       <Table.Cell className="text-center">
         <Flex height="100%" align="center" justify="center">
