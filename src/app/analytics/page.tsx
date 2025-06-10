@@ -1,18 +1,21 @@
-import { Card, Flex, Heading, Text } from '@radix-ui/themes';
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 
-import LayoutContainer from '@/layout/layout-container';
+import AnalyticsClientPage from '@/components/features/analytics/analytics-client-page';
+import { prefetchContributors } from '@/hooks/use-get-contributors';
+import { TimeFilter } from '@/utils/github';
+import QueryClientWrapper from '@/wrappers/query-client';
 
-import AnalyticsContributorMap from '@/components/features/analytics/analytics-contributor-map';
+const AnalyticsPage = async () => {
+  const queryClient = new QueryClient();
 
-const AnalyticsPage = () => {
+  await Promise.all([prefetchContributors(queryClient, { timeFilter: TimeFilter.ALL_TIME })]);
+
   return (
-    <LayoutContainer mt="5">
-      <Heading>Contributors Analytics (WIP)</Heading>
-      <Flex flexGrow="1" justify="center" align="center" mt="6">
-        <Text>[ Graph coming soon ]</Text>
-        {/* <AnalyticsContributorMap /> */}
-      </Flex>
-    </LayoutContainer>
+    <QueryClientWrapper>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <AnalyticsClientPage />
+      </HydrationBoundary>
+    </QueryClientWrapper>
   );
 };
 
