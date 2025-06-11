@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/dgraph-io/ristretto"
@@ -80,7 +81,8 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 		var err error
 		var resp githubUserResponse
 		log.Printf("[Contributor Handler] Request for: %s", r.URL.Path)
-		login := r.URL.Path
+		login := strings.TrimPrefix(r.URL.Path, "/contributors/")
+		log.Printf("[Contributor Handler] Extracted login from URL.Path: '%s'", login)
 		if login == "" {
 			http.Error(w, "Missing user login", http.StatusBadRequest)
 			return
