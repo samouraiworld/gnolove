@@ -13,9 +13,9 @@ type Props = {
 };
 
 const presets: Record<Preset, string> = {
-  '7d': '7 derniers jours',
-  '14d': '14 jours',
-  '1m': '1 mois',
+  '7d': 'Past 7 days',
+  '14d': 'Past 14 days',
+  '1m': 'Past month',
 };
 
 const getStartDate = (key: Preset): Date => {
