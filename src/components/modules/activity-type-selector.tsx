@@ -29,7 +29,7 @@ const ActivityTypeSelector = ({ onChange, defaultValue = 'commits' }: Props) => 
   return (
     <Flex direction="column" gap="1" mb="3">
       <Text size="1" weight="medium">
-        Type d'activité
+        Activity type
       </Text>
       <Select.Root value={value} onValueChange={handleChange}>
         <Select.Trigger />

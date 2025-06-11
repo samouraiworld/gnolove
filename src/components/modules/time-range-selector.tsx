@@ -40,7 +40,7 @@ const TimeRangeSelector = ({ onChange, defaultValue = '14d' }: Props) => {
   return (
     <Flex direction="column" gap="1" mb="3">
       <Text size="1" weight="medium">
-        Période d'activité
+        Date range
       </Text>
       <Select.Root value={value} onValueChange={handleChange}>
         <Select.Trigger />
