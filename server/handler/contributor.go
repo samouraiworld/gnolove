@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 
 	"github.com/dgraph-io/ristretto"
 	"github.com/shurcooL/githubv4"
+	"golang.org/x/oauth2"
 	"gorm.io/gorm"
 )
 
@@ -116,7 +118,11 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 		log.Printf("[Contributor Handler] Cache miss for user: %s. Querying GitHub API...", login)
 
 		// Prepare GitHub client
-		client := githubv4.NewClient(nil)
+		src := oauth2.StaticTokenSource(
+			&oauth2.Token{AccessToken: os.Getenv("GITHUB_API_TOKEN")},
+		)
+		httpClient := oauth2.NewClient(context.Background(), src)
+		client := githubv4.NewClient(httpClient)
 
 		var q struct {
 			User struct {
