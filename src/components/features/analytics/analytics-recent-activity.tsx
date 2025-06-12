@@ -5,9 +5,10 @@ import { useMemo } from 'react';
 import { useTheme } from 'next-themes';
 
 import { ChatBubbleIcon, CommitIcon, MixerVerticalIcon } from '@radix-ui/react-icons';
-import { Box, Card, Flex, Heading, Separator, Text } from '@radix-ui/themes';
+import { Box, Card, Flex, Heading, Text } from '@radix-ui/themes';
 import dayjs from 'dayjs';
-import { ResponsiveContainer, BarChart, XAxis, YAxis, Tooltip, Legend, Bar } from 'recharts';
+import { ResponsiveContainer, BarChart, XAxis, YAxis, Tooltip, Bar, TooltipProps } from 'recharts';
+import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 
 import { TEnhancedUserWithStats } from '@/utils/schemas';
 
@@ -24,6 +25,13 @@ const fillColors = {
   },
 };
 
+type ActivityDataPoint = {
+  date: string;
+  commits: number;
+  issues: number;
+  prs: number;
+};
+
 type Props = {
   contributors: TEnhancedUserWithStats[];
   startDate: Date;
@@ -34,7 +42,7 @@ const AnalyticsRecentActivity = ({ contributors, startDate }: Props) => {
   const isDark = resolvedTheme === 'dark';
   const palette = isDark ? fillColors.dark : fillColors.light;
 
-  const data = useMemo(() => {
+  const data: ActivityDataPoint[] = useMemo(() => {
     const map = new Map<string, { date: string; commits: number; prs: number; issues: number }>();
 
     const today = dayjs().startOf('day');
@@ -69,9 +77,9 @@ const AnalyticsRecentActivity = ({ contributors, startDate }: Props) => {
     return Array.from(map.values()).sort((a, b) => a.date.localeCompare(b.date));
   }, [contributors, startDate]);
 
-  const TooltipRenderer: React.FC<any> = ({ payload }) => {
+  const TooltipRenderer: React.FC<TooltipProps<ValueType, NameType>> = ({ payload }) => {
     if (!payload || !payload[0]) return null;
-    const p = payload[0].payload;
+    const p = payload[0].payload as ActivityDataPoint;
     return (
       <Card>
         <Box mb="2">
@@ -107,7 +115,7 @@ const AnalyticsRecentActivity = ({ contributors, startDate }: Props) => {
   };
 
   return (
-    <Card className="h-[450px] w-full max-w-[650px] min-w-[350px] px-0">
+    <Card className="h-[450px] w-full min-w-[350px] max-w-[650px] px-0">
       <Heading size="3" align="center">
         Recent activity
       </Heading>

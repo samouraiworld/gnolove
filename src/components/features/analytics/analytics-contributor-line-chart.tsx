@@ -1,12 +1,21 @@
 'use client';
 
-import { useMemo } from 'react';
-
-import { useTheme } from 'next-themes';
+import { ReactElement, useMemo } from 'react';
 
 import { Avatar, Box, Card, Flex, Heading, Text } from '@radix-ui/themes';
 import dayjs from 'dayjs';
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Customized } from 'recharts';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  Customized,
+  CustomizedProps,
+  TooltipProps,
+} from 'recharts';
+import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 
 import { TEnhancedUserWithStats } from '@/utils/schemas';
 
@@ -16,21 +25,23 @@ const labelMap: Record<Props['type'], string> = {
   issues: 'Issues',
 };
 
+type ContributorDataLinePoint = {
+  date: string;
+  [login: string]: number | string;
+};
+
 type Props = {
   contributors: TEnhancedUserWithStats[];
   type: 'commits' | 'pullRequests' | 'issues';
 };
 
 const AnalyticsContributorLineChart = ({ contributors, type = 'commits' }: Props) => {
-  const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === 'dark';
-
   const contributorFiltered = useMemo(
     () => contributors.filter((c) => (c[type]?.length || 0) > 0),
     [contributors, type],
   );
 
-  const data = useMemo(() => {
+  const data: ContributorDataLinePoint[] = useMemo(() => {
     const countByDate: Record<string, Record<string, number>> = {};
 
     for (const c of contributorFiltered) {
@@ -47,7 +58,7 @@ const AnalyticsContributorLineChart = ({ contributors, type = 'commits' }: Props
     const cumulative: Record<string, number> = {};
 
     return datesSorted.map((date) => {
-      const row: Record<string, number | string> = { date };
+      const row: ContributorDataLinePoint = { date };
 
       contributorLogins.forEach((login) => {
         const daily = countByDate[date]?.[login] || 0;
@@ -61,7 +72,7 @@ const AnalyticsContributorLineChart = ({ contributors, type = 'commits' }: Props
 
   const contributorLogins = useMemo(() => contributorFiltered.map((c) => c.login), [contributorFiltered]);
 
-  const AvatarRenderer: React.FC<any> = ({ xAxisMap = {}, yAxisMap = {} }) => {
+  const AvatarRenderer: React.FC<CustomizedProps<any, ReactElement>> = ({ xAxisMap = {}, yAxisMap = {} }) => {
     const xAxis: any = Object.values(xAxisMap)[0];
     const yAxis: any = Object.values(yAxisMap)[0];
     if (!xAxis || !yAxis) return null;
@@ -103,7 +114,7 @@ const AnalyticsContributorLineChart = ({ contributors, type = 'commits' }: Props
     );
   };
 
-  const TooltipRenderer: React.FC<any> = ({ payload, label }) => {
+  const TooltipRenderer: React.FC<TooltipProps<ValueType, NameType>> = ({ payload, label }) => {
     if (!payload?.length) return null;
 
     return (
@@ -130,7 +141,7 @@ const AnalyticsContributorLineChart = ({ contributors, type = 'commits' }: Props
   };
 
   return (
-    <Card className="h-[450px] w-full max-w-[650px] min-w-[350px] px-0">
+    <Card className="h-[450px] w-full min-w-[350px] max-w-[650px] px-0">
       <Heading size="3" align="center">
         {labelMap[type]} activity
       </Heading>
