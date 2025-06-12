@@ -6,7 +6,7 @@ import { useTheme } from 'next-themes';
 
 import { ChatBubbleIcon, CommitIcon, MixerVerticalIcon } from '@radix-ui/react-icons';
 import { Box, Card, Flex, Heading, Text } from '@radix-ui/themes';
-import dayjs from 'dayjs';
+import { format, isBefore, isEqual, parseISO, addDays, startOfDay, startOfToday } from 'date-fns';
 import { ResponsiveContainer, BarChart, XAxis, YAxis, Tooltip, Bar, TooltipProps } from 'recharts';
 import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 
@@ -43,34 +43,30 @@ const AnalyticsRecentActivity = ({ contributors, startDate }: Props) => {
   const palette = isDark ? fillColors.dark : fillColors.light;
 
   const data: ActivityDataPoint[] = useMemo(() => {
-    const map = new Map<string, { date: string; commits: number; prs: number; issues: number }>();
-
-    const today = dayjs().startOf('day');
-    for (let d = dayjs(startDate).startOf('day'); d.isBefore(today) || d.isSame(today); d = d.add(1, 'day')) {
-      const date = d.format('YYYY-MM-DD');
-      map.set(date, { date, commits: 0, prs: 0, issues: 0 });
+    const map = new Map<string, ActivityDataPoint>();
+    const today = startOfToday();
+    for (let d = startOfDay(startDate); isBefore(d, today) || isEqual(d, today); d = addDays(d, 1)) {
+      const key = format(d, 'yyyy-MM-dd');
+      map.set(key, { date: key, commits: 0, prs: 0, issues: 0 });
     }
 
     for (const c of contributors) {
       c.commits?.forEach(({ createdAt }) => {
-        const date = dayjs(createdAt).format('YYYY-MM-DD');
-        if (dayjs(date).isBefore(startDate)) return;
-        const entry = map.get(date);
-        if (entry) entry.commits++;
+        const date = format(parseISO(createdAt), 'yyyy-MM-dd');
+        if (isBefore(parseISO(createdAt), startDate)) return;
+        map.get(date)!.commits++;
       });
 
       c.pullRequests?.forEach(({ createdAt }) => {
-        const date = dayjs(createdAt).format('YYYY-MM-DD');
-        if (dayjs(date).isBefore(startDate)) return;
-        const entry = map.get(date);
-        if (entry) entry.prs++;
+        const date = format(parseISO(createdAt), 'yyyy-MM-dd');
+        if (isBefore(parseISO(createdAt), startDate)) return;
+        map.get(date)!.prs++;
       });
 
       c.issues?.forEach(({ createdAt }) => {
-        const date = dayjs(createdAt).format('YYYY-MM-DD');
-        if (dayjs(date).isBefore(startDate)) return;
-        const entry = map.get(date);
-        if (entry) entry.issues++;
+        const date = format(parseISO(createdAt), 'yyyy-MM-dd');
+        if (isBefore(parseISO(createdAt), startDate)) return;
+        map.get(date)!.issues++;
       });
     }
 

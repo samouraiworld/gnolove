@@ -3,7 +3,7 @@
 import { ReactElement, useMemo } from 'react';
 
 import { Avatar, Box, Card, Flex, Heading, Text } from '@radix-ui/themes';
-import dayjs from 'dayjs';
+import { format, parseISO, compareAsc } from 'date-fns';
 import {
   LineChart,
   Line,
@@ -47,13 +47,15 @@ const AnalyticsContributorLineChart = ({ contributors, type = 'commits' }: Props
     for (const c of contributorFiltered) {
       const list = c[type] || [];
       for (const item of list) {
-        const date = dayjs(item.createdAt).format('YYYY-MM-DD');
+        const rawDate = item.createdAt;
+        const parsed = parseISO(rawDate);
+        const date = format(parsed, 'yyyy-MM-dd');
         if (!countByDate[date]) countByDate[date] = {};
         countByDate[date][c.login] = (countByDate[date][c.login] || 0) + 1;
       }
     }
 
-    const datesSorted = Object.keys(countByDate).sort();
+    const datesSorted = Object.keys(countByDate).sort((a, b) => compareAsc(parseISO(a), parseISO(b)));
     const contributorLogins = contributorFiltered.map((c) => c.login);
     const cumulative: Record<string, number> = {};
 

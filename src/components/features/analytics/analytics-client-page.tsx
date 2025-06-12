@@ -1,11 +1,12 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { Box, Flex, Heading, Separator } from '@radix-ui/themes';
+
+import { subDays, parseISO, isAfter, isEqual } from 'date-fns';
 
 import AnalyticsContributorLineChart from './analytics-contributor-line-chart';
 import AnalyticsRecentActivity from './analytics-recent-activity';
-import { Box, Flex, Heading, Separator } from '@radix-ui/themes';
-import dayjs from 'dayjs';
 
 import LayoutContainer from '@/layout/layout-container';
 
@@ -17,11 +18,15 @@ import TimeRangeSelector from '@/components/modules/time-range-selector';
 import useGetContributors from '@/hooks/use-get-contributors';
 
 const AnalyticsClientPage = () => {
-  const [filter, setFilter] = useState<TimeFilter>(TimeFilter.ALL_TIME);
-  const [startDate, setStartDate] = useState(dayjs().subtract(14, 'day').toDate());
+  const [startDate, setStartDate] = useState(subDays(new Date(), 14));
   const [activityType, setActivityType] = useState<ActivityType>('commits');
 
-  let { data: contributors } = useGetContributors({ timeFilter: filter });
+  const { data: contributors } = useGetContributors({ timeFilter: TimeFilter.ALL_TIME });
+
+  const isAfterAndEqual = (date: string) => {
+    const parsedDate = parseISO(date);
+    return isAfter(parsedDate, startDate) || isEqual(parsedDate, startDate)
+  };
 
   const filteredContributors = useMemo(() => {
     if (!contributors) return [];
@@ -29,17 +34,11 @@ const AnalyticsClientPage = () => {
     return contributors.map((contributor) => ({
       ...contributor,
       commits:
-        contributor.commits?.filter(
-          ({ createdAt }) => dayjs(createdAt).isAfter(startDate) || dayjs(createdAt).isSame(startDate),
-        ) ?? [],
+        contributor.commits?.filter(({ createdAt }) => isAfterAndEqual(createdAt)) ?? [],
       issues:
-        contributor.issues?.filter(
-          ({ createdAt }) => dayjs(createdAt).isAfter(startDate) || dayjs(createdAt).isSame(startDate),
-        ) ?? [],
+        contributor.issues?.filter(({ createdAt }) => isAfterAndEqual(createdAt)) ?? [],
       pullRequests:
-        contributor.pullRequests?.filter(
-          ({ updatedAt }) => dayjs(updatedAt).isAfter(startDate) || dayjs(updatedAt).isSame(startDate),
-        ) ?? [],
+        contributor.pullRequests?.filter(({ updatedAt }) => isAfterAndEqual(updatedAt)) ?? [],
     }));
   }, [contributors, startDate]);
 

@@ -1,9 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-
 import { Select, Flex, Text } from '@radix-ui/themes';
-import dayjs from 'dayjs';
+import { subDays, subMonths, subYears } from 'date-fns';
 
 type Preset = '7d' | '14d' | '1m';
 
@@ -19,13 +18,16 @@ const presets: Record<Preset, string> = {
 };
 
 const getStartDate = (key: Preset): Date => {
-  if (key.endsWith('d'))
-    return dayjs()
-      .subtract(Number(key.replace('d', '')), 'day')
-      .toDate();
-  return dayjs()
-    .subtract(Number(key.replace('m', '').replace('y', '')), key.includes('y') ? 'year' : 'month')
-    .toDate();
+  switch (key) {
+    case '7d':
+      return subDays(new Date(), 7);
+    case '14d':
+      return subDays(new Date(), 14);
+    case '1m':
+      return subMonths(new Date(), 1);
+    default:
+      return new Date();
+  }
 };
 
 const TimeRangeSelector = ({ onChange, defaultValue = '14d' }: Props) => {
