@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import { Select, Flex, Text } from '@radix-ui/themes';
-import { subDays, subMonths, subYears } from 'date-fns';
+import { subDays, subMonths } from 'date-fns';
 
 type Preset = '7d' | '14d' | '1m';
 

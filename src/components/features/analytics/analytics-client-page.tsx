@@ -25,7 +25,7 @@ const AnalyticsClientPage = () => {
 
   const isAfterAndEqual = (date: string) => {
     const parsedDate = parseISO(date);
-    return isAfter(parsedDate, startDate) || isEqual(parsedDate, startDate)
+    return isAfter(parsedDate, startDate) || isEqual(parsedDate, startDate);
   };
 
   const filteredContributors = useMemo(() => {
