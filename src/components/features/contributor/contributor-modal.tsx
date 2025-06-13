@@ -48,7 +48,7 @@ const ContributorModal = ({ login }: { login: string }) => {
     </Dialog.Root>
   );
 
-  const profileUrl = `https://gnolove.world/contributors/${contributor.login}`;
+  const profileUrl = `https://gnolove.world/@${contributor.login}`;
 
   return (
     <Dialog.Root open={true} onOpenChange={handleClose}>
@@ -58,7 +58,7 @@ const ContributorModal = ({ login }: { login: string }) => {
             <Flex align='center' gap='2'>
               <Dialog.Title mb='0'>{contributor.name ?? contributor.login}</Dialog.Title>
               <Badge color='gray' variant='soft' size='1'>
-                gnolove.world/contributors/{contributor.login}
+                gnolove.world/@{contributor.login}
               </Badge>
               <Button variant='outline' size='1' onClick={() => navigator.clipboard.writeText(profileUrl)}>
                 <Copy size={12} />

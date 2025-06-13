@@ -68,7 +68,7 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
             className="shrink-0 overflow-hidden rounded-full"
           />
 
-          <Link href={`/contributors/${contributor.login}`}>
+          <Link href={`/@${contributor.login}`}>
             <Text className="whitespace-break-spaces text-wrap">{contributor.name ?? contributor.login}</Text>
           </Link>
 
