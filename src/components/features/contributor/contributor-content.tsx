@@ -25,7 +25,16 @@ const ContributorContent = ({ login }: { login: string }) => {
 
   return (
     <Box>
-      <Flex justify='between' align='center' mb='4'>
+      <Flex
+        justify='between'
+        align='center'
+        mb='1'
+        position='sticky'
+        top='0'
+        pt='5'
+        pb='2'
+        style={{ backgroundColor: 'white', zIndex: 2, borderBottom: '1px solid var(--gray-3)' }}
+      >
         <Flex align='center' gap='2'>
           <Dialog.Title mb='0'>{contributor.name ?? contributor.login}</Dialog.Title>
           <Badge color='gray' variant='soft' size='1'>
