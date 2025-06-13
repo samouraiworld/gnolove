@@ -38,6 +38,10 @@ func GetGnoBalance(ctx context.Context, wallet string) (string, error) {
 	if err != nil {
 		return "0", fmt.Errorf("failed to query account: %w", err)
 	}
+	if account == nil {
+		// address exists but no state yet
+		return "0", nil
+	}
 
 	return fmt.Sprintf("%d", account.GetCoins().AmountOf("ugnot")), nil
 }

@@ -11,7 +11,7 @@ const ContributorPage = async ({ params }: { params: { login: string } }) => {
 
   const queryClient = new QueryClient();
 
-  await prefetchContributor(queryClient, { login });
+  await prefetchContributor(queryClient, login);
 
   return (
     <QueryClientWrapper>

@@ -3,6 +3,10 @@ import { TContributor } from '@/util/schemas';
 import { Calendar, Copy, Github, Globe, MapPin, Twitter } from 'lucide-react';
 
 const ContributorProfile = ({ contributor }: { contributor: TContributor }) => {
+  const websiteUrl = /^https?:\/\//i.test(contributor.websiteUrl ?? '')
+    ? contributor.websiteUrl
+    : `https://${contributor.websiteUrl}`;
+
   return (
     <Box>
       <Flex direction='column' gap='4'>
@@ -73,7 +77,7 @@ const ContributorProfile = ({ contributor }: { contributor: TContributor }) => {
               )}
               {contributor.websiteUrl && (
                 <IconButton variant='outline' size='2' asChild>
-                  <a href={`http://${contributor.websiteUrl}`} target='_blank' rel='noopener noreferrer'>
+                  <a href={websiteUrl} target='_blank' rel='noopener noreferrer'>
                     <Globe size={16} />
                   </a>
                 </IconButton>

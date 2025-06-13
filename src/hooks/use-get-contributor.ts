@@ -4,20 +4,16 @@ import { getContributor } from '@/app/actions';
 
 export const BASE_QUERY_KEY = ['contributor'];
 
-export interface UseGetContributorParams {
-  login: string;
-}
-
-export const prefetchContributor = async (queryClient: QueryClient, params: UseGetContributorParams) => {
-  const contributor = await getContributor(params.login);
-  queryClient.setQueryData([...BASE_QUERY_KEY, params], contributor);
+export const prefetchContributor = async (queryClient: QueryClient, login: string) => {
+  const contributor = await getContributor(login);
+  queryClient.setQueryData([...BASE_QUERY_KEY, login], contributor);
   return contributor;
 };
 
-const useGetContributor = (params: UseGetContributorParams) => {
+const useGetContributor = (login: string) => {
   return useQuery({
-    queryFn: () => getContributor(params.login),
-    queryKey: [...BASE_QUERY_KEY, params],
+    queryFn: () => getContributor(login),
+    queryKey: [...BASE_QUERY_KEY, login],
   });
 };
 

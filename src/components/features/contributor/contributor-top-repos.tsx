@@ -9,8 +9,8 @@ const ContributorTopRepos = ({ contributor }: { contributor: TContributor }) => 
       <Flex direction='column' gap='4' p='4'>
         <Heading size='3'>Top Repositories</Heading>
         <Flex direction='column' gap='4'>
-          {contributor.topRepositories.map((repo, index) => (
-            <Flex key={index} align='start' justify='between'>
+          {contributor.topRepositories.map((repo) => (
+            <Flex key={repo.url} align='start' justify='between'>
               <Flex direction='column' gap='1'>
                 <Flex align='center' gap='2'>
                   <Text size='2' weight='medium'>

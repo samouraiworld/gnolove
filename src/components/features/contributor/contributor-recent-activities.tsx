@@ -14,8 +14,8 @@ const ContributorRecentActivities = ({ contributor }: { contributor: TContributo
             ...contributor.recentPullRequests,
           ]
             .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-            .map((activity, index) => (
-              <Flex key={index} align='start' gap='3'>
+            .map((activity) => (
+              <Flex key={`${activity.type}-${activity.title}`} align='start' gap='3'>
                 <Box mt='1'>
                   {activity.type === 'pull_request' && <GitPullRequest size={16} color='blue' />}
                   {activity.type === 'issue' && <MessageSquare size={16} color='orange' />}

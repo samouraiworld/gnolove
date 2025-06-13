@@ -29,7 +29,7 @@ import ContributorTopRepos from './contributor-top-repos';
 import ContributorContributions from './contributor-contributions';
 
 const ContributorModal = ({ login }: { login: string }) => {
-  const { data: contributor } = useGetContributor({ login });
+  const { data: contributor } = useGetContributor(login);
   const router = useRouter();
 
   const handleClose = () => {
