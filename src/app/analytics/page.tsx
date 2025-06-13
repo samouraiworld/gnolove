@@ -8,7 +8,7 @@ import QueryClientWrapper from '@/wrappers/query-client';
 const AnalyticsPage = async () => {
   const queryClient = new QueryClient();
 
-  await Promise.all([prefetchContributors(queryClient, { timeFilter: TimeFilter.ALL_TIME })]);
+  await prefetchContributors(queryClient, { timeFilter: TimeFilter.ALL_TIME });
 
   return (
     <QueryClientWrapper>
