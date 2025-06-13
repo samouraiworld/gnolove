@@ -1,16 +1,14 @@
 'use client';
 
-import { Dialog, Spinner } from '@radix-ui/themes';
+import { Dialog, Flex, Spinner } from '@radix-ui/themes';
 
-const LoadingContributor = () => {
+const Loading = () => {
   return (
-    <Dialog.Root open>
-      <Dialog.Content height='88vh' maxWidth='1000px' style={{ overflow: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-        <Dialog.Title>Loading...</Dialog.Title>
-        <Spinner size="3" />
-      </Dialog.Content>
-    </Dialog.Root>
+    <Flex align='center' gap='2'>
+      <Dialog.Title mb='0'>Loading...</Dialog.Title>
+      <Spinner />
+    </Flex>
   );
 };
 
-export default LoadingContributor;
+export default Loading;

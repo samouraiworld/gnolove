@@ -4,7 +4,7 @@ import { prefetchContributor } from '@/hooks/use-get-contributor';
 
 import QueryClientWrapper from '@/wrapper/query-client';
 
-import ContributorModal from '@/components/features/contributor/contributor-modal';
+import ContributorContent from '@/components/features/contributor/contributor-content';
 
 const ContributorPage = async ({ params }: { params: { login: string } }) => {
   const { login } = params;
@@ -22,7 +22,7 @@ const ContributorPage = async ({ params }: { params: { login: string } }) => {
   return (
     <QueryClientWrapper>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <ContributorModal {...{ login: formattedLogin }} />
+        <ContributorContent {...{ login: formattedLogin }} />
       </HydrationBoundary>
     </QueryClientWrapper>
   );
