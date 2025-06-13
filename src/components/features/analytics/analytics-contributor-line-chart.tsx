@@ -143,14 +143,14 @@ const AnalyticsContributorLineChart = ({ contributors, type = 'commits' }: Props
   };
 
   return (
-    <Card className="h-[450px] w-full min-w-[350px] max-w-[650px] px-0">
+    <Card className="h-[500px] w-full min-w-[350px] max-w-[650px] px-0">
       <Heading size="3" align="center">
         {labelMap[type]} activity
       </Heading>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={data} margin={{ top: 20, right: 60, bottom: 20, left: 0 }}>
           <XAxis dataKey="date" tick={{ fontSize: 10 }} axisLine={false} tickLine={false} />
-          <YAxis axisLine={false} tickLine={false} tickFormatter={(v) => v.toFixed(0)} />
+          <YAxis axisLine={false} tickLine={false} allowDecimals={false} tickFormatter={(v) => v.toFixed(0)} />
           <Tooltip content={<TooltipRenderer />} />
           {contributorLogins.map((login, i) => (
             <Line

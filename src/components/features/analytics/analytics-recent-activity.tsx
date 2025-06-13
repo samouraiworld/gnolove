@@ -111,14 +111,14 @@ const AnalyticsRecentActivity = ({ contributors, startDate }: Props) => {
   };
 
   return (
-    <Card className="h-[450px] w-full min-w-[350px] max-w-[650px] px-0">
+    <Card className="h-[500px] w-full min-w-[350px] max-w-[650px] px-0">
       <Heading size="3" align="center">
         Recent activity
       </Heading>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} margin={{ top: 20, right: 60, bottom: 20, left: 0 }}>
           <XAxis axisLine={false} dataKey="date" tick={{ fontSize: 10 }} tickLine={false} />
-          <YAxis axisLine={false} tickLine={false} tickFormatter={(value) => Math.abs(value).toFixed(0).toString()} />
+          <YAxis axisLine={false} tickLine={false} allowDecimals={false} tickFormatter={(value) => Math.abs(value).toFixed(0).toString()} />
           <Tooltip offset={30} cursor={{ strokeDasharray: '3 3' }} content={<TooltipRenderer />} />
           <Bar maxBarSize={15} radius={[4, 4, 0, 0]} dataKey="commits" fill={palette.commits} />
           <Bar maxBarSize={15} radius={[4, 4, 0, 0]} dataKey="issues" fill={palette.issues} />
