@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
 import { Select, Flex, Text } from '@radix-ui/themes';
 import { subDays, subMonths, subYears } from 'date-fns';
 
@@ -32,6 +33,10 @@ const getStartDate = (key: Preset): Date => {
 
 const TimeRangeSelector = ({ onChange, defaultValue = '14d' }: Props) => {
   const [value, setValue] = useState<Preset>(defaultValue);
+
+  useEffect(() => {
+    onChange(getStartDate(defaultValue));
+  }, [defaultValue, onChange]);
 
   const handleChange = (newValue: string) => {
     const key = newValue as Preset;

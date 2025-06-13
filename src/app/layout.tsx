@@ -43,6 +43,8 @@ const RootLayout = ({ children }: RootLayoutProps) => {
 
                 <Box
                   position="fixed"
+                  top="0"
+                  left="0"
                   width="100%"
                   p="2"
                   className="z-50 z-[99]"
@@ -50,24 +52,20 @@ const RootLayout = ({ children }: RootLayoutProps) => {
                 >
                   <Flex justify="between" align="center">
                     <Flex align="center" gap="4" px="2">
-                      <NextLink href="/">
-                        <Button variant="ghost">
-                          Home
-                        </Button>
-                      </NextLink>
+                      <Button variant="ghost">
+                        <NextLink href="/">Home</NextLink>
+                      </Button>
 
-                      <NextLink href="/milestone">
-                        <Button variant="ghost">
-                          Milestone
-                        </Button>
-                      </NextLink>
+                      <Button variant="ghost">
+                        <NextLink href="/milestone">Milestone</NextLink>
+                      </Button>
 
-                      <NextLink href="/analytics">
-                        <Button variant="ghost">
+                      <Button variant="ghost">
+                        <NextLink href="/analytics">
                           Analytics
                           <Badge color="red">new</Badge>
-                        </Button>
-                      </NextLink>
+                        </NextLink>
+                      </Button>
                     </Flex>
 
                     <Flex gap="2" align="center" justify="end">
