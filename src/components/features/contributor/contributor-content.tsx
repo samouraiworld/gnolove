@@ -110,7 +110,7 @@ const ContributorContent = ({ login }: { login: string }) => {
               </Card>
             </Grid>
 
-            <Box style={{ flex: 1, minHeight: 0 }}>
+            <Box minHeight='0' style={{ flex: 1 }}>
               {/* Tabs for different views */}
               <Tabs.Root defaultValue='activity' style={{ display: 'flex', flexDirection: 'column', gap: '4', height: '100%' }}>
                 <Tabs.List>
@@ -119,7 +119,7 @@ const ContributorContent = ({ login }: { login: string }) => {
                   <Tabs.Trigger value='contributions'>Contributions</Tabs.Trigger>
                 </Tabs.List>
 
-                <Box style={{ flex: 1, minHeight: 0 }}>
+                <Box minHeight='0'>
                   <Tabs.Content value='activity' style={{ height: '100%'}}>
                     <ContributorRecentActivities contributor={contributor} />
                   </Tabs.Content>

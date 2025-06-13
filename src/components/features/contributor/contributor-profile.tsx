@@ -97,14 +97,15 @@ const ContributorProfile = ({ contributor }: { contributor: TContributor }) => {
                 </Text>
                 <Flex align='center' gap='2'>
                   <Box
+                    py='4'
+                    px='8'
+                    overflow='hidden'
                     style={{
                       backgroundColor: 'var(--gray-3)',
-                      padding: '4px 8px',
                       borderRadius: '4px',
                       fontFamily: 'monospace',
                       fontSize: '12px',
                       flex: 1,
-                      overflow: 'hidden',
                       textOverflow: 'ellipsis',
                     }}
                   >
