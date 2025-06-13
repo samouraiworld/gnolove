@@ -46,9 +46,21 @@ const TEAMS: Team[] = [
     members: ['linhpn99', 'thinhnx-var', 'AnhVAR'],
   },
   {
-    name: 'Teritori',
+    name: 'Samourai.world',
     color: 'red',
-    members: ['n0izn0iz', 'omarsy', 'villaquiranm', 'hthieu1110', 'MikaelVallenet', 'villaquiranm'],
+    members: [
+      'n0izn0iz',
+      'omarsy',
+      'villaquiranm',
+      'hthieu1110',
+      'MikaelVallenet',
+      'villaquiranm',
+      'WaDadidou',
+      'dtczelo',
+      'naim-ea',
+      'louis14448',
+      'pr0m3th3usEx',
+    ],
   },
   {
     name: 'Berty',
