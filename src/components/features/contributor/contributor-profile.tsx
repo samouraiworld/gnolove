@@ -8,7 +8,7 @@ const ContributorProfile = ({ contributor }: { contributor: TContributor }) => {
     : `https://${contributor.websiteUrl}`;
 
   return (
-    <Box>
+    <Box height='100%' overflow='auto'>
       <Flex direction='column' gap='4'>
         <Card>
           <Flex direction='column' align='center' gap='4' p='6'>

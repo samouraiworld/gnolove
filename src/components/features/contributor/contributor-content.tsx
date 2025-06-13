@@ -24,16 +24,11 @@ const ContributorContent = ({ login }: { login: string }) => {
   };
 
   return (
-    <Box>
+    <Flex direction='column' height='100%' overflow='hidden'>
       <Flex
         justify='between'
         align='center'
-        mb='1'
-        position='sticky'
-        top='0'
-        pt='5'
-        pb='2'
-        style={{ backgroundColor: 'white', zIndex: 2, borderBottom: '1px solid var(--gray-3)' }}
+        mb='4'
       >
         <Flex align='center' gap='2'>
           <Dialog.Title mb='0'>{contributor.name ?? contributor.login}</Dialog.Title>
@@ -51,13 +46,19 @@ const ContributorContent = ({ login }: { login: string }) => {
         </Dialog.Close>
       </Flex>
 
-      <Grid columns={{ initial: '1', md: '3' }} gap='6'>
+      <Grid
+        columns={{ initial: '1', md: '3' }}
+        gap='6'
+        style={{ flex: 1, minHeight: 0 }}
+      >
         {/* Left Column - Profile Info */}
-        <ContributorProfile contributor={contributor} />
+        <Box style={{ minHeight: 0 }}>
+          <ContributorProfile contributor={contributor} />
+        </Box>
 
         {/* Right Column - Activity & Contributions */}
-        <Box style={{ gridColumn: 'span 2' }}>
-          <Flex direction='column' gap='4'>
+        <Box style={{ gridColumn: 'span 2', minHeight: 0 }}>
+          <Flex direction='column' gap='4' height='100%'>
             {/* Metrics */}
             <Grid columns='4' gap='4'>
               <Card>
@@ -109,32 +110,34 @@ const ContributorContent = ({ login }: { login: string }) => {
               </Card>
             </Grid>
 
-            {/* Tabs for different views */}
-            <Tabs.Root defaultValue='activity'>
-              <Tabs.List>
-                <Tabs.Trigger value='activity'>Recent Activity</Tabs.Trigger>
-                <Tabs.Trigger value='repositories'>Top Repositories</Tabs.Trigger>
-                <Tabs.Trigger value='contributions'>Contributions</Tabs.Trigger>
-              </Tabs.List>
+            <Box style={{ flex: 1, minHeight: 0 }}>
+              {/* Tabs for different views */}
+              <Tabs.Root defaultValue='activity' style={{ display: 'flex', flexDirection: 'column', gap: '4', height: '100%' }}>
+                <Tabs.List>
+                  <Tabs.Trigger value='activity'>Recent Activity</Tabs.Trigger>
+                  <Tabs.Trigger value='repositories'>Top Repositories</Tabs.Trigger>
+                  <Tabs.Trigger value='contributions'>Contributions</Tabs.Trigger>
+                </Tabs.List>
 
-              <Box pt='4'>
-                <Tabs.Content value='activity'>
-                  <ContributorRecentActivities contributor={contributor} />
-                </Tabs.Content>
+                <Box style={{ flex: 1, minHeight: 0 }}>
+                  <Tabs.Content value='activity' style={{ height: '100%'}}>
+                    <ContributorRecentActivities contributor={contributor} />
+                  </Tabs.Content>
 
-                <Tabs.Content value='repositories'>
-                  <ContributorTopRepos contributor={contributor} />
-                </Tabs.Content>
+                  <Tabs.Content value='repositories' style={{ height: '100%'}}>
+                    <ContributorTopRepos contributor={contributor} />
+                  </Tabs.Content>
 
-                <Tabs.Content value='contributions'>
-                  <ContributorContributions contributor={contributor} />
-                </Tabs.Content>
-              </Box>
-            </Tabs.Root>
+                  <Tabs.Content value='contributions' style={{ height: '100%'}}>
+                    <ContributorContributions contributor={contributor} />
+                  </Tabs.Content>
+                </Box>
+              </Tabs.Root>
+            </Box>
           </Flex>
         </Box>
       </Grid>
-    </Box>
+    </Flex>
   );
 };
 

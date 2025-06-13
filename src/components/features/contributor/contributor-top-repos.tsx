@@ -5,8 +5,8 @@ import Link from 'next/link';
 
 const ContributorTopRepos = ({ contributor }: { contributor: TContributor }) => {
   return (
-    <Card>
-      <Flex direction='column' gap='4' p='4'>
+    <Card style={{ height: '100%' }}>
+      <Flex direction='column' gap='4' p='4' height='100%' overflowY='auto'>
         <Heading size='3'>Top Repositories</Heading>
         <Flex direction='column' gap='4'>
           {contributor.topRepositories.map((repo) => (
