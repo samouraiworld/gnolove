@@ -69,6 +69,8 @@ func getUserStats(db *gorm.DB, startTime time.Time, exclude, repositories []stri
 				AvatarUrl:    user.AvatarUrl,
 				URL:          user.URL,
 				Name:         user.Name,
+				Commits:      user.Commits,
+				Issues:       user.Issues,
 				PullRequests: user.PullRequests,
 			},
 			TotalCommits:              len(user.Commits),

@@ -1,9 +1,8 @@
 import { Metadata } from 'next';
-import NextLink from 'next/link';
 import { notFound } from 'next/navigation';
 
-import { ArrowLeftIcon, CheckCircledIcon } from '@radix-ui/react-icons';
-import { Avatar, Flex, Heading, Link, Table, Text } from '@radix-ui/themes';
+import { CheckCircledIcon } from '@radix-ui/react-icons';
+import { Avatar, Flex, Heading, Table, Text } from '@radix-ui/themes';
 import { formatDistanceToNow } from 'date-fns';
 import { CircleDotIcon } from 'lucide-react';
 
@@ -39,18 +38,9 @@ const MilestonePage = async () => {
 
   return (
     <LayoutContainer>
-      <MilestoneProgress milestone={milestone} />
+      <MilestoneProgress milestone={milestone} mt="5" />
 
-      <Flex align="center" gap="2" mt="4" asChild>
-        <Link asChild>
-          <NextLink href="/">
-            <ArrowLeftIcon />
-            <Text>Go back to home</Text>
-          </NextLink>
-        </Link>
-      </Flex>
-
-      <Heading as="h1" size="8" my="2">
+      <Heading as="h1" size="8" my="4">
         {milestone.title}
       </Heading>
 

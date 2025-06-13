@@ -149,6 +149,7 @@ export const CommitSchema = z.preprocess(preprocessCommit, CommitBaseSchema);
 export type TCommit = z.infer<typeof CommitSchema>;
 
 export const EnhancedBaseUserSchema = UserBaseSchema.extend({
+  commits: z.array(CommitSchema).nullish(),
   issues: z.array(IssueSchema).nullish(),
   pullRequests: z.array(PullRequestSchema).nullish(),
   LastContribution: IssueSchema.or(PullRequestSchema).or(CommitSchema).nullish(),
