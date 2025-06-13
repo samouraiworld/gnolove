@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/google/go-github/v64/github"
+	"github.com/samouraiworld/topofgnomes/server/models"
 	"github.com/samouraiworld/topofgnomes/server/signer"
 	"gorm.io/gorm"
 )
@@ -52,7 +53,7 @@ type GithubInfo struct {
 	GithubToken string       `json:"github_token"`
 }
 
-func HandleVerifyGithubAccount(signer *signer.Signer) func(w http.ResponseWriter, r *http.Request) {
+func HandleVerifyGithubAccount(signer *signer.Signer, database *gorm.DB) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		err := verifyGithubLoginBelongsToUser(r)
@@ -61,8 +62,17 @@ func HandleVerifyGithubAccount(signer *signer.Signer) func(w http.ResponseWriter
 			json.NewEncoder(w).Encode(resCallback{Error: err.Error()})
 			return
 		}
+		address := r.URL.Query().Get("address")
+		login := r.URL.Query().Get("login")
 
-		err = signer.CallVerify(r.URL.Query().Get("address"), r.URL.Query().Get("login"))
+		err = signer.CallVerify(address, login)
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(resCallback{Error: err.Error()})
+			return
+		}
+
+		err = linkAddressToUser(database, address, login)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			json.NewEncoder(w).Encode(resCallback{Error: err.Error()})
@@ -78,6 +88,10 @@ func HandleVerifyGithubAccount(signer *signer.Signer) func(w http.ResponseWriter
 
 		json.NewEncoder(w).Encode(resCallback{Success: "true"})
 	}
+}
+
+func linkAddressToUser(database *gorm.DB, address, login string) error {
+	return database.Model(&models.User{}).Where("login = ?", login).Update("wallet", address).Error
 }
 
 func HandleGetGithubUserAndTokenByCode(signer *signer.Signer, database *gorm.DB) func(w http.ResponseWriter, r *http.Request) {
