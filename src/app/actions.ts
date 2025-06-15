@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { TimeFilter } from '@/util/github';
 import { getParameterFromTimeFilter } from '@/util/repositories';
 import {
+  ContributorSchema,
   EnhancedUserWithStatsSchema,
   IssueSchema,
   MilestoneSchema,
@@ -70,4 +71,16 @@ export const getRepositories = async () => {
   const data = await res.json();
 
   return z.array(RepositorySchema).parse(data);
+};
+
+export const getContributor = async (login: string) => {
+  const url = new URL(`/contributors/${login}`, ENV.NEXT_PUBLIC_API_URL);
+
+  const res = await fetch(url.toString());
+  if (!res.ok) {
+    throw new Error(`Failed to fetch contributor ${login}: ${res.status}`);
+  }
+  const data = await res.json();
+
+  return ContributorSchema.parse(data);
 };
