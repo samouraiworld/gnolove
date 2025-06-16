@@ -8,6 +8,7 @@ import ContributorRecentActivities from './contributor-recent-activities';
 import ContributorTopRepos from './contributor-top-repos';
 import ContributorContributions from './contributor-contributions';
 import { useState } from 'react';
+import ContributorAnalytics from './contributor-analytics';
 
 const ContributorContent = ({ login }: { login: string }) => {
   const { data: contributor } = useGetContributor(login);
@@ -112,16 +113,21 @@ const ContributorContent = ({ login }: { login: string }) => {
 
             <Box minHeight='0' style={{ flex: 1 }}>
               {/* Tabs for different views */}
-              <Tabs.Root defaultValue='activity' style={{ display: 'flex', flexDirection: 'column', gap: '4', height: '100%' }}>
-                <Tabs.List>
+              <Tabs.Root defaultValue='charts' style={{ display: 'flex', flexDirection: 'column', gap: '4', height: '100%' }}>
+                <Tabs.List style={{ minHeight: '40px' }}>
                   <Tabs.Trigger value='activity'>Recent Activity</Tabs.Trigger>
                   <Tabs.Trigger value='repositories'>Top Repositories</Tabs.Trigger>
+                  <Tabs.Trigger value='charts'>Charts</Tabs.Trigger>
                   <Tabs.Trigger value='contributions'>Contributions</Tabs.Trigger>
                 </Tabs.List>
 
                 <Box minHeight='0'>
                   <Tabs.Content value='activity' style={{ height: '100%'}}>
                     <ContributorRecentActivities contributor={contributor} />
+                  </Tabs.Content>
+
+                  <Tabs.Content value='charts' style={{ height: '100%'}}>
+                    <ContributorAnalytics contributor={contributor} />
                   </Tabs.Content>
 
                   <Tabs.Content value='repositories' style={{ height: '100%'}}>
