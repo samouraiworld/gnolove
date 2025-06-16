@@ -223,6 +223,11 @@ export const ContributorRepositorySchema = z.object({
   primaryLanguage: z.string(),
 });
 
+export const TimeCountSchema = z.object({
+  period: z.string(),
+  count: z.number(),
+});
+
 export const ContributorSchema = z.object({
   id: z.string(),
   login: z.string(),
@@ -246,10 +251,17 @@ export const ContributorSchema = z.object({
   topRepositories: z.array(ContributorRepositorySchema),
   gnoBalance: z.string(),
   wallet: z.string(),
+  commitsPerMonth: z.array(TimeCountSchema),
+  pullRequestsPerMonth: z.array(TimeCountSchema),
+  issuesPerMonth: z.array(TimeCountSchema),
+  contributionsPerDay: z.array(TimeCountSchema),
 });
 
 export type TContributorRepository = z.infer<typeof ContributorRepositorySchema>;
 
-
+/**
+ * Represents a count of contributions over a specified time period.
+ */
+export type TTimeCount = z.infer<typeof TimeCountSchema>;
 export type TContributor = z.infer<typeof ContributorSchema>;
 export type TContributorActivity = z.infer<typeof ContributorActivitySchema>;

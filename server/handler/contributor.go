@@ -10,7 +10,14 @@ import (
 	"gorm.io/gorm"
 )
 
+type TimeCount struct {
+	Period string `json:"period"`
+	Count  int    `json:"count"`
+}
+
 type githubUserResponse struct {
+	ContributionsPerDay []TimeCount `json:"contributionsPerDay"` // Daily contributions for heatmap
+
 	ID                 string           `json:"id"`
 	Login              string           `json:"login"`
 	AvatarUrl          string           `json:"avatarUrl"`
@@ -33,6 +40,10 @@ type githubUserResponse struct {
 	TopRepositories    []topRepository  `json:"topRepositories"`
 	Wallet             string           `json:"wallet"`
 	GnoBalance         string           `json:"gnoBalance"`
+
+	CommitsPerMonth      []TimeCount `json:"commitsPerMonth"`
+	PullRequestsPerMonth []TimeCount `json:"pullRequestsPerMonth"`
+	IssuesPerMonth       []TimeCount `json:"issuesPerMonth"`
 }
 
 type recentActivity struct {
@@ -96,6 +107,90 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 		log.Printf("[Contributor Handler] Querying DB for user: %s...", login)
 
 		// Fetch stats from DB
+		// --- Time-bucketed analytics ---
+		// Helper: get YYYY-MM for last 12 months
+		months := make([]string, 12)
+		now := time.Now()
+		for i := 0; i < 12; i++ {
+			m := now.AddDate(0, -i, 0)
+			months[11-i] = m.Format("2006-01")
+		}
+
+		// Commits per month
+		var commitCounts []struct {
+			Period string
+			Count  int
+		}
+		db.Raw(`SELECT strftime('%Y-%m', created_at) as period, COUNT(*) as count FROM commits WHERE author_id = ? AND created_at >= ? GROUP BY period`, q.User.ID, now.AddDate(0, -12, 0)).Scan(&commitCounts)
+		commitMap := map[string]int{}
+		for _, c := range commitCounts {
+			commitMap[c.Period] = c.Count
+		}
+		commitsPerMonth := make([]TimeCount, 12)
+		for i, m := range months {
+			commitsPerMonth[i] = TimeCount{Period: m, Count: commitMap[m]}
+		}
+
+		// PRs per month
+		var prCounts []struct {
+			Period string
+			Count  int
+		}
+		db.Raw(`SELECT strftime('%Y-%m', created_at) as period, COUNT(*) as count FROM pull_requests WHERE author_id = ? AND created_at >= ? GROUP BY period`, q.User.ID, now.AddDate(0, -12, 0)).Scan(&prCounts)
+		prMap := map[string]int{}
+		for _, c := range prCounts {
+			prMap[c.Period] = c.Count
+		}
+		prsPerMonth := make([]TimeCount, 12)
+		for i, m := range months {
+			prsPerMonth[i] = TimeCount{Period: m, Count: prMap[m]}
+		}
+
+		// Issues per month
+		var issueCounts []struct {
+			Period string
+			Count  int
+		}
+		db.Raw(`SELECT strftime('%Y-%m', created_at) as period, COUNT(*) as count FROM issues WHERE author_id = ? AND created_at >= ? GROUP BY period`, q.User.ID, now.AddDate(0, -12, 0)).Scan(&issueCounts)
+		issueMap := map[string]int{}
+		for _, c := range issueCounts {
+			issueMap[c.Period] = c.Count
+		}
+		issuesPerMonth := make([]TimeCount, 12)
+		for i, m := range months {
+			issuesPerMonth[i] = TimeCount{Period: m, Count: issueMap[m]}
+		}
+
+		// Daily contributions for heatmap (commits + PRs + issues per day)
+		var dailyCounts []struct {
+			Period string
+			Count  int
+		}
+		// TODO: Optimize this query if slow
+		db.Raw(`
+			SELECT strftime('%Y-%m-%d', created_at) as period, COUNT(*) as count FROM (
+				SELECT created_at FROM commits WHERE author_id = ? AND created_at >= ?
+				UNION ALL
+				SELECT created_at FROM pull_requests WHERE author_id = ? AND created_at >= ?
+				UNION ALL
+				SELECT created_at FROM issues WHERE author_id = ? AND created_at >= ?
+			) GROUP BY period
+		`, q.User.ID, now.AddDate(-1, 0, 0), q.User.ID, now.AddDate(-1, 0, 0), q.User.ID, now.AddDate(-1, 0, 0)).Scan(&dailyCounts)
+		dailyMap := map[string]int{}
+		for _, c := range dailyCounts {
+			dailyMap[c.Period] = c.Count
+		}
+		days := []string{}
+		start := now.AddDate(-1, 0, 0)
+		for i := 0; i < 365; i++ {
+			date := start.AddDate(0, 0, i).Format("2006-01-02")
+			days = append(days, date)
+		}
+		contributionsPerDay := make([]TimeCount, 365)
+		for i, d := range days {
+			contributionsPerDay[i] = TimeCount{Period: d, Count: dailyMap[d]}
+		}
+
 		var totalCommits, totalPRs, totalIssues int64
 		if err := db.Table("commits").Where("author_id = ?", dbUser.ID).Count(&totalCommits).Error; err != nil {
 			log.Printf("[Contributor Handler] DB error counting commits for user %s: %v", dbUser.ID, err)
@@ -210,6 +305,10 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 			}(),
 			Wallet:     dbUser.Wallet,
 			GnoBalance: "0",
+
+			CommitsPerMonth:      commitsPerMonth,
+			PullRequestsPerMonth: prsPerMonth,
+			IssuesPerMonth:       issuesPerMonth,
 		}
 
 		w.Header().Set("Content-Type", "application/json")
