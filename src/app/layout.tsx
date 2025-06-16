@@ -19,9 +19,10 @@ import AdenaProvider from '@/contexts/adena-context';
 
 interface RootLayoutProps {
   children?: ReactNode;
+  details?: ReactNode;
 }
 
-const RootLayout = ({ children }: RootLayoutProps) => {
+const RootLayout = ({ children, details }: RootLayoutProps) => {
   return (
     <html lang="en">
       <head>
@@ -63,6 +64,8 @@ const RootLayout = ({ children }: RootLayoutProps) => {
                 </Flex>
 
                 {children}
+
+                {details}
               </AdenaProvider>
             </ToastProvider>
           </Theme>

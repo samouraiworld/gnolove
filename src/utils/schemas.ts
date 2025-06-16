@@ -204,3 +204,51 @@ export const RepositorySchema = z.object({
 });
 
 export type TRepository = z.infer<typeof RepositorySchema>;
+
+// Contributor API response schema
+export const ContributorActivitySchema = z.object({
+  title: z.string(),
+  url: z.string().url(),
+  createdAt: z.string(),
+  repository: z.string(),
+  type: z.enum(['pull_request', 'issue']),
+});
+
+export const ContributorRepositorySchema = z.object({
+  nameWithOwner: z.string(),
+  description: z.string(),
+  url: z.string().url(),
+  stargazerCount: z.number(),
+  primaryLanguage: z.string(),
+});
+
+export const ContributorSchema = z.object({
+  id: z.string(),
+  login: z.string(),
+  avatarUrl: z.string().url(),
+  url: z.string().url(),
+  name: z.string(),
+  bio: z.string(),
+  location: z.string(),
+  joinDate: z.string(),
+  websiteUrl: z.string().optional(),
+  twitterUsername: z.string().optional(),
+  totalStars: z.number(),
+  totalRepos: z.number(),
+  followers: z.number(),
+  following: z.number(),
+  totalCommits: z.number(),
+  totalPullRequests: z.number(),
+  totalIssues: z.number(),
+  recentIssues: z.array(ContributorActivitySchema),
+  recentPullRequests: z.array(ContributorActivitySchema),
+  topRepositories: z.array(ContributorRepositorySchema),
+  gnoBalance: z.string(),
+  wallet: z.string(),
+});
+
+export type TContributorRepository = z.infer<typeof ContributorRepositorySchema>;
+
+
+export type TContributor = z.infer<typeof ContributorSchema>;
+export type TContributorActivity = z.infer<typeof ContributorActivitySchema>;
