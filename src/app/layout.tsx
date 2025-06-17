@@ -17,6 +17,7 @@ import ToastProvider from '@/context/toast-context';
 import { AdenaAddress } from '@/components/modules/adena-address';
 import { GithubLink } from '@/components/modules/github-link';
 import AdenaProvider from '@/contexts/adena-context';
+import QueryClientWrapper from '@/wrappers/query-client';
 
 interface RootLayoutProps {
   children?: ReactNode;
@@ -36,61 +37,63 @@ const RootLayout = ({ children, details }: RootLayoutProps) => {
       </head>
 
       <body>
-        <ThemeProvider defaultTheme="light" attribute="class">
-          <Theme>
-            <ToastProvider>
-              <AdenaProvider>
-                <Toaster />
+        <QueryClientWrapper>
+          <ThemeProvider defaultTheme="light" attribute="class">
+            <Theme>
+              <ToastProvider>
+                <AdenaProvider>
+                  <Toaster />
 
-                <Box
-                  position="fixed"
-                  top="0"
-                  left="0"
-                  width="100%"
-                  p="2"
-                  className="z-50 z-[99]"
-                  style={{ background: 'var(--accent-1)', borderBottom: '1px solid var(--gray-a3)' }}
-                >
-                  <Flex justify="between" align="center">
-                    <Flex align="center" gap="4" px="2">
-                      <Button variant="ghost">
-                        <NextLink href="/">Home</NextLink>
-                      </Button>
-
-                      <Button variant="ghost">
-                        <NextLink href="/milestone">Milestone</NextLink>
-                      </Button>
-
-                      <Button variant="ghost">
-                        <NextLink href="/analytics">
-                          Analytics
-                          <Badge color="red">new</Badge>
-                        </NextLink>
-                      </Button>
-                    </Flex>
-
-                    <Flex gap="2" align="center" justify="end">
-                      <AdenaAddress />
-
-                      <GithubLink>
-                        <Button variant="soft">
-                          <LinkNone2Icon />
-                          Link Github Account
+                  <Box
+                    position="fixed"
+                    top="0"
+                    left="0"
+                    width="100%"
+                    p="2"
+                    className="z-50"
+                    style={{ background: 'var(--accent-1)', borderBottom: '1px solid var(--gray-a3)' }}
+                  >
+                    <Flex justify="between" align="center">
+                      <Flex align="center" gap="4" px="2">
+                        <Button variant="ghost">
+                          <NextLink href="/">Home</NextLink>
                         </Button>
-                      </GithubLink>
 
-                      <ThemeSwitch />
+                        <Button variant="ghost">
+                          <NextLink href="/milestone">Milestone</NextLink>
+                        </Button>
+
+                        <Button variant="ghost">
+                          <NextLink href="/analytics">
+                            Analytics
+                            <Badge color="red">new</Badge>
+                          </NextLink>
+                        </Button>
+                      </Flex>
+
+                      <Flex gap="2" align="center" justify="end">
+                        <AdenaAddress />
+
+                        <GithubLink>
+                          <Button variant="soft">
+                            <LinkNone2Icon />
+                            Link Github Account
+                          </Button>
+                        </GithubLink>
+
+                        <ThemeSwitch />
+                      </Flex>
                     </Flex>
-                  </Flex>
-                </Box>
+                  </Box>
 
-                {children}
+                  {children}
 
-                {details}
-              </AdenaProvider>
-            </ToastProvider>
-          </Theme>
-        </ThemeProvider>
+                  {details}
+                </AdenaProvider>
+              </ToastProvider>
+            </Theme>
+          </ThemeProvider>
+        </QueryClientWrapper>
       </body>
     </html>
   );
