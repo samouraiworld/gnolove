@@ -1,9 +1,10 @@
 import { ReactNode } from 'react';
 
 import { ThemeProvider } from 'next-themes';
+import NextLink from 'next/link';
 
 import { LinkNone2Icon } from '@radix-ui/react-icons';
-import { Button, Flex, Theme } from '@radix-ui/themes';
+import { Badge, Box, Button, Flex, Theme } from '@radix-ui/themes';
 
 import '@/style/globals.css';
 
@@ -41,27 +42,47 @@ const RootLayout = ({ children, details }: RootLayoutProps) => {
               <AdenaProvider>
                 <Toaster />
 
-                <Flex
+                <Box
                   position="fixed"
+                  top="0"
+                  left="0"
+                  width="100%"
                   p="2"
                   className="z-50 z-[99]"
-                  gap="2"
-                  align="center"
-                  justify="end"
-                  width="100%"
                   style={{ background: 'var(--accent-1)', borderBottom: '1px solid var(--gray-a3)' }}
                 >
-                  <AdenaAddress />
+                  <Flex justify="between" align="center">
+                    <Flex align="center" gap="4" px="2">
+                      <Button variant="ghost">
+                        <NextLink href="/">Home</NextLink>
+                      </Button>
 
-                  <GithubLink>
-                    <Button variant="soft">
-                      <LinkNone2Icon />
-                      Link Github Account
-                    </Button>
-                  </GithubLink>
+                      <Button variant="ghost">
+                        <NextLink href="/milestone">Milestone</NextLink>
+                      </Button>
 
-                  <ThemeSwitch />
-                </Flex>
+                      <Button variant="ghost">
+                        <NextLink href="/analytics">
+                          Analytics
+                          <Badge color="red">new</Badge>
+                        </NextLink>
+                      </Button>
+                    </Flex>
+
+                    <Flex gap="2" align="center" justify="end">
+                      <AdenaAddress />
+
+                      <GithubLink>
+                        <Button variant="soft">
+                          <LinkNone2Icon />
+                          Link Github Account
+                        </Button>
+                      </GithubLink>
+
+                      <ThemeSwitch />
+                    </Flex>
+                  </Flex>
+                </Box>
 
                 {children}
 
