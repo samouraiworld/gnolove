@@ -4,7 +4,6 @@ import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query
 
 import ScoreboardPage from '@/feature/scoreboard-page';
 
-import QueryClientWrapper from '@/wrapper/query-client';
 
 import { prefetchContributors } from '@/hook/use-get-contributors';
 import { prefetchLastIssues } from '@/hook/use-get-last-issues';
@@ -47,11 +46,9 @@ const HomePage = async ({ searchParams: { f, e, r } }: HomePageParams) => {
   ]);
 
   return (
-    <QueryClientWrapper>
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <ScoreboardPage {...{ exclude, timeFilter, selectedRepositories }} />
-      </HydrationBoundary>
-    </QueryClientWrapper>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <ScoreboardPage {...{ exclude, timeFilter, selectedRepositories }} />
+    </HydrationBoundary>
   );
 };
 
