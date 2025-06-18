@@ -15,10 +15,14 @@ jobs:
         registry: ghcr.io
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Define image tag
+      id: vars
+      run: echo "tag=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
           
     - name: Build the Docker image
-      run: docker build server --file server/Dockerfile --tag ghcr.io/${{ github.repository_owner }}/gnolove-server:cf23ce0
+      run: docker build server --file server/Dockerfile --tag ghcr.io/${{ github.repository_owner }}/gnolove-server:${{ steps.vars.outputs.tag }}
       
     - name: Push Docker image
       run: |
-          docker push ghcr.io/${{ github.repository_owner }}/gnolove-server:cf23ce0
+          docker push ghcr.io/${{ github.repository_owner }}/gnolove-server:${{ steps.vars.outputs.tag }}
