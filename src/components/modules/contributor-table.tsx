@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import Image from 'next/image';
 
-import { Flex, Table, Tooltip } from '@radix-ui/themes';
+import { Flex, Table, Text, Tooltip } from '@radix-ui/themes';
 
 import ContributorRow from '@/module/contributor-row';
 
@@ -50,11 +50,10 @@ const ContributorTable = ({ contributors, sort, showRank }: ContributorTableProp
           <Table.ColumnHeaderCell className="text-center">
             <Tooltip className="text-center font-mono" content={tooltipContent}>
               <Flex width="100%" height="100%" justify="center" align="center" gap="1">
-                Gno Love Power <Image src={MinecraftHeart} alt="minecraft heart " width={12} height={12} />
+                <Text className="hidden xs:inline">Gno Love Power</Text> <Image src={MinecraftHeart} alt="minecraft heart " width={12} height={12} />
               </Flex>
             </Tooltip>
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell></Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell></Table.ColumnHeaderCell>
         </Table.Row>
       </Table.Header>

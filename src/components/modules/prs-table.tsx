@@ -3,6 +3,8 @@
 import { ExternalLinkIcon } from '@radix-ui/react-icons';
 import { Flex, Table, Text } from '@radix-ui/themes';
 
+import Cell from '@/components/elements/cell';
+
 import { TPullRequest } from '@/util/schemas';
 
 export interface IssuesTableProps extends Table.RootProps {
@@ -36,13 +38,13 @@ const PrsTable = ({ prs, showHeader, ...props }: IssuesTableProps) => {
               key={id}
               className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-grayA-2"
             >
-              <Table.Cell className="max-w-0">
+              <Cell className="max-w-0">
                 <Flex width="100%" height="100%" align="center" gap="2">
                   <Text className="w-full truncate">{title}</Text>
 
                   <ExternalLinkIcon className="shrink-0 text-blue-10" />
                 </Flex>
-              </Table.Cell>
+              </Cell>
             </Table.Row>
           );
         })}

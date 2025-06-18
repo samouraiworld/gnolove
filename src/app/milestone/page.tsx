@@ -38,7 +38,7 @@ const MilestonePage = async () => {
 
   return (
     <LayoutContainer>
-      <MilestoneProgress milestone={milestone} mt="5" />
+      <MilestoneProgress milestone={milestone} />
 
       <Heading as="h1" size="8" my="4">
         {milestone.title}
