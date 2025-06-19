@@ -13,6 +13,7 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/samouraiworld/topofgnomes/server/db"
 	"github.com/samouraiworld/topofgnomes/server/handler"
+	"github.com/samouraiworld/topofgnomes/server/handler/contributor"
 	"github.com/samouraiworld/topofgnomes/server/models"
 	"github.com/samouraiworld/topofgnomes/server/signer"
 	"github.com/samouraiworld/topofgnomes/server/sync"
@@ -96,7 +97,7 @@ func main() {
 	router.HandleFunc("/contributors/newest", handler.HandleGetNewestContributors(database))
 	router.HandleFunc("/verifyGithubAccount", handler.HandleVerifyGithubAccount(signer))
 	router.HandleFunc("/getGithubUserAndTokenByCode", handler.HandleGetGithubUserAndTokenByCode(signer, database))
-	router.HandleFunc("/contributors/{login}", handler.HandleGetContributor(database))
+	router.HandleFunc("/contributors/{login}", contributor.HandleGetContributor(database))
 
 	logger.Infof("Server running on port %d", port)
 	err = http.ListenAndServe(fmt.Sprintf(":%d", port), router)

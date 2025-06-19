@@ -206,7 +206,6 @@ export const RepositorySchema = z.object({
 
 export type TRepository = z.infer<typeof RepositorySchema>;
 
-// Contributor API response schema
 export const ContributorActivitySchema = z.object({
   title: z.string(),
   url: z.string().url(),
@@ -226,6 +225,11 @@ export const ContributorRepositorySchema = z.object({
 export const TimeCountSchema = z.object({
   period: z.string(),
   count: z.number(),
+});
+
+export const TopContributedRepo = z.object({
+  id: z.string(),
+  contributions: z.number(),
 });
 
 export const ContributorSchema = z.object({
@@ -255,9 +259,11 @@ export const ContributorSchema = z.object({
   pullRequestsPerMonth: z.array(TimeCountSchema),
   issuesPerMonth: z.array(TimeCountSchema),
   contributionsPerDay: z.array(TimeCountSchema),
+  topContributedRepositories: z.array(TopContributedRepo)
 });
 
 export type TContributorRepository = z.infer<typeof ContributorRepositorySchema>;
+export type TTopContributedRepo = z.infer<typeof TopContributedRepo>;
 
 /**
  * Represents a count of contributions over a specified time period.

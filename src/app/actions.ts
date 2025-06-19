@@ -76,7 +76,7 @@ export const getRepositories = async () => {
 export const getContributor = async (login: string) => {
   const url = new URL(`/contributors/${login}`, ENV.NEXT_PUBLIC_API_URL);
 
-  const res = await fetch(url.toString());
+  const res = await fetch(url.toString(), { cache: 'no-cache' });
   if (!res.ok) {
     throw new Error(`Failed to fetch contributor ${login}: ${res.status}`);
   }
