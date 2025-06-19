@@ -10,7 +10,7 @@ import (
 )
 
 // GetContributorDataFromGithub gathers all GitHub API queries for the contributor
-func GetContributorDataFromGithub(login string) (struct {
+type ContributorData struct {
 	ID              string
 	Login           string
 	AvatarUrl       string
@@ -26,26 +26,12 @@ func GetContributorDataFromGithub(login string) (struct {
 	Followers       int
 	Following       int
 	TopRepositories []repoInfo
-}, error) {
+}
+
+func GetContributorDataFromGithub(login string) (ContributorData, error) {
 	token := os.Getenv("GITHUB_API_TOKEN")
 	if token == "" {
-		return struct {
-			ID              string
-			Login           string
-			AvatarUrl       string
-			URL             string
-			Name            string
-			Bio             string
-			Location        string
-			JoinDate        string
-			WebsiteUrl      string
-			TwitterUsername string
-			TotalStars      int
-			TotalRepos      int
-			Followers       int
-			Following       int
-			TopRepositories []repoInfo
-		}{}, fmt.Errorf("GITHUB_API_TOKEN not set")
+		return ContributorData{}, fmt.Errorf("GITHUB_API_TOKEN not set")
 	}
 
 	src := oauth2.StaticTokenSource(
@@ -90,23 +76,7 @@ func GetContributorDataFromGithub(login string) (struct {
 		"login": githubv4.String(login),
 	}
 	if err := client.Query(ctx, &q, vars); err != nil {
-		return struct {
-			ID              string
-			Login           string
-			AvatarUrl       string
-			URL             string
-			Name            string
-			Bio             string
-			Location        string
-			JoinDate        string
-			WebsiteUrl      string
-			TwitterUsername string
-			TotalStars      int
-			TotalRepos      int
-			Followers       int
-			Following       int
-			TopRepositories []repoInfo
-		}{}, err
+		return ContributorData{}, err
 	}
 
 	totalStars := 0
@@ -121,23 +91,7 @@ func GetContributorDataFromGithub(login string) (struct {
 		})
 	}
 
-	return struct {
-		ID              string
-		Login           string
-		AvatarUrl       string
-		URL             string
-		Name            string
-		Bio             string
-		Location        string
-		JoinDate        string
-		WebsiteUrl      string
-		TwitterUsername string
-		TotalStars      int
-		TotalRepos      int
-		Followers       int
-		Following       int
-		TopRepositories []repoInfo
-	}{
+	return ContributorData{
 		ID:              q.User.ID,
 		Login:           q.User.Login,
 		AvatarUrl:       q.User.AvatarUrl,

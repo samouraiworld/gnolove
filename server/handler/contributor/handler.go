@@ -40,7 +40,7 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 		}
 
 		// Check if cache should be disabled
-		disableCache := os.Getenv("DISABLE_CACHE") == "true"
+		disableCache := os.Getenv("DISABLE_CACHE") == "true" || userCache == nil
 		if !disableCache {
 			if val, found := userCache.Get(login); found {
 				if cached, ok := val.(cachedUser); ok && time.Since(cached.Timestamp) < cacheExpiry {
@@ -66,7 +66,6 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 			userCache.Set(login, cachedUser{Data: resp, Timestamp: time.Now()}, 1)
 			userCache.Wait()
 		}
-		userCache.Wait()
 		w.Header().Set("Content-Type", "application/json")
 		if err := json.NewEncoder(w).Encode(resp); err != nil {
 			log.Printf("[Contributor Handler] Error encoding response for user %s: %v", login, err)
