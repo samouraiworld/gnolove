@@ -3,8 +3,8 @@ import { ReactNode } from 'react';
 import { ThemeProvider } from 'next-themes';
 import NextLink from 'next/link';
 
-import { HamburgerMenuIcon, LinkNone2Icon } from '@radix-ui/react-icons';
-import { Badge, Box, Button, Dialog, Flex, Theme } from '@radix-ui/themes';
+import { LinkNone2Icon } from '@radix-ui/react-icons';
+import { Badge, Box, Button, Flex, Theme } from '@radix-ui/themes';
 
 import '@/style/globals.css';
 
