@@ -317,7 +317,7 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 			for id := range repoIDs {
 				ids = append(ids, id)
 			}
-			if err := db.Table("repositories").Select("id, name_with_owner").Where("id IN ?", ids).Scan(&repos).Error; err != nil {
+			if err := db.Table("repositories").Select("id, name").Where("id IN ?", ids).Scan(&repos).Error; err != nil {
 				log.Printf("[Contributor Handler] DB error fetching repositories for user %s: %v", q.User.ID, err)
 			}
 			for _, r := range repos {
@@ -326,6 +326,7 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 		}
 
 		resp = githubUserResponse{
+			ContributionsPerDay: contributionsPerDay,
 			ID:                q.User.ID,
 			Login:             q.User.Login,
 			AvatarUrl:         q.User.AvatarUrl,

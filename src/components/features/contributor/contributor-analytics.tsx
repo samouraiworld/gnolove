@@ -1,74 +1,18 @@
 'use client';
 
-import { TContributor, TTimeCount } from '@/utils/schemas';
+import { TContributor, TContributorRepository, TTimeCount } from '@/utils/schemas';
 import { Box, Flex, Grid, Card, Text, Heading } from '@radix-ui/themes';
 import { Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis, TooltipProps } from 'recharts';
-
-type HeatmapDay = {
-  date: string;
-  contributions: number;
-  day: number;
-  week: number;
-};
-
-const ContributionHeatmap = ({ data }: { data: HeatmapDay[] }) => {
-  const weeks = Math.ceil(data.length / 7);
-  const cellSize = 12;
-  const gap = 2;
-
-  return (
-    <Box overflowX='auto' p='2'>
-      <svg width={weeks * (cellSize + gap)} height={7 * (cellSize + gap)} style={{ minWidth: '600px' }}>
-        {data.map((day: HeatmapDay, index: number) => {
-          const week = Math.floor(index / 7);
-          const dayOfWeek = index % 7;
-          const level = getContributionLevel(day.contributions);
-          const colors = ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'];
-
-          return (
-            <rect
-              key={index}
-              x={week * (cellSize + gap)}
-              y={dayOfWeek * (cellSize + gap)}
-              width={cellSize}
-              height={cellSize}
-              fill={colors[level]}
-              rx={2}
-            />
-          );
-        })}
-      </svg>
-      <Flex justify='between' align='center' mt='2'>
-        <Text size='1' color='gray'>
-          Less
-        </Text>
-        <Flex gap='1'>
-          {[0, 1, 2, 3, 4].map((level: number) => (
-            <Box
-              key={level}
-              height={`${cellSize}px`}
-              width={`${cellSize}px`}
-              style={{
-                backgroundColor: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'][level],
-                borderRadius: '2px',
-              }}
-            />
-          ))}
-        </Flex>
-        <Text size='1' color='gray'>
-          More
-        </Text>
-      </Flex>
-    </Box>
-  );
-};
+import ContributionsHeatmap from './contributions-heatmap';
 
 const CustomTooltip = ({ active, payload, label }: TooltipProps<number, string>) => {
   if (active && payload && payload.length) {
     return (
-      <Box
+      <Flex
         py='1'
-        px='1.5'
+        px='2'
+        gap='1'
+        direction='column'
         style={{
           backgroundColor: 'var(--color-panel-solid)',
           border: '1px solid var(--gray-6)',
@@ -84,22 +28,14 @@ const CustomTooltip = ({ active, payload, label }: TooltipProps<number, string>)
             {entry.name}: {entry.value}
           </Text>
         ))}
-      </Box>
+      </Flex>
     );
   }
   return null;
 };
 
-const getContributionLevel = (contributions: number) => {
-  if (contributions === 0) return 0;
-  if (contributions <= 2) return 1;
-  if (contributions <= 5) return 2;
-  if (contributions <= 8) return 3;
-  return 4;
-};
-
 const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) => {
-  const repositoryData = (contributor.topRepositories || []).map((repo: any, idx: number) => ({
+  const repositoryData = (contributor.topRepositories || []).map((repo: TContributorRepository, idx: number) => ({
     name: repo.nameWithOwner,
     contributions: repo.stargazerCount || 0,
     color: [
@@ -126,7 +62,7 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
   };
 
   const languageCounts: Record<string, number> = {};
-  (contributor.topRepositories || []).forEach((repo: any) => {
+  (contributor.topRepositories || []).forEach((repo: TContributorRepository) => {
     const lang = repo.primaryLanguage || 'Other';
     languageCounts[lang] = (languageCounts[lang] || 0) + 1;
   });
@@ -150,13 +86,13 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
   return (
     <Card style={{ height: '100%' }}>
       <Flex direction='column' gap='4' height='100%' overflowY='auto'>
-        <Card style={{ minHeight: 250 }}>
-          <Flex direction='column' gap='3' p='4'>
+        <Card style={{ minHeight: 240 }}>
+          <Flex direction='column' gap='3'>
             <Heading size='3'>Contribution Activity</Heading>
             <Text size='2' color='gray'>
               Daily contributions over the past year
             </Text>
-            <ContributionHeatmap data={heatmapData} />
+            <ContributionsHeatmap data={heatmapData} />
           </Flex>
         </Card>
 
@@ -164,15 +100,18 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
         <Grid columns={{ initial: '1', lg: '2' }} gap='4'>
           {/* Repository Contributions Bar Chart */}
           <Card>
-            <Flex direction='column' gap='3' p='4'>
+            <Flex direction='column' gap='3'>
               <Heading size='3'>Contributions by Repository</Heading>
               <Box height='300px'>
                 <ResponsiveContainer width='100%' height='100%'>
-                  <BarChart data={(contributor.topRepositories && contributor.topRepositories.length > 0) ? contributor.topRepositories.map(repo => ({
-                    name: repo.nameWithOwner,
-                    contributions: repo.stargazerCount,
-                    color: '#8884d8',
-                  })) : repositoryData} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
+                  <BarChart
+                    data={(contributor.topRepositories && contributor.topRepositories.length > 0) ? contributor.topRepositories.map(repo => ({
+                      name: repo.nameWithOwner,
+                      contributions: repo.stargazerCount,
+                      color: '#8884d8',
+                    })) : repositoryData}
+                    margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
+                  >
                     <CartesianGrid strokeDasharray='3 3' stroke='var(--gray-6)' />
                     <XAxis
                       dataKey='name'
@@ -193,7 +132,7 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
 
           {/* Contribution Types Donut Chart */}
           <Card>
-            <Flex direction='column' gap='3' p='4'>
+            <Flex direction='column' gap='3'>
               <Heading size='3'>Contribution Types</Heading>
               <Box style={{ height: '300px' }}>
                 <ResponsiveContainer width='100%' height='100%'>
@@ -225,7 +164,7 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
 
           {/* Language Distribution */}
           <Card>
-            <Flex direction='column' gap='3' p='4'>
+            <Flex direction='column' gap='3'>
               <Heading size='3'>Programming Languages</Heading>
               <Box style={{ height: '300px' }}>
                 <ResponsiveContainer width='100%' height='100%'>
@@ -236,14 +175,13 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
                       cy='50%'
                       outerRadius={100}
                       dataKey='value'
-                      label={({ name, value }) => `${name} ${value}%`}
-                      labelLine={false}
                     >
                       {languageData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={entry.color} />
                       ))}
                     </Pie>
                     <Tooltip content={<CustomTooltip />} />
+                    <Legend verticalAlign='bottom' height={36} wrapperStyle={{ fontSize: '12px' }} />
                   </PieChart>
                 </ResponsiveContainer>
               </Box>
@@ -252,7 +190,7 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
 
           {/* Monthly Activity Trend */}
           <Card>
-            <Flex direction='column' gap='3' p='4'>
+            <Flex direction='column' gap='3'>
               <Heading size='3'>Monthly Activity Trend</Heading>
               <Box style={{ height: '300px' }}>
                 <ResponsiveContainer width='100%' height='100%'>
@@ -263,7 +201,7 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
                       prs: contributor.pullRequestsPerMonth[i]?.count || 0,
                       issues: contributor.issuesPerMonth[i]?.count || 0,
                     }))}
-                    margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                    margin={{ top: 20, right: 30, left: -30, bottom: 5 }}
                   >
                     <CartesianGrid strokeDasharray='3 3' stroke='var(--gray-6)' />
                     <XAxis dataKey='month' fontSize={12} stroke='var(--gray-11)' />
