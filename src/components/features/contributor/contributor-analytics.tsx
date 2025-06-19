@@ -35,6 +35,30 @@ const CustomTooltip = ({ active, payload, label }: TooltipProps<number, string>)
 };
 
 const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) => {
+  // Merge monthly data from commits, PRs, and issues into one array by period
+  const commits = contributor.commitsPerMonth || [];
+  const prs = contributor.pullRequestsPerMonth || [];
+  const issues = contributor.issuesPerMonth || [];
+
+  // Create a map of period -> { commits, prs, issues }
+  const monthlyMap: Record<string, { commits: number; prs: number; issues: number }> = {};
+  commits.forEach(({ period, count }) => {
+    if (!monthlyMap[period]) monthlyMap[period] = { commits: 0, prs: 0, issues: 0 };
+    monthlyMap[period].commits = count;
+  });
+  prs.forEach(({ period, count }) => {
+    if (!monthlyMap[period]) monthlyMap[period] = { commits: 0, prs: 0, issues: 0 };
+    monthlyMap[period].prs = count;
+  });
+  issues.forEach(({ period, count }) => {
+    if (!monthlyMap[period]) monthlyMap[period] = { commits: 0, prs: 0, issues: 0 };
+    monthlyMap[period].issues = count;
+  });
+  // Convert to array sorted by period ascending
+  const monthlyActivityData = Object.entries(monthlyMap)
+    .map(([period, vals]) => ({ period, ...vals }))
+    .sort((a, b) => a.period.localeCompare(b.period));
+
   const repositoryData = (contributor.topContributedRepositories || []).map(({ id, contributions }: TTopContributedRepo) => ({
     name: id,
     contributions,
@@ -186,11 +210,11 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
               <Box style={{ height: '300px' }}>
                 <ResponsiveContainer width='100%' height='100%'>
                   <BarChart
-                    data={contributionTypeData}
+                    data={monthlyActivityData}
                     margin={{ top: 20, right: 30, left: -30, bottom: 5 }}
                   >
                     <CartesianGrid strokeDasharray='3 3' stroke='var(--gray-6)' />
-                    <XAxis dataKey='month' fontSize={12} stroke='var(--gray-11)' />
+                    <XAxis dataKey='period' fontSize={12} stroke='var(--gray-11)' />
                     <YAxis fontSize={12} stroke='var(--gray-11)' />
                     <Tooltip content={<CustomTooltip />} />
                     <Bar dataKey='commits' fill='#8884d8' name='Commits' radius={[4, 4, 0, 0]} />
