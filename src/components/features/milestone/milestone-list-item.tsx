@@ -3,22 +3,23 @@ import { Avatar, Badge, BadgeProps, Box, Card, Flex, Link, Separator, Text, Tool
 import { formatDistanceToNow } from 'date-fns';
 import { TIssue } from '@/util/schemas';
 
+const VALID_COLORS: BadgeProps['color'][] = ['gray', 'gold', 'bronze', 'brown', 'yellow', 'amber', 'orange', 'tomato', 'red', 'ruby', 'crimson', 'pink', 'plum', 'purple', 'violet', 'iris', 'indigo', 'blue', 'cyan', 'teal', 'jade', 'green', 'grass', 'lime', 'mint', 'sky'];
+
+const getIssueStateColor = (state: string): BadgeProps['color'] => {
+  switch (state.toUpperCase()) {
+    case 'OPEN': return 'green';
+    case 'CLOSED': return 'gray';
+    default: return 'gray';
+  }
+};
+
+const getSafeLabelColor = (color: string): BadgeProps['color'] => {
+  return VALID_COLORS.includes(color as BadgeProps['color']) ? color as BadgeProps['color'] : 'gray';
+};
+
 const MilestoneListItem = ({ issue }: { issue: TIssue }) => {
-  const getIssueStateColor = (state: string): BadgeProps['color'] => {
-    switch (state.toUpperCase()) {
-      case 'OPEN': return 'green';
-      case 'CLOSED': return 'gray';
-      default: return 'gray';
-    }
-  };
-
-  const getSafeLabelColor = (color: string): BadgeProps['color'] => {
-    const validColors: BadgeProps['color'][] = ['gray', 'gold', 'bronze', 'brown', 'yellow', 'amber', 'orange', 'tomato', 'red', 'ruby', 'crimson', 'pink', 'plum', 'purple', 'violet', 'iris', 'indigo', 'blue', 'cyan', 'teal', 'jade', 'green', 'grass', 'lime', 'mint', 'sky'];
-    return validColors.includes(color as BadgeProps['color']) ? color as BadgeProps['color'] : 'gray';
-  };
-
   return (
-    <Card key={issue.id} size='2' variant='surface'>
+    <Card size='2' variant='surface'>
       <Box>
         <Flex align='start' justify='between' mb='3'>
           <Box>
