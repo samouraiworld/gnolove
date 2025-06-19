@@ -21,8 +21,13 @@ jobs:
       run: echo "tag=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
           
     - name: Build the Docker image
-      run: docker build server --file server/Dockerfile --tag ghcr.io/${{ github.repository_owner }}/gnolove-server:${{ steps.vars.outputs.tag }}
+      run: | 
+        docker build server --file server/Dockerfile \
+        --tag ghcr.io/${{ github.repository_owner }}/gnolove-server:${{ steps.vars.outputs.tag }} \
+        --tag ghcr.io/${{ github.repository_owner }}/gnolove-server:latest
+
       
     - name: Push Docker image
       run: |
           docker push ghcr.io/${{ github.repository_owner }}/gnolove-server:${{ steps.vars.outputs.tag }}
+          docker push ghcr.io/${{ github.repository_owner }}/gnolove-server:latest
