@@ -104,28 +104,28 @@ const ScoreboardPage = ({
 
       <Grid columns={{ initial: '1', md: '3' }} gap="4">
         <Flex direction="column" gap="4">
-          <Text weight="bold" size="6" mt="6" asChild>
+          <Heading as="h2" weight="bold" size="6" mt="6" asChild>
             <NextLink
               href={`https://github.com/${REPOSITORY.owner}/${REPOSITORY.repository}/labels/help%20wanted`}
               target="_blank"
             >
               👋 Help Wanted!
             </NextLink>
-          </Text>
+          </Heading>
           <IssuesTable issues={issues ?? []} showLabels="on-hover" />
         </Flex>
 
         <Flex direction="column" gap="4">
-          <Text weight="bold" size="6" mt="6">
+          <Heading as="h2" weight="bold" size="6" mt="6">
             ✔️ Freshly Merged
-          </Text>
+          </Heading>
           <PrsTable prs={lastMRs} />
         </Flex>
 
         <Flex direction="column" gap="4">
-          <Text weight="bold" size="6" mt="6">
+          <Heading as="h2" weight="bold" size="6" mt="6">
             ⭐ New Rising gnome
-          </Text>
+          </Heading>
           <UserTable users={newContributors ?? []} />
         </Flex>
       </Grid>

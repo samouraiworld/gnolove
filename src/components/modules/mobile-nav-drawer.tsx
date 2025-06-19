@@ -3,11 +3,12 @@
 import Image from 'next/image';
 import NextLink from 'next/link';
 
-import Footer from './footer';
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import { Badge, Button, Dialog, Flex, IconButton } from '@radix-ui/themes';
 
 import MinecraftHeart from '@/image/minecraft-heart.png';
+
+import Footer from '@/components/modules/footer';
 
 const MobileNavDrawer = () => {
   return (
@@ -29,20 +30,26 @@ const MobileNavDrawer = () => {
           </Flex>
 
           <Flex flexGrow="1" direction="column" align="start" gap="5" p="4">
-            <Button size="4" variant="ghost" asChild>
-              <NextLink href="/">Home</NextLink>
-            </Button>
+            <Dialog.Close>
+              <Button size="4" variant="ghost" asChild>
+                <NextLink href="/">Home</NextLink>
+              </Button>
+            </Dialog.Close>
 
-            <Button size="4" variant="ghost" asChild>
-              <NextLink href="/milestone">Milestone</NextLink>
-            </Button>
+            <Dialog.Close>
+              <Button size="4" variant="ghost" asChild>
+                <NextLink href="/milestone">Milestone</NextLink>
+              </Button>
+            </Dialog.Close>
 
-            <Button size="4" variant="ghost" asChild>
-              <NextLink href="/analytics">
-                Analytics
-                <Badge color="red">new</Badge>
-              </NextLink>
-            </Button>
+            <Dialog.Close>
+              <Button size="4" variant="ghost" asChild>
+                <NextLink href="/analytics">
+                  Analytics
+                  <Badge color="red">new</Badge>
+                </NextLink>
+              </Button>
+            </Dialog.Close>
           </Flex>
 
           <Footer />
