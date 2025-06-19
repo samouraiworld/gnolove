@@ -121,7 +121,7 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 			Period string
 			Count  int
 		}
-		db.Raw(`SELECT strftime('%Y-%m', created_at) as period, COUNT(*) as count FROM commits WHERE author_id = ? AND created_at >= ? GROUP BY period`, q.User.ID, now.AddDate(0, -12, 0)).Scan(&commitCounts)
+		db.Raw(`SELECT strftime('%Y-%m', created_at) as period, COUNT(*) as count FROM commits WHERE author_id = ? AND created_at >= ? GROUP BY period`, dbUser.ID, now.AddDate(0, -12, 0)).Scan(&commitCounts)
 		commitMap := map[string]int{}
 		for _, c := range commitCounts {
 			commitMap[c.Period] = c.Count
@@ -136,7 +136,7 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 			Period string
 			Count  int
 		}
-		db.Raw(`SELECT strftime('%Y-%m', created_at) as period, COUNT(*) as count FROM pull_requests WHERE author_id = ? AND created_at >= ? GROUP BY period`, q.User.ID, now.AddDate(0, -12, 0)).Scan(&prCounts)
+		db.Raw(`SELECT strftime('%Y-%m', created_at) as period, COUNT(*) as count FROM pull_requests WHERE author_id = ? AND created_at >= ? GROUP BY period`, dbUser.ID, now.AddDate(0, -12, 0)).Scan(&prCounts)
 		prMap := map[string]int{}
 		for _, c := range prCounts {
 			prMap[c.Period] = c.Count
@@ -151,7 +151,7 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 			Period string
 			Count  int
 		}
-		db.Raw(`SELECT strftime('%Y-%m', created_at) as period, COUNT(*) as count FROM issues WHERE author_id = ? AND created_at >= ? GROUP BY period`, q.User.ID, now.AddDate(0, -12, 0)).Scan(&issueCounts)
+		db.Raw(`SELECT strftime('%Y-%m', created_at) as period, COUNT(*) as count FROM issues WHERE author_id = ? AND created_at >= ? GROUP BY period`, dbUser.ID, now.AddDate(0, -12, 0)).Scan(&issueCounts)
 		issueMap := map[string]int{}
 		for _, c := range issueCounts {
 			issueMap[c.Period] = c.Count
@@ -175,7 +175,7 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 				UNION ALL
 				SELECT created_at FROM issues WHERE author_id = ? AND created_at >= ?
 			) GROUP BY period
-		`, q.User.ID, now.AddDate(-1, 0, 0), q.User.ID, now.AddDate(-1, 0, 0), q.User.ID, now.AddDate(-1, 0, 0)).Scan(&dailyCounts)
+		`, dbUser.ID, now.AddDate(-1, 0, 0), dbUser.ID, now.AddDate(-1, 0, 0), dbUser.ID, now.AddDate(-1, 0, 0)).Scan(&dailyCounts)
 		dailyMap := map[string]int{}
 		for _, c := range dailyCounts {
 			dailyMap[c.Period] = c.Count
@@ -242,7 +242,7 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 			for id := range repoIDs {
 				ids = append(ids, id)
 			}
-			if err := db.Table("repositories").Select("id, name_with_owner").Where("id IN ?", ids).Scan(&repos).Error; err != nil {
+			if err := db.Table("repositories").Select("id, name").Where("id IN ?", ids).Scan(&repos).Error; err != nil {
 				log.Printf("[Contributor Handler] DB error fetching repositories for user %s: %v", dbUser.ID, err)
 			}
 			for _, r := range repos {
@@ -264,12 +264,13 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 				}
 				return ""
 			}(),
-			WebsiteUrl:        dbUser.WebsiteUrl,
-			TwitterUsername:   dbUser.TwitterUsername,
-			TotalStars:        dbUser.TotalStars,
-			TotalRepos:        dbUser.TotalRepos,
-			Followers:         dbUser.Followers,
-			Following:         dbUser.Following,
+			WebsiteUrl:      dbUser.WebsiteUrl,
+			TwitterUsername: dbUser.TwitterUsername,
+			TotalStars:      dbUser.TotalStars,
+			TotalRepos:      dbUser.TotalRepos,
+			Followers:       dbUser.Followers,
+			Following:       dbUser.Following,
+
 			TotalCommits:      int(totalCommits),
 			TotalPullRequests: int(totalPRs),
 			TotalIssues:       int(totalIssues),
