@@ -31,3 +31,12 @@ jobs:
       run: |
           docker push ghcr.io/${{ github.repository_owner }}/gnolove-server:${{ steps.vars.outputs.tag }}
           docker push ghcr.io/${{ github.repository_owner }}/gnolove-server:latest
+
+
+    - name: Trigger deploy repo
+      uses: peter-evans/repository-dispatch@v3
+      with:
+        token: ${{ secrets.REPO_DEPLOY_PAT }}
+        repository: TERITORI/full-nodes-infra
+        event-type: deploy-image
+        # client-payload: '{"image": "ghcr.io/tonuser/gnolove-server:latest"}'
