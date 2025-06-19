@@ -3,8 +3,6 @@ import { Box, Flex, Text, Tooltip } from '@radix-ui/themes';
 type HeatmapDay = {
   date: string;
   contributions: number;
-  day: number;
-  week: number;
 };
 
 const getContributionLevel = (contributions: number) => {
@@ -68,19 +66,6 @@ const ContributionSquare = ({ level, date, count }: { level: number; date: Date;
 };
 
 const ContributionsHeatmap = ({ data }: { data: HeatmapDay[] }) => {
-
-  // Group data by weeks
-  const weeks: any[] = [];
-  let currentWeek: any[] = [];
-
-  data.forEach((day: any, index: number) => {
-    currentWeek.push(day);
-    if (currentWeek.length === 7 || index === data.length - 1) {
-      weeks.push([...currentWeek]);
-      currentWeek = [];
-    }
-  });
-
   return (
     <Flex direction="column" gap='4' py='2' overflowX="auto">
       {/* Graph grid */}

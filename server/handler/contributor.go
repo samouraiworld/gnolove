@@ -311,39 +311,42 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 		if len(repoIDs) > 0 {
 			var repos []struct {
 				ID            string
+				Name          string
+				Owner         string
 				NameWithOwner string
 			}
 			var ids []string
 			for id := range repoIDs {
 				ids = append(ids, id)
 			}
-			if err := db.Table("repositories").Select("id, name").Where("id IN ?", ids).Scan(&repos).Error; err != nil {
+			if err := db.Table("repositories").Select("id, name, owner").Where("id IN ?", ids).Scan(&repos).Error; err != nil {
 				log.Printf("[Contributor Handler] DB error fetching repositories for user %s: %v", q.User.ID, err)
 			}
-			for _, r := range repos {
-				repoNames[r.ID] = r.NameWithOwner
+			for i, r := range repos {
+				repos[i].NameWithOwner = r.Owner + "/" + r.Name
+				repoNames[r.ID] = repos[i].NameWithOwner
 			}
 		}
 
 		resp = githubUserResponse{
 			ContributionsPerDay: contributionsPerDay,
-			ID:                q.User.ID,
-			Login:             q.User.Login,
-			AvatarUrl:         q.User.AvatarUrl,
-			URL:               q.User.URL,
-			Name:              q.User.Name,
-			Bio:               q.User.Bio,
-			Location:          q.User.Location,
-			JoinDate:          q.User.CreatedAt.String(),
-			WebsiteUrl:        q.User.WebsiteUrl,
-			TwitterUsername:   q.User.TwitterUsername,
-			TotalStars:        q.User.StarredRepositories.TotalCount,
-			TotalRepos:        q.User.Repositories.TotalCount,
-			Followers:         q.User.Followers.TotalCount,
-			Following:         q.User.Following.TotalCount,
-			TotalCommits:      int(totalCommits),
-			TotalPullRequests: int(totalPRs),
-			TotalIssues:       int(totalIssues),
+			ID:                  q.User.ID,
+			Login:               q.User.Login,
+			AvatarUrl:           q.User.AvatarUrl,
+			URL:                 q.User.URL,
+			Name:                q.User.Name,
+			Bio:                 q.User.Bio,
+			Location:            q.User.Location,
+			JoinDate:            q.User.CreatedAt.String(),
+			WebsiteUrl:          q.User.WebsiteUrl,
+			TwitterUsername:     q.User.TwitterUsername,
+			TotalStars:          q.User.StarredRepositories.TotalCount,
+			TotalRepos:          q.User.Repositories.TotalCount,
+			Followers:           q.User.Followers.TotalCount,
+			Following:           q.User.Following.TotalCount,
+			TotalCommits:        int(totalCommits),
+			TotalPullRequests:   int(totalPRs),
+			TotalIssues:         int(totalIssues),
 			RecentIssues: func() []recentActivity {
 				var out []recentActivity
 				for _, n := range recentIssues {

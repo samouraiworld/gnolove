@@ -78,8 +78,6 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
     ? contributor.contributionsPerDay.map((day: TTimeCount) => ({
       date: day.period,
       contributions: day.count,
-      day: new Date(day.period).getDay(),
-      week: Math.floor((new Date(day.period).getTime() - (new Date().setFullYear(new Date().getFullYear() - 1))) / (7 * 24 * 60 * 60 * 1000)),
     }))
     : [];
 
