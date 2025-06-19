@@ -1,6 +1,6 @@
 'use client';
 
-import { TContributor, TContributorRepository, TTimeCount } from '@/utils/schemas';
+import { TContributor, TContributorRepository, TTimeCount, TTopContributedRepo } from '@/utils/schemas';
 import { Box, Flex, Grid, Card, Text, Heading } from '@radix-ui/themes';
 import { Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis, TooltipProps } from 'recharts';
 import ContributionsHeatmap from './contributions-heatmap';
@@ -35,12 +35,9 @@ const CustomTooltip = ({ active, payload, label }: TooltipProps<number, string>)
 };
 
 const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) => {
-  const repositoryData = (contributor.topRepositories || []).map((repo: TContributorRepository, idx: number) => ({
-    name: repo.nameWithOwner,
-    contributions: repo.stargazerCount || 0,
-    color: [
-      '#8884d8', '#82ca9d', '#ffc658', '#ff7300', '#00ff88', '#00ADD8', '#7C3AED', '#F7DF1E', '#3178C6'
-    ][idx % 9],
+  const repositoryData = (contributor.topContributedRepositories || []).map(({ id, contributions }: TTopContributedRepo) => ({
+    name: id,
+    contributions,
   }));
 
   const contributionTypeData = [
@@ -73,7 +70,6 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
     color: languageColorMap[name] || '#8884d8',
   }));
 
-  // Use real daily contributions if available (to be implemented in backend)
   const heatmapData = Array.isArray(contributor.contributionsPerDay)
     ? contributor.contributionsPerDay.map((day: TTimeCount) => ({
       date: day.period,
@@ -97,37 +93,34 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
         {/* Charts Grid */}
         <Grid columns={{ initial: '1', lg: '2' }} gap='4'>
           {/* Repository Contributions Bar Chart */}
-          <Card>
-            <Flex direction='column' gap='3'>
-              <Heading size='3'>Contributions by Repository</Heading>
-              <Box height='300px'>
-                <ResponsiveContainer width='100%' height='100%'>
-                  <BarChart
-                    data={(contributor.topRepositories && contributor.topRepositories.length > 0) ? contributor.topRepositories.map(repo => ({
-                      name: repo.nameWithOwner,
-                      contributions: repo.stargazerCount,
-                      color: '#8884d8',
-                    })) : repositoryData}
-                    margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
-                  >
-                    <CartesianGrid strokeDasharray='3 3' stroke='var(--gray-6)' />
-                    <XAxis
-                      dataKey='name'
-                      angle={-45}
-                      textAnchor='end'
-                      height={80}
-                      fontSize={12}
-                      stroke='var(--gray-11)'
-                    />
-                    <YAxis fontSize={12} stroke='var(--gray-11)' />
-                    <Tooltip content={<CustomTooltip />} />
-                    <Bar dataKey='contributions' fill='var(--accent-9)' radius={[4, 4, 0, 0]} />
-                  </BarChart>
-                </ResponsiveContainer>
-              </Box>
-            </Flex>
-          </Card>
-
+          {repositoryData.length > 0 && (
+            <Card>
+              <Flex direction='column' gap='3'>
+                <Heading size='3'>Contributions by Repository</Heading>
+                <Box height='300px'>
+                  <ResponsiveContainer width='100%' height='100%'>
+                    <BarChart
+                      data={repositoryData}
+                      margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
+                    >
+                      <CartesianGrid strokeDasharray='3 3' stroke='var(--gray-6)' />
+                      <XAxis
+                        dataKey='name'
+                        angle={-45}
+                        textAnchor='end'
+                        height={80}
+                        fontSize={12}
+                        stroke='var(--gray-11)'
+                      />
+                      <YAxis fontSize={12} stroke='var(--gray-11)' />
+                      <Tooltip content={<CustomTooltip />} />
+                      <Bar dataKey='contributions' fill='var(--accent-9)' radius={[4, 4, 0, 0]} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </Box>
+              </Flex>
+            </Card>
+          )}
           {/* Contribution Types Donut Chart */}
           <Card>
             <Flex direction='column' gap='3'>
@@ -193,12 +186,7 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
               <Box style={{ height: '300px' }}>
                 <ResponsiveContainer width='100%' height='100%'>
                   <BarChart
-                    data={contributor.commitsPerMonth.map((item, i) => ({
-                      month: item.period,
-                      commits: item.count,
-                      prs: contributor.pullRequestsPerMonth[i]?.count || 0,
-                      issues: contributor.issuesPerMonth[i]?.count || 0,
-                    }))}
+                    data={contributionTypeData}
                     margin={{ top: 20, right: 30, left: -30, bottom: 5 }}
                   >
                     <CartesianGrid strokeDasharray='3 3' stroke='var(--gray-6)' />
