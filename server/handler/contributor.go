@@ -236,17 +236,20 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 		if len(repoIDs) > 0 {
 			var repos []struct {
 				ID            string
+				Name          string
+				Owner         string
 				NameWithOwner string
 			}
 			var ids []string
 			for id := range repoIDs {
 				ids = append(ids, id)
 			}
-			if err := db.Table("repositories").Select("id, name").Where("id IN ?", ids).Scan(&repos).Error; err != nil {
+			if err := db.Table("repositories").Select("id, name, owner").Where("id IN ?", ids).Scan(&repos).Error; err != nil {
 				log.Printf("[Contributor Handler] DB error fetching repositories for user %s: %v", dbUser.ID, err)
 			}
-			for _, r := range repos {
-				repoNames[r.ID] = r.NameWithOwner
+			for i, r := range repos {
+				repos[i].NameWithOwner = r.Owner + "/" + r.Name
+				repoNames[r.ID] = repos[i].NameWithOwner
 			}
 		}
 
