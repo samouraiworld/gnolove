@@ -30,7 +30,7 @@ const MilestoneListItem = ({ issue }: { issue: TIssue }) => {
         <Flex align='start' justify='between' mb='3'>
           <Box>
             <Flex align='center' gap='2' mb='2'>
-              <Link href={issue.url} target='_blank'>
+              <Link href={issue.url} target='_blank' rel='noopener noreferrer'>
                 <Text size='2' color='gray'>
                   #{issue.number}
                 </Text>
@@ -39,7 +39,7 @@ const MilestoneListItem = ({ issue }: { issue: TIssue }) => {
                 {issue.state}
               </Badge>
             </Flex>
-            <Link href={issue.url} target='_blank'>
+            <Link href={issue.url} target='_blank' rel='noopener noreferrer'>
               <Text size='3' weight='medium'>
                 {issue.title}
               </Text>
@@ -67,12 +67,14 @@ const MilestoneListItem = ({ issue }: { issue: TIssue }) => {
                 {issue.author?.login}
               </Text>
             </Flex>
-            <Flex align='center' gap='1'>
-              <CalendarIcon width='12' height='12' color='gray' />
-              <Text size='1' color='gray'>
-                {formatDistanceToNow(issue.createdAt, { addSuffix: true })}
-              </Text>
-            </Flex>
+            {issue.createdAt && (
+              <Flex align='center' gap='1'>
+                <CalendarIcon width='12' height='12' color='gray' />
+                <Text size='1' color='gray'>
+                  {formatDistanceToNow(issue.createdAt, { addSuffix: true })}
+                </Text>
+              </Flex>
+            )}
           </Flex>
           {assignees.length > 0 && (
             <Flex gap='1' wrap='wrap' align='center'>
