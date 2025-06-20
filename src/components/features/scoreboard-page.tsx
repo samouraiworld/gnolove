@@ -5,7 +5,7 @@ import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import NextLink from 'next/link';
 
-import { Flex, Grid, Heading, Spinner, Text } from '@radix-ui/themes';
+import { Box, Flex, Grid, Heading, Spinner, Text } from '@radix-ui/themes';
 
 import MilestoneProgress from '@/feature/milestone-progress';
 import Scoreboard from '@/feature/scoreboard';
@@ -88,7 +88,13 @@ const ScoreboardPage = ({
 
   return (
     <LayoutContainer>
-      <Image src={HeaderImage} alt="Header Image" className="rounded-3" />
+      <Box>
+        <Image
+          src={HeaderImage}
+          alt="Minecraft heart on top of the words 'Gnolove Community Leaderboard'"
+          className="min-h-[200px] h-full w-full object-cover"
+        />
+      </Box>
 
       {milestone && (
         <NextLink href="/milestone">
@@ -96,27 +102,32 @@ const ScoreboardPage = ({
         </NextLink>
       )}
 
-      <Grid columns="3" rows="auto auto" gap="4">
-        <Text weight="bold" size="6" mt="6" asChild>
-          <NextLink
-            href={`https://github.com/${REPOSITORY.owner}/${REPOSITORY.repository}/labels/help%20wanted`}
-            target="_blank"
-          >
-            👋 Help Wanted!
-          </NextLink>
-        </Text>
+      <Grid columns={{ initial: '1', md: '3' }} gap="4">
+        <Flex direction="column" gap="4">
+          <Heading as="h2" weight="bold" size="6" mt="6" asChild>
+            <NextLink
+              href={`https://github.com/${REPOSITORY.owner}/${REPOSITORY.repository}/labels/help%20wanted`}
+              target="_blank"
+            >
+              👋 Help Wanted!
+            </NextLink>
+          </Heading>
+          <IssuesTable issues={issues ?? []} showLabels="on-hover" />
+        </Flex>
 
-        <Text weight="bold" size="6" mt="6">
-          ✔️ Freshly Merged
-        </Text>
+        <Flex direction="column" gap="4">
+          <Heading as="h2" weight="bold" size="6" mt="6">
+            ✔️ Freshly Merged
+          </Heading>
+          <PrsTable prs={lastMRs} />
+        </Flex>
 
-        <Text weight="bold" size="6" mt="6">
-          ⭐ New Rising gnome
-        </Text>
-
-        <IssuesTable issues={issues ?? []} showLabels="on-hover" />
-        <PrsTable prs={lastMRs} />
-        <UserTable users={newContributors ?? []} />
+        <Flex direction="column" gap="4">
+          <Heading as="h2" weight="bold" size="6" mt="6">
+            ⭐ New Rising gnome
+          </Heading>
+          <UserTable users={newContributors ?? []} />
+        </Flex>
       </Grid>
 
       <Flex justify="center" align="center" mt="6">

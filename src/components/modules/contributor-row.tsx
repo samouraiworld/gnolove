@@ -3,6 +3,7 @@
 import { useMemo } from 'react';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { ExternalLinkIcon, MagnifyingGlassIcon, StarFilledIcon } from '@radix-ui/react-icons';
 import { Badge, Flex, IconButton, Table, Text } from '@radix-ui/themes';
@@ -15,7 +16,7 @@ import { TEnhancedUserWithStatsAndScore } from '@/util/schemas';
 import { cn } from '@/util/style';
 
 import TEAMS from '@/constant/teams';
-import Link from 'next/link';
+import Cell from '@/components/elements/cell';
 
 export interface ContributorRowProps {
   contributor: TEnhancedUserWithStatsAndScore;
@@ -51,15 +52,15 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
   return (
     <Table.Row className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-grayA-2" key={contributor.id}>
       {showRank && (
-        <Table.Cell className="text-center">
+        <Cell className="text-center">
           <Flex height="100%" align="center" justify="center">
             {rankElement}
           </Flex>
-        </Table.Cell>
+        </Cell>
       )}
 
-      <Table.Cell>
-        <Flex width="100%" height="100%" align="center" gap="2">
+      <Cell>
+        <Flex width="100%" height="100%" align="center" gap="2" className="min-w-0">
           <Image
             src={contributor.avatarUrl}
             alt={`${contributor.login} avatar url`}
@@ -68,22 +69,24 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
             className="shrink-0 overflow-hidden rounded-full"
           />
 
-          <Link href={`/@${contributor.login}`}>
-            <Text className="whitespace-break-spaces text-wrap">{contributor.name ?? contributor.login}</Text>
+          <Link href={`/@${contributor.login}`} className="min-w-0 max-w-[160px]">
+            <Text truncate className="block overflow-hidden text-ellipsis whitespace-nowrap">
+              {contributor.name ?? contributor.login}
+            </Text>
           </Link>
 
           {team && (
-            <Badge color={team.color} size="1">
+            <Badge color={team.color} size="1" className="hidden xs:inline">
               {team.name}
             </Badge>
           )}
 
           <ExternalLinkIcon className="shrink-0 text-blue-10" />
         </Flex>
-      </Table.Cell>
+      </Cell>
 
       {contributor.LastContribution && 'title' in contributor.LastContribution ? (
-        <Table.Cell onClick={onLastContributionClick} className="group hidden text-left lg:table-cell">
+        <Cell onClick={onLastContributionClick} className="group hidden text-left lg:table-cell">
           <Flex width="100%" height="100%" align="center" gap="2" className="text-1">
             <Flex direction="column">
               <Flex align="center" gap="1">
@@ -101,24 +104,22 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
               </Text>
             </Flex>
           </Flex>
-        </Table.Cell>
+        </Cell>
       ) : (
-        <Table.Cell className="hidden text-left lg:table-cell">
+        <Cell className="hidden text-left lg:table-cell">
           <Text color="gray">-</Text>
-        </Table.Cell>
+        </Cell>
       )}
 
-      <Table.Cell className="hidden text-center align-middle sm:table-cell">
-        {contributor.TotalCommits}
-      </Table.Cell>
+      <Cell className="hidden text-center align-middle sm:table-cell">{contributor.TotalCommits}</Cell>
 
-      <Table.Cell className="hidden text-center align-middle sm:table-cell">{contributor.TotalIssues}</Table.Cell>
+      <Cell className="hidden text-center align-middle sm:table-cell">{contributor.TotalIssues}</Cell>
 
-      <Table.Cell className="hidden text-center align-middle sm:table-cell">{contributor.TotalPrs}</Table.Cell>
+      <Cell className="hidden text-center align-middle sm:table-cell">{contributor.TotalPrs}</Cell>
 
-      <Table.Cell className="text-center align-middle font-bold">{contributor.score.toFixed(2)}</Table.Cell>
+      <Cell className="text-center align-middle font-bold">{contributor.score.toFixed(2)}</Cell>
 
-      <Table.Cell className="text-center">
+      <Cell className="text-center">
         <Flex height="100%" align="center" justify="center">
           <ContributionsDialog user={contributor}>
             <IconButton variant="ghost">
@@ -126,7 +127,7 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
             </IconButton>
           </ContributionsDialog>
         </Flex>
-      </Table.Cell>
+      </Cell>
     </Table.Row>
   );
 };

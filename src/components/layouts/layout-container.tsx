@@ -6,7 +6,7 @@ import { cn } from '@/util/style';
 
 const LayoutContainer = ({ className, ...props }: FlexProps) => {
   return (
-    <Flex className="h-screen w-screen" asChild>
+    <Flex className="h-screen w-screen" pt={{ initial: '8', sm: '4', lg: '0' }} asChild>
       <ScrollArea>
         <Flex
           p={{ initial: '2', sm: '4', lg: '7' }}
