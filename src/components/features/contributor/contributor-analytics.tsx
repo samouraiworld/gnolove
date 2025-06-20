@@ -153,11 +153,7 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
                 <ResponsiveContainer width='100%' height='100%'>
                   <PieChart>
                     <Pie
-                      data={[
-                        { name: 'Commits', value: contributor.totalCommits, color: '#8884d8' },
-                        { name: 'Pull Requests', value: contributor.totalPullRequests, color: '#82ca9d' },
-                        { name: 'Issues', value: contributor.totalIssues, color: '#ffc658' },
-                      ]}
+                      data={contributionTypeData}
                       cx='50%'
                       cy='50%'
                       innerRadius={60}
