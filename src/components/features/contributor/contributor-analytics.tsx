@@ -220,6 +220,7 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
                     <Bar dataKey='commits' fill='#8884d8' name='Commits' radius={[4, 4, 0, 0]} />
                     <Bar dataKey='prs' fill='#82ca9d' name='PRs' radius={[4, 4, 0, 0]} />
                     <Bar dataKey='issues' fill='#ffc658' name='Issues' radius={[4, 4, 0, 0]} />
+                    <Legend verticalAlign='bottom' height={36} wrapperStyle={{ fontSize: '12px' }} />
                   </BarChart>
                 </ResponsiveContainer>
               </Box>
