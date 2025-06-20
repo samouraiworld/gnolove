@@ -49,7 +49,7 @@ const getIssueStateColor = (state: string): BadgeProps['color'] => {
 };
 
 const getSafeLabelColor = (color: string): BadgeProps['color'] => {
-  return VALID_COLORS.includes(color as BadgeProps['color']) ? color as BadgeProps['color'] : 'gray';
+  return VALID_COLORS.includes(color as BadgeProps['color']) ? (color as BadgeProps['color']) : 'gray';
 };
 
 const MilestoneListItem = ({ issue }: { issue: TIssue }) => {
@@ -85,7 +85,7 @@ const MilestoneListItem = ({ issue }: { issue: TIssue }) => {
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
                 whiteSpace: 'normal',
-                maxHeight: '2.8em',  
+                maxHeight: '2.8em',
               }}
             >
               {issue.title}
@@ -102,8 +102,8 @@ const MilestoneListItem = ({ issue }: { issue: TIssue }) => {
                     {label.name}
                   </Badge>
                 ))}
-            {/* Ellipsis fade for overflow indication */}
-            {labels.length > 5 && (
+                {/* Ellipsis fade for overflow indication */}
+                {labels.length > 5 && (
                   <Box
                     display="block"
                     position="absolute"
