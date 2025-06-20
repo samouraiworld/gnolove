@@ -25,41 +25,89 @@ const MilestoneListItem = ({ issue }: { issue: TIssue }) => {
   const assignees = useMemo(() => deduplicateByKey(issue.assignees, assignee => assignee.user.id), [issue.assignees]);
 
   return (
-    <Card size='2' variant='surface'>
-      <Box>
-        <Flex align='start' justify='between' mb='3'>
-          <Box>
-            <Flex align='center' gap='2' mb='2'>
-              <Link href={issue.url} target='_blank' rel='noopener noreferrer'>
-                <Text size='2' color='gray'>
-                  #{issue.number}
-                </Text>
-              </Link>
-              <Badge size='1' color={getIssueStateColor(issue.state)} variant='soft'>
-                {issue.state}
-              </Badge>
-            </Flex>
+    <Card size='2' variant='surface' style={{ minHeight: 220 }}>
+      <Flex direction='column' height='100%' justify='between'>
+        <Flex align='center' justify='between'>
+          <Flex align='center' gap='2'>
             <Link href={issue.url} target='_blank' rel='noopener noreferrer'>
-              <Text size='3' weight='medium'>
-                {issue.title}
+              <Text size='2' color='gray'>
+                #{issue.number}
               </Text>
             </Link>
-          </Box>
+            <Badge size='1' color={getIssueStateColor(issue.state)} variant='soft'>
+              {issue.state}
+            </Badge>
+          </Flex>
         </Flex>
 
+        <Link href={issue.url} target='_blank' rel='noopener noreferrer'>
+          <Text
+            size='4'
+            weight='bold'
+            as='div'
+            style={{
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'normal',
+              maxHeight: '2.8em'
+            }}
+          >
+            {issue.title}
+          </Text>
+        </Link>
+
         {labels.length > 0 && (
-          <Flex gap='1' mb='3' wrap='wrap'>
+          <Flex
+            gap='1'
+            wrap='wrap'
+            maxHeight='72px'
+            overflow='hidden'
+            position='relative'
+          >
             {labels.map((label, index) => (
               <Badge key={index} size='1' color={getSafeLabelColor(label.color)} variant='soft'>
                 {label.name}
               </Badge>
             ))}
+            {/* Ellipsis fade for overflow indication */}
+            {labels.length > 0 && (
+              <Box
+                display='block'
+                position='absolute'
+                bottom='0'
+                left='0'
+                width='100%'
+                height='24px'
+                style={{
+                  pointerEvents: 'none',
+                  background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, #fff 90%)',
+                  zIndex: '1',
+                  opacity: labels.length > 12 ? 1 : 0
+                }}
+              />
+            )}
           </Flex>
         )}
 
-        <Separator size='4' mb='3' />
+        {assignees.length > 0 && (
+          <Flex gap='1' wrap='wrap' align='center'>
+            <Text size='2' color='gray'>
+              Assignees:
+            </Text>
+            {assignees.map(({ user }) => (
+              <Tooltip content={user.login} key={user.id}>
+                <Link href={user.url} target='_blank' rel='noopener noreferrer'>
+                  <Avatar size='1' src={user.avatarUrl} fallback={<PersonIcon />} />
+                </Link>
+              </Tooltip>
+            ))}
+          </Flex>
+        )}
 
-        <Flex direction='column' gap='4'>
+        <Box>
+          <Separator size='4' mb='3' />
           <Flex align='center' justify='between'>
             <Flex align='center' gap='2'>
               <Avatar size='1' src={issue.author?.avatarUrl} fallback={<PersonIcon />} />
@@ -76,20 +124,8 @@ const MilestoneListItem = ({ issue }: { issue: TIssue }) => {
               </Flex>
             )}
           </Flex>
-          {assignees.length > 0 && (
-            <Flex gap='1' wrap='wrap' align='center'>
-              <Text size='2' color='gray'>
-                Assignees:
-              </Text>
-              {assignees.map(({ user }) => (
-                <Tooltip content={user.login} key={user.id}>
-                  <Avatar size='1' src={user.avatarUrl} fallback={<PersonIcon />} />
-                </Tooltip>
-              ))}
-            </Flex>
-          )}
-        </Flex>
-      </Box>
+        </Box>
+      </Flex>
     </Card>
   );
 };
