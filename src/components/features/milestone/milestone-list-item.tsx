@@ -2,6 +2,8 @@ import { CalendarIcon, PersonIcon } from '@radix-ui/react-icons';
 import { Avatar, Badge, BadgeProps, Box, Card, Flex, Link, Separator, Text, Tooltip } from '@radix-ui/themes';
 import { formatDistanceToNow } from 'date-fns';
 import { TIssue } from '@/util/schemas';
+import { useMemo } from 'react';
+import { deduplicateByKey } from '@/utils/array';
 
 const VALID_COLORS: BadgeProps['color'][] = ['gray', 'gold', 'bronze', 'brown', 'yellow', 'amber', 'orange', 'tomato', 'red', 'ruby', 'crimson', 'pink', 'plum', 'purple', 'violet', 'iris', 'indigo', 'blue', 'cyan', 'teal', 'jade', 'green', 'grass', 'lime', 'mint', 'sky'];
 
@@ -18,6 +20,10 @@ const getSafeLabelColor = (color: string): BadgeProps['color'] => {
 };
 
 const MilestoneListItem = ({ issue }: { issue: TIssue }) => {
+  const labels = useMemo(() => deduplicateByKey(issue.labels, label => label.name), [issue.labels]);
+
+  const assignees = useMemo(() => deduplicateByKey(issue.assignees, assignee => assignee.user.id), [issue.assignees]);
+
   return (
     <Card size='2' variant='surface'>
       <Box>
@@ -41,9 +47,9 @@ const MilestoneListItem = ({ issue }: { issue: TIssue }) => {
           </Box>
         </Flex>
 
-        {issue.labels.length > 0 && (
+        {labels.length > 0 && (
           <Flex gap='1' mb='3' wrap='wrap'>
-            {issue.labels.map((label, index) => (
+            {labels.map((label, index) => (
               <Badge key={index} size='1' color={getSafeLabelColor(label.color)} variant='soft'>
                 {label.name}
               </Badge>
@@ -68,12 +74,12 @@ const MilestoneListItem = ({ issue }: { issue: TIssue }) => {
               </Text>
             </Flex>
           </Flex>
-          {issue.assignees.length > 0 && (
+          {assignees.length > 0 && (
             <Flex gap='1' wrap='wrap' align='center'>
               <Text size='2' color='gray'>
                 Assignees:
               </Text>
-              {issue.assignees.map(({ user }) => (
+              {assignees.map(({ user }) => (
                 <Tooltip content={user.login} key={user.id}>
                   <Avatar size='1' src={user.avatarUrl} fallback={<PersonIcon />} />
                 </Tooltip>
