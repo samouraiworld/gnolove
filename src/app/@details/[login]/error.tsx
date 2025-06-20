@@ -3,7 +3,7 @@
 import { Dialog, Button, IconButton, Flex } from '@radix-ui/themes';
 import { X } from 'lucide-react';
 
-const ErrorPage = ({ error, reset }: { error: Error & { digest?: string }, reset: () => void }) => {
+const ErrorPage = ({ reset }: { reset: () => void }) => {
   return (
     <Flex direction='column'>
       <Flex justify='between'>
@@ -15,14 +15,14 @@ const ErrorPage = ({ error, reset }: { error: Error & { digest?: string }, reset
         </Dialog.Close>
       </Flex>
       <Dialog.Description>
-        {error?.message || 'Unknown error occurred.'}
+        We&apos;re sorry, but an unexpected error occurred. Please try again later.
       </Dialog.Description>
       <Button
         onClick={reset}
         mt="2"
         style={{ width: '200px' }}
       >
-        Retry
+        Try again
       </Button>
     </Flex>
   );
