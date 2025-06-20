@@ -25,20 +25,22 @@ const ContributorContent = ({ login }: { login: string }) => {
   };
 
   return (
-    <Flex direction='column' height='100%' overflow='hidden'>
+    <Flex direction='column' height='100%' overflow={{ md: 'hidden' }}>
       <Flex
         justify='between'
         align='center'
         mb='4'
       >
-        <Flex align='center' gap='2'>
+        <Flex direction={{ initial: 'column', md: 'row' }} align={{ initial: 'start', md: 'center' }} gap='2'>
           <Dialog.Title mb='0'>{contributor.name ?? contributor.login}</Dialog.Title>
-          <Badge color='gray' variant='soft' size='1'>
-            gnolove.world/@{contributor.login}
-          </Badge>
-          <Button variant='outline' size='1' onClick={handleCopy}>
-            {loginCopied ? (<Check size={12} />) : (<Copy size={12} />)}
-          </Button>
+          <Flex gap='1' align='center'>
+            <Badge color='gray' variant='soft' size='1'>
+              gnolove.world/@{contributor.login}
+            </Badge>
+            <Button variant='outline' size='1' onClick={handleCopy}>
+              {loginCopied ? (<Check size={12} />) : (<Copy size={12} />)}
+            </Button>
+          </Flex>
         </Flex>
         <Dialog.Close>
           <IconButton variant='ghost' color='gray'>
@@ -49,19 +51,20 @@ const ContributorContent = ({ login }: { login: string }) => {
 
       <Grid
         columns={{ initial: '1', md: '3' }}
-        gap='6'
-        style={{ flex: 1, minHeight: 0 }}
+        gap={{ initial: '0', md: '6' }}
+        minHeight={{ md: '0' }}
+        style={{ flex: 1 }}
       >
         {/* Left Column - Profile Info */}
-        <Box style={{ minHeight: 0 }}>
+        <Box minHeight={{ md: '0' }}>
           <ContributorProfile contributor={contributor} />
         </Box>
 
         {/* Right Column - Activity & Contributions */}
-        <Box style={{ gridColumn: 'span 2', minHeight: 0 }}>
+        <Box gridColumn='span 2' minHeight={{ md: '0' }}>
           <Flex direction='column' gap='4' height='100%'>
             {/* Metrics */}
-            <Grid columns='4' gap='4'>
+            <Grid columns={{ initial: '2', md: '4' }} mt={{ initial: '4', md: '0' }} gap='4'>
               <Card>
                 <Flex direction='column' align='center' gap='2' p='3'>
                   <Heading size='6'>{contributor.totalCommits}</Heading>
@@ -121,7 +124,7 @@ const ContributorContent = ({ login }: { login: string }) => {
                   <Tabs.Trigger value='contributions'>Contributions</Tabs.Trigger>
                 </Tabs.List>
 
-                <Box minHeight='0'>
+                <Box minHeight={{ md: '0' }}>
                   <Tabs.Content value='analytics' style={{ height: '100%'}}>
                     <ContributorAnalytics contributor={contributor} />
                   </Tabs.Content>
