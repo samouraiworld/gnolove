@@ -4,6 +4,7 @@ import { TContributor, TContributorRepository, TTimeCount, TTopContributedRepo }
 import { Box, Flex, Grid, Card, Text, Heading } from '@radix-ui/themes';
 import { Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis, TooltipProps } from 'recharts';
 import ContributionsHeatmap from './contributions-heatmap';
+import { useMemo } from 'react';
 
 const CustomTooltip = ({ active, payload, label }: TooltipProps<number, string>) => {
   if (active && payload && payload.length) {
@@ -35,29 +36,30 @@ const CustomTooltip = ({ active, payload, label }: TooltipProps<number, string>)
 };
 
 const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) => {
-  // Merge monthly data from commits, PRs, and issues into one array by period
-  const commits = contributor.commitsPerMonth || [];
-  const prs = contributor.pullRequestsPerMonth || [];
-  const issues = contributor.issuesPerMonth || [];
-
-  // Create a map of period -> { commits, prs, issues }
-  const monthlyMap: Record<string, { commits: number; prs: number; issues: number }> = {};
-  commits.forEach(({ period, count }) => {
-    if (!monthlyMap[period]) monthlyMap[period] = { commits: 0, prs: 0, issues: 0 };
-    monthlyMap[period].commits = count;
-  });
-  prs.forEach(({ period, count }) => {
-    if (!monthlyMap[period]) monthlyMap[period] = { commits: 0, prs: 0, issues: 0 };
-    monthlyMap[period].prs = count;
-  });
-  issues.forEach(({ period, count }) => {
-    if (!monthlyMap[period]) monthlyMap[period] = { commits: 0, prs: 0, issues: 0 };
-    monthlyMap[period].issues = count;
-  });
-  // Convert to array sorted by period ascending
-  const monthlyActivityData = Object.entries(monthlyMap)
-    .map(([period, vals]) => ({ period, ...vals }))
-    .sort((a, b) => a.period.localeCompare(b.period));
+  const monthlyActivityData = useMemo(() => {
+    // Merge monthly data from commits, PRs, and issues into one array by period
+    const commits = contributor.commitsPerMonth || [];
+    const prs = contributor.pullRequestsPerMonth || [];
+    const issues = contributor.issuesPerMonth || [];
+    // Create a map of period -> { commits, prs, issues }
+    const monthlyMap: Record<string, { commits: number; prs: number; issues: number }> = {};
+    commits.forEach(({ period, count }) => {
+      if (!monthlyMap[period]) monthlyMap[period] = { commits: 0, prs: 0, issues: 0 };
+      monthlyMap[period].commits = count;
+    });
+    prs.forEach(({ period, count }) => {
+      if (!monthlyMap[period]) monthlyMap[period] = { commits: 0, prs: 0, issues: 0 };
+      monthlyMap[period].prs = count;
+    });
+    issues.forEach(({ period, count }) => {
+      if (!monthlyMap[period]) monthlyMap[period] = { commits: 0, prs: 0, issues: 0 };
+      monthlyMap[period].issues = count;
+    });
+    // Convert to array sorted by period ascending
+    return Object.entries(monthlyMap)
+      .map(([period, vals]) => ({ period, ...vals }))
+      .sort((a, b) => a.period.localeCompare(b.period));
+  }, [contributor.commitsPerMonth, contributor.pullRequestsPerMonth, contributor.issuesPerMonth]);
 
   const repositoryData = (contributor.topContributedRepositories || []).map(({ id, contributions }: TTopContributedRepo) => ({
     name: id,
@@ -82,24 +84,28 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
     Other: '#8884d8',
   };
 
-  const languageCounts: Record<string, number> = {};
-  (contributor.topRepositories || []).forEach((repo: TContributorRepository) => {
-    const lang = repo.primaryLanguage || 'Other';
-    languageCounts[lang] = (languageCounts[lang] || 0) + 1;
-  });
-  const totalLang = Object.values(languageCounts).reduce((a, b) => a + b, 0) || 1;
-  const languageData = Object.entries(languageCounts).map(([name, count]) => ({
-    name,
-    value: Math.round((count / totalLang) * 100),
-    color: languageColorMap[name] || '#8884d8',
-  }));
+  const languageData = useMemo(() => {
+    const languageCounts: Record<string, number> = {};
+    (contributor.topRepositories || []).forEach((repo: TContributorRepository) => {
+      const lang = repo.primaryLanguage || 'Other';
+      languageCounts[lang] = (languageCounts[lang] || 0) + 1;
+    });
+    const totalLang = Object.values(languageCounts).reduce((a, b) => a + b, 0) || 1;
+    return Object.entries(languageCounts).map(([name, count]) => ({
+      name,
+      value: Math.round((count / totalLang) * 100),
+      color: languageColorMap[name] || '#8884d8',
+    }));
+  }, [contributor.topRepositories]);
 
-  const heatmapData = Array.isArray(contributor.contributionsPerDay)
-    ? contributor.contributionsPerDay.map((day: TTimeCount) => ({
-      date: day.period,
-      contributions: day.count,
-    }))
-    : [];
+  const heatmapData = useMemo(() => {
+    return Array.isArray(contributor.contributionsPerDay)
+      ? contributor.contributionsPerDay.map((day: TTimeCount) => ({
+        date: day.period,
+        contributions: day.count,
+      }))
+      : [];
+  }, [contributor.contributionsPerDay]);
 
   return (
     <Card style={{ height: '100%' }}>
