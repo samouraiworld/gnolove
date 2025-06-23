@@ -19,6 +19,8 @@ import { GithubLink } from '@/components/modules/github-link';
 import AdenaProvider from '@/contexts/adena-context';
 import QueryClientWrapper from '@/wrappers/query-client';
 
+import { Analytics } from '@vercel/analytics/next';
+
 interface RootLayoutProps {
   children?: ReactNode;
   details?: ReactNode;
@@ -94,6 +96,7 @@ const RootLayout = ({ children, details }: RootLayoutProps) => {
             </Theme>
           </ThemeProvider>
         </QueryClientWrapper>
+        <Analytics />
       </body>
     </html>
   );
