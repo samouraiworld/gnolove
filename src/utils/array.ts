@@ -20,3 +20,18 @@ export const isDefined = <T>(el: T | undefined | null): el is T => el !== undefi
 export const getIds = <T extends { id: string }>(arr: T[]): string[] => {
   return arr.map(({ id }) => id);
 };
+
+/**
+ * Deduplicate an array of objects by a specified key
+ * @param arr The array to deduplicate
+ * @param keyFn Function to extract the key from each item
+ */
+export function deduplicateByKey<T, K>(arr: T[], keyFn: (item: T) => K): T[] {
+  const seen = new Set<K>();
+  return arr.filter(item => {
+    const key = keyFn(item);
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
