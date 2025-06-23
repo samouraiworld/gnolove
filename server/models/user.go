@@ -1,5 +1,7 @@
 package models
 
+import "time"
+
 type User struct {
 	Login     string `json:"login"`
 	ID        string `gorm:"primarykey" json:"id"`
@@ -7,6 +9,16 @@ type User struct {
 	URL       string `json:"URL"`
 	Name      string `json:"name"`
 	Wallet    string `json:"wallet"`
+
+	Bio             string    `json:"bio"`
+	Location        string    `json:"location"`
+	JoinDate        time.Time `json:"joinDate"`
+	WebsiteUrl      string    `json:"websiteUrl"`
+	TwitterUsername string    `json:"twitterUsername"`
+	TotalStars      int       `json:"totalStars"`
+	TotalRepos      int       `json:"totalRepos"`
+	Followers       int       `json:"followers"`
+	Following       int       `json:"following"`
 
 	Issues       []Issue       `gorm:"foreignKey:AuthorID" json:"issues"`
 	PullRequests []PullRequest `gorm:"foreignKey:AuthorID" json:"pullRequests"`
