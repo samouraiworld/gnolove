@@ -124,10 +124,8 @@ const AnalyticsRecentActivity = ({ contributors, startDate }: Props) => {
                   payload?: any[]
                 ) => {
                   // Use the date from the first payload entry
-                  if (payload && payload[0] && payload[0].payload) {
-                    return <Text size="2" weight="bold">{payload[0].payload.date}</Text>;
-                  }
-                  return null;
+                  const date = payload?.[0]?.payload?.date;
+                  return date ? <Text size="2" weight="bold">{date}</Text> : null;
                 }}
               />
             }

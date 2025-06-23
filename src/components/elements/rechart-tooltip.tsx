@@ -2,8 +2,8 @@ import React from 'react';
 import { Card, Box, Flex, Text } from '@radix-ui/themes';
 import type { TooltipProps } from 'recharts';
 
-// @TODO remove the any, any typing when recharts allows for better typing.
-interface RechartTooltipProps extends TooltipProps<any, any> {
+// @TODO remove the any typing when recharts allows for better typing. (unknown typing doesn't satisfy ValueType constraints)
+interface RechartTooltipProps extends TooltipProps<any, string | number> {
   /**
    * Optional custom render function for entries.
    * If not provided, will render name, value, and color.
