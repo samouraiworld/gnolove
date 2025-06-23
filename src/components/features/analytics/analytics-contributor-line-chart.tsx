@@ -2,7 +2,8 @@
 
 import { ReactElement, useMemo } from 'react';
 
-import { Avatar, Box, Card, Flex, Heading, Text } from '@radix-ui/themes';
+import { Avatar, Card, Heading } from '@radix-ui/themes';
+import RechartTooltip from '@/components/elements/rechart-tooltip';
 import { format, parseISO, compareAsc } from 'date-fns';
 import {
   LineChart,
@@ -13,9 +14,7 @@ import {
   ResponsiveContainer,
   Customized,
   CustomizedProps,
-  TooltipProps,
 } from 'recharts';
-import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 
 import { TEnhancedUserWithStats } from '@/utils/schemas';
 
@@ -116,32 +115,6 @@ const AnalyticsContributorLineChart = ({ contributors, type = 'commits' }: Props
     );
   };
 
-  const TooltipRenderer: React.FC<TooltipProps<ValueType, NameType>> = ({ payload, label }) => {
-    if (!payload?.length) return null;
-
-    return (
-      <Card>
-        <Box mb="2">
-          <Text size="2" weight="bold">
-            {label}
-          </Text>
-        </Box>
-        <Flex direction="column" gap="2">
-          {payload.map((entry: any, i: number) => (
-            <Flex key={i} gap="2">
-              <Text size="1" style={{ color: entry.color }}>
-                {entry.name}:
-              </Text>
-              <Text size="1" weight="bold" style={{ color: entry.color }}>
-                {entry.value}
-              </Text>
-            </Flex>
-          ))}
-        </Flex>
-      </Card>
-    );
-  };
-
   return (
     <Card className="h-[500px] w-full min-w-[350px] max-w-[650px] px-0">
       <Heading size="3" align="center">
@@ -151,7 +124,7 @@ const AnalyticsContributorLineChart = ({ contributors, type = 'commits' }: Props
         <LineChart data={data} margin={{ top: 20, right: 60, bottom: 20, left: 0 }}>
           <XAxis dataKey="date" tick={{ fontSize: 10 }} axisLine={false} tickLine={false} />
           <YAxis axisLine={false} tickLine={false} allowDecimals={false} tickFormatter={(v) => v.toFixed(0)} />
-          <Tooltip content={<TooltipRenderer />} />
+          <Tooltip content={<RechartTooltip />} />
           {contributorLogins.map((login, i) => (
             <Line
               key={login}

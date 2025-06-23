@@ -2,38 +2,12 @@
 
 import { TContributor, TContributorRepository, TTimeCount, TTopContributedRepo } from '@/utils/schemas';
 import { Box, Flex, Grid, Card, Text, Heading } from '@radix-ui/themes';
-import { Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis, TooltipProps } from 'recharts';
+import RechartTooltip from '@/components/elements/rechart-tooltip';
+import { Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import ContributionsHeatmap from './contributions-heatmap';
 import { useMemo } from 'react';
 
-const CustomTooltip = ({ active, payload, label }: TooltipProps<number, string>) => {
-  if (active && payload && payload.length) {
-    return (
-      <Flex
-        py='1'
-        px='2'
-        gap='1'
-        direction='column'
-        style={{
-          backgroundColor: 'var(--color-panel-solid)',
-          border: '1px solid var(--gray-6)',
-          borderRadius: '6px',
-          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-        }}
-      >
-        <Text size='2' weight='medium'>
-          {label}
-        </Text>
-        {(payload as { name: string; value: number; color?: string }[]).map((entry, index) => (
-          <Text key={index} size='1' style={{ color: entry.color }}>
-            {entry.name}: {entry.value}
-          </Text>
-        ))}
-      </Flex>
-    );
-  }
-  return null;
-};
+
 
 const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) => {
   const monthlyActivityData = useMemo(() => {
@@ -143,7 +117,7 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
                         stroke='var(--gray-11)'
                       />
                       <YAxis fontSize={12} stroke='var(--gray-11)' />
-                      <Tooltip content={<CustomTooltip />} />
+                      <Tooltip content={<RechartTooltip />} />
                       <Bar dataKey='contributions' fill='var(--accent-9)' radius={[4, 4, 0, 0]} />
                     </BarChart>
                   </ResponsiveContainer>
@@ -171,7 +145,7 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
                         <Cell key={`cell-${index}`} fill={entry.color} />
                       ))}
                     </Pie>
-                    <Tooltip content={<CustomTooltip />} />
+                    <Tooltip content={<RechartTooltip />} />
                     <Legend verticalAlign='bottom' height={36} wrapperStyle={{ fontSize: '12px' }} />
                   </PieChart>
                 </ResponsiveContainer>
@@ -197,7 +171,7 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
                         <Cell key={`cell-${index}`} fill={entry.color} />
                       ))}
                     </Pie>
-                    <Tooltip content={<CustomTooltip />} />
+                    <Tooltip content={<RechartTooltip />} />
                     <Legend verticalAlign='bottom' height={36} wrapperStyle={{ fontSize: '12px' }} />
                   </PieChart>
                 </ResponsiveContainer>
@@ -218,7 +192,7 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
                     <CartesianGrid strokeDasharray='3 3' stroke='var(--gray-6)' />
                     <XAxis dataKey='period' fontSize={12} stroke='var(--gray-11)' />
                     <YAxis fontSize={12} stroke='var(--gray-11)' />
-                    <Tooltip content={<CustomTooltip />} />
+                    <Tooltip content={<RechartTooltip />} />
                     <Bar dataKey='commits' fill='#8884d8' name='Commits' radius={[4, 4, 0, 0]} />
                     <Bar dataKey='prs' fill='#82ca9d' name='PRs' radius={[4, 4, 0, 0]} />
                     <Bar dataKey='issues' fill='#ffc658' name='Issues' radius={[4, 4, 0, 0]} />
