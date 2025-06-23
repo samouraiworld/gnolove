@@ -72,14 +72,16 @@ const RootLayout = ({ children, details }: RootLayoutProps) => {
                       </Flex>
 
                       <Flex gap="2" align="center" justify="end">
-                        <AdenaAddress />
+                        <Flex gap="2" align="center" hidden>
+                          <AdenaAddress />
 
-                        <GithubLink>
-                          <Button variant="soft">
-                            <LinkNone2Icon />
-                            Link Github Account
-                          </Button>
-                        </GithubLink>
+                          <GithubLink>
+                            <Button variant="soft">
+                              <LinkNone2Icon />
+                              Link Github Account
+                            </Button>
+                          </GithubLink>
+                        </Flex>
 
                         <ThemeSwitch />
                       </Flex>
