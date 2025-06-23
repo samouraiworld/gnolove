@@ -87,7 +87,7 @@ func (s *Syncer) StartSynchonizing() error {
 
 				err = s.syncCommits(repository)
 				if err != nil {
-					s.logger.Errorf("error while syncing Milestones %s", err.Error())
+					s.logger.Errorf("error while syncing commits %s", err.Error())
 				}
 			}
 			s.logger.Info("synchronization Finished...")
@@ -419,7 +419,6 @@ func (s *Syncer) syncCommits(repository models.Repository) error {
 
 	return nil
 }
-
 
 // syncUserDetails fetches and updates detailed GitHub data for all users
 func (s *Syncer) syncUserDetails() error {

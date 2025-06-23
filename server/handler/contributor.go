@@ -212,11 +212,6 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 			GnoBalance: "0",
 		}
 
-		// Guarantee TopRepositories is always an array
-		if resp.TopRepositories == nil {
-			resp.TopRepositories = []topRepository{}
-		}
-
 		w.Header().Set("Content-Type", "application/json")
 		if err := json.NewEncoder(w).Encode(resp); err != nil {
 			log.Printf("[Contributor Handler] Error encoding response for user %s: %v", login, err)
