@@ -20,6 +20,11 @@
   --viewport-padding: 25px;
 }
 
+.radix-panel-bg {
+  background-color: var(--accent-1);
+  color: var(--accent-12);
+}
+
 /* Animation */
 @keyframes slideInFromLeft {
   from {

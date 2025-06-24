@@ -1,10 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-import NextLink from 'next/link';
+import Link from 'next/link';
 
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
-import { Badge, Button, Dialog, Flex, IconButton } from '@radix-ui/themes';
+import { Button, Flex, IconButton, Badge, Theme } from '@radix-ui/themes';
+import { Drawer } from 'vaul';
 
 import MinecraftHeart from '@/image/minecraft-heart.png';
 
@@ -12,50 +13,56 @@ import Footer from '@/components/modules/footer';
 
 const MobileNavDrawer = () => {
   return (
-    <Dialog.Root>
-      <Dialog.Trigger>
-        <IconButton variant="ghost" ml="1" className="flex md:hidden">
-          <HamburgerMenuIcon width="18" height="18" />
-        </IconButton>
-      </Dialog.Trigger>
+    <div className="md:hidden">
+      <Drawer.Root direction="left">
+        <Drawer.Trigger asChild>
+          <IconButton variant="ghost" ml="1" className="flex">
+            <HamburgerMenuIcon width="18" height="18" />
+          </IconButton>
+        </Drawer.Trigger>
 
-      <Dialog.Content
-        className="animate-slide-in-from-left data-[state=open]:animate-slide-in-from-left fixed inset-y-0 left-0 z-50 w-3/4"
-        style={{ borderRadius: 0 }}
-      >
-        <Dialog.Title className="hidden">Navigation menu</Dialog.Title>
-        <Flex direction="column" justify="between" height="100%" gap="5">
-          <Flex direction="row" justify="between" p="4">
-            <Image src={MinecraftHeart} alt="minecraft heart" width={12} height={12} />
-          </Flex>
+        <Drawer.Portal>
+          <Theme className="h-full">
+            <Drawer.Overlay className="fixed inset-0 z-[100] bg-[rgba(0,0,0,0.4)]" />
 
-          <Flex flexGrow="1" direction="column" align="start" gap="5" p="4">
-            <Dialog.Close>
-              <Button size="4" variant="ghost" asChild>
-                <NextLink href="/">Home</NextLink>
-              </Button>
-            </Dialog.Close>
+            <Drawer.Content className="radix-panel-bg fixed inset-y-0 left-0 z-[101] w-3/4 overflow-y-auto p-8 pb-4">
+              <Drawer.Title className="sr-only">Mobile Navigation</Drawer.Title>
+              <Drawer.Description className="sr-only">Use this drawer to navigate through the site.</Drawer.Description>
 
-            <Dialog.Close>
-              <Button size="4" variant="ghost" asChild>
-                <NextLink href="/milestone">Milestone</NextLink>
-              </Button>
-            </Dialog.Close>
+              <Flex direction="column" justify="between" height="100%" gap="5">
+                <Flex direction="row" justify="between">
+                  <Image src={MinecraftHeart} alt="minecraft heart" width={20} height={20} />
+                </Flex>
 
-            <Dialog.Close>
-              <Button size="4" variant="ghost" asChild>
-                <NextLink href="/analytics">
-                  Analytics
-                  <Badge color="red">new</Badge>
-                </NextLink>
-              </Button>
-            </Dialog.Close>
-          </Flex>
+                <Flex direction="column" align="start" gap="6" mt="8" flexGrow="1">
+                  <Drawer.Close asChild>
+                    <Button variant="ghost" size="4" asChild>
+                      <Link href="/">Home</Link>
+                    </Button>
+                  </Drawer.Close>
 
-          <Footer />
-        </Flex>
-      </Dialog.Content>
-    </Dialog.Root>
+                  <Drawer.Close asChild>
+                    <Button variant="ghost" size="4" asChild>
+                      <Link href="/milestone">Milestone</Link>
+                    </Button>
+                  </Drawer.Close>
+
+                  <Drawer.Close asChild>
+                    <Button variant="ghost" size="4" asChild>
+                      <Link href="/analytics">
+                        Analytics <Badge color="red">new</Badge>
+                      </Link>
+                    </Button>
+                  </Drawer.Close>
+                </Flex>
+
+                <Footer />
+              </Flex>
+            </Drawer.Content>
+          </Theme>
+        </Drawer.Portal>
+      </Drawer.Root>
+    </div>
   );
 };
 
