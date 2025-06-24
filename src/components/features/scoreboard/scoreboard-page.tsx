@@ -5,12 +5,11 @@ import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import NextLink from 'next/link';
 
-import { Box, Button, Flex, Grid, Heading, Spinner, Text } from '@radix-ui/themes';
-import { Link1Icon } from '@radix-ui/react-icons';
+import { Box, Flex, Grid, Heading, Spinner, Text } from '@radix-ui/themes';
 
 import LayoutContainer from '@/layout/layout-container';
 import MilestoneProgress from '@/feature/milestone-progress';
-import Scoreboard from '@/components/features/scoreboard';
+import Scoreboard from '@/components/features/scoreboard/scoreboard';
 import IssuesTable from '@/module/issues-table';
 import PrsTable from '@/module/prs-table';
 import UserTable from '@/module/user-table';
@@ -23,9 +22,7 @@ import useGetLastIssues from '@/hook/use-get-last-issues';
 import useGetNewContributors from '@/hook/use-get-new-contributors';
 
 import { getTimeFilterFromSearchParam, getLastMRs, TimeFilter } from '@/util/github';
-import { getSelectedRepositoriesFromSearchParam } from '@/util/repositories';
 import { getContributorsWithScore } from '@/util/score';
-import { getIds } from '@/util/array';
 
 import REPOSITORY from '@/constant/repository';
 import VIDEOS from '@/constant/videos';
@@ -44,12 +41,6 @@ const ScoreboardPage = () => {
 
   const { data: repositories, isPending: isRepositoriesPending } = useGetRepositories();
 
-  const { data: contributors, isPending: isContributorsPending } = useGetContributors({
-    timeFilter,
-    exclude,
-    repositories: selectedRepositories,
-  });
-
   const { data: allTimeContributors, isPending: isAllTimePending } = useGetContributors({
     timeFilter: TimeFilter.ALL_TIME,
   });
@@ -57,11 +48,6 @@ const ScoreboardPage = () => {
   const { data: milestone, isPending: isMilestonePending } = useGetMilestone();
   const { data: issues, isPending: isIssuesPending } = useGetLastIssues();
   const { data: newContributors, isPending: isNewContributorsPending } = useGetNewContributors();
-
-  const filteredContributors = useMemo(
-    () => getContributorsWithScore(contributors ?? []).filter(({ score }) => score),
-    [contributors],
-  );
 
   const lastMRs = useMemo(() => getLastMRs(allTimeContributors ?? [], 5), [allTimeContributors]);
 

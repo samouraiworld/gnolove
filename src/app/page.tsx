@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 
-import ScoreboardPage from '@/components/features/scoreboard-page';
+import ScoreboardPage from '@/components/features/scoreboard/scoreboard-page';
 
 
 import { prefetchContributors } from '@/hook/use-get-contributors';
