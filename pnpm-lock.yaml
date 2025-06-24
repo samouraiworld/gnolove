@@ -35,6 +35,9 @@ dependencies:
   '@tanstack/react-query':
     specifier: ^5.64.2
     version: 5.64.2(react@18.3.1)
+  '@vercel/analytics':
+    specifier: ^1.5.0
+    version: 1.5.0(next@14.2.21)(react@18.3.1)
   '@vercel/kv':
     specifier: ^3.0.0
     version: 3.0.0
@@ -2337,6 +2340,36 @@ packages:
     resolution: {integrity: sha512-VT25TyODGy/8ljl7GADnJoMmtmJ1F8d84UXfGonRRF8fWYJz7+2J6GzW+a6ETGtk4OyuRTt7FRSvFG5GvrfSdQ==}
     dependencies:
       crypto-js: 4.2.0
+    dev: false
+
+  /@vercel/analytics@1.5.0(next@14.2.21)(react@18.3.1):
+    resolution: {integrity: sha512-MYsBzfPki4gthY5HnYN7jgInhAZ7Ac1cYDoRWFomwGHWEX7odTEzbtg9kf/QSo7XEsEAqlQugA6gJ2WS2DEa3g==}
+    peerDependencies:
+      '@remix-run/react': ^2
+      '@sveltejs/kit': ^1 || ^2
+      next: '>= 13'
+      react: ^18 || ^19 || ^19.0.0-rc
+      svelte: '>= 4'
+      vue: ^3
+      vue-router: ^4
+    peerDependenciesMeta:
+      '@remix-run/react':
+        optional: true
+      '@sveltejs/kit':
+        optional: true
+      next:
+        optional: true
+      react:
+        optional: true
+      svelte:
+        optional: true
+      vue:
+        optional: true
+      vue-router:
+        optional: true
+    dependencies:
+      next: 14.2.21(react-dom@18.3.1)(react@18.3.1)
+      react: 18.3.1
     dev: false
 
   /@vercel/kv@3.0.0:

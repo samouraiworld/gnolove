@@ -1,0 +1,42 @@
+name: Docker build and deploy Image
+
+on:
+    workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Define image tag
+      id: vars
+      run: echo "tag=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+          
+    - name: Build the Docker image
+      run: | 
+        docker build server --file server/Dockerfile \
+        --tag ghcr.io/${{ github.repository_owner }}/gnolove-server:${{ steps.vars.outputs.tag }} \
+        --tag ghcr.io/${{ github.repository_owner }}/gnolove-server:latest
+
+      
+    - name: Push Docker image
+      run: |
+          docker push ghcr.io/${{ github.repository_owner }}/gnolove-server:${{ steps.vars.outputs.tag }}
+          docker push ghcr.io/${{ github.repository_owner }}/gnolove-server:latest
+
+
+    - name: Trigger deploy repo
+      uses: peter-evans/repository-dispatch@v3
+      with:
+        token: ${{ secrets.REPO_DEPLOY_PAT }}
+        repository: TERITORI/full-nodes-infra
+        event-type: deploy-image
+        # client-payload: '{"image": "ghcr.io/samouraiworld/gnolove-server:latest"}'
