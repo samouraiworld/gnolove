@@ -3,7 +3,6 @@
 import { z } from 'zod';
 
 import { TimeFilter } from '@/util/github';
-import { getParameterFromTimeFilter } from '@/util/repositories';
 import {
   ContributorSchema,
   EnhancedUserWithStatsSchema,
@@ -21,8 +20,7 @@ import ENV from '@/env';
 export const getContributors = async (timeFilter: TimeFilter, excludeCoreTeam?: boolean, repositories?: string[]) => {
   const url = new URL('/getStats', ENV.NEXT_PUBLIC_API_URL);
 
-  const timeParameter = getParameterFromTimeFilter(timeFilter);
-  if (timeParameter !== 'all') url.searchParams.set('time', timeParameter);
+  if (timeFilter !== 'all') url.searchParams.set('time', timeFilter);
 
   if (excludeCoreTeam) {
     const coreTeam = TEAMS.find((team) => team.name === 'Core Team');
