@@ -51,7 +51,11 @@ const Scoreboard = ({
   ...props
 }: ScoreboardProps & FlexProps) => {
   const [copied, setCopied] = useState(false);
-  const [fallbackMessage, setFallbackMessages] = useState('');
+  const [fallbackMessage, setFallbackMessage] = useState('');
+
+  useEffect(() => {
+    setFallbackMessage(fallbackMessages[Math.floor(Math.random() * fallbackMessages.length)]);
+  }, []);
 
   const { data: contributors, isPending } = useGetContributors({
     timeFilter,
