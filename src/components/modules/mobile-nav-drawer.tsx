@@ -10,6 +10,7 @@ import { Drawer } from 'vaul';
 import MinecraftHeart from '@/image/minecraft-heart.png';
 
 import Footer from '@/components/modules/footer';
+import { MENU_ITEMS } from '@/constants/menu-items';
 
 const MobileNavDrawer = () => {
   return (
@@ -35,33 +36,15 @@ const MobileNavDrawer = () => {
                 </Flex>
 
                 <Flex direction="column" align="start" gap="6" mt="8" flexGrow="1">
-                  <Drawer.Close asChild>
-                    <Button variant="ghost" size="4" asChild>
-                      <Link href="/">Home</Link>
-                    </Button>
-                  </Drawer.Close>
-
-                  <Drawer.Close asChild>
-                    <Button variant="ghost" size="4" asChild>
-                      <Link href="/milestone">Milestone</Link>
-                    </Button>
-                  </Drawer.Close>
-
-                  <Drawer.Close asChild>
-                    <Button variant="ghost" size="4" asChild>
-                      <Link href="/analytics">
-                        Analytics <Badge color="red">new</Badge>
-                      </Link>
-                    </Button>
-                  </Drawer.Close>
-
-                  <Drawer.Close asChild>
-                    <Button variant="ghost" size="4" asChild>
-                      <Link href="/tutorials">
-                        Tutorials <Badge color="red">new</Badge>
-                      </Link>
-                    </Button>
-                  </Drawer.Close>
+                  {MENU_ITEMS.map((item) => (
+                    <Drawer.Close asChild key={item.href}>
+                      <Button variant="ghost" size="4" asChild>
+                        <Link href={item.href}>{item.label}
+                          {item.new && <Badge color='red'>new</Badge>}
+                        </Link>
+                      </Button>
+                    </Drawer.Close>
+                  ))}
                 </Flex>
 
                 <Footer />

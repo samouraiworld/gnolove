@@ -1,14 +1,17 @@
+import { Metadata } from 'next';
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 
 import { prefetchContributor } from '@/hooks/use-get-contributor';
 
 import ContributorContent from '@/components/features/contributor/contributor-content';
 
-export async function generateMetadata({ params }: { params: { login: string } }) {
-  const { login } = params;
+export async function generateMetadata({ params }: { params: { login: string } }): Promise<Metadata> {
+  const decodedLogin = decodeURIComponent(params.login);
+  const match = decodedLogin.match(/^([^@]*)@([^@]+)$/);
+  const formattedLogin = match ? match[2] : decodedLogin;
 
   return {
-    title: `${login} - Gnolove`,
+    title: `${formattedLogin} - Gnolove`,
   };
 }
 

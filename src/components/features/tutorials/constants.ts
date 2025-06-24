@@ -23,4 +23,4 @@ export const TUTORIAL_VIDEOS = [
     src: 'https://www.youtube.com/embed/-Z3M1XVxWU8?si=CuV98ix_ZnjRccpv',
     title: 'Transaction type (Call, Run, Addpkg and Send) - Gno land Education Tutorial',
   },
-];
+] as const satisfies ReadonlyArray<{ src: string; title: string }>;

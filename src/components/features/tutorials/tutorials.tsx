@@ -8,26 +8,26 @@ const Tutorials = () => {
     <Container size='4' py='6'>
       <Section>
         <Flex direction='column' align='center' mb='8'>
-          <Heading size='8' align='center' style={{ color: '#dc2626', fontFamily: 'monospace' }}>
+          <Heading size='8' align='center' color='red' className='font-mono'>
             GNOLOVE
           </Heading>
-          <Text size='4' align='center' style={{ color: '#ef4444', fontFamily: 'monospace', marginTop: '8px' }}>
+          <Text size='4' align='center' color='red' className='font-mono mt-1'>
             TUTORIALS & GUIDES
           </Text>
         </Flex>
 
-        <Card mb='6' style={{ backgroundColor: 'white', border: '1px solid #e5e5e5' }}>
+        <Card mb='6' className='bg-white border border-gray-200'>
           <Flex align='center' justify='between' p='4' wrap='wrap' gap='4'>
             <Flex align='center' gap='4'>
               <Badge size='2' color='green'>
                 📚 Learning Hub
               </Badge>
-              <Text size='2' style={{ color: '#6b7280' }}>
+              <Text size='2' color='gray'>
                 {TUTORIAL_VIDEOS.length} video(s) available
               </Text>
             </Flex>
-            <Link href='https://www.youtube.com/playlist?list=PLJZrQikyfMc-kBojXgAojOz4UQPuq4DiY' target='_blank'>
-              <Button size='2' style={{ backgroundColor: '#dc2626', color: 'white' }}>
+            <Link href='https://www.youtube.com/playlist?list=PLJZrQikyfMc-kBojXgAojOz4UQPuq4DiY' target='_blank' rel='noopener noreferrer'>
+              <Button size='2' color='red' variant='solid'>
                 Subscribe to Updates
               </Button>
             </Link>

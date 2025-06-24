@@ -1,10 +1,11 @@
+import { Metadata } from 'next';
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 
 import AnalyticsClientPage from '@/components/features/analytics/analytics-client-page';
 import { prefetchContributors } from '@/hooks/use-get-contributors';
 import { TimeFilter } from '@/utils/github';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Analytics',
 };
 
