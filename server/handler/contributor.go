@@ -1,17 +1,12 @@
 package handler
 
 import (
-	"context"
 	"encoding/json"
 	"log"
 	"net/http"
-	"os"
 	"strings"
 	"time"
 
-	"github.com/dgraph-io/ristretto"
-	"github.com/shurcooL/githubv4"
-	"golang.org/x/oauth2"
 	"gorm.io/gorm"
 )
 
@@ -56,28 +51,6 @@ type topRepository struct {
 	PrimaryLanguage string `json:"primaryLanguage"`
 }
 
-type cachedUser struct {
-	Data      githubUserResponse
-	Timestamp time.Time
-}
-
-var (
-	userCache   *ristretto.Cache
-	cacheExpiry = 10 * time.Minute
-)
-
-func init() {
-	cache, err := ristretto.NewCache(&ristretto.Config{
-		NumCounters: 1e4, // 10x max items
-		MaxCost:     1e3, // max 1000 items
-		BufferItems: 64,
-	})
-	if err != nil {
-		log.Fatalf("Failed to initialize ristretto cache: %v", err)
-	}
-	userCache = cache
-}
-
 func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var err error
@@ -90,12 +63,25 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 			return
 		}
 
-		// Lookup login from DB
+		// Lookup user from DB (all fields)
 		var dbUser struct {
-			Login  string
-			Wallet string
+			ID              string
+			Login           string
+			AvatarUrl       string
+			URL             string
+			Name            string
+			Bio             string
+			Location        string
+			JoinDate        *time.Time
+			WebsiteUrl      string
+			TwitterUsername string
+			TotalStars      int
+			TotalRepos      int
+			Followers       int
+			Following       int
+			Wallet          string
 		}
-		err = db.Table("users").Select("login, wallet").Where("login = ?", login).Scan(&dbUser).Error
+		err = db.Table("users").Select("id, login, avatar_url, url, name, bio, location, join_date, website_url, twitter_username, total_stars, total_repos, followers, following, wallet").Where("login = ?", login).Scan(&dbUser).Error
 		if err != nil {
 			log.Printf("[Contributor Handler] DB error for login %s: %v", login, err)
 			http.Error(w, "Database error", http.StatusInternalServerError)
@@ -107,79 +93,18 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 			return
 		}
 
-		// Check cache
-		if val, found := userCache.Get(login); found {
-			if cached, ok := val.(cachedUser); ok && time.Since(cached.Timestamp) < cacheExpiry {
-				log.Printf("[Contributor Handler] Cache hit for user: %s", login)
-				json.NewEncoder(w).Encode(cached.Data)
-				return
-			}
-		}
-		log.Printf("[Contributor Handler] Cache miss for user: %s. Querying GitHub API...", login)
-
-		// Prepare GitHub client
-		src := oauth2.StaticTokenSource(
-			&oauth2.Token{AccessToken: os.Getenv("GITHUB_API_TOKEN")},
-		)
-		httpClient := oauth2.NewClient(context.Background(), src)
-		client := githubv4.NewClient(httpClient)
-
-		var q struct {
-			User struct {
-				ID                  string
-				Login               string
-				AvatarUrl           string
-				URL                 string
-				Name                string
-				Bio                 string
-				Location            string
-				CreatedAt           githubv4.DateTime
-				WebsiteUrl          string
-				TwitterUsername     string
-				StarredRepositories struct {
-					TotalCount int
-				}
-				Followers struct {
-					TotalCount int
-				}
-				Following struct {
-					TotalCount int
-				}
-				Repositories struct {
-					TotalCount int
-					Nodes      []struct {
-						NameWithOwner   string
-						Description     string
-						URL             string
-						StargazerCount  int
-						PrimaryLanguage *struct {
-							Name string
-						}
-					}
-				} `graphql:"repositories(first: 3, privacy: PUBLIC, isFork: false, orderBy: {field: STARGAZERS, direction: DESC})"`
-			} `graphql:"user(login: $login)"`
-		}
-		variables := map[string]interface{}{
-			"login": githubv4.String(login),
-		}
-		err = client.Query(context.Background(), &q, variables)
-		if err != nil {
-			log.Printf("[Contributor Handler] GitHub API error for user %s: %v", login, err)
-			http.Error(w, "GitHub API error: "+err.Error(), http.StatusInternalServerError)
-			return
-		}
-		log.Printf("[Contributor Handler] GitHub API success for user: %s", login)
+		log.Printf("[Contributor Handler] Querying DB for user: %s...", login)
 
 		// Fetch stats from DB
 		var totalCommits, totalPRs, totalIssues int64
-		if err := db.Table("commits").Where("author_id = ?", q.User.ID).Count(&totalCommits).Error; err != nil {
-			log.Printf("[Contributor Handler] DB error counting commits for user %s: %v", q.User.ID, err)
+		if err := db.Table("commits").Where("author_id = ?", dbUser.ID).Count(&totalCommits).Error; err != nil {
+			log.Printf("[Contributor Handler] DB error counting commits for user %s: %v", dbUser.ID, err)
 		}
-		if err := db.Table("pull_requests").Where("author_id = ?", q.User.ID).Count(&totalPRs).Error; err != nil {
-			log.Printf("[Contributor Handler] DB error counting pull requests for user %s: %v", q.User.ID, err)
+		if err := db.Table("pull_requests").Where("author_id = ?", dbUser.ID).Count(&totalPRs).Error; err != nil {
+			log.Printf("[Contributor Handler] DB error counting PRs for user %s: %v", dbUser.ID, err)
 		}
-		if err := db.Table("issues").Where("author_id = ?", q.User.ID).Count(&totalIssues).Error; err != nil {
-			log.Printf("[Contributor Handler] DB error counting issues for user %s: %v", q.User.ID, err)
+		if err := db.Table("issues").Where("author_id = ?", dbUser.ID).Count(&totalIssues).Error; err != nil {
+			log.Printf("[Contributor Handler] DB error counting issues for user %s: %v", dbUser.ID, err)
 		}
 
 		// Fetch recent issues from DB
@@ -189,8 +114,8 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 			CreatedAt    time.Time
 			RepositoryID string
 		}
-		if err := db.Table("issues").Select("title, url, created_at, repository_id").Where("author_id = ?", q.User.ID).Order("created_at desc").Limit(3).Scan(&recentIssues).Error; err != nil {
-			log.Printf("[Contributor Handler] DB error fetching issues for user %s: %v", q.User.ID, err)
+		if err := db.Table("issues").Select("title, url, created_at, repository_id").Where("author_id = ?", dbUser.ID).Order("created_at desc").Limit(3).Scan(&recentIssues).Error; err != nil {
+			log.Printf("[Contributor Handler] DB error fetching issues for user %s: %v", dbUser.ID, err)
 		}
 
 		// Fetch recent pull requests from DB
@@ -200,8 +125,8 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 			CreatedAt    time.Time
 			RepositoryID string
 		}
-		if err := db.Table("pull_requests").Select("title, url, created_at, repository_id").Where("author_id = ?", q.User.ID).Order("created_at desc").Limit(3).Scan(&recentPRs).Error; err != nil {
-			log.Printf("[Contributor Handler] DB error fetching pull requests for user %s: %v", q.User.ID, err)
+		if err := db.Table("pull_requests").Select("title, url, created_at, repository_id").Where("author_id = ?", dbUser.ID).Order("created_at desc").Limit(3).Scan(&recentPRs).Error; err != nil {
+			log.Printf("[Contributor Handler] DB error fetching pull requests for user %s: %v", dbUser.ID, err)
 		}
 
 		// Fetch repository names for issues and PRs from DB
@@ -223,7 +148,7 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 				ids = append(ids, id)
 			}
 			if err := db.Table("repositories").Select("id, name_with_owner").Where("id IN ?", ids).Scan(&repos).Error; err != nil {
-				log.Printf("[Contributor Handler] DB error fetching repositories for user %s: %v", q.User.ID, err)
+				log.Printf("[Contributor Handler] DB error fetching repositories for user %s: %v", dbUser.ID, err)
 			}
 			for _, r := range repos {
 				repoNames[r.ID] = r.NameWithOwner
@@ -231,20 +156,25 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 		}
 
 		resp = githubUserResponse{
-			ID:                q.User.ID,
-			Login:             q.User.Login,
-			AvatarUrl:         q.User.AvatarUrl,
-			URL:               q.User.URL,
-			Name:              q.User.Name,
-			Bio:               q.User.Bio,
-			Location:          q.User.Location,
-			JoinDate:          q.User.CreatedAt.String(),
-			WebsiteUrl:        q.User.WebsiteUrl,
-			TwitterUsername:   q.User.TwitterUsername,
-			TotalStars:        q.User.StarredRepositories.TotalCount,
-			TotalRepos:        q.User.Repositories.TotalCount,
-			Followers:         q.User.Followers.TotalCount,
-			Following:         q.User.Following.TotalCount,
+			ID:        dbUser.ID,
+			Login:     dbUser.Login,
+			AvatarUrl: dbUser.AvatarUrl,
+			URL:       dbUser.URL,
+			Name:      dbUser.Name,
+			Bio:       dbUser.Bio,
+			Location:  dbUser.Location,
+			JoinDate: func() string {
+				if dbUser.JoinDate != nil {
+					return dbUser.JoinDate.Format(time.RFC3339)
+				}
+				return ""
+			}(),
+			WebsiteUrl:        dbUser.WebsiteUrl,
+			TwitterUsername:   dbUser.TwitterUsername,
+			TotalStars:        dbUser.TotalStars,
+			TotalRepos:        dbUser.TotalRepos,
+			Followers:         dbUser.Followers,
+			Following:         dbUser.Following,
 			TotalCommits:      int(totalCommits),
 			TotalPullRequests: int(totalPRs),
 			TotalIssues:       int(totalIssues),
@@ -275,29 +205,12 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 				return out
 			}(),
 			TopRepositories: func() []topRepository {
-				var out []topRepository
-				for _, n := range q.User.Repositories.Nodes {
-					out = append(out, topRepository{
-						NameWithOwner:  n.NameWithOwner,
-						Description:    n.Description,
-						URL:            n.URL,
-						StargazerCount: n.StargazerCount,
-						PrimaryLanguage: func() string {
-							if n.PrimaryLanguage != nil {
-								return n.PrimaryLanguage.Name
-							}
-							return ""
-						}(),
-					})
-				}
-				return out
+				// Not available from DB yet, return empty array instead of nil
+				return []topRepository{}
 			}(),
 			Wallet:     dbUser.Wallet,
 			GnoBalance: "0",
 		}
-
-		userCache.Set(login, cachedUser{Data: resp, Timestamp: time.Now()}, 1)
-		userCache.Wait()
 
 		w.Header().Set("Content-Type", "application/json")
 		if err := json.NewEncoder(w).Encode(resp); err != nil {

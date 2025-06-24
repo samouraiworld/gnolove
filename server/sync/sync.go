@@ -87,11 +87,18 @@ func (s *Syncer) StartSynchonizing() error {
 
 				err = s.syncCommits(repository)
 				if err != nil {
-					s.logger.Errorf("error while syncing Milestones %s", err.Error())
+					s.logger.Errorf("error while syncing commits %s", err.Error())
 				}
 			}
 			s.logger.Info("synchronization Finished...")
-			<-time.Tick(time.Minute * 3)
+
+			// After syncing everything else, update user details.
+			err := s.syncUserDetails()
+			if err != nil {
+				s.logger.Errorf("error while syncing user details %s", err.Error())
+			}
+
+			<-time.Tick(2 * time.Hour)
 		}
 	}()
 
@@ -358,7 +365,6 @@ func (s *Syncer) syncMilestones(repository models.Repository) error {
 	return nil
 }
 func (s *Syncer) syncCommits(repository models.Repository) error {
-
 	var q struct {
 		Repository struct {
 			Ref struct {
@@ -411,6 +417,68 @@ func (s *Syncer) syncCommits(repository models.Repository) error {
 		variables["cursor"] = githubv4.NewString(q.Repository.Ref.Target.Commit.History.PageInfo.EndCursor)
 	}
 
+	return nil
+}
+
+// syncUserDetails fetches and updates detailed GitHub data for all users
+func (s *Syncer) syncUserDetails() error {
+	var users []models.User
+	if err := s.db.Find(&users).Error; err != nil {
+		s.logger.Errorf("Failed to fetch users for details sync: %v", err)
+		return err
+	}
+
+	for _, user := range users {
+		var q struct {
+			User struct {
+				ID                  string
+				Login               string
+				AvatarUrl           string
+				URL                 string
+				Name                string
+				Bio                 string
+				Location            string
+				CreatedAt           githubv4.DateTime
+				WebsiteUrl          string
+				TwitterUsername     string
+				StarredRepositories struct {
+					TotalCount int
+				}
+				Followers struct {
+					TotalCount int
+				}
+				Following struct {
+					TotalCount int
+				}
+				Repositories struct {
+					TotalCount int
+				}
+			} `graphql:"user(login: $login)"`
+		}
+		variables := map[string]interface{}{
+			"login": githubv4.String(user.Login),
+		}
+		err := s.client.Query(context.Background(), &q, variables)
+		if err != nil {
+			s.logger.Errorf("Failed to fetch details for user %s: %v", user.Login, err)
+			continue
+		}
+
+		// Update user fields
+		user.Bio = q.User.Bio
+		user.Location = q.User.Location
+		user.JoinDate = q.User.CreatedAt.Time
+		user.WebsiteUrl = q.User.WebsiteUrl
+		user.TwitterUsername = q.User.TwitterUsername
+		user.TotalStars = q.User.StarredRepositories.TotalCount
+		user.TotalRepos = q.User.Repositories.TotalCount
+		user.Followers = q.User.Followers.TotalCount
+		user.Following = q.User.Following.TotalCount
+
+		if err := s.db.Save(&user).Error; err != nil {
+			s.logger.Errorf("Failed to update user %s: %v", user.Login, err)
+		}
+	}
 	return nil
 }
 
