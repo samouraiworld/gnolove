@@ -54,6 +54,14 @@ const MobileNavDrawer = () => {
                       </Link>
                     </Button>
                   </Drawer.Close>
+
+                  <Drawer.Close asChild>
+                    <Button variant="ghost" size="4" asChild>
+                      <Link href="/tutorials">
+                        Tutorials <Badge color="red">new</Badge>
+                      </Link>
+                    </Button>
+                  </Drawer.Close>
                 </Flex>
 
                 <Footer />

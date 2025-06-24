@@ -4,6 +4,10 @@ import AnalyticsClientPage from '@/components/features/analytics/analytics-clien
 import { prefetchContributors } from '@/hooks/use-get-contributors';
 import { TimeFilter } from '@/utils/github';
 
+export const metadata = {
+  title: 'Analytics',
+};
+
 const AnalyticsPage = async () => {
   const queryClient = new QueryClient();
 
