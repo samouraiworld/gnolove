@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 
-import ScoreboardPage from '@/feature/scoreboard-page';
+import ScoreboardPage from '@/components/features/scoreboard-page';
 
 
 import { prefetchContributors } from '@/hook/use-get-contributors';
@@ -47,7 +47,7 @@ const HomePage = async ({ searchParams: { f, e, r } }: HomePageParams) => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <ScoreboardPage {...{ exclude, timeFilter, selectedRepositories }} />
+      <ScoreboardPage />
     </HydrationBoundary>
   );
 };
