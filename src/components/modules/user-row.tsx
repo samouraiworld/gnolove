@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { ExternalLinkIcon } from '@radix-ui/react-icons';
 import { Flex, Table, Text } from '@radix-ui/themes';
 
+import Cell from '@/components/elements/cell';
+
 import { TUser } from '@/util/schemas';
 
 export interface UserRowProps {
@@ -19,7 +21,7 @@ const UserRow = ({ user }: UserRowProps) => {
 
   return (
     <Table.Row className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-grayA-2" key={user.id}>
-      <Table.Cell data-href={user.url} onClick={onClick}>
+      <Cell data-href={user.url} onClick={onClick}>
         <Flex width="100%" height="100%" align="center" gap="2">
           <Image
             src={user.avatarUrl}
@@ -33,7 +35,7 @@ const UserRow = ({ user }: UserRowProps) => {
 
           <ExternalLinkIcon className="shrink-0 text-blue-10" />
         </Flex>
-      </Table.Cell>
+      </Cell>
     </Table.Row>
   );
 };

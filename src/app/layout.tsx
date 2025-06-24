@@ -18,6 +18,7 @@ import { AdenaAddress } from '@/components/modules/adena-address';
 import { GithubLink } from '@/components/modules/github-link';
 import AdenaProvider from '@/contexts/adena-context';
 import QueryClientWrapper from '@/wrappers/query-client';
+import MobileNavDrawer from '@/components/modules/mobile-nav-drawer';
 
 import { Analytics } from '@vercel/analytics/next';
 
@@ -56,7 +57,10 @@ const RootLayout = ({ children, details }: RootLayoutProps) => {
                     style={{ background: 'var(--accent-1)', borderBottom: '1px solid var(--gray-a3)' }}
                   >
                     <Flex justify="between" align="center">
-                      <Flex align="center" gap="4" px="2">
+
+                      <MobileNavDrawer />
+
+                      <Flex className='hidden md:flex' align="center" gap="4" px="2">
                         <Button variant="ghost">
                           <NextLink href="/">Home</NextLink>
                         </Button>

@@ -6,16 +6,35 @@
 @tailwind utilities;
 
 .radix-themes {
-    --cursor-button: pointer;
-    --cursor-link: pointer;
+  --cursor-button: pointer;
+  --cursor-link: pointer;
 }
 
 /* TableCell */
 .rt-TableCell {
-    white-space: nowrap;
+  white-space: nowrap;
 }
 
 /* Toast */
 .rt-ToastRoot {
-    --viewport-padding: 25px;
+  --viewport-padding: 25px;
+}
+
+.radix-panel-bg {
+  background-color: var(--accent-1);
+  color: var(--accent-12);
+}
+
+/* Animation */
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-from-left {
+  animation: slideInFromLeft 200ms ease-out forwards;
 }

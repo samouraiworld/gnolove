@@ -6,6 +6,7 @@ import { Flex, HoverCard, Table, Text } from '@radix-ui/themes';
 import Label from '@/element/label';
 
 import { TIssue } from '@/util/schemas';
+import Cell from '@/components/elements/cell';
 
 export interface IssuesTableProps extends Table.RootProps {
   issues: TIssue[];
@@ -39,7 +40,7 @@ const IssuesTable = ({ issues, showLabels, showHeader, ...props }: IssuesTablePr
             key={id}
             className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-grayA-2"
           >
-            <Table.Cell className="max-w-0">
+            <Cell className="max-w-0">
               <Flex width="100%" height="100%" align="center" gap="2">
                 <Text className="w-full truncate">{title}</Text>
 
@@ -59,16 +60,16 @@ const IssuesTable = ({ issues, showLabels, showHeader, ...props }: IssuesTablePr
 
                 <ExternalLinkIcon className="shrink-0 text-blue-10" />
               </Flex>
-            </Table.Cell>
+            </Cell>
 
             {showLabels === 'as-column' && (
-              <Table.Cell>
+              <Cell>
                 <Flex gap="2" wrap="wrap">
                   {labels.map((label) => (
                     <Label label={label} key={label.name + label.color} />
                   ))}
                 </Flex>
-              </Table.Cell>
+              </Cell>
             )}
           </Table.Row>
         ))}
