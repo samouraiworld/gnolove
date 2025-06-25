@@ -47,7 +47,7 @@ const HomePage = async ({ searchParams: { f, e, r } }: HomePageParams) => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <ScoreboardPage {...{ exclude, timeFilter, selectedRepositories }} />
+      <ScoreboardPage />
     </HydrationBoundary>
   );
 };

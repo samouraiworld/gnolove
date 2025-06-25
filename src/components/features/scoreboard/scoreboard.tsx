@@ -53,10 +53,6 @@ const Scoreboard = ({
   const [copied, setCopied] = useState(false);
   const [fallbackMessage, setFallbackMessage] = useState('');
 
-  useEffect(() => {
-    setFallbackMessage(fallbackMessages[Math.floor(Math.random() * fallbackMessages.length)]);
-  }, []);
-
   const { data: contributors, isPending } = useGetContributors({
     timeFilter,
     exclude,
@@ -69,7 +65,7 @@ const Scoreboard = ({
   );
 
   useEffect(() => {
-    setFallbackMessages(fallbackMessages[Math.floor(Math.random() * fallbackMessages.length)]);
+    setFallbackMessage(fallbackMessages[Math.floor(Math.random() * fallbackMessages.length)]);
   }, []);
 
   const handleCopyUrl = () => {
