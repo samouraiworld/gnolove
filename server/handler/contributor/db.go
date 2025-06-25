@@ -100,6 +100,17 @@ func getMonthlyCounts(db *gorm.DB, userID string) ([]TimeCount, []TimeCount, []T
 
 // getEntityMonthlyCounts returns the monthly counts for a given entity table (commits, pull_requests, issues)
 func getEntityMonthlyCounts(db *gorm.DB, tableName string, userID string, months []string, now time.Time) []TimeCount {
+	// Whitelist of allowed table names
+	allowedTables := map[string]bool{
+		"commits":        true,
+		"pull_requests":  true,
+		"issues":         true,
+	}
+	if !allowedTables[tableName] {
+		// Optionally log or handle the error here
+		return make([]TimeCount, 12) // Return empty result for invalid table
+	}
+
 	var counts []struct {
 		Period string
 		Count  int
