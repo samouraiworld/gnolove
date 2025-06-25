@@ -1,7 +1,5 @@
 package contributor
 
-import "time"
-
 // TimeCount represents a count for a given period (day, month, etc)
 type TimeCount struct {
 	Period string `json:"period"`
@@ -57,9 +55,4 @@ type githubUserResponse struct {
 	PullRequestsPerMonth       []TimeCount                 `json:"pullRequestsPerMonth"`
 	IssuesPerMonth             []TimeCount                 `json:"issuesPerMonth"`
 	TopContributedRepositories []repoInfoWithContributions `json:"topContributedRepositories"`
-}
-
-type cachedUser struct {
-	Data      githubUserResponse
-	Timestamp time.Time
 }

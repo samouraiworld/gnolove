@@ -8,8 +8,12 @@ import (
 )
 
 type contributorDBUser struct {
-	Login  string
-	Wallet string
+	ID        string
+	Login     string
+	AvatarUrl string
+	URL       string
+	Name      string
+	Wallet    string
 }
 
 type contributorDBResponse struct {
@@ -65,12 +69,9 @@ func GetContributorDataFromDatabase(db *gorm.DB, login string) (contributorDBRes
 }
 
 func getUser(db *gorm.DB, login string) (contributorDBUser, error) {
-	var dbUser struct {
-		Login  string
-		Wallet string
-	}
-	err := db.Table("users").Select("login, wallet").Where("login = ?", login).Scan(&dbUser).Error
-	return contributorDBUser{Login: dbUser.Login, Wallet: dbUser.Wallet}, err
+	var dbUser contributorDBUser
+	err := db.Table("users").Select("id, login, avatar_url, url, name, wallet").Where("login = ?", login).Scan(&dbUser).Error
+	return dbUser, err
 }
 
 func getMonthlyCounts(db *gorm.DB, userID string) ([]TimeCount, []TimeCount, []TimeCount) {
