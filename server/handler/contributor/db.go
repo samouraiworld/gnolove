@@ -49,8 +49,7 @@ func GetContributorDataFromDatabase(db *gorm.DB, login string) (contributorDBRes
 		return contributorDBResponse{}, dbUser, errors.New("user not found")
 	}
 
-	var userID string
-	db.Table("users").Select("id").Where("login = ?", login).Scan(&userID)
+	userID := dbUser.ID
 
 	commitsPerMonth, prsPerMonth, issuesPerMonth := getMonthlyCounts(db, userID)
 	contributionsPerDay := getDailyContributions(db, userID)
@@ -92,49 +91,30 @@ func getMonthlyCounts(db *gorm.DB, userID string) ([]TimeCount, []TimeCount, []T
 		months[11-i] = m.Format("2006-01")
 	}
 
-	var commitCounts []struct {
-		Period string
-		Count  int
-	}
-	db.Raw(`SELECT strftime('%Y-%m', created_at) as period, COUNT(*) as count FROM commits WHERE author_id = ? AND created_at >= ? GROUP BY period`, userID, now.AddDate(0, -12, 0)).Scan(&commitCounts)
-	commitMap := map[string]int{}
-	for _, c := range commitCounts {
-		commitMap[c.Period] = c.Count
-	}
-	commitsPerMonth := make([]TimeCount, 12)
-	for i, m := range months {
-		commitsPerMonth[i] = TimeCount{Period: m, Count: commitMap[m]}
-	}
-
-	var prCounts []struct {
-		Period string
-		Count  int
-	}
-	db.Raw(`SELECT strftime('%Y-%m', created_at) as period, COUNT(*) as count FROM pull_requests WHERE author_id = ? AND created_at >= ? GROUP BY period`, userID, now.AddDate(0, -12, 0)).Scan(&prCounts)
-	prMap := map[string]int{}
-	for _, c := range prCounts {
-		prMap[c.Period] = c.Count
-	}
-	prsPerMonth := make([]TimeCount, 12)
-	for i, m := range months {
-		prsPerMonth[i] = TimeCount{Period: m, Count: prMap[m]}
-	}
-
-	var issueCounts []struct {
-		Period string
-		Count  int
-	}
-	db.Raw(`SELECT strftime('%Y-%m', created_at) as period, COUNT(*) as count FROM issues WHERE author_id = ? AND created_at >= ? GROUP BY period`, userID, now.AddDate(0, -12, 0)).Scan(&issueCounts)
-	issueMap := map[string]int{}
-	for _, c := range issueCounts {
-		issueMap[c.Period] = c.Count
-	}
-	issuesPerMonth := make([]TimeCount, 12)
-	for i, m := range months {
-		issuesPerMonth[i] = TimeCount{Period: m, Count: issueMap[m]}
-	}
+	commitsPerMonth := getEntityMonthlyCounts(db, "commits", userID, months, now)
+	prsPerMonth := getEntityMonthlyCounts(db, "pull_requests", userID, months, now)
+	issuesPerMonth := getEntityMonthlyCounts(db, "issues", userID, months, now)
 
 	return commitsPerMonth, prsPerMonth, issuesPerMonth
+}
+
+// getEntityMonthlyCounts returns the monthly counts for a given entity table (commits, pull_requests, issues)
+func getEntityMonthlyCounts(db *gorm.DB, tableName string, userID string, months []string, now time.Time) []TimeCount {
+	var counts []struct {
+		Period string
+		Count  int
+	}
+	query := "SELECT strftime('%Y-%m', created_at) as period, COUNT(*) as count FROM " + tableName + " WHERE author_id = ? AND created_at >= ? GROUP BY period"
+	db.Raw(query, userID, now.AddDate(0, -12, 0)).Scan(&counts)
+	countMap := make(map[string]int)
+	for _, c := range counts {
+		countMap[c.Period] = c.Count
+	}
+	result := make([]TimeCount, 12)
+	for i, m := range months {
+		result[i] = TimeCount{Period: m, Count: countMap[m]}
+	}
+	return result
 }
 
 func getDailyContributions(db *gorm.DB, userID string) []TimeCount {
@@ -188,13 +168,13 @@ func getRecentActivities(db *gorm.DB, userID string) ([]struct {
 		CreatedAt    time.Time
 		RepositoryID string
 	}
-	if err := db.Table("issues").Select("title, url, created_at, repository_id").Where("author_id = ?", userID).Order("created_at desc").Limit(3).Scan(&recentIssues).Error; err != nil {
-		recentIssues = []struct {
+	if err := db.Table("issues").Select("title, url, created_at, repository_id").Where("author_id = ?", userID).Order("created_at desc").Limit(3).Scan(&recentIssues).Error; err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
+		recentIssues = make([]struct {
 			Title        string
 			URL          string
 			CreatedAt    time.Time
 			RepositoryID string
-		}{}
+		}, 0)
 	}
 
 	var recentPRs []struct {
@@ -203,13 +183,13 @@ func getRecentActivities(db *gorm.DB, userID string) ([]struct {
 		CreatedAt    time.Time
 		RepositoryID string
 	}
-	if err := db.Table("pull_requests").Select("title, url, created_at, repository_id").Where("author_id = ?", userID).Order("created_at desc").Limit(3).Scan(&recentPRs).Error; err != nil {
-		recentPRs = []struct {
+	if err := db.Table("pull_requests").Select("title, url, created_at, repository_id").Where("author_id = ?", userID).Order("created_at desc").Limit(3).Scan(&recentPRs).Error; err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
+		recentPRs = make([]struct {
 			Title        string
 			URL          string
 			CreatedAt    time.Time
 			RepositoryID string
-		}{}
+		}, 0)
 	}
 
 	return recentIssues, recentPRs
@@ -303,14 +283,12 @@ func getTopContributedRepositories(db *gorm.DB, userID string) []repoInfoWithCon
 	var repos []repoAgg
 	query := `
 		SELECT r.id,
-			(
-				SELECT COUNT(*) FROM commits c WHERE c.repository_id = r.id AND c.author_id = ?
-				+
-				SELECT COUNT(*) FROM pull_requests pr WHERE pr.repository_id = r.id AND pr.author_id = ?
-				+
-				SELECT COUNT(*) FROM issues i WHERE i.repository_id = r.id AND i.author_id = ?
-			) as total_authored
+			COALESCE(COUNT(DISTINCT c.id), 0) + COALESCE(COUNT(DISTINCT pr.id), 0) + COALESCE(COUNT(DISTINCT i.id), 0) AS total_authored
 		FROM repositories r
+		LEFT JOIN commits c ON c.repository_id = r.id AND c.author_id = ?
+		LEFT JOIN pull_requests pr ON pr.repository_id = r.id AND pr.author_id = ?
+		LEFT JOIN issues i ON i.repository_id = r.id AND i.author_id = ?
+		GROUP BY r.id
 		ORDER BY total_authored DESC
 		LIMIT 3
 	`
