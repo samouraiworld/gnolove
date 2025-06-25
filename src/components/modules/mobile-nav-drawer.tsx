@@ -38,11 +38,14 @@ const MobileNavDrawer = () => {
                 <Flex direction="column" align="start" gap="6" mt="8" flexGrow="1">
                   {MENU_ITEMS.map((item) => (
                     <Drawer.Close asChild key={item.href}>
-                      <Button variant="ghost" size="4" asChild>
-                        <Link href={item.href}>{item.label}
-                          {item.new && <Badge color='red'>new</Badge>}
-                        </Link>
-                      </Button>
+                      <Link href={item.href}>
+                        <Button variant="ghost" size="4" asChild>
+                          <span>
+                            {item.label}
+                            {item.new && <Badge color='red'>new</Badge>}
+                          </span>
+                        </Button>
+                      </Link>
                     </Drawer.Close>
                   ))}
                 </Flex>

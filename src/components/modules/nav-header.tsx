@@ -6,12 +6,14 @@ const NavHeader = () => {
   return (
     <Flex className='hidden md:flex' align='center' gap='4' px='2'>
       {MENU_ITEMS.map((item) => (
-        <Button variant='ghost' key={item.href}>
-          <NextLink href={item.href}>
-            {item.label}
-            {item.new && <Badge color='red'>new</Badge>}
-          </NextLink>
-        </Button>
+        <NextLink href={item.href} key={item.href}>
+          <Button variant='ghost' asChild>
+            <span>
+              {item.label}
+              {item.new && <Badge color='red'>new</Badge>}
+            </span>
+          </Button>
+        </NextLink>
       ))}
     </Flex>
   );

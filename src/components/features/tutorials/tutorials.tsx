@@ -9,11 +9,8 @@ const Tutorials = () => {
       <Section>
         <Flex direction='column' align='center' mb='8'>
           <Heading size='8' align='center' color='red' className='font-mono'>
-            GNOLOVE
-          </Heading>
-          <Text size='4' align='center' color='red' className='font-mono mt-1'>
             TUTORIALS & GUIDES
-          </Text>
+          </Heading>
         </Flex>
 
         <Card mb='6' className='bg-white border border-gray-200'>
