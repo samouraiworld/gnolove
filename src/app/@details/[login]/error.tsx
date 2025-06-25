@@ -9,7 +9,7 @@ const ErrorPage = ({ reset }: { reset: () => void }) => {
       <Flex justify='between'>
         <Dialog.Title>Something went wrong!</Dialog.Title>
         <Dialog.Close>
-          <IconButton variant='ghost' color='gray'>
+          <IconButton variant='outline' color='gray' size='1'>
             <X size={16} />
           </IconButton>
         </Dialog.Close>

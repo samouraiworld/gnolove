@@ -2,6 +2,7 @@ package sync
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"os"
 	"time"
@@ -474,6 +475,59 @@ func (s *Syncer) syncUserDetails() error {
 		user.TotalRepos = q.User.Repositories.TotalCount
 		user.Followers = q.User.Followers.TotalCount
 		user.Following = q.User.Following.TotalCount
+
+		// Fetch top repositories from GitHub API
+		var repoQuery struct {
+			User struct {
+				Repositories struct {
+					Nodes []struct {
+						NameWithOwner   string `graphql:"nameWithOwner"`
+						Description     string `graphql:"description"`
+						Url             string `graphql:"url"`
+						StargazerCount  int    `graphql:"stargazerCount"`
+						PrimaryLanguage struct {
+							Name string `graphql:"name"`
+						} `graphql:"primaryLanguage"`
+					} `graphql:"nodes"`
+				} `graphql:"repositories(first: 3, privacy: PUBLIC, orderBy: { field: STARGAZERS, direction: DESC })"`
+			} `graphql:"user(login: $login)"`
+		}
+		repoVars := map[string]interface{}{
+			"login": githubv4.String(user.Login),
+		}
+		err = s.client.Query(context.Background(), &repoQuery, repoVars)
+		if err != nil {
+			s.logger.Errorf("Failed to fetch top repositories for user %s: %v", user.Login, err)
+		} else {
+			topRepos := make([]struct {
+				NameWithOwner   string
+				Description     string
+				URL             string
+				StargazerCount  int
+				PrimaryLanguage string
+			}, 0, len(repoQuery.User.Repositories.Nodes))
+			for _, n := range repoQuery.User.Repositories.Nodes {
+				topRepos = append(topRepos, struct {
+					NameWithOwner   string
+					Description     string
+					URL             string
+					StargazerCount  int
+					PrimaryLanguage string
+				}{
+					NameWithOwner:   n.NameWithOwner,
+					Description:     n.Description,
+					URL:             n.Url,
+					StargazerCount:  n.StargazerCount,
+					PrimaryLanguage: n.PrimaryLanguage.Name,
+				})
+			}
+			topReposJSON, err := json.Marshal(topRepos)
+			if err != nil {
+				s.logger.Errorf("Failed to marshal top repositories for user %s: %v", user.Login, err)
+			} else {
+				user.TopRepositories = string(topReposJSON)
+			}
+		}
 
 		if err := s.db.Save(&user).Error; err != nil {
 			s.logger.Errorf("Failed to update user %s: %v", user.Login, err)

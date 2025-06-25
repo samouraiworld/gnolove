@@ -154,31 +154,33 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
           </Card>
 
           {/* Language Distribution */}
-          <Card>
-            <Flex direction='column' gap='3'>
-              <Heading size='3'>Programming Languages</Heading>
-              <Box style={{ height: '300px' }}>
-                <ResponsiveContainer width='100%' height='100%'>
-                  <PieChart>
-                    <Pie
-                      data={languageData}
-                      cx='50%'
-                      cy='50%'
-                      outerRadius={100}
-                      dataKey='value'
-                    >
-                      {languageData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                      ))}
-                    </Pie>
-                    <Tooltip content={<RechartTooltip />} />
-                    <Legend verticalAlign='bottom' height={36} wrapperStyle={{ fontSize: '12px' }} />
-                  </PieChart>
-                </ResponsiveContainer>
-              </Box>
-            </Flex>
-          </Card>
-
+          {languageData.length > 0 && (
+            <Card>
+              <Flex direction='column' gap='3'>
+                <Heading size='3'>Programming Languages</Heading>
+                <Box style={{ height: '300px' }}>
+                  <ResponsiveContainer width='100%' height='100%'>
+                    <PieChart>
+                      <Pie
+                        data={languageData}
+                        cx='50%'
+                        cy='50%'
+                        outerRadius={100}
+                        dataKey='value'
+                      >
+                        {languageData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.color} />
+                        ))}
+                      </Pie>
+                      <Tooltip content={<RechartTooltip />} />
+                      <Legend verticalAlign='bottom' height={36} wrapperStyle={{ fontSize: '12px' }} />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </Box>
+              </Flex>
+            </Card>
+          )}
+          
           {/* Monthly Activity Trend */}
           <Card>
             <Flex direction='column' gap='3'>

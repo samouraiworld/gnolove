@@ -1,6 +1,7 @@
 package contributor
 
 import (
+	"encoding/json"
 	"errors"
 	"time"
 
@@ -8,12 +9,21 @@ import (
 )
 
 type contributorDBUser struct {
-	ID        string
-	Login     string
-	AvatarUrl string
-	URL       string
-	Name      string
-	Wallet    string
+	ID              string
+	Login           string
+	AvatarUrl       string
+	URL             string
+	Name            string
+	Wallet          string
+	Bio             string
+	Location        string
+	JoinDate        time.Time
+	WebsiteUrl      string
+	TwitterUsername string
+	TotalStars      int
+	TotalRepos      int
+	Followers       int
+	Following       int
 }
 
 type contributorDBResponse struct {
@@ -70,7 +80,7 @@ func GetContributorDataFromDatabase(db *gorm.DB, login string) (contributorDBRes
 
 func getUser(db *gorm.DB, login string) (contributorDBUser, error) {
 	var dbUser contributorDBUser
-	err := db.Table("users").Select("id, login, avatar_url, url, name, wallet").Where("login = ?", login).Scan(&dbUser).Error
+	err := db.Table("users").Select("id, login, avatar_url, url, name, wallet, bio, location, join_date, website_url, twitter_username, total_stars, total_repos, followers, following").Where("login = ?", login).Scan(&dbUser).Error
 	return dbUser, err
 }
 
@@ -266,7 +276,25 @@ func formatRecentActivities(entries []struct {
 	return out
 }
 
-// getTopRepositories fetches the top 3 repositories the user has contributed to, ordered by total authored activity
+// getTopRepositories fetches the top 3 repositories the user owns, sorted by stargazer_count DESC
+func getTopRepositories(db *gorm.DB, userLogin string) []repoInfo {
+	var topReposJSON string
+	db.Table("users").Select("top_repositories").Where("login = ?", userLogin).Scan(&topReposJSON)
+
+	var repos []repoInfo
+	if topReposJSON != "" {
+		err := json.Unmarshal([]byte(topReposJSON), &repos)
+		if err != nil {
+			repos = make([]repoInfo, 0)
+		}
+	}
+	if repos == nil {
+		repos = make([]repoInfo, 0)
+	}
+	return repos
+}
+
+// getTopContributedRepositories fetches the top 3 repositories the user has contributed to, ordered by total authored activity
 func getTopContributedRepositories(db *gorm.DB, userID string) []repoInfoWithContributions {
 	type repoAgg struct {
 		ID            string
@@ -292,6 +320,9 @@ func getTopContributedRepositories(db *gorm.DB, userID string) []repoInfoWithCon
 		if r.Contributions > 0 {
 			out = append(out, repoInfoWithContributions(r))
 		}
+	}
+	if out == nil {
+		return make([]repoInfoWithContributions, 0)
 	}
 	return out
 }

@@ -43,8 +43,8 @@ const ContributorContent = ({ login }: { login: string }) => {
           </Flex>
         </Flex>
         <Dialog.Close>
-          <IconButton variant='ghost' color='gray'>
-            <X size={16} />
+          <IconButton variant='outline' color='gray' size='1'>
+            <X width={16} height={16} />
           </IconButton>
         </Dialog.Close>
       </Flex>

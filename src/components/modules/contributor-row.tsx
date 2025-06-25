@@ -81,7 +81,9 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
             </Badge>
           )}
 
-          <ExternalLinkIcon className="shrink-0 text-blue-10" />
+          <Link href={`https://github.com/${contributor.login}`} target="_blank" rel="noopener noreferrer">
+            <ExternalLinkIcon className="shrink-0 text-blue-10" />
+          </Link>
         </Flex>
       </Cell>
 

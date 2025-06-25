@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"strings"
+	"time"
 
 	"gorm.io/gorm"
 )
@@ -42,21 +43,21 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 			AvatarUrl:                  dbUser.AvatarUrl,
 			URL:                        dbUser.URL,
 			Name:                       dbUser.Name,
-			Bio:                        "", // not in dbUser
-			Location:                   "", // not in dbUser
-			JoinDate:                   "", // not in dbUser
-			WebsiteUrl:                 "", // not in dbUser
-			TwitterUsername:            "", // not in dbUser
-			TotalStars:                 0,  // not in dbUser
-			TotalRepos:                 0,  // not in dbUser
-			Followers:                  0,  // not in dbUser
-			Following:                  0,  // not in dbUser
+			Bio:                        dbUser.Bio,
+			Location:                   dbUser.Location,
+			JoinDate:                   dbUser.JoinDate.Format(time.RFC3339),
+			WebsiteUrl:                 dbUser.WebsiteUrl,
+			TwitterUsername:            dbUser.TwitterUsername,
+			TotalStars:                 dbUser.TotalStars,
+			TotalRepos:                 dbUser.TotalRepos,
+			Followers:                  dbUser.Followers,
+			Following:                  dbUser.Following,
 			TotalCommits:               dbData.TotalCommits,
 			TotalPullRequests:          dbData.TotalPullRequests,
 			TotalIssues:                dbData.TotalIssues,
 			RecentIssues:               dbData.RecentIssues,
 			RecentPullRequests:         dbData.RecentPullRequests,
-			TopRepositories:            []repoInfo{}, // not available from DB, return empty array
+			TopRepositories:            getTopRepositories(db, dbUser.Login),
 			Wallet:                     dbUser.Wallet,
 			GnoBalance:                 gnoBalance,
 			ContributionsPerDay:        dbData.ContributionsPerDay,
