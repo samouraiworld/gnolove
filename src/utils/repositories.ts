@@ -1,4 +1,3 @@
-import { TimeFilter } from '@/util/github';
 import { TRepository } from '@/util/schemas';
 
 export const getSelectedRepositoriesFromSearchParam = (

@@ -26,8 +26,8 @@ export const getTimeFilterFromSearchParam = (
   fallback = TimeFilter.ALL_TIME,
 ) => {
   return searchParam && typeof searchParam === 'string' && isTimeFilter(searchParam)
-  ? searchParam as TimeFilter
-  : fallback;
+    ? (searchParam as TimeFilter)
+    : fallback;
 };
 
 type CreatedAtKind = { createdAt: string | Date } | { created_at: string | Date } | { CreatedAt: string | Date };

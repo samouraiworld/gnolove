@@ -22,7 +22,6 @@ import useGetLastIssues from '@/hook/use-get-last-issues';
 import useGetNewContributors from '@/hook/use-get-new-contributors';
 
 import { getTimeFilterFromSearchParam, getLastMRs, TimeFilter } from '@/util/github';
-import { getContributorsWithScore } from '@/util/score';
 
 import REPOSITORY from '@/constant/repository';
 import VIDEOS from '@/constant/videos';
@@ -39,13 +38,13 @@ const ScoreboardPage = () => {
   const [exclude, setExclude] = useState<boolean>(initialExclude);
   const [selectedRepositories, setSelectedRepositories] = useState<string[]>(initialRepoIds);
 
-  const { data: repositories, isPending: isRepositoriesPending } = useGetRepositories();
+  const { data: repositories } = useGetRepositories();
 
   const { data: allTimeContributors, isPending: isAllTimePending } = useGetContributors({
     timeFilter: TimeFilter.ALL_TIME,
   });
 
-  const { data: milestone, isPending: isMilestonePending } = useGetMilestone();
+  const { data: milestone } = useGetMilestone();
   const { data: issues, isPending: isIssuesPending } = useGetLastIssues();
   const { data: newContributors, isPending: isNewContributorsPending } = useGetNewContributors();
 
