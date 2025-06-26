@@ -71,7 +71,7 @@ const Scoreboard = ({ ...props }: FlexProps) => {
     if (urlParams === currentParams) return;
 
     router.replace(`?${urlParams}`);
-  }, [timeFilter, exclude, selectedRepositories]);
+  }, [timeFilter, exclude, selectedRepositories, router, searchParams, buildSearchParams]);
 
   useEffect(() => {
     setFallbackMessage(fallbackMessages[Math.floor(Math.random() * fallbackMessages.length)]);
