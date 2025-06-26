@@ -3,6 +3,8 @@ package models
 import "time"
 
 type User struct {
+	// ... other fields ...
+	TopRepositories string `gorm:"column:top_repositories;type:text" json:"topRepositories"`
 	Login     string `json:"login"`
 	ID        string `gorm:"primarykey" json:"id"`
 	AvatarUrl string `json:"avatarURL"`

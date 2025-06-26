@@ -8,6 +8,7 @@ import ContributorRecentActivities from './contributor-recent-activities';
 import ContributorTopRepos from './contributor-top-repos';
 import ContributorContributions from './contributor-contributions';
 import { useState } from 'react';
+import ContributorAnalytics from './contributor-analytics';
 
 const ContributorContent = ({ login }: { login: string }) => {
   const { data: contributor } = useGetContributor(login);
@@ -24,43 +25,46 @@ const ContributorContent = ({ login }: { login: string }) => {
   };
 
   return (
-    <Flex direction='column' height='100%' overflow='hidden'>
+    <Flex direction='column' height='100%' overflow={{ md: 'hidden' }}>
       <Flex
         justify='between'
         align='center'
         mb='4'
       >
-        <Flex align='center' gap='2'>
+        <Flex direction={{ initial: 'column', md: 'row' }} align={{ initial: 'start', md: 'center' }} gap='2'>
           <Dialog.Title mb='0'>{contributor.name ?? contributor.login}</Dialog.Title>
-          <Badge color='gray' variant='soft' size='1'>
-            gnolove.world/@{contributor.login}
-          </Badge>
-          <Button variant='outline' size='1' onClick={handleCopy}>
-            {loginCopied ? (<Check size={12} />) : (<Copy size={12} />)}
-          </Button>
+          <Flex gap='1' align='center'>
+            <Badge color='gray' variant='soft' size='1'>
+              gnolove.world/@{contributor.login}
+            </Badge>
+            <Button variant='outline' size='1' onClick={handleCopy}>
+              {loginCopied ? (<Check size={12} />) : (<Copy size={12} />)}
+            </Button>
+          </Flex>
         </Flex>
         <Dialog.Close>
-          <IconButton variant='ghost' color='gray'>
-            <X size={16} />
+          <IconButton variant='outline' color='gray' size='1'>
+            <X width={16} height={16} />
           </IconButton>
         </Dialog.Close>
       </Flex>
 
       <Grid
         columns={{ initial: '1', md: '3' }}
-        gap='6'
-        style={{ flex: 1, minHeight: 0 }}
+        gap={{ initial: '0', md: '6' }}
+        minHeight={{ md: '0' }}
+        style={{ flex: 1 }}
       >
         {/* Left Column - Profile Info */}
-        <Box style={{ minHeight: 0 }}>
+        <Box minHeight={{ md: '0' }}>
           <ContributorProfile contributor={contributor} />
         </Box>
 
         {/* Right Column - Activity & Contributions */}
-        <Box style={{ gridColumn: 'span 2', minHeight: 0 }}>
+        <Box gridColumn='span 2' minHeight={{ md: '0' }}>
           <Flex direction='column' gap='4' height='100%'>
             {/* Metrics */}
-            <Grid columns='4' gap='4'>
+            <Grid columns={{ initial: '2', md: '4' }} mt={{ initial: '4', md: '0' }} gap='4'>
               <Card>
                 <Flex direction='column' align='center' gap='2' p='3'>
                   <Heading size='6'>{contributor.totalCommits}</Heading>
@@ -112,14 +116,18 @@ const ContributorContent = ({ login }: { login: string }) => {
 
             <Box minHeight='0' style={{ flex: 1 }}>
               {/* Tabs for different views */}
-              <Tabs.Root defaultValue='activity' style={{ display: 'flex', flexDirection: 'column', gap: '4', height: '100%' }}>
-                <Tabs.List>
+              <Tabs.Root defaultValue='analytics' style={{ display: 'flex', flexDirection: 'column', gap: '4', height: '100%' }}>
+                <Tabs.List style={{ minHeight: '40px' }}>
+                  <Tabs.Trigger value='analytics'>Analytics</Tabs.Trigger>
                   <Tabs.Trigger value='activity'>Recent Activity</Tabs.Trigger>
                   <Tabs.Trigger value='repositories'>Top Repositories</Tabs.Trigger>
                   <Tabs.Trigger value='contributions'>Contributions</Tabs.Trigger>
                 </Tabs.List>
 
-                <Box minHeight='0'>
+                <Box minHeight={{ md: '0' }}>
+                  <Tabs.Content value='analytics' style={{ height: '100%'}}>
+                    <ContributorAnalytics contributor={contributor} />
+                  </Tabs.Content>
                   <Tabs.Content value='activity' style={{ height: '100%'}}>
                     <ContributorRecentActivities contributor={contributor} />
                   </Tabs.Content>
