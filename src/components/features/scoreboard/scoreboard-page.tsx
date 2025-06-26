@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import Image from 'next/image';
 import NextLink from 'next/link';
@@ -8,7 +8,6 @@ import NextLink from 'next/link';
 import { Box, Flex, Grid, Heading, Spinner, Text } from '@radix-ui/themes';
 
 import MilestoneProgress from '@/feature/milestone-progress';
-import Scoreboard from '@/feature/scoreboard';
 
 import LayoutContainer from '@/layout/layout-container';
 
@@ -22,69 +21,26 @@ import useGetContributors from '@/hook/use-get-contributors';
 import useGetLastIssues from '@/hook/use-get-last-issues';
 import useGetMilestone from '@/hook/use-get-milestone';
 import useGetNewContributors from '@/hook/use-get-new-contributors';
-import useGetRepositories from '@/hook/use-get-repositories';
 
-import { getIds } from '@/util/array';
 import { getLastMRs, TimeFilter } from '@/util/github';
-import { TRepository } from '@/util/schemas';
-import { getContributorsWithScore } from '@/util/score';
 
 import REPOSITORY from '@/constant/repository';
 import VIDEOS from '@/constant/videos';
 
 import HeaderImage from '@/image/header.png';
 
-export interface ScoreboardPageProps {
-  timeFilter: TimeFilter;
-  exclude: boolean;
+import Scoreboard from '@/components/features/scoreboard/scoreboard';
 
-  selectedRepositories: TRepository[];
-}
-
-const ScoreboardPage = ({
-  timeFilter: defaultTimeFilter,
-  exclude: defaultExclude,
-  selectedRepositories: defaultSelectedRepositories,
-}: ScoreboardPageProps) => {
-  const [selectedRepositories, setSelectedRepositories] = useState(getIds(defaultSelectedRepositories));
-  const [exclude, setExclude] = useState(defaultExclude);
-  const [timeFilter, setTimeFilter] = useState(defaultTimeFilter);
-
-  const { data: allTimeContributors, isPending: isAllTimeContributorsPending } = useGetContributors({
+const ScoreboardPage = () => {
+  const { data: allTimeContributors, isPending: isAllTimePending } = useGetContributors({
     timeFilter: TimeFilter.ALL_TIME,
   });
 
-  const { data: contributors, isPending: isContributorsPending } = useGetContributors({
-    timeFilter,
-    exclude,
-    repositories: selectedRepositories,
-  });
-
-  const { data: milestone, isPending: isMilestonePending } = useGetMilestone();
+  const { data: milestone } = useGetMilestone();
   const { data: issues, isPending: isIssuesPending } = useGetLastIssues();
   const { data: newContributors, isPending: isNewContributorsPending } = useGetNewContributors();
-  const { data: repositories, isPending: isRepositoriesPending } = useGetRepositories();
-
-  const filteredContributors = useMemo(
-    () => getContributorsWithScore(contributors ?? []).filter(({ score }) => score),
-    [contributors],
-  );
 
   const lastMRs = useMemo(() => getLastMRs(allTimeContributors ?? [], 5), [allTimeContributors]);
-
-  if (
-    isAllTimeContributorsPending ||
-    isContributorsPending ||
-    isMilestonePending ||
-    isIssuesPending ||
-    isNewContributorsPending ||
-    isRepositoriesPending
-  )
-    return (
-      <Flex className="h-screen w-screen" justify="center" align="center">
-        <Spinner />
-      </Flex>
-    );
 
   return (
     <LayoutContainer>
@@ -92,7 +48,7 @@ const ScoreboardPage = ({
         <Image
           src={HeaderImage}
           alt="Minecraft heart on top of the words 'Gnolove Community Leaderboard'"
-          className="min-h-[200px] h-full w-full object-cover"
+          className="h-full min-h-[200px] w-full object-cover"
         />
       </Box>
 
@@ -112,21 +68,21 @@ const ScoreboardPage = ({
               👋 Help Wanted!
             </NextLink>
           </Heading>
-          <IssuesTable issues={issues ?? []} showLabels="on-hover" />
+          {isIssuesPending ? <Spinner /> : <IssuesTable issues={issues ?? []} showLabels="on-hover" />}
         </Flex>
 
         <Flex direction="column" gap="4">
           <Heading as="h2" weight="bold" size="6" mt="6">
             ✔️ Freshly Merged
           </Heading>
-          <PrsTable prs={lastMRs} />
+          {isAllTimePending ? <Spinner /> : <PrsTable prs={lastMRs} />}
         </Flex>
 
         <Flex direction="column" gap="4">
           <Heading as="h2" weight="bold" size="6" mt="6">
             ⭐ New Rising gnome
           </Heading>
-          <UserTable users={newContributors ?? []} />
+          {isNewContributorsPending ? <Spinner /> : <UserTable users={newContributors ?? []} />}
         </Flex>
       </Grid>
 
@@ -136,16 +92,7 @@ const ScoreboardPage = ({
         </Heading>
       </Flex>
 
-      <Scoreboard
-        repositories={repositories ?? []}
-        contributors={filteredContributors}
-        exclude={exclude}
-        setExclude={setExclude}
-        selectedRepositories={selectedRepositories}
-        setSelectedRepositories={setSelectedRepositories}
-        timeFilter={timeFilter}
-        setTimeFilter={setTimeFilter}
-      />
+      <Scoreboard />
 
       <Text weight="bold" size="6" mt="6">
         🎥 Latest gnoland videos

@@ -2,18 +2,18 @@ import { isDefined } from '@/util/array';
 import { TEnhancedUserWithStats } from '@/util/schemas';
 
 export enum TimeFilter {
-  ALL_TIME = 'All Time',
-  YEARLY = 'Yearly',
-  MONTHLY = 'Monthly',
-  WEEKLY = 'Weekly',
+  ALL_TIME = 'all',
+  YEARLY = 'yearly',
+  MONTHLY = 'monthly',
+  WEEKLY = 'weekly',
 }
 
 /**
  * Util function to check if the value is a TimeFilter
  * @param value The value to check
  */
-export const isTimeFilter = (value: string): value is keyof typeof TimeFilter => {
-  return value in TimeFilter;
+export const isTimeFilter = (value: string): value is TimeFilter => {
+  return Object.values(TimeFilter).includes(value as TimeFilter);
 };
 
 /**
@@ -26,7 +26,7 @@ export const getTimeFilterFromSearchParam = (
   fallback = TimeFilter.ALL_TIME,
 ) => {
   return searchParam && typeof searchParam === 'string' && isTimeFilter(searchParam)
-    ? TimeFilter[searchParam]
+    ? (searchParam as TimeFilter)
     : fallback;
 };
 
