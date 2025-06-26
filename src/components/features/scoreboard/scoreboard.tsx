@@ -13,7 +13,6 @@ import ContributorTable from '@/module/contributor-table';
 import useGetContributors from '@/hook/use-get-contributors';
 
 import { getTimeFilterFromSearchParam, TimeFilter } from '@/util/github';
-import { TRepository } from '@/util/schemas';
 import { getContributorsWithScore } from '@/util/score';
 import useGetRepositories from '@/hooks/use-get-repositories';
 
