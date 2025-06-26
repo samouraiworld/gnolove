@@ -41,8 +41,8 @@ jobs:
         event-type: deploy-image
         client-payload: >-
           ${{ toJson(
-            format(
-              '{"image":"ghcr.io/tonuser/gnolove-server:{0}"}',
-              steps.vars.outputs.tag
-            )
-              ) }}
+            {
+              image: format('ghcr.io/tonuser/gnolove-server:{0}', steps.vars.outputs.tag)
+            }
+          ) }}
+
