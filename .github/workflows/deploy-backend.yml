@@ -39,4 +39,10 @@ jobs:
         token: ${{ secrets.REPO_DEPLOY_PAT }}
         repository: TERITORI/full-nodes-infra
         event-type: deploy-image
-        # client-payload: '{"image": "ghcr.io/samouraiworld/gnolove-server:latest"}'
+        client-payload: >-
+          ${{ toJson(
+            format(
+              '{"image":"ghcr.io/tonuser/gnolove-server:{0}"}',
+              steps.vars.outputs.tag
+            )
+              ) }}
