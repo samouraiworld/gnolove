@@ -39,5 +39,5 @@ jobs:
         token: ${{ secrets.REPO_DEPLOY_PAT }}
         repository: TERITORI/full-nodes-infra
         event-type: deploy-image
-        client-payload: ${{ format('image:ghcr.io/{0}/gnolove-server:{1}',${{ github.repository_owner }} ,${{ steps.vars.outputs.tag }}) }}
+        client-payload: ${{ format('{"image":"ghcr.io/{0}/gnolove-server:{1}"}', github.repository_owner, steps.vars.outputs.tag) }}
 
