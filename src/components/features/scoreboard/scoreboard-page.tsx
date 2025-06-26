@@ -1,45 +1,37 @@
 'use client';
 
-import { useMemo, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useMemo } from 'react';
+
 import Image from 'next/image';
 import NextLink from 'next/link';
 
 import { Box, Flex, Grid, Heading, Spinner, Text } from '@radix-ui/themes';
 
-import LayoutContainer from '@/layout/layout-container';
 import MilestoneProgress from '@/feature/milestone-progress';
-import Scoreboard from '@/components/features/scoreboard/scoreboard';
+
+import LayoutContainer from '@/layout/layout-container';
+
 import IssuesTable from '@/module/issues-table';
 import PrsTable from '@/module/prs-table';
 import UserTable from '@/module/user-table';
+
 import YoutubeEmbeddedVideo from '@/element/youtube-embedded-video';
 
 import useGetContributors from '@/hook/use-get-contributors';
-import useGetRepositories from '@/hook/use-get-repositories';
-import useGetMilestone from '@/hook/use-get-milestone';
 import useGetLastIssues from '@/hook/use-get-last-issues';
+import useGetMilestone from '@/hook/use-get-milestone';
 import useGetNewContributors from '@/hook/use-get-new-contributors';
 
-import { getTimeFilterFromSearchParam, getLastMRs, TimeFilter } from '@/util/github';
+import { getLastMRs, TimeFilter } from '@/util/github';
 
 import REPOSITORY from '@/constant/repository';
 import VIDEOS from '@/constant/videos';
+
 import HeaderImage from '@/image/header.png';
 
+import Scoreboard from '@/components/features/scoreboard/scoreboard';
+
 const ScoreboardPage = () => {
-  const searchParams = useSearchParams();
-
-  const initialTimeFilter = getTimeFilterFromSearchParam(searchParams.get('f'), TimeFilter.MONTHLY);
-  const initialExclude = !!searchParams.get('e');
-  const initialRepoIds = searchParams.get('r')?.split(',') ?? [];
-
-  const [timeFilter, setTimeFilter] = useState<TimeFilter>(initialTimeFilter);
-  const [exclude, setExclude] = useState<boolean>(initialExclude);
-  const [selectedRepositories, setSelectedRepositories] = useState<string[]>(initialRepoIds);
-
-  const { data: repositories } = useGetRepositories();
-
   const { data: allTimeContributors, isPending: isAllTimePending } = useGetContributors({
     timeFilter: TimeFilter.ALL_TIME,
   });
@@ -56,7 +48,7 @@ const ScoreboardPage = () => {
         <Image
           src={HeaderImage}
           alt="Minecraft heart on top of the words 'Gnolove Community Leaderboard'"
-          className="min-h-[200px] h-full w-full object-cover"
+          className="h-full min-h-[200px] w-full object-cover"
         />
       </Box>
 
@@ -100,15 +92,7 @@ const ScoreboardPage = () => {
         </Heading>
       </Flex>
 
-      <Scoreboard
-        repositories={repositories ?? []}
-        exclude={exclude}
-        setExclude={setExclude}
-        selectedRepositories={selectedRepositories}
-        setSelectedRepositories={setSelectedRepositories}
-        timeFilter={timeFilter}
-        setTimeFilter={setTimeFilter}
-      />
+      <Scoreboard />
 
       <Text weight="bold" size="6" mt="6">
         🎥 Latest gnoland videos

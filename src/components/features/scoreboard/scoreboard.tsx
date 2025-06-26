@@ -1,6 +1,9 @@
 'use client';
 
-import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+
+import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import { CheckIcon, Link1Icon, MixerHorizontalIcon } from '@radix-ui/react-icons';
 import { Badge, Button, CheckboxGroup, Flex, FlexProps, Popover, Spinner, Switch, Tabs, Text } from '@radix-ui/themes';
@@ -9,22 +12,10 @@ import ContributorTable from '@/module/contributor-table';
 
 import useGetContributors from '@/hook/use-get-contributors';
 
-import { TimeFilter } from '@/util/github';
+import { getTimeFilterFromSearchParam, TimeFilter } from '@/util/github';
 import { TRepository } from '@/util/schemas';
 import { getContributorsWithScore } from '@/util/score';
-
-export interface ScoreboardProps {
-  repositories: TRepository[];
-
-  selectedRepositories: string[];
-  setSelectedRepositories: Dispatch<SetStateAction<string[]>>;
-
-  exclude: boolean;
-  setExclude: Dispatch<SetStateAction<boolean>>;
-
-  timeFilter: TimeFilter;
-  setTimeFilter: Dispatch<SetStateAction<TimeFilter>>;
-}
+import useGetRepositories from '@/hooks/use-get-repositories';
 
 const TIMEFILTER_MAP = {
   [TimeFilter.ALL_TIME]: 'All time',
@@ -40,19 +31,22 @@ const fallbackMessages = [
   'No gnomes contributed during this time — maybe they’re on a break? 🧙‍♂️',
 ];
 
-const Scoreboard = ({
-  repositories,
-  selectedRepositories,
-  setSelectedRepositories,
-  timeFilter,
-  setTimeFilter,
-  exclude,
-  setExclude,
-  ...props
-}: ScoreboardProps & FlexProps) => {
+const Scoreboard = ({ ...props }: FlexProps) => {
+  const router = useRouter();
   const [copied, setCopied] = useState(false);
   const [fallbackMessage, setFallbackMessage] = useState('');
 
+  const searchParams = useSearchParams();
+
+  const initialTimeFilter = getTimeFilterFromSearchParam(searchParams.get('f'), TimeFilter.MONTHLY);
+  const initialExclude = !!searchParams.get('e');
+  const initialRepoIds = searchParams.get('r')?.split(',') ?? [];
+
+  const [timeFilter, setTimeFilter] = useState<TimeFilter>(initialTimeFilter);
+  const [exclude, setExclude] = useState<boolean>(initialExclude);
+  const [selectedRepositories, setSelectedRepositories] = useState<string[]>(initialRepoIds);
+
+  const { data: repositories = [] } = useGetRepositories();
   const { data: contributors, isPending } = useGetContributors({
     timeFilter,
     exclude,
@@ -64,19 +58,29 @@ const Scoreboard = ({
     [contributors],
   );
 
+  const buildSearchParams = () => {
+    const params = new URLSearchParams();
+    params.set('f', timeFilter);
+    if (exclude) params.set('e', '1');
+    if (selectedRepositories.length) params.set('r', selectedRepositories.join(','));
+    return params;
+  };
+
+  useEffect(() => {
+    const urlParams = buildSearchParams().toString();
+    const currentParams = searchParams.toString();
+    if (urlParams === currentParams) return;
+
+    router.replace(`?${urlParams}`);
+  }, [timeFilter, exclude, selectedRepositories]);
+
   useEffect(() => {
     setFallbackMessage(fallbackMessages[Math.floor(Math.random() * fallbackMessages.length)]);
   }, []);
 
   const handleCopyUrl = () => {
-    const params = new URLSearchParams();
-    params.set('f', timeFilter);
-    if (exclude) params.set('e', '1');
-    if (selectedRepositories.length) params.set('r', selectedRepositories.join(','));
-
-    const url = `${window.location.origin}/?${params.toString()}`;
+    const url = `${window.location.origin}/?${buildSearchParams().toString()}`;
     navigator.clipboard.writeText(url);
-
     setCopied(true);
     setTimeout(() => setCopied(false), 1500);
   };
@@ -93,7 +97,13 @@ const Scoreboard = ({
         </Tabs.List>
       </Tabs.Root>
 
-      <Flex direction={{ initial: 'column', sm: 'row' }} gap="2" width="100%" justify={{ initial: 'start', sm: 'between' }} align={{ initial: 'start', sm: 'center' }}>
+      <Flex
+        direction={{ initial: 'column', sm: 'row' }}
+        gap="2"
+        width="100%"
+        justify={{ initial: 'start', sm: 'between' }}
+        align={{ initial: 'start', sm: 'center' }}
+      >
         <label htmlFor="excludeCoreTeam" className="my-2 flex items-center gap-1">
           <Switch checked={exclude} onCheckedChange={setExclude} id="excludeCoreTeam" />
           <span className="flex items-center gap-2">
