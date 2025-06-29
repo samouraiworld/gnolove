@@ -5,14 +5,14 @@ import (
 )
 
 type Issue struct {
-	CreatedAt    time.Time  `json:"createdAt"`
+	CreatedAt    time.Time  `json:"createdAt" gorm:"index:idx_issues_author_created,priority:2"`
 	UpdatedAt    time.Time  `json:"updatedAt"`
 	ID           string     `json:"id"`
 	RepositoryID string     `json:"repositoryID" gorm:"index"`
 	Number       int        `json:"number"`
 	State        string     `json:"state"`
 	Title        string     `json:"title"`
-	AuthorID     string     `json:"authorID" gorm:"index"`
+	AuthorID     string     `json:"authorID" gorm:"index;index:idx_issues_author_created,priority:1"`
 	Author       *User      `json:"author"`
 	Labels       []Label    `gorm:"many2many:issue_labels" json:"labels"`
 	MilestoneID  string     `json:"milestoneID"`

@@ -293,14 +293,16 @@ func getTopContributedRepositories(db *gorm.DB, userID string) []repoInfoWithCon
 	}
 	var repos []repoAgg
 	query := `
-		SELECT r.id,
-			COALESCE(COUNT(DISTINCT c.id), 0) + COALESCE(COUNT(DISTINCT pr.id), 0) + COALESCE(COUNT(DISTINCT i.id), 0) AS total_authored
-		FROM repositories r
-		LEFT JOIN commits c ON c.repository_id = r.id AND c.author_id = ?
-		LEFT JOIN pull_requests pr ON pr.repository_id = r.id AND pr.author_id = ?
-		LEFT JOIN issues i ON i.repository_id = r.id AND i.author_id = ?
-		GROUP BY r.id
-		ORDER BY total_authored DESC
+		SELECT repository_id as id, SUM(cnt) as contributions
+		FROM (
+			SELECT repository_id, COUNT(*) as cnt FROM commits WHERE author_id = ? GROUP BY repository_id
+			UNION ALL
+			SELECT repository_id, COUNT(*) as cnt FROM pull_requests WHERE author_id = ? GROUP BY repository_id
+			UNION ALL
+			SELECT repository_id, COUNT(*) as cnt FROM issues WHERE author_id = ? GROUP BY repository_id
+		) as all_contribs
+		GROUP BY repository_id
+		ORDER BY contributions DESC
 		LIMIT 3
 	`
 	db.Raw(query, userID, userID, userID).Scan(&repos)
