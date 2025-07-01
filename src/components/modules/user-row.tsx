@@ -31,7 +31,7 @@ const UserRow = ({ user }: UserRowProps) => {
             className="-my-1 shrink-0 overflow-hidden rounded-full"
           />
 
-          <Text className="w-full truncate">{user.name ?? user.login}</Text>
+          <Text className="w-full truncate">{user.name || user.login}</Text>
 
           <ExternalLinkIcon className="shrink-0 text-blue-10" />
         </Flex>

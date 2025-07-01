@@ -32,7 +32,7 @@ const ContributorContent = ({ login }: { login: string }) => {
         mb='4'
       >
         <Flex direction={{ initial: 'column', md: 'row' }} align={{ initial: 'start', md: 'center' }} gap='2'>
-          <Dialog.Title mb='0'>{contributor.name ?? contributor.login}</Dialog.Title>
+          <Dialog.Title mb='0'>{contributor.name || contributor.login}</Dialog.Title>
           <Flex gap='1' align='center'>
             <Badge color='gray' variant='soft' size='1'>
               gnolove.world/@{contributor.login}

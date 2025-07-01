@@ -71,7 +71,7 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
 
           <Link href={`/@${contributor.login}`} className="min-w-0 max-w-[160px]">
             <Text truncate className="block overflow-hidden text-ellipsis whitespace-nowrap">
-              {contributor.name ?? contributor.login}
+              {contributor.name || contributor.login}
             </Text>
           </Link>
 
