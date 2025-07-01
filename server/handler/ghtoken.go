@@ -156,3 +156,36 @@ func getGithubUserByCode(code string) (*github.User, string, error) {
 
 	return user, token.AccessToken, nil
 }
+
+type linkBody struct {
+	Address string `json:"address"`
+	Login   string `json:"login"`
+}
+
+func HandleLink(db *gorm.DB) func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+
+		var body linkBody
+		if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(resCallback{Error: err.Error()})
+			return
+		}
+
+		if body.Address == "" || body.Login == "" {
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(resCallback{Error: "address or login not found"})
+			return
+		}
+
+		err := linkAddressToUser(db, body.Address, body.Login)
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(resCallback{Error: err.Error()})
+			return
+		}
+
+		json.NewEncoder(w).Encode(resCallback{Success: "true"})
+	}
+}
