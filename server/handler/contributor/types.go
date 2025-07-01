@@ -51,6 +51,7 @@ type githubUserResponse struct {
 	TopRepositories            []repoInfo                  `json:"topRepositories"`
 	Wallet                     string                      `json:"wallet"`
 	GnoBalance                 string                      `json:"gnoBalance"`
+	RenderOutput               string                      `json:"renderOutput"`
 	CommitsPerMonth            []TimeCount                 `json:"commitsPerMonth"`
 	PullRequestsPerMonth       []TimeCount                 `json:"pullRequestsPerMonth"`
 	IssuesPerMonth             []TimeCount                 `json:"issuesPerMonth"`
