@@ -36,7 +36,7 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
       <Dialog.Trigger>{children}</Dialog.Trigger>
 
       <Dialog.Content maxWidth="550px">
-        <Dialog.Title>{user.name ?? user.login} contributions</Dialog.Title>
+        <Dialog.Title>{user.name || user.login} contributions</Dialog.Title>
         <Dialog.Description size="2" mb="4">
           Get information about all the contribution
         </Dialog.Description>
