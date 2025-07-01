@@ -95,9 +95,10 @@ func main() {
 	router.HandleFunc("/getIssues", handler.GetIssues(database))
 	router.HandleFunc("/milestones/{number}", handler.GetMilestone(database))
 	router.HandleFunc("/contributors/newest", handler.HandleGetNewestContributors(database))
-	router.HandleFunc("/verifyGithubAccount", handler.HandleVerifyGithubAccount(signer))
+	router.HandleFunc("/verifyGithubAccount", handler.HandleVerifyGithubAccount(signer, database))
 	router.HandleFunc("/getGithubUserAndTokenByCode", handler.HandleGetGithubUserAndTokenByCode(signer, database))
 	router.HandleFunc("/contributors/{login}", contributor.HandleGetContributor(database))
+	router.Post("/link", handler.HandleLink(database))
 
 	logger.Infof("Server running on port %d", port)
 	err = http.ListenAndServe(fmt.Sprintf(":%d", port), router)
