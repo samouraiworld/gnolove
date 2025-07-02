@@ -22,7 +22,7 @@ interface MilestoneListProps {
   }>;
 }
 
-const MilestoneList = ({ issues, milestones = [] }: MilestoneListProps) => {
+const MilestoneList = ({ issues }: MilestoneListProps) => {
   const [openColumnCollapsed, setOpenColumnCollapsed] = useState(false);
   const [closedColumnCollapsed, setClosedColumnCollapsed] = useState(false);
 
