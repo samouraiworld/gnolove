@@ -1,10 +1,10 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { memo, useCallback, useMemo, useState, useTransition } from 'react';
 
 import MilestoneListItem from './milestone-list-item';
 import { CheckCircledIcon, CircleIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
-import { Grid, Flex, Text, Badge, Box, Card, Separator, IconButton } from '@radix-ui/themes';
+import { Grid, Flex, Text, Badge, Box, Card, Separator, IconButton, Spinner } from '@radix-ui/themes';
 
 import { TIssue } from '@/util/schemas';
 
@@ -22,19 +22,8 @@ interface MilestoneListProps {
   }>;
 }
 
-const MilestoneList = ({ issues }: MilestoneListProps) => {
-  const [openColumnCollapsed, setOpenColumnCollapsed] = useState(false);
-  const [closedColumnCollapsed, setClosedColumnCollapsed] = useState(false);
-
-  const { openIssues, closedIssues } = useMemo(
-    () => ({
-      openIssues: issues.filter((issue) => issue.state.toLowerCase() === 'open').sort(cmpCreatedAt),
-      closedIssues: issues.filter((issue) => issue.state.toLowerCase() === 'closed').sort(cmpCreatedAt),
-    }),
-    [issues],
-  );
-
-  const KanbanColumn = ({
+const KanbanColumn = memo(
+  ({
     title,
     issues,
     badgeColor,
@@ -50,43 +39,71 @@ const MilestoneList = ({ issues }: MilestoneListProps) => {
     icon: React.ReactNode;
     isCollapsed: boolean;
     onToggleCollapse: () => void;
-  }) => (
-    <Card size="1" variant="ghost" style={{ height: 'fit-content' }}>
-      <Flex align="center" justify="between" mb="4" p="3">
-        <Flex align="center" gap="2">
-          {icon}
-          <Text size="4" weight="bold">
-            {title}
-          </Text>
-          <Badge size="2" color={badgeColor} variant="soft">
-            {count}
-          </Badge>
+  }) => {
+    const [isPending, startTransition] = useTransition();
+
+    const handleToggle = useCallback(() => {
+      startTransition(() => {
+        onToggleCollapse();
+      });
+    }, [onToggleCollapse]);
+
+    return (
+      <Card size="1" variant="ghost" style={{ height: 'fit-content' }}>
+        <Flex align="center" justify="between" mb="4" p="3">
+          <Flex align="center" gap="2">
+            {icon}
+            <Text size="4" weight="bold">
+              {title}
+            </Text>
+            <Badge size="2" color={badgeColor} variant="soft">
+              {count}
+            </Badge>
+          </Flex>
+          <IconButton variant="ghost" size="2" onClick={handleToggle} disabled={isPending}>
+            {isPending ? (
+              <Spinner size="1" />
+            ) : isCollapsed ? (
+              <ChevronDownIcon width="16" height="16" />
+            ) : (
+              <ChevronUpIcon width="16" height="16" />
+            )}
+          </IconButton>
         </Flex>
-        <IconButton variant="ghost" size="2" onClick={onToggleCollapse} style={{ cursor: 'pointer' }}>
-          {isCollapsed ? <ChevronDownIcon width="16" height="16" /> : <ChevronUpIcon width="16" height="16" />}
-        </IconButton>
-      </Flex>
 
-      {!isCollapsed && (
-        <>
-          <Separator size="4" mb="4" />
+        {!isCollapsed && (
+          <>
+            <Separator size="4" mb="4" />
+            <Box px="3" pb="3">
+              <Flex direction="column" gap="3">
+                {issues.length > 0 ? (
+                  issues.map((issue) => <MilestoneListItem key={issue.id} issue={issue} />)
+                ) : (
+                  <Box p="8">
+                    <Text size="3" color="gray">
+                      {`No ${title.toLowerCase()}`}
+                    </Text>
+                  </Box>
+                )}
+              </Flex>
+            </Box>
+          </>
+        )}
+      </Card>
+    );
+  },
+);
 
-          <Box px="3" pb="3">
-            <Flex direction="column" gap="3">
-              {issues.length > 0 ? (
-                issues.map((issue) => <MilestoneListItem key={issue.id} issue={issue} />)
-              ) : (
-                <Box p="8">
-                  <Text size="3" color="gray">
-                    {`No ${title.toLowerCase()}`}
-                  </Text>
-                </Box>
-              )}
-            </Flex>
-          </Box>
-        </>
-      )}
-    </Card>
+const MilestoneList = ({ issues }: MilestoneListProps) => {
+  const [openColumnCollapsed, setOpenColumnCollapsed] = useState(false);
+  const [closedColumnCollapsed, setClosedColumnCollapsed] = useState(false);
+
+  const { openIssues, closedIssues } = useMemo(
+    () => ({
+      openIssues: issues.filter((issue) => issue.state.toLowerCase() === 'open').sort(cmpCreatedAt),
+      closedIssues: issues.filter((issue) => issue.state.toLowerCase() === 'closed').sort(cmpCreatedAt),
+    }),
+    [issues],
   );
 
   return (
