@@ -9,6 +9,7 @@ import ContributorTopRepos from './contributor-top-repos';
 import ContributorContributions from './contributor-contributions';
 import { useState } from 'react';
 import ContributorAnalytics from './contributor-analytics';
+import ContributorRealmHome from '@/components/features/contributor/contributor-realm-home';
 
 const ContributorContent = ({ login }: { login: string }) => {
   const { data: contributor } = useGetContributor(login);
@@ -122,6 +123,7 @@ const ContributorContent = ({ login }: { login: string }) => {
                   <Tabs.Trigger value='activity'>Recent Activity</Tabs.Trigger>
                   <Tabs.Trigger value='repositories'>Top Repositories</Tabs.Trigger>
                   <Tabs.Trigger value='contributions'>Contributions</Tabs.Trigger>
+                  <Tabs.Trigger value='Realm Home'>Realm Home</Tabs.Trigger>
                 </Tabs.List>
 
                 <Box minHeight={{ md: '0' }}>
@@ -138,6 +140,10 @@ const ContributorContent = ({ login }: { login: string }) => {
 
                   <Tabs.Content value='contributions' style={{ height: '100%'}}>
                     <ContributorContributions contributor={contributor} />
+                  </Tabs.Content>
+
+                  <Tabs.Content value='Realm Home' style={{ height: '100%'}}>
+                    <ContributorRealmHome contributor={contributor} />
                   </Tabs.Content>
                 </Box>
               </Tabs.Root>

@@ -31,11 +31,7 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 			return
 		}
 
-		gnoBalance := "0"
-		if dbUser.Wallet != "" {
-			balanceStruct, _ := GetContributorOnChainData(dbUser.Wallet)
-			gnoBalance = balanceStruct.GnoBalance
-		}
+		contributorData, _ := GetContributorOnChainData(dbUser.Wallet, dbUser.Name)
 
 		resp := githubUserResponse{
 			ID:                         dbUser.ID,
@@ -59,7 +55,8 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 			RecentPullRequests:         dbData.RecentPullRequests,
 			TopRepositories:            getTopRepositories(db, dbUser.Login),
 			Wallet:                     dbUser.Wallet,
-			GnoBalance:                 gnoBalance,
+			GnoBalance:                 contributorData.GnoBalance,
+			RenderOutput:               contributorData.RenderOutput,
 			ContributionsPerDay:        dbData.ContributionsPerDay,
 			CommitsPerMonth:            dbData.CommitsPerMonth,
 			PullRequestsPerMonth:       dbData.PullRequestsPerMonth,

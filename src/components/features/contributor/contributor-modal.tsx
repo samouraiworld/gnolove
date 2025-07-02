@@ -19,7 +19,7 @@ const ContributorModal: FC<{ children: React.ReactNode }> = ({ children }) => {
     <Dialog.Root open={true} onOpenChange={handleClose}>
       <Dialog.Content
         height='88vh'
-        maxWidth='1000px'
+        maxWidth='1300px'
         style={{ overflow: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
       >
         { children }

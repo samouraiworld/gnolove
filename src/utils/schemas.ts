@@ -254,6 +254,7 @@ export const ContributorSchema = z.object({
   recentPullRequests: z.array(ContributorActivitySchema),
   topRepositories: z.array(ContributorRepositorySchema),
   gnoBalance: z.string(),
+  renderOutput: z.string(),
   wallet: z.string(),
   commitsPerMonth: z.array(TimeCountSchema),
   pullRequestsPerMonth: z.array(TimeCountSchema),
