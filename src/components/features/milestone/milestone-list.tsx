@@ -2,7 +2,7 @@
 
 import { memo, useCallback, useMemo, useState, useTransition } from 'react';
 
-import MilestoneListItem from './milestone-list-item';
+import MilestoneListItem from '@/components/features/milestone/milestone-list-item';
 import { CheckCircledIcon, CircleIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 import { Grid, Flex, Text, Badge, Box, Card, Separator, IconButton, Spinner } from '@radix-ui/themes';
 
@@ -93,6 +93,8 @@ const KanbanColumn = memo(
     );
   },
 );
+
+KanbanColumn.displayName = 'KanbanColumn';
 
 const MilestoneList = ({ issues }: MilestoneListProps) => {
   const [openColumnCollapsed, setOpenColumnCollapsed] = useState(false);
