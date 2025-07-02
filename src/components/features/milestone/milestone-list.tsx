@@ -76,15 +76,7 @@ const MilestoneList = ({ issues }: MilestoneListProps) => {
               {issues.length > 0 ? (
                 issues.map((issue) => <MilestoneListItem key={issue.id} issue={issue} />)
               ) : (
-                <Box
-                  p="8"
-                  style={{
-                    border: '2px dashed var(--gray-6)',
-                    borderRadius: 'var(--radius-3)',
-                    textAlign: 'center',
-                    backgroundColor: 'var(--gray-2)',
-                  }}
-                >
+                <Box p="8">
                   <Text size="3" color="gray">
                     {`No ${title.toLowerCase()}`}
                   </Text>
@@ -100,7 +92,7 @@ const MilestoneList = ({ issues }: MilestoneListProps) => {
   return (
     <Box mt="6">
       <Card size="2" variant="surface" mb="6">
-        <Flex align="center" justify="between" p="4">
+        <Flex direction={{ initial: 'column', sm: 'row' }} align="center" justify="between" p="4">
           <Text size="4" weight="medium">
             Milestone progress
           </Text>
@@ -113,7 +105,7 @@ const MilestoneList = ({ issues }: MilestoneListProps) => {
               <CheckCircledIcon color="gray" />
               <Text size="3">{closedIssues.length} closed</Text>
             </Flex>
-            <Separator orientation="vertical" size="2" />
+            <Separator orientation="vertical" size="2" className="hidden sm:block" />
             <Text size="3" weight="bold">
               Total: {issues.length}
             </Text>
