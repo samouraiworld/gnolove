@@ -110,7 +110,7 @@ const AnalyticsRecentActivity = ({ contributors, startDate }: Props) => {
         Recent activity
       </Heading>
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data} margin={{ top: 20, right: 60, bottom: 20, left: 0 }}>
+        <BarChart data={data} margin={{ top: 20, right: 40, bottom: 20, left: -20 }}>
           <XAxis axisLine={false} dataKey="date" tick={{ fontSize: 10 }} tickLine={false} />
           <YAxis axisLine={false} tickLine={false} allowDecimals={false} tickFormatter={(value) => Math.abs(value).toFixed(0).toString()} />
           <Tooltip
