@@ -2,20 +2,11 @@
 
 import { ReactElement, useMemo } from 'react';
 
-import { Avatar, Card, Heading } from '@radix-ui/themes';
-import RechartTooltip from '@/components/elements/rechart-tooltip';
+import { Avatar, Card, Flex, Heading, Text } from '@radix-ui/themes';
 import { format, parseISO, compareAsc } from 'date-fns';
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  Customized,
-  CustomizedProps,
-} from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Customized, CustomizedProps } from 'recharts';
 
+import RechartTooltip from '@/components/elements/rechart-tooltip';
 import { TEnhancedUserWithStats } from '@/utils/schemas';
 
 const labelMap: Record<Props['type'], string> = {
@@ -34,6 +25,12 @@ type Props = {
   type: 'commits' | 'pullRequests' | 'issues';
 };
 
+interface Entry {
+  color: string;
+  name: string;
+  value: number;
+}
+
 const AnalyticsContributorLineChart = ({ contributors, type = 'commits' }: Props) => {
   const contributorFiltered = useMemo(
     () => contributors.filter((c) => (c[type]?.length || 0) > 0),
@@ -42,51 +39,51 @@ const AnalyticsContributorLineChart = ({ contributors, type = 'commits' }: Props
 
   const { data, avatarData } = useMemo(() => {
     const countByDate: Record<string, Record<string, number>> = {};
-  
+
     for (const c of contributorFiltered) {
       const list = c[type] || [];
       for (const item of list) {
         const rawDate = item.createdAt;
         const parsed = parseISO(rawDate);
         const date = format(parsed, 'yyyy-MM-dd');
-  
+
         if (!countByDate[date]) countByDate[date] = {};
         countByDate[date][c.login] = (countByDate[date][c.login] || 0) + 1;
       }
     }
-  
+
     const datesSorted = Object.keys(countByDate).sort((a, b) => compareAsc(parseISO(a), parseISO(b)));
     const contributorLogins = contributorFiltered.map((c) => c.login);
-  
+
     const cumulativeData: Record<string, number> = {};
     const cumulativeAvatar: Record<string, number> = {};
-  
+
     const data: ContributorDataLinePoint[] = [];
     const avatarData: ContributorDataLinePoint[] = [];
-  
+
     for (const date of datesSorted) {
       const rowData: ContributorDataLinePoint = { date };
       const rowAvatar: ContributorDataLinePoint = { date };
       const dailyContributors = countByDate[date] || {};
-  
+
       // All login even for days without acitivities
       for (const login of contributorLogins) {
         const daily = dailyContributors[login] || 0;
         cumulativeData[login] = (cumulativeData[login] || 0) + daily;
         rowData[login] = cumulativeData[login];
       }
-  
+
       // Only login with acitivities per day
       for (const login of Object.keys(dailyContributors)) {
         const daily = dailyContributors[login];
         cumulativeAvatar[login] = (cumulativeAvatar[login] || 0) + daily;
         rowAvatar[login] = cumulativeAvatar[login];
       }
-  
+
       data.push(rowData);
       avatarData.push(rowAvatar);
     }
-  
+
     return { data, avatarData };
   }, [contributorFiltered, type]);
 
@@ -96,12 +93,12 @@ const AnalyticsContributorLineChart = ({ contributors, type = 'commits' }: Props
     const xAxis: any = Object.values(xAxisMap)[0];
     const yAxis: any = Object.values(yAxisMap)[0];
     if (!xAxis || !yAxis) return null;
-  
+
     const scaleX = typeof xAxis?.scale === 'function' ? xAxis.scale : () => 0;
     const scaleY = typeof yAxis?.scale === 'function' ? yAxis.scale : () => 0;
-  
+
     const positionMap = new Map<string, number>();
-  
+
     return (
       <>
         {contributorFiltered.map((c, i) => {
@@ -109,16 +106,16 @@ const AnalyticsContributorLineChart = ({ contributors, type = 'commits' }: Props
           const avatarUrl = c.avatarUrl;
           const lastEntry = [...avatarData].reverse().find((d: any) => d[login] !== undefined);
           if (!lastEntry) return null;
-  
+
           const x = scaleX(lastEntry.date);
           const y = scaleY(lastEntry[login]);
-  
+
           const yKey = Math.round(y);
           const positionKey = `${yKey}`;
-          
+
           const offset = ((positionMap.get(positionKey) ?? 0) - 1) * 15;
           positionMap.set(positionKey, (positionMap.get(positionKey) || 0) + 1);
-  
+
           return (
             <foreignObject
               key={i}
@@ -143,9 +140,27 @@ const AnalyticsContributorLineChart = ({ contributors, type = 'commits' }: Props
       </Heading>
       <ResponsiveContainer minWidth={0} height="100%">
         <LineChart data={data} margin={{ top: 20, right: 40, bottom: 20, left: -20 }}>
-          <XAxis dataKey="date" tick={{ fontSize: 10 }} axisLine={false} tickLine={false} />
+          <XAxis dataKey="date" tick={{ fontSize: 10 }} axisLine={false} tickLine={false} tickMargin={10} minTickGap={8} />
           <YAxis axisLine={false} tickLine={false} allowDecimals={false} tickFormatter={(v) => v.toFixed(0)} />
-          <Tooltip content={<RechartTooltip />} />
+          <Tooltip
+            content={
+              <RechartTooltip
+                renderEntries={(payload) => {
+                  const sortedPayload = (payload as Entry[]).slice().sort((a, b) => b.value - a.value);
+                  return sortedPayload.map((entry, index) => (
+                    <Flex key={index} gap="1">
+                      <Text size="1" style={{ color: entry.color }}>
+                        {entry.name}:
+                      </Text>
+                      <Text size="1" weight="bold" style={{ color: entry.color }}>
+                        {entry.value}
+                      </Text>
+                    </Flex>
+                  ));
+                }}
+              />
+            }
+          />
           {contributorLogins.map((login, i) => (
             <Line
               key={login}
