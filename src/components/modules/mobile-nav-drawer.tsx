@@ -11,8 +11,12 @@ import MinecraftHeart from '@/image/minecraft-heart.png';
 
 import Footer from '@/components/modules/footer';
 import { MENU_ITEMS } from '@/constants/menu-items';
+import { useOffline } from '@/contexts/offline-context';
+import { cn } from '@/util/style';
 
 const MobileNavDrawer = () => {
+  const { isOffline } = useOffline();
+
   return (
     <div className="md:hidden">
       <Drawer.Root direction="left">
@@ -38,7 +42,7 @@ const MobileNavDrawer = () => {
                 <Flex direction="column" align="start" gap="6" mt="8" flexGrow="1">
                   {MENU_ITEMS.map((item) => (
                     <Drawer.Close asChild key={item.href}>
-                      <Link href={item.href}>
+                      <Link className={cn(isOffline && 'pointer-events-none')} href={item.href}>
                         <Button variant="ghost" size="4" asChild>
                           <span>
                             {item.label}

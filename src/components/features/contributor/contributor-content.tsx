@@ -9,11 +9,13 @@ import ContributorTopRepos from './contributor-top-repos';
 import ContributorContributions from './contributor-contributions';
 import { useState } from 'react';
 import ContributorAnalytics from './contributor-analytics';
+import { useOffline } from '@/contexts/offline-context';
 
 const ContributorContent = ({ login }: { login: string }) => {
   const { data: contributor } = useGetContributor(login);
   const [loginCopied, setLoginCopied] = useState(false);
-
+  const { isOffline } = useOffline();
+  
   if (!contributor) return (
     <Dialog.Title>Contributor not found</Dialog.Title>
   );
@@ -43,7 +45,7 @@ const ContributorContent = ({ login }: { login: string }) => {
           </Flex>
         </Flex>
         <Dialog.Close>
-          <IconButton variant='outline' color='gray' size='1'>
+          <IconButton disabled={isOffline} variant='outline' color='gray' size='1'>
             <X width={16} height={16} />
           </IconButton>
         </Dialog.Close>
