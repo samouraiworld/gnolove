@@ -17,6 +17,7 @@ import { cn } from '@/util/style';
 
 import TEAMS from '@/constant/teams';
 import Cell from '@/components/elements/cell';
+import { useOffline } from '@/contexts/offline-context';
 
 export interface ContributorRowProps {
   contributor: TEnhancedUserWithStatsAndScore;
@@ -26,6 +27,7 @@ export interface ContributorRowProps {
 }
 
 const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) => {
+  const { isOffline } = useOffline();
   const rankElement = useMemo(() => {
     if (rank < 3)
       return (
@@ -69,8 +71,14 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
             className="shrink-0 overflow-hidden rounded-full"
           />
 
-          <Link href={`/@${contributor.login}`} className="min-w-0 max-w-[160px]">
-            <Text truncate className="block overflow-hidden text-ellipsis whitespace-nowrap">
+          <Link
+            className={cn('min-w-0 max-w-[160px]', isOffline && 'pointer-events-none')}
+            href={isOffline ? '' : `/@${contributor.login}`}
+          >
+            <Text
+              truncate
+              className={cn('block overflow-hidden text-ellipsis whitespace-nowrap', isOffline && 'text-gray-8')}
+            >
               {contributor.name || contributor.login}
             </Text>
           </Link>

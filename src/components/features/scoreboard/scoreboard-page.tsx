@@ -30,6 +30,8 @@ import VIDEOS from '@/constant/videos';
 import HeaderImage from '@/image/header.png';
 
 import Scoreboard from '@/components/features/scoreboard/scoreboard';
+import { useOffline } from '@/contexts/offline-context';
+import { cn } from '@/util/style';
 
 const ScoreboardPage = () => {
   const { data: allTimeContributors, isPending: isAllTimePending } = useGetContributors({
@@ -42,6 +44,8 @@ const ScoreboardPage = () => {
 
   const lastMRs = useMemo(() => getLastMRs(allTimeContributors ?? [], 5), [allTimeContributors]);
 
+  const { isOffline } = useOffline();
+
   return (
     <LayoutContainer>
       <Box>
@@ -53,7 +57,7 @@ const ScoreboardPage = () => {
       </Box>
 
       {milestone && (
-        <NextLink href="/milestone">
+        <NextLink className={cn(isOffline && 'pointer-events-none')} href="/milestone">
           <MilestoneProgress milestone={milestone} />
         </NextLink>
       )}
