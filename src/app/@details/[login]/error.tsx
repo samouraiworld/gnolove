@@ -2,14 +2,17 @@
 
 import { Dialog, Button, IconButton, Flex } from '@radix-ui/themes';
 import { X } from 'lucide-react';
+import { useOffline } from '@/contexts/offline-context';
 
 const ErrorPage = ({ reset }: { reset: () => void }) => {
+  const { isOffline } = useOffline();
+
   return (
     <Flex direction='column'>
       <Flex justify='between'>
         <Dialog.Title>Something went wrong!</Dialog.Title>
         <Dialog.Close>
-          <IconButton variant='outline' color='gray' size='1'>
+          <IconButton disabled={isOffline} variant='outline' color='gray' size='1'>
             <X size={16} />
           </IconButton>
         </Dialog.Close>

@@ -1,11 +1,10 @@
+import '@/style/globals.css';
 import { ReactNode } from 'react';
 
 import { ThemeProvider } from 'next-themes';
 
 import { LinkNone2Icon } from '@radix-ui/react-icons';
 import { Box, Button, Flex, Theme } from '@radix-ui/themes';
-
-import '@/style/globals.css';
 
 import ThemeSwitch from '@/module/theme-switch';
 
@@ -21,6 +20,9 @@ import MobileNavDrawer from '@/components/modules/mobile-nav-drawer';
 import NavHeader from '@/components/modules/nav-header';
 
 import { Analytics } from '@vercel/analytics/next';
+
+import { OfflineProvider } from '@/contexts/offline-context';
+import OfflineBanner from '@/components/elements/offline-banner';
 
 interface RootLayoutProps {
   children?: ReactNode;
@@ -40,52 +42,55 @@ const RootLayout = ({ children, details }: RootLayoutProps) => {
       </head>
 
       <body>
-        <QueryClientWrapper>
-          <ThemeProvider defaultTheme="light" attribute="class">
-            <Theme>
-              <ToastProvider>
-                <AdenaProvider>
-                  <Toaster />
+        <OfflineProvider>
+          <QueryClientWrapper>
+            <ThemeProvider defaultTheme="light" attribute="class">
+              <Theme>
+                <ToastProvider>
+                  <AdenaProvider>
+                    <Toaster />
 
-                  <Box
-                    position="fixed"
-                    top="0"
-                    left="0"
-                    width="100%"
-                    p="2"
-                    className="z-50"
-                    style={{ background: 'var(--accent-1)', borderBottom: '1px solid var(--gray-a3)' }}
-                  >
-                    <Flex justify="between" align="center">
+                    <Box
+                      position="fixed"
+                      top="0"
+                      left="0"
+                      width="100%"
+                      p="2"
+                      className="z-50"
+                      style={{ background: 'var(--accent-1)', borderBottom: '1px solid var(--gray-a3)' }}
+                    >
+                      <Flex justify="between" align="center">
 
-                      <MobileNavDrawer />
-                      <NavHeader />
-                      <Flex gap="2" align="center" justify="end">
-                        <Flex gap="2" align="center" hidden>
-                          <AdenaAddress />
+                        <MobileNavDrawer />
+                        <NavHeader />
+                        <Flex gap="2" align="center" justify="end">
+                          <Flex gap="2" align="center" hidden>
+                            <AdenaAddress />
 
-                          <GithubLink>
-                            <Button variant="soft">
-                              <LinkNone2Icon />
-                              Link Github Account
-                            </Button>
-                          </GithubLink>
+                            <GithubLink>
+                              <Button variant="soft">
+                                <LinkNone2Icon />
+                                Link Github Account
+                              </Button>
+                            </GithubLink>
+                          </Flex>
+
+                          <ThemeSwitch />
                         </Flex>
-
-                        <ThemeSwitch />
                       </Flex>
-                    </Flex>
-                  </Box>
+                    </Box>
 
-                  {children}
+                    {children}
 
-                  {details}
-                </AdenaProvider>
-              </ToastProvider>
-            </Theme>
-          </ThemeProvider>
-        </QueryClientWrapper>
-        <Analytics />
+                    {details}
+                  </AdenaProvider>
+                </ToastProvider>
+              </Theme>
+            </ThemeProvider>
+          </QueryClientWrapper>
+          <OfflineBanner />
+          <Analytics />
+        </OfflineProvider>
       </body>
     </html>
   );
