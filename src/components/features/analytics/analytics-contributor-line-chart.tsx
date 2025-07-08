@@ -8,6 +8,8 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Customized
 
 import RechartTooltip from '@/components/elements/rechart-tooltip';
 import { TEnhancedUserWithStats } from '@/utils/schemas';
+import { ArrowDownToLine } from 'lucide-react';
+import CSVExportButton from '@/components/elements/csv-export-button';
 
 const labelMap: Record<Props['type'], string> = {
   commits: 'Commits',
@@ -174,6 +176,13 @@ const AnalyticsContributorLineChart = ({ contributors, type = 'commits' }: Props
           <Customized component={AvatarRenderer} />
         </LineChart>
       </ResponsiveContainer>
+      <CSVExportButton
+        className='absolute top-2 right-4'
+        data={data}
+        filename={`${labelMap[type]} activity`.toUpperCase().split(' ').join('-')}
+      >
+        <ArrowDownToLine size={20} />
+      </CSVExportButton>
     </Card>
   );
 };

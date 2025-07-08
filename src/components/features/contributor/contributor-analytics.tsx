@@ -6,8 +6,8 @@ import RechartTooltip from '@/components/elements/rechart-tooltip';
 import { Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import ContributionsHeatmap from './contributions-heatmap';
 import { useMemo } from 'react';
-
-
+import CSVExportButton from '@/components/elements/csv-export-button';
+import { ArrowDownToLine } from 'lucide-react';
 
 const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) => {
   const monthlyActivityData = useMemo(() => {
@@ -84,7 +84,7 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
   return (
     <Card style={{ height: '100%' }}>
       <Flex direction='column' gap='4' height='100%' overflowY='auto'>
-        <Card style={{ minHeight: 240 }}>
+        <Card style={{ minHeight: 260 }}>
           <Flex direction='column' gap='3'>
             <Heading size='3'>Contribution Activity</Heading>
             <Text size='2' color='gray'>
@@ -92,6 +92,13 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
             </Text>
             <ContributionsHeatmap data={heatmapData} />
           </Flex>
+          <CSVExportButton
+            className='absolute top-2 right-2'
+            data={heatmapData}
+            filename='contributions-heatmap'
+          >
+            <ArrowDownToLine size={20} />
+          </CSVExportButton>
         </Card>
 
         {/* Charts Grid */}
@@ -123,6 +130,13 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
                   </ResponsiveContainer>
                 </Box>
               </Flex>
+              <CSVExportButton
+                className='absolute top-2 right-2'
+                data={repositoryData}
+                filename='repository-contributions'
+              >
+                <ArrowDownToLine size={20} />
+              </CSVExportButton>
             </Card>
           )}
           {/* Contribution Types Donut Chart */}
@@ -150,6 +164,13 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
                   </PieChart>
                 </ResponsiveContainer>
               </Box>
+              <CSVExportButton
+                className='absolute top-2 right-2'
+                data={contributionTypeData}
+                filename='contribution-types'
+              >
+                <ArrowDownToLine size={20} />
+              </CSVExportButton>
             </Flex>
           </Card>
 
@@ -178,6 +199,13 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
                   </ResponsiveContainer>
                 </Box>
               </Flex>
+              <CSVExportButton
+                className='absolute top-2 right-2'
+                data={languageData}
+                filename='language-distribution'
+              >
+                <ArrowDownToLine size={20} />
+              </CSVExportButton>
             </Card>
           )}
           
@@ -202,6 +230,13 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
                   </BarChart>
                 </ResponsiveContainer>
               </Box>
+              <CSVExportButton
+                className='absolute top-2 right-2'
+                data={monthlyActivityData}
+                filename='monthly-activity-trend'
+              >
+                <ArrowDownToLine size={20} />
+              </CSVExportButton>
             </Flex>
           </Card>
         </Grid>
