@@ -40,6 +40,6 @@ jobs:
             key: ${{ secrets.SSH_PRIVATE_KEY }}
             port: 22
             script: |
-              cd /chemin/vers/ton/projet
+              cd Gnolove
               docker compose pull
               docker compose up -d
