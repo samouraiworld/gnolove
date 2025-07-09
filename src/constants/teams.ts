@@ -75,6 +75,7 @@ const TEAMS: Team[] = [
       'naim-ea',
       'louis14448',
       'pr0m3th3usEx',
+      'Davphla',
     ],
   },
   {
