@@ -7,6 +7,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/Khan/genqlient/graphql"
 	"github.com/samouraiworld/topofgnomes/server/models"
 	"github.com/shurcooL/githubv4"
 	"go.uber.org/zap"
@@ -16,10 +17,11 @@ import (
 )
 
 type Syncer struct {
-	db           *gorm.DB
-	client       *githubv4.Client
-	repositories []models.Repository
-	logger       *zap.SugaredLogger
+	db            *gorm.DB
+	client        *githubv4.Client
+	repositories  []models.Repository
+	logger        *zap.SugaredLogger
+	graphqlClient graphql.Client
 }
 
 func NewSyncer(db *gorm.DB, repositories []models.Repository, logger *zap.SugaredLogger) *Syncer {
@@ -28,11 +30,13 @@ func NewSyncer(db *gorm.DB, repositories []models.Repository, logger *zap.Sugare
 	)
 	httpClient := oauth2.NewClient(context.Background(), src)
 	client := githubv4.NewClient(httpClient)
+	gqlClient := graphql.NewClient(os.Getenv("GNO_GRAPHQL_ENDPOINT"), nil)
 	return &Syncer{
-		db:           db,
-		client:       client,
-		repositories: repositories,
-		logger:       logger,
+		db:            db,
+		client:        client,
+		repositories:  repositories,
+		logger:        logger,
+		graphqlClient: gqlClient,
 	}
 }
 
@@ -97,6 +101,16 @@ func (s *Syncer) StartSynchonizing() error {
 			err := s.syncUserDetails()
 			if err != nil {
 				s.logger.Errorf("error while syncing user details %s", err.Error())
+			}
+
+			err = s.syncGnoUserRegistrations(context.Background())
+			if err != nil {
+				s.logger.Errorf("error while syncing gno user registrations %s", err.Error())
+			}
+
+			err = s.syncPublishedPackages(context.Background())
+			if err != nil {
+				s.logger.Errorf("error while syncing gno published packages %s", err.Error())
 			}
 
 			<-time.Tick(2 * time.Hour)

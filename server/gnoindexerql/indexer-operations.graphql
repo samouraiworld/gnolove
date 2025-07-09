@@ -1,0 +1,38 @@
+query GetUserRegistrations($StartBlock: Int!) {
+  transactions(
+    filter: { success: true, from_block_height: $StartBlock, events: { pkg_path: "gno.land/r/gnoland/users/v1" } }
+  ) {
+    hash
+    block_height
+    messages {
+      value {
+        ... on MsgCall {
+          caller
+          pkg_path
+          func
+          args
+        }
+      }
+    }
+  }
+}
+
+query GetPublishedPackages($StartBlock: Int!) {
+  transactions(filter: { success: true, from_block_height: $StartBlock, message: { type_url: add_package } }) {
+    hash
+    block_height
+    messages {
+      typeUrl
+      value {
+        ... on MsgAddPackage {
+          creator
+          deposit
+          package {
+            path
+            name
+          }
+        }
+      }
+    }
+  }
+}
