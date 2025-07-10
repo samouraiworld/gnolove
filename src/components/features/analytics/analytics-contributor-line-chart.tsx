@@ -135,6 +135,12 @@ const AnalyticsContributorLineChart = ({ contributors, type = 'commits' }: Props
     );
   };
 
+  const filename = useMemo(() => {
+    const start = data[0]?.date || '';
+    const end = data[data.length - 1]?.date || '';
+    return `${labelMap[type].toLowerCase()}_activity_${start}_to_${end}`.replace(/\s+/g, '-');
+  }, [data, type]);
+
   return (
     <Card className="h-[500px] w-full max-w-[650px] px-0">
       <Heading size="3" align="center">
@@ -179,7 +185,7 @@ const AnalyticsContributorLineChart = ({ contributors, type = 'commits' }: Props
       <CSVExportButton
         className='absolute top-2 right-4'
         data={data}
-        filename={`${labelMap[type]} activity`.toUpperCase().split(' ').join('-')}
+        filename={filename}
       >
         <ArrowDownToLine size={20} />
       </CSVExportButton>
