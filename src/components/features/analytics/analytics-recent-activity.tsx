@@ -10,8 +10,9 @@ import RechartTooltip from '@/components/elements/rechart-tooltip';
 import { format, isBefore, isEqual, parseISO, addDays, startOfDay, startOfToday } from 'date-fns';
 import { ResponsiveContainer, BarChart, XAxis, YAxis, Tooltip, Bar } from 'recharts';
 
-
 import { TEnhancedUserWithStats } from '@/utils/schemas';
+import { ArrowDownToLine } from 'lucide-react';
+import CSVExportButton from '@/components/elements/csv-export-button';
 
 const fillColors = {
   light: {
@@ -104,6 +105,12 @@ const AnalyticsRecentActivity = ({ contributors, startDate }: Props) => {
     return Array.from(map.values()).sort((a, b) => a.date.localeCompare(b.date));
   }, [contributors, startDate]);
 
+  const filename = useMemo(() => {
+    const start = data[0]?.date || '';
+    const end = data[data.length - 1]?.date || '';
+    return `recent-activity_${start}_to_${end}`;
+  }, [data]);
+
   return (
     <Card className="h-[500px] w-full min-w-[350px] max-w-[650px] px-0">
       <Heading size="3" align="center">
@@ -135,6 +142,13 @@ const AnalyticsRecentActivity = ({ contributors, startDate }: Props) => {
           <Bar maxBarSize={15} radius={[4, 4, 0, 0]} dataKey="prs" fill={palette.prs} />
         </BarChart>
       </ResponsiveContainer>
+      <CSVExportButton
+        className='absolute top-2 right-4'
+        data={data}
+        filename={filename}
+      >
+        <ArrowDownToLine size={20} />
+      </CSVExportButton>
     </Card>
   );
 };
