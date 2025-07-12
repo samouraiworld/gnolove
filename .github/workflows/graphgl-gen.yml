@@ -1,0 +1,30 @@
+name: Codegen
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  merge_group:
+
+jobs:
+  check-codegen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Golang with cache
+        uses: magnetikonline/action-golang-cache@v5
+        with:
+          go-version-file: server/go.mod
+          cache-key-suffix: graphql-gen
+
+      - name: Generate Graphql
+        run: |
+          cd server
+          make generate.graphql
+
+      - name: Check diff
+        run: git diff --exit-code
