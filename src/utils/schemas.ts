@@ -271,3 +271,17 @@ export type TTopContributedRepo = z.infer<typeof TopContributedRepo>;
 export type TTimeCount = z.infer<typeof TimeCountSchema>;
 export type TContributor = z.infer<typeof ContributorSchema>;
 export type TContributorActivity = z.infer<typeof ContributorActivitySchema>;
+
+/**
+ * Represents a package contribution.
+ */
+export const PackageSchema = z.object({
+  address: z.string(),
+  path: z.string(),
+  namespace: z.string(),
+  blockHeight: z.number(),
+});
+export const PackagesSchema = z.array(PackageSchema);
+
+export type TPackage = z.infer<typeof PackageSchema>;
+export type TPackages = z.infer<typeof PackagesSchema>;

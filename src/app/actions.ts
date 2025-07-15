@@ -8,6 +8,7 @@ import {
   EnhancedUserWithStatsSchema,
   IssueSchema,
   MilestoneSchema,
+  PackagesSchema,
   RepositorySchema,
   UserSchema,
 } from '@/utils/schemas';
@@ -81,4 +82,22 @@ export const getContributor = async (login: string) => {
   const data = await res.json();
 
   return ContributorSchema.parse(data);
+};
+
+export const getPackages = async () => {
+  const url = new URL('/api/onchain/packages', ENV.NEXT_PUBLIC_API_URL);
+
+  const res = await fetch(url.toString(), { cache: 'no-cache' });
+  const data = await res.json();
+
+  return PackagesSchema.parse(data);
+};
+
+export const getPackagesByUser = async (address: string) => {
+  const url = new URL(`/api/onchain/packages/${address}`, ENV.NEXT_PUBLIC_API_URL);
+
+  const res = await fetch(url.toString(), { cache: 'no-cache' });
+  const data = await res.json();
+
+  return PackagesSchema.parse(data);
 };

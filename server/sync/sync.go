@@ -95,7 +95,6 @@ func (s *Syncer) StartSynchonizing() error {
 					s.logger.Errorf("error while syncing commits %s", err.Error())
 				}
 			}
-			s.logger.Info("synchronization Finished...")
 
 			// After syncing everything else, update user details.
 			err := s.syncUserDetails()
@@ -112,6 +111,8 @@ func (s *Syncer) StartSynchonizing() error {
 			if err != nil {
 				s.logger.Errorf("error while syncing gno published packages %s", err.Error())
 			}
+
+			s.logger.Info("Syncing finished.")
 
 			<-time.Tick(2 * time.Hour)
 		}

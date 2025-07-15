@@ -100,6 +100,10 @@ func main() {
 	router.HandleFunc("/contributors/{login}", contributor.HandleGetContributor(database))
 	router.Post("/link", handler.HandleLink(database))
 
+	// Onchain package contributions endpoints
+	router.HandleFunc("/api/onchain/packages", handler.HandleGetAllPackages(database))
+	router.HandleFunc("/api/onchain/packages/{address}", handler.HandleGetPackagesByUser(database))
+
 	logger.Infof("Server running on port %d", port)
 	err = http.ListenAndServe(fmt.Sprintf(":%d", port), router)
 	if err != nil {
