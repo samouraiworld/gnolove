@@ -3,6 +3,7 @@ module github.com/samouraiworld/topofgnomes/server
 go 1.23.0
 
 require (
+	github.com/Khan/genqlient v0.8.1
 	github.com/dgraph-io/ristretto v0.2.0
 	github.com/gnolang/gno v0.0.0-20250214130904-9884ba10e8b0
 	github.com/go-chi/chi/v5 v5.2.1
@@ -45,6 +46,7 @@ require (
 	github.com/stretchr/testify v1.10.0 // indirect
 	github.com/syndtr/goleveldb v1.0.1-0.20210819022825-2ae1ddf74ef7 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
+	github.com/vektah/gqlparser/v2 v2.5.19 // indirect
 	github.com/zondax/hid v0.9.2 // indirect
 	github.com/zondax/ledger-go v0.14.3 // indirect
 	go.opentelemetry.io/auto/sdk v1.1.0 // indirect
