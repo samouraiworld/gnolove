@@ -104,6 +104,10 @@ func main() {
 	router.HandleFunc("/api/onchain/packages", handler.HandleGetAllPackages(database))
 	router.HandleFunc("/api/onchain/packages/{address}", handler.HandleGetPackagesByUser(database))
 
+	// Onchain namespace contributions endpoints
+	router.HandleFunc("/api/onchain/namespaces", handler.HandleGetAllNamespaces(database))
+	router.HandleFunc("/api/onchain/namespaces/{address}", handler.HandleGetNamespacesByUser(database))
+
 	logger.Infof("Server running on port %d", port)
 	err = http.ListenAndServe(fmt.Sprintf(":%d", port), router)
 	if err != nil {

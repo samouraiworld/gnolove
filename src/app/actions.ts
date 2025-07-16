@@ -8,6 +8,7 @@ import {
   EnhancedUserWithStatsSchema,
   IssueSchema,
   MilestoneSchema,
+  NamespacesSchema,
   PackagesSchema,
   RepositorySchema,
   UserSchema,
@@ -100,4 +101,22 @@ export const getPackagesByUser = async (address: string) => {
   const data = await res.json();
 
   return PackagesSchema.parse(data);
+};
+
+export const getNamespaces = async () => {
+  const url = new URL('/api/onchain/namespaces', ENV.NEXT_PUBLIC_API_URL);
+
+  const res = await fetch(url.toString(), { cache: 'no-cache' });
+  const data = await res.json();
+
+  return NamespacesSchema.parse(data);
+};
+
+export const getNamespacesByUser = async (address: string) => {
+  const url = new URL(`/api/onchain/namespaces/${address}`, ENV.NEXT_PUBLIC_API_URL);
+
+  const res = await fetch(url.toString(), { cache: 'no-cache' });
+  const data = await res.json();
+
+  return NamespacesSchema.parse(data);
 };

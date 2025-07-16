@@ -285,3 +285,17 @@ export const PackagesSchema = z.array(PackageSchema);
 
 export type TPackage = z.infer<typeof PackageSchema>;
 export type TPackages = z.infer<typeof PackagesSchema>;
+
+/**
+ * Represents a namespace contribution.
+ */
+export const NamespaceSchema = z.object({
+  hash:        z.string(),
+  namespace:   z.string(),
+  address:     z.string(),
+  blockHeight: z.number(),
+});
+export const NamespacesSchema = z.array(NamespaceSchema);
+
+export type TNamespace = z.infer<typeof NamespaceSchema>;
+export type TNamespaces = z.infer<typeof NamespacesSchema>;
