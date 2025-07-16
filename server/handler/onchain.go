@@ -81,7 +81,7 @@ func HandleGetNamespacesByUser(db *gorm.DB) http.HandlerFunc {
 			return
 		}
 		var namespaces []models.GnoNamespace
-		if err := db.Where("publisher = ?", address).Find(&namespaces).Error; err != nil {
+		if err := db.Where("address = ?", address).Find(&namespaces).Error; err != nil {
 			log.Printf("[HandleGetNamespacesByUser] DB error for address %s: %v", address, err)
 			w.WriteHeader(http.StatusInternalServerError)
 			json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
