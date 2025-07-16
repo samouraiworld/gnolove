@@ -22,7 +22,7 @@ const ContributorProfile = ({ contributor }: { contributor: TContributor }) => {
             />
 
             <Flex direction='column' align='center' gap='2'>
-              <Heading size='5'>{contributor.name}</Heading>
+              <Heading size='5' align='center'>{contributor.name}</Heading>
               <Text size='2' color='gray'>
                 @{contributor.login}
               </Text>

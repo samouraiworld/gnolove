@@ -86,7 +86,7 @@ export const getContributor = async (login: string) => {
 };
 
 export const getPackages = async () => {
-  const url = new URL('/api/onchain/packages', ENV.NEXT_PUBLIC_API_URL);
+  const url = new URL('/onchain/packages', ENV.NEXT_PUBLIC_API_URL);
 
   const res = await fetch(url.toString(), { cache: 'no-cache' });
   const data = await res.json();
@@ -95,7 +95,8 @@ export const getPackages = async () => {
 };
 
 export const getPackagesByUser = async (address: string) => {
-  const url = new URL(`/api/onchain/packages/${address}`, ENV.NEXT_PUBLIC_API_URL);
+  if (!address) return [];
+  const url = new URL(`/onchain/packages/${address}`, ENV.NEXT_PUBLIC_API_URL);
 
   const res = await fetch(url.toString(), { cache: 'no-cache' });
   const data = await res.json();
@@ -104,7 +105,7 @@ export const getPackagesByUser = async (address: string) => {
 };
 
 export const getNamespaces = async () => {
-  const url = new URL('/api/onchain/namespaces', ENV.NEXT_PUBLIC_API_URL);
+  const url = new URL('/onchain/namespaces', ENV.NEXT_PUBLIC_API_URL);
 
   const res = await fetch(url.toString(), { cache: 'no-cache' });
   const data = await res.json();
@@ -113,7 +114,7 @@ export const getNamespaces = async () => {
 };
 
 export const getNamespacesByUser = async (address: string) => {
-  const url = new URL(`/api/onchain/namespaces/${address}`, ENV.NEXT_PUBLIC_API_URL);
+  const url = new URL(`/onchain/namespaces/${address}`, ENV.NEXT_PUBLIC_API_URL);
 
   const res = await fetch(url.toString(), { cache: 'no-cache' });
   const data = await res.json();

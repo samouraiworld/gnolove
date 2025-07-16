@@ -1,20 +1,20 @@
 import { QueryClient, useQuery } from '@tanstack/react-query';
 
-import { getPackagesByUser } from '@/app/actions';
+import { getNamespacesByUser } from '@/app/actions';
 
-export const BASE_QUERY_KEY = ['user-packages'];
+export const BASE_QUERY_KEY = ['user-namespaces'];
 
-export const prefetchUserPackages = async (queryClient: QueryClient, address: string) => {
-  const packages = await getPackagesByUser(address);
-  queryClient.setQueryData([...BASE_QUERY_KEY, address], packages);
-  return packages;
+export const prefetchUserNamespaces = async (queryClient: QueryClient, address: string) => {
+  const namespaces = await getNamespacesByUser(address);
+  queryClient.setQueryData([...BASE_QUERY_KEY, address], namespaces);
+  return namespaces;
 };
 
-const useGetUserPackages = (address: string) => {
+const useGetUserNamespaces = (address: string) => {
   return useQuery({
-    queryFn: () => getPackagesByUser(address),
+    queryFn: () => getNamespacesByUser(address),
     queryKey: [...BASE_QUERY_KEY, address],
   });
 };
 
-export default useGetUserPackages;
+export default useGetUserNamespaces;
