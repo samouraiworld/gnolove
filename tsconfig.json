@@ -15,7 +15,6 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": ["./src/*"],
       "@/scripts/*": ["./src/scripts/*"],
       "@/styles/*": ["./src/styles/*"],
       "@/features/*": ["./src/components/features/*"],
@@ -32,7 +31,8 @@
       "@/constants/*": ["./src/constants/*"],
       "@/types/*": ["./src/types/*"],
       "@/images/*": ["./src/assets/images/*"],
-      "@/fonts/*": ["./src/assets/fonts/*"]
+      "@/fonts/*": ["./src/assets/fonts/*"],
+      "@/*": ["./src/*"],
     },
     "plugins": [
       {
