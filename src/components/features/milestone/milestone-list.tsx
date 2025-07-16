@@ -6,7 +6,7 @@ import MilestoneListItem from '@/components/features/milestone/milestone-list-it
 import { CheckCircledIcon, CircleIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 import { Grid, Flex, Text, Badge, Box, Card, Separator, IconButton, Spinner } from '@radix-ui/themes';
 
-import { TIssue } from '@/util/schemas';
+import { TIssue } from '@/utils/schemas';
 
 import { cmpCreatedAt } from '@/utils/github';
 

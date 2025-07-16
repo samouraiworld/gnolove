@@ -1,6 +1,6 @@
 import { ComponentProps } from 'react';
 
-import { cn } from '@/util/style';
+import { cn } from '@/utils/style';
 
 export interface YoutubeEmbeddedVideoProps extends ComponentProps<'iframe'> {}
 

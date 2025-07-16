@@ -2,7 +2,7 @@
 
 import Papa from 'papaparse';
 import { Button, ButtonProps } from '@radix-ui/themes';
-import { useToast } from '@/context/toast-context';
+import { useToast } from '@/contexts/toast-context';
 
 interface CSVExportButtonProps<T = any> extends ButtonProps {
   data: T[];

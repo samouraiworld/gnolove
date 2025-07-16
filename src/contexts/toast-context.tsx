@@ -2,7 +2,7 @@
 
 import { createContext, ReactNode, useContext, useState } from 'react';
 
-import { IToast } from '@/type/radix-ui';
+import { IToast } from '@/types/radix-ui';
 
 interface IContext {
   toasts: IToast[];

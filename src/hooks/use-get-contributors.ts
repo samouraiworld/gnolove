@@ -1,6 +1,6 @@
 import { QueryClient, useQuery } from '@tanstack/react-query';
 
-import { TimeFilter } from '@/util/github';
+import { TimeFilter } from '@/utils/github';
 
 import { getContributors } from '@/app/actions';
 

@@ -8,13 +8,13 @@ import { subDays, parseISO, isAfter, isEqual } from 'date-fns';
 import AnalyticsContributorLineChart from './analytics-contributor-line-chart';
 import AnalyticsRecentActivity from './analytics-recent-activity';
 
-import LayoutContainer from '@/layout/layout-container';
+import LayoutContainer from '@/layouts/layout-container';
 
-import { TimeFilter } from '@/util/github';
+import { TimeFilter } from '@/utils/github';
 
-import AnalyticsTotalStats from '@/components/features/analytics/analytics-total-stats';
-import ActivityTypeSelector, { ActivityType } from '@/components/modules/activity-type-selector';
-import TimeRangeSelector from '@/components/modules/time-range-selector';
+import AnalyticsTotalStats from '@/features/analytics/analytics-total-stats';
+import ActivityTypeSelector, { ActivityType } from '@/modules/activity-type-selector';
+import TimeRangeSelector from '@/modules/time-range-selector';
 import useGetContributors from '@/hooks/use-get-contributors';
 
 const AnalyticsClientPage = () => {

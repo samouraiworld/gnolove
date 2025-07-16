@@ -4,14 +4,14 @@ import Image from 'next/image';
 
 import { Flex, Table, Text, Tooltip } from '@radix-ui/themes';
 
-import ContributorRow from '@/module/contributor-row';
+import ContributorRow from '@/modules/contributor-row';
 
-import { TEnhancedUserWithStatsAndScore } from '@/util/schemas';
-import { getSortedContributors } from '@/util/score';
+import { TEnhancedUserWithStatsAndScore } from '@/utils/schemas';
+import { getSortedContributors } from '@/utils/score';
 
-import SCORE from '@/constant/score';
+import SCORE from '@/constants/score';
 
-import MinecraftHeart from '@/image/minecraft-heart.png';
+import MinecraftHeart from '@/images/minecraft-heart.png';
 
 export interface ContributorTableProps {
   contributors: TEnhancedUserWithStatsAndScore[];

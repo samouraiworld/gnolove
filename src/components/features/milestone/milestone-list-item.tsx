@@ -4,7 +4,7 @@ import { CalendarIcon, PersonIcon } from '@radix-ui/react-icons';
 import { Avatar, Badge, BadgeProps, Box, Card, Flex, Link, Separator, Text, Tooltip } from '@radix-ui/themes';
 import { formatDistanceToNow } from 'date-fns';
 
-import { TIssue } from '@/util/schemas';
+import { TIssue } from '@/utils/schemas';
 
 import { deduplicateByKey } from '@/utils/array';
 

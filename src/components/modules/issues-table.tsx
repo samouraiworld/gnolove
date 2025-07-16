@@ -3,10 +3,10 @@
 import { ExternalLinkIcon, InfoCircledIcon } from '@radix-ui/react-icons';
 import { Flex, HoverCard, Table, Text } from '@radix-ui/themes';
 
-import Label from '@/element/label';
+import Label from '@/elements/label';
 
-import { TIssue } from '@/util/schemas';
-import Cell from '@/components/elements/cell';
+import { TIssue } from '@/utils/schemas';
+import Cell from '@/elements/cell';
 
 export interface IssuesTableProps extends Table.RootProps {
   issues: TIssue[];

@@ -7,7 +7,7 @@ import { Flex, Table, Text } from '@radix-ui/themes';
 
 import Cell from '@/components/elements/cell';
 
-import { TUser } from '@/util/schemas';
+import { TUser } from '@/utils/schemas';
 
 export interface UserRowProps {
   user: TUser;

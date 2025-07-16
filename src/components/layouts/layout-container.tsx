@@ -1,8 +1,8 @@
 import { Flex, FlexProps, ScrollArea } from '@radix-ui/themes';
 
-import Footer from '@/module/footer';
+import Footer from '@/modules/footer';
 
-import { cn } from '@/util/style';
+import { cn } from '@/utils/style';
 
 const LayoutContainer = ({ className, ...props }: FlexProps) => {
   return (

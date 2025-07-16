@@ -1,5 +1,5 @@
 import { Card, Flex, Heading, Text, Badge, IconButton } from '@radix-ui/themes';
-import { TContributor } from '@/util/schemas';
+import { TContributor } from '@/utils/schemas';
 import { Star, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 
