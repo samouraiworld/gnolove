@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, Flex, Grid, Heading, Table, Text } from '@radix-ui/themes';
+import { Box, Card, Flex, Heading, Table, Text } from '@radix-ui/themes';
 import { useMemo } from 'react';
 
 import teams from '@/constants/teams';
@@ -14,6 +14,7 @@ import { getContributorsWithScore } from '@/utils/score';
 import LayoutContainer from '@/components/layouts/layout-container';
 import { useOffline } from '@/contexts/offline-context';
 import Image from 'next/image';
+import { Masonry } from 'masonic';
 
 const BestPerformingTeams = () => {
   const { isOffline } = useOffline();
@@ -58,38 +59,46 @@ const BestPerformingTeams = () => {
       <Flex direction="column" gap="6" my="6">
         <Heading size="6" align="center">🏆 Best Performing Teams</Heading>
         <Text size="2" align="center">(of last month)</Text>
-        <Grid columns={{ initial: '1', md: '3' }} gap="3">
-          {teamScores.map((team, rank) => (
-            <Card key={team.name}>
+        <Masonry
+          maxColumnCount={3}
+          maxColumnWidth={400}
+          columnGutter={8}
+          items={teamScores}
+          render={({index, data: { name, totalScore, members }}) => (
+            <Card className="break-inside-avoid" key={name}>
               <Flex direction="column" gap="2">
                 <Flex align="center" gap="2">
-                  {rankElement(rank)}
-                  <Heading size="4" weight="bold">{team.name}</Heading>
+                  {rankElement(index)}
+                  <Heading size="4" weight="bold">{name}</Heading>
                 </Flex>
                 <Flex align="center" gap="4">
                   <Flex align="center" gap="2">
                     <Text size="2" weight="bold">Score: </Text>
-                    <Text size="2">{team.totalScore}</Text>
+                    <Text size="2">{totalScore}</Text>
                   </Flex>
                   <Flex align="center" gap="2">
                     <Text size="2" weight="bold">Members: </Text>
-                    <Text size="2">{team.members.length}</Text>
+                    <Text size="2">{members.length}</Text>
                   </Flex>
                 </Flex>
                 <Table.Root>
                   <Table.Body>
-                    {team.members.map((member) => (
+                    {members.map((member) => (
                       <Table.Row key={member.login}>
                         <Table.Cell>
                           <Flex align="center" gap="2">
-                            <Image
-                              src={member.avatarUrl!}
-                              alt={`${member.login} avatar`}
-                              width={24}
-                              height={24}
-                              className="shrink-0 overflow-hidden rounded-full"
-                            />
-                            <Link href={isOffline ? '' : `/@${member}`}>
+                            {member.avatarUrl ? (
+                              <Image
+                                src={member.avatarUrl!}
+                                alt={`${member.login} avatar`}
+                                width={24}
+                                height={24}
+                                className="shrink-0 overflow-hidden rounded-full"
+                              />
+                            ) : (
+                              <Box width="24" height="24" />
+                            )}
+                            <Link href={isOffline ? '' : `/@${member.login}`}>
                               <Text truncate className={cn('block overflow-hidden text-ellipsis whitespace-nowrap hover:text-blue-10', isOffline && 'text-gray-8')}>{member.login}</Text>
                             </Link>
                           </Flex>
@@ -101,8 +110,8 @@ const BestPerformingTeams = () => {
                 </Table.Root>
               </Flex>
             </Card>
-          ))}
-        </Grid>
+          )}
+        />
       </Flex>
     </LayoutContainer>
   );

@@ -3,8 +3,9 @@ import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query
 
 import { prefetchContributors } from '@/hooks/use-get-contributors';
 import { TimeFilter } from '@/utils/github';
+import dynamic from 'next/dynamic';
 
-import BestPerformingTeams from '@/components/features/scoreboard/best-performing-teams';
+const BestPerformingTeams = dynamic(() => import('@/components/features/scoreboard/best-performing-teams'), { ssr: false });
 
 export const metadata: Metadata = {
   title: 'Teams',
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
 const TeamsPage = async () => {
   const queryClient = new QueryClient();
 
-  await prefetchContributors(queryClient, { timeFilter: TimeFilter.ALL_TIME });
+  await prefetchContributors(queryClient, { timeFilter: TimeFilter.MONTHLY });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
