@@ -14,6 +14,7 @@ import (
 	"golang.org/x/oauth2"
 
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 type Syncer struct {
@@ -221,7 +222,11 @@ func (s *Syncer) syncUsers(repository models.Repository) error {
 		}
 
 		for _, user := range q.Repository.Users.Nodes {
-			err = s.db.Save(&models.User{
+			// Upsert user record
+			err = s.db.Clauses(clause.OnConflict{
+				Columns:   []clause.Column{{Name: "id"}},                                            // conflict target
+				DoUpdates: clause.AssignmentColumns([]string{"login", "avatar_url", "url", "name"}), // only update these
+			}).Create(&models.User{
 				ID:        user.ID,
 				Login:     user.Login,
 				AvatarUrl: user.AvatarUrl,
