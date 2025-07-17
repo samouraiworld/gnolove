@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const TeamsPage = async () => {
   const queryClient = new QueryClient();
 
-  await prefetchContributors(queryClient, { timeFilter: TimeFilter.MONTHLY });
+  await prefetchContributors(queryClient, { timeFilter: TimeFilter.ALL_TIME });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
