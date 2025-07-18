@@ -69,7 +69,6 @@ const TEAMS: Team[] = [
       'villaquiranm',
       'hthieu1110',
       'MikaelVallenet',
-      'villaquiranm',
       'WaDadidou',
       'dtczelo',
       'naim-ea',
