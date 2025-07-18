@@ -2,18 +2,20 @@
 
 import { z } from 'zod';
 
-import { TimeFilter } from '@/util/github';
+import { TimeFilter } from '@/utils/github';
 import {
   ContributorSchema,
   EnhancedUserWithStatsSchema,
   IssueSchema,
   MilestoneSchema,
+  NamespacesSchema,
+  PackagesSchema,
   RepositorySchema,
   UserSchema,
-} from '@/util/schemas';
+} from '@/utils/schemas';
 
-import MILESTONE from '@/constant/milestone';
-import TEAMS from '@/constant/teams';
+import MILESTONE from '@/constants/milestone';
+import TEAMS from '@/constants/teams';
 
 import ENV from '@/env';
 
@@ -81,4 +83,41 @@ export const getContributor = async (login: string) => {
   const data = await res.json();
 
   return ContributorSchema.parse(data);
+};
+
+export const getPackages = async () => {
+  const url = new URL('/onchain/packages', ENV.NEXT_PUBLIC_API_URL);
+
+  const res = await fetch(url.toString(), { cache: 'no-cache' });
+  const data = await res.json();
+
+  return PackagesSchema.parse(data);
+};
+
+export const getPackagesByUser = async (address: string) => {
+  if (!address) return [];
+  const url = new URL(`/onchain/packages/${address}`, ENV.NEXT_PUBLIC_API_URL);
+
+  const res = await fetch(url.toString(), { cache: 'no-cache' });
+  const data = await res.json();
+
+  return PackagesSchema.parse(data);
+};
+
+export const getNamespaces = async () => {
+  const url = new URL('/onchain/namespaces', ENV.NEXT_PUBLIC_API_URL);
+
+  const res = await fetch(url.toString(), { cache: 'no-cache' });
+  const data = await res.json();
+
+  return NamespacesSchema.parse(data);
+};
+
+export const getNamespacesByUser = async (address: string) => {
+  const url = new URL(`/onchain/namespaces/${address}`, ENV.NEXT_PUBLIC_API_URL);
+
+  const res = await fetch(url.toString(), { cache: 'no-cache' });
+  const data = await res.json();
+
+  return NamespacesSchema.parse(data);
 };

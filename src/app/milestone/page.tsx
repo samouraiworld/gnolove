@@ -1,18 +1,18 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import MilestoneProgress from '@/feature/milestone-progress';
+import MilestoneProgress from '@/features/milestone-progress';
 
-import LayoutContainer from '@/layout/layout-container';
+import LayoutContainer from '@/layouts/layout-container';
 
-import RadixMarkdown from '@/element/radix-markdown';
+import RadixMarkdown from '@/elements/radix-markdown';
 
-import { MilestoneSchema } from '@/util/schemas';
+import { MilestoneSchema } from '@/utils/schemas';
 
-import MILESTONE from '@/constant/milestone';
+import MILESTONE from '@/constants/milestone';
 
 import ENV from '@/env';
-import MilestoneList from '@/components/features/milestone/milestone-list';
+import MilestoneList from '@/features/milestone/milestone-list';
 import { Heading } from '@radix-ui/themes';
 
 export const metadata: Metadata = {

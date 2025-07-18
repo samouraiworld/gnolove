@@ -1,4 +1,4 @@
-import '@/style/globals.css';
+import '@/styles/globals.css';
 import { ReactNode } from 'react';
 
 import { ThemeProvider } from 'next-themes';
@@ -6,23 +6,23 @@ import { ThemeProvider } from 'next-themes';
 import { LinkNone2Icon } from '@radix-ui/react-icons';
 import { Box, Button, Flex, Theme } from '@radix-ui/themes';
 
-import ThemeSwitch from '@/module/theme-switch';
+import ThemeSwitch from '@/modules/theme-switch';
 
-import Toaster from '@/element/toast';
+import Toaster from '@/elements/toast';
 
-import ToastProvider from '@/context/toast-context';
+import ToastProvider from '@/contexts/toast-context';
 
-import { AdenaAddress } from '@/components/modules/adena-address';
-import { GithubLink } from '@/components/modules/github-link';
+import { AdenaAddress } from '@/modules/adena-address';
+import { GithubLink } from '@/modules/github-link';
 import AdenaProvider from '@/contexts/adena-context';
 import QueryClientWrapper from '@/wrappers/query-client';
-import MobileNavDrawer from '@/components/modules/mobile-nav-drawer';
-import NavHeader from '@/components/modules/nav-header';
+import MobileNavDrawer from '@/modules/mobile-nav-drawer';
+import NavHeader from '@/modules/nav-header';
 
 import { Analytics } from '@vercel/analytics/next';
 
 import { OfflineProvider } from '@/contexts/offline-context';
-import OfflineBanner from '@/components/elements/offline-banner';
+import OfflineBanner from '@/elements/offline-banner';
 
 interface RootLayoutProps {
   children?: ReactNode;

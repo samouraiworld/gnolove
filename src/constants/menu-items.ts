@@ -5,6 +5,11 @@ export const MENU_ITEMS = [
     new: false,
   },
   {
+    label: 'Teams',
+    href: '/teams',
+    new: true,
+  },
+  {
     label: 'Milestone',
     href: '/milestone',
     new: false,
@@ -12,7 +17,7 @@ export const MENU_ITEMS = [
   {
     label: 'Analytics',
     href: '/analytics',
-    new: true,
+    new: false,
   },
   {
     label: 'Tutorials',

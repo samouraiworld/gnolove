@@ -8,12 +8,12 @@ import { useRouter } from 'next/navigation';
 import { CheckIcon, Link1Icon } from '@radix-ui/react-icons';
 import { Badge, Button, Flex, FlexProps, Spinner, Switch, Tabs, Text } from '@radix-ui/themes';
 
-import ContributorTable from '@/module/contributor-table';
+import ContributorTable from '@/modules/contributor-table';
 
-import useGetContributors from '@/hook/use-get-contributors';
+import useGetContributors from '@/hooks/use-get-contributors';
 
-import { getTimeFilterFromSearchParam, TimeFilter } from '@/util/github';
-import { getContributorsWithScore } from '@/util/score';
+import { getTimeFilterFromSearchParam, TimeFilter } from '@/utils/github';
+import { getContributorsWithScore } from '@/utils/score';
 import useGetRepositories from '@/hooks/use-get-repositories';
 import RepositoriesSelector from '@/components/modules/repositories-selector';
 

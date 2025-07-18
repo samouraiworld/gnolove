@@ -3,7 +3,7 @@ import { ComponentProps } from 'react';
 import { Heading, HeadingProps, Text } from '@radix-ui/themes';
 import Markdown, { Options } from 'react-markdown';
 
-import { cn } from '@/util/style';
+import { cn } from '@/utils/style';
 
 const getHeadingComponent = (
   headingProps: HeadingProps,

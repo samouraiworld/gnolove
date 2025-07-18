@@ -1,7 +1,7 @@
 import { ExternalLinkIcon } from '@radix-ui/react-icons';
 import { Flex, FlexProps, Progress, Text } from '@radix-ui/themes';
 
-import { TMilestone } from '@/util/schemas';
+import { TMilestone } from '@/utils/schemas';
 
 export interface MilestoneProgressProps {
   milestone: TMilestone;

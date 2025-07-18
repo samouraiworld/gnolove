@@ -3,7 +3,7 @@ import NextLink from 'next/link';
 import { DiscordLogoIcon, GitHubLogoIcon, TwitterLogoIcon } from '@radix-ui/react-icons';
 import { Flex, FlexProps, IconButton, Link, Separator, Text } from '@radix-ui/themes';
 
-import { cn } from '@/util/style';
+import { cn } from '@/utils/style';
 
 const Footer = ({ className, ...props }: FlexProps) => {
   return (

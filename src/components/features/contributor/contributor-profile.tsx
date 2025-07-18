@@ -1,5 +1,5 @@
 import { Box, Flex, Card, Avatar, Text, Heading, Separator, IconButton } from '@radix-ui/themes';
-import { TContributor } from '@/util/schemas';
+import { TContributor } from '@/utils/schemas';
 import { Calendar, Copy, Github, Globe, MapPin, Twitter } from 'lucide-react';
 
 const ContributorProfile = ({ contributor }: { contributor: TContributor }) => {
@@ -22,7 +22,7 @@ const ContributorProfile = ({ contributor }: { contributor: TContributor }) => {
             />
 
             <Flex direction='column' align='center' gap='2'>
-              <Heading size='5'>{contributor.name}</Heading>
+              <Heading size='5' align='center'>{contributor.name}</Heading>
               <Text size='2' color='gray'>
                 @{contributor.login}
               </Text>

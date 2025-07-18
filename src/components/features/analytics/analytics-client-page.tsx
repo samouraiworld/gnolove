@@ -8,9 +8,9 @@ import AnalyticsTopContributorBarChart from './analytics-top-contributor-bar-cha
 import { Box, Flex, Heading, Separator } from '@radix-ui/themes';
 import { subDays, parseISO, isAfter, isEqual } from 'date-fns';
 
-import LayoutContainer from '@/layout/layout-container';
+import LayoutContainer from '@/layouts/layout-container';
 
-import { TimeFilter } from '@/util/github';
+import { TimeFilter } from '@/utils/github';
 
 import AnalyticsTotalStats from '@/components/features/analytics/analytics-total-stats';
 import RepositoriesSelector from '@/components/modules/repositories-selector';

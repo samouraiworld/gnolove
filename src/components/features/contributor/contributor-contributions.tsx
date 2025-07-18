@@ -1,5 +1,5 @@
 import { Card, Flex, Heading, Text } from '@radix-ui/themes';
-import { TContributor } from '@/util/schemas';
+import { TContributor } from '@/utils/schemas';
 
 const ContributorContributions = ({ contributor }: { contributor: TContributor }) => {
   return (

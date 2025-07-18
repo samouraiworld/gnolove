@@ -1,4 +1,4 @@
-import { TRepository } from '@/util/schemas';
+import { TRepository } from '@/utils/schemas';
 
 export const getSelectedRepositoriesFromSearchParam = (
   searchParam: string | string[] | undefined,

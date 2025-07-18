@@ -10,13 +10,13 @@ import { Badge, Flex, IconButton, Table, Text } from '@radix-ui/themes';
 import { formatDistanceToNow } from 'date-fns';
 import { CircleDotIcon } from 'lucide-react';
 
-import ContributionsDialog from '@/module/contributions-dialog';
+import ContributionsDialog from '@/modules/contributions-dialog';
 
-import { TEnhancedUserWithStatsAndScore } from '@/util/schemas';
-import { cn } from '@/util/style';
+import { TEnhancedUserWithStatsAndScore } from '@/utils/schemas';
+import { cn } from '@/utils/style';
 
-import TEAMS from '@/constant/teams';
-import Cell from '@/components/elements/cell';
+import TEAMS from '@/constants/teams';
+import Cell from '@/elements/cell';
 import { useOffline } from '@/contexts/offline-context';
 
 export interface ContributorRowProps {

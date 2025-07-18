@@ -100,6 +100,14 @@ func main() {
 	router.HandleFunc("/contributors/{login}", contributor.HandleGetContributor(database))
 	router.Post("/link", handler.HandleLink(database))
 
+	// Onchain package contributions endpoints
+	router.HandleFunc("/onchain/packages", handler.HandleGetAllPackages(database))
+	router.HandleFunc("/onchain/packages/{address}", handler.HandleGetPackagesByUser(database))
+
+	// Onchain namespace contributions endpoints
+	router.HandleFunc("/onchain/namespaces", handler.HandleGetAllNamespaces(database))
+	router.HandleFunc("/onchain/namespaces/{address}", handler.HandleGetNamespacesByUser(database))
+
 	logger.Infof("Server running on port %d", port)
 	err = http.ListenAndServe(fmt.Sprintf(":%d", port), router)
 	if err != nil {

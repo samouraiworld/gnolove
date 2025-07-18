@@ -5,7 +5,7 @@ import { Flex, Table, Text } from '@radix-ui/themes';
 
 import Cell from '@/components/elements/cell';
 
-import { TPullRequest } from '@/util/schemas';
+import { TPullRequest } from '@/utils/schemas';
 
 export interface IssuesTableProps extends Table.RootProps {
   prs: TPullRequest[];

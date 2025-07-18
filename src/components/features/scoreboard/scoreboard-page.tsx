@@ -7,31 +7,31 @@ import NextLink from 'next/link';
 
 import { Box, Flex, Grid, Heading, Spinner, Text } from '@radix-ui/themes';
 
-import MilestoneProgress from '@/feature/milestone-progress';
+import MilestoneProgress from '@/features/milestone-progress';
 
-import LayoutContainer from '@/layout/layout-container';
+import LayoutContainer from '@/layouts/layout-container';
 
-import IssuesTable from '@/module/issues-table';
-import PrsTable from '@/module/prs-table';
-import UserTable from '@/module/user-table';
+import IssuesTable from '@/modules/issues-table';
+import PrsTable from '@/modules/prs-table';
+import UserTable from '@/modules/user-table';
 
-import YoutubeEmbeddedVideo from '@/element/youtube-embedded-video';
+import YoutubeEmbeddedVideo from '@/elements/youtube-embedded-video';
 
-import useGetContributors from '@/hook/use-get-contributors';
-import useGetLastIssues from '@/hook/use-get-last-issues';
-import useGetMilestone from '@/hook/use-get-milestone';
-import useGetNewContributors from '@/hook/use-get-new-contributors';
+import useGetContributors from '@/hooks/use-get-contributors';
+import useGetLastIssues from '@/hooks/use-get-last-issues';
+import useGetMilestone from '@/hooks/use-get-milestone';
+import useGetNewContributors from '@/hooks/use-get-new-contributors';
 
-import { getLastMRs, TimeFilter } from '@/util/github';
+import { getLastMRs, TimeFilter } from '@/utils/github';
 
-import REPOSITORY from '@/constant/repository';
-import VIDEOS from '@/constant/videos';
+import REPOSITORY from '@/constants/repository';
+import VIDEOS from '@/constants/videos';
 
-import HeaderImage from '@/image/header.png';
+import HeaderImage from '@/images/header.png';
 
-import Scoreboard from '@/components/features/scoreboard/scoreboard';
+import Scoreboard from '@/features/scoreboard/scoreboard';
 import { useOffline } from '@/contexts/offline-context';
-import { cn } from '@/util/style';
+import { cn } from '@/utils/style';
 
 const ScoreboardPage = () => {
   const { data: allTimeContributors, isPending: isAllTimePending } = useGetContributors({

@@ -5,13 +5,13 @@ import { useMemo, useState } from 'react';
 import { ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons';
 import { Button, Dialog, Flex, Table, Text } from '@radix-ui/themes';
 
-import Label from '@/element/label';
+import Label from '@/elements/label';
 
-import { chunk } from '@/util/array';
-import { TEnhancedUserWithStats, TIssue, TPullRequest } from '@/util/schemas';
-import { getIssueOrPRScore, getScore } from '@/util/score';
+import { chunk } from '@/utils/array';
+import { TEnhancedUserWithStats, TIssue, TPullRequest } from '@/utils/schemas';
+import { getIssueOrPRScore, getScore } from '@/utils/score';
 
-import SCORE from '@/constant/score';
+import SCORE from '@/constants/score';
 
 export interface ContributionsDialogProps extends Dialog.RootProps {
   user: TEnhancedUserWithStats;

@@ -1,6 +1,6 @@
 import { Badge, Box, Card, Flex, Heading, IconButton, Text } from '@radix-ui/themes';
 import { ExternalLink, GitPullRequest, MessageSquare } from 'lucide-react';
-import { TContributor } from '@/util/schemas';
+import { TContributor } from '@/utils/schemas';
 import Link from 'next/link';
 
 const ContributorRecentActivities = ({ contributor }: { contributor: TContributor }) => {
