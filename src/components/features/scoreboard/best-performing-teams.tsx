@@ -7,7 +7,7 @@ import { useMemo } from 'react';
 import teams from '@/constants/teams';
 import Link from 'next/link';
 import { MixerHorizontalIcon, StarFilledIcon } from '@radix-ui/react-icons';
-import { cn } from '@/util/style';
+import { cn } from '@/utils/style';
 
 import useGetContributors from '@/hooks/use-get-contributors';
 import { TimeFilter } from '@/utils/github';
