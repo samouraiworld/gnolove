@@ -1,14 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { ComponentProps, useEffect, useState } from 'react';
 
 import { Select, Flex, Text } from '@radix-ui/themes';
 import { subDays, subMonths } from 'date-fns';
 
 type Preset = '7d' | '14d' | '1m';
 
-type Props = {
-  onChange: (startDate: Date) => void;
+type Props = ComponentProps<typeof Flex> & {
+  onDateChange: (startDate: Date) => void; // Renamed to avoid conflict
   defaultValue?: Preset;
 };
 
@@ -31,26 +31,26 @@ const getStartDate = (key: Preset): Date => {
   }
 };
 
-const TimeRangeSelector = ({ onChange, defaultValue = '14d' }: Props) => {
+const TimeRangeSelector = ({ onDateChange, defaultValue = '14d', ...props }: Props) => {
   const [value, setValue] = useState<Preset>(defaultValue);
 
   useEffect(() => {
-    onChange(getStartDate(defaultValue));
-  }, [defaultValue, onChange]);
+    onDateChange(getStartDate(defaultValue));
+  }, [defaultValue, onDateChange]);
 
   const handleChange = (newValue: string) => {
     const key = newValue as Preset;
     setValue(key);
-    onChange(getStartDate(key));
+    onDateChange(getStartDate(key));
   };
 
   return (
-    <Flex direction="column" gap="1" mb="3">
+    <Flex direction="column" gap="1" {...props}>
       <Text size="1" weight="medium">
         Date range
       </Text>
       <Select.Root value={value} onValueChange={handleChange}>
-        <Select.Trigger />
+        <Select.Trigger variant="soft" />
         <Select.Content>
           {Object.entries(presets).map(([k, label]) => (
             <Select.Item key={k} value={k}>

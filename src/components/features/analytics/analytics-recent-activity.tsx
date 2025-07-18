@@ -2,29 +2,20 @@
 
 import { useMemo } from 'react';
 
-import { useTheme } from 'next-themes';
-
 import { ChatBubbleIcon, CommitIcon, MixerVerticalIcon } from '@radix-ui/react-icons';
 import { Card, Flex, Heading, Text } from '@radix-ui/themes';
-import RechartTooltip from '@/components/elements/rechart-tooltip';
 import { format, isBefore, isEqual, parseISO, addDays, startOfDay, startOfToday } from 'date-fns';
+import { ArrowDownToLine } from 'lucide-react';
 import { ResponsiveContainer, BarChart, XAxis, YAxis, Tooltip, Bar } from 'recharts';
 
-import { TEnhancedUserWithStats } from '@/utils/schemas';
-import { ArrowDownToLine } from 'lucide-react';
 import CSVExportButton from '@/components/elements/csv-export-button';
+import RechartTooltip from '@/components/elements/rechart-tooltip';
+import { TEnhancedUserWithStats } from '@/utils/schemas';
 
 const fillColors = {
-  light: {
-    commits: '#9ca3af',
-    issues: '#6b7280',
-    prs: '#4b5563',
-  },
-  dark: {
-    commits: '#d1d5db',
-    issues: '#9ca3af',
-    prs: '#6b7280',
-  },
+  commits: '#8884d8',
+  issues: '#ffc658',
+  prs: '#82ca9d',
 };
 
 type ActivityDataPoint = {
@@ -70,10 +61,6 @@ const renderActivityEntries = (payload: any[], _label?: string | number) => {
 };
 
 const AnalyticsRecentActivity = ({ contributors, startDate }: Props) => {
-  const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === 'dark';
-  const palette = isDark ? fillColors.dark : fillColors.light;
-
   const data: ActivityDataPoint[] = useMemo(() => {
     const map = new Map<string, ActivityDataPoint>();
     const today = startOfToday();
@@ -117,36 +104,45 @@ const AnalyticsRecentActivity = ({ contributors, startDate }: Props) => {
         Recent activity
       </Heading>
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data} margin={{ top: 20, right: 40, bottom: 20, left: -20 }}>
-          <XAxis axisLine={false} dataKey="date" tick={{ fontSize: 10 }} tickLine={false} tickMargin={10} minTickGap={8}/>
-          <YAxis axisLine={false} tickLine={false} allowDecimals={false} tickFormatter={(value) => Math.abs(value).toFixed(0).toString()} />
+        <BarChart data={data} margin={{ top: 10, right: 40, bottom: 20, left: -20 }}>
+          <XAxis
+            axisLine={false}
+            dataKey="date"
+            tick={{ fontSize: 10 }}
+            tickLine={false}
+            tickMargin={10}
+            minTickGap={8}
+          />
+          <YAxis
+            axisLine={false}
+            tickLine={false}
+            allowDecimals={false}
+            tickFormatter={(value) => Math.abs(value).toFixed(0).toString()}
+          />
           <Tooltip
             offset={30}
             cursor={{ strokeDasharray: '3 3' }}
             content={
               <RechartTooltip
                 renderEntries={renderActivityEntries}
-                renderLabel={(
-                  _label: string | number | undefined,
-                  payload?: any[]
-                ) => {
+                renderLabel={(_label: string | number | undefined, payload?: any[]) => {
                   // Use the date from the first payload entry
                   const date = payload?.[0]?.payload?.date;
-                  return date ? <Text size="2" weight="bold">{date}</Text> : null;
+                  return date ? (
+                    <Text size="2" weight="bold">
+                      {date}
+                    </Text>
+                  ) : null;
                 }}
               />
             }
           />
-          <Bar maxBarSize={15} radius={[4, 4, 0, 0]} dataKey="commits" fill={palette.commits} />
-          <Bar maxBarSize={15} radius={[4, 4, 0, 0]} dataKey="issues" fill={palette.issues} />
-          <Bar maxBarSize={15} radius={[4, 4, 0, 0]} dataKey="prs" fill={palette.prs} />
+          <Bar maxBarSize={15} radius={[4, 4, 0, 0]} dataKey="commits" fill={fillColors.commits} />
+          <Bar maxBarSize={15} radius={[4, 4, 0, 0]} dataKey="issues" fill={fillColors.issues} />
+          <Bar maxBarSize={15} radius={[4, 4, 0, 0]} dataKey="prs" fill={fillColors.prs} />
         </BarChart>
       </ResponsiveContainer>
-      <CSVExportButton
-        className='absolute top-2 right-4'
-        data={data}
-        filename={filename}
-      >
+      <CSVExportButton className="absolute right-4 top-2" data={data} filename={filename}>
         <ArrowDownToLine size={20} />
       </CSVExportButton>
     </Card>
