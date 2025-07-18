@@ -1,8 +1,8 @@
 import { Badge } from '@radix-ui/themes';
 import { emojify } from 'node-emoji';
 
-import { TLabel } from '@/util/schemas';
-import { hexToRGB } from '@/util/style';
+import { TLabel } from '@/utils/schemas';
+import { hexToRGB } from '@/utils/style';
 
 export interface LabelProps {
   label: TLabel;

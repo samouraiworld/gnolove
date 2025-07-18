@@ -1,5 +1,5 @@
 import { Box, Flex, Card, Avatar, Text, Heading, Separator, IconButton } from '@radix-ui/themes';
-import { TContributor } from '@/util/schemas';
+import { TContributor } from '@/utils/schemas';
 import { Calendar, Copy, Github, Globe, MapPin, Twitter } from 'lucide-react';
 
 const ContributorProfile = ({ contributor }: { contributor: TContributor }) => {

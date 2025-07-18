@@ -1,8 +1,8 @@
 import { Table } from '@radix-ui/themes';
 
-import UserRow from '@/module/user-row';
+import UserRow from '@/modules/user-row';
 
-import { TUser } from '@/util/schemas';
+import { TUser } from '@/utils/schemas';
 
 export interface UserTableProps {
   users: TUser[];

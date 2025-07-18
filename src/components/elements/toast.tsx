@@ -5,9 +5,9 @@ import { useEffect, useRef } from 'react';
 import * as Toast from '@radix-ui/react-toast';
 import { Text, Theme } from '@radix-ui/themes';
 
-import { useToast } from '@/context/toast-context';
+import { useToast } from '@/contexts/toast-context';
 
-import { cn } from '@/util/style';
+import { cn } from '@/utils/style';
 
 const Toaster = () => {
   const { toasts } = useToast();

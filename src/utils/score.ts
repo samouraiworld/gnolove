@@ -1,6 +1,6 @@
-import { TEnhancedUserWithStats, TEnhancedUserWithStatsAndScore, TIssue, TPullRequest } from '@/util/schemas';
+import { TEnhancedUserWithStats, TEnhancedUserWithStatsAndScore, TIssue, TPullRequest } from '@/utils/schemas';
 
-import SCORE from '@/constant/score';
+import SCORE from '@/constants/score';
 
 /**
  * Calculate the score of the user from its stats

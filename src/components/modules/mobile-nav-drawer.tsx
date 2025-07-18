@@ -7,12 +7,12 @@ import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import { Button, Flex, IconButton, Badge, Theme } from '@radix-ui/themes';
 import { Drawer } from 'vaul';
 
-import MinecraftHeart from '@/image/minecraft-heart.png';
+import MinecraftHeart from '@/images/minecraft-heart.png';
 
 import Footer from '@/components/modules/footer';
 import { MENU_ITEMS } from '@/constants/menu-items';
 import { useOffline } from '@/contexts/offline-context';
-import { cn } from '@/util/style';
+import { cn } from '@/utils/style';
 
 const MobileNavDrawer = () => {
   const { isOffline } = useOffline();

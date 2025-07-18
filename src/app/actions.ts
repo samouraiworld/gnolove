@@ -2,7 +2,7 @@
 
 import { z } from 'zod';
 
-import { TimeFilter } from '@/util/github';
+import { TimeFilter } from '@/utils/github';
 import {
   ContributorSchema,
   EnhancedUserWithStatsSchema,
@@ -10,10 +10,10 @@ import {
   MilestoneSchema,
   RepositorySchema,
   UserSchema,
-} from '@/util/schemas';
+} from '@/utils/schemas';
 
-import MILESTONE from '@/constant/milestone';
-import TEAMS from '@/constant/teams';
+import MILESTONE from '@/constants/milestone';
+import TEAMS from '@/constants/teams';
 
 import ENV from '@/env';
 

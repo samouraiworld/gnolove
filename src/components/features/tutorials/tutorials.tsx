@@ -1,6 +1,6 @@
 import { Container, Flex, Heading, Text, Card, Grid, Badge, Button, Section } from '@radix-ui/themes';
-import YoutubeEmbeddedVideo from '@/element/youtube-embedded-video';
-import { TUTORIAL_VIDEOS } from '@/components/features/tutorials/constants';
+import YoutubeEmbeddedVideo from '@/elements/youtube-embedded-video';
+import { TUTORIAL_VIDEOS } from '@/features/tutorials/constants';
 import Link from 'next/link';
 
 const Tutorials = () => {

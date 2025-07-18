@@ -1,5 +1,5 @@
-import { isDefined } from '@/util/array';
-import { TEnhancedUserWithStats } from '@/util/schemas';
+import { isDefined } from '@/utils/array';
+import { TEnhancedUserWithStats } from '@/utils/schemas';
 
 export enum TimeFilter {
   ALL_TIME = 'all',
