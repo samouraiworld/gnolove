@@ -21,13 +21,6 @@ import SCORE from '@/constants/score';
 import { TEnhancedUserWithStats } from '@/utils/schemas';
 import { getContributorsWithScore } from '@/utils/score';
 
-type Contributor = {
-  name: string;
-  commits: { url: string }[];
-  issues: { url: string }[];
-  pullRequests: { url: string }[];
-};
-
 type Props = {
   contributors: TEnhancedUserWithStats[];
   selectedRepositories: string[];
@@ -46,9 +39,6 @@ type TopContributorData = {
 };
 
 const AnalyticsTopContributorBarChart = ({ contributors, selectedRepositories }: Props) => {
-
-    console.log('Contributors:', contributors);
-
   const topContributors: TopContributorData[] = useMemo(() => {
     const contributorData = getContributorsWithScore(contributors)
       .filter(
@@ -68,9 +58,7 @@ const AnalyticsTopContributorBarChart = ({ contributors, selectedRepositories }:
         const weightedPullRequests = pullRequests * SCORE.PR_FACTOR;
 
         const totalActivity = weightedCommits + weightedIssues + weightedPullRequests;
-        console.log('Total Activity:', totalActivity, 'for contributor:', contributor.login, weightedCommits, weightedIssues, weightedPullRequests);
-        
-        
+
         const commitsPercentage = contributor.score > 0 ? (weightedCommits * 100) / totalActivity : 0;
         const issuesPercentage = contributor.score > 0 ? (weightedIssues * 100) / totalActivity : 0;
         const pullRequestsPercentage = contributor.score > 0 ? (weightedPullRequests * 100) / totalActivity : 0;
@@ -100,8 +88,6 @@ const AnalyticsTopContributorBarChart = ({ contributors, selectedRepositories }:
       .slice(0, 15)
       .reverse();
   }, [contributors, selectedRepositories]);
-
-  console.log('topContributors:', topContributors);
 
   const renderEntries = (payload: any[], _label?: string | number) => {
     if (!payload || !payload[0]) return null;
@@ -168,7 +154,7 @@ const AnalyticsTopContributorBarChart = ({ contributors, selectedRepositories }:
           Top Contributors
         </Heading>
         <Tooltip content="The percentages are weighted by the Gnolove score calculation. This means that each contribution type (commits, issues, pull requests) is adjusted using predefined factors to reflect their relative importance in the overall score. This ensures a balanced representation of contributions based on their impact.">
-          <IconButton variant='ghost' radius="full" size="1" asChild>
+          <IconButton variant="ghost" radius="full" size="1" asChild>
             <InfoCircledIcon className="cursor-pointer" />
           </IconButton>
         </Tooltip>
