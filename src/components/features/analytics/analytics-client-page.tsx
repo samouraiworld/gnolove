@@ -6,17 +6,19 @@ import AnalyticsContributorLineChart from './analytics-contributor-line-chart';
 import AnalyticsRecentActivity from './analytics-recent-activity';
 import AnalyticsTopContributorBarChart from './analytics-top-contributor-bar-chart';
 import { Box, Flex, Heading, Separator } from '@radix-ui/themes';
-import { subDays, parseISO, isAfter, isEqual } from 'date-fns';
+import { subDays } from 'date-fns';
 
 import LayoutContainer from '@/layouts/layout-container';
 
+import useGetContributors from '@/hooks/use-get-contributors';
+import useGetRepositories from '@/hooks/use-get-repositories';
+
+import { filterContributionsByDateAndRepo } from '@/utils/contributors';
 import { TimeFilter } from '@/utils/github';
 
 import AnalyticsTotalStats from '@/components/features/analytics/analytics-total-stats';
 import RepositoriesSelector from '@/components/modules/repositories-selector';
 import TimeRangeSelector from '@/components/modules/time-range-selector';
-import useGetContributors from '@/hooks/use-get-contributors';
-import useGetRepositories from '@/hooks/use-get-repositories';
 
 const AnalyticsClientPage = () => {
   const [startDate, setStartDate] = useState(subDays(new Date(), 14));
@@ -30,34 +32,19 @@ const AnalyticsClientPage = () => {
 
   const { data: repositories = [] } = useGetRepositories();
 
-  const isAfterAndEqual = (date: string) => {
-    const parsedDate = parseISO(date);
-    return isAfter(parsedDate, startDate) || isEqual(parsedDate, startDate);
-  };
-
   const filteredContributors = useMemo(() => {
     if (!contributors) return [];
 
     return contributors.map((contributor) => ({
       ...contributor,
-      commits:
-        contributor.commits?.filter(
-          ({ createdAt, url }) =>
-            isAfterAndEqual(createdAt) &&
-            (selectedRepositories.length ? selectedRepositories.some((repo) => url.includes(repo)) : true),
-        ) ?? [],
-      issues:
-        contributor.issues?.filter(
-          ({ createdAt, url }) =>
-            isAfterAndEqual(createdAt) &&
-            (selectedRepositories.length ? selectedRepositories.some((repo) => url.includes(repo)) : true),
-        ) ?? [],
-      pullRequests:
-        contributor.pullRequests?.filter(
-          ({ updatedAt, url }) =>
-            isAfterAndEqual(updatedAt) &&
-            (selectedRepositories.length ? selectedRepositories.some((repo) => url.includes(repo)) : true),
-        ) ?? [],
+      commits: filterContributionsByDateAndRepo(contributor.commits, startDate, selectedRepositories, 'createdAt'),
+      issues: filterContributionsByDateAndRepo(contributor.issues, startDate, selectedRepositories, 'createdAt'),
+      pullRequests: filterContributionsByDateAndRepo(
+        contributor.pullRequests,
+        startDate,
+        selectedRepositories,
+        'updatedAt',
+      ),
     }));
   }, [contributors, startDate, selectedRepositories]);
 
