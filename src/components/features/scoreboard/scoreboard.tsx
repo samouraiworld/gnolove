@@ -39,7 +39,7 @@ const Scoreboard = ({ ...props }: FlexProps) => {
 
   const initialTimeFilter = getTimeFilterFromSearchParam(searchParams.get('f'), TimeFilter.MONTHLY);
   const initialExclude = !!searchParams.get('e');
-  const initialRepoIds = searchParams.get('r')?.split(',') ?? [];
+  const initialRepoIds = searchParams.get('r')?.split(',') ?? ['gnolang/gno'];
 
   const [timeFilter, setTimeFilter] = useState<TimeFilter>(initialTimeFilter);
   const [exclude, setExclude] = useState<boolean>(initialExclude);
@@ -124,9 +124,15 @@ const Scoreboard = ({ ...props }: FlexProps) => {
           </Popover.Trigger>
 
           <Popover.Content>
-            <CheckboxGroup.Root value={selectedRepositories} onValueChange={setSelectedRepositories}>
+            <CheckboxGroup.Root
+              value={selectedRepositories}
+              onValueChange={(value) => {
+                if (value.length === 0) setSelectedRepositories(['gnolang/gno']);
+                else setSelectedRepositories(value);
+              }}
+            >
               {repositories.map(({ id, name, owner }) => (
-                <CheckboxGroup.Item disabled={id === 'gnolang/gno'} value={id} key={id}>
+                <CheckboxGroup.Item value={id} key={id}>
                   {owner}/{name}
                 </CheckboxGroup.Item>
               ))}
