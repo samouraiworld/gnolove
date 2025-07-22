@@ -9,13 +9,23 @@ export const filterContributionsByDateAndRepo = <T extends { [key: string]: any 
   if (!contributions) return [];
 
   const isAfterAndEqual = (date: string) => {
-    const parsedDate = parseISO(date);
-    return isAfter(parsedDate, startDate) || isEqual(parsedDate, startDate);
+    try {
+      const parsedDate = parseISO(date);
+      return isAfter(parsedDate, startDate) || isEqual(parsedDate, startDate);
+    } catch {
+      return false;
+    }
+  };
+
+  const matchesRepository = (url: string) => {
+    if (!selectedRepositories.length) return true;
+    return selectedRepositories.some((repo) => {
+      const urlPattern = new RegExp(`/${repo}(?:/|$)`);
+      return urlPattern.test(url);
+    });
   };
 
   return contributions.filter(
-    (item) =>
-      isAfterAndEqual(item[dateKey]) &&
-      (selectedRepositories.length ? selectedRepositories.some((repo) => item.url.includes(repo)) : true),
+    (item) => isAfterAndEqual(item[dateKey]) && matchesRepository(item.url),
   );
 };

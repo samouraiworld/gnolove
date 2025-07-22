@@ -37,7 +37,7 @@ const RepositoriesSelector = ({
     if (selectedRepositories.length === 0) {
       onSelectedRepositoriesChange(defaultCheckedIds);
     }
-  }, [selectedRepositories, onSelectedRepositoriesChange, defaultCheckedIds]);
+  }, [selectedRepositories.length, defaultCheckedIds]);
 
   return (
     <Popover.Root>
