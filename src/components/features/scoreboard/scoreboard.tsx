@@ -40,7 +40,7 @@ const Scoreboard = ({ ...props }: FlexProps) => {
 
   const initialTimeFilter = getTimeFilterFromSearchParam(searchParams.get('f'), TimeFilter.MONTHLY);
   const initialExclude = !!searchParams.get('e');
-  const initialRepoIds = searchParams.get('r')?.split(',') ?? [];
+  const initialRepoIds = searchParams.get('r')?.split(',') ?? ['gnolang/gno'];
 
   const [timeFilter, setTimeFilter] = useState<TimeFilter>(initialTimeFilter);
   const [exclude, setExclude] = useState<boolean>(initialExclude);

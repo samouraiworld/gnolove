@@ -23,7 +23,7 @@ import TimeRangeSelector from '@/components/modules/time-range-selector';
 const AnalyticsClientPage = () => {
   const [startDate, setStartDate] = useState(subDays(new Date(), 14));
 
-  const [selectedRepositories, setSelectedRepositories] = useState<string[]>([]);
+  const [selectedRepositories, setSelectedRepositories] = useState<string[]>(['gnolang/gno']);
   const { data: contributors } = useGetContributors({
     timeFilter: TimeFilter.ALL_TIME,
     exclude: false,
