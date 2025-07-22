@@ -16,10 +16,12 @@ import {
   Customized,
 } from 'recharts';
 
-import RechartTooltip from '@/components/elements/rechart-tooltip';
-import SCORE from '@/constants/score';
 import { TEnhancedUserWithStats } from '@/utils/schemas';
 import { getContributorsWithScore } from '@/utils/score';
+
+import SCORE from '@/constants/score';
+
+import RechartTooltip from '@/components/elements/rechart-tooltip';
 
 type Props = {
   contributors: TEnhancedUserWithStats[];
@@ -45,8 +47,7 @@ const AnalyticsTopContributorBarChart = ({ contributors, selectedRepositories }:
         (contributor) =>
           contributor.commits?.length ||
           contributor.issues?.length ||
-          contributor.pullRequests?.length ||
-          contributor.score <= 0,
+          contributor.pullRequests?.length
       )
       .map((contributor) => {
         const commits = (contributor?.commits ?? []).length;
@@ -59,16 +60,19 @@ const AnalyticsTopContributorBarChart = ({ contributors, selectedRepositories }:
 
         const totalActivity = weightedCommits + weightedIssues + weightedPullRequests;
 
-        const commitsPercentage = contributor.score > 0 ? (weightedCommits * 100) / totalActivity : 0;
-        const issuesPercentage = contributor.score > 0 ? (weightedIssues * 100) / totalActivity : 0;
-        const pullRequestsPercentage = contributor.score > 0 ? (weightedPullRequests * 100) / totalActivity : 0;
+        const commitsPercentage =
+          contributor.score > 0 && totalActivity > 0 ? (weightedCommits * 100) / totalActivity : 0;
+        const issuesPercentage =
+          contributor.score > 0 && totalActivity > 0 ? (weightedIssues * 100) / totalActivity : 0;
+        const pullRequestsPercentage =
+          contributor.score > 0 && totalActivity > 0 ? (weightedPullRequests * 100) / totalActivity : 0;
 
         const commitsPercentageOfScore =
-          contributor.score > 0 ? (weightedCommits / totalActivity) * contributor.score : 0;
+          contributor.score > 0 && totalActivity > 0 ? (weightedCommits / totalActivity) * contributor.score : 0;
         const issuesPercentageOfScore =
-          contributor.score > 0 ? (weightedIssues / totalActivity) * contributor.score : 0;
+          contributor.score > 0 && totalActivity > 0 ? (weightedIssues / totalActivity) * contributor.score : 0;
         const pullRequestsPercentageOfScore =
-          contributor.score > 0 ? (weightedPullRequests / totalActivity) * contributor.score : 0;
+          contributor.score > 0 && totalActivity > 0 ? (weightedPullRequests / totalActivity) * contributor.score : 0;
 
         return {
           login: contributor.login,
@@ -154,7 +158,7 @@ const AnalyticsTopContributorBarChart = ({ contributors, selectedRepositories }:
           Top Contributors
         </Heading>
         <Tooltip content="The percentages are weighted by the Gnolove score calculation. This means that each contribution type (commits, issues, pull requests) is adjusted using predefined factors to reflect their relative importance in the overall score. This ensures a balanced representation of contributions based on their impact.">
-          <IconButton variant="ghost" radius="full" size="1" asChild>
+          <IconButton variant="ghost" radius="full" size="1">
             <InfoCircledIcon className="cursor-pointer" />
           </IconButton>
         </Tooltip>
