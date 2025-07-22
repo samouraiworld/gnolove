@@ -152,7 +152,7 @@ const AnalyticsContributorLineChart = ({ contributors }: Props) => {
         <ActivityTypeSelector onActivityTypeChange={setActivityType} mb="3" display="inline-flex" /> activity
       </Heading>
       <ResponsiveContainer minWidth={0} height="100%">
-        <LineChart data={data} margin={{ top: 10, right: 40, bottom: 20, left: -20 }}>
+        <LineChart data={data} margin={{ top: 10, right: 40, bottom: 42, left: -20 }}>
           <XAxis
             dataKey="date"
             tick={{ fontSize: 10 }}
