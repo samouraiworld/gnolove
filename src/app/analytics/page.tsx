@@ -2,19 +2,19 @@ import { Metadata } from 'next';
 
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 
-import { HomePageParams } from '@/app/page';
 import AnalyticsClientPage from '@/components/features/analytics/analytics-client-page';
 import { prefetchContributors } from '@/hooks/use-get-contributors';
 import { prefetchRepositories } from '@/hooks/use-get-repositories';
 import { getIds } from '@/utils/array';
 import { getTimeFilterFromSearchParam, TimeFilter } from '@/utils/github';
 import { getSelectedRepositoriesFromSearchParam } from '@/utils/repositories';
+import { SearchParamsFilters } from '@/types/url-filters';
 
 export const metadata: Metadata = {
   title: 'Analytics',
 };
 
-const AnalyticsPage = async ({ searchParams: { f, e, r } }: HomePageParams) => {
+const AnalyticsPage = async ({ searchParams: { f, e, r } }: SearchParamsFilters) => {
   const timeFilter = getTimeFilterFromSearchParam(f, TimeFilter.MONTHLY);
   const exclude = !!e;
   const queryClient = new QueryClient();

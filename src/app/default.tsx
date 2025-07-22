@@ -14,20 +14,13 @@ import { prefetchRepositories } from '@/hooks/use-get-repositories';
 import { getIds } from '@/utils/array';
 import { getTimeFilterFromSearchParam, TimeFilter } from '@/utils/github';
 import { getSelectedRepositoriesFromSearchParam } from '@/utils/repositories';
+import { SearchParamsFilters } from '@/types/url-filters';
 
 export const metadata: Metadata = {
   title: 'Top of Gnome',
 };
 
-export interface HomePageParams {
-  searchParams: {
-    f?: string | string[] | undefined;
-    e?: string | string[] | undefined;
-    r?: string | string[] | undefined;
-  };
-}
-
-const HomePage = async ({ searchParams: { f, e, r } }: HomePageParams) => {
+const HomePage = async ({ searchParams: { f, e, r } }: SearchParamsFilters) => {
   const timeFilter = getTimeFilterFromSearchParam(f, TimeFilter.MONTHLY);
   const exclude = !!e;
 
