@@ -1,24 +1,18 @@
 'use client';
 
-import { Flex, Box, Text, Separator } from '@radix-ui/themes';
-import { CommitIcon, ChatBubbleIcon, MixerVerticalIcon } from '@radix-ui/react-icons';
-import { TEnhancedUserWithStats } from '@/utils/schemas';
 import { useEffect, useMemo, useState } from 'react';
-import { motion, animate } from "motion/react";
+
+import { CommitIcon, ChatBubbleIcon, MixerVerticalIcon } from '@radix-ui/react-icons';
+import { Flex, Box, Text, Separator } from '@radix-ui/themes';
+import { motion, animate } from 'motion/react';
+
+import { TEnhancedUserWithStats } from '@/utils/schemas';
 
 type Props = {
   contributors: TEnhancedUserWithStats[];
 };
 
-const StatItem = ({
-  icon,
-  value,
-  label,
-}: {
-  icon: React.ReactNode;
-  value: number;
-  label: string;
-}) => {
+const StatItem = ({ icon, value, label }: { icon: React.ReactNode; value: number; label: string }) => {
   const [animatedValue, setAnimatedValue] = useState(0);
 
   useEffect(() => {
@@ -33,16 +27,17 @@ const StatItem = ({
   return (
     <Flex align="center" justify="center" px="4" gap="3">
       <Box mb="1">{icon}</Box>
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <Text size="6" weight="bold">{animatedValue}</Text>
+      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+        <Text size="6" weight="bold">
+          {animatedValue}
+        </Text>
       </motion.div>
-      <Text size="2" color="gray">{label}</Text>
+      <Text size="2" color="gray">
+        {label}
+      </Text>
     </Flex>
-)};
+  );
+};
 
 const AnalyticsTotalStats = ({ contributors }: Props) => {
   const { totalCommits, totalIssues, totalPRs } = useMemo(() => {
