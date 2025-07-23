@@ -11,6 +11,7 @@ import CSVExportButton from '@/components/elements/csv-export-button';
 import RechartTooltip from '@/components/elements/rechart-tooltip';
 import ActivityTypeSelector, { ActivityType } from '@/components/modules/activity-type-selector';
 import { TEnhancedUserWithStats } from '@/utils/schemas';
+import { getChunkKeyByTimeFilter, TimeFilter } from '@/utils/github';
 
 const labelMap: Record<ActivityType, string> = {
   commits: 'Commits',
@@ -25,6 +26,7 @@ type ContributorDataLinePoint = {
 
 type Props = {
   contributors: TEnhancedUserWithStats[];
+  timeFilter: TimeFilter;
 };
 
 interface Entry {
@@ -33,7 +35,7 @@ interface Entry {
   value: number;
 }
 
-const AnalyticsContributorLineChart = ({ contributors }: Props) => {
+const AnalyticsContributorLineChart = ({ contributors, timeFilter }: Props) => {
   const [activityType, setActivityType] = useState<ActivityType>('commits');
 
   const contributorFiltered = useMemo(
@@ -49,10 +51,10 @@ const AnalyticsContributorLineChart = ({ contributors }: Props) => {
       for (const item of list) {
         const rawDate = item.createdAt;
         const parsed = parseISO(rawDate);
-        const date = format(parsed, 'yyyy-MM-dd');
+        const chunkKey = getChunkKeyByTimeFilter(parsed, timeFilter);
 
-        if (!countByDate[date]) countByDate[date] = {};
-        countByDate[date][c.login] = (countByDate[date][c.login] || 0) + 1;
+        if (!countByDate[chunkKey]) countByDate[chunkKey] = {};
+        countByDate[chunkKey][c.login] = (countByDate[chunkKey][c.login] || 0) + 1;
       }
     }
 
@@ -70,14 +72,14 @@ const AnalyticsContributorLineChart = ({ contributors }: Props) => {
       const rowAvatar: ContributorDataLinePoint = { date };
       const dailyContributors = countByDate[date] || {};
 
-      // All login even for days without acitivities
+      // All login even for days without activities
       for (const login of contributorLogins) {
         const daily = dailyContributors[login] || 0;
         cumulativeData[login] = (cumulativeData[login] || 0) + daily;
         rowData[login] = cumulativeData[login];
       }
 
-      // Only login with acitivities per day
+      // Only login with activities per day
       for (const login of Object.keys(dailyContributors)) {
         const daily = dailyContributors[login];
         cumulativeAvatar[login] = (cumulativeAvatar[login] || 0) + daily;
@@ -152,7 +154,7 @@ const AnalyticsContributorLineChart = ({ contributors }: Props) => {
         <ActivityTypeSelector onActivityTypeChange={setActivityType} mb="3" display="inline-flex" /> activity
       </Heading>
       <ResponsiveContainer minWidth={0} height="100%">
-        <LineChart data={data} margin={{ top: 10, right: 40, bottom: 42, left: -20 }}>
+        <LineChart data={data} margin={{ top: 10, right: 40, bottom: 42, left: -10 }}>
           <XAxis
             dataKey="date"
             tick={{ fontSize: 10 }}
