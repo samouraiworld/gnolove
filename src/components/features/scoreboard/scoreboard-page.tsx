@@ -5,7 +5,7 @@ import { useMemo } from 'react';
 import Image from 'next/image';
 import NextLink from 'next/link';
 
-import { Box, Flex, Grid, Heading, Spinner, Text } from '@radix-ui/themes';
+import { Box, Button, Flex, Grid, Heading, Spinner, Text } from '@radix-ui/themes';
 
 import MilestoneProgress from '@/features/milestone-progress';
 
@@ -32,6 +32,7 @@ import HeaderImage from '@/images/header.png';
 import Scoreboard from '@/features/scoreboard/scoreboard';
 import { useOffline } from '@/contexts/offline-context';
 import { cn } from '@/utils/style';
+import { sendDiscordNotification } from '@/app/actions';
 
 const ScoreboardPage = () => {
   const { data: allTimeContributors, isPending: isAllTimePending } = useGetContributors({
@@ -46,9 +47,16 @@ const ScoreboardPage = () => {
 
   const { isOffline } = useOffline();
 
+  const handleButtonClick = async () => {
+    await sendDiscordNotification();
+  };
+
   return (
     <LayoutContainer>
       <Box>
+        <Button className="mt-5" onClick={handleButtonClick}>
+          Notify Discord
+        </Button>
         <Image
           src={HeaderImage}
           alt="Minecraft heart on top of the words 'Gnolove Community Leaderboard'"
