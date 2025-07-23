@@ -95,6 +95,6 @@ export const getChunkKeyByTimeFilter = (date: string | Date, timeFilter: TimeFil
     case TimeFilter.ALL_TIME:
       return format(parsedDate, 'yyyy');
     default:
-      return console.warn(`Unknown time filter: ${timeFilter}`), `${timeFilter}   ${format(parsedDate, 'yyyy-MM-DD')}`;
+      return format(parsedDate, 'yyyy-MM-dd');
   }
 };
