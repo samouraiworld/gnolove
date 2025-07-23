@@ -8,6 +8,7 @@ import { TimeFilter } from '@/utils/github';
 type Props = ComponentProps<typeof Flex> & {
   onDateChange: (timeFilter: TimeFilter) => void;
   defaultValue?: TimeFilter;
+  showLabel?: boolean;
 };
 
 const presets: Record<TimeFilter, string> = {
@@ -17,7 +18,7 @@ const presets: Record<TimeFilter, string> = {
   [TimeFilter.WEEKLY]: 'Past week',
 };
 
-const TimeRangeSelector = ({ onDateChange, defaultValue = TimeFilter.WEEKLY, ...props }: Props) => {
+const TimeRangeSelector = ({ onDateChange, defaultValue = TimeFilter.WEEKLY, showLabel = true, ...props }: Props) => {
   const [value, setValue] = useState<TimeFilter>(defaultValue);
 
   useEffect(() => {
@@ -32,9 +33,11 @@ const TimeRangeSelector = ({ onDateChange, defaultValue = TimeFilter.WEEKLY, ...
 
   return (
     <Flex direction="column" gap="1" {...props}>
-      <Text size="1" weight="medium">
-        Date range
-      </Text>
+      {showLabel && (
+        <Text size="1" weight="medium">
+          Date range
+        </Text>
+      )}
       <Select.Root value={value} onValueChange={handleChange}>
         <Select.Trigger variant="soft" />
         <Select.Content>
