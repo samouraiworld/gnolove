@@ -1,17 +1,20 @@
 'use client';
 
-import { ReactElement, useMemo } from 'react';
+import { ReactElement, useMemo, useState } from 'react';
 
 import { Avatar, Card, Flex, Heading, Text } from '@radix-ui/themes';
-import { format, parseISO, compareAsc } from 'date-fns';
+import { parseISO, compareAsc } from 'date-fns';
+import { ArrowDownToLine } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Customized, CustomizedProps } from 'recharts';
 
-import RechartTooltip from '@/components/elements/rechart-tooltip';
+import { getChunkKeyByTimeFilter, TimeFilter } from '@/utils/github';
 import { TEnhancedUserWithStats } from '@/utils/schemas';
-import { ArrowDownToLine } from 'lucide-react';
-import CSVExportButton from '@/components/elements/csv-export-button';
 
-const labelMap: Record<Props['type'], string> = {
+import CSVExportButton from '@/components/elements/csv-export-button';
+import RechartTooltip from '@/components/elements/rechart-tooltip';
+import ActivityTypeSelector, { ActivityType } from '@/components/modules/activity-type-selector';
+
+const labelMap: Record<ActivityType, string> = {
   commits: 'Commits',
   pullRequests: 'Pull Requests',
   issues: 'Issues',
@@ -24,7 +27,7 @@ type ContributorDataLinePoint = {
 
 type Props = {
   contributors: TEnhancedUserWithStats[];
-  type: 'commits' | 'pullRequests' | 'issues';
+  timeFilter: TimeFilter;
 };
 
 interface Entry {
@@ -33,24 +36,26 @@ interface Entry {
   value: number;
 }
 
-const AnalyticsContributorLineChart = ({ contributors, type = 'commits' }: Props) => {
+const AnalyticsContributorLineChart = ({ contributors, timeFilter }: Props) => {
+  const [activityType, setActivityType] = useState<ActivityType>('commits');
+
   const contributorFiltered = useMemo(
-    () => contributors.filter((c) => (c[type]?.length || 0) > 0),
-    [contributors, type],
+    () => contributors.filter((c) => (c[activityType]?.length || 0) > 0).slice(0, 16),
+    [contributors, activityType],
   );
 
   const { data, avatarData } = useMemo(() => {
     const countByDate: Record<string, Record<string, number>> = {};
 
     for (const c of contributorFiltered) {
-      const list = c[type] || [];
+      const list = c[activityType] || [];
       for (const item of list) {
         const rawDate = item.createdAt;
         const parsed = parseISO(rawDate);
-        const date = format(parsed, 'yyyy-MM-dd');
+        const chunkKey = getChunkKeyByTimeFilter(parsed, timeFilter);
 
-        if (!countByDate[date]) countByDate[date] = {};
-        countByDate[date][c.login] = (countByDate[date][c.login] || 0) + 1;
+        if (!countByDate[chunkKey]) countByDate[chunkKey] = {};
+        countByDate[chunkKey][c.login] = (countByDate[chunkKey][c.login] || 0) + 1;
       }
     }
 
@@ -68,14 +73,14 @@ const AnalyticsContributorLineChart = ({ contributors, type = 'commits' }: Props
       const rowAvatar: ContributorDataLinePoint = { date };
       const dailyContributors = countByDate[date] || {};
 
-      // All login even for days without acitivities
+      // All login even for days without activities
       for (const login of contributorLogins) {
         const daily = dailyContributors[login] || 0;
         cumulativeData[login] = (cumulativeData[login] || 0) + daily;
         rowData[login] = cumulativeData[login];
       }
 
-      // Only login with acitivities per day
+      // Only login with activities per day
       for (const login of Object.keys(dailyContributors)) {
         const daily = dailyContributors[login];
         cumulativeAvatar[login] = (cumulativeAvatar[login] || 0) + daily;
@@ -86,8 +91,11 @@ const AnalyticsContributorLineChart = ({ contributors, type = 'commits' }: Props
       avatarData.push(rowAvatar);
     }
 
-    return { data, avatarData };
-  }, [contributorFiltered, type]);
+    return {
+      data,
+      avatarData,
+    };
+  }, [contributorFiltered, activityType]);
 
   const contributorLogins = useMemo(() => contributorFiltered.map((c) => c.login), [contributorFiltered]);
 
@@ -138,17 +146,24 @@ const AnalyticsContributorLineChart = ({ contributors, type = 'commits' }: Props
   const filename = useMemo(() => {
     const start = data[0]?.date || '';
     const end = data[data.length - 1]?.date || '';
-    return `${labelMap[type].toLowerCase()}_activity_${start}_to_${end}`.replace(/\s+/g, '-');
-  }, [data, type]);
+    return `${labelMap[activityType].toLowerCase()}_activity_${start}_to_${end}`.replace(/\s+/g, '-');
+  }, [data, activityType]);
 
   return (
     <Card className="h-[500px] w-full max-w-[650px] px-0">
       <Heading size="3" align="center">
-        {labelMap[type]} activity
+        <ActivityTypeSelector onActivityTypeChange={setActivityType} mb="3" display="inline-flex" /> activity
       </Heading>
       <ResponsiveContainer minWidth={0} height="100%">
-        <LineChart data={data} margin={{ top: 20, right: 40, bottom: 20, left: -20 }}>
-          <XAxis dataKey="date" tick={{ fontSize: 10 }} axisLine={false} tickLine={false} tickMargin={10} minTickGap={8} />
+        <LineChart data={data} margin={{ top: 10, right: 40, bottom: 42, left: -10 }}>
+          <XAxis
+            dataKey="date"
+            tick={{ fontSize: 10 }}
+            axisLine={false}
+            tickLine={false}
+            tickMargin={10}
+            minTickGap={8}
+          />
           <YAxis axisLine={false} tickLine={false} allowDecimals={false} tickFormatter={(v) => v.toFixed(0)} />
           <Tooltip
             content={
@@ -182,11 +197,7 @@ const AnalyticsContributorLineChart = ({ contributors, type = 'commits' }: Props
           <Customized component={AvatarRenderer} />
         </LineChart>
       </ResponsiveContainer>
-      <CSVExportButton
-        className='absolute top-2 right-4'
-        data={data}
-        filename={filename}
-      >
+      <CSVExportButton className="absolute right-4 top-2" data={data} filename={filename}>
         <ArrowDownToLine size={20} />
       </CSVExportButton>
     </Card>

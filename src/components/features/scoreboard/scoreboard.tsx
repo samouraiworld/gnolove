@@ -5,8 +5,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 
-import { CheckIcon, Link1Icon, MixerHorizontalIcon } from '@radix-ui/react-icons';
-import { Badge, Button, CheckboxGroup, Flex, FlexProps, Popover, Spinner, Switch, Tabs, Text } from '@radix-ui/themes';
+import { CheckIcon, Link1Icon } from '@radix-ui/react-icons';
+import { Badge, Button, Flex, FlexProps, Spinner, Switch, Tabs, Text } from '@radix-ui/themes';
 
 import ContributorTable from '@/modules/contributor-table';
 
@@ -15,6 +15,7 @@ import useGetContributors from '@/hooks/use-get-contributors';
 import { getTimeFilterFromSearchParam, TimeFilter } from '@/utils/github';
 import { getContributorsWithScore } from '@/utils/score';
 import useGetRepositories from '@/hooks/use-get-repositories';
+import RepositoriesSelector from '@/components/modules/repositories-selector';
 
 const TIMEFILTER_MAP = {
   [TimeFilter.ALL_TIME]: 'All time',
@@ -39,7 +40,7 @@ const Scoreboard = ({ ...props }: FlexProps) => {
 
   const initialTimeFilter = getTimeFilterFromSearchParam(searchParams.get('f'), TimeFilter.MONTHLY);
   const initialExclude = !!searchParams.get('e');
-  const initialRepoIds = searchParams.get('r')?.split(',') ?? [];
+  const initialRepoIds = searchParams.get('r')?.split(',') ?? ['gnolang/gno'];
 
   const [timeFilter, setTimeFilter] = useState<TimeFilter>(initialTimeFilter);
   const [exclude, setExclude] = useState<boolean>(initialExclude);
@@ -115,24 +116,12 @@ const Scoreboard = ({ ...props }: FlexProps) => {
           Share this board
         </Button>
 
-        <Popover.Root>
-          <Popover.Trigger>
-            <Button variant="soft" mb="2">
-              <MixerHorizontalIcon />
-              Repositories
-            </Button>
-          </Popover.Trigger>
-
-          <Popover.Content>
-            <CheckboxGroup.Root value={selectedRepositories} onValueChange={setSelectedRepositories}>
-              {repositories.map(({ id, name, owner }) => (
-                <CheckboxGroup.Item disabled={id === 'gnolang/gno'} value={id} key={id}>
-                  {owner}/{name}
-                </CheckboxGroup.Item>
-              ))}
-            </CheckboxGroup.Root>
-          </Popover.Content>
-        </Popover.Root>
+        <RepositoriesSelector
+          repositories={repositories}
+          selectedRepositories={selectedRepositories}
+          onSelectedRepositoriesChange={setSelectedRepositories}
+          defaultCheckedIds={['gnolang/gno']}
+        />
       </Flex>
 
       {isPending ? (

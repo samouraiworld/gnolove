@@ -1,56 +1,42 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { ComponentProps, useEffect, useState } from 'react';
 
 import { Select, Flex, Text } from '@radix-ui/themes';
-import { subDays, subMonths } from 'date-fns';
+import { TimeFilter } from '@/utils/github';
 
-type Preset = '7d' | '14d' | '1m';
-
-type Props = {
-  onChange: (startDate: Date) => void;
-  defaultValue?: Preset;
+type Props = ComponentProps<typeof Flex> & {
+  onDateChange: (timeFilter: TimeFilter) => void;
+  defaultValue?: TimeFilter;
 };
 
-const presets: Record<Preset, string> = {
-  '7d': 'Past 7 days',
-  '14d': 'Past 14 days',
-  '1m': 'Past month',
+const presets: Record<TimeFilter, string> = {
+  [TimeFilter.ALL_TIME]: 'All time',
+  [TimeFilter.YEARLY]: 'Past year',
+  [TimeFilter.MONTHLY]: 'Past month',
+  [TimeFilter.WEEKLY]: 'Past week',
 };
 
-const getStartDate = (key: Preset): Date => {
-  switch (key) {
-    case '7d':
-      return subDays(new Date(), 7);
-    case '14d':
-      return subDays(new Date(), 14);
-    case '1m':
-      return subMonths(new Date(), 1);
-    default:
-      return new Date();
-  }
-};
-
-const TimeRangeSelector = ({ onChange, defaultValue = '14d' }: Props) => {
-  const [value, setValue] = useState<Preset>(defaultValue);
+const TimeRangeSelector = ({ onDateChange, defaultValue = TimeFilter.WEEKLY, ...props }: Props) => {
+  const [value, setValue] = useState<TimeFilter>(defaultValue);
 
   useEffect(() => {
-    onChange(getStartDate(defaultValue));
-  }, [defaultValue, onChange]);
+    onDateChange(defaultValue);
+  }, [defaultValue, onDateChange]);
 
   const handleChange = (newValue: string) => {
-    const key = newValue as Preset;
+    const key = newValue as TimeFilter;
     setValue(key);
-    onChange(getStartDate(key));
+    onDateChange(key);
   };
 
   return (
-    <Flex direction="column" gap="1" mb="3">
+    <Flex direction="column" gap="1" {...props}>
       <Text size="1" weight="medium">
         Date range
       </Text>
       <Select.Root value={value} onValueChange={handleChange}>
-        <Select.Trigger />
+        <Select.Trigger variant="soft" />
         <Select.Content>
           {Object.entries(presets).map(([k, label]) => (
             <Select.Item key={k} value={k}>

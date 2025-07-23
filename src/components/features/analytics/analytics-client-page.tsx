@@ -1,46 +1,44 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { Box, Flex, Heading, Separator } from '@radix-ui/themes';
-
-import { subDays, parseISO, isAfter, isEqual } from 'date-fns';
 
 import AnalyticsContributorLineChart from './analytics-contributor-line-chart';
 import AnalyticsRecentActivity from './analytics-recent-activity';
+import AnalyticsTopContributorBarChart from './analytics-top-contributor-bar-chart';
+import { Box, Flex, Heading, Separator } from '@radix-ui/themes';
 
 import LayoutContainer from '@/layouts/layout-container';
 
+import useGetContributors from '@/hooks/use-get-contributors';
+import useGetRepositories from '@/hooks/use-get-repositories';
+
+import { filterContributionsByRepo } from '@/utils/contributors';
 import { TimeFilter } from '@/utils/github';
 
-import AnalyticsTotalStats from '@/features/analytics/analytics-total-stats';
-import ActivityTypeSelector, { ActivityType } from '@/modules/activity-type-selector';
-import TimeRangeSelector from '@/modules/time-range-selector';
-import useGetContributors from '@/hooks/use-get-contributors';
+import AnalyticsTotalStats from '@/components/features/analytics/analytics-total-stats';
+import RepositoriesSelector from '@/components/modules/repositories-selector';
+import TimeRangeSelector from '@/components/modules/time-range-selector';
 
 const AnalyticsClientPage = () => {
-  const [startDate, setStartDate] = useState(subDays(new Date(), 14));
-  const [activityType, setActivityType] = useState<ActivityType>('commits');
+  const [timeFilter, setTimeFilter] = useState<TimeFilter>(TimeFilter.WEEKLY);
+  const [selectedRepositories, setSelectedRepositories] = useState<string[]>(['gnolang/gno']);
 
-  const { data: contributors } = useGetContributors({ timeFilter: TimeFilter.ALL_TIME });
-
-  const isAfterAndEqual = (date: string) => {
-    const parsedDate = parseISO(date);
-    return isAfter(parsedDate, startDate) || isEqual(parsedDate, startDate);
-  };
+  const { data: contributors } = useGetContributors({
+    timeFilter,
+    exclude: false,
+    repositories: selectedRepositories,
+  });
+  const { data: repositories = [] } = useGetRepositories();
 
   const filteredContributors = useMemo(() => {
     if (!contributors) return [];
-
     return contributors.map((contributor) => ({
       ...contributor,
-      commits:
-        contributor.commits?.filter(({ createdAt }) => isAfterAndEqual(createdAt)) ?? [],
-      issues:
-        contributor.issues?.filter(({ createdAt }) => isAfterAndEqual(createdAt)) ?? [],
-      pullRequests:
-        contributor.pullRequests?.filter(({ updatedAt }) => isAfterAndEqual(updatedAt)) ?? [],
+      commits: filterContributionsByRepo(contributor.commits, selectedRepositories),
+      issues: filterContributionsByRepo(contributor.issues, selectedRepositories),
+      pullRequests: filterContributionsByRepo(contributor.pullRequests, selectedRepositories),
     }));
-  }, [contributors, startDate]);
+  }, [contributors, timeFilter, selectedRepositories]);
 
   return (
     <LayoutContainer mt="5">
@@ -53,15 +51,27 @@ const AnalyticsClientPage = () => {
           justify="between"
           align="center"
         >
-          <Flex gap="4">
-            <TimeRangeSelector onChange={setStartDate} />
-            <ActivityTypeSelector onChange={setActivityType} />
+          <Flex gap="4" align="end">
+            <TimeRangeSelector onDateChange={setTimeFilter} defaultValue={timeFilter} mb="3" />
+            <RepositoriesSelector
+              repositories={repositories}
+              selectedRepositories={selectedRepositories}
+              onSelectedRepositoriesChange={setSelectedRepositories}
+              defaultCheckedIds={['gnolang/gno']}
+              mb="3"
+            />
           </Flex>
           <AnalyticsTotalStats contributors={filteredContributors} />
         </Flex>
-        <Flex direction={{ initial: 'column', lg: 'row' }} justify="center" align="center" mt="6" gap="3">
-          <AnalyticsContributorLineChart contributors={filteredContributors} type={activityType} />
-          <AnalyticsRecentActivity contributors={filteredContributors} startDate={startDate} />
+        <Flex direction={{ initial: 'column' }} mt="6" gap="3">
+          <AnalyticsTopContributorBarChart
+            contributors={filteredContributors}
+            selectedRepositories={selectedRepositories}
+          />
+          <Flex direction={{ initial: 'column', lg: 'row' }} justify="center" align="center" mt="6" gap="3">
+            <AnalyticsContributorLineChart contributors={filteredContributors} timeFilter={timeFilter} />
+            <AnalyticsRecentActivity contributors={filteredContributors} timeFilter={timeFilter} />
+          </Flex>
         </Flex>
       </Box>
     </LayoutContainer>
