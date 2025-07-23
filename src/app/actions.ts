@@ -121,12 +121,3 @@ export const getNamespacesByUser = async (address: string) => {
 
   return NamespacesSchema.parse(data);
 };
-
-export const sendDiscordNotification = async () => {
-  const url = new URL('/discord/notify', ENV.NEXT_PUBLIC_API_URL);
-
-  const res = await fetch(url.toString(), { cache: 'no-cache' });
-  const data = await res.json();
-
-  return data;
-};

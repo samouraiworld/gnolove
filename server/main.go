@@ -99,7 +99,6 @@ func main() {
 	router.HandleFunc("/getGithubUserAndTokenByCode", handler.HandleGetGithubUserAndTokenByCode(signer, database))
 	router.HandleFunc("/contributors/{login}", contributor.HandleGetContributor(database))
 	router.Post("/link", handler.HandleLink(database))
-	router.HandleFunc("/discord/notify", handler.HandleDiscordNotification(database))
 
 	// Onchain package contributions endpoints
 	router.HandleFunc("/onchain/packages", handler.HandleGetAllPackages(database))
