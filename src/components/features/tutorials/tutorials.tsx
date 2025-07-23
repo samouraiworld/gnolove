@@ -4,6 +4,8 @@ import { TUTORIAL_VIDEOS } from '@/features/tutorials/constants';
 import Link from 'next/link';
 
 const Tutorials = () => {
+  const videos = [...TUTORIAL_VIDEOS].reverse();
+
   return (
     <Container size='4' py='6'>
       <Section>
@@ -32,7 +34,7 @@ const Tutorials = () => {
         </Card>
 
         <Grid columns={{ initial: '1', sm: '2', lg: '3' }} gap='6'>
-          {TUTORIAL_VIDEOS.map(({ src, title }) => (
+          {videos.map(({ src, title }) => (
             <Card key={src}>
               <Flex direction='column' gap='2'>
                 <YoutubeEmbeddedVideo className="overflow-hidden rounded-4" src={src} />
