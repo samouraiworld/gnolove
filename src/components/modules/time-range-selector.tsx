@@ -3,45 +3,31 @@
 import { ComponentProps, useEffect, useState } from 'react';
 
 import { Select, Flex, Text } from '@radix-ui/themes';
-import { subDays, subMonths } from 'date-fns';
-
-type Preset = '7d' | '14d' | '1m';
+import { TimeFilter } from '@/utils/github';
 
 type Props = ComponentProps<typeof Flex> & {
-  onDateChange: (startDate: Date) => void; // Renamed to avoid conflict
-  defaultValue?: Preset;
+  onDateChange: (timeFilter: TimeFilter) => void;
+  defaultValue?: TimeFilter;
 };
 
-const presets: Record<Preset, string> = {
-  '7d': 'Past 7 days',
-  '14d': 'Past 14 days',
-  '1m': 'Past month',
+const presets: Record<TimeFilter, string> = {
+  [TimeFilter.ALL_TIME]: 'All time',
+  [TimeFilter.YEARLY]: 'Past year',
+  [TimeFilter.MONTHLY]: 'Past month',
+  [TimeFilter.WEEKLY]: 'Past week',
 };
 
-const getStartDate = (key: Preset): Date => {
-  switch (key) {
-    case '7d':
-      return subDays(new Date(), 7);
-    case '14d':
-      return subDays(new Date(), 14);
-    case '1m':
-      return subMonths(new Date(), 1);
-    default:
-      return new Date();
-  }
-};
-
-const TimeRangeSelector = ({ onDateChange, defaultValue = '14d', ...props }: Props) => {
-  const [value, setValue] = useState<Preset>(defaultValue);
+const TimeRangeSelector = ({ onDateChange, defaultValue = TimeFilter.WEEKLY, ...props }: Props) => {
+  const [value, setValue] = useState<TimeFilter>(defaultValue);
 
   useEffect(() => {
-    onDateChange(getStartDate(defaultValue));
+    onDateChange(defaultValue);
   }, [defaultValue, onDateChange]);
 
   const handleChange = (newValue: string) => {
-    const key = newValue as Preset;
+    const key = newValue as TimeFilter;
     setValue(key);
-    onDateChange(getStartDate(key));
+    onDateChange(key);
   };
 
   return (

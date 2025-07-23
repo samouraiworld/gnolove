@@ -45,18 +45,14 @@ const AnalyticsTopContributorBarChart = ({ contributors, selectedRepositories }:
     const contributorData = getContributorsWithScore(contributors)
       .filter(
         (contributor) =>
-          contributor.commits?.length ||
-          contributor.issues?.length ||
-          contributor.pullRequests?.length
+          contributor.TotalCommits ||
+          contributor.TotalIssues ||
+          contributor.TotalPrs
       )
       .map((contributor) => {
-        const commits = (contributor?.commits ?? []).length;
-        const issues = (contributor?.issues ?? []).length;
-        const pullRequests = (contributor?.pullRequests ?? []).length;
-
-        const weightedCommits = commits * SCORE.COMMIT_FACTOR;
-        const weightedIssues = issues * SCORE.ISSUES_FACTOR;
-        const weightedPullRequests = pullRequests * SCORE.PR_FACTOR;
+        const weightedCommits = contributor.TotalCommits * SCORE.COMMIT_FACTOR;
+        const weightedIssues = contributor.TotalIssues * SCORE.ISSUES_FACTOR;
+        const weightedPullRequests = contributor.TotalPrs * SCORE.PR_FACTOR;
 
         const totalActivity = weightedCommits + weightedIssues + weightedPullRequests;
 

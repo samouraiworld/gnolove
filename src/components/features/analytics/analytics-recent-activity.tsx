@@ -4,13 +4,14 @@ import { useMemo } from 'react';
 
 import { ChatBubbleIcon, CommitIcon, MixerVerticalIcon } from '@radix-ui/react-icons';
 import { Card, Flex, Heading, Text } from '@radix-ui/themes';
-import { format, isBefore, isEqual, parseISO, addDays, startOfDay, startOfToday } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import { ArrowDownToLine } from 'lucide-react';
 import { ResponsiveContainer, BarChart, XAxis, YAxis, Tooltip, Bar } from 'recharts';
 
+import { TEnhancedUserWithStats } from '@/utils/schemas';
+
 import CSVExportButton from '@/components/elements/csv-export-button';
 import RechartTooltip from '@/components/elements/rechart-tooltip';
-import { TEnhancedUserWithStats } from '@/utils/schemas';
 
 const fillColors = {
   commits: '#8884d8',
@@ -27,7 +28,6 @@ type ActivityDataPoint = {
 
 type Props = {
   contributors: TEnhancedUserWithStats[];
-  startDate: Date;
 };
 
 const renderActivityEntries = (payload: any[], _label?: string | number) => {
@@ -60,37 +60,38 @@ const renderActivityEntries = (payload: any[], _label?: string | number) => {
   );
 };
 
-const AnalyticsRecentActivity = ({ contributors, startDate }: Props) => {
+const AnalyticsRecentActivity = ({ contributors }: Props) => {
   const data: ActivityDataPoint[] = useMemo(() => {
     const map = new Map<string, ActivityDataPoint>();
-    const today = startOfToday();
-    for (let d = startOfDay(startDate); isBefore(d, today) || isEqual(d, today); d = addDays(d, 1)) {
-      const key = format(d, 'yyyy-MM-dd');
-      map.set(key, { date: key, commits: 0, prs: 0, issues: 0 });
-    }
-
+   
     for (const c of contributors) {
       c.commits?.forEach(({ createdAt }) => {
         const date = format(parseISO(createdAt), 'yyyy-MM-dd');
-        if (isBefore(parseISO(createdAt), startDate)) return;
+        if (!map.has(date)) {
+          map.set(date, { date, commits: 0, prs: 0, issues: 0 });
+        }
         map.get(date)!.commits++;
       });
 
       c.pullRequests?.forEach(({ createdAt }) => {
         const date = format(parseISO(createdAt), 'yyyy-MM-dd');
-        if (isBefore(parseISO(createdAt), startDate)) return;
+        if (!map.has(date)) {
+          map.set(date, { date, commits: 0, prs: 0, issues: 0 });
+        }
         map.get(date)!.prs++;
       });
 
       c.issues?.forEach(({ createdAt }) => {
         const date = format(parseISO(createdAt), 'yyyy-MM-dd');
-        if (isBefore(parseISO(createdAt), startDate)) return;
+        if (!map.has(date)) {
+          map.set(date, { date, commits: 0, prs: 0, issues: 0 });
+        }
         map.get(date)!.issues++;
       });
     }
 
     return Array.from(map.values()).sort((a, b) => a.date.localeCompare(b.date));
-  }, [contributors, startDate]);
+  }, [contributors]);
 
   const filename = useMemo(() => {
     const start = data[0]?.date || '';
