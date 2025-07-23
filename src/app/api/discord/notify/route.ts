@@ -37,7 +37,7 @@ function formatLeaderboardMessage(contributors: TEnhancedUserWithStatsAndScore[]
 
 export async function POST(req: Request) {
   const auth = req.headers.get('authorization');
-  if (auth !== `Bearer ${process.env.WEBHOOK_SECRET}`) {
+  if (auth !== `Bearer ${process.env.CRON_SECRET}`) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -49,11 +49,15 @@ export async function POST(req: Request) {
 
   const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
 
+  if (!webhookUrl) {
+    return NextResponse.json({ error: 'Discord webhook URL not configured' }, { status: 500 });
+  }
+
   const payload = {
     content,
   };
 
-  const response = await fetch(webhookUrl!, {
+  const response = await fetch(webhookUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
