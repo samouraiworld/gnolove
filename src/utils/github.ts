@@ -1,3 +1,5 @@
+import { format, parseISO } from 'date-fns';
+
 import { isDefined } from '@/utils/array';
 import { TEnhancedUserWithStats } from '@/utils/schemas';
 
@@ -73,4 +75,26 @@ export const getLastMRs = (contributors: TEnhancedUserWithStats[], last: number)
     .filter(({ state }) => state === 'MERGED')
     .toSorted(cmpUpdatedAt)
     .slice(0, last);
+};
+
+/**
+ * Utility function to determine the chunking key based on the TimeFilter.
+ * @param date The date to format.
+ * @param timeFilter The selected TimeFilter.
+ * @returns A formatted string representing the chunking key.
+ */
+export const getChunkKeyByTimeFilter = (date: string | Date, timeFilter: TimeFilter): string => {
+  const parsedDate = typeof date === 'string' ? parseISO(date) : date;
+  switch (timeFilter) {
+    case TimeFilter.WEEKLY:
+      return format(parsedDate, 'EEE');
+    case TimeFilter.MONTHLY:
+      return format(parsedDate, 'yyyy-MM-dd');
+    case TimeFilter.YEARLY:
+      return format(parsedDate, 'yyyy-MM');
+    case TimeFilter.ALL_TIME:
+      return format(parsedDate, 'yyyy');
+    default:
+      return console.warn(`Unknown time filter: ${timeFilter}`), `${timeFilter}   ${format(parsedDate, 'yyyy-MM-DD')}`;
+  }
 };

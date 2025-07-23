@@ -70,7 +70,7 @@ const AnalyticsClientPage = () => {
           />
           <Flex direction={{ initial: 'column', lg: 'row' }} justify="center" align="center" mt="6" gap="3">
             <AnalyticsContributorLineChart contributors={filteredContributors} />
-            <AnalyticsRecentActivity contributors={filteredContributors} />
+            <AnalyticsRecentActivity contributors={filteredContributors} timeFilter={timeFilter} />
           </Flex>
         </Flex>
       </Box>

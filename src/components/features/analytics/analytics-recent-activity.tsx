@@ -4,10 +4,10 @@ import { useMemo } from 'react';
 
 import { ChatBubbleIcon, CommitIcon, MixerVerticalIcon } from '@radix-ui/react-icons';
 import { Card, Flex, Heading, Text } from '@radix-ui/themes';
-import { format, parseISO } from 'date-fns';
 import { ArrowDownToLine } from 'lucide-react';
 import { ResponsiveContainer, BarChart, XAxis, YAxis, Tooltip, Bar } from 'recharts';
 
+import { TimeFilter, getChunkKeyByTimeFilter } from '@/utils/github';
 import { TEnhancedUserWithStats } from '@/utils/schemas';
 
 import CSVExportButton from '@/components/elements/csv-export-button';
@@ -28,6 +28,7 @@ type ActivityDataPoint = {
 
 type Props = {
   contributors: TEnhancedUserWithStats[];
+  timeFilter: TimeFilter;
 };
 
 const renderActivityEntries = (payload: any[], _label?: string | number) => {
@@ -60,38 +61,38 @@ const renderActivityEntries = (payload: any[], _label?: string | number) => {
   );
 };
 
-const AnalyticsRecentActivity = ({ contributors }: Props) => {
+const AnalyticsRecentActivity = ({ contributors, timeFilter }: Props) => {
   const data: ActivityDataPoint[] = useMemo(() => {
     const map = new Map<string, ActivityDataPoint>();
-   
-    for (const c of contributors) {
+
+    contributors.forEach((c) => {
       c.commits?.forEach(({ createdAt }) => {
-        const date = format(parseISO(createdAt), 'yyyy-MM-dd');
-        if (!map.has(date)) {
-          map.set(date, { date, commits: 0, prs: 0, issues: 0 });
+        const dateKey = getChunkKeyByTimeFilter(createdAt, timeFilter);
+        if (!map.has(dateKey)) {
+          map.set(dateKey, { date: dateKey, commits: 0, prs: 0, issues: 0 });
         }
-        map.get(date)!.commits++;
+        map.get(dateKey)!.commits++;
       });
 
       c.pullRequests?.forEach(({ createdAt }) => {
-        const date = format(parseISO(createdAt), 'yyyy-MM-dd');
-        if (!map.has(date)) {
-          map.set(date, { date, commits: 0, prs: 0, issues: 0 });
+        const dateKey = getChunkKeyByTimeFilter(createdAt, timeFilter);
+        if (!map.has(dateKey)) {
+          map.set(dateKey, { date: dateKey, commits: 0, prs: 0, issues: 0 });
         }
-        map.get(date)!.prs++;
+        map.get(dateKey)!.prs++;
       });
 
       c.issues?.forEach(({ createdAt }) => {
-        const date = format(parseISO(createdAt), 'yyyy-MM-dd');
-        if (!map.has(date)) {
-          map.set(date, { date, commits: 0, prs: 0, issues: 0 });
+        const dateKey = getChunkKeyByTimeFilter(createdAt, timeFilter);
+        if (!map.has(dateKey)) {
+          map.set(dateKey, { date: dateKey, commits: 0, prs: 0, issues: 0 });
         }
-        map.get(date)!.issues++;
+        map.get(dateKey)!.issues++;
       });
-    }
+    });
 
     return Array.from(map.values()).sort((a, b) => a.date.localeCompare(b.date));
-  }, [contributors]);
+  }, [contributors, timeFilter]);
 
   const filename = useMemo(() => {
     const start = data[0]?.date || '';
@@ -127,7 +128,6 @@ const AnalyticsRecentActivity = ({ contributors }: Props) => {
               <RechartTooltip
                 renderEntries={renderActivityEntries}
                 renderLabel={(_label: string | number | undefined, payload?: any[]) => {
-                  // Use the date from the first payload entry
                   const date = payload?.[0]?.payload?.date;
                   return date ? (
                     <Text size="2" weight="bold">
