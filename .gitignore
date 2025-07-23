@@ -2,7 +2,6 @@
 
 .env
 .env.*
-!.env.example
 
 _.env
 _.env.*
@@ -33,6 +32,10 @@ yarn-error.log*
 
 # local env files
 .env*.local
+
+# Allow .env.example
+!.env.example
+!server/.env.example
 
 # vercel
 .vercel
