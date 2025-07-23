@@ -3,15 +3,16 @@
 import { ReactElement, useMemo, useState } from 'react';
 
 import { Avatar, Card, Flex, Heading, Text } from '@radix-ui/themes';
-import { format, parseISO, compareAsc } from 'date-fns';
+import { parseISO, compareAsc } from 'date-fns';
 import { ArrowDownToLine } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Customized, CustomizedProps } from 'recharts';
+
+import { getChunkKeyByTimeFilter, TimeFilter } from '@/utils/github';
+import { TEnhancedUserWithStats } from '@/utils/schemas';
 
 import CSVExportButton from '@/components/elements/csv-export-button';
 import RechartTooltip from '@/components/elements/rechart-tooltip';
 import ActivityTypeSelector, { ActivityType } from '@/components/modules/activity-type-selector';
-import { TEnhancedUserWithStats } from '@/utils/schemas';
-import { getChunkKeyByTimeFilter, TimeFilter } from '@/utils/github';
 
 const labelMap: Record<ActivityType, string> = {
   commits: 'Commits',
