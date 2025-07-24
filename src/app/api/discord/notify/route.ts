@@ -41,8 +41,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  const repositories = await getRepositories();
-  const contributors = await getContributors(TimeFilter.WEEKLY, false, repositories.map((repo) => repo.id));
+  const envRepos = process.env.DISCORD_NOTIFICATION_REPOSITORIES;
+  const repositories = envRepos ? envRepos.split(' ') : (await getRepositories()).map((repo) => repo.id);
+  const contributors = await getContributors(TimeFilter.WEEKLY, false, repositories);
   const contributorsWithScore = getContributorsWithScore(contributors).sort((a, b) => b.score - a.score).slice(0, 10);
 
   const content = formatLeaderboardMessage(contributorsWithScore);
