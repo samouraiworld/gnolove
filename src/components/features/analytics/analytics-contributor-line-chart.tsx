@@ -5,7 +5,7 @@ import { ReactElement, useMemo, useState } from 'react';
 import { Avatar, Card, Flex, Heading, Text } from '@radix-ui/themes';
 import { parseISO, compareAsc } from 'date-fns';
 import { ArrowDownToLine } from 'lucide-react';
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Customized, CustomizedProps } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, Customized, CustomizedProps } from 'recharts';
 
 import { getChunkKeyByTimeFilter, TimeFilter } from '@/utils/github';
 import { TEnhancedUserWithStats } from '@/utils/schemas';
@@ -165,24 +165,20 @@ const AnalyticsContributorLineChart = ({ contributors, timeFilter }: Props) => {
             minTickGap={8}
           />
           <YAxis axisLine={false} tickLine={false} allowDecimals={false} tickFormatter={(v) => v.toFixed(0)} />
-          <Tooltip
-            content={
-              <RechartTooltip
-                renderEntries={(payload) => {
-                  const sortedPayload = (payload as Entry[]).slice().sort((a, b) => b.value - a.value);
-                  return sortedPayload.map((entry, index) => (
-                    <Flex key={index} gap="1">
-                      <Text size="1" style={{ color: entry.color }}>
-                        {entry.name}:
-                      </Text>
-                      <Text size="1" weight="bold" style={{ color: entry.color }}>
-                        {entry.value}
-                      </Text>
-                    </Flex>
-                  ));
-                }}
-              />
-            }
+          <RechartTooltip
+            renderEntries={(payload) => {
+              const sortedPayload = (payload as Entry[]).slice().sort((a, b) => b.value - a.value);
+              return sortedPayload.map((entry, index) => (
+                <Flex key={index} gap="1">
+                  <Text size="1" style={{ color: entry.color }}>
+                    {entry.name}:
+                  </Text>
+                  <Text size="1" weight="bold" style={{ color: entry.color }}>
+                    {entry.value}
+                  </Text>
+                </Flex>
+              ));
+            }}
           />
           {contributorLogins.map((login, i) => (
             <Line

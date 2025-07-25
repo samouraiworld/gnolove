@@ -3,7 +3,7 @@
 import { TContributor, TContributorRepository, TTimeCount, TTopContributedRepo } from '@/utils/schemas';
 import { Box, Flex, Grid, Card, Text, Heading } from '@radix-ui/themes';
 import RechartTooltip from '@/components/elements/rechart-tooltip';
-import { Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import ContributionsHeatmap from './contributions-heatmap';
 import { useMemo } from 'react';
 import CSVExportButton from '@/components/elements/csv-export-button';
@@ -129,7 +129,7 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
                         stroke='var(--gray-11)'
                       />
                       <YAxis fontSize={12} stroke='var(--gray-11)' />
-                      <Tooltip content={<RechartTooltip />} />
+                      <RechartTooltip />
                       <Bar dataKey='contributions' fill='var(--accent-9)' radius={[4, 4, 0, 0]} />
                     </BarChart>
                   </ResponsiveContainer>
@@ -164,7 +164,7 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
                         <Cell key={`cell-${index}`} fill={entry.color} />
                       ))}
                     </Pie>
-                    <Tooltip content={<RechartTooltip />} />
+                    <RechartTooltip />
                     <Legend verticalAlign='bottom' height={36} wrapperStyle={{ fontSize: '12px' }} />
                   </PieChart>
                 </ResponsiveContainer>
@@ -198,7 +198,7 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
                           <Cell key={`cell-${index}`} fill={entry.color} />
                         ))}
                       </Pie>
-                      <Tooltip content={<RechartTooltip />} />
+                      <RechartTooltip />
                       <Legend verticalAlign='bottom' height={36} wrapperStyle={{ fontSize: '12px' }} />
                     </PieChart>
                   </ResponsiveContainer>
@@ -227,7 +227,7 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
                     <CartesianGrid strokeDasharray='3 3' stroke='var(--gray-6)' />
                     <XAxis dataKey='period' fontSize={12} stroke='var(--gray-11)' />
                     <YAxis fontSize={12} stroke='var(--gray-11)' />
-                    <Tooltip content={<RechartTooltip />} />
+                    <RechartTooltip />
                     <Bar dataKey='commits' fill='#8884d8' name='Commits' radius={[4, 4, 0, 0]} />
                     <Bar dataKey='prs' fill='#82ca9d' name='PRs' radius={[4, 4, 0, 0]} />
                     <Bar dataKey='issues' fill='#ffc658' name='Issues' radius={[4, 4, 0, 0]} />
