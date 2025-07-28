@@ -16,7 +16,6 @@ import {
 } from 'recharts';
 
 import { TEnhancedUserWithStats } from '@/utils/schemas';
-import { getContributorsWithScore } from '@/utils/score';
 
 import SCORE from '@/constants/score';
 
@@ -41,7 +40,7 @@ type TopContributorData = {
 
 const AnalyticsTopContributorBarChart = ({ contributors, selectedRepositories }: Props) => {
   const topContributors: TopContributorData[] = useMemo(() => {
-    const contributorData = getContributorsWithScore(contributors)
+    const contributorData = contributors
       .filter((contributor) => contributor.TotalCommits || contributor.TotalIssues || contributor.TotalPrs)
       .map((contributor) => {
         const weightedCommits = contributor.TotalCommits * SCORE.COMMIT_FACTOR;
