@@ -7,7 +7,26 @@ const factorsPath = path.join(__dirname, '../score-factors.json');
 const tsOutPath = path.join(__dirname, '../src/constants/score.ts');
 const goOutPath = path.join(__dirname, '../server/handler/score.go');
 
-const factors = JSON.parse(fs.readFileSync(factorsPath, 'utf8'));
+let factors;
+try {
+  factors = JSON.parse(fs.readFileSync(factorsPath, 'utf8'));
+} catch (err) {
+  console.error('Error reading or parsing score-factors.json:', err.message);
+  process.exit(1);
+}
+
+// Validate that all factor values are numbers
+const requiredKeys = ['COMMIT_FACTOR', 'ISSUES_FACTOR', 'PR_FACTOR', 'REVIEWED_MR_FACTOR'];
+for (const key of requiredKeys) {
+  if (!(key in factors)) {
+    console.error(`Missing required factor: ${key}`);
+    process.exit(1);
+  }
+  if (typeof factors[key] !== 'number' || !isFinite(factors[key])) {
+    console.error(`Invalid value for ${key}: must be a finite number, got '${factors[key]}'`);
+    process.exit(1);
+  }
+}
 
 // TypeScript output
 const tsContent = `
@@ -23,7 +42,12 @@ const SCORE = {
 
 export default SCORE;
 `;
-fs.writeFileSync(tsOutPath, tsContent);
+try {
+  fs.writeFileSync(tsOutPath, tsContent);
+} catch (err) {
+  console.error('Error writing TypeScript output:', err.message);
+  process.exit(1);
+}
 
 // Go output
 const goContent = `package handler
@@ -42,12 +66,18 @@ const (
 // Read existing Go file to preserve CalculateScore function
 let goExisting = '';
 if (fs.existsSync(goOutPath)) {
-  const lines = fs.readFileSync(goOutPath, 'utf8').split('\n');
-  const idx = lines.findIndex(l => l.includes('func CalculateScore'));
-  if (idx !== -1) {
-    goExisting = '\n' + lines.slice(idx).join('\n');
+  const content = fs.readFileSync(goOutPath, 'utf8');
+  // Match function and its body using a more robust pattern
+  const funcMatch = content.match(/(\nfunc\s+CalculateScore[\s\S]*?)(?=\nfunc|\n$)/);
+  if (funcMatch) {
+    goExisting = funcMatch[0];
   }
 }
-fs.writeFileSync(goOutPath, goContent + goExisting);
+try {
+  fs.writeFileSync(goOutPath, goContent + goExisting);
+} catch (err) {
+  console.error('Error writing Go output:', err.message);
+  process.exit(1);
+}
 
 console.log('Generated score.ts and score.go from score-factors.json');

@@ -74,12 +74,18 @@ func main() {
 	)
 
 	syncer := sync.NewSyncer(database, repositories, logger)
-	// Start the Discord leaderboard cron job
-	syncer.StartLeaderboardNotifier()
 
+	// Start data synchronization first
 	err = syncer.StartSynchonizing()
 	if err != nil {
 		panic(err)
+	}
+
+	// Start the Discord leaderboard cron job if webhook is configured
+	if os.Getenv("DISCORD_WEBHOOK_URL") != "" {
+		syncer.StartLeaderboardNotifier()
+	} else {
+		logger.Warn("DISCORD_WEBHOOK_URL not set, skipping leaderboard notifier")
 	}
 
 	cache, err := ristretto.NewCache(&ristretto.Config{

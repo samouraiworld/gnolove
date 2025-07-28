@@ -9,9 +9,9 @@ import (
 	"sort"
 	"time"
 
+	"github.com/samouraiworld/topofgnomes/server/handler"
 	"github.com/samouraiworld/topofgnomes/server/models"
 	"gorm.io/gorm"
-	"github.com/samouraiworld/topofgnomes/server/handler"
 )
 
 // ContributorStats holds stats and score for a contributor
@@ -33,15 +33,55 @@ func GetContributorsWithScores(db *gorm.DB, since time.Time) ([]ContributorStats
 		return nil, err
 	}
 
+	// Aggregate all counts in one query per table
+
+	type countResult struct {
+		AuthorID string
+		Count    int64
+	}
+	commitsMap := map[string]int64{}
+	var commitResults []countResult
+	db.Table("commits").Select("author_id, COUNT(*) as count").
+		Where("created_at >= ?", since).
+		Group("author_id").Scan(&commitResults)
+	for _, r := range commitResults {
+		commitsMap[r.AuthorID] = r.Count
+	}
+
+	issuesMap := map[string]int64{}
+	var issueResults []countResult
+	db.Table("issues").Select("author_id, COUNT(*) as count").
+		Where("created_at >= ?", since).
+		Group("author_id").Scan(&issueResults)
+	for _, r := range issueResults {
+		issuesMap[r.AuthorID] = r.Count
+	}
+
+	prsMap := map[string]int64{}
+	var prResults []countResult
+	db.Table("pull_requests").Select("author_id, COUNT(*) as count").
+		Where("created_at >= ?", since).
+		Group("author_id").Scan(&prResults)
+	for _, r := range prResults {
+		prsMap[r.AuthorID] = r.Count
+	}
+
+	reviewedMap := map[string]int64{}
+	var reviewedResults []countResult
+	db.Table("reviews").Select("author_id, COUNT(*) as count").
+		Where("created_at >= ?", since).
+		Group("author_id").Scan(&reviewedResults)
+	for _, r := range reviewedResults {
+		reviewedMap[r.AuthorID] = r.Count
+	}
+
+	// Now build the stats slice
 	stats := make([]ContributorStats, 0, len(users))
 	for _, user := range users {
-		var commits, issues, prs, reviewed int64
-
-		db.Table("commits").Where("author_id = ? AND created_at >= ?", user.ID, since).Count(&commits)
-		db.Table("issues").Where("author_id = ? AND created_at >= ?", user.ID, since).Count(&issues)
-		db.Table("pull_requests").Where("author_id = ? AND created_at >= ?", user.ID, since).Count(&prs)
-		db.Table("reviews").Where("author_id = ? AND created_at >= ?", user.ID, since).Count(&reviewed)
-
+		commits := commitsMap[user.ID]
+		issues := issuesMap[user.ID]
+		prs := prsMap[user.ID]
+		reviewed := reviewedMap[user.ID]
 		score := handler.CalculateScore(commits, issues, prs, reviewed)
 		if score > 0 {
 			stats = append(stats, ContributorStats{
@@ -95,8 +135,15 @@ func FormatLeaderboardMessage(stats []ContributorStats) string {
 // Send leaderboard to Discord webhook
 func SendDiscordLeaderboard(webhookURL, content string) error {
 	payload := map[string]string{"content": content}
-	b, _ := json.Marshal(payload)
-	resp, err := http.Post(webhookURL, "application/json", bytes.NewBuffer(b))
+	b, err := json.Marshal(payload)
+	if err != nil {
+		return fmt.Errorf("failed to marshal payload: %w", err)
+	}
+
+	client := &http.Client{
+		Timeout: 30 * time.Second,
+	}
+	resp, err := client.Post(webhookURL, "application/json", bytes.NewBuffer(b))
 	if err != nil {
 		return err
 	}
