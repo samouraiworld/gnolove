@@ -11,7 +11,6 @@ import { cn } from '@/utils/style';
 
 import useGetContributors from '@/hooks/use-get-contributors';
 import { TimeFilter } from '@/utils/github';
-import { getContributorsWithScore } from '@/utils/score';
 import LayoutContainer from '@/components/layouts/layout-container';
 import { useOffline } from '@/contexts/offline-context';
 import Image from 'next/image';
@@ -28,7 +27,7 @@ const BestPerformingTeams = () => {
   const { data: contributors, isPending } = useGetContributors({ timeFilter, repositories: selectedRepositories });
 
   const filteredContributors = useMemo(
-    () => getContributorsWithScore(contributors ?? []).filter(({ score }) => score),
+    () => contributors?.filter(({ score }) => score),
     [contributors],
   );
 
@@ -37,7 +36,7 @@ const BestPerformingTeams = () => {
       // Map members to their score and login
       const membersWithScore: { avatarUrl: string; name: string; login: string; score: number }[] = []; 
       for (const memberLogin of team.members) {
-        const contributor = filteredContributors.find(c => c.login.toLowerCase() === memberLogin.toLowerCase());
+        const contributor = filteredContributors?.find(c => c.login.toLowerCase() === memberLogin.toLowerCase());
         if (!contributor) continue;
         membersWithScore.push({
           avatarUrl: contributor.avatarUrl,

@@ -6,15 +6,14 @@ import { Flex, Table, Text, Tooltip } from '@radix-ui/themes';
 
 import ContributorRow from '@/modules/contributor-row';
 
-import { TEnhancedUserWithStatsAndScore } from '@/utils/schemas';
-import { getSortedContributors } from '@/utils/score';
+import { TEnhancedUserWithStats } from '@/utils/schemas';
 
 import SCORE from '@/constants/score';
 
 import MinecraftHeart from '@/images/minecraft-heart.png';
 
 export interface ContributorTableProps {
-  contributors: TEnhancedUserWithStatsAndScore[];
+  contributors: TEnhancedUserWithStats[];
 
   sort?: boolean;
 
@@ -36,6 +35,7 @@ const ContributorTable = ({ contributors, sort, showRank }: ContributorTableProp
 
     return `score = ${strKeys.join(' + ')}`;
   }, [SCORE]);
+
   return (
     <Table.Root layout="auto">
       <Table.Header>
@@ -59,7 +59,7 @@ const ContributorTable = ({ contributors, sort, showRank }: ContributorTableProp
       </Table.Header>
 
       <Table.Body>
-        {(sort ? getSortedContributors(contributors) : contributors).slice(0, 50).map((contributor, rank) => (
+        {(sort ? contributors.sort((a, b) => b.score - a.score) : contributors).slice(0, 50).map((contributor, rank) => (
           <ContributorRow key={contributor.id} {...{ contributor, rank, showRank }} />
         ))}
       </Table.Body>

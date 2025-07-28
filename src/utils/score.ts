@@ -1,19 +1,6 @@
-import { TEnhancedUserWithStats, TEnhancedUserWithStatsAndScore, TIssue, TPullRequest } from '@/utils/schemas';
+import { TEnhancedUserWithStats, TIssue, TPullRequest } from '@/utils/schemas';
 
 import SCORE from '@/constants/score';
-
-/**
- * Calculate the score of the user from its stats
- * @param user The user to calculate the score from
- */
-export const getScore = (user: TEnhancedUserWithStats): number => {
-  return (
-    user.TotalCommits * SCORE.COMMIT_FACTOR +
-    user.TotalIssues * SCORE.ISSUES_FACTOR +
-    user.TotalPrs * SCORE.PR_FACTOR +
-    user.TotalReviewedPullRequests * SCORE.REVIEWED_MR_FACTOR
-  );
-};
 
 /**
  * Get the score of an issue or PR
@@ -27,20 +14,10 @@ export const getIssueOrPRScore = (issueOrPR: TIssue | TPullRequest) => {
 };
 
 /**
- * Map the score to the contributors
- * @param contributors The contributors to map the score to
- */
-export const getContributorsWithScore = (contributors: TEnhancedUserWithStats[]): TEnhancedUserWithStatsAndScore[] => {
-  return contributors.map((row) => ({ ...row, score: getScore(row) }));
-};
-
-/**
  * Get the contributors sorted by score
  * @param contributors The contributors to sort
  */
-export const getSortedContributors = (
-  contributors: TEnhancedUserWithStatsAndScore[],
-): TEnhancedUserWithStatsAndScore[] => {
+export const getSortedContributors = (contributors: TEnhancedUserWithStats[]): TEnhancedUserWithStats[] => {
   return contributors
     .toSorted((a, b) => b.TotalCommits - a.TotalCommits)
     .toSorted((a, b) => b.TotalReviewedPullRequests - a.TotalReviewedPullRequests)

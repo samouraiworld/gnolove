@@ -1,0 +1,6 @@
+{
+  "COMMIT_FACTOR": 10,
+  "ISSUES_FACTOR": 0.5,
+  "PR_FACTOR": 2,
+  "REVIEWED_MR_FACTOR": 2
+}

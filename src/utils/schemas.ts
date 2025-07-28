@@ -166,11 +166,11 @@ export const EnhancedUserWithStatsSchema = z.preprocess(
     TotalPrs: z.number().default(0),
     TotalIssues: z.number().default(0),
     TotalReviewedPullRequests: z.number().default(0),
+    score: z.number().default(0),
   }),
 );
 
 export type TEnhancedUserWithStats = z.infer<typeof EnhancedUserWithStatsSchema>;
-export type TEnhancedUserWithStatsAndScore = TEnhancedUserWithStats & { score: number };
 
 const preprocessMilestone = (data: unknown) => {
   if (!data || typeof data !== 'object') return data;

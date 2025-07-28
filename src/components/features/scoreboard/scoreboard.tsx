@@ -13,7 +13,6 @@ import ContributorTable from '@/modules/contributor-table';
 import useGetContributors from '@/hooks/use-get-contributors';
 
 import { getTimeFilterFromSearchParam, TimeFilter } from '@/utils/github';
-import { getContributorsWithScore } from '@/utils/score';
 import useGetRepositories from '@/hooks/use-get-repositories';
 import RepositoriesSelector from '@/components/modules/repositories-selector';
 
@@ -54,7 +53,7 @@ const Scoreboard = ({ ...props }: FlexProps) => {
   });
 
   const filteredContributors = useMemo(
-    () => getContributorsWithScore(contributors ?? []).filter(({ score }) => score),
+    () => (contributors ?? []).filter(({ score }) => score),
     [contributors],
   );
 

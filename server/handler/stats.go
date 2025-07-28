@@ -61,6 +61,7 @@ func getUserStats(db *gorm.DB, startTime time.Time, exclude, repositories []stri
 
 		user.PullRequests = getPrByState(user.PullRequests, "MERGED")
 
+		score := CalculateScore(int64(len(user.Commits)), int64(len(user.Issues)), int64(len(user.PullRequests)), int64(len(user.Reviews)))
 		res = append(res, UserWithStats{
 			User: models.User{
 				Login:        user.Login,
@@ -77,6 +78,7 @@ func getUserStats(db *gorm.DB, startTime time.Time, exclude, repositories []stri
 			TotalIssues:               len(user.Issues),
 			TotalReviewedPullRequests: len(user.Reviews),
 			LastContribution:          getLastContribution(user),
+			Score:                    score,
 		})
 	}
 
@@ -102,6 +104,7 @@ type UserWithStats struct {
 	TotalIssues               int
 	TotalReviewedPullRequests int
 	LastContribution          interface{}
+	Score                     float64 `json:"score"`
 }
 
 func HandleGetUserStats(db *gorm.DB, cache *ristretto.Cache) func(w http.ResponseWriter, r *http.Request) {

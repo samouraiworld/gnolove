@@ -9,7 +9,7 @@ import Label from '@/elements/label';
 
 import { chunk } from '@/utils/array';
 import { TEnhancedUserWithStats, TIssue, TPullRequest } from '@/utils/schemas';
-import { getIssueOrPRScore, getScore } from '@/utils/score';
+import { getIssueOrPRScore } from '@/utils/score';
 
 import SCORE from '@/constants/score';
 
@@ -138,7 +138,7 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
                     <Text size="1">Total</Text>
                   </Table.ColumnHeaderCell>
                   <Table.ColumnHeaderCell align="right">
-                    <Text size="1">{getScore(user)} points</Text>
+                    <Text size="1">{user.score} points</Text>
                   </Table.ColumnHeaderCell>
                 </Table.Row>
               </Table.Body>

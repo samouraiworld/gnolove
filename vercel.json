@@ -1,6 +1,0 @@
-{
-  "crons": [{
-    "path": "/api/discord/notify",
-    "schedule": "0 15 * * 5"
-  }]
-}

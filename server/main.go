@@ -74,6 +74,9 @@ func main() {
 	)
 
 	syncer := sync.NewSyncer(database, repositories, logger)
+	// Start the Discord leaderboard cron job
+	syncer.StartLeaderboardNotifier()
+
 	err = syncer.StartSynchonizing()
 	if err != nil {
 		panic(err)
