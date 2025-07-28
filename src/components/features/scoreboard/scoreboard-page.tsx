@@ -15,8 +15,6 @@ import IssuesTable from '@/modules/issues-table';
 import PrsTable from '@/modules/prs-table';
 import UserTable from '@/modules/user-table';
 
-import YoutubeEmbeddedVideo from '@/elements/youtube-embedded-video';
-
 import useGetContributors from '@/hooks/use-get-contributors';
 import useGetLastIssues from '@/hooks/use-get-last-issues';
 import useGetMilestone from '@/hooks/use-get-milestone';
@@ -32,6 +30,9 @@ import HeaderImage from '@/images/header.png';
 import Scoreboard from '@/features/scoreboard/scoreboard';
 import { useOffline } from '@/contexts/offline-context';
 import { cn } from '@/utils/style';
+import dynamic from 'next/dynamic';
+
+const YoutubeEmbeddedVideo = dynamic(() => import('@/elements/youtube-embedded-video'), { ssr: false });
 
 const ScoreboardPage = () => {
   const { data: allTimeContributors, isPending: isAllTimePending } = useGetContributors({

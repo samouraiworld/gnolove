@@ -1,7 +1,10 @@
 import { Container, Flex, Heading, Text, Card, Grid, Badge, Button, Section } from '@radix-ui/themes';
-import YoutubeEmbeddedVideo from '@/elements/youtube-embedded-video';
 import { TUTORIAL_VIDEOS } from '@/features/tutorials/constants';
 import Link from 'next/link';
+
+import dynamic from 'next/dynamic';
+
+const YoutubeEmbeddedVideo = dynamic(() => import('@/elements/youtube-embedded-video'), { ssr: false });
 
 const Tutorials = () => {
   const videos = [...TUTORIAL_VIDEOS].reverse();
