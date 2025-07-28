@@ -35,4 +35,12 @@ export const TUTORIAL_VIDEOS = [
     src: 'https://www.youtube.com/embed/-byuFoVYp30?si=GSv1ck2SkAWqfSE6',
     title: 'Extend your IDE capabilities with Gnopls - Gno Land Education Tutorial',
   },
+  {
+    src: 'https://www.youtube.com/embed/zpGxMQo3V-o?si=IHxcusnDD-hlXzHv',
+    title: 'Interactive Documentation - Gno Land Education Tutorial',
+  },
+  {
+    src: 'https://www.youtube.com/embed/UNJSuMdjTFA?si=5U_CMoltbNuFW96_',
+    title: 'How to code Effectively in Gno - Gno Land Education Tutorial',
+  },
 ] as const satisfies ReadonlyArray<{ src: string; title: string }>;
