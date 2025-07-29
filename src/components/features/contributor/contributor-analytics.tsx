@@ -1,13 +1,28 @@
 'use client';
 
-import { TContributor, TContributorRepository, TTimeCount, TTopContributedRepo } from '@/utils/schemas';
-import { Box, Flex, Grid, Card, Text, Heading } from '@radix-ui/themes';
-import RechartTooltip from '@/components/elements/rechart-tooltip';
-import { Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import ContributionsHeatmap from './contributions-heatmap';
 import { useMemo } from 'react';
-import CSVExportButton from '@/components/elements/csv-export-button';
+
+import ContributionsHeatmap from './contributions-heatmap';
+import { Box, Flex, Grid, Card, Text, Heading } from '@radix-ui/themes';
 import { ArrowDownToLine } from 'lucide-react';
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
+
+import { TContributor, TContributorRepository, TTimeCount, TTopContributedRepo } from '@/utils/schemas';
+
+import CSVExportButton from '@/components/elements/csv-export-button';
+import RechartTooltip from '@/components/elements/rechart-tooltip';
 
 const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) => {
   const monthlyActivityData = useMemo(() => {
@@ -40,10 +55,12 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
     return `monthly-activity-trend_${contributor.name || contributor.login}_${start}_to_${end}`.replace(/\s+/g, '-');
   }, [monthlyActivityData, contributor.name || contributor.login]);
 
-  const repositoryData = (contributor.topContributedRepositories || []).map(({ id, contributions }: TTopContributedRepo) => ({
-    name: id,
-    contributions,
-  }));
+  const repositoryData = (contributor.topContributedRepositories || []).map(
+    ({ id, contributions }: TTopContributedRepo) => ({
+      name: id,
+      contributions,
+    }),
+  );
 
   const contributionTypeData = [
     { name: 'Commits', value: contributor.totalCommits || 0, color: '#8884d8' },
@@ -80,25 +97,25 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
   const heatmapData = useMemo(() => {
     return Array.isArray(contributor.contributionsPerDay)
       ? contributor.contributionsPerDay.map((day: TTimeCount) => ({
-        date: day.period,
-        contributions: day.count,
-      }))
+          date: day.period,
+          contributions: day.count,
+        }))
       : [];
   }, [contributor.contributionsPerDay]);
 
   return (
     <Card style={{ height: '100%' }}>
-      <Flex direction='column' gap='4' height='100%' overflowY='auto'>
+      <Flex direction="column" gap="4" height="100%" overflowY="auto">
         <Card style={{ minHeight: 260 }}>
-          <Flex direction='column' gap='3'>
-            <Heading size='3'>Contribution Activity</Heading>
-            <Text size='2' color='gray'>
+          <Flex direction="column" gap="3">
+            <Heading size="3">Contribution Activity</Heading>
+            <Text size="2" color="gray">
               Daily contributions over the past year
             </Text>
             <ContributionsHeatmap data={heatmapData} />
           </Flex>
           <CSVExportButton
-            className='absolute top-2 right-2'
+            className="absolute right-2 top-2"
             data={heatmapData}
             filename={`yearly-contributions-${contributor.name || contributor.login}`}
           >
@@ -107,36 +124,33 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
         </Card>
 
         {/* Charts Grid */}
-        <Grid columns={{ initial: '1', lg: '2' }} gap='4'>
+        <Grid columns={{ initial: '1', lg: '2' }} gap="4">
           {/* Repository Contributions Bar Chart */}
           {repositoryData.length > 0 && (
             <Card>
-              <Flex direction='column' gap='3'>
-                <Heading size='3'>Contributions by Repository</Heading>
-                <Box height='300px'>
-                  <ResponsiveContainer width='100%' height='100%'>
-                    <BarChart
-                      data={repositoryData}
-                      margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
-                    >
-                      <CartesianGrid strokeDasharray='3 3' stroke='var(--gray-6)' />
+              <Flex direction="column" gap="3">
+                <Heading size="3">Contributions by Repository</Heading>
+                <Box height="300px">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={repositoryData} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="var(--gray-6)" />
                       <XAxis
-                        dataKey='name'
+                        dataKey="name"
                         angle={-45}
-                        textAnchor='end'
+                        textAnchor="end"
                         height={80}
                         fontSize={12}
-                        stroke='var(--gray-11)'
+                        stroke="var(--gray-11)"
                       />
-                      <YAxis fontSize={12} stroke='var(--gray-11)' />
+                      <YAxis fontSize={12} stroke="var(--gray-11)" />
                       <Tooltip content={<RechartTooltip />} />
-                      <Bar dataKey='contributions' fill='var(--accent-9)' radius={[4, 4, 0, 0]} />
+                      <Bar dataKey="contributions" fill="var(--accent-9)" radius={[4, 4, 0, 0]} />
                     </BarChart>
                   </ResponsiveContainer>
                 </Box>
               </Flex>
               <CSVExportButton
-                className='absolute top-2 right-2'
+                className="absolute right-2 top-2"
                 data={repositoryData}
                 filename={`repository-contributions-${contributor.name || contributor.login}`}
               >
@@ -146,31 +160,31 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
           )}
           {/* Contribution Types Donut Chart */}
           <Card>
-            <Flex direction='column' gap='3'>
-              <Heading size='3'>Contribution Types</Heading>
+            <Flex direction="column" gap="3">
+              <Heading size="3">Contribution Types</Heading>
               <Box style={{ height: '300px' }}>
-                <ResponsiveContainer width='100%' height='100%'>
+                <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
                       data={contributionTypeData}
-                      cx='50%'
-                      cy='50%'
+                      cx="50%"
+                      cy="50%"
                       innerRadius={60}
                       outerRadius={100}
                       paddingAngle={2}
-                      dataKey='value'
+                      dataKey="value"
                     >
                       {contributionTypeData.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={entry.color} />
                       ))}
                     </Pie>
                     <Tooltip content={<RechartTooltip />} />
-                    <Legend verticalAlign='bottom' height={36} wrapperStyle={{ fontSize: '12px' }} />
+                    <Legend verticalAlign="bottom" height={36} wrapperStyle={{ fontSize: '12px' }} />
                   </PieChart>
                 </ResponsiveContainer>
               </Box>
               <CSVExportButton
-                className='absolute top-2 right-2'
+                className="absolute right-2 top-2"
                 data={contributionTypeData}
                 filename={`contribution-types-${contributor.name || contributor.login}`}
               >
@@ -182,30 +196,24 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
           {/* Language Distribution */}
           {languageData.length > 0 && (
             <Card>
-              <Flex direction='column' gap='3'>
-                <Heading size='3'>Programming Languages</Heading>
+              <Flex direction="column" gap="3">
+                <Heading size="3">Programming Languages</Heading>
                 <Box style={{ height: '300px' }}>
-                  <ResponsiveContainer width='100%' height='100%'>
+                  <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
-                      <Pie
-                        data={languageData}
-                        cx='50%'
-                        cy='50%'
-                        outerRadius={100}
-                        dataKey='value'
-                      >
+                      <Pie data={languageData} cx="50%" cy="50%" outerRadius={100} dataKey="value">
                         {languageData.map((entry, index) => (
                           <Cell key={`cell-${index}`} fill={entry.color} />
                         ))}
                       </Pie>
                       <Tooltip content={<RechartTooltip />} />
-                      <Legend verticalAlign='bottom' height={36} wrapperStyle={{ fontSize: '12px' }} />
+                      <Legend verticalAlign="bottom" height={36} wrapperStyle={{ fontSize: '12px' }} />
                     </PieChart>
                   </ResponsiveContainer>
                 </Box>
               </Flex>
               <CSVExportButton
-                className='absolute top-2 right-2'
+                className="absolute right-2 top-2"
                 data={languageData}
                 filename={`language-distribution-${contributor.name || contributor.login}`}
               >
@@ -213,30 +221,27 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
               </CSVExportButton>
             </Card>
           )}
-          
+
           {/* Monthly Activity Trend */}
           <Card>
-            <Flex direction='column' gap='3'>
-              <Heading size='3'>Monthly Activity Trend</Heading>
+            <Flex direction="column" gap="3">
+              <Heading size="3">Monthly Activity Trend</Heading>
               <Box style={{ height: '300px' }}>
-                <ResponsiveContainer width='100%' height='100%'>
-                  <BarChart
-                    data={monthlyActivityData}
-                    margin={{ top: 20, right: 30, left: -30, bottom: 5 }}
-                  >
-                    <CartesianGrid strokeDasharray='3 3' stroke='var(--gray-6)' />
-                    <XAxis dataKey='period' fontSize={12} stroke='var(--gray-11)' />
-                    <YAxis fontSize={12} stroke='var(--gray-11)' />
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={monthlyActivityData} margin={{ top: 20, right: 30, left: -30, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--gray-6)" />
+                    <XAxis dataKey="period" fontSize={12} stroke="var(--gray-11)" />
+                    <YAxis fontSize={12} stroke="var(--gray-11)" />
                     <Tooltip content={<RechartTooltip />} />
-                    <Bar dataKey='commits' fill='#8884d8' name='Commits' radius={[4, 4, 0, 0]} />
-                    <Bar dataKey='prs' fill='#82ca9d' name='PRs' radius={[4, 4, 0, 0]} />
-                    <Bar dataKey='issues' fill='#ffc658' name='Issues' radius={[4, 4, 0, 0]} />
-                    <Legend verticalAlign='bottom' height={36} wrapperStyle={{ fontSize: '12px' }} />
+                    <Bar dataKey="commits" fill="#8884d8" name="Commits" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="prs" fill="#82ca9d" name="PRs" radius={[4, 4, 0, 0]} />
+                    <Bar dataKey="issues" fill="#ffc658" name="Issues" radius={[4, 4, 0, 0]} />
+                    <Legend verticalAlign="bottom" height={36} wrapperStyle={{ fontSize: '12px' }} />
                   </BarChart>
                 </ResponsiveContainer>
               </Box>
               <CSVExportButton
-                className='absolute top-2 right-2'
+                className="absolute right-2 top-2"
                 data={monthlyActivityData}
                 filename={monthlyActivityFilename}
               >
