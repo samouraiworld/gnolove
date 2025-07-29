@@ -25,15 +25,3 @@
 }
 
 /* Animation */
-@keyframes slideInFromLeft {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-.animate-slide-in-from-left {
-  animation: slideInFromLeft 200ms ease-out forwards;
-}
