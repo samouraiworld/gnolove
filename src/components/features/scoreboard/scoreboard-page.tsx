@@ -5,7 +5,7 @@ import { useMemo } from 'react';
 import Image from 'next/image';
 import NextLink from 'next/link';
 
-import { Box, Flex, Grid, Heading, Spinner, Text } from '@radix-ui/themes';
+import { Box, Flex, Grid, Heading, Text } from '@radix-ui/themes';
 
 import MilestoneProgress from '@/features/milestone-progress';
 
@@ -32,6 +32,7 @@ import HeaderImage from '@/images/header.png';
 import Scoreboard from '@/features/scoreboard/scoreboard';
 import { useOffline } from '@/contexts/offline-context';
 import { cn } from '@/utils/style';
+import Loader from '@/elements/loader';
 
 const ScoreboardPage = () => {
   const { data: allTimeContributors, isPending: isAllTimePending } = useGetContributors({
@@ -72,21 +73,21 @@ const ScoreboardPage = () => {
               👋 Help Wanted!
             </NextLink>
           </Heading>
-          {isIssuesPending ? <Spinner /> : <IssuesTable issues={issues ?? []} showLabels="on-hover" />}
+          {isIssuesPending ? <Loader /> : <IssuesTable issues={issues ?? []} showLabels="on-hover" />}
         </Flex>
 
         <Flex direction="column" gap="4">
           <Heading as="h2" weight="bold" size="6" mt="6">
             ✔️ Freshly Merged
           </Heading>
-          {isAllTimePending ? <Spinner /> : <PrsTable prs={lastMRs} />}
+          {isAllTimePending ? <Loader /> : <PrsTable prs={lastMRs} />}
         </Flex>
 
         <Flex direction="column" gap="4">
           <Heading as="h2" weight="bold" size="6" mt="6">
             ⭐ New Rising gnome
           </Heading>
-          {isNewContributorsPending ? <Spinner /> : <UserTable users={newContributors ?? []} />}
+          {isNewContributorsPending ? <Loader /> : <UserTable users={newContributors ?? []} />}
         </Flex>
       </Grid>
 

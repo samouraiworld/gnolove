@@ -1,12 +1,13 @@
 'use client';
 
-import { Dialog, Flex, Spinner } from '@radix-ui/themes';
+import Loader from '@/elements/loader';
+import { Dialog, Flex } from '@radix-ui/themes';
 
 const Loading = () => {
   return (
     <Flex align='center' gap='2'>
       <Dialog.Title mb='0'>Loading...</Dialog.Title>
-      <Spinner />
+      <Loader width={24} height={24} />
     </Flex>
   );
 };

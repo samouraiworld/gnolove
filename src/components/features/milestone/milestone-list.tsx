@@ -4,11 +4,12 @@ import { memo, useCallback, useMemo, useState, useTransition } from 'react';
 
 import MilestoneListItem from '@/components/features/milestone/milestone-list-item';
 import { CheckCircledIcon, CircleIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
-import { Grid, Flex, Text, Badge, Box, Card, Separator, IconButton, Spinner } from '@radix-ui/themes';
+import { Grid, Flex, Text, Badge, Box, Card, Separator, IconButton } from '@radix-ui/themes';
 
 import { TIssue } from '@/utils/schemas';
 
 import { cmpCreatedAt } from '@/utils/github';
+import Loader from '@/elements/loader';
 
 interface MilestoneListProps {
   issues: TIssue[];
@@ -62,7 +63,7 @@ const KanbanColumn = memo(
           </Flex>
           <IconButton variant="ghost" size="2" onClick={handleToggle} disabled={isPending}>
             {isPending ? (
-              <Spinner size="1" />
+              <Loader width={16} height={16} />
             ) : isCollapsed ? (
               <ChevronDownIcon width="16" height="16" />
             ) : (
