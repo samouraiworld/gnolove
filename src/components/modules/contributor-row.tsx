@@ -12,7 +12,7 @@ import { CircleDotIcon } from 'lucide-react';
 
 import ContributionsDialog from '@/modules/contributions-dialog';
 
-import { TEnhancedUserWithStatsAndScore } from '@/utils/schemas';
+import { TEnhancedUserWithStats } from '@/utils/schemas';
 import { cn } from '@/utils/style';
 
 import TEAMS from '@/constants/teams';
@@ -20,7 +20,7 @@ import Cell from '@/elements/cell';
 import { useOffline } from '@/contexts/offline-context';
 
 export interface ContributorRowProps {
-  contributor: TEnhancedUserWithStatsAndScore;
+  contributor: TEnhancedUserWithStats;
   rank: number;
 
   showRank?: boolean;

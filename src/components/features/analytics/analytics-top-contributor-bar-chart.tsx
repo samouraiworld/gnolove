@@ -17,11 +17,10 @@ import {
 } from 'recharts';
 
 import { TEnhancedUserWithStats } from '@/utils/schemas';
-import { getContributorsWithScore } from '@/utils/score';
-
-import SCORE from '@/constants/score';
 
 import RechartTooltip from '@/components/elements/rechart-tooltip';
+
+import useGetScoreFactors from '@/hooks/use-get-score-factors';
 
 type Props = {
   contributors: TEnhancedUserWithStats[];
@@ -41,13 +40,15 @@ type TopContributorData = {
 };
 
 const AnalyticsTopContributorBarChart = ({ contributors, selectedRepositories }: Props) => {
+  const { data: scoreFactors } = useGetScoreFactors();
+
   const topContributors: TopContributorData[] = useMemo(() => {
-    const contributorData = getContributorsWithScore(contributors)
+    const contributorData = contributors
       .filter((contributor) => contributor.TotalCommits || contributor.TotalIssues || contributor.TotalPrs)
       .map((contributor) => {
-        const weightedCommits = contributor.TotalCommits * SCORE.COMMIT_FACTOR;
-        const weightedIssues = contributor.TotalIssues * SCORE.ISSUES_FACTOR;
-        const weightedPullRequests = contributor.TotalPrs * SCORE.PR_FACTOR;
+        const weightedCommits = contributor.TotalCommits * (scoreFactors?.commitFactor ?? 0);
+        const weightedIssues = contributor.TotalIssues * (scoreFactors?.issueFactor ?? 0);
+        const weightedPullRequests = contributor.TotalPrs * (scoreFactors?.prFactor ?? 0);
 
         const totalActivity = weightedCommits + weightedIssues + weightedPullRequests;
 
@@ -82,7 +83,7 @@ const AnalyticsTopContributorBarChart = ({ contributors, selectedRepositories }:
       .sort((a, b) => b.score - a.score)
       .slice(0, 15)
       .reverse();
-  }, [contributors, selectedRepositories]);
+  }, [contributors, selectedRepositories, scoreFactors]);
 
   const renderEntries = (payload: any[], _label?: string | number) => {
     if (!payload || !payload[0]) return null;

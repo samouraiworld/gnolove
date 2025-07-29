@@ -74,9 +74,18 @@ func main() {
 	)
 
 	syncer := sync.NewSyncer(database, repositories, logger)
+
+	// Start data synchronization first
 	err = syncer.StartSynchonizing()
 	if err != nil {
 		panic(err)
+	}
+
+	// Start the Discord leaderboard cron job if webhook is configured
+	if os.Getenv("DISCORD_WEBHOOK_URL") != "" {
+		syncer.StartLeaderboardNotifier()
+	} else {
+		logger.Warn("DISCORD_WEBHOOK_URL not set, skipping leaderboard notifier")
 	}
 
 	cache, err := ristretto.NewCache(&ristretto.Config{
@@ -93,6 +102,7 @@ func main() {
 	router.HandleFunc("/getRepositories", handler.HandleGetRepository(database))
 	router.HandleFunc("/getStats", handler.HandleGetUserStats(database, cache))
 	router.HandleFunc("/getIssues", handler.GetIssues(database))
+	router.HandleFunc("/score-factors", handler.HandleGetScoreFactors)
 	router.HandleFunc("/milestones/{number}", handler.GetMilestone(database))
 	router.HandleFunc("/contributors/newest", handler.HandleGetNewestContributors(database))
 	router.HandleFunc("/verifyGithubAccount", handler.HandleVerifyGithubAccount(signer, database))

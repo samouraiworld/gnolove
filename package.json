@@ -11,7 +11,7 @@
     "format": "prettier --check --write \"src/**/*.{ts,tsx}\"",
     "check-types": "tsc --noemit",
     "generate-contributors": "npm-run-all generate-contributors-no-format format",
-    "generate-contributors-no-format": "tsx src/scripts/generate-contributors.ts "
+    "generate-contributors-no-format": "tsx src/scripts/generate-contributors.ts"
   },
   "dependencies": {
     "@next/env": "^14.2.13",

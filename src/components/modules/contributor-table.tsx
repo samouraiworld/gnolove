@@ -6,15 +6,14 @@ import { Flex, Table, Text, Tooltip } from '@radix-ui/themes';
 
 import ContributorRow from '@/modules/contributor-row';
 
-import { TEnhancedUserWithStatsAndScore } from '@/utils/schemas';
-import { getSortedContributors } from '@/utils/score';
+import { TEnhancedUserWithStats } from '@/utils/schemas';
 
-import SCORE from '@/constants/score';
+import useGetScoreFactors from '@/hooks/use-get-score-factors';
 
 import MinecraftHeart from '@/images/minecraft-heart.png';
 
 export interface ContributorTableProps {
-  contributors: TEnhancedUserWithStatsAndScore[];
+  contributors: TEnhancedUserWithStats[];
 
   sort?: boolean;
 
@@ -22,12 +21,14 @@ export interface ContributorTableProps {
 }
 
 const ContributorTable = ({ contributors, sort, showRank }: ContributorTableProps) => {
+  const { data: scoreFactors } = useGetScoreFactors();
+
   const tooltipContent = useMemo(() => {
     const values = {
-      commits: SCORE.COMMIT_FACTOR,
-      issues: SCORE.ISSUES_FACTOR,
-      pull_requests: SCORE.PR_FACTOR,
-      reviewed_merge_requests: SCORE.REVIEWED_MR_FACTOR,
+      commits: scoreFactors?.commitFactor ?? 0,
+      issues: scoreFactors?.issueFactor ?? 0,
+      pull_requests: scoreFactors?.prFactor ?? 0,
+      reviewed_merge_requests: scoreFactors?.reviewedPrFactor ?? 0,
     };
 
     const keys = Object.keys(values) as (keyof typeof values)[];
@@ -35,7 +36,8 @@ const ContributorTable = ({ contributors, sort, showRank }: ContributorTableProp
     const strKeys = sortedKeys.map((k) => `${k} * ${values[k]}`);
 
     return `score = ${strKeys.join(' + ')}`;
-  }, [SCORE]);
+  }, [scoreFactors]);
+
   return (
     <Table.Root layout="auto">
       <Table.Header>
@@ -59,7 +61,7 @@ const ContributorTable = ({ contributors, sort, showRank }: ContributorTableProp
       </Table.Header>
 
       <Table.Body>
-        {(sort ? getSortedContributors(contributors) : contributors).slice(0, 50).map((contributor, rank) => (
+        {(sort ? contributors.sort((a, b) => b.score - a.score) : contributors).slice(0, 50).map((contributor, rank) => (
           <ContributorRow key={contributor.id} {...{ contributor, rank, showRank }} />
         ))}
       </Table.Body>
