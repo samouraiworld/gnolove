@@ -10,11 +10,11 @@ const (
 	CommitFactor     = 10
 	IssueFactor      = 0.5
 	PRFactor         = 2
-	ReviewedMRFactor = 2
+	ReviewedPRFactor = 2
 )
 
 func CalculateScore(commits, issues, prs, reviewed int64) float64 {
-	return float64(commits)*CommitFactor + float64(issues)*IssueFactor + float64(prs)*PRFactor + float64(reviewed)*ReviewedMRFactor
+	return float64(commits)*CommitFactor + float64(issues)*IssueFactor + float64(prs)*PRFactor + float64(reviewed)*ReviewedPRFactor
 }
 
 // HandleGetScoreFactors returns the score factors as JSON
@@ -24,7 +24,7 @@ func HandleGetScoreFactors(w http.ResponseWriter, r *http.Request) {
 		"commitFactor":     CommitFactor,
 		"issueFactor":      IssueFactor,
 		"prFactor":         PRFactor,
-		"reviewedMrFactor": ReviewedMRFactor,
+		"reviewedPrFactor": ReviewedPRFactor,
 	}
 	json.NewEncoder(w).Encode(factors)
 }

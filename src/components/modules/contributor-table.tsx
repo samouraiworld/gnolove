@@ -28,7 +28,7 @@ const ContributorTable = ({ contributors, sort, showRank }: ContributorTableProp
       commits: scoreFactors?.commitFactor ?? 0,
       issues: scoreFactors?.issueFactor ?? 0,
       pull_requests: scoreFactors?.prFactor ?? 0,
-      reviewed_merge_requests: scoreFactors?.reviewedMrFactor ?? 0,
+      reviewed_merge_requests: scoreFactors?.reviewedPrFactor ?? 0,
     };
 
     const keys = Object.keys(values) as (keyof typeof values)[];
