@@ -97,9 +97,9 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
   const heatmapData = useMemo(() => {
     return Array.isArray(contributor.contributionsPerDay)
       ? contributor.contributionsPerDay.map((day: TTimeCount) => ({
-          date: day.period,
-          contributions: day.count,
-        }))
+        date: day.period,
+        contributions: day.count,
+      }))
       : [];
   }, [contributor.contributionsPerDay]);
 

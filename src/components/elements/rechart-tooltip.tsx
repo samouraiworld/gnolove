@@ -33,15 +33,15 @@ const RechartTooltip = (props: RechartTooltipProps) => {
         {renderEntries
           ? renderEntries(payload, label)
           : payload.map((entry: any, i: number) => (
-              <Flex key={i} gap="2">
-                <Text size="1" style={{ color: entry.color }}>
-                  {entry.name}:
-                </Text>
-                <Text size="1" weight="bold" style={{ color: entry.color }}>
-                  {entry.value}
-                </Text>
-              </Flex>
-            ))}
+            <Flex key={i} gap="2">
+              <Text size="1" style={{ color: entry.color }}>
+                {entry.name}:
+              </Text>
+              <Text size="1" weight="bold" style={{ color: entry.color }}>
+                {entry.value}
+              </Text>
+            </Flex>
+          ))}
       </Flex>
     </Card>
   );
