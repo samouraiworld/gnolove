@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Box, Card, Flex, Heading, Table, Spinner, Text } from '@radix-ui/themes';
+import { Box, Card, Flex, Heading, Table, Text } from '@radix-ui/themes';
 import { useMemo } from 'react';
 
 import teams from '@/constants/teams';
@@ -19,6 +19,7 @@ import { Masonry } from 'masonic';
 import useGetRepositories from '@/hooks/use-get-repositories';
 import RepositoriesSelector from '@/modules/repositories-selector';
 import TimeRangeSelector from '@/modules/time-range-selector';
+import Loader from '@/elements/loader';
 
 const BestPerformingTeams = () => {
   const { isOffline } = useOffline();
@@ -81,7 +82,7 @@ const BestPerformingTeams = () => {
         </Flex>
         {isPending ? (
           <Flex my="9" justify="center" align="center">
-            <Spinner />
+            <Loader />
           </Flex>
         ) : (
           <Masonry

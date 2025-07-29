@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 
 import { CheckIcon, Link1Icon } from '@radix-ui/react-icons';
-import { Badge, Button, Flex, FlexProps, Spinner, Switch, Tabs, Text } from '@radix-ui/themes';
+import { Badge, Button, Flex, FlexProps, Switch, Tabs, Text } from '@radix-ui/themes';
 
 import ContributorTable from '@/modules/contributor-table';
 
@@ -16,6 +16,7 @@ import { getTimeFilterFromSearchParam, TimeFilter } from '@/utils/github';
 import { getContributorsWithScore } from '@/utils/score';
 import useGetRepositories from '@/hooks/use-get-repositories';
 import RepositoriesSelector from '@/components/modules/repositories-selector';
+import Loader from '@/elements/loader';
 
 const TIMEFILTER_MAP = {
   [TimeFilter.ALL_TIME]: 'All time',
@@ -126,7 +127,7 @@ const Scoreboard = ({ ...props }: FlexProps) => {
 
       {isPending ? (
         <Flex my="9" justify="center" align="center">
-          <Spinner />
+          <Loader />
         </Flex>
       ) : filteredContributors.length ? (
         <ContributorTable contributors={filteredContributors} sort showRank />
