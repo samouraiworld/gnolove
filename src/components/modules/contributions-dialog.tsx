@@ -11,13 +11,15 @@ import { chunk } from '@/utils/array';
 import { TEnhancedUserWithStats, TIssue, TPullRequest } from '@/utils/schemas';
 import { getIssueOrPRScore } from '@/utils/score';
 
-import SCORE from '@/constants/score';
+import useGetScoreFactors from '@/hooks/use-get-score-factors';
 
 export interface ContributionsDialogProps extends Dialog.RootProps {
   user: TEnhancedUserWithStats;
 }
 
 const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogProps) => {
+  const { data: scoreFactors } = useGetScoreFactors();
+
   const [page, setPage] = useState(0);
 
   const issuesAndPRsChunks = useMemo((): (TIssue | TPullRequest)[][] => {
@@ -70,7 +72,7 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
                     </Table.Cell>
                     <Table.Cell>
                       <Flex direction="column" height="100%" justify="center" py="2" gap="1">
-                        <Text size="1">+{getIssueOrPRScore(issueOrPR)} points</Text>
+                        <Text size="1">+{getIssueOrPRScore(issueOrPR, scoreFactors)} points</Text>
                       </Flex>
                     </Table.Cell>
                   </Table.Row>
@@ -106,7 +108,7 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
                     <Text size="1">Commits score</Text>
                   </Table.RowHeaderCell>
                   <Table.Cell align="right">
-                    <Text size="1">{user.TotalCommits * SCORE.COMMIT_FACTOR} points</Text>
+                    <Text size="1">{user.TotalCommits * (scoreFactors?.commitFactor ?? 0)} points</Text>
                   </Table.Cell>
                 </Table.Row>
                 <Table.Row>
@@ -114,7 +116,7 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
                     <Text size="1">PRs score</Text>
                   </Table.RowHeaderCell>
                   <Table.Cell align="right">
-                    <Text size="1">{user.TotalPrs * SCORE.PR_FACTOR} points</Text>
+                    <Text size="1">{user.TotalPrs * (scoreFactors?.prFactor ?? 0)} points</Text>
                   </Table.Cell>
                 </Table.Row>
                 <Table.Row>
@@ -122,7 +124,7 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
                     <Text size="1">Reviewed MRs score</Text>
                   </Table.RowHeaderCell>
                   <Table.Cell align="right">
-                    <Text size="1">{user.TotalReviewedPullRequests * SCORE.REVIEWED_MR_FACTOR} points</Text>
+                    <Text size="1">{user.TotalReviewedPullRequests * (scoreFactors?.reviewedMrFactor ?? 0)} points</Text>
                   </Table.Cell>
                 </Table.Row>
                 <Table.Row>
@@ -130,7 +132,7 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
                     <Text size="1">Issues score</Text>
                   </Table.RowHeaderCell>
                   <Table.Cell align="right">
-                    <Text size="1">{user.TotalIssues * SCORE.ISSUES_FACTOR} points</Text>
+                    <Text size="1">{user.TotalIssues * (scoreFactors?.issueFactor ?? 0)} points</Text>
                   </Table.Cell>
                 </Table.Row>
                 <Table.Row>

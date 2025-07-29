@@ -299,3 +299,12 @@ export const NamespacesSchema = z.array(NamespaceSchema);
 
 export type TNamespace = z.infer<typeof NamespaceSchema>;
 export type TNamespaces = z.infer<typeof NamespacesSchema>;
+
+export const ScoreFactorsSchema = z.object({
+  prFactor: z.number(),
+  issueFactor: z.number(),
+  commitFactor: z.number(),
+  reviewedMrFactor: z.number(),
+});
+
+export type TScoreFactors = z.infer<typeof ScoreFactorsSchema>;

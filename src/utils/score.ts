@@ -1,16 +1,14 @@
-import { TEnhancedUserWithStats, TIssue, TPullRequest } from '@/utils/schemas';
-
-import SCORE from '@/constants/score';
+import { TEnhancedUserWithStats, TIssue, TPullRequest, TScoreFactors } from '@/utils/schemas';
 
 /**
  * Get the score of an issue or PR
  * @param issueOrPR The issue or PR to get the score from
  */
-export const getIssueOrPRScore = (issueOrPR: TIssue | TPullRequest) => {
+export const getIssueOrPRScore = (issueOrPR: TIssue | TPullRequest, scoreFactors?: TScoreFactors) => {
   const isIssue = 'assignees' in issueOrPR;
 
-  if (isIssue) return SCORE.ISSUES_FACTOR;
-  return SCORE.PR_FACTOR;
+  if (isIssue) return scoreFactors?.issueFactor;
+  return scoreFactors?.prFactor;
 };
 
 /**

@@ -102,6 +102,7 @@ func main() {
 	router.HandleFunc("/getRepositories", handler.HandleGetRepository(database))
 	router.HandleFunc("/getStats", handler.HandleGetUserStats(database, cache))
 	router.HandleFunc("/getIssues", handler.GetIssues(database))
+	router.HandleFunc("/score-factors", handler.HandleGetScoreFactors)
 	router.HandleFunc("/milestones/{number}", handler.GetMilestone(database))
 	router.HandleFunc("/contributors/newest", handler.HandleGetNewestContributors(database))
 	router.HandleFunc("/verifyGithubAccount", handler.HandleVerifyGithubAccount(signer, database))

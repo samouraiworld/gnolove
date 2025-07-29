@@ -11,6 +11,7 @@ import {
   NamespacesSchema,
   PackagesSchema,
   RepositorySchema,
+  ScoreFactorsSchema,
   UserSchema,
 } from '@/utils/schemas';
 
@@ -120,4 +121,13 @@ export const getNamespacesByUser = async (address: string) => {
   const data = await res.json();
 
   return NamespacesSchema.parse(data);
+};
+
+export const getScoreFactors = async () => {
+  const url = new URL('/score-factors', ENV.NEXT_PUBLIC_API_URL);
+
+  const res = await fetch(url.toString(), { cache: 'no-cache' });
+  const data = await res.json();
+
+  return ScoreFactorsSchema.parse(data);
 };
