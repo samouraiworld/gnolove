@@ -1,6 +1,7 @@
 import React from 'react';
+
 import { Card, Box, Flex, Text } from '@radix-ui/themes';
-import { Tooltip, type TooltipProps } from 'recharts';
+import { type TooltipProps } from 'recharts';
 
 // @TODO remove the any typing when recharts allows for better typing. (unknown typing doesn't satisfy ValueType constraints)
 interface RechartTooltipProps extends TooltipProps<any, string | number> {
@@ -18,33 +19,31 @@ const RechartTooltip = (props: RechartTooltipProps) => {
   if (!active || !payload || !payload.length) return null;
 
   return (
-    <Tooltip
-      content={
-        <Card>
-          <Box mb="2">
-            {renderLabel ? renderLabel(label, payload) : (
-              <Text size="2" weight="bold">
-                {label}
-              </Text>
-            )}
-          </Box>
-          <Flex direction="column" gap="2">
-            {renderEntries
-              ? renderEntries(payload, label)
-              : payload.map((entry: any, i: number) => (
-                <Flex key={i} gap="2">
-                  <Text size="1" style={{ color: entry.color }}>
-                    {entry.name}:
-                  </Text>
-                  <Text size="1" weight="bold" style={{ color: entry.color }}>
-                    {entry.value}
-                  </Text>
-                </Flex>
-              ))}
-          </Flex>
-        </Card>
-      }
-    />
+    <Card>
+      <Box mb="2">
+        {renderLabel ? (
+          renderLabel(label, payload)
+        ) : (
+          <Text size="2" weight="bold">
+            {label}
+          </Text>
+        )}
+      </Box>
+      <Flex direction="column" gap="2">
+        {renderEntries
+          ? renderEntries(payload, label)
+          : payload.map((entry: any, i: number) => (
+              <Flex key={i} gap="2">
+                <Text size="1" style={{ color: entry.color }}>
+                  {entry.name}:
+                </Text>
+                <Text size="1" weight="bold" style={{ color: entry.color }}>
+                  {entry.value}
+                </Text>
+              </Flex>
+            ))}
+      </Flex>
+    </Card>
   );
 };
 

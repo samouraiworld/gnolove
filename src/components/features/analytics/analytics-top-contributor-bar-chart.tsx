@@ -9,6 +9,7 @@ import {
   Bar,
   XAxis,
   YAxis,
+  Tooltip as NativeRechartTooltip,
   ResponsiveContainer,
   Legend,
   CustomizedProps,
@@ -157,10 +158,10 @@ const AnalyticsTopContributorBarChart = ({ contributors, selectedRepositories }:
         <BarChart data={topContributors} layout="horizontal" margin={{ top: 10, right: 20, bottom: 20, left: 0 }}>
           <XAxis type="category" dataKey="login" hide />
           <YAxis type="number" padding={{ top: 20, bottom: 20 }} />
-          <RechartTooltip
+          <NativeRechartTooltip
             offset={30}
             cursor={{ strokeDasharray: '3 3' }}
-            renderEntries={renderEntries}
+            content={<RechartTooltip renderEntries={renderEntries} />}
           />
           <Legend />
           <Bar dataKey="commitsPercentageOfScore" stackId="a" fill="#8884d8" name="Commits %" />

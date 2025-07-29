@@ -5,7 +5,7 @@ import { useMemo } from 'react';
 import { ChatBubbleIcon, CommitIcon, MixerVerticalIcon } from '@radix-ui/react-icons';
 import { Card, Flex, Heading, Text } from '@radix-ui/themes';
 import { ArrowDownToLine } from 'lucide-react';
-import { ResponsiveContainer, BarChart, XAxis, YAxis, Bar } from 'recharts';
+import { ResponsiveContainer, BarChart, XAxis, YAxis, Tooltip, Bar } from 'recharts';
 
 import { TimeFilter, getChunkKeyByTimeFilter } from '@/utils/github';
 import { TEnhancedUserWithStats } from '@/utils/schemas';
@@ -121,18 +121,22 @@ const AnalyticsRecentActivity = ({ contributors, timeFilter }: Props) => {
             allowDecimals={false}
             tickFormatter={(value) => Math.abs(value).toFixed(0).toString()}
           />
-          <RechartTooltip
+          <Tooltip
             offset={30}
             cursor={{ strokeDasharray: '3 3' }}
-            renderEntries={renderActivityEntries}
-            renderLabel={(_label: string | number | undefined, payload?: any[]) => {
-              const date = payload?.[0]?.payload?.date;
-              return date ? (
-                <Text size="2" weight="bold">
-                  {date}
-                </Text>
-              ) : null;
-            }}
+            content={
+              <RechartTooltip
+                renderEntries={renderActivityEntries}
+                renderLabel={(_label: string | number | undefined, payload?: any[]) => {
+                  const date = payload?.[0]?.payload?.date;
+                  return date ? (
+                    <Text size="2" weight="bold">
+                      {date}
+                    </Text>
+                  ) : null;
+                }}
+              />
+            }
           />
           <Bar maxBarSize={15} radius={[4, 4, 0, 0]} dataKey="commits" fill={fillColors.commits} />
           <Bar maxBarSize={15} radius={[4, 4, 0, 0]} dataKey="issues" fill={fillColors.issues} />
