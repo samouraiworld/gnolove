@@ -63,7 +63,7 @@ const KanbanColumn = memo(
           </Flex>
           <IconButton variant="ghost" size="2" onClick={handleToggle} disabled={isPending}>
             {isPending ? (
-              <Loader />
+              <Loader width={16} height={16} />
             ) : isCollapsed ? (
               <ChevronDownIcon width="16" height="16" />
             ) : (
