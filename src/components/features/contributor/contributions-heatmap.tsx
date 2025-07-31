@@ -1,4 +1,5 @@
 import { Box, Flex, Text, Tooltip } from '@radix-ui/themes';
+import { useMemo } from 'react';
 
 type HeatmapDay = {
   date: string;
@@ -65,32 +66,69 @@ const ContributionSquare = ({ level, date, count }: { level: number; date: Date;
   );
 };
 
+// Utility to preprocess data for the heatmap
+const getHeatmapWeeks = (data: HeatmapDay[]): HeatmapDay[][] => {
+  if (!data.length) return [];
+  const today = new Date();
+  const sorted = [...data].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  const firstDate = new Date(sorted[0].date);
+  const lastDate = new Date(sorted[sorted.length - 1].date);
+
+  // Pad start
+  const firstDayOfWeek = firstDate.getDay();
+  const padStart = (firstDayOfWeek + 6) % 7;
+  const padded = [
+    ...Array.from({ length: padStart }, (_, i) => {
+      const padDate = new Date(firstDate);
+      padDate.setDate(firstDate.getDate() - (padStart - i));
+      return { date: padDate.toISOString(), contributions: 0 };
+    }),
+    ...sorted,
+  ];
+
+  // Pad end
+  const lastDayOfWeek = lastDate.getDay();
+  const padEnd = (7 - ((lastDayOfWeek + 6) % 7) - 1);
+  for (let i = 0; i < padEnd; i++) {
+    const padDate = new Date(lastDate);
+    padDate.setDate(lastDate.getDate() + i + 1);
+    padded.push({ date: padDate.toISOString(), contributions: 0 });
+  }
+
+  // Remove future dates
+  today.setHours(0, 0, 0, 0);
+  const filtered = padded.filter(day => {
+    const dayDate = new Date(day.date);
+    dayDate.setHours(0, 0, 0, 0);
+    return dayDate <= today;
+  });
+
+  // Split into weeks
+  const weeks: HeatmapDay[][] = [];
+  for (let i = 0; i < filtered.length; i += 7) {
+    weeks.push(filtered.slice(i, i + 7));
+  }
+  return weeks;
+};
+
 const ContributionsHeatmap = ({ data }: { data: HeatmapDay[] }) => {
+  const weeks = useMemo(() => getHeatmapWeeks(data), [data]);
+
   return (
     <Flex direction="column" gap='4' py='2' overflowX="auto">
       {/* Graph grid */}
       {/* Contribution squares */}
       <Flex gap='1'>
-        {Array.from({ length: 53 }, (_, weekIndex) => (
+        {weeks.map((week, weekIndex) => (
           <Flex key={weekIndex} direction='column' gap='1'>
-            {Array.from({ length: 7 }, (_, dayIndex) => {
-              const dataIndex = weekIndex * 7 + dayIndex;
-              const contribution = data[dataIndex];
-
-              if (!contribution) {
-                return <ContributionSquare key={dayIndex} level={0} date={new Date()} count={0} />;
-
-              }
-
-              return (
-                <ContributionSquare
-                  key={dayIndex}
-                  level={getContributionLevel(contribution.contributions)}
-                  date={new Date(contribution.date)}
-                  count={contribution.contributions}
-                />
-              );
-            })}
+            {week.map((contribution, dayIndex) => (
+              <ContributionSquare
+                key={dayIndex}
+                level={getContributionLevel(contribution.contributions)}
+                date={new Date(contribution.date)}
+                count={contribution.contributions}
+              />
+            ))}
           </Flex>
         ))}
       </Flex>
