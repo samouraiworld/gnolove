@@ -190,7 +190,7 @@ export const useLinkGithub = () => {
   };
 
   const getGithubUserAndToken = async (code: string) => {
-    const url = new URL(`/getGithubUserAndTokenByCode?code=${code}`, process.env.NEXT_PUBLIC_API_URL);
+    const url = new URL(`/github/oauth/exchange?code=${code}`, process.env.NEXT_PUBLIC_API_URL);
     const res = await fetch(url.toString(), { cache: 'no-cache' });
     const data = await res.json();
 

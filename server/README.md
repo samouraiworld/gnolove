@@ -33,7 +33,7 @@ This command will start indexing all important elements on the repository then s
 
 ### API
 Currently there are 4 functional endpoints
-- get stats (curl http://localhost:3333/getStats?time=x): where x in (daily|weekly|monthly|yearly)
+- get stats (curl http://localhost:3333/stats?time=x): where x in (daily|weekly|monthly|yearly)
 ```json
 [
     {
@@ -50,7 +50,7 @@ Currently there are 4 functional endpoints
 ]
 ```
 
-- get Issues (curl http://localhost:3333/getIssues?label=help wanted):
+- get issues (curl http://localhost:3333/issues?label=help wanted):
 ```json
 [
     {
