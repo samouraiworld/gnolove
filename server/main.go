@@ -99,16 +99,38 @@ func main() {
 	router := chi.NewRouter()
 	router.Use(LoggingMiddleware)
 	router.Use(Compress())
-	router.HandleFunc("/getRepositories", handler.HandleGetRepository(database))
-	router.HandleFunc("/getStats", handler.HandleGetUserStats(database, cache))
-	router.HandleFunc("/getIssues", handler.GetIssues(database))
+
+	// --- Temporary Redirects from Old Endpoints to New Endpoints ---
+	router.HandleFunc("/getRepositories", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/repositories", http.StatusTemporaryRedirect)
+	})
+	router.HandleFunc("/getStats", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/stats", http.StatusTemporaryRedirect)
+	})
+	router.HandleFunc("/getIssues", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/issues", http.StatusTemporaryRedirect)
+	})
+	router.HandleFunc("/verifyGithubAccount", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/github/verify", http.StatusTemporaryRedirect)
+	})
+	router.HandleFunc("/getGithubUserAndTokenByCode", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/github/oauth/exchange", http.StatusTemporaryRedirect)
+	})
+	router.Post("/link", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/github/link", http.StatusTemporaryRedirect)
+	})
+
+	// --- New Endpoints ---
+	router.HandleFunc("/repositories", handler.HandleGetRepository(database))
+	router.HandleFunc("/stats", handler.HandleGetUserStats(database, cache))
+	router.HandleFunc("/issues", handler.GetIssues(database))
 	router.HandleFunc("/score-factors", handler.HandleGetScoreFactors)
 	router.HandleFunc("/milestones/{number}", handler.GetMilestone(database))
 	router.HandleFunc("/contributors/newest", handler.HandleGetNewestContributors(database))
-	router.HandleFunc("/verifyGithubAccount", handler.HandleVerifyGithubAccount(signer, database))
-	router.HandleFunc("/getGithubUserAndTokenByCode", handler.HandleGetGithubUserAndTokenByCode(signer, database))
+	router.HandleFunc("/github/verify", handler.HandleVerifyGithubAccount(signer, database))
+	router.HandleFunc("/github/oauth/exchange", handler.HandleGetGithubUserAndTokenByCode(signer, database))
 	router.HandleFunc("/contributors/{login}", contributor.HandleGetContributor(database))
-	router.Post("/link", handler.HandleLink(database))
+	router.Post("/github/link", handler.HandleLink(database))
 
 	// Onchain package contributions endpoints
 	router.HandleFunc("/onchain/packages", handler.HandleGetAllPackages(database))
