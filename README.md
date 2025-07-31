@@ -54,7 +54,7 @@ https://github.com/gnolang/gno
 We welcome contributions from the community ! 
 Check out our [contribution guide](CONTRIBUTING.md) to get started.
 
-👉 [Contribute to the project](https://https://github.com/samouraiworld/gnolove)
+👉 [Contribute to the project](https://github.com/samouraiworld/gnolove)
 
 ---
 
