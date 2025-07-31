@@ -36,13 +36,24 @@ const Footer = ({ className, ...props }: FlexProps) => {
 
       <Separator my="2" size="4" />
 
-      <Flex direction="column" align="center" mb="2" className="italic">
-        <Text size="2">Gnolove.world is cooked with ❤️ by</Text>
-        <Link size="2" asChild>
-          <NextLink href="https://www.samourai.world" target="_blank">
-            www.samourai.world
-          </NextLink>
-        </Link>
+      <Flex gap="9">
+        <Flex align="center" mb="2" className="italic">
+          <Text size="2" mr="1">Gnolove.world is cooked with ❤️ by</Text>
+          <Link size="2" asChild>
+            <NextLink href="https://www.samourai.world" target="_blank">
+              www.samourai.world
+            </NextLink>
+          </Link>
+        </Flex>
+
+        <Flex align="center" mb="2">
+          <Text size="2" mr="1">Want to contribute?</Text>
+          <Link size="2" asChild>
+            <NextLink href="https://github.com/samouraiworld/gnolove" target="_blank">
+              Contribute on GitHub
+            </NextLink>
+          </Link>
+        </Flex>
       </Flex>
     </Flex>
   );

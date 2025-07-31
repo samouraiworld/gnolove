@@ -49,6 +49,15 @@ https://github.com/gnolang/gno
 
 ---
 
+### Contribute
+
+We welcome contributions from the community ! 
+Check out our [contribution guide](CONTRIBUTING.md) to get started.
+
+👉 [Contribute to the project](https://https://github.com/samouraiworld/gnolove)
+
+---
+
 To be continued, 
 by & for Gno.land community.
 🥷
