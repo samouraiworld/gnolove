@@ -129,7 +129,7 @@ export const useLinkGithub = () => {
 
   const verifyGithubAccount = async (ghToken: string, ghLogin: string, userAddress: string) => {
     const url = new URL(
-      `/verifyGithubAccount?token=${ghToken}&login=${ghLogin}&address=${userAddress}`,
+      `/github/verify?token=${ghToken}&login=${ghLogin}&address=${userAddress}`,
       process.env.NEXT_PUBLIC_API_URL,
     );
     const res = await fetch(url.toString(), { cache: 'no-cache' });

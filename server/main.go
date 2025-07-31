@@ -108,7 +108,7 @@ func main() {
 	router.HandleFunc("/github/verify", handler.HandleVerifyGithubAccount(signer, database))
 	router.HandleFunc("/github/oauth/exchange", handler.HandleGetGithubUserAndTokenByCode(signer, database))
 	router.HandleFunc("/contributors/{login}", contributor.HandleGetContributor(database))
-	router.Post("/link", handler.HandleLink(database))
+	router.Post("/github/link", handler.HandleLink(database))
 
 	// Onchain package contributions endpoints
 	router.HandleFunc("/onchain/packages", handler.HandleGetAllPackages(database))

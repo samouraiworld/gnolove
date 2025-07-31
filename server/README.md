@@ -129,7 +129,7 @@ This command will start indexing all important elements on the repository then s
   | address   | query | string | Yes      | Wallet address to link         |
 
 - **Link GitHub account to wallet**  
-  `POST /link`  
+  `POST /github/link`  
   Body: `{ "address": "...", "login": "..." }`  
   Links a wallet address to a GitHub login.
 
@@ -141,13 +141,13 @@ This command will start indexing all important elements on the repository then s
 #### On-chain (Gno) Endpoints
 
 - **Get all Gno namespaces**  
-  `GET /api/onchain/namespaces`  
+  `GET /onchain/namespaces`  
   Returns all registered namespaces.
 
   _No parameters._
 
 - **Get namespaces by user**  
-  `GET /api/onchain/namespaces/{address}`  
+  `GET /onchain/namespaces/{address}`  
   Returns namespaces registered by a specific address.
 
   | Parameter | In   | Type   | Required | Description             |
@@ -155,13 +155,13 @@ This command will start indexing all important elements on the repository then s
   | address   | path | string | Yes      | Wallet address (bech32) |
 
 - **Get all Gno packages**  
-  `GET /api/onchain/packages`  
+  `GET /onchain/packages`  
   Returns all registered packages.
 
   _No parameters._
 
 - **Get packages by user**  
-  `GET /api/onchain/packages/{address}`  
+  `GET /onchain/packages/{address}`  
   Returns packages published by a specific address.
 
   | Parameter | In   | Type   | Required | Description             |
