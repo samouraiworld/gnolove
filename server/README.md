@@ -71,7 +71,7 @@ This command will start indexing all important elements on the repository then s
 
   | Parameter    | In    | Type   | Required | Description                                                        |
   |--------------|-------|--------|----------|--------------------------------------------------------------------|
-  | time         | query | string | Yes      | Time period: `daily`, `weekly`, `monthly`, or `yearly`             |
+  | time         | query | string | No       | Time period: `daily`, `weekly`, `monthly`, or `yearly`. If omitted, returns all-time stats (no explicit all time value). |
   | exclude      | query | string | No       | Comma-separated logins to exclude                                  |
   | repositories | query | string | No       | Comma-separated repository IDs (owner/name)                        |
 

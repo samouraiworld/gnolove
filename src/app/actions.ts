@@ -21,7 +21,7 @@ import TEAMS from '@/constants/teams';
 import ENV from '@/env';
 
 export const getContributors = async (timeFilter: TimeFilter, excludeCoreTeam?: boolean, repositories?: string[]) => {
-  const url = new URL('/stats', ENV.NEXT_PUBLIC_API_URL);
+  const url = new URL('/getStats', ENV.NEXT_PUBLIC_API_URL);
 
   if (timeFilter !== 'all') url.searchParams.set('time', timeFilter);
 
@@ -39,7 +39,7 @@ export const getContributors = async (timeFilter: TimeFilter, excludeCoreTeam?: 
 };
 
 export const getLastIssues = async (last: number) => {
-  const url = new URL('/issues?labels=help wanted,bounty', ENV.NEXT_PUBLIC_API_URL);
+  const url = new URL('/getIssues?labels=help wanted,bounty', ENV.NEXT_PUBLIC_API_URL);
 
   const res = await fetch(url.toString(), { cache: 'no-cache' });
   const data = await res.json();
@@ -66,7 +66,7 @@ export const getMilestone = async () => {
 };
 
 export const getRepositories = async () => {
-  const url = new URL('/repositories', ENV.NEXT_PUBLIC_API_URL);
+  const url = new URL('/getRepositories', ENV.NEXT_PUBLIC_API_URL);
 
   const res = await fetch(url.toString(), { cache: 'no-cache' });
   const data = await res.json();

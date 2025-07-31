@@ -99,6 +99,28 @@ func main() {
 	router := chi.NewRouter()
 	router.Use(LoggingMiddleware)
 	router.Use(Compress())
+
+	// --- Temporary Redirects from Old Endpoints to New Endpoints ---
+	router.HandleFunc("/getRepositories", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/repositories", http.StatusTemporaryRedirect)
+	})
+	router.HandleFunc("/getStats", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/stats", http.StatusTemporaryRedirect)
+	})
+	router.HandleFunc("/getIssues", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/issues", http.StatusTemporaryRedirect)
+	})
+	router.HandleFunc("/verifyGithubAccount", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/github/verify", http.StatusTemporaryRedirect)
+	})
+	router.HandleFunc("/getGithubUserAndTokenByCode", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/github/oauth/exchange", http.StatusTemporaryRedirect)
+	})
+	router.Post("/link", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/github/link", http.StatusTemporaryRedirect)
+	})
+
+	// --- New Endpoints ---
 	router.HandleFunc("/repositories", handler.HandleGetRepository(database))
 	router.HandleFunc("/stats", handler.HandleGetUserStats(database, cache))
 	router.HandleFunc("/issues", handler.GetIssues(database))
