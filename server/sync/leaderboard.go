@@ -122,13 +122,14 @@ func FormatLeaderboardMessage(stats []ContributorStats) string {
 		if displayName == "" {
 			displayName = c.Login
 		}
-		message += fmt.Sprintf("%s **%s** - **%.0f** points\n   💻 %d commits • 🔀 %d PRs • 🐛 %d issues\n\n",
-			position, displayName, c.Score, c.TotalCommits, c.TotalPRs, c.TotalIssues)
+		userLink := fmt.Sprintf("[**%s**](https://gnolove.world/@%s)", displayName, c.Login)
+		message += fmt.Sprintf("%s %s - **%.0f** points\n   💻 %d commits • 🔀 %d PRs • 🐛 %d issues\n\n",
+			position, userLink, c.Score, c.TotalCommits, c.TotalPRs, c.TotalIssues)
 		if i == 9 {
 			break
 		}
 	}
-	message += "\nKeep up the great work! 🚀"
+	message += "\nKeep up the great work! 🚀\n\nSee the full leaderboard on [gnolove.world](https://gnolove.world/?f=weekly)"
 	return message
 }
 
