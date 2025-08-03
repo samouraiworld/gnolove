@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/url"
 	"os"
 	"sort"
 	"time"
@@ -122,7 +123,7 @@ func FormatLeaderboardMessage(stats []ContributorStats) string {
 		if displayName == "" {
 			displayName = c.Login
 		}
-		userLink := fmt.Sprintf("[**%s**](https://gnolove.world/@%s)", displayName, c.Login)
+		userLink := fmt.Sprintf("[**%s**](https://gnolove.world/@%s)", displayName, url.QueryEscape(c.Login))
 		message += fmt.Sprintf("%s %s - **%.0f** points\n   💻 %d commits • 🔀 %d PRs • 🐛 %d issues\n\n",
 			position, userLink, c.Score, c.TotalCommits, c.TotalPRs, c.TotalIssues)
 		if i == 9 {
