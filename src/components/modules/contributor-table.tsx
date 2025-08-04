@@ -39,7 +39,7 @@ const ContributorTable = ({ contributors, sort, showRank }: ContributorTableProp
   }, [scoreFactors]);
 
   return (
-    <Table.Root layout="auto">
+    <Table.Root layout="auto" variant='surface'>
       <Table.Header>
         <Table.Row>
           {showRank && <Table.ColumnHeaderCell className="text-center">Rank</Table.ColumnHeaderCell>}
