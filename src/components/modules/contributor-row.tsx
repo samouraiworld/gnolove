@@ -12,12 +12,14 @@ import { CircleDotIcon } from 'lucide-react';
 
 import ContributionsDialog from '@/modules/contributions-dialog';
 
+import Cell from '@/elements/cell';
+
+import { useOffline } from '@/contexts/offline-context';
+
 import { TEnhancedUserWithStats } from '@/utils/schemas';
 import { cn } from '@/utils/style';
 
 import TEAMS from '@/constants/teams';
-import Cell from '@/elements/cell';
-import { useOffline } from '@/contexts/offline-context';
 
 export interface ContributorRowProps {
   contributor: TEnhancedUserWithStats;
@@ -61,8 +63,8 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
         </Cell>
       )}
 
-      <Cell>
-        <Flex width="100%" height="100%" align="center" gap="2" className="min-w-0">
+      <Cell maxWidth={{ initial: '50px', xs: '100px', sm: '150px' }}>
+        <Flex width="100%" height="100%" align="center" gap="2">
           <Image
             src={contributor.avatarUrl}
             alt={`${contributor.login} avatar url`}
@@ -72,12 +74,14 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
           />
 
           <Link
-            className={cn('min-w-0 max-w-[160px]', isOffline && 'pointer-events-none')}
+            className={cn('min-w-0 max-w-[160px] xs:max-w-[180px] sm:max-w-none', isOffline && 'pointer-events-none')}
             href={isOffline ? '' : `/@${contributor.login}`}
           >
             <Text
               truncate
+              title={contributor.name || contributor.login}
               className={cn('block overflow-hidden text-ellipsis whitespace-nowrap', isOffline && 'text-gray-8')}
+              trim="both"
             >
               {contributor.name || contributor.login}
             </Text>
