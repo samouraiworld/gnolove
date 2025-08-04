@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 
 import { CheckIcon, Link1Icon } from '@radix-ui/react-icons';
-import { Badge, Box, Button, Flex, FlexProps, Switch, Tabs, Text } from '@radix-ui/themes';
+import { Badge, Button, Flex, FlexProps, Switch, Tabs, Text } from '@radix-ui/themes';
 
 import ContributorTable from '@/modules/contributor-table';
 
