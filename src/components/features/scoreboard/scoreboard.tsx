@@ -10,12 +10,14 @@ import { Badge, Button, Flex, FlexProps, Switch, Tabs, Text } from '@radix-ui/th
 
 import ContributorTable from '@/modules/contributor-table';
 
+import Loader from '@/elements/loader';
+
 import useGetContributors from '@/hooks/use-get-contributors';
+import useGetRepositories from '@/hooks/use-get-repositories';
 
 import { getTimeFilterFromSearchParam, TimeFilter } from '@/utils/github';
-import useGetRepositories from '@/hooks/use-get-repositories';
+
 import RepositoriesSelector from '@/components/modules/repositories-selector';
-import Loader from '@/elements/loader';
 
 const TIMEFILTER_MAP = {
   [TimeFilter.ALL_TIME]: 'All time',
@@ -53,10 +55,7 @@ const Scoreboard = ({ ...props }: FlexProps) => {
     repositories: selectedRepositories,
   });
 
-  const filteredContributors = useMemo(
-    () => (contributors ?? []).filter(({ score }) => score),
-    [contributors],
-  );
+  const filteredContributors = useMemo(() => (contributors ?? []).filter(({ score }) => score), [contributors]);
 
   const buildSearchParams = () => {
     const params = new URLSearchParams();
@@ -104,7 +103,7 @@ const Scoreboard = ({ ...props }: FlexProps) => {
         justify={{ initial: 'start', sm: 'between' }}
         align={{ initial: 'start', sm: 'center' }}
       >
-        <label htmlFor="excludeCoreTeam" className="my-2 flex items-center gap-1">
+        <label htmlFor="excludeCoreTeam" className="my-2 flex flex-1 items-center gap-1">
           <Switch checked={exclude} onCheckedChange={setExclude} id="excludeCoreTeam" />
           <span className="flex items-center gap-2">
             Hide the <Badge>Core team</Badge>
@@ -116,12 +115,14 @@ const Scoreboard = ({ ...props }: FlexProps) => {
           Share this board
         </Button>
 
-        <RepositoriesSelector
-          repositories={repositories}
-          selectedRepositories={selectedRepositories}
-          onSelectedRepositoriesChange={setSelectedRepositories}
-          defaultCheckedIds={['gnolang/gno']}
-        />
+        <Flex mb="2" flexGrow="1" className="flex-1" justify="end" align="center">
+          <RepositoriesSelector
+            repositories={repositories}
+            selectedRepositories={selectedRepositories}
+            onSelectedRepositoriesChange={setSelectedRepositories}
+            defaultCheckedIds={['gnolang/gno']}
+          />
+        </Flex>
       </Flex>
 
       {isPending ? (
