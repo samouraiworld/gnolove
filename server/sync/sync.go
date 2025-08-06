@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/Khan/genqlient/graphql"
+	"github.com/samouraiworld/topofgnomes/server/handler/report"
 	"github.com/samouraiworld/topofgnomes/server/models"
 	"github.com/shurcooL/githubv4"
 	"go.uber.org/zap"
@@ -149,9 +150,37 @@ func (s *Syncer) StartSynchonizing() error {
 		}
 	}()
 
+	if os.Getenv("MISTRAL_API_KEY") != "" {
+		go func() {
+			for {
+				currentTime := time.Now()
+				if currentTime.Weekday() == time.Friday && currentTime.Hour() == 14 && currentTime.Minute() == 58 {
+					s.logger.Info("Starting report synchronization.")
+					err := s.syncReports()
+					if err != nil {
+						s.logger.Errorf("error while syncing reports %s", err.Error())
+					}
+				}
+				<-time.Tick(1 * time.Minute)
+			}
+		}()
+	} else {
+		s.logger.Warn("MISTRAL_API_KEY is not set. Report synchronization will not start.")
+	}
+
 	return nil
 }
 
+func (s *Syncer) syncReports() error {
+	report, err := report.GenerateReport(s.db)
+	if err != nil {
+		s.logger.Errorf("Failed to generate report: %v", err)
+		return err
+	}
+
+	s.logger.Infof("Report generated successfully: %s", report.ID)
+	return nil
+}
 func (s *Syncer) syncPRs(repository models.Repository) error {
 	lastUpdatedTime := getLastUpdatedPR(*s.db, repository.ID)
 
