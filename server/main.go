@@ -14,6 +14,7 @@ import (
 	"github.com/samouraiworld/topofgnomes/server/db"
 	"github.com/samouraiworld/topofgnomes/server/handler"
 	"github.com/samouraiworld/topofgnomes/server/handler/contributor"
+	"github.com/samouraiworld/topofgnomes/server/handler/report"
 	"github.com/samouraiworld/topofgnomes/server/models"
 	"github.com/samouraiworld/topofgnomes/server/signer"
 	"github.com/samouraiworld/topofgnomes/server/sync"
@@ -131,6 +132,8 @@ func main() {
 	router.HandleFunc("/github/oauth/exchange", handler.HandleGetGithubUserAndTokenByCode(signer, database))
 	router.HandleFunc("/contributors/{login}", contributor.HandleGetContributor(database))
 	router.Post("/github/link", handler.HandleLink(database))
+
+	router.HandleFunc("/report", report.HandleGetLastReport(database))
 
 	// Onchain package contributions endpoints
 	router.HandleFunc("/onchain/packages", handler.HandleGetAllPackages(database))
