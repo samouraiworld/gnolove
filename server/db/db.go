@@ -9,7 +9,7 @@ import (
 
 func InitDB() (*gorm.DB, error) {
 	var err error
-	db, err := gorm.Open(sqlite.Open("/db/database.db"), &gorm.Config{
+	db, err := gorm.Open(sqlite.Open("database.db"), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Silent),
 	})
 	if err != nil {
@@ -29,6 +29,7 @@ func InitDB() (*gorm.DB, error) {
 		&models.GnoProposal{},
 		&models.GnoVote{},
 		&models.File{},
+		&models.Report{},
 	)
 	if err != nil {
 		panic(err)
