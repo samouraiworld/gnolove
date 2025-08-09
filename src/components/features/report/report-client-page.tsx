@@ -103,7 +103,7 @@ interface RepoPRStatusListProps {
   isOffline: boolean;
 }
 
-function RepoPRStatusList({ repo, statusMap, isOffline }: RepoPRStatusListProps) {
+const RepoPRStatusList = ({ repo, statusMap, isOffline }: RepoPRStatusListProps) => {
   return (
     <Box key={repo} mb="5" pl={{ initial: '0', sm: '4' }}>
       <Heading as="h3" size="4" style={{ backgroundColor: 'white' }} className="sticky top-[25px] z-20 py-1">
