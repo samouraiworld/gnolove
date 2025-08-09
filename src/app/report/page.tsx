@@ -8,13 +8,11 @@ import ReportClientPage from '@/features/report/report-client-page';
 import { prefetchPullRequestsReport } from '@/hooks/use-get-pullrequests-report';
 import { prefetchRepositories } from '@/hooks/use-get-repositories';
 
-import { SearchParamsFilters } from '@/types/url-filters';
-
 export const metadata: Metadata = {
   title: 'Weekly reports',
 };
 
-const ReportPage = async ({ searchParams: { f, e, r } }: SearchParamsFilters) => {
+const ReportPage = async () => {
   const queryClient = new QueryClient();
   const startDate = endOfWeek(subWeeks(new Date(), 1), { weekStartsOn: 0 });
   const endDate = endOfWeek(new Date(), { weekStartsOn: 0 });
