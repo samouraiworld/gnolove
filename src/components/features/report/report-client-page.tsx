@@ -362,7 +362,7 @@ const ReportClientPage = () => {
       <Flex direction="column" gap="4" flexGrow="1">
         <Flex direction={{ initial: 'column', sm: 'row' }} justify="between" align="center">
           <Heading as="h1" size={{ initial: '4', sm: '6' }}>
-            <span role="img" aria-label="report">
+            <span className="mr-2" role="img" aria-label="report">
               📋
             </span>
             Weekly report
