@@ -168,17 +168,21 @@ func (s *Syncer) syncPRs(repository models.Repository) error {
 			}
 
 			pr := models.PullRequest{
-				CreatedAt:    pr.CreatedAt,
-				UpdatedAt:    pr.UpdatedAt,
-				RepositoryID: repository.ID,
-				ID:           pr.ID,
-				Number:       pr.Number,
-				State:        pr.State,
-				Title:        pr.Title,
-				AuthorID:     pr.Author.User.ID,
-				Reviews:      reviews,
-				MilestoneID:  pr.Milestone.ID,
-				URL:          pr.Url,
+				CreatedAt:        pr.CreatedAt,
+				UpdatedAt:        pr.UpdatedAt,
+				RepositoryID:     repository.ID,
+				ID:               pr.ID,
+				Number:           pr.Number,
+				State:            pr.State,
+				Title:            pr.Title,
+				AuthorID:         pr.Author.User.ID,
+				Reviews:          reviews,
+				MilestoneID:      pr.Milestone.ID,
+				URL:              pr.Url,
+				ReviewDecision:   pr.ReviewDecision,
+				Mergeable:        pr.Mergeable,
+				MergeStateStatus: pr.MergeStateStatus,
+				MergedAt:         pr.MergedAt,
 			}
 			err = s.db.Save(pr).Error
 			if err != nil {
@@ -607,6 +611,10 @@ type pullRequest struct {
 	Reviews   struct {
 		Nodes []review
 	} `graphql:"reviews(first: 100)"`
+	ReviewDecision   string     `graphql:"reviewDecision"`
+	Mergeable        string     `graphql:"mergeable"`
+	MergeStateStatus string     `graphql:"mergeStateStatus"`
+	MergedAt         *time.Time `graphql:"mergedAt"`
 }
 type review struct {
 	Author    Author
