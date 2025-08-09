@@ -92,6 +92,19 @@ const preprocessPullRequest = (data: unknown) => {
   };
 };
 
+export const ReviewSchema: z.ZodType = z.lazy(() =>
+  z.object({
+    id: z.coerce.string(),
+    authorID: z.string(),
+    pullRequestID: z.string(),
+    createdAt: z.string(),
+    pullRequest: z.lazy(() => PullRequestSchema).nullable(),
+    author: UserSchema.nullish(),
+  })
+);
+
+export type TReview = z.infer<typeof ReviewSchema>;
+
 export const PullRequestBaseSchema = z.object({
   createdAt: z.string(),
   updatedAt: z.string(),
@@ -102,24 +115,27 @@ export const PullRequestBaseSchema = z.object({
   url: z.string().url(),
   authorID: z.string(),
   author: UserSchema.nullish(),
-  reviews: z.literal(null),
+  reviews: z.union([z.array(ReviewSchema), z.null()]),
   milestoneID: z.string(),
+  reviewDecision: z.string().optional(),
+  mergeable: z.string().optional(),
+  mergeStateStatus: z.string().optional(),
+  mergedAt: z.string().nullable(),
 });
 
 export const PullRequestSchema = z.preprocess(preprocessPullRequest, PullRequestBaseSchema);
 
 export type TPullRequest = z.infer<typeof PullRequestSchema>;
 
-export const ReviewSchema = z.object({
-  id: z.coerce.string(),
-  authorID: z.string(),
-  pullRequestID: z.string(),
-  createdAt: z.string(),
-  pullRequest: PullRequestSchema,
-  author: UserSchema.nullish(),
+export const PullRequestReportSchema = z.object({
+  merged: z.union([z.array(PullRequestSchema), z.null()]),            
+  in_progress: z.union([z.array(PullRequestSchema), z.null()]),      
+  reviewed: z.union([z.array(PullRequestSchema), z.null()]),        
+  waiting_for_review: z.union([z.array(PullRequestSchema), z.null()]),
+  blocked: z.union([z.array(PullRequestSchema), z.null()]),        
 });
 
-export type TReview = z.infer<typeof ReviewSchema>;
+export type TPullRequestReport = z.infer<typeof PullRequestReportSchema>;
 
 const preprocessCommit = (data: unknown) => {
   if (!data || typeof data !== 'object') return data;
