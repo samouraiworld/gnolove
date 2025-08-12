@@ -43,4 +43,12 @@ export const TUTORIAL_VIDEOS = [
     src: 'https://www.youtube.com/embed/UNJSuMdjTFA?si=5U_CMoltbNuFW96_',
     title: 'How to code Effectively in Gno - Gno Land Education Tutorial',
   },
+  {
+    src: 'https://www.youtube.com/embed/8ld0nsV37SA?si=87_zOYH8AJEu0JEn',
+    title: 'Index your Transactions through `tx-indexer` - Gno Land Education Tutorial',
+  },
+  {
+    src: 'https://www.youtube.com/embed/C8RuA_uU3Fs?si=fTXAHOeAs-2yerhO',
+    title: 'Setup local environment [Updated] - Gno land Education Tutorial',
+  },
 ] as const satisfies ReadonlyArray<{ src: string; title: string }>;
