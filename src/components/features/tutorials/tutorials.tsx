@@ -40,7 +40,11 @@ const Tutorials = () => {
           {videos?.map((video: { snippet: { resourceId: { videoId: string }; title: string } }) => (
             <Card key={video.snippet.resourceId.videoId}>
               <Flex direction='column' gap='2'>
-                <YoutubeEmbeddedVideo className="overflow-hidden rounded-4" src={`https://www.youtube.com/embed/${video.snippet.resourceId.videoId}`} />
+                <YoutubeEmbeddedVideo
+                  className="overflow-hidden rounded-4"
+                  loading="lazy"
+                  src={`https://www.youtube.com/embed/${video.snippet.resourceId.videoId}`}
+                />
                 <Text size='3'>{video.snippet.title}</Text>
               </Flex>
             </Card>

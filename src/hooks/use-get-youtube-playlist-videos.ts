@@ -6,7 +6,7 @@ export const QUERY_KEY = ['youtube-playlist-videos'];
 
 export const prefetchYoutubePlaylistVideos = async (queryClient: QueryClient, playlistId: string, maxResults?: number) => {
   const videos = await getYoutubePlaylistVideos(playlistId, maxResults);
-  queryClient.setQueryData([...QUERY_KEY, playlistId], videos);
+  queryClient.setQueryData([...QUERY_KEY, playlistId, maxResults ?? null], videos);
   return videos;
 };
 

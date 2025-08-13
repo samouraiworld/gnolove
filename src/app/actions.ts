@@ -133,34 +133,91 @@ export const getScoreFactors = async () => {
 };
 
 export const getYoutubeChannelUploadsPlaylistId = async (searchParams: { channelId?: string; channelUsername?: string }) => {
+  const { channelId, channelUsername } = searchParams || {};
+
+  // Validate inputs: at least one of channelId or channelUsername is required
+  if (!channelId && !channelUsername) {
+    throw new Error('Validation error: either channelId or channelUsername must be provided.');
+  }
+
   const url = new URL('https://www.googleapis.com/youtube/v3/channels');
 
   url.searchParams.set('part', 'contentDetails');
 
-  if (searchParams.channelId) url.searchParams.set('id', searchParams.channelId);
-  if (searchParams.channelUsername) url.searchParams.set('forUsername', searchParams.channelUsername);
+  if (channelId) url.searchParams.set('id', channelId);
+  if (channelUsername) url.searchParams.set('forUsername', channelUsername);
 
   url.searchParams.set('key', ENV.YOUTUBE_API_KEY);
 
   const res = await fetch(url.toString());
+
+  // Check HTTP response
+  if (!res.ok) {
+    let bodyText = '';
+    try {
+      bodyText = await res.text();
+    } catch {
+      // ignore body read errors
+    }
+    throw new Error(
+      `YouTube API error: ${res.status} ${res.statusText}${bodyText ? ` - ${bodyText}` : ''}`
+    );
+  }
+
   const data = await res.json();
 
-  if (!data.items.length) throw new Error('Channel not found / Channel items not found');
+  // Defensive checks on items
+  const items = Array.isArray(data?.items) ? data.items : [];
+  if (!items.length) {
+    const apiErrorMessage = data?.error?.message || data?.message;
+    throw new Error(
+      `Channel not found / Channel items not found${apiErrorMessage ? ` - ${apiErrorMessage}` : ''}`
+    );
+  }
 
-  return data.items[0].contentDetails.relatedPlaylists.uploads;
+  const uploads = items[0]?.contentDetails?.relatedPlaylists?.uploads;
+  if (!uploads) {
+    throw new Error('Channel found but uploads playlist ID is missing in response.');
+  }
+
+  return uploads;
 };
 
 export const getYoutubePlaylistVideos = async (playlistId: string, maxResults: number = 50) => {
+  // Clamp maxResults to YouTube API allowed range [1..50]
+  const clampedMax = Math.min(50, Math.max(1, Math.floor(Number.isFinite(maxResults) ? maxResults : 50)));
+
   const url = new URL('https://www.googleapis.com/youtube/v3/playlistItems');
 
   url.searchParams.set('part', 'snippet');
   url.searchParams.set('playlistId', playlistId);
-  url.searchParams.set('maxResults', maxResults.toString());
+  url.searchParams.set('maxResults', clampedMax.toString());
   url.searchParams.set('key', ENV.YOUTUBE_API_KEY);
 
   const res = await fetch(url.toString());
+
+  // Check HTTP response early and include body text if available
+  if (!res.ok) {
+    let bodyText = '';
+    try {
+      bodyText = await res.text();
+    } catch {
+      // ignore body read errors
+    }
+    throw new Error(`YouTube API error (playlistItems): ${res.status} ${res.statusText}${bodyText ? ` - ${bodyText}` : ''}`);
+  }
+
   const data = await res.json();
 
-  if (!data.items.length) throw new Error('Playlist not found / Playlist items not found');
+  // Ensure data and items exist
+  if (!data || !Array.isArray(data.items)) {
+    const apiErrorMessage = data?.error?.message || data?.message;
+    throw new Error(`Invalid YouTube response: items missing or not an array${apiErrorMessage ? ` - ${apiErrorMessage}` : ''}`);
+  }
+
+  if (data.items.length === 0) {
+    throw new Error('Playlist not found / Playlist items not found');
+  }
+
   return data.items;
 };
