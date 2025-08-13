@@ -13,9 +13,18 @@ import { prefetchMilestone } from '@/hooks/use-get-milestone';
 import { prefetchNewContributors } from '@/hooks/use-get-new-contributors';
 import { prefetchRepositories } from '@/hooks/use-get-repositories';
 import { SearchParamsFilters } from '@/types/url-filters';
+import { getYoutubeChannelUploadsPlaylistId } from '@/app/actions';
+import { prefetchYoutubePlaylistVideos } from '@/hooks/use-get-youtube-playlist-videos';
+import { GNOLAND_YOUTUBE_CHANNEL_ID} from '@/constants/videos';
 
 export const metadata: Metadata = {
   title: 'Top of Gnome',
+};
+
+const prefetchVideos = async (queryClient: QueryClient) => {
+  const uploadsPlaylistId = await getYoutubeChannelUploadsPlaylistId({ channelId: GNOLAND_YOUTUBE_CHANNEL_ID });
+
+  await prefetchYoutubePlaylistVideos(queryClient, uploadsPlaylistId, 6);
 };
 
 const HomePage = async ({ searchParams: { f, e, r } }: SearchParamsFilters) => {
@@ -34,6 +43,7 @@ const HomePage = async ({ searchParams: { f, e, r } }: SearchParamsFilters) => {
     prefetchContributors(queryClient, { timeFilter, exclude, repositories: getIds(selectedRepositories) }),
     prefetchLastIssues(queryClient),
     prefetchNewContributors(queryClient),
+    prefetchVideos(queryClient),
   ]);
 
   return (

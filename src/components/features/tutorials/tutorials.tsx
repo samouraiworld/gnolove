@@ -1,10 +1,13 @@
+'use client';
+
 import { Container, Flex, Heading, Text, Card, Grid, Badge, Button, Section } from '@radix-ui/themes';
 import YoutubeEmbeddedVideo from '@/elements/youtube-embedded-video';
-import { TUTORIAL_VIDEOS } from '@/features/tutorials/constants';
+import { TUTORIAL_VIDEOS_YOUTUBE_PLAYLIST_ID } from '@/features/tutorials/constants';
 import Link from 'next/link';
+import useGetYoutubePlaylistVideos from '@/hooks/use-get-youtube-playlist-videos';
 
 const Tutorials = () => {
-  const videos = [...TUTORIAL_VIDEOS].reverse();
+  const { data: videos } = useGetYoutubePlaylistVideos(TUTORIAL_VIDEOS_YOUTUBE_PLAYLIST_ID);
 
   return (
     <Container size='4' py='6'>
@@ -22,7 +25,7 @@ const Tutorials = () => {
                 📚 Learning Hub
               </Badge>
               <Text size='2' color='gray'>
-                {TUTORIAL_VIDEOS.length} video(s) available
+                {videos?.length} video(s) available
               </Text>
             </Flex>
             <Link href='https://www.youtube.com/playlist?list=PLJZrQikyfMc-kBojXgAojOz4UQPuq4DiY' target='_blank' rel='noopener noreferrer'>
@@ -34,11 +37,11 @@ const Tutorials = () => {
         </Card>
 
         <Grid columns={{ initial: '1', sm: '2', lg: '3' }} gap='6'>
-          {videos.map(({ src, title }) => (
-            <Card key={src}>
+          {videos?.map((video: { snippet: { resourceId: { videoId: string }; title: string } }) => (
+            <Card key={video.snippet.resourceId.videoId}>
               <Flex direction='column' gap='2'>
-                <YoutubeEmbeddedVideo className="overflow-hidden rounded-4" src={src} />
-                <Text size='3'>{title}</Text>
+                <YoutubeEmbeddedVideo className="overflow-hidden rounded-4" src={`https://www.youtube.com/embed/${video.snippet.resourceId.videoId}`} />
+                <Text size='3'>{video.snippet.title}</Text>
               </Flex>
             </Card>
           ))}

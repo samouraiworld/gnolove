@@ -131,3 +131,36 @@ export const getScoreFactors = async () => {
 
   return ScoreFactorsSchema.parse(data);
 };
+
+export const getYoutubeChannelUploadsPlaylistId = async (searchParams: { channelId?: string; channelUsername?: string }) => {
+  const url = new URL('https://www.googleapis.com/youtube/v3/channels');
+
+  url.searchParams.set('part', 'contentDetails');
+
+  if (searchParams.channelId) url.searchParams.set('id', searchParams.channelId);
+  if (searchParams.channelUsername) url.searchParams.set('forUsername', searchParams.channelUsername);
+
+  url.searchParams.set('key', ENV.YOUTUBE_API_KEY);
+
+  const res = await fetch(url.toString());
+  const data = await res.json();
+
+  if (!data.items.length) throw new Error('Channel not found / Channel items not found');
+
+  return data.items[0].contentDetails.relatedPlaylists.uploads;
+};
+
+export const getYoutubePlaylistVideos = async (playlistId: string, maxResults: number = 50) => {
+  const url = new URL('https://www.googleapis.com/youtube/v3/playlistItems');
+
+  url.searchParams.set('part', 'snippet');
+  url.searchParams.set('playlistId', playlistId);
+  url.searchParams.set('maxResults', maxResults.toString());
+  url.searchParams.set('key', ENV.YOUTUBE_API_KEY);
+
+  const res = await fetch(url.toString());
+  const data = await res.json();
+
+  if (!data.items.length) throw new Error('Playlist not found / Playlist items not found');
+  return data.items;
+};

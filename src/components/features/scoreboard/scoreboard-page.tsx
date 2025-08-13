@@ -24,8 +24,9 @@ import useGetNewContributors from '@/hooks/use-get-new-contributors';
 
 import { getLastMRs, TimeFilter } from '@/utils/github';
 
+import { GNOLAND_YOUTUBE_CHANNEL_ID } from '@/constants/videos';
+
 import REPOSITORY from '@/constants/repository';
-import VIDEOS from '@/constants/videos';
 
 import HeaderImage from '@/images/header.png';
 
@@ -33,6 +34,8 @@ import Scoreboard from '@/features/scoreboard/scoreboard';
 import { useOffline } from '@/contexts/offline-context';
 import { cn } from '@/utils/style';
 import Loader from '@/elements/loader';
+import useGetYoutubePlaylistVideos from '@/hooks/use-get-youtube-playlist-videos';
+import useGetYoutubeChannelUploadsPlaylistId from '@/hooks/use-get-youtube-channel-uploads-playlist-id';
 
 const ScoreboardPage = () => {
   const { data: allTimeContributors, isPending: isAllTimePending } = useGetContributors({
@@ -42,6 +45,9 @@ const ScoreboardPage = () => {
   const { data: milestone } = useGetMilestone();
   const { data: issues, isPending: isIssuesPending } = useGetLastIssues();
   const { data: newContributors, isPending: isNewContributorsPending } = useGetNewContributors();
+
+  const { data: uploadsPlaylistId } = useGetYoutubeChannelUploadsPlaylistId({ channelId: GNOLAND_YOUTUBE_CHANNEL_ID });
+  const { data: videos } = useGetYoutubePlaylistVideos(uploadsPlaylistId ?? '', 6);
 
   const lastMRs = useMemo(() => getLastMRs(allTimeContributors ?? [], 5), [allTimeContributors]);
 
@@ -103,11 +109,17 @@ const ScoreboardPage = () => {
         🎥 Latest gnoland videos
       </Text>
 
-      <Grid columns={{ initial: '1', xs: '2', md: '3' }} rows="auto" gap="2">
-        {VIDEOS.map((src) => (
-          <YoutubeEmbeddedVideo key={src} className="overflow-hidden rounded-4" src={src} />
-        ))}
-      </Grid>
+      {uploadsPlaylistId && videos && (
+        <Grid columns={{ initial: '1', xs: '2', md: '3' }} rows="auto" gap="2">
+          {videos.map((video: { snippet: { resourceId: { videoId: string } } }) => (
+            <YoutubeEmbeddedVideo
+              key={video.snippet.resourceId.videoId}
+              className="overflow-hidden rounded-4"
+              src={`https://www.youtube.com/embed/${video.snippet.resourceId.videoId}`}
+            />
+          ))}
+        </Grid>
+      )}
     </LayoutContainer>
   );
 };
