@@ -13,7 +13,11 @@ export const prefetchYoutubePlaylistVideos = async (queryClient: QueryClient, pl
 const useGetYoutubePlaylistVideos = (playlistId: string, maxResults?: number) => {
   return useQuery({
     queryFn: () => getYoutubePlaylistVideos(playlistId, maxResults),
-    queryKey: [...QUERY_KEY, playlistId],
+    queryKey: [...QUERY_KEY, playlistId, maxResults ?? 'all'],
+    enabled: Boolean(playlistId),
+    // If you rely on SSR prefetch + hydration, consider a long staleTime to avoid client refetch and API key exposure.
+    staleTime: 1000 * 60 * 60, // 1h
+    refetchOnWindowFocus: false,
   });
 };
 
