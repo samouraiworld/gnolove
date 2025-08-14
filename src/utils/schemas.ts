@@ -308,3 +308,41 @@ export const ScoreFactorsSchema = z.object({
 });
 
 export type TScoreFactors = z.infer<typeof ScoreFactorsSchema>;
+
+export const YoutubePlaylistIdSchema = z.string();
+export type TYoutubePlaylistId = z.infer<typeof YoutubePlaylistIdSchema>;
+
+const ThumbnailSchema = z.object({
+  url: z.string(),
+  width: z.number(),
+  height: z.number(),
+});
+
+export const YoutubeVideoSchema = z.object({
+  publishedAt: z.string(),
+  channelId: z.string(),
+  title: z.string(),
+  description: z.string(),
+  thumbnails: z.object({
+    default: ThumbnailSchema,
+    medium: ThumbnailSchema,
+    high: ThumbnailSchema,
+    standard: ThumbnailSchema,
+    maxres: ThumbnailSchema,
+  }),
+  channelTitle: z.string(),
+  playlistId: z.string(),
+  position: z.number(),
+  resourceId: z.object({ kind: z.string(), videoId: z.string() }),
+  videoOwnerChannelTitle: z.string(),
+  videoOwnerChannelId: z.string()
+});
+export type TYoutubeVideo = z.infer<typeof YoutubeVideoSchema>;
+
+export const YoutubeVideoPlaylistSchema = z.array(z.object({
+  kind: z.string(),
+  etag: z.string(),
+  id: YoutubePlaylistIdSchema,
+  snippet: YoutubeVideoSchema,
+}));
+export type TYoutubeVideoPlaylist = z.infer<typeof YoutubeVideoPlaylistSchema>;
