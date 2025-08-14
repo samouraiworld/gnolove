@@ -13,8 +13,8 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/samouraiworld/topofgnomes/server/db"
 	"github.com/samouraiworld/topofgnomes/server/handler"
-	"github.com/samouraiworld/topofgnomes/server/infra/gormrepo"
 	"github.com/samouraiworld/topofgnomes/server/handler/contributor"
+	"github.com/samouraiworld/topofgnomes/server/infra/gormrepo"
 	"github.com/samouraiworld/topofgnomes/server/models"
 	"github.com/samouraiworld/topofgnomes/server/signer"
 	"github.com/samouraiworld/topofgnomes/server/sync"
@@ -101,13 +101,13 @@ func main() {
 	router.Use(LoggingMiddleware)
 	router.Use(Compress())
 
-    // repositories
-    prRepo := gormrepo.NewPullRequestRepository(database)
+	// repositories
+	prRepo := gormrepo.NewPullRequestRepository(database)
 
 	router.HandleFunc("/repositories", handler.HandleGetRepository(database))
 	router.HandleFunc("/stats", handler.HandleGetUserStats(database, cache))
-    router.HandleFunc("/issues", handler.GetIssues(database))
-    router.HandleFunc("/pullRequests/reportByDate", handler.GetPullrequestsReportByDate(prRepo))
+	router.HandleFunc("/issues", handler.GetIssues(database))
+	router.HandleFunc("/pull-requests/report", handler.GetPullrequestsReportByDate(prRepo))
 	router.HandleFunc("/score-factors", handler.HandleGetScoreFactors)
 	router.HandleFunc("/milestones/{number}", handler.GetMilestone(database))
 	router.HandleFunc("/contributors/newest", handler.HandleGetNewestContributors(database))
