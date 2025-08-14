@@ -3,17 +3,18 @@ package handler
 import (
 	"encoding/json"
 	"net/http"
+	"time"
 
+	"github.com/samouraiworld/topofgnomes/server/handler/dto"
 	"github.com/samouraiworld/topofgnomes/server/models"
-	"gorm.io/gorm"
+	"github.com/samouraiworld/topofgnomes/server/repository"
 )
 
-func GetPullrequestsReportByDate(db *gorm.DB) func(w http.ResponseWriter, r *http.Request) {
+func GetPullrequestsReportByDate(repo repository.PullRequestRepository) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		startDate := r.URL.Query().Get("startdate")
 		endDate := r.URL.Query().Get("enddate")
-		var pullRequests []models.PullRequest
 		var mergedPRs, inProgressPRs, reviewedPRs, waitingForReviewPRs, blockedPRs []models.PullRequest
 
 		if startDate == "" || endDate == "" {
@@ -22,9 +23,27 @@ func GetPullrequestsReportByDate(db *gorm.DB) func(w http.ResponseWriter, r *htt
 			return
 		}
 
-		err := db.Model(&models.PullRequest{}).Preload("Author").Preload("Reviews").
-			Where("(created_at >= ? AND created_at <= ?) OR (created_at < ? AND state = 'OPEN')", startDate, endDate, startDate).
-			Find(&pullRequests).Error
+		// Parse dates (accept RFC3339 or YYYY-MM-DD)
+		parseDate := func(s string) (time.Time, error) {
+			if t, err := time.Parse(time.RFC3339, s); err == nil {
+				return t, nil
+			}
+			return time.Parse("2006-01-02", s)
+		}
+		start, err := parseDate(startDate)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			w.Write([]byte("invalid startdate format, use RFC3339 or YYYY-MM-DD"))
+			return
+		}
+		end, err := parseDate(endDate)
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			w.Write([]byte("invalid enddate format, use RFC3339 or YYYY-MM-DD"))
+			return
+		}
+
+		pullRequests, err := repo.FindForReport(start, end)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			w.Write([]byte(err.Error()))
@@ -35,13 +54,12 @@ func GetPullrequestsReportByDate(db *gorm.DB) func(w http.ResponseWriter, r *htt
 			switch {
 			case pr.State == "MERGED" && pr.MergedAt != nil:
 				mergedPRs = append(mergedPRs, pr)
-			case pr.State == "OPEN" && (pr.ReviewDecision == "" || pr.ReviewDecision == "REVIEW_REQUIRED") &&
-				(pr.Mergeable == "MERGEABLE" || pr.Mergeable == "UNKNOWN") && len(pr.Reviews) == 0:
+			case pr.State == "OPEN" && pr.IsDraft:
 				inProgressPRs = append(inProgressPRs, pr)
-			case pr.State == "OPEN" && pr.ReviewDecision == "APPROVED" &&
+			case pr.State == "OPEN" && !pr.IsDraft && pr.ReviewDecision == "APPROVED" &&
 				(pr.MergeStateStatus == "CLEAN" || pr.MergeStateStatus == "BEHIND") && pr.MergedAt == nil:
 				reviewedPRs = append(reviewedPRs, pr)
-			case pr.State == "OPEN" && pr.ReviewDecision == "REVIEW_REQUIRED" &&
+			case pr.State == "OPEN" && !pr.IsDraft && pr.ReviewDecision == "REVIEW_REQUIRED" &&
 				(pr.Mergeable == "MERGEABLE" || pr.Mergeable == "UNKNOWN"):
 				waitingForReviewPRs = append(waitingForReviewPRs, pr)
 			case pr.State == "OPEN" && (pr.MergeStateStatus == "BLOCKED" || pr.MergeStateStatus == "UNSTABLE") &&
@@ -50,12 +68,12 @@ func GetPullrequestsReportByDate(db *gorm.DB) func(w http.ResponseWriter, r *htt
 			}
 		}
 
-		response := map[string][]models.PullRequest{
-			"merged":             mergedPRs,
-			"in_progress":        inProgressPRs,
-			"reviewed":           reviewedPRs,
-			"waiting_for_review": waitingForReviewPRs,
-			"blocked":            blockedPRs,
+		response := dto.PullRequestsReportResponse{
+			Merged:           dto.MapPullRequestList(mergedPRs),
+			InProgress:       dto.MapPullRequestList(inProgressPRs),
+			Reviewed:         dto.MapPullRequestList(reviewedPRs),
+			WaitingForReview: dto.MapPullRequestList(waitingForReviewPRs),
+			Blocked:          dto.MapPullRequestList(blockedPRs),
 		}
 
 		json.NewEncoder(w).Encode(response)

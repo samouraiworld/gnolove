@@ -19,4 +19,5 @@ type PullRequest struct {
 	Mergeable        string     `json:"mergeable"`
 	MergeStateStatus string     `json:"mergeStateStatus"`
 	MergedAt         *time.Time `json:"mergedAt"`
+	IsDraft          bool       `json:"isDraft"`
 }

@@ -121,6 +121,7 @@ func (s *Syncer) StartSynchonizing() error {
 
 	return nil
 }
+
 func (s *Syncer) syncPRs(repository models.Repository) error {
 	lastUpdatedTime := getLastUpdatedPR(*s.db, repository.ID)
 
@@ -183,6 +184,7 @@ func (s *Syncer) syncPRs(repository models.Repository) error {
 				Mergeable:        pr.Mergeable,
 				MergeStateStatus: pr.MergeStateStatus,
 				MergedAt:         pr.MergedAt,
+				IsDraft:          pr.IsDraft,
 			}
 			err = s.db.Save(pr).Error
 			if err != nil {
@@ -389,6 +391,7 @@ func (s *Syncer) syncMilestones(repository models.Repository) error {
 
 	return nil
 }
+
 func (s *Syncer) syncCommits(repository models.Repository) error {
 	var q struct {
 		Repository struct {
@@ -592,6 +595,7 @@ type issue struct {
 		}
 	} `graphql:"labels(first: 10)"`
 }
+
 type Author struct {
 	User struct {
 		ID string
@@ -615,7 +619,9 @@ type pullRequest struct {
 	Mergeable        string     `graphql:"mergeable"`
 	MergeStateStatus string     `graphql:"mergeStateStatus"`
 	MergedAt         *time.Time `graphql:"mergedAt"`
+	IsDraft          bool       `graphql:"isDraft"`
 }
+
 type review struct {
 	Author    Author
 	ID        string
