@@ -2,13 +2,9 @@
 
 import { Container, Flex, Heading, Text, Card, Grid, Badge, Button, Section } from '@radix-ui/themes';
 import YoutubeEmbeddedVideo from '@/elements/youtube-embedded-video';
-import { TUTORIAL_VIDEOS_YOUTUBE_PLAYLIST_ID } from '@/features/tutorials/constants';
 import Link from 'next/link';
-import useGetYoutubePlaylistVideos from '@/hooks/use-get-youtube-playlist-videos';
 
-const Tutorials = () => {
-  const { data: videos } = useGetYoutubePlaylistVideos(TUTORIAL_VIDEOS_YOUTUBE_PLAYLIST_ID);
-
+const Tutorials = ({ videos }: { videos: any }) => {
   return (
     <Container size='4' py='6'>
       <Section>

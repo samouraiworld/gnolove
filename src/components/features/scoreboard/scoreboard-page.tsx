@@ -24,8 +24,6 @@ import useGetNewContributors from '@/hooks/use-get-new-contributors';
 
 import { getLastMRs, TimeFilter } from '@/utils/github';
 
-import { GNOLAND_YOUTUBE_CHANNEL_ID } from '@/constants/videos';
-
 import REPOSITORY from '@/constants/repository';
 
 import HeaderImage from '@/images/header.png';
@@ -34,10 +32,8 @@ import Scoreboard from '@/features/scoreboard/scoreboard';
 import { useOffline } from '@/contexts/offline-context';
 import { cn } from '@/utils/style';
 import Loader from '@/elements/loader';
-import useGetYoutubePlaylistVideos from '@/hooks/use-get-youtube-playlist-videos';
-import useGetYoutubeChannelUploadsPlaylistId from '@/hooks/use-get-youtube-channel-uploads-playlist-id';
 
-const ScoreboardPage = () => {
+const ScoreboardPage = ({ videos }: { videos: any }) => {
   const { data: allTimeContributors, isPending: isAllTimePending } = useGetContributors({
     timeFilter: TimeFilter.ALL_TIME,
   });
@@ -45,9 +41,6 @@ const ScoreboardPage = () => {
   const { data: milestone } = useGetMilestone();
   const { data: issues, isPending: isIssuesPending } = useGetLastIssues();
   const { data: newContributors, isPending: isNewContributorsPending } = useGetNewContributors();
-
-  const { data: uploadsPlaylistId } = useGetYoutubeChannelUploadsPlaylistId({ channelId: GNOLAND_YOUTUBE_CHANNEL_ID });
-  const { data: videos } = useGetYoutubePlaylistVideos(uploadsPlaylistId ?? '', 6);
 
   const lastMRs = useMemo(() => getLastMRs(allTimeContributors ?? [], 5), [allTimeContributors]);
 
@@ -109,7 +102,7 @@ const ScoreboardPage = () => {
         🎥 Latest gnoland videos
       </Text>
 
-      {uploadsPlaylistId && videos && (
+      {videos && (
         <Grid columns={{ initial: '1', xs: '2', md: '3' }} rows="auto" gap="2">
           {videos.map((video: { snippet: { resourceId: { videoId: string } } }) => (
             <YoutubeEmbeddedVideo

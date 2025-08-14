@@ -13,6 +13,8 @@ import {
   RepositorySchema,
   ScoreFactorsSchema,
   UserSchema,
+  YoutubePlaylistIdSchema,
+  YoutubeVideoPlaylistSchema,
 } from '@/utils/schemas';
 
 import MILESTONE from '@/constants/milestone';
@@ -153,12 +155,7 @@ export const getYoutubeChannelUploadsPlaylistId = async (searchParams: { channel
 
   // Check HTTP response
   if (!res.ok) {
-    let bodyText = '';
-    try {
-      bodyText = await res.text();
-    } catch {
-      // ignore body read errors
-    }
+    const bodyText = await res.text();
     throw new Error(
       `YouTube API error: ${res.status} ${res.statusText}${bodyText ? ` - ${bodyText}` : ''}`
     );
@@ -166,21 +163,12 @@ export const getYoutubeChannelUploadsPlaylistId = async (searchParams: { channel
 
   const data = await res.json();
 
-  // Defensive checks on items
-  const items = Array.isArray(data?.items) ? data.items : [];
-  if (!items.length) {
-    const apiErrorMessage = data?.error?.message || data?.message;
-    throw new Error(
-      `Channel not found / Channel items not found${apiErrorMessage ? ` - ${apiErrorMessage}` : ''}`
-    );
-  }
-
-  const uploads = items[0]?.contentDetails?.relatedPlaylists?.uploads;
+  const uploads = data.items[0]?.contentDetails?.relatedPlaylists?.uploads;
   if (!uploads) {
     throw new Error('Channel found but uploads playlist ID is missing in response.');
   }
 
-  return uploads;
+  return YoutubePlaylistIdSchema.parse(uploads);
 };
 
 export const getYoutubePlaylistVideos = async (playlistId: string, maxResults: number = 50) => {
@@ -198,12 +186,7 @@ export const getYoutubePlaylistVideos = async (playlistId: string, maxResults: n
 
   // Check HTTP response early and include body text if available
   if (!res.ok) {
-    let bodyText = '';
-    try {
-      bodyText = await res.text();
-    } catch {
-      // ignore body read errors
-    }
+    const bodyText = await res.text();
     throw new Error(`YouTube API error (playlistItems): ${res.status} ${res.statusText}${bodyText ? ` - ${bodyText}` : ''}`);
   }
 
@@ -219,5 +202,5 @@ export const getYoutubePlaylistVideos = async (playlistId: string, maxResults: n
     throw new Error('Playlist not found / Playlist items not found');
   }
 
-  return data.items;
+  return YoutubeVideoPlaylistSchema.parse(data.items);
 };

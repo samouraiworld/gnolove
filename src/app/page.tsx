@@ -13,9 +13,8 @@ import { prefetchMilestone } from '@/hooks/use-get-milestone';
 import { prefetchNewContributors } from '@/hooks/use-get-new-contributors';
 import { prefetchRepositories } from '@/hooks/use-get-repositories';
 import { SearchParamsFilters } from '@/types/url-filters';
-import { prefetchYoutubeChannelUploadsPlaylistId } from '@/hooks/use-get-youtube-channel-uploads-playlist-id';
-import { prefetchYoutubePlaylistVideos } from '@/hooks/use-get-youtube-playlist-videos';
-import { GNOLAND_YOUTUBE_CHANNEL_ID} from '@/constants/videos';
+import { getYoutubeChannelUploadsPlaylistId, getYoutubePlaylistVideos } from '@/app/actions';
+import { GNOLAND_YOUTUBE_CHANNEL_ID } from '@/constants/videos';
 
 export const metadata: Metadata = {
   title: 'Top of Gnome',
@@ -26,13 +25,6 @@ const HomePage = async ({ searchParams: { f, e, r } }: SearchParamsFilters) => {
   const exclude = !!e;
 
   const queryClient = new QueryClient();
-
-  let uploadsPlaylistId: string | undefined;
-  try {
-    uploadsPlaylistId = await prefetchYoutubeChannelUploadsPlaylistId(queryClient, { channelId: GNOLAND_YOUTUBE_CHANNEL_ID });
-  } catch (error) {
-    console.error('Failed to prefetch YouTube uploads playlist ID', error);
-  }
 
   const allRepositories = await prefetchRepositories(queryClient);
 
@@ -45,18 +37,13 @@ const HomePage = async ({ searchParams: { f, e, r } }: SearchParamsFilters) => {
     prefetchLastIssues(queryClient),
     prefetchNewContributors(queryClient),
   ]);
-
-  if (uploadsPlaylistId) {
-    try {
-      await prefetchYoutubePlaylistVideos(queryClient, uploadsPlaylistId, 6);
-    } catch (error) {
-      console.error('Failed to prefetch YouTube playlist videos', error);
-    }
-  }
+  
+  const uploadsPlaylistId = await getYoutubeChannelUploadsPlaylistId({ channelId: GNOLAND_YOUTUBE_CHANNEL_ID });
+  const videos = await getYoutubePlaylistVideos(uploadsPlaylistId, 6);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <ScoreboardPage />
+      <ScoreboardPage videos={videos} />
     </HydrationBoundary>
   );
 };
