@@ -1,7 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
-
 import { MixerHorizontalIcon } from '@radix-ui/react-icons';
 import { Button, Checkbox, CheckboxGroup, Flex, Popover, Separator, Text } from '@radix-ui/themes';
 
@@ -15,29 +13,21 @@ type Props = {
   repositories: Repository[];
   selectedRepositories: string[];
   onSelectedRepositoriesChange: (selected: string[]) => void;
-  defaultCheckedIds?: string[];
 };
 
 const RepositoriesSelector = ({
   repositories,
   selectedRepositories,
   onSelectedRepositoriesChange,
-  defaultCheckedIds = ['gnolang/gno'],
   ...props
 }: Props & React.ComponentProps<typeof Button>) => {
   const handleSelectAllToggle = () => {
     if (selectedRepositories.length === repositories.length) {
-      onSelectedRepositoriesChange(defaultCheckedIds);
+      onSelectedRepositoriesChange([]);
     } else {
       onSelectedRepositoriesChange(repositories.map((repo) => repo.id));
     }
   };
-
-  useEffect(() => {
-    if (selectedRepositories.length === 0) {
-      onSelectedRepositoriesChange(defaultCheckedIds);
-    }
-  }, [selectedRepositories.length, defaultCheckedIds]);
 
   return (
     <Popover.Root>
@@ -63,7 +53,6 @@ const RepositoriesSelector = ({
         <CheckboxGroup.Root
           value={selectedRepositories}
           onValueChange={onSelectedRepositoriesChange}
-          defaultValue={defaultCheckedIds}
         >
           {repositories.map(({ id, name, owner }) => (
             <CheckboxGroup.Item key={id} value={id}>

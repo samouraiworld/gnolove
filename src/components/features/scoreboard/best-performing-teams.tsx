@@ -76,7 +76,6 @@ const BestPerformingTeams = () => {
             repositories={repositories}
             selectedRepositories={selectedRepositories}
             onSelectedRepositoriesChange={setSelectedRepositories}
-            defaultCheckedIds={['gnolang/gno']}
           />
         </Flex>
         {isPending ? (
