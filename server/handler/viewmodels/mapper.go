@@ -1,4 +1,4 @@
-package dto
+package viewmodels
 
 import (
 	"github.com/samouraiworld/topofgnomes/server/models"

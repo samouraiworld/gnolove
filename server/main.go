@@ -14,7 +14,7 @@ import (
 	"github.com/samouraiworld/topofgnomes/server/db"
 	"github.com/samouraiworld/topofgnomes/server/handler"
 	"github.com/samouraiworld/topofgnomes/server/handler/contributor"
-	"github.com/samouraiworld/topofgnomes/server/infra/gormrepo"
+	infrarepo "github.com/samouraiworld/topofgnomes/server/infra/repository"
 	"github.com/samouraiworld/topofgnomes/server/models"
 	"github.com/samouraiworld/topofgnomes/server/signer"
 	"github.com/samouraiworld/topofgnomes/server/sync"
@@ -102,7 +102,7 @@ func main() {
 	router.Use(Compress())
 
 	// repositories
-	prRepo := gormrepo.NewPullRequestRepository(database)
+	prRepo := infrarepo.NewPullRequestRepository(database)
 
 	router.HandleFunc("/repositories", handler.HandleGetRepository(database))
 	router.HandleFunc("/stats", handler.HandleGetUserStats(database, cache))

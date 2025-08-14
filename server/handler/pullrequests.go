@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/samouraiworld/topofgnomes/server/handler/dto"
+	"github.com/samouraiworld/topofgnomes/server/handler/viewmodels"
 	"github.com/samouraiworld/topofgnomes/server/models"
 	"github.com/samouraiworld/topofgnomes/server/repository"
 )
@@ -68,12 +68,12 @@ func GetPullrequestsReportByDate(repo repository.PullRequestRepository) func(w h
 			}
 		}
 
-		response := dto.PullRequestsReportResponse{
-			Merged:           dto.MapPullRequestList(mergedPRs),
-			InProgress:       dto.MapPullRequestList(inProgressPRs),
-			Reviewed:         dto.MapPullRequestList(reviewedPRs),
-			WaitingForReview: dto.MapPullRequestList(waitingForReviewPRs),
-			Blocked:          dto.MapPullRequestList(blockedPRs),
+		response := viewmodels.PullRequestsReportResponse{
+			Merged:           viewmodels.MapPullRequestList(mergedPRs),
+			InProgress:       viewmodels.MapPullRequestList(inProgressPRs),
+			Reviewed:         viewmodels.MapPullRequestList(reviewedPRs),
+			WaitingForReview: viewmodels.MapPullRequestList(waitingForReviewPRs),
+			Blocked:          viewmodels.MapPullRequestList(blockedPRs),
 		}
 
 		json.NewEncoder(w).Encode(response)
