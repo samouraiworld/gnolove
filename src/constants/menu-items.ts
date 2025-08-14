@@ -7,6 +7,11 @@ export const MENU_ITEMS = [
   {
     label: 'Teams',
     href: '/teams',
+    new: false,
+  },
+  {
+    label: 'Report',
+    href: '/report',
     new: true,
   },
   {
@@ -22,6 +27,6 @@ export const MENU_ITEMS = [
   {
     label: 'Tutorials',
     href: '/tutorials',
-    new: true,
+    new: false,
   },
 ] as const satisfies ReadonlyArray<{ label: string; href: string; new: boolean }>;
