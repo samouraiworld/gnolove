@@ -103,6 +103,7 @@ func main() {
 	router.HandleFunc("/repositories", handler.HandleGetRepository(database))
 	router.HandleFunc("/stats", handler.HandleGetUserStats(database, cache))
 	router.HandleFunc("/issues", handler.GetIssues(database))
+	router.HandleFunc("/pullRequests/reportByDate", handler.GetPullrequestsReportByDate(database))
 	router.HandleFunc("/score-factors", handler.HandleGetScoreFactors)
 	router.HandleFunc("/milestones/{number}", handler.GetMilestone(database))
 	router.HandleFunc("/contributors/newest", handler.HandleGetNewestContributors(database))
