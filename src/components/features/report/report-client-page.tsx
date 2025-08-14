@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect } from 'react';
 
 import Image from 'next/image';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import {
   ArrowLeftIcon,
@@ -23,15 +24,13 @@ import {
   ScrollArea,
   Tooltip,
   IconButton,
-  Popover,
-  CheckboxGroup,
   Separator,
-  Checkbox,
   Avatar,
   Link,
   HoverCard,
 } from '@radix-ui/themes';
-import { endOfWeek, subWeeks, addWeeks, format, isAfter } from 'date-fns';
+import { endOfWeek, subWeeks, addWeeks, format, isAfter, getWeek, setWeek } from 'date-fns';
+import { enUS } from 'date-fns/locale';
 
 import RepositoriesSelector from '@/modules/repositories-selector';
 
@@ -49,6 +48,7 @@ import TEAMS from '@/constants/teams';
 import MinecraftHeart from '@/images/minecraft-heart.png';
 
 import LayoutContainer from '@/components/layouts/layout-container';
+import TeamSelector from '@/modules/team-selector';
 
 type RepoStatusMap = {
   [repo: string]: {
@@ -236,67 +236,13 @@ const RepoPRStatusList = ({ repo, statusMap, isOffline }: RepoPRStatusListProps)
       </Flex>
     </Box>
   );
-}
-
-const TeamSelector = ({
-  teams,
-  selectedTeams,
-  onSelectedTeamsChange,
-  defaultCheckedNames = ['Core Team'],
-  ...props
-}: {
-  teams: { name: string }[];
-  selectedTeams: string[];
-  onSelectedTeamsChange: (selected: string[]) => void;
-  defaultCheckedNames?: string[];
-} & React.ComponentProps<typeof Button>) => {
-  const handleSelectAllToggle = () => {
-    if (selectedTeams.length === teams.length) {
-      onSelectedTeamsChange(defaultCheckedNames);
-    } else {
-      onSelectedTeamsChange(teams.map((team) => team.name));
-    }
-  };
-
-  useEffect(() => {
-    if (selectedTeams.length === 0) {
-      onSelectedTeamsChange(defaultCheckedNames);
-    }
-  }, [selectedTeams.length, defaultCheckedNames]);
-
-  return (
-    <Popover.Root>
-      <Popover.Trigger>
-        <Button variant="soft" {...(props as React.ComponentProps<typeof Button>)}>
-          <PersonIcon /> Teams
-        </Button>
-      </Popover.Trigger>
-      <Popover.Content>
-        <Text as="label" size="2">
-          <Flex as="span" gap="2">
-            <Checkbox checked={selectedTeams.length === teams.length} onCheckedChange={handleSelectAllToggle} />{' '}
-            Select/Unselect All
-          </Flex>
-        </Text>
-        <Separator size="4" my="2" />
-        <CheckboxGroup.Root
-          value={selectedTeams}
-          onValueChange={onSelectedTeamsChange}
-          defaultValue={defaultCheckedNames}
-        >
-          {teams.map(({ name }) => (
-            <CheckboxGroup.Item key={name} value={name}>
-              {name}
-            </CheckboxGroup.Item>
-          ))}
-        </CheckboxGroup.Root>
-      </Popover.Content>
-    </Popover.Root>
-  );
 };
 
 const ReportClientPage = () => {
   const { isOffline } = useOffline();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [startDate, setStartDate] = useState<Date>(endOfWeek(subWeeks(new Date(), 1), { weekStartsOn: 0 }));
   const [endDate, setEndDate] = useState<Date>(endOfWeek(new Date(), { weekStartsOn: 0 }));
   const [selectedTeams, setSelectedTeams] = useState<string[]>(['Core Team']);
@@ -318,11 +264,37 @@ const ReportClientPage = () => {
   const { data: repositories = [] } = useGetRepositories();
   const { data: pullRequests, isPending } = useGetPullRequestsReport({ startDate, endDate });
 
+  // Sync week with URL: initialize from ?week= and update URL when week changes via navigation buttons
+  useEffect(() => {
+    const weekParam = Number(searchParams.get('week'));
+    if (!Number.isNaN(weekParam) && weekParam >= 1 && weekParam <= 53) {
+      const targetEnd = endOfWeek(setWeek(new Date(), weekParam), { weekStartsOn: 0 });
+      const targetStart = endOfWeek(subWeeks(targetEnd, 1), { weekStartsOn: 0 });
+      setStartDate(targetStart);
+      setEndDate(targetEnd);
+    } else {
+      // Ensure URL reflects current week if missing/invalid
+      const currentWeek = getWeek(endDate, { weekStartsOn: 0, firstWeekContainsDate: 1 });
+      const params = new URLSearchParams(searchParams.toString());
+      params.set('week', String(currentWeek));
+      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const pushWeekToUrl = (date: Date) => {
+    const week = getWeek(date, { weekStartsOn: 0, firstWeekContainsDate: 1 });
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('week', String(week));
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+  };
+
   const handlePreviousWeek = () => {
     const newStartDate = endOfWeek(subWeeks(startDate, 1), { weekStartsOn: 0 });
     const newEndDate = endOfWeek(subWeeks(endDate, 1), { weekStartsOn: 0 });
     setStartDate(newStartDate);
     setEndDate(newEndDate);
+    pushWeekToUrl(newEndDate);
   };
 
   const handleNextWeek = () => {
@@ -331,6 +303,7 @@ const ReportClientPage = () => {
     if (!isAfter(newEndDate, endOfWeek(new Date(), { weekStartsOn: 0 }))) {
       setStartDate(newStartDate);
       setEndDate(newEndDate);
+      pushWeekToUrl(newEndDate);
     }
   };
 
@@ -368,7 +341,7 @@ const ReportClientPage = () => {
             Weekly report
           </Heading>
           <Text size={{ initial: '2', sm: '4' }} color="gray">
-            Week from {format(startDate, 'dd/MM/yyyy')} to {format(endDate, 'dd/MM/yyyy')}
+            Week from {format(startDate, 'MMMM d, yyyy', { locale: enUS })} to {format(endDate, 'MMMM d, yyyy', { locale: enUS })}
           </Text>
         </Flex>
         <Flex gap="2" justify="between" align="center">
@@ -381,14 +354,12 @@ const ReportClientPage = () => {
               teams={TEAMS}
               selectedTeams={selectedTeams}
               onSelectedTeamsChange={setSelectedTeams}
-              defaultCheckedNames={['Core Team']}
               mb="3"
             />
             <RepositoriesSelector
               repositories={repositories}
               selectedRepositories={selectedRepositories}
               onSelectedRepositoriesChange={setSelectedRepositories}
-              defaultCheckedIds={['gnolang/gno']}
               mb="3"
             />
           </Flex>

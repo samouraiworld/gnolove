@@ -1,21 +1,35 @@
 import { Metadata } from 'next';
 
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
-import { endOfWeek, subWeeks } from 'date-fns';
+import { endOfWeek, startOfWeek, subWeeks, format, setWeek } from 'date-fns';
 
 import ReportClientPage from '@/features/report/report-client-page';
 
 import { prefetchPullRequestsReport } from '@/hooks/use-get-pullrequests-report';
 import { prefetchRepositories } from '@/hooks/use-get-repositories';
 
-export const metadata: Metadata = {
-  title: 'Weekly reports',
-};
+export async function generateMetadata({ searchParams }: { searchParams?: { week?: string } }): Promise<Metadata> {
+  const now = new Date();
+  const weekParam = Number(searchParams?.week);
+  const refDate = !Number.isNaN(weekParam) && weekParam >= 1 && weekParam <= 53 ? setWeek(now, weekParam) : now;
+  const start = startOfWeek(refDate, { weekStartsOn: 0 });
+  const end = endOfWeek(refDate, { weekStartsOn: 0 });
 
-const ReportPage = async () => {
+  const startLabel = format(start, 'MMM d');
+  const endLabel = format(end, 'MMM d, yyyy');
+
+  return {
+    title: `Weekly reports — ${startLabel} – ${endLabel}`,
+  };
+}
+
+const ReportPage = async ({ searchParams }: { searchParams?: { week?: string } }) => {
   const queryClient = new QueryClient();
-  const startDate = endOfWeek(subWeeks(new Date(), 1), { weekStartsOn: 0 });
-  const endDate = endOfWeek(new Date(), { weekStartsOn: 0 });
+  const now = new Date();
+  const weekParam = Number(searchParams?.week);
+  const refDate = !Number.isNaN(weekParam) && weekParam >= 1 && weekParam <= 53 ? setWeek(now, weekParam) : now;
+  const endDate = endOfWeek(refDate, { weekStartsOn: 0 });
+  const startDate = endOfWeek(subWeeks(endDate, 1), { weekStartsOn: 0 });
 
   await Promise.all([
     prefetchRepositories(queryClient),
