@@ -29,7 +29,7 @@ import {
   Link,
   HoverCard,
 } from '@radix-ui/themes';
-import { endOfWeek, subWeeks, addWeeks, format, isAfter, getWeek, setWeek } from 'date-fns';
+import { endOfWeek, subWeeks, addWeeks, format, isAfter, getWeek, setWeek, startOfWeek } from 'date-fns';
 import { enUS } from 'date-fns/locale';
 
 import RepositoriesSelector from '@/modules/repositories-selector';
@@ -84,10 +84,10 @@ function groupPRsByRepoAndStatus(
   let foundAny = false;
   STATUS_ORDER.forEach((status) => {
     const prs = (pullRequests || {})[status] || [];
-    prs.forEach((pr: any) => {
+    prs.forEach((pr) => {
       const repo = selectedRepositories.find((r) => pr.url.includes(r));
       if (!repo) return;
-      if (!teamMembers.includes(pr.author?.login)) return;
+      if (pr.author?.login && !teamMembers.includes(pr.author?.login)) return;
       if (!repoStatusMap[repo]) repoStatusMap[repo] = {};
       if (!repoStatusMap[repo][status]) repoStatusMap[repo][status] = [];
       repoStatusMap[repo][status].push(pr);
@@ -243,8 +243,13 @@ const ReportClientPage = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [startDate, setStartDate] = useState<Date>(endOfWeek(subWeeks(new Date(), 1), { weekStartsOn: 0 }));
-  const [endDate, setEndDate] = useState<Date>(endOfWeek(new Date(), { weekStartsOn: 0 }));
+  const initialWeek = Number(searchParams.get('week'));
+  const initialRefDate =
+    !Number.isNaN(initialWeek) && initialWeek >= 1 && initialWeek <= 53
+      ? setWeek(new Date(), initialWeek, { weekStartsOn: 0, firstWeekContainsDate: 1 })
+      : new Date();
+  const [startDate, setStartDate] = useState<Date>(startOfWeek(initialRefDate, { weekStartsOn: 0 }));
+  const [endDate, setEndDate] = useState<Date>(endOfWeek(initialRefDate, { weekStartsOn: 0 }));
   const [selectedTeams, setSelectedTeams] = useState<string[]>(['Core Team']);
   const [selectedRepositories, setSelectedRepositories] = useState<string[]>([
     'gnolang/gno',
@@ -268,8 +273,11 @@ const ReportClientPage = () => {
   useEffect(() => {
     const weekParam = Number(searchParams.get('week'));
     if (!Number.isNaN(weekParam) && weekParam >= 1 && weekParam <= 53) {
-      const targetEnd = endOfWeek(setWeek(new Date(), weekParam), { weekStartsOn: 0 });
-      const targetStart = endOfWeek(subWeeks(targetEnd, 1), { weekStartsOn: 0 });
+      const targetEnd = endOfWeek(
+        setWeek(new Date(), weekParam, { weekStartsOn: 0, firstWeekContainsDate: 1 }),
+        { weekStartsOn: 0 },
+      );
+      const targetStart = startOfWeek(targetEnd, { weekStartsOn: 0 });
       setStartDate(targetStart);
       setEndDate(targetEnd);
     } else {
@@ -279,7 +287,6 @@ const ReportClientPage = () => {
       params.set('week', String(currentWeek));
       router.replace(`${pathname}?${params.toString()}`, { scroll: false });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const pushWeekToUrl = (date: Date) => {

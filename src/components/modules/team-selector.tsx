@@ -1,3 +1,5 @@
+'use client';
+
 import { Button, Popover, CheckboxGroup, Checkbox, Separator, Text, Flex } from '@radix-ui/themes';
 import { PersonIcon } from '@radix-ui/react-icons';
 

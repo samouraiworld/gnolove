@@ -55,6 +55,9 @@ export const getPullrequestsReportByDate = async (startDate: Date, endDate: Date
   url.searchParams.set('enddate', endDate.toISOString());
 
   const res = await fetch(url.toString(), { cache: 'no-cache' });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch pull requests report: ${res.status}`);
+  }
   const data = await res.json();
 
   return PullRequestReportSchema.parse(data);

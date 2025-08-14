@@ -10,14 +10,18 @@ export interface UseGetPullRequestsReportParams {
 
 export const prefetchPullRequestsReport = async (queryClient: QueryClient, params: UseGetPullRequestsReportParams) => {
   const report = await getPullrequestsReportByDate(params.startDate, params.endDate);
-  queryClient.setQueryData([...QUERY_KEY, params], report);
+  const startIso = params.startDate.toISOString();
+  const endIso = params.endDate.toISOString();
+  queryClient.setQueryData([...QUERY_KEY, startIso, endIso], report);
   return report;
 };
 
 const useGetPullRequestsReport = (params: UseGetPullRequestsReportParams) => {
+  const startIso = params.startDate.toISOString();
+  const endIso = params.endDate.toISOString();
   return useQuery({
     queryFn: () => getPullrequestsReportByDate(params.startDate, params.endDate),
-    queryKey: [...QUERY_KEY, params],
+    queryKey: [...QUERY_KEY, startIso, endIso],
   });
 };
 

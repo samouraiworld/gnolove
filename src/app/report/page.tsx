@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
-import { endOfWeek, startOfWeek, subWeeks, format, setWeek } from 'date-fns';
+import { endOfWeek, startOfWeek, format, setWeek } from 'date-fns';
 
 import ReportClientPage from '@/features/report/report-client-page';
 
@@ -11,7 +11,10 @@ import { prefetchRepositories } from '@/hooks/use-get-repositories';
 export async function generateMetadata({ searchParams }: { searchParams?: { week?: string } }): Promise<Metadata> {
   const now = new Date();
   const weekParam = Number(searchParams?.week);
-  const refDate = !Number.isNaN(weekParam) && weekParam >= 1 && weekParam <= 53 ? setWeek(now, weekParam) : now;
+  const refDate =
+    !Number.isNaN(weekParam) && weekParam >= 1 && weekParam <= 53
+      ? setWeek(now, weekParam, { weekStartsOn: 0, firstWeekContainsDate: 1 })
+      : now;
   const start = startOfWeek(refDate, { weekStartsOn: 0 });
   const end = endOfWeek(refDate, { weekStartsOn: 0 });
 
@@ -27,9 +30,12 @@ const ReportPage = async ({ searchParams }: { searchParams?: { week?: string } }
   const queryClient = new QueryClient();
   const now = new Date();
   const weekParam = Number(searchParams?.week);
-  const refDate = !Number.isNaN(weekParam) && weekParam >= 1 && weekParam <= 53 ? setWeek(now, weekParam) : now;
+  const refDate =
+    !Number.isNaN(weekParam) && weekParam >= 1 && weekParam <= 53
+      ? setWeek(now, weekParam, { weekStartsOn: 0, firstWeekContainsDate: 1 })
+      : now;
   const endDate = endOfWeek(refDate, { weekStartsOn: 0 });
-  const startDate = endOfWeek(subWeeks(endDate, 1), { weekStartsOn: 0 });
+  const startDate = startOfWeek(refDate, { weekStartsOn: 0 });
 
   await Promise.all([
     prefetchRepositories(queryClient),
