@@ -121,6 +121,7 @@ func (s *Syncer) StartSynchonizing() error {
 
 	return nil
 }
+
 func (s *Syncer) syncPRs(repository models.Repository) error {
 	lastUpdatedTime := getLastUpdatedPR(*s.db, repository.ID)
 
@@ -168,17 +169,22 @@ func (s *Syncer) syncPRs(repository models.Repository) error {
 			}
 
 			pr := models.PullRequest{
-				CreatedAt:    pr.CreatedAt,
-				UpdatedAt:    pr.UpdatedAt,
-				RepositoryID: repository.ID,
-				ID:           pr.ID,
-				Number:       pr.Number,
-				State:        pr.State,
-				Title:        pr.Title,
-				AuthorID:     pr.Author.User.ID,
-				Reviews:      reviews,
-				MilestoneID:  pr.Milestone.ID,
-				URL:          pr.Url,
+				CreatedAt:        pr.CreatedAt,
+				UpdatedAt:        pr.UpdatedAt,
+				RepositoryID:     repository.ID,
+				ID:               pr.ID,
+				Number:           pr.Number,
+				State:            pr.State,
+				Title:            pr.Title,
+				AuthorID:         pr.Author.User.ID,
+				Reviews:          reviews,
+				MilestoneID:      pr.Milestone.ID,
+				URL:              pr.Url,
+				ReviewDecision:   pr.ReviewDecision,
+				Mergeable:        pr.Mergeable,
+				MergeStateStatus: pr.MergeStateStatus,
+				MergedAt:         pr.MergedAt,
+				IsDraft:          pr.IsDraft,
 			}
 			err = s.db.Save(pr).Error
 			if err != nil {
@@ -385,6 +391,7 @@ func (s *Syncer) syncMilestones(repository models.Repository) error {
 
 	return nil
 }
+
 func (s *Syncer) syncCommits(repository models.Repository) error {
 	var q struct {
 		Repository struct {
@@ -588,6 +595,7 @@ type issue struct {
 		}
 	} `graphql:"labels(first: 10)"`
 }
+
 type Author struct {
 	User struct {
 		ID string
@@ -607,7 +615,13 @@ type pullRequest struct {
 	Reviews   struct {
 		Nodes []review
 	} `graphql:"reviews(first: 100)"`
+	ReviewDecision   string     `graphql:"reviewDecision"`
+	Mergeable        string     `graphql:"mergeable"`
+	MergeStateStatus string     `graphql:"mergeStateStatus"`
+	MergedAt         *time.Time `graphql:"mergedAt"`
+	IsDraft          bool       `graphql:"isDraft"`
 }
+
 type review struct {
 	Author    Author
 	ID        string
