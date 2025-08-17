@@ -8,6 +8,7 @@ import (
 	"net/url"
 	"os"
 	"sort"
+	"strings"
 	"time"
 
 	"github.com/samouraiworld/topofgnomes/server/handler"
@@ -34,44 +35,74 @@ func GetContributorsWithScores(db *gorm.DB, since time.Time) ([]ContributorStats
 		return nil, err
 	}
 
-	// Aggregate all counts in one query per table
+	// Build excluded repositories slice from env var (comma or space separated)
+	excludedEnv := os.Getenv("LEADERBOARD_EXCLUDED_REPOS")
+	var excludedRepos []string
+	if strings.TrimSpace(excludedEnv) == "" {
+		// Default exclusion
+		excludedRepos = []string{"samouraiworld/gnomonitoring"}
+	} else {
+		parts := strings.FieldsFunc(excludedEnv, func(r rune) bool { return r == ',' || r == ' ' || r == '\n' || r == '\t' })
+		for _, p := range parts {
+			if s := strings.TrimSpace(p); s != "" {
+				excludedRepos = append(excludedRepos, s)
+			}
+		}
+	}
 
+	// Aggregate all counts in one query per table
 	type countResult struct {
 		AuthorID string
 		Count    int64
 	}
 	commitsMap := map[string]int64{}
 	var commitResults []countResult
-	db.Table("commits").Select("author_id, COUNT(*) as count").
-		Where("created_at >= ? AND repository_id <> ?", since, "samouraiworld/gnomonitoring").
-		Group("author_id").Scan(&commitResults)
+	{
+		q := db.Table("commits").Select("author_id, COUNT(*) as count").Where("created_at >= ?", since)
+		if len(excludedRepos) > 0 {
+			q = q.Where("repository_id NOT IN ?", excludedRepos)
+		}
+		q.Group("author_id").Scan(&commitResults)
+	}
 	for _, r := range commitResults {
 		commitsMap[r.AuthorID] = r.Count
 	}
 
 	issuesMap := map[string]int64{}
 	var issueResults []countResult
-	db.Table("issues").Select("author_id, COUNT(*) as count").
-		Where("created_at >= ? AND repository_id <> ?", since, "samouraiworld/gnomonitoring").
-		Group("author_id").Scan(&issueResults)
+	{
+		q := db.Table("issues").Select("author_id, COUNT(*) as count").Where("created_at >= ?", since)
+		if len(excludedRepos) > 0 {
+			q = q.Where("repository_id NOT IN ?", excludedRepos)
+		}
+		q.Group("author_id").Scan(&issueResults)
+	}
 	for _, r := range issueResults {
 		issuesMap[r.AuthorID] = r.Count
 	}
 
 	prsMap := map[string]int64{}
 	var prResults []countResult
-	db.Table("pull_requests").Select("author_id, COUNT(*) as count").
-		Where("created_at >= ? AND repository_id <> ?", since, "samouraiworld/gnomonitoring").
-		Group("author_id").Scan(&prResults)
+	{
+		q := db.Table("pull_requests").Select("author_id, COUNT(*) as count").Where("created_at >= ?", since)
+		if len(excludedRepos) > 0 {
+			q = q.Where("repository_id NOT IN ?", excludedRepos)
+		}
+		q.Group("author_id").Scan(&prResults)
+	}
 	for _, r := range prResults {
 		prsMap[r.AuthorID] = r.Count
 	}
 
 	reviewedMap := map[string]int64{}
 	var reviewedResults []countResult
-	db.Table("reviews").Select("author_id, COUNT(*) as count").
-		Where("created_at >= ? AND repository_id <> ?", since, "samouraiworld/gnomonitoring").
-		Group("author_id").Scan(&reviewedResults)
+	{
+		q := db.Table("reviews").Select("author_id, COUNT(*) as count").Where("created_at >= ?", since)
+		if len(excludedRepos) > 0 {
+			q = q.Where("repository_id NOT IN ?", excludedRepos)
+		}
+		q.Group("author_id").Scan(&reviewedResults)
+	}
 	for _, r := range reviewedResults {
 		reviewedMap[r.AuthorID] = r.Count
 	}
