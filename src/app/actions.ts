@@ -13,6 +13,8 @@ import {
   RepositorySchema,
   ScoreFactorsSchema,
   UserSchema,
+  YoutubePlaylistIdSchema,
+  YoutubeVideoPlaylistSchema,
 } from '@/utils/schemas';
 
 import MILESTONE from '@/constants/milestone';
@@ -130,4 +132,75 @@ export const getScoreFactors = async () => {
   const data = await res.json();
 
   return ScoreFactorsSchema.parse(data);
+};
+
+export const getYoutubeChannelUploadsPlaylistId = async (searchParams: { channelId?: string; channelUsername?: string }) => {
+  const { channelId, channelUsername } = searchParams || {};
+
+  // Validate inputs: at least one of channelId or channelUsername is required
+  if (!channelId && !channelUsername) {
+    throw new Error('Validation error: either channelId or channelUsername must be provided.');
+  }
+
+  const url = new URL('https://www.googleapis.com/youtube/v3/channels');
+
+  url.searchParams.set('part', 'contentDetails');
+
+  if (channelId) url.searchParams.set('id', channelId);
+  if (channelUsername) url.searchParams.set('forUsername', channelUsername);
+
+  url.searchParams.set('key', ENV.YOUTUBE_API_KEY);
+
+  const res = await fetch(url.toString());
+
+  // Check HTTP response
+  if (!res.ok) {
+    const bodyText = await res.text();
+    throw new Error(
+      `YouTube API error: ${res.status} ${res.statusText}${bodyText ? ` - ${bodyText}` : ''}`
+    );
+  }
+
+  const data = await res.json();
+
+  const uploads = data.items[0]?.contentDetails?.relatedPlaylists?.uploads;
+  if (!uploads) {
+    throw new Error('Channel found but uploads playlist ID is missing in response.');
+  }
+
+  return YoutubePlaylistIdSchema.parse(uploads);
+};
+
+export const getYoutubePlaylistVideos = async (playlistId: string, maxResults: number = 50) => {
+  // Clamp maxResults to YouTube API allowed range [1..50]
+  const clampedMax = z.number().int().min(1).max(50).catch(50).parse(maxResults);
+
+  const url = new URL('https://www.googleapis.com/youtube/v3/playlistItems');
+
+  url.searchParams.set('part', 'snippet');
+  url.searchParams.set('playlistId', playlistId);
+  url.searchParams.set('maxResults', clampedMax.toString());
+  url.searchParams.set('key', ENV.YOUTUBE_API_KEY);
+
+  const res = await fetch(url.toString());
+
+  // Check HTTP response early and include body text if available
+  if (!res.ok) {
+    const bodyText = await res.text();
+    throw new Error(`YouTube API error (playlistItems): ${res.status} ${res.statusText}${bodyText ? ` - ${bodyText}` : ''}`);
+  }
+
+  const data = await res.json();
+
+  // Ensure data and items exist
+  if (!data || !Array.isArray(data.items)) {
+    const apiErrorMessage = data?.error?.message || data?.message;
+    throw new Error(`Invalid YouTube response: items missing or not an array${apiErrorMessage ? ` - ${apiErrorMessage}` : ''}`);
+  }
+
+  if (data.items.length === 0) {
+    throw new Error('Playlist not found / Playlist items not found');
+  }
+
+  return YoutubeVideoPlaylistSchema.parse(data.items);
 };

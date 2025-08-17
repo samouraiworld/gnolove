@@ -25,7 +25,6 @@ import useGetNewContributors from '@/hooks/use-get-new-contributors';
 import { getLastMRs, TimeFilter } from '@/utils/github';
 
 import REPOSITORY from '@/constants/repository';
-import VIDEOS from '@/constants/videos';
 
 import HeaderImage from '@/images/header.png';
 
@@ -34,7 +33,7 @@ import { useOffline } from '@/contexts/offline-context';
 import { cn } from '@/utils/style';
 import Loader from '@/elements/loader';
 
-const ScoreboardPage = () => {
+const ScoreboardPage = ({ videos }: { videos: any }) => {
   const { data: allTimeContributors, isPending: isAllTimePending } = useGetContributors({
     timeFilter: TimeFilter.ALL_TIME,
   });
@@ -103,11 +102,17 @@ const ScoreboardPage = () => {
         🎥 Latest gnoland videos
       </Text>
 
-      <Grid columns={{ initial: '1', xs: '2', md: '3' }} rows="auto" gap="2">
-        {VIDEOS.map((src) => (
-          <YoutubeEmbeddedVideo key={src} className="overflow-hidden rounded-4" src={src} />
-        ))}
-      </Grid>
+      {videos && (
+        <Grid columns={{ initial: '1', xs: '2', md: '3' }} rows="auto" gap="2">
+          {videos.map((video: { snippet: { resourceId: { videoId: string } } }) => (
+            <YoutubeEmbeddedVideo
+              key={video.snippet.resourceId.videoId}
+              className="overflow-hidden rounded-4"
+              src={`https://www.youtube.com/embed/${video.snippet.resourceId.videoId}`}
+            />
+          ))}
+        </Grid>
+      )}
     </LayoutContainer>
   );
 };
