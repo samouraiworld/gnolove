@@ -173,7 +173,7 @@ export const getYoutubeChannelUploadsPlaylistId = async (searchParams: { channel
 
 export const getYoutubePlaylistVideos = async (playlistId: string, maxResults: number = 50) => {
   // Clamp maxResults to YouTube API allowed range [1..50]
-  const clampedMax = Math.min(50, Math.max(1, Math.floor(Number.isFinite(maxResults) ? maxResults : 50)));
+  const clampedMax = z.number().int().min(1).max(50).catch(50).parse(maxResults);
 
   const url = new URL('https://www.googleapis.com/youtube/v3/playlistItems');
 
