@@ -43,7 +43,7 @@ func GetContributorsWithScores(db *gorm.DB, since time.Time) ([]ContributorStats
 	commitsMap := map[string]int64{}
 	var commitResults []countResult
 	db.Table("commits").Select("author_id, COUNT(*) as count").
-		Where("created_at >= ?", since).
+		Where("created_at >= ? AND repository_id <> ?", since, "samouraiworld/gnomonitoring").
 		Group("author_id").Scan(&commitResults)
 	for _, r := range commitResults {
 		commitsMap[r.AuthorID] = r.Count
@@ -52,7 +52,7 @@ func GetContributorsWithScores(db *gorm.DB, since time.Time) ([]ContributorStats
 	issuesMap := map[string]int64{}
 	var issueResults []countResult
 	db.Table("issues").Select("author_id, COUNT(*) as count").
-		Where("created_at >= ?", since).
+		Where("created_at >= ? AND repository_id <> ?", since, "samouraiworld/gnomonitoring").
 		Group("author_id").Scan(&issueResults)
 	for _, r := range issueResults {
 		issuesMap[r.AuthorID] = r.Count
@@ -61,7 +61,7 @@ func GetContributorsWithScores(db *gorm.DB, since time.Time) ([]ContributorStats
 	prsMap := map[string]int64{}
 	var prResults []countResult
 	db.Table("pull_requests").Select("author_id, COUNT(*) as count").
-		Where("created_at >= ?", since).
+		Where("created_at >= ? AND repository_id <> ?", since, "samouraiworld/gnomonitoring").
 		Group("author_id").Scan(&prResults)
 	for _, r := range prResults {
 		prsMap[r.AuthorID] = r.Count
@@ -70,7 +70,7 @@ func GetContributorsWithScores(db *gorm.DB, since time.Time) ([]ContributorStats
 	reviewedMap := map[string]int64{}
 	var reviewedResults []countResult
 	db.Table("reviews").Select("author_id, COUNT(*) as count").
-		Where("created_at >= ?", since).
+		Where("created_at >= ? AND repository_id <> ?", since, "samouraiworld/gnomonitoring").
 		Group("author_id").Scan(&reviewedResults)
 	for _, r := range reviewedResults {
 		reviewedMap[r.AuthorID] = r.Count
