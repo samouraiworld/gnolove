@@ -115,7 +115,7 @@ export const PullRequestBaseSchema = z.object({
   url: z.string().url(),
   authorID: z.string().optional(),
   author: UserSchema.nullish(),
-  reviews: z.array(ReviewSchema).nullable(),
+  reviews: z.array(ReviewSchema).nullish(),
   milestoneID: z.string().optional(),
   reviewDecision: z.string().optional(),
   mergeable: z.string().optional(),
