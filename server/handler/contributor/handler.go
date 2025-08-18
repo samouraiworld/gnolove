@@ -37,6 +37,12 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 			gnoBalance = balanceStruct.GnoBalance
 		}
 
+		// Prepare a safe join date string (avoid formatting zero time)
+		joinDateStr := ""
+		if !dbUser.JoinDate.IsZero() {
+			joinDateStr = dbUser.JoinDate.Format(time.RFC3339)
+		}
+
 		resp := githubUserResponse{
 			ID:                         dbUser.ID,
 			Login:                      dbUser.Login,
@@ -45,7 +51,7 @@ func HandleGetContributor(db *gorm.DB) http.HandlerFunc {
 			Name:                       dbUser.Name,
 			Bio:                        dbUser.Bio,
 			Location:                   dbUser.Location,
-			JoinDate:                   dbUser.JoinDate.Format(time.RFC3339),
+			JoinDate:                   joinDateStr,
 			WebsiteUrl:                 dbUser.WebsiteUrl,
 			TwitterUsername:            dbUser.TwitterUsername,
 			TotalStars:                 dbUser.TotalStars,
