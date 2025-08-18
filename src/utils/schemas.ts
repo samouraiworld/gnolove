@@ -113,14 +113,17 @@ export const PullRequestBaseSchema = z.object({
   state: z.string(),
   title: z.string(),
   url: z.string().url(),
-  authorID: z.string(),
+  authorID: z.string().optional(),
   author: UserSchema.nullish(),
-  reviews: z.union([z.array(ReviewSchema), z.null()]),
-  milestoneID: z.string(),
+  reviews: z.array(ReviewSchema).nullish(),
+  milestoneID: z.string().optional(),
   reviewDecision: z.string().optional(),
   mergeable: z.string().optional(),
   mergeStateStatus: z.string().optional(),
   mergedAt: z.string().nullable(),
+  authorLogin: z.string().optional(),
+  authorAvatarUrl: z.string().optional(),
+  isDraft: z.boolean().optional(),
 });
 
 export const PullRequestSchema = z.preprocess(preprocessPullRequest, PullRequestBaseSchema);
@@ -128,11 +131,11 @@ export const PullRequestSchema = z.preprocess(preprocessPullRequest, PullRequest
 export type TPullRequest = z.infer<typeof PullRequestSchema>;
 
 export const PullRequestReportSchema = z.object({
-  merged: z.union([z.array(PullRequestSchema), z.null()]),            
-  in_progress: z.union([z.array(PullRequestSchema), z.null()]),      
-  reviewed: z.union([z.array(PullRequestSchema), z.null()]),        
-  waiting_for_review: z.union([z.array(PullRequestSchema), z.null()]),
-  blocked: z.union([z.array(PullRequestSchema), z.null()]),        
+  merged: z.array(PullRequestSchema).nullable(),            
+  in_progress: z.array(PullRequestSchema).nullable(),      
+  reviewed: z.array(PullRequestSchema).nullable(),        
+  waiting_for_review: z.array(PullRequestSchema).nullable(),
+  blocked: z.array(PullRequestSchema).nullable(),        
 });
 
 export type TPullRequestReport = z.infer<typeof PullRequestReportSchema>;
