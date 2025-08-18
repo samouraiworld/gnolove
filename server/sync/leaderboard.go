@@ -62,7 +62,9 @@ func GetContributorsWithScores(db *gorm.DB, since time.Time) ([]ContributorStats
 		if len(excludedRepos) > 0 {
 			q = q.Where("repository_id NOT IN ?", excludedRepos)
 		}
-		q.Group("author_id").Scan(&commitResults)
+		if err := q.Group("author_id").Scan(&commitResults).Error; err != nil {
+			return nil, err
+		}
 	}
 	for _, r := range commitResults {
 		commitsMap[r.AuthorID] = r.Count
@@ -75,7 +77,9 @@ func GetContributorsWithScores(db *gorm.DB, since time.Time) ([]ContributorStats
 		if len(excludedRepos) > 0 {
 			q = q.Where("repository_id NOT IN ?", excludedRepos)
 		}
-		q.Group("author_id").Scan(&issueResults)
+		if err := q.Group("author_id").Scan(&issueResults).Error; err != nil {
+			return nil, err
+		}
 	}
 	for _, r := range issueResults {
 		issuesMap[r.AuthorID] = r.Count
@@ -88,7 +92,9 @@ func GetContributorsWithScores(db *gorm.DB, since time.Time) ([]ContributorStats
 		if len(excludedRepos) > 0 {
 			q = q.Where("repository_id NOT IN ?", excludedRepos)
 		}
-		q.Group("author_id").Scan(&prResults)
+		if err := q.Group("author_id").Scan(&prResults).Error; err != nil {
+			return nil, err
+		}
 	}
 	for _, r := range prResults {
 		prsMap[r.AuthorID] = r.Count
@@ -101,7 +107,9 @@ func GetContributorsWithScores(db *gorm.DB, since time.Time) ([]ContributorStats
 		if len(excludedRepos) > 0 {
 			q = q.Where("repository_id NOT IN ?", excludedRepos)
 		}
-		q.Group("author_id").Scan(&reviewedResults)
+		if err := q.Group("author_id").Scan(&reviewedResults).Error; err != nil {
+			return nil, err
+		}
 	}
 	for _, r := range reviewedResults {
 		reviewedMap[r.AuthorID] = r.Count
