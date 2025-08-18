@@ -240,7 +240,7 @@ const ReportClientPage = () => {
                           as="h2"
                           size="5"
                           className="sticky -top-[5px] z-30 py-1"
-                          style={{ backgroundColor: 'white' }}
+                          style={{ backgroundColor: 'var(--color-background)' }}
                         >
                           <Flex align="center" gap="2">
                             <PersonIcon />

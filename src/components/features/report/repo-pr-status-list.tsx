@@ -29,7 +29,7 @@ interface RepoPRStatusListProps {
 const RepoPRStatusList = ({ repo, statusMap, isOffline }: RepoPRStatusListProps) => {
   return (
     <Box key={repo} mb="5" pl={{ initial: '0', sm: '4' }}>
-      <Heading as="h3" size="4" style={{ backgroundColor: 'white' }} className="sticky top-[25px] z-20 py-1">
+      <Heading as="h3" size="4" style={{ backgroundColor: 'var(--color-background)' }} className="sticky top-[25px] z-20 py-1">
         <Flex align="center" gap="2">
           <MixerHorizontalIcon />
           {repo}
@@ -41,7 +41,7 @@ const RepoPRStatusList = ({ repo, statusMap, isOffline }: RepoPRStatusListProps)
             <Box key={status} pl={{ initial: '0', sm: '2' }}>
               <Box
                 width="100%"
-                style={{ backgroundColor: 'white' }}
+                style={{ backgroundColor: 'var(--color-background)' }}
                 className="sticky top-[55px] z-10 py-1 text-center"
               >
                 <Tooltip content={STATUS_TOOLTIPS[status]}>
