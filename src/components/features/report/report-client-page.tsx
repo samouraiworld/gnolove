@@ -87,7 +87,7 @@ function groupPRsByRepoAndStatus(
     prs.forEach((pr) => {
       const repo = selectedRepositories.find((r) => pr.url.includes(r));
       if (!repo) return;
-      if (pr.author?.login && !teamMembers.includes(pr.author?.login)) return;
+      if (pr.authorLogin && !teamMembers.includes(pr.authorLogin)) return;
       if (!repoStatusMap[repo]) repoStatusMap[repo] = {};
       if (!repoStatusMap[repo][status]) repoStatusMap[repo][status] = [];
       repoStatusMap[repo][status].push(pr);
@@ -130,8 +130,8 @@ const RepoPRStatusList = ({ repo, statusMap, isOffline }: RepoPRStatusListProps)
               <ul className="sm:pl-4">
                 {[...statusMap[status]]
                   .sort((a, b) => {
-                    const aLogin = a.author?.login || '';
-                    const bLogin = b.author?.login || '';
+                    const aLogin = a.authorLogin || '';
+                    const bLogin = b.authorLogin || '';
                     return aLogin.localeCompare(bLogin);
                   })
                   .map((pr: TPullRequest) => (
@@ -140,21 +140,21 @@ const RepoPRStatusList = ({ repo, statusMap, isOffline }: RepoPRStatusListProps)
                         <Avatar
                           size="1"
                           radius="full"
-                          src={pr.author?.avatarUrl}
-                          fallback={pr.author?.avatarUrl ? pr.author?.login[0] : '?'}
+                          src={pr.authorAvatarUrl}
+                          fallback={pr.authorLogin ? pr.authorLogin[0] : '?'}
                         />
-                        <Link href={isOffline ? '' : `/@${pr.author?.login}`}>
-                          <Tooltip content={pr.author?.login}>
+                        <Link className="flex items-center" href={isOffline ? '' : `/@${pr.authorLogin}`}>
+                          <Tooltip content={pr.authorLogin}>
                             <Text
                               weight="bold"
                               size="2"
                               className="sm:max-w-auto inline-block min-w-0 max-w-[70px] overflow-hidden text-ellipsis whitespace-nowrap xs:max-w-[90px]"
                             >
-                              {pr.author?.login}
+                              {pr.authorLogin}
                             </Text>
                           </Tooltip>
                         </Link>
-                        <Link href={isOffline ? '' : pr.url} target="_blank" rel="noopener noreferrer">
+                        <Link className="flex items-center" href={isOffline ? '' : pr.url} target="_blank" rel="noopener noreferrer">
                           <Tooltip content={pr.title}>
                             <Text
                               size="2"
@@ -199,7 +199,7 @@ const RepoPRStatusList = ({ repo, statusMap, isOffline }: RepoPRStatusListProps)
                                   PR #{pr.number} • {pr.state}
                                 </Text>
                                 <Text size="1" color="gray">
-                                  <Text weight="bold">Author: </Text> {pr.author?.login}
+                                  <Text weight="bold">Author: </Text> {pr.authorLogin}
                                 </Text>
                                 <Text size="1" color="gray">
                                   <Text weight="bold">Review Decision: </Text> {pr.reviewDecision || 'N/A'}
@@ -297,20 +297,20 @@ const ReportClientPage = () => {
   };
 
   const handlePreviousWeek = () => {
-    const newStartDate = endOfWeek(subWeeks(startDate, 1), { weekStartsOn: 0 });
-    const newEndDate = endOfWeek(subWeeks(endDate, 1), { weekStartsOn: 0 });
-    setStartDate(newStartDate);
-    setEndDate(newEndDate);
-    pushWeekToUrl(newEndDate);
+    const targetEnd = endOfWeek(subWeeks(endDate, 1), { weekStartsOn: 0 });
+    const targetStart = startOfWeek(targetEnd, { weekStartsOn: 0 });
+    setStartDate(targetStart);
+    setEndDate(targetEnd);
+    pushWeekToUrl(targetEnd);
   };
 
   const handleNextWeek = () => {
-    const newStartDate = endOfWeek(addWeeks(startDate, 1), { weekStartsOn: 0 });
-    const newEndDate = endOfWeek(addWeeks(endDate, 1), { weekStartsOn: 0 });
-    if (!isAfter(newEndDate, endOfWeek(new Date(), { weekStartsOn: 0 }))) {
-      setStartDate(newStartDate);
-      setEndDate(newEndDate);
-      pushWeekToUrl(newEndDate);
+    const targetEnd = endOfWeek(addWeeks(endDate, 1), { weekStartsOn: 0 });
+    if (!isAfter(targetEnd, endOfWeek(new Date(), { weekStartsOn: 0 }))) {
+      const targetStart = startOfWeek(targetEnd, { weekStartsOn: 0 });
+      setStartDate(targetStart);
+      setEndDate(targetEnd);
+      pushWeekToUrl(targetEnd);
     }
   };
 

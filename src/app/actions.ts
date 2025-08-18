@@ -51,7 +51,7 @@ export const getLastIssues = async (last: number) => {
 };
 
 export const getPullrequestsReportByDate = async (startDate: Date, endDate: Date) => {
-  const url = new URL('/pullRequests/reportByDate', ENV.NEXT_PUBLIC_API_URL);
+  const url = new URL('/pull-requests/report', ENV.NEXT_PUBLIC_API_URL);
 
   url.searchParams.set('startdate', startDate.toISOString());
   url.searchParams.set('enddate', endDate.toISOString());
