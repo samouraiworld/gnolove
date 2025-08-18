@@ -10,6 +10,7 @@ import {
   MilestoneSchema,
   NamespacesSchema,
   PackagesSchema,
+  PullRequestReportSchema,
   RepositorySchema,
   ScoreFactorsSchema,
   UserSchema,
@@ -47,6 +48,21 @@ export const getLastIssues = async (last: number) => {
   const data = await res.json();
 
   return z.array(IssueSchema).parse(data).slice(0, last);
+};
+
+export const getPullrequestsReportByDate = async (startDate: Date, endDate: Date) => {
+  const url = new URL('/pullRequests/reportByDate', ENV.NEXT_PUBLIC_API_URL);
+
+  url.searchParams.set('startdate', startDate.toISOString());
+  url.searchParams.set('enddate', endDate.toISOString());
+
+  const res = await fetch(url.toString(), { cache: 'no-cache' });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch pull requests report: ${res.status}`);
+  }
+  const data = await res.json();
+
+  return PullRequestReportSchema.parse(data);
 };
 
 export const getNewContributors = async () => {
