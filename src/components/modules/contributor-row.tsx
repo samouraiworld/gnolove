@@ -74,13 +74,13 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
           />
 
           <Link
-            className={cn('min-w-0 max-w-[160px] xs:max-w-[180px] sm:max-w-none', isOffline && 'pointer-events-none')}
+            className={cn('min-w-0 max-w-[160px] xs:max-w-[180px] sm:max-w-none', { 'pointer-events-none': isOffline })}
             href={isOffline ? '' : `/@${contributor.login}`}
           >
             <Text
               truncate
               title={contributor.name || contributor.login}
-              className={cn('block overflow-hidden text-ellipsis whitespace-nowrap', isOffline && 'text-gray-8')}
+              className={cn({ 'text-gray-8': isOffline })}
               trim="both"
             >
               {contributor.name || contributor.login}
