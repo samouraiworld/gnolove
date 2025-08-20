@@ -84,3 +84,76 @@ func getPublishedPackagesLastBlock(db *gorm.DB) int64 {
 	db.Model(&lastPackage).Order("block_height desc").First(&lastPackage)
 	return lastPackage.BlockHeight
 }
+
+func (s *Syncer) syncProposals(ctx context.Context) error {
+	s.logger.Info("Syncing Proposals")
+	lastBlock := getProposalsLastBlock(s.db)
+	response, err := gnoindexerql.GetGovDAOProposals(ctx, s.graphqlClient, int(lastBlock))
+	if err != nil {
+		return err
+	}
+
+	for _, transaction := range response.GetTransactions {
+		createProposalEvent, err := getProposalCreatedEvent(transaction.Response.Events)
+		if err != nil {
+			return err
+		}
+
+		for _, msg := range transaction.Messages {
+			messageRunValue := msg.Value.(*gnoindexerql.GetGovDAOProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgRun)
+			var files []models.File
+			proposalID := getAttrKey(createProposalEvent.Attrs, "id")
+			id := fmt.Sprintf("%s_%d", proposalID, transaction.Block_height)
+			for idx, file := range messageRunValue.Package.Files {
+				files = append(files, models.File{
+					ID:            fmt.Sprintf("%s_%d", proposalID, idx),
+					Name:          file.Name,
+					Body:          file.Body,
+					GnoProposalID: id,
+				})
+			}
+			proposal := &models.GnoProposal{
+				ID:          proposalID,
+				Address:     messageRunValue.Caller,
+				Path:        createProposalEvent.Pkg_path,
+				Files:       files,
+				BlockHeight: int64(transaction.Block_height),
+			}
+
+			err = s.db.Save(proposal).Error
+			if err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+func getProposalCreatedEvent(events []gnoindexerql.GetGovDAOProposalsGetTransactionsTransactionResponseEventsEvent) (*gnoindexerql.GetGovDAOProposalsGetTransactionsTransactionResponseEventsGnoEvent, error) {
+	for _, event := range events {
+		gnoEvent, ok := event.(*gnoindexerql.GetGovDAOProposalsGetTransactionsTransactionResponseEventsGnoEvent)
+		if !ok {
+			return nil, fmt.Errorf("invalid event type %T", event)
+		}
+		if gnoEvent.Type == "ProposalCreated" {
+			return gnoEvent, nil
+		}
+	}
+
+	return nil, fmt.Errorf("no proposal created event found")
+}
+
+func getProposalsLastBlock(db *gorm.DB) int64 {
+	var lastProposal models.GnoProposal
+	db.Model(&lastProposal).Order("block_height desc").First(&lastProposal)
+	return lastProposal.BlockHeight
+}
+
+func getAttrKey(attributs []gnoindexerql.GetGovDAOProposalsGetTransactionsTransactionResponseEventsGnoEventAttrsGnoEventAttribute, key string) string {
+	for _, attr := range attributs {
+		if attr.Key == key {
+			return attr.Value
+		}
+	}
+
+	return ""
+}

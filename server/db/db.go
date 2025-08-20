@@ -26,6 +26,8 @@ func InitDB() (*gorm.DB, error) {
 		&models.Repository{},
 		&models.GnoNamespace{},
 		&models.GnoPackage{},
+		&models.GnoProposal{},
+		&models.File{},
 	)
 	if err != nil {
 		panic(err)
