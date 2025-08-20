@@ -120,7 +120,6 @@ const Scoreboard = ({ ...props }: FlexProps) => {
             repositories={repositories}
             selectedRepositories={selectedRepositories}
             onSelectedRepositoriesChange={setSelectedRepositories}
-            defaultCheckedIds={['gnolang/gno']}
           />
         </Flex>
       </Flex>
