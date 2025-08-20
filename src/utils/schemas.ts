@@ -92,6 +92,19 @@ const preprocessPullRequest = (data: unknown) => {
   };
 };
 
+export const ReviewSchema: z.ZodType = z.lazy(() =>
+  z.object({
+    id: z.coerce.string(),
+    authorID: z.string(),
+    pullRequestID: z.string(),
+    createdAt: z.string(),
+    pullRequest: z.lazy(() => PullRequestSchema).nullable(),
+    author: UserSchema.nullish(),
+  })
+);
+
+export type TReview = z.infer<typeof ReviewSchema>;
+
 export const PullRequestBaseSchema = z.object({
   createdAt: z.string(),
   updatedAt: z.string(),
@@ -100,26 +113,32 @@ export const PullRequestBaseSchema = z.object({
   state: z.string(),
   title: z.string(),
   url: z.string().url(),
-  authorID: z.string(),
+  authorID: z.string().optional(),
   author: UserSchema.nullish(),
-  reviews: z.literal(null),
-  milestoneID: z.string(),
+  reviews: z.array(ReviewSchema).nullish(),
+  milestoneID: z.string().optional(),
+  reviewDecision: z.string().optional(),
+  mergeable: z.string().optional(),
+  mergeStateStatus: z.string().optional(),
+  mergedAt: z.string().nullable(),
+  authorLogin: z.string().optional(),
+  authorAvatarUrl: z.string().optional(),
+  isDraft: z.boolean().optional(),
 });
 
 export const PullRequestSchema = z.preprocess(preprocessPullRequest, PullRequestBaseSchema);
 
 export type TPullRequest = z.infer<typeof PullRequestSchema>;
 
-export const ReviewSchema = z.object({
-  id: z.coerce.string(),
-  authorID: z.string(),
-  pullRequestID: z.string(),
-  createdAt: z.string(),
-  pullRequest: PullRequestSchema,
-  author: UserSchema.nullish(),
+export const PullRequestReportSchema = z.object({
+  merged: z.array(PullRequestSchema).nullable(),            
+  in_progress: z.array(PullRequestSchema).nullable(),      
+  reviewed: z.array(PullRequestSchema).nullable(),        
+  waiting_for_review: z.array(PullRequestSchema).nullable(),
+  blocked: z.array(PullRequestSchema).nullable(),        
 });
 
-export type TReview = z.infer<typeof ReviewSchema>;
+export type TPullRequestReport = z.infer<typeof PullRequestReportSchema>;
 
 const preprocessCommit = (data: unknown) => {
   if (!data || typeof data !== 'object') return data;

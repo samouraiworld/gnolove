@@ -57,7 +57,6 @@ const AnalyticsClientPage = () => {
               repositories={repositories}
               selectedRepositories={selectedRepositories}
               onSelectedRepositoriesChange={setSelectedRepositories}
-              defaultCheckedIds={['gnolang/gno']}
               mb="3"
             />
           </Flex>

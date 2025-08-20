@@ -5,6 +5,7 @@ import { memo, useCallback, useMemo, useState, useTransition } from 'react';
 import MilestoneListItem from '@/components/features/milestone/milestone-list-item';
 import { CheckCircledIcon, CircleIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 import { Grid, Flex, Text, Badge, Box, Card, Separator, IconButton } from '@radix-ui/themes';
+import ResponsiveCarousel from '../../modules/responsive-carousel';
 
 import { TIssue } from '@/utils/schemas';
 
@@ -76,17 +77,21 @@ const KanbanColumn = memo(
           <>
             <Separator size="4" mb="4" />
             <Box px="3" pb="3">
-              <Flex direction="column" gap="3">
-                {issues.length > 0 ? (
-                  issues.map((issue) => <MilestoneListItem key={issue.id} issue={issue} />)
-                ) : (
-                  <Box p="8">
-                    <Text size="3" color="gray">
-                      {`No ${title.toLowerCase()}`}
-                    </Text>
-                  </Box>
-                )}
-              </Flex>
+              <ResponsiveCarousel id={`scroller-${title.replace(/\s+/g, '-').toLowerCase()}`} itemsPerScroll={2}>
+                <Flex direction={{ initial: 'column', sm: 'row' }} gap="3" wrap={{ initial: 'nowrap', sm: 'nowrap' }}>
+                  {issues.length > 0 ? (
+                    issues.map((issue) => (
+                      <Box key={issue.id} className="sm:snap-start sm:min-w-[280px] sm:w-[clamp(280px,33vw,420px)]">
+                        <MilestoneListItem issue={issue} />
+                      </Box>
+                    ))
+                  ) : (
+                    <Box p="8">
+                      <Text size="3" color="gray">{`No ${title.toLowerCase()}`}</Text>
+                    </Box>
+                  )}
+                </Flex>
+              </ResponsiveCarousel>
             </Box>
           </>
         )}
@@ -133,7 +138,8 @@ const MilestoneList = ({ issues }: MilestoneListProps) => {
         </Flex>
       </Card>
 
-      <Grid columns={{ initial: '1', lg: '2' }} gap="6">
+      {/* Stacked sections; rows scroll horizontally on sm+ */}
+      <Grid columns="1" gap="6">
         <KanbanColumn
           title="Open Issues"
           issues={openIssues}

@@ -10,6 +10,7 @@ import {
   MilestoneSchema,
   NamespacesSchema,
   PackagesSchema,
+  PullRequestReportSchema,
   RepositorySchema,
   ScoreFactorsSchema,
   UserSchema,
@@ -47,6 +48,21 @@ export const getLastIssues = async (last: number) => {
   const data = await res.json();
 
   return z.array(IssueSchema).parse(data).slice(0, last);
+};
+
+export const getPullrequestsReportByDate = async (startDate: Date, endDate: Date) => {
+  const url = new URL('/pull-requests/report', ENV.NEXT_PUBLIC_API_URL);
+
+  url.searchParams.set('startdate', startDate.toISOString());
+  url.searchParams.set('enddate', endDate.toISOString());
+
+  const res = await fetch(url.toString(), { cache: 'no-cache' });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch pull requests report: ${res.status}`);
+  }
+  const data = await res.json();
+
+  return PullRequestReportSchema.parse(data);
 };
 
 export const getNewContributors = async () => {
@@ -139,7 +155,8 @@ export const getYoutubeChannelUploadsPlaylistId = async (searchParams: { channel
 
   // Validate inputs: at least one of channelId or channelUsername is required
   if (!channelId && !channelUsername) {
-    throw new Error('Validation error: either channelId or channelUsername must be provided.');
+    console.error('Validation error: either channelId or channelUsername must be provided.');
+    return '';
   }
 
   const url = new URL('https://www.googleapis.com/youtube/v3/channels');
@@ -156,16 +173,18 @@ export const getYoutubeChannelUploadsPlaylistId = async (searchParams: { channel
   // Check HTTP response
   if (!res.ok) {
     const bodyText = await res.text();
-    throw new Error(
+    console.error(
       `YouTube API error: ${res.status} ${res.statusText}${bodyText ? ` - ${bodyText}` : ''}`
     );
+    return '';
   }
 
   const data = await res.json();
 
   const uploads = data.items[0]?.contentDetails?.relatedPlaylists?.uploads;
   if (!uploads) {
-    throw new Error('Channel found but uploads playlist ID is missing in response.');
+    console.error('Channel found but uploads playlist ID is missing in response.');
+    return '';
   }
 
   return YoutubePlaylistIdSchema.parse(uploads);
@@ -187,7 +206,8 @@ export const getYoutubePlaylistVideos = async (playlistId: string, maxResults: n
   // Check HTTP response early and include body text if available
   if (!res.ok) {
     const bodyText = await res.text();
-    throw new Error(`YouTube API error (playlistItems): ${res.status} ${res.statusText}${bodyText ? ` - ${bodyText}` : ''}`);
+    console.error(`YouTube API error (playlistItems): ${res.status} ${res.statusText}${bodyText ? ` - ${bodyText}` : ''}`);
+    return [];
   }
 
   const data = await res.json();
@@ -195,11 +215,13 @@ export const getYoutubePlaylistVideos = async (playlistId: string, maxResults: n
   // Ensure data and items exist
   if (!data || !Array.isArray(data.items)) {
     const apiErrorMessage = data?.error?.message || data?.message;
-    throw new Error(`Invalid YouTube response: items missing or not an array${apiErrorMessage ? ` - ${apiErrorMessage}` : ''}`);
+    console.error(`Invalid YouTube response: items missing or not an array${apiErrorMessage ? ` - ${apiErrorMessage}` : ''}`);
+    return [];
   }
 
   if (data.items.length === 0) {
-    throw new Error('Playlist not found / Playlist items not found');
+    console.error('Playlist not found / Playlist items not found');
+    return [];
   }
 
   return YoutubeVideoPlaylistSchema.parse(data.items);
