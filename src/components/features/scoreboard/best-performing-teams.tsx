@@ -89,6 +89,8 @@ const BestPerformingTeams = () => {
             columnGutter={8}
             key={`${timeFilter}-${selectedRepositories.join(',')}`}
             items={teamScores}
+            itemKey={(item) => item.name}
+            overscanBy={teamScores.length}
             render={({index, data: { name, totalScore, members }}) => (
               <Card className="break-inside-avoid" key={name}>
                 <Flex direction="column" gap="2">
@@ -124,7 +126,7 @@ const BestPerformingTeams = () => {
                                 <Box width="24" height="24" />
                               )}
                               <Link href={isOffline ? '' : `/@${member.login}`}>
-                                <Text truncate className={cn('block overflow-hidden text-ellipsis whitespace-nowrap hover:text-blue-10', isOffline && 'text-gray-8')}>{member.name || member.login}</Text>
+                                <Text truncate className={cn('block overflow-hidden text-ellipsis whitespace-nowrap hover:text-blue-10', { 'text-gray-8': isOffline })}>{member.name || member.login}</Text>
                               </Link>
                             </Flex>
                           </Table.Cell>
