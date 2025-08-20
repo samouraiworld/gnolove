@@ -32,8 +32,9 @@ import Scoreboard from '@/features/scoreboard/scoreboard';
 import { useOffline } from '@/contexts/offline-context';
 import { cn } from '@/utils/style';
 import Loader from '@/elements/loader';
+import { TYoutubeVideoPlaylist } from '@/utils/schemas';
 
-const ScoreboardPage = ({ videos }: { videos: any }) => {
+const ScoreboardPage = ({ videos }: { videos: TYoutubeVideoPlaylist }) => {
   const { data: allTimeContributors, isPending: isAllTimePending } = useGetContributors({
     timeFilter: TimeFilter.ALL_TIME,
   });
@@ -98,20 +99,22 @@ const ScoreboardPage = ({ videos }: { videos: any }) => {
 
       <Scoreboard />
 
-      <Text weight="bold" size="6" mt="6">
-        🎥 Latest gnoland videos
-      </Text>
+      {videos && videos.length > 0 && (
+        <>
+          <Text weight="bold" size="6" mt="6">
+            🎥 Latest gnoland videos
+          </Text>
 
-      {videos && (
-        <Grid columns={{ initial: '1', xs: '2', md: '3' }} rows="auto" gap="2">
-          {videos.map((video: { snippet: { resourceId: { videoId: string } } }) => (
-            <YoutubeEmbeddedVideo
-              key={video.snippet.resourceId.videoId}
-              className="overflow-hidden rounded-4"
-              src={`https://www.youtube.com/embed/${video.snippet.resourceId.videoId}`}
-            />
-          ))}
-        </Grid>
+          <Grid columns={{ initial: '1', xs: '2', md: '3' }} rows="auto" gap="2">
+            {videos.map((video: { snippet: { resourceId: { videoId: string } } }) => (
+              <YoutubeEmbeddedVideo
+                key={video.snippet.resourceId.videoId}
+                className="overflow-hidden rounded-4"
+                src={`https://www.youtube.com/embed/${video.snippet.resourceId.videoId}`}
+              />
+            ))}
+          </Grid>
+        </>
       )}
     </LayoutContainer>
   );
