@@ -231,13 +231,14 @@ func (s *Syncer) syncUsers(repository models.Repository) error {
 			// Upsert user record
 			err = s.db.Clauses(clause.OnConflict{
 				Columns:   []clause.Column{{Name: "id"}},                                            // conflict target
-				DoUpdates: clause.AssignmentColumns([]string{"login", "avatar_url", "url", "name"}), // only update these
+				DoUpdates: clause.AssignmentColumns([]string{"login", "avatar_url", "url", "name", "join_date"}), // update join_date too
 			}).Create(&models.User{
 				ID:        user.ID,
 				Login:     user.Login,
 				AvatarUrl: user.AvatarUrl,
 				URL:       user.URL,
 				Name:      user.Name,
+				JoinDate:  user.CreatedAt.Time,
 			}).Error
 			if err != nil {
 				return fmt.Errorf("error save %s", err.Error())
@@ -647,4 +648,5 @@ type user struct {
 	AvatarUrl string
 	URL       string
 	Name      string
+	CreatedAt githubv4.DateTime
 }
