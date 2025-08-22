@@ -5,6 +5,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import { Box, Flex, IconButton } from '@radix-ui/themes';
 import { cn } from '@/utils/style';
 import useEmblaCarousel from 'embla-carousel-react';
+import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 
 export interface ResponsiveCarouselProps {
   id?: string;
@@ -46,7 +47,7 @@ const ResponsiveCarousel: React.FC<ResponsiveCarouselProps> = ({
   const [canLeft, setCanLeft] = useState(false);
   const [canRight, setCanRight] = useState(false);
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'start', dragFree: true, containScroll: 'trimSnaps', loop: false });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'start', dragFree: true, containScroll: 'trimSnaps', loop: false }, [WheelGesturesPlugin()]);
 
   // track button enabled state via Embla events
   useEffect(() => {
