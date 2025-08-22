@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import { Box, Flex, IconButton } from '@radix-ui/themes';
 import { cn } from '@/utils/style';
@@ -47,7 +47,11 @@ const ResponsiveCarousel: React.FC<ResponsiveCarouselProps> = ({
   const [canLeft, setCanLeft] = useState(false);
   const [canRight, setCanRight] = useState(false);
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'start', dragFree: true, containScroll: 'trimSnaps', loop: false }, [WheelGesturesPlugin()]);
+  const wheelPlugin = useMemo(() => WheelGesturesPlugin(), []);
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { align: 'start', dragFree: true, containScroll: 'trimSnaps', loop: false },
+    [wheelPlugin]
+  );
 
   // track button enabled state via Embla events
   useEffect(() => {
