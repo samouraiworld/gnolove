@@ -10,7 +10,7 @@ const EnvSchema = z.object({
 
   NEXT_PUBLIC_API_URL: z.string(),
 
-  YOUTUBE_API_KEY: z.string(),
+  YOUTUBE_API_KEY: z.string().optional(),
 });
 
 const ENV = EnvSchema.parse({
