@@ -168,6 +168,11 @@ func (s *Syncer) syncPRs(repository models.Repository) error {
 				}
 			}
 
+			if pr.Author.Typename == "Bot" {
+				// avoid syncing PRs from bot users
+				continue
+			}
+
 			pr := models.PullRequest{
 				CreatedAt:        pr.CreatedAt,
 				UpdatedAt:        pr.UpdatedAt,
@@ -230,7 +235,7 @@ func (s *Syncer) syncUsers(repository models.Repository) error {
 		for _, user := range q.Repository.Users.Nodes {
 			// Upsert user record
 			err = s.db.Clauses(clause.OnConflict{
-				Columns:   []clause.Column{{Name: "id"}},                                            // conflict target
+				Columns:   []clause.Column{{Name: "id"}},                                                         // conflict target
 				DoUpdates: clause.AssignmentColumns([]string{"login", "avatar_url", "url", "name", "join_date"}), // update join_date too
 			}).Create(&models.User{
 				ID:        user.ID,
@@ -598,7 +603,8 @@ type issue struct {
 }
 
 type Author struct {
-	User struct {
+	Typename string `graphql:"__typename"`
+	User     struct {
 		ID string
 	} `graphql:"... on User"`
 }
