@@ -198,7 +198,7 @@ export const getYoutubeChannelUploadsPlaylistId = async (searchParams: { channel
 export const getYoutubePlaylistVideos = async (playlistId: string, maxResults: number = 50) => {
   if (!ENV.YOUTUBE_API_KEY) {
     console.error('YouTube API key is not configured.');
-    return '';
+    return [];
   }
   // Clamp maxResults to YouTube API allowed range [1..50]
   const clampedMax = z.number().int().min(1).max(50).catch(50).parse(maxResults);
