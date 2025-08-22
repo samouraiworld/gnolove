@@ -98,13 +98,20 @@ func HandleGetAllProposals(db *gorm.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		var pkgs []models.GnoProposal
-		if err := db.Model(&models.GnoProposal{}).Preload("Files").Find(&pkgs).Error; err != nil {
+		address := r.URL.Query().Get("address")
+		query := db.Model(&models.GnoProposal{}).Preload("Files")
+
+		if address != "" {
+			query = query.Where("address = ?", address)
+		}
+
+		err := query.Find(&pkgs).Error
+		if err != nil {
 			log.Printf("[HandleGetAllProposals] DB error : %v", err)
 			w.WriteHeader(http.StatusInternalServerError)
 			json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
 			return
 		}
-		log.Printf("[HandleGetAllProposals] Found %d proposals", len(pkgs))
 		json.NewEncoder(w).Encode(pkgs)
 	}
 }

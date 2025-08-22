@@ -15,12 +15,11 @@ type GnoPackage struct {
 }
 
 type GnoProposal struct {
-	ID      string `gorm:"primarykey" json:"id"`
-	Address string `json:"address"`
-	Path    string `json:"path"`
-
-	Files       []File `json:"files"`
-	BlockHeight int64  `json:"blockHeight"`
+	ID          string `gorm:"primaryKey" json:"id"`
+	Address     string `json:"address" gorm:"index"`
+	Path        string `json:"path" gorm:"index"`
+	BlockHeight int64  `json:"blockHeight" gorm:"index"`
+	Files       []File `json:"files" gorm:"constraint:OnDelete:CASCADE;"`
 }
 
 type File struct {

@@ -100,16 +100,20 @@ func (s *Syncer) syncProposals(ctx context.Context) error {
 		}
 
 		for _, msg := range transaction.Messages {
-			messageRunValue := msg.Value.(*gnoindexerql.GetGovDAOProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgRun)
+			// Only process MsgRun; skip other message types safely.
+			messageRunValue, ok := msg.Value.(*gnoindexerql.GetGovDAOProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgRun)
+			if !ok {
+				continue
+			}
+
 			var files []models.File
 			proposalID := getAttrKey(createProposalEvent.Attrs, "id")
-			id := fmt.Sprintf("%s_%d", proposalID, transaction.Block_height)
 			for idx, file := range messageRunValue.Package.Files {
 				files = append(files, models.File{
 					ID:            fmt.Sprintf("%s_%d", proposalID, idx),
 					Name:          file.Name,
 					Body:          file.Body,
-					GnoProposalID: id,
+					GnoProposalID: proposalID,
 				})
 			}
 			proposal := &models.GnoProposal{

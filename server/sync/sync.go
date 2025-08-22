@@ -68,7 +68,7 @@ func (s *Syncer) StartSynchonizing() error {
 	}
 	go func() {
 		for {
-			for _, repository := range s.repositories {
+			/*for _, repository := range s.repositories {
 				fmt.Printf("repository: %#v", repository)
 				s.logger.Info("Starting synchronization for ", repository.ID)
 				err := s.syncUsers(repository)
@@ -111,9 +111,9 @@ func (s *Syncer) StartSynchonizing() error {
 			err = s.syncPublishedPackages(context.Background())
 			if err != nil {
 				s.logger.Errorf("error while syncing gno published packages %s", err.Error())
-			}
+			}*/
 
-			err = s.syncProposals(context.Background())
+			err := s.syncProposals(context.Background())
 			if err != nil {
 				s.logger.Errorf("error while syncing proposals %s", err.Error())
 			}
