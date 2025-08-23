@@ -33,6 +33,7 @@
     "date-fns": "^4.1.0",
     "embla-carousel": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
+    "embla-carousel-wheel-gestures": "^8.1.0",
     "lucide-react": "^0.445.0",
     "masonic": "^4.1.0",
     "motion": "^12.23.0",
