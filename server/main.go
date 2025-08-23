@@ -123,6 +123,7 @@ func main() {
 	// Onchain namespace contributions endpoints
 	router.HandleFunc("/onchain/namespaces", handler.HandleGetAllNamespaces(database))
 	router.HandleFunc("/onchain/namespaces/{address}", handler.HandleGetNamespacesByUser(database))
+	router.HandleFunc("/onchain/proposals", handler.HandleGetAllProposals(database))
 
 	logger.Infof("Server running on port %d", port)
 	err = http.ListenAndServe(fmt.Sprintf(":%d", port), router)

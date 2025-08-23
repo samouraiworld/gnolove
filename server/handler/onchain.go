@@ -91,3 +91,27 @@ func HandleGetNamespacesByUser(db *gorm.DB) http.HandlerFunc {
 		json.NewEncoder(w).Encode(namespaces)
 	}
 }
+
+// HandleGetAllProposals handles GET /api/onchain/proposals
+// It returns all the proposals registered on the Gno blockchain
+func HandleGetAllProposals(db *gorm.DB) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		var pkgs []models.GnoProposal
+		address := r.URL.Query().Get("address")
+		query := db.Model(&models.GnoProposal{}).Preload("Files")
+
+		if address != "" {
+			query = query.Where("address = ?", address)
+		}
+
+		err := query.Find(&pkgs).Error
+		if err != nil {
+			log.Printf("[HandleGetAllProposals] DB error : %v", err)
+			w.WriteHeader(http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
+			return
+		}
+		json.NewEncoder(w).Encode(pkgs)
+	}
+}
