@@ -19,7 +19,10 @@ func (s *Syncer) syncGnoUserRegistrations(ctx context.Context) error {
 	}
 	for _, registration := range response.Transactions {
 		for _, msg := range registration.Messages {
-			msgCall := msg.Value.(*gnoindexerql.GetUserRegistrationsTransactionsTransactionMessagesTransactionMessageValueMsgCall)
+			msgCall, ok := msg.Value.(*gnoindexerql.GetUserRegistrationsTransactionsTransactionMessagesTransactionMessageValueMsgCall)
+			if !ok {
+				continue
+			}
 			if len(msgCall.Args) < 1 {
 				s.logger.Warnf("invalid args %s", msg.Value)
 				continue
@@ -54,7 +57,7 @@ func (s *Syncer) syncPublishedPackages(ctx context.Context) error {
 	if err != nil {
 		return err
 	}
-	fmt.Println("found ", len(response.Transactions))
+
 	for _, registration := range response.Transactions {
 		for _, msg := range registration.Messages {
 			addPkg := msg.Value.(*gnoindexerql.GetPublishedPackagesTransactionsTransactionMessagesTransactionMessageValueMsgAddPackage)

@@ -156,6 +156,11 @@ func (s *Syncer) syncPRs(repository models.Repository) error {
 				return nil
 			}
 
+			if pr.Author.Typename == "Bot" {
+				// avoid syncing PRs from bot users
+				continue
+			}
+
 			reviews := make([]models.Review, len(pr.Reviews.Nodes))
 
 			for index, review := range pr.Reviews.Nodes {
@@ -166,11 +171,6 @@ func (s *Syncer) syncPRs(repository models.Repository) error {
 					CreatedAt:     review.CreatedAt,
 					PullRequestID: pr.ID,
 				}
-			}
-
-			if pr.Author.Typename == "Bot" {
-				// avoid syncing PRs from bot users
-				continue
 			}
 
 			pr := models.PullRequest{
