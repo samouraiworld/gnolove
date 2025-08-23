@@ -36,8 +36,8 @@ const Footer = ({ className, ...props }: FlexProps) => {
 
       <Separator my="2" size="4" />
 
-      <Flex direction={{ initial: 'column', md: 'row' }} align="center" gap="5" mb="2" className="text-accent-10">
-        <Flex align="center">
+      <Flex gap={{ initial: '1', sm: '5'}} direction="row" wrap="wrap" justify="center" className="text-accent-10">
+        <Flex align="center" mb="2">
           <Text size="2">Gnolove.world is cooked with ❤️ by{' '}
             <Link size="2" asChild>
               <NextLink href="https://www.samourai.world" target="_blank">
@@ -47,7 +47,7 @@ const Footer = ({ className, ...props }: FlexProps) => {
           </Text>
         </Flex>
 
-        <Flex align="center">
+        <Flex align="center" mb="2">
           <Text size="2" mr="1">Want to contribute?</Text>
           <Link size="2" asChild>
             <NextLink href="https://github.com/samouraiworld/gnolove" target="_blank">
