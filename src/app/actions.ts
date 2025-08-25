@@ -151,6 +151,11 @@ export const getScoreFactors = async () => {
 };
 
 export const getYoutubeChannelUploadsPlaylistId = async (searchParams: { channelId?: string; channelUsername?: string }) => {
+  if (!ENV.YOUTUBE_API_KEY) {
+    console.error('YouTube API key is not configured.');
+    return '';
+  }
+
   const { channelId, channelUsername } = searchParams || {};
 
   // Validate inputs: at least one of channelId or channelUsername is required
@@ -191,6 +196,10 @@ export const getYoutubeChannelUploadsPlaylistId = async (searchParams: { channel
 };
 
 export const getYoutubePlaylistVideos = async (playlistId: string, maxResults: number = 50) => {
+  if (!ENV.YOUTUBE_API_KEY) {
+    console.error('YouTube API key is not configured.');
+    return [];
+  }
   // Clamp maxResults to YouTube API allowed range [1..50]
   const clampedMax = z.number().int().min(1).max(50).catch(50).parse(maxResults);
 
