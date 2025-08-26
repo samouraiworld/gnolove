@@ -335,7 +335,7 @@ const ThumbnailSchema = z.object({
   url: z.string(),
   width: z.number(),
   height: z.number(),
-}).optional();
+});
 
 export const YoutubeVideoSchema = z.object({
   publishedAt: z.string(),
@@ -348,7 +348,7 @@ export const YoutubeVideoSchema = z.object({
     high: ThumbnailSchema,
     standard: ThumbnailSchema,
     maxres: ThumbnailSchema,
-  }),
+  }).partial(),
   channelTitle: z.string(),
   playlistId: z.string(),
   position: z.number(),
