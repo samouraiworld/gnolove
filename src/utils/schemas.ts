@@ -335,7 +335,7 @@ const ThumbnailSchema = z.object({
   url: z.string(),
   width: z.number(),
   height: z.number(),
-});
+}).optional();
 
 export const YoutubeVideoSchema = z.object({
   publishedAt: z.string(),
@@ -353,8 +353,8 @@ export const YoutubeVideoSchema = z.object({
   playlistId: z.string(),
   position: z.number(),
   resourceId: z.object({ kind: z.string(), videoId: z.string() }),
-  videoOwnerChannelTitle: z.string(),
-  videoOwnerChannelId: z.string()
+  videoOwnerChannelTitle: z.string().optional(),
+  videoOwnerChannelId: z.string().optional(),
 });
 export type TYoutubeVideo = z.infer<typeof YoutubeVideoSchema>;
 
