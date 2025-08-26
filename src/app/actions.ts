@@ -173,7 +173,7 @@ export const getYoutubeChannelUploadsPlaylistId = async (searchParams: { channel
 
   url.searchParams.set('key', ENV.YOUTUBE_API_KEY);
 
-  const res = await fetch(url.toString());
+  const res = await fetch(url.toString(), { next: { revalidate: 86400 } });
 
   // Check HTTP response
   if (!res.ok) {
@@ -210,7 +210,7 @@ export const getYoutubePlaylistVideos = async (playlistId: string, maxResults: n
   url.searchParams.set('maxResults', clampedMax.toString());
   url.searchParams.set('key', ENV.YOUTUBE_API_KEY);
 
-  const res = await fetch(url.toString());
+  const res = await fetch(url.toString(), { next: { revalidate: 3600 } });
 
   // Check HTTP response early and include body text if available
   if (!res.ok) {

@@ -348,13 +348,13 @@ export const YoutubeVideoSchema = z.object({
     high: ThumbnailSchema,
     standard: ThumbnailSchema,
     maxres: ThumbnailSchema,
-  }),
+  }).partial(),
   channelTitle: z.string(),
   playlistId: z.string(),
   position: z.number(),
   resourceId: z.object({ kind: z.string(), videoId: z.string() }),
-  videoOwnerChannelTitle: z.string(),
-  videoOwnerChannelId: z.string()
+  videoOwnerChannelTitle: z.string().optional(),
+  videoOwnerChannelId: z.string().optional(),
 });
 export type TYoutubeVideo = z.infer<typeof YoutubeVideoSchema>;
 
