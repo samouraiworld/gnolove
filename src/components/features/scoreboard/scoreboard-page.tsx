@@ -26,7 +26,7 @@ import { getLastMRs, TimeFilter } from '@/utils/github';
 
 import REPOSITORY from '@/constants/repository';
 
-import HeaderImage from '@/images/header.png';
+import HeaderImage from '@/images/gnolove-hero.gif';
 
 import Scoreboard from '@/features/scoreboard/scoreboard';
 import { useOffline } from '@/contexts/offline-context';
@@ -52,8 +52,9 @@ const ScoreboardPage = ({ videos }: { videos: TYoutubeVideoPlaylist }) => {
       <Box>
         <Image
           src={HeaderImage}
-          alt="Minecraft heart on top of the words 'Gnolove Community Leaderboard'"
-          className="h-full min-h-[200px] w-full object-cover"
+          alt="The words 'Gnolove Community Leaderboard', with desks and gnomes moving in the background"
+          className="h-full min-h-[200px] w-full object-cover rounded-4"
+          unoptimized
         />
       </Box>
 
