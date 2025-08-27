@@ -6,9 +6,12 @@ export const QUERY_KEY = ['milestone'];
 
 export const prefetchMilestone = async (queryClient: QueryClient) => {
   try {
-    const milestone = await getMilestone();
-    queryClient.setQueryData(QUERY_KEY, milestone);
-    return milestone;
+    const queryKey = [...QUERY_KEY] as const;
+    await queryClient.prefetchQuery({
+      queryKey,
+      queryFn: getMilestone,
+    });
+    return queryClient.getQueryData(queryKey) as Awaited<ReturnType<typeof getMilestone>>;
   } catch (err) {
     console.error('prefetchMilestone failed', err);
     return undefined as unknown as Awaited<ReturnType<typeof getMilestone>>;
@@ -17,7 +20,7 @@ export const prefetchMilestone = async (queryClient: QueryClient) => {
 
 const useGetMilestone = () => {
   return useQuery({
-    queryFn: () => getMilestone(),
+    queryFn: getMilestone,
     queryKey: QUERY_KEY,
   });
 };

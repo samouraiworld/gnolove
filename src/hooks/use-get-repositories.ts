@@ -6,9 +6,12 @@ export const QUERY_KEY = ['repositories'];
 
 export const prefetchRepositories = async (queryClient: QueryClient) => {
   try {
-    const repositories = await getRepositories();
-    queryClient.setQueryData(QUERY_KEY, repositories);
-    return repositories;
+    const queryKey = [...QUERY_KEY] as const;
+    await queryClient.prefetchQuery({
+      queryKey,
+      queryFn: getRepositories,
+    });
+    return queryClient.getQueryData(queryKey) as Awaited<ReturnType<typeof getRepositories>>;
   } catch (err) {
     console.error('prefetchRepositories failed', err);
     return [] as Awaited<ReturnType<typeof getRepositories>>;
@@ -17,7 +20,7 @@ export const prefetchRepositories = async (queryClient: QueryClient) => {
 
 const useGetRepositories = () => {
   return useQuery({
-    queryFn: () => getRepositories(),
+    queryFn: getRepositories,
     queryKey: QUERY_KEY,
   });
 };

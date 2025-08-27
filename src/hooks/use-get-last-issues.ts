@@ -6,9 +6,12 @@ export const QUERY_KEY = ['last-issues'];
 
 export const prefetchLastIssues = async (queryClient: QueryClient) => {
   try {
-    const lastIssues = await getLastIssues(5);
-    queryClient.setQueryData(QUERY_KEY, lastIssues);
-    return lastIssues;
+    const queryKey = [...QUERY_KEY] as const;
+    await queryClient.prefetchQuery({
+      queryKey,
+      queryFn: () => getLastIssues(5),
+    });
+    return queryClient.getQueryData(queryKey) as Awaited<ReturnType<typeof getLastIssues>>;
   } catch (err) {
     console.error('prefetchLastIssues failed', err);
     return [] as Awaited<ReturnType<typeof getLastIssues>>;

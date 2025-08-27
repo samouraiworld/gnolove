@@ -6,9 +6,12 @@ export const QUERY_KEY = ['new-contributors'];
 
 export const prefetchNewContributors = async (queryClient: QueryClient) => {
   try {
-    const newContributors = await getNewContributors();
-    queryClient.setQueryData(QUERY_KEY, newContributors);
-    return newContributors;
+    const queryKey = [...QUERY_KEY] as const;
+    await queryClient.prefetchQuery({
+      queryKey,
+      queryFn: getNewContributors,
+    });
+    return queryClient.getQueryData(queryKey) as Awaited<ReturnType<typeof getNewContributors>>;
   } catch (err) {
     console.error('prefetchNewContributors failed', err);
     return [] as Awaited<ReturnType<typeof getNewContributors>>;

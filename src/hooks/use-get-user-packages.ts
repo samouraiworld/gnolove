@@ -6,9 +6,12 @@ export const BASE_QUERY_KEY = ['user-packages'];
 
 export const prefetchUserPackages = async (queryClient: QueryClient, address: string) => {
   try {
-    const packages = await getPackagesByUser(address);
-    queryClient.setQueryData([...BASE_QUERY_KEY, address], packages);
-    return packages;
+    const queryKey = [...BASE_QUERY_KEY, address] as const;
+    await queryClient.prefetchQuery({
+      queryKey,
+      queryFn: () => getPackagesByUser(address),
+    });
+    return queryClient.getQueryData(queryKey) as Awaited<ReturnType<typeof getPackagesByUser>>;
   } catch (err) {
     console.error('prefetchUserPackages failed', err);
     return [] as Awaited<ReturnType<typeof getPackagesByUser>>;
