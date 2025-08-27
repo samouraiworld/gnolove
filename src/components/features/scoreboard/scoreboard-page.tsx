@@ -2,7 +2,6 @@
 
 import { useMemo } from 'react';
 
-import Image from 'next/image';
 import NextLink from 'next/link';
 
 import { Box, Flex, Grid, Heading, Text } from '@radix-ui/themes';
@@ -26,13 +25,12 @@ import { getLastMRs, TimeFilter } from '@/utils/github';
 
 import REPOSITORY from '@/constants/repository';
 
-import HeaderImage from '@/images/header.png';
-
 import Scoreboard from '@/features/scoreboard/scoreboard';
 import { useOffline } from '@/contexts/offline-context';
 import { cn } from '@/utils/style';
 import Loader from '@/elements/loader';
 import { TYoutubeVideoPlaylist } from '@/utils/schemas';
+import Image from 'next/image';
 
 const ScoreboardPage = ({ videos }: { videos: TYoutubeVideoPlaylist }) => {
   const { data: allTimeContributors, isPending: isAllTimePending } = useGetContributors({
@@ -49,11 +47,24 @@ const ScoreboardPage = ({ videos }: { videos: TYoutubeVideoPlaylist }) => {
 
   return (
     <LayoutContainer>
-      <Box>
+      <Box mt="4">
+        <video
+          className="motion-reduce:hidden h-full min-h-[200px] w-full object-cover rounded-4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster='/images/header.png'
+        >
+          <source src="/videos/gnolove_drone-on-the-desk-video.mp4" type="video/mp4" />
+        </video>
         <Image
-          src={HeaderImage}
-          alt="Minecraft heart on top of the words 'Gnolove Community Leaderboard'"
-          className="h-full min-h-[200px] w-full object-cover"
+          alt="Gnolove"
+          src="/images/header.png"
+          className="hidden motion-reduce:block h-full min-h-[200px] w-full object-cover rounded-4"
+          priority
+          width={1920}
+          height={1000}
         />
       </Box>
 
