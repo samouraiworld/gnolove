@@ -141,6 +141,24 @@ export const getNamespacesByUser = async (address: string) => {
   return NamespacesSchema.parse(data);
 };
 
+// On-chain proposals
+export const getProposals = async (address?: string) => {
+  const url = new URL('/onchain/proposals', ENV.NEXT_PUBLIC_API_URL);
+  if (address) url.searchParams.set('address', address);
+
+  const res = await fetch(url.toString(), { cache: 'no-cache' });
+  const data = await res.json();
+
+  // Lazily import to avoid circular import issues
+  const { ProposalsSchema } = await import('@/utils/schemas');
+  return ProposalsSchema.parse(data);
+};
+
+export const getProposalsByUser = async (address: string) => {
+  if (!address) return [];
+  return getProposals(address);
+};
+
 export const getScoreFactors = async () => {
   const url = new URL('/score-factors', ENV.NEXT_PUBLIC_API_URL);
 

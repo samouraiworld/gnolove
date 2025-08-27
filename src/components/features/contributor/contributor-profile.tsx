@@ -97,8 +97,7 @@ const ContributorProfile = ({ contributor }: { contributor: TContributor }) => {
                 </Text>
                 <Flex align='center' gap='2'>
                   <Box
-                    py='4'
-                    px='8'
+                    p='4'
                     overflow='hidden'
                     style={{
                       backgroundColor: 'var(--gray-3)',

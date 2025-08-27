@@ -14,6 +14,7 @@ const useGetUserNamespaces = (address: string) => {
   return useQuery({
     queryFn: () => getNamespacesByUser(address),
     queryKey: [...BASE_QUERY_KEY, address],
+    enabled: !!address && address.length > 0,
   });
 };
 
