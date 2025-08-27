@@ -13,3 +13,19 @@ type GnoPackage struct {
 	Namespace   string `json:"namespace" gorm:"index"`
 	BlockHeight int64  `json:"blockHeight"`
 }
+
+type GnoProposal struct {
+	ID          string `gorm:"primaryKey" json:"id"`
+	Address     string `json:"address" gorm:"index"`
+	Path        string `json:"path" gorm:"index"`
+	BlockHeight int64  `json:"blockHeight" gorm:"index"`
+	Files       []File `json:"files" gorm:"constraint:OnDelete:CASCADE;"`
+}
+
+type File struct {
+	ID   string `gorm:"primaryKey" json:"id"`
+	Name string `json:"name"`
+	Body string `json:"body"`
+
+	GnoProposalID string `json:"proposalID"`
+}

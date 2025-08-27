@@ -36,3 +36,58 @@ query GetPublishedPackages($StartBlock: Int!) {
     }
   }
 }
+
+query GetGovDAOProposals($StartBlock: Int!) {
+    getTransactions(
+        where: {
+            success: { eq: true }
+            response: {
+                events: {
+                    GnoEvent: {
+                        type: { eq: "ProposalCreated" }
+                        pkg_path: { eq: "gno.land/r/gov/dao" }
+                    }
+                }
+            }
+            _not:{
+              block_height:{lt: $StartBlock}
+            }
+        }
+        order: { heightAndIndex: ASC }
+    ) {
+        block_height
+        index
+        response {
+            events {
+                ... on GnoEvent {
+                    type
+                    func
+                    attrs {
+                        key
+                        value
+                    }
+                    pkg_path
+                }
+            }
+            data
+        }
+        messages {
+            typeUrl
+            route
+            value {
+                ... on MsgRun {
+                    caller
+                    send
+                    package {
+                        path
+                        files {
+                            name
+                            body
+                        }
+                        name
+                    }
+                }
+            }
+        }
+    }
+}
