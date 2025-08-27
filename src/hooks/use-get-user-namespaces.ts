@@ -5,9 +5,14 @@ import { getNamespacesByUser } from '@/app/actions';
 export const BASE_QUERY_KEY = ['user-namespaces'];
 
 export const prefetchUserNamespaces = async (queryClient: QueryClient, address: string) => {
-  const namespaces = await getNamespacesByUser(address);
-  queryClient.setQueryData([...BASE_QUERY_KEY, address], namespaces);
-  return namespaces;
+  try {
+    const namespaces = await getNamespacesByUser(address);
+    queryClient.setQueryData([...BASE_QUERY_KEY, address], namespaces);
+    return namespaces;
+  } catch (err) {
+    console.error('prefetchUserNamespaces failed', err);
+    return [] as Awaited<ReturnType<typeof getNamespacesByUser>>;
+  }
 };
 
 const useGetUserNamespaces = (address: string) => {
