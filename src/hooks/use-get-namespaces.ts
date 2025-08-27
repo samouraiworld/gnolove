@@ -5,9 +5,14 @@ import { getNamespaces } from '@/app/actions';
 export const BASE_QUERY_KEY = ['namespaces'];
 
 export const prefetchNamespaces = async (queryClient: QueryClient) => {
-  const namespaces = await getNamespaces();
-  queryClient.setQueryData([...BASE_QUERY_KEY], namespaces);
-  return namespaces;
+  try {
+    const namespaces = await getNamespaces();
+    queryClient.setQueryData([...BASE_QUERY_KEY], namespaces);
+    return namespaces;
+  } catch (err) {
+    console.error('prefetchNamespaces failed', err);
+    return [] as Awaited<ReturnType<typeof getNamespaces>>;
+  }
 };
 
 const useGetNamespaces = () => {

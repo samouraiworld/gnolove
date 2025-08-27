@@ -5,9 +5,14 @@ import { getRepositories } from '@/app/actions';
 export const QUERY_KEY = ['repositories'];
 
 export const prefetchRepositories = async (queryClient: QueryClient) => {
-  const repositories = await getRepositories();
-  queryClient.setQueryData(QUERY_KEY, repositories);
-  return repositories;
+  try {
+    const repositories = await getRepositories();
+    queryClient.setQueryData(QUERY_KEY, repositories);
+    return repositories;
+  } catch (err) {
+    console.error('prefetchRepositories failed', err);
+    return [] as Awaited<ReturnType<typeof getRepositories>>;
+  }
 };
 
 const useGetRepositories = () => {

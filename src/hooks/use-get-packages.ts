@@ -5,9 +5,14 @@ import { getPackages } from '@/app/actions';
 export const BASE_QUERY_KEY = ['packages'];
 
 export const prefetchPackages = async (queryClient: QueryClient) => {
-  const packages = await getPackages();
-  queryClient.setQueryData([...BASE_QUERY_KEY], packages);
-  return packages;
+  try {
+    const packages = await getPackages();
+    queryClient.setQueryData([...BASE_QUERY_KEY], packages);
+    return packages;
+  } catch (err) {
+    console.error('prefetchPackages failed', err);
+    return [] as Awaited<ReturnType<typeof getPackages>>;
+  }
 };
 
 const useGetPackages = () => {
