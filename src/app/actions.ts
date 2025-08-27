@@ -58,7 +58,8 @@ export const getPullrequestsReportByDate = async (startDate: Date, endDate: Date
 
   const res = await fetch(url.toString(), { cache: 'no-cache' });
   if (!res.ok) {
-    throw new Error(`Failed to fetch pull requests report: ${res.status}`);
+    console.error(`Failed to fetch pull requests report: ${res.status}`);
+    return [];
   }
   const data = await res.json();
 
@@ -97,7 +98,8 @@ export const getContributor = async (login: string) => {
 
   const res = await fetch(url.toString(), { cache: 'no-cache' });
   if (!res.ok) {
-    throw new Error(`Failed to fetch contributor ${login}: ${res.status}`);
+    console.error(`Failed to fetch contributor ${login}: ${res.status}`);
+    return null;
   }
   const data = await res.json();
 
