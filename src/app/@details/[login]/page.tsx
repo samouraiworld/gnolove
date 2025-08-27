@@ -5,6 +5,8 @@ import { prefetchContributor } from '@/hooks/use-get-contributor';
 
 import ContributorContent from '@/components/features/contributor/contributor-content';
 import { prefetchUserPackages } from '@/hooks/use-get-user-packages';
+import { prefetchUserNamespaces } from '@/hooks/use-get-user-namespaces';
+import { prefetchUserProposals } from '@/hooks/use-get-user-proposals';
 
 export async function generateMetadata({ params }: { params: { login: string } }): Promise<Metadata> {
   const decodedLogin = decodeURIComponent(params.login);
@@ -29,7 +31,11 @@ const ContributorPage = async ({ params }: { params: { login: string } }) => {
 
   const contributor = await prefetchContributor(queryClient, formattedLogin);
   if (contributor && contributor.wallet) {
-    await prefetchUserPackages(queryClient, contributor.wallet);
+    await Promise.all([
+      prefetchUserPackages(queryClient, contributor.wallet),
+      prefetchUserNamespaces(queryClient, contributor.wallet),
+      prefetchUserProposals(queryClient, contributor.wallet),
+    ]);
   }
   
   return (

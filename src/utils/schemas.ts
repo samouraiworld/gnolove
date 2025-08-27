@@ -319,6 +319,26 @@ export const NamespacesSchema = z.array(NamespaceSchema);
 export type TNamespace = z.infer<typeof NamespaceSchema>;
 export type TNamespaces = z.infer<typeof NamespacesSchema>;
 
+// On-chain proposals
+export const ProposalFileSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  body: z.string(),
+  proposalID: z.string(),
+});
+export type TProposalFile = z.infer<typeof ProposalFileSchema>;
+
+export const ProposalSchema = z.object({
+  id: z.string(),
+  address: z.string(),
+  path: z.string(),
+  blockHeight: z.number(),
+  files: z.array(ProposalFileSchema).default([]),
+});
+export const ProposalsSchema = z.array(ProposalSchema);
+export type TProposal = z.infer<typeof ProposalSchema>;
+export type TProposals = z.infer<typeof ProposalsSchema>;
+
 export const ScoreFactorsSchema = z.object({
   prFactor: z.number(),
   issueFactor: z.number(),
