@@ -10,11 +10,14 @@ export interface UseGetPullRequestsReportParams {
 
 export const prefetchPullRequestsReport = async (queryClient: QueryClient, params: UseGetPullRequestsReportParams) => {
   try {
-    const report = await getPullrequestsReportByDate(params.startDate, params.endDate);
     const startIso = params.startDate.toISOString();
     const endIso = params.endDate.toISOString();
-    queryClient.setQueryData([...QUERY_KEY, startIso, endIso], report);
-    return report;
+    const queryKey = [...QUERY_KEY, startIso, endIso] as const;
+    await queryClient.prefetchQuery({
+      queryKey,
+      queryFn: () => getPullrequestsReportByDate(params.startDate, params.endDate),
+    });
+    return queryClient.getQueryData(queryKey) as Awaited<ReturnType<typeof getPullrequestsReportByDate>>;
   } catch (err) {
     console.error('prefetchPullRequestsReport failed', err);
     return undefined as unknown as Awaited<ReturnType<typeof getPullrequestsReportByDate>>;
