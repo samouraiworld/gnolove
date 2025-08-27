@@ -26,7 +26,7 @@ import { getLastMRs, TimeFilter } from '@/utils/github';
 
 import REPOSITORY from '@/constants/repository';
 
-import HeaderImage from '@/images/gnolove-hero.gif';
+import HeaderImage from '@/images/gnolove-hero2.gif';
 
 import Scoreboard from '@/features/scoreboard/scoreboard';
 import { useOffline } from '@/contexts/offline-context';
@@ -49,7 +49,7 @@ const ScoreboardPage = ({ videos }: { videos: TYoutubeVideoPlaylist }) => {
 
   return (
     <LayoutContainer>
-      <Box>
+      <Box mt="4">
         <Image
           src={HeaderImage}
           alt="The words 'Gnolove Community Leaderboard', with desks and gnomes moving in the background"
