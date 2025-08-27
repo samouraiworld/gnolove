@@ -26,7 +26,7 @@ import { getLastMRs, TimeFilter } from '@/utils/github';
 
 import REPOSITORY from '@/constants/repository';
 
-import HeaderImage from '@/images/gnolove-hero2.gif';
+import HeaderImage from '@/images/gnolove-hero.gif';
 
 import Scoreboard from '@/features/scoreboard/scoreboard';
 import { useOffline } from '@/contexts/offline-context';
