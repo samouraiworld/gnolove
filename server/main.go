@@ -98,7 +98,7 @@ func main() {
 		panic(err)
 	}
 	router := chi.NewRouter()
-	router.Use(LoggingMiddleware)
+	//router.Use(LoggingMiddleware)
 	router.Use(Compress())
 
 	// repositories

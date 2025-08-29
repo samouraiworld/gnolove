@@ -31,7 +31,10 @@ func NewSyncer(db *gorm.DB, repositories []models.Repository, logger *zap.Sugare
 	)
 	httpClient := oauth2.NewClient(context.Background(), src)
 	client := githubv4.NewClient(httpClient)
-	gqlClient := graphql.NewClient(os.Getenv("GNO_GRAPHQL_ENDPOINT"), nil)
+	graphqlEndpoint := os.Getenv("GNO_GRAPHQL_ENDPOINT")
+	gqlClient := graphql.NewClient(graphqlEndpoint, nil)
+	logger.Infof("NewSyncer:: GNO_GRAPHQL_ENDPOINT: %s", graphqlEndpoint)
+
 	return &Syncer{
 		db:            db,
 		client:        client,
@@ -98,21 +101,22 @@ func (s *Syncer) StartSynchonizing() error {
 			}
 
 			// After syncing everything else, update user details.
+			s.logger.Info("Syncing user details")
 			err := s.syncUserDetails()
 			if err != nil {
 				s.logger.Errorf("error while syncing user details %s", err.Error())
 			}
-
+			s.logger.Info("syncGnoUserRegistrations details")
 			err = s.syncGnoUserRegistrations(context.Background())
 			if err != nil {
 				s.logger.Errorf("error while syncing gno user registrations %s", err.Error())
 			}
-
+			s.logger.Info("syncPublishedPackages details")
 			err = s.syncPublishedPackages(context.Background())
 			if err != nil {
 				s.logger.Errorf("error while syncing gno published packages %s", err.Error())
 			}
-
+			s.logger.Info("syncProposals details")
 			err = s.syncProposals(context.Background())
 			if err != nil {
 				s.logger.Errorf("error while syncing proposals %s", err.Error())
@@ -150,6 +154,7 @@ func (s *Syncer) syncPRs(repository models.Repository) error {
 	}
 
 	for hasNextPage {
+		hasNextPage = false
 		err := s.client.Query(context.Background(), &q, variables)
 		if err != nil {
 			return err
