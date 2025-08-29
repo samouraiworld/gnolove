@@ -201,9 +201,9 @@ func (s *Syncer) syncPRs(repository models.Repository) error {
 				return err
 			}
 
-			hasNextPage = q.Repository.PullRequests.PageInfo.HasNextPage
-			variables["cursor"] = githubv4.NewString(q.Repository.PullRequests.PageInfo.EndCursor)
 		}
+		hasNextPage = q.Repository.PullRequests.PageInfo.HasNextPage
+		variables["cursor"] = githubv4.NewString(q.Repository.PullRequests.PageInfo.EndCursor)
 	}
 
 	return nil
