@@ -38,8 +38,14 @@ const HomePage = async ({ searchParams: { f, e, r } }: SearchParamsFilters) => {
     prefetchNewContributors(queryClient),
   ]);
   
-  const uploadsPlaylistId = await getYoutubeChannelUploadsPlaylistId({ channelId: GNOLAND_YOUTUBE_CHANNEL_ID });
-  const videos = await getYoutubePlaylistVideos(uploadsPlaylistId, 6);
+  let videos = [] as Awaited<ReturnType<typeof getYoutubePlaylistVideos>>;
+  try {
+    const uploadsPlaylistId = await getYoutubeChannelUploadsPlaylistId({ channelId: GNOLAND_YOUTUBE_CHANNEL_ID });
+    videos = await getYoutubePlaylistVideos(uploadsPlaylistId, 6);
+  } catch (err) {
+    console.error('YouTube prefetch failed', err);
+    videos = [] as Awaited<ReturnType<typeof getYoutubePlaylistVideos>>;
+  }
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

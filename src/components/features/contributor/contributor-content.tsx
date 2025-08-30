@@ -12,16 +12,35 @@ import ContributorAnalytics from './contributor-analytics';
 import { useOffline } from '@/contexts/offline-context';
 import ContributorOnchain from './contributor-onchain';
 import useGetUserPackages from '@/hooks/use-get-user-packages';
+import { HttpError } from '@/utils/fetcher';
 
 const ContributorContent = ({ login }: { login: string }) => {
-  const { data: contributor } = useGetContributor(login);
+  const { data: contributor, isError, error, isLoading } = useGetContributor(login);
   const { data: packages } = useGetUserPackages(contributor?.wallet ?? '');
   const [loginCopied, setLoginCopied] = useState(false);
   const { isOffline } = useOffline();
   
-  if (!contributor) return (
-    <Dialog.Title>Contributor not found</Dialog.Title>
-  );
+  if (isLoading) {
+    return <Dialog.Title>Loading…</Dialog.Title>;
+  }
+
+  if (isError) {
+    if (error instanceof HttpError && error.status === 404) {
+      return <Dialog.Title>Contributor not found</Dialog.Title>;
+    }
+    return (
+      <Box>
+        <Dialog.Title>Something went wrong</Dialog.Title>
+        <Text size='2' color='gray'>
+          Unable to load contributor details. Please try again.
+        </Text>
+      </Box>
+    );
+  }
+
+  if (!contributor) {
+    return <Dialog.Title>Contributor not found</Dialog.Title>;
+  }
 
   const handleCopy = () => {
     const profileUrl = `https://gnolove.world/@${contributor.login}`;
