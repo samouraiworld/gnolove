@@ -150,6 +150,10 @@ func FormatLeaderboardMessage(stats []ContributorStats) string {
 		return "No contributions found in the last week! 😢"
 	}
 	message := "🏆 **Weekly Contributor Leaderboard** 🏆\n\n"
+	// Add a concise legend so the scoring is explicit for users
+	// Uses factors from handler/score.go to stay consistent with backend logic
+	message += fmt.Sprintf("Scoring: 💻×%.0f + 🔀×%.0f + 🐛×%.1f + 🧐×%.0f\n\n",
+		handler.CommitFactor, handler.PRFactor, handler.IssueFactor, handler.ReviewedPRFactor)
 	podiumEmojis := []string{"🥇", "🥈", "🥉"}
 	for i, c := range stats {
 		var position string
@@ -163,8 +167,8 @@ func FormatLeaderboardMessage(stats []ContributorStats) string {
 			displayName = c.Login
 		}
 		userLink := fmt.Sprintf("[**%s**](https://gnolove.world/@%s)", displayName, url.QueryEscape(c.Login))
-		message += fmt.Sprintf("%s %s - **%.0f** points\n   💻 %d commits • 🔀 %d PRs • 🐛 %d issues\n\n",
-			position, userLink, c.Score, c.TotalCommits, c.TotalPRs, c.TotalIssues)
+		message += fmt.Sprintf("%s %s - **%.0f** points\n   💻 %d commits • 🔀 %d PRs • 🐛 %d issues • 🧐 %d reviews\n\n",
+			position, userLink, c.Score, c.TotalCommits, c.TotalPRs, c.TotalIssues, c.TotalReviewed)
 		if i == 9 {
 			break
 		}

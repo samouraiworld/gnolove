@@ -7,10 +7,10 @@ import (
 
 // Tweak values if we need to favor one type of contribution over another
 const (
-	CommitFactor     = 10
-	IssueFactor      = 0.5
-	PRFactor         = 2
-	ReviewedPRFactor = 2
+	CommitFactor     float64 = 10
+	IssueFactor      float64 = 0.5
+	PRFactor         float64 = 2
+	ReviewedPRFactor float64 = 2
 )
 
 func CalculateScore(commits, issues, prs, reviewed int64) float64 {
