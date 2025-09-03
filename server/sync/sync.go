@@ -97,8 +97,15 @@ func (s *Syncer) StartSynchonizing() error {
 				}
 			}
 
+			// For some reason github api doesn't return all users. so we have to sync them manually
+			// by taking the ids from pull requests and issues without a corresponding ID on users table
+			err := s.syncRemaningUsers()
+			if err != nil {
+				s.logger.Errorf("error while syncing Remaning Users %s", err.Error())
+			}
+
 			// After syncing everything else, update user details.
-			err := s.syncUserDetails()
+			err = s.syncUserDetails()
 			if err != nil {
 				s.logger.Errorf("error while syncing user details %s", err.Error())
 			}
@@ -660,4 +667,65 @@ type user struct {
 	URL       string
 	Name      string
 	CreatedAt githubv4.DateTime
+}
+
+func (s *Syncer) syncRemaningUsers() error {
+	db, err := s.db.DB()
+	if err != nil {
+		return err
+	}
+
+	// Take all authorIds from Prs and issues whose user is not yet synced
+	rows, err := db.Query(`
+	select distinct * from (
+		select pr.author_id from pull_requests pr 
+		UNION
+		select i.author_id  from issues i
+	) where author_id != '' and author_id not in (select id from users)
+	`)
+	if err != nil {
+		return err
+	}
+
+	var ids []string
+	for rows.Next() {
+		var id string
+		if err := rows.Scan(&id); err != nil {
+			rows.Close()
+			return err
+		}
+		ids = append(ids, id)
+	}
+	rows.Close()
+
+	var q struct {
+		Node struct {
+			User user `graphql:"... on User"`
+		} `graphql:"node(id: $id)"`
+	}
+
+	for _, id := range ids {
+		variables := map[string]interface{}{
+			"id": githubv4.ID(id),
+		}
+
+		err := s.client.Query(context.Background(), &q, variables)
+		if err != nil {
+			return err
+		}
+
+		user := &models.User{
+			ID:        q.Node.User.ID,
+			Login:     q.Node.User.Login,
+			AvatarUrl: q.Node.User.AvatarUrl,
+			URL:       q.Node.User.URL,
+			Name:      q.Node.User.Name,
+			JoinDate:  q.Node.User.CreatedAt.Time,
+		}
+
+		if err := s.db.Save(user).Error; err != nil {
+			s.logger.Errorf("Failed to update user %s: %v", user.Login, err)
+		}
+	}
+	return nil
 }
