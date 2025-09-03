@@ -12,10 +12,14 @@ import ContributorAnalytics from './contributor-analytics';
 import { useOffline } from '@/contexts/offline-context';
 import ContributorOnchain from './contributor-onchain';
 import useGetUserPackages from '@/hooks/use-get-user-packages';
+import useGetUserNamespaces from '@/hooks/use-get-user-namespaces';
+import useGetUserProposals from '@/hooks/use-get-user-proposals';
 
 const ContributorContent = ({ login }: { login: string }) => {
   const { data: contributor } = useGetContributor(login);
   const { data: packages } = useGetUserPackages(contributor?.wallet ?? '');
+  const { data: namespaces } = useGetUserNamespaces(contributor?.wallet ?? '');
+  const { data: proposals } = useGetUserProposals(contributor?.wallet ?? '');
   const [loginCopied, setLoginCopied] = useState(false);
   const { isOffline } = useOffline();
   
@@ -121,11 +125,11 @@ const ContributorContent = ({ login }: { login: string }) => {
 
             <Box minHeight='0' style={{ flex: 1 }}>
               {/* Tabs for different views */}
-              <Tabs.Root defaultValue={packages ? 'onchain' : 'analytics'} style={{ display: 'flex', flexDirection: 'column', gap: '4', height: '100%' }}>
+              <Tabs.Root defaultValue={(packages?.length || namespaces?.length || proposals?.length) ? 'onchain' : 'analytics'} style={{ display: 'flex', flexDirection: 'column', gap: '4', height: '100%' }}>
                 <Tabs.List style={{ minHeight: '40px' }}>
-                  {packages && (
+                  {(packages?.length || namespaces?.length || proposals?.length) ? (
                     <Tabs.Trigger value='onchain'>GNO Chain</Tabs.Trigger>
-                  )}
+                  ) : null}
                   <Tabs.Trigger value='analytics'>Analytics</Tabs.Trigger>
                   <Tabs.Trigger value='activity'>Recent Activity</Tabs.Trigger>
                   <Tabs.Trigger value='repositories'>Top Repositories</Tabs.Trigger>
@@ -133,11 +137,11 @@ const ContributorContent = ({ login }: { login: string }) => {
                 </Tabs.List>
 
                 <Box minHeight={{ md: '0' }}>
-                  {packages && (
+                  {(packages?.length || namespaces?.length || proposals?.length) ? (
                     <Tabs.Content value='onchain' style={{ height: '100%'}}>
-                      <ContributorOnchain packages={packages} />
+                      <ContributorOnchain packages={packages ?? []} namespaces={namespaces ?? []} proposals={proposals ?? []} />
                     </Tabs.Content>
-                  )}
+                  ) : null}
                   <Tabs.Content value='analytics' style={{ height: '100%'}}>
                     <ContributorAnalytics contributor={contributor} />
                   </Tabs.Content>
