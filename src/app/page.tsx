@@ -42,10 +42,11 @@ const HomePage = async ({ searchParams: { f, e, r } }: SearchParamsFilters) => {
     console.error('YouTube uploads playlist ID prefetch failed');
     return '';
   });
-  const videos = await getYoutubePlaylistVideos(uploadsPlaylistId, 6).catch(() => {
-    console.error('YouTube videos prefetch failed');
-    return [];
-  });
+  const videos = uploadsPlaylistId ?
+    await getYoutubePlaylistVideos(uploadsPlaylistId, 6).catch(() => {
+      console.error('YouTube videos prefetch failed');
+      return [];
+    }) : [];
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
