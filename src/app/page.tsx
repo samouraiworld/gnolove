@@ -37,9 +37,16 @@ const HomePage = async ({ searchParams: { f, e, r } }: SearchParamsFilters) => {
     prefetchLastIssues(queryClient),
     prefetchNewContributors(queryClient),
   ]);
-  
-  const uploadsPlaylistId = await getYoutubeChannelUploadsPlaylistId({ channelId: GNOLAND_YOUTUBE_CHANNEL_ID });
-  const videos = await getYoutubePlaylistVideos(uploadsPlaylistId, 6);
+
+  const uploadsPlaylistId = await getYoutubeChannelUploadsPlaylistId({ channelId: GNOLAND_YOUTUBE_CHANNEL_ID }).catch(() => {
+    console.error('YouTube uploads playlist ID prefetch failed');
+    return '';
+  });
+  const videos = uploadsPlaylistId ?
+    await getYoutubePlaylistVideos(uploadsPlaylistId, 6).catch(() => {
+      console.error('YouTube videos prefetch failed');
+      return [];
+    }) : [];
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

@@ -5,7 +5,21 @@ import { ReactNode } from 'react';
 import { isServer, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const makeQueryClient = () => {
-  return new QueryClient({ defaultOptions: { queries: { staleTime: 60 * 1000 } } });
+  return new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 60 * 1000,
+        // Retry up to 3 times on network/5xx errors; skip retries on 4xx
+        retry: (failureCount, error: any) => {
+          const status = error?.status ?? error?.response?.status;
+          if (status && status >= 400 && status < 500) return false;
+          return failureCount < 3;
+        },
+        retryDelay: (attempt) => Math.min(1000 * 2 ** attempt, 30_000),
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
 };
 
 let browserQueryClient: QueryClient | undefined = undefined;

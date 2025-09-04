@@ -13,9 +13,17 @@ export interface UseGetContributorsParams {
 }
 
 export const prefetchContributors = async (queryClient: QueryClient, params: UseGetContributorsParams) => {
-  const contributors = await getContributors(params.timeFilter, params.exclude, params.repositories);
-  queryClient.setQueryData([...BASE_QUERY_KEY, params], contributors);
-  return contributors;
+  try {
+    const queryKey = [...BASE_QUERY_KEY, params] as const;
+    await queryClient.prefetchQuery({
+      queryKey,
+      queryFn: () => getContributors(params.timeFilter, params.exclude, params.repositories),
+    });
+    return queryClient.getQueryData(queryKey) as Awaited<ReturnType<typeof getContributors>>;
+  } catch (err) {
+    console.error('prefetchContributors failed', err);
+    return [] as Awaited<ReturnType<typeof getContributors>>;
+  }
 };
 
 const useGetContributors = (params: UseGetContributorsParams) => {

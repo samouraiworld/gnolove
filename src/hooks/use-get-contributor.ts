@@ -5,9 +5,17 @@ import { getContributor } from '@/app/actions';
 export const BASE_QUERY_KEY = ['contributor'];
 
 export const prefetchContributor = async (queryClient: QueryClient, login: string) => {
-  const contributor = await getContributor(login);
-  queryClient.setQueryData([...BASE_QUERY_KEY, login], contributor);
-  return contributor;
+  try {
+    const queryKey = [...BASE_QUERY_KEY, login] as const;
+    await queryClient.prefetchQuery({
+      queryKey,
+      queryFn: () => getContributor(login),
+    });
+    return queryClient.getQueryData(queryKey) as Awaited<ReturnType<typeof getContributor>>;
+  } catch (err) {
+    console.error('prefetchContributor failed', err);
+    return undefined as unknown as Awaited<ReturnType<typeof getContributor>>;
+  }
 };
 
 const useGetContributor = (login: string) => {

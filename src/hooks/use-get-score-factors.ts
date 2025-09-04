@@ -5,14 +5,22 @@ import { getScoreFactors } from '@/app/actions';
 export const QUERY_KEY = ['score-factors'];
 
 export const prefetchScoreFactors = async (queryClient: QueryClient) => {
-  const scoreFactors = await getScoreFactors();
-  queryClient.setQueryData(QUERY_KEY, scoreFactors);
-  return scoreFactors;
+  try {
+    const queryKey = [...QUERY_KEY] as const;
+    await queryClient.prefetchQuery({
+      queryKey,
+      queryFn: getScoreFactors,
+    });
+    return queryClient.getQueryData(queryKey) as Awaited<ReturnType<typeof getScoreFactors>>;
+  } catch (err) {
+    console.error('prefetchScoreFactors failed', err);
+    return undefined as unknown as Awaited<ReturnType<typeof getScoreFactors>>;
+  }
 };
 
 const useGetScoreFactors = () => {
   return useQuery({
-    queryFn: () => getScoreFactors(),
+    queryFn: getScoreFactors,
     queryKey: QUERY_KEY,
   });
 };
