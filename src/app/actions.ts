@@ -172,7 +172,7 @@ export const getYoutubeChannelUploadsPlaylistId = async (searchParams: { channel
 
   url.searchParams.set('key', ENV.YOUTUBE_API_KEY);
 
-  const data = await fetchJson<any>(url.toString(), { next: { revalidate: 86400 } });
+  const data = await fetchJson<{ items: Array<{ contentDetails: { relatedPlaylists: { uploads: string } } }>; }>(url.toString(), { next: { revalidate: 86400 } });
 
   const uploads = data.items[0]?.contentDetails?.relatedPlaylists?.uploads;
   if (!uploads) {
@@ -196,7 +196,18 @@ export const getYoutubePlaylistVideos = async (playlistId: string, maxResults: n
   url.searchParams.set('maxResults', clampedMax.toString());
   url.searchParams.set('key', ENV.YOUTUBE_API_KEY);
 
-  const data = await fetchJson<any>(url.toString(), { next: { revalidate: 3600 } });
+  const data = await fetchJson<{
+    items: Array<{
+      snippet: {
+        title: string;
+        resourceId: {
+          videoId: string;
+        };
+      };
+    }>;
+    error?: { message?: string };
+    message?: string;
+  }>(url.toString(), { next: { revalidate: 3600 } });
 
   if (!data || !Array.isArray(data.items)) {
     const apiErrorMessage = data?.error?.message || data?.message;
@@ -207,5 +218,14 @@ export const getYoutubePlaylistVideos = async (playlistId: string, maxResults: n
     throw new HttpError('Playlist not found / Playlist items not found', { status: 404 });
   }
 
-  return YoutubeVideoPlaylistSchema.parse(data.items);
+  // Filter out deleted or private videos and any entries without a valid videoId
+  const filteredItems = data.items.filter((item) => {
+    const title = item?.snippet?.title;
+    const videoId = item?.snippet?.resourceId?.videoId;
+    const isDeleted = typeof title === 'string' && title.toLowerCase() === 'deleted video';
+    const isPrivate = typeof title === 'string' && title.toLowerCase() === 'private video';
+    return Boolean(videoId) && !isDeleted && !isPrivate;
+  });
+
+  return YoutubeVideoPlaylistSchema.parse(filteredItems);
 };
