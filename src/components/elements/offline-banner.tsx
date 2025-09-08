@@ -15,7 +15,7 @@ const OfflineBanner: React.FC = () => {
           exit={{ y: '100%' }}
           initial={{ y: '100%' }}
           transition={{ ease: 'easeOut' }}
-          className="fixed bottom-0 left-0 z-50 w-full text-center bg-red-9 text-whiteA-12"
+          className="fixed bottom-0 left-0 z-50 w-full text-center bg-red-9 text-white-a-12"
         >
           You are offline. Some features may not be available.
         </motion.div>

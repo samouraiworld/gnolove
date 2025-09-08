@@ -98,7 +98,7 @@ const ResponsiveCarousel: React.FC<ResponsiveCarouselProps> = ({
             if (e.key === 'ArrowLeft') { e.preventDefault(); scrollByItems('left'); }
             else if (e.key === 'ArrowRight') { e.preventDefault(); scrollByItems('right'); }
           }}
-          className={'outline-none focus-visible:ring-2 focus-visible:ring-blue-9 overflow-hidden sm:scroll-p-3 flex-1'}
+          className={'outline-hidden focus-visible:ring-2 focus-visible:ring-blue-9 overflow-hidden sm:scroll-p-3 flex-1'}
           style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-y' }}
         >
           {/* Children should render a track. On sm+, Embla uses first child as container and its children as slides. */}

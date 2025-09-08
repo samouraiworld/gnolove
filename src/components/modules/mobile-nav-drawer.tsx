@@ -28,9 +28,9 @@ const MobileNavDrawer = () => {
 
         <Drawer.Portal>
           <Theme className="h-full">
-            <Drawer.Overlay className="fixed inset-0 z-[100] bg-[rgba(0,0,0,0.4)]" />
+            <Drawer.Overlay className="fixed inset-0 z-100 bg-[rgba(0,0,0,0.4)]" />
 
-            <Drawer.Content className="radix-panel-bg fixed inset-y-0 left-0 z-[101] w-3/4 overflow-y-auto p-8 pb-4">
+            <Drawer.Content className="radix-panel-bg fixed inset-y-0 left-0 z-101 w-3/4 overflow-y-auto p-8 pb-4">
               <Drawer.Title className="sr-only">Mobile Navigation</Drawer.Title>
               <Drawer.Description className="sr-only">Use this drawer to navigate through the site.</Drawer.Description>
 

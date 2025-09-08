@@ -13,13 +13,13 @@ const Toaster = () => {
   const { toasts } = useToast();
 
   return (
-    <Theme className="pointer-events-none fixed inset-0 z-[100] bg-transparent">
+    <Theme className="pointer-events-none fixed inset-0 z-100 bg-transparent">
       <Toast.Provider swipeDirection="right">
         {toasts.map((toast) => (
           <SingleToast {...toast} key={toast.id} />
         ))}
 
-        <Toast.Viewport className="max-w-screen fixed right-0 top-0 !z-50 m-0 flex w-96 list-none flex-col gap-3 p-8 outline-none" />
+        <Toast.Viewport className="max-w-screen fixed right-0 top-0 z-50! m-0 flex w-96 list-none flex-col gap-3 p-8 outline-hidden" />
       </Toast.Provider>
     </Theme>
   );
@@ -66,13 +66,13 @@ const SingleToast = ({
 
   return (
     <Toast.Root
-      className="rt-ToastRoot pointer-events-auto flex flex-col items-start gap-x-4 rounded-4 bg-whiteA-12 p-5 shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] [grid-template-areas:_'title_action'_'description_action']"
+      className="rt-ToastRoot pointer-events-auto flex flex-col items-start gap-x-4 rounded-4 bg-white-a-12 p-5 shadow-[hsl(206_22%_7%/35%)_0px_10px_38px_-10px,hsl(206_22%_7%/20%)_0px_10px_20px_-15px] [grid-template-areas:'title_action'_'description_action']"
       duration={Infinity}
     >
       <Toast.Title className={cn('text-3 font-medium')}>
         <Text color={titleColor}>{title}</Text>
       </Toast.Title>
-      <Toast.Description className="text-2 text-grayA-11">{message}</Toast.Description>
+      <Toast.Description className="text-2 text-gray-a-11">{message}</Toast.Description>
     </Toast.Root>
   );
 };

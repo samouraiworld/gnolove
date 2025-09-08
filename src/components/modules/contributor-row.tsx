@@ -54,7 +54,7 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
   };
 
   return (
-    <Table.Row className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-grayA-2" key={contributor.id}>
+    <Table.Row className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-gray-a-2" key={contributor.id}>
       {showRank && (
         <Cell className="text-center">
           <Flex height="100%" align="center" justify="center">

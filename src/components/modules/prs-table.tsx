@@ -36,7 +36,7 @@ const PrsTable = ({ prs, showHeader, ...props }: IssuesTableProps) => {
               data-href={url}
               onClick={onClick.bind(null, url)}
               key={id}
-              className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-grayA-2"
+              className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-gray-a-2"
             >
               <Cell className="max-w-0">
                 <Flex width="100%" height="100%" align="center" gap="2">

@@ -57,7 +57,7 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
                   <Table.Row
                     key={issueOrPR.url}
                     onClick={() => window.open(issueOrPR.url, '_blank')}
-                    className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-grayA-2"
+                    className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-gray-a-2"
                   >
                     <Table.Cell>
                       <Flex direction="column" py="2" gap="1">

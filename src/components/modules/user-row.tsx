@@ -20,7 +20,7 @@ const UserRow = ({ user }: UserRowProps) => {
   };
 
   return (
-    <Table.Row className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-grayA-2" key={user.id}>
+    <Table.Row className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-gray-a-2" key={user.id}>
       <Cell data-href={user.url} onClick={onClick}>
         <Flex width="100%" height="100%" align="center" gap="2">
           <Image
