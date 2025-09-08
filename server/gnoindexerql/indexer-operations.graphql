@@ -97,12 +97,16 @@ query GetGovDAOProposalsVotes($StartBlock: Int!) {
         where: {
             success: { eq: true }
             messages: {
-                value: { MsgCall: { func: { eq: "MustVoteOnProposalSimple" } } }
+                value: { MsgCall: { 
+                  func: { eq: "MustVoteOnProposalSimple" } 
+                  pkg_path: { eq: "gno.land/r/gov/dao" }
+                  } }
             }
             _not:{
               block_height:{lt: $StartBlock}
             }
         }
+        order: { heightAndIndex: ASC }
     ) {
         index
         hash
@@ -133,12 +137,17 @@ query GetGovDAOExecutedProposals($StartBlock: Int!) {
         where: {
             success: { eq: true }
             messages: {
-                value: { MsgCall: { func: { eq: "ExecuteProposal" } } }
+                value: { MsgCall: { 
+                  func: { eq: "ExecuteProposal" } 
+                  pkg_path: { eq: "gno.land/r/gov/dao" }
+                } 
+              }
             }
             _not:{
               block_height:{lt: $StartBlock}
             }
         }
+        order: { heightAndIndex: ASC }
     ) {
         index
         hash

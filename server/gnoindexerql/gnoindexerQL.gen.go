@@ -2155,7 +2155,7 @@ func GetGovDAOExecutedProposals(
 		OpName: "GetGovDAOExecutedProposals",
 		Query: `
 query GetGovDAOExecutedProposals ($StartBlock: Int!) {
-	getTransactions(where: {success:{eq:true},messages:{value:{MsgCall:{func:{eq:"ExecuteProposal"}}}},_not:{block_height:{lt:$StartBlock}}}) {
+	getTransactions(where: {success:{eq:true},messages:{value:{MsgCall:{func:{eq:"ExecuteProposal"},pkg_path:{eq:"gno.land/r/gov/dao"}}}},_not:{block_height:{lt:$StartBlock}}}, order: {heightAndIndex:ASC}) {
 		index
 		hash
 		success
@@ -2274,7 +2274,7 @@ func GetGovDAOProposalsVotes(
 		OpName: "GetGovDAOProposalsVotes",
 		Query: `
 query GetGovDAOProposalsVotes ($StartBlock: Int!) {
-	getTransactions(where: {success:{eq:true},messages:{value:{MsgCall:{func:{eq:"MustVoteOnProposalSimple"}}}},_not:{block_height:{lt:$StartBlock}}}) {
+	getTransactions(where: {success:{eq:true},messages:{value:{MsgCall:{func:{eq:"MustVoteOnProposalSimple"},pkg_path:{eq:"gno.land/r/gov/dao"}}}},_not:{block_height:{lt:$StartBlock}}}, order: {heightAndIndex:ASC}) {
 		index
 		hash
 		success
