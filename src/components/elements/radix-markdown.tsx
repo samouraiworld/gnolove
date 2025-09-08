@@ -1,34 +1,21 @@
-import { ComponentProps } from 'react';
-
-import { Heading, HeadingProps, Text } from '@radix-ui/themes';
+import React from 'react';
 import Markdown, { Options } from 'react-markdown';
 
 import { cn } from '@/utils/style';
-
-const getHeadingComponent = (
-  headingProps: HeadingProps,
-  { color: _color, ...props }: ComponentProps<NoUndefined<HeadingProps['as']>>,
-) => {
-  return (
-    <Heading {...headingProps} {...props}>
-      {props.children}
-    </Heading>
-  );
-};
 
 const RadixMarkdown = ({ components, ...props }: Readonly<Options>) => {
   return (
     <Markdown
       {...props}
       components={{
-        h1: getHeadingComponent.bind(null, { as: 'h1', size: '8' }),
-        h2: getHeadingComponent.bind(null, { as: 'h2', size: '7' }),
-        h3: getHeadingComponent.bind(null, { as: 'h3', size: '6' }),
-        h4: getHeadingComponent.bind(null, { as: 'h4', size: '5' }),
-        h5: getHeadingComponent.bind(null, { as: 'h5', size: '4' }),
-        h6: getHeadingComponent.bind(null, { as: 'h6', size: '3' }),
+        h1: (p) => <h1 className="text-3xl font-bold" {...p} />,
+        h2: (p) => <h2 className="text-2xl font-semibold" {...p} />,
+        h3: (p) => <h3 className="text-xl font-semibold" {...p} />,
+        h4: (p) => <h4 className="text-lg font-semibold" {...p} />,
+        h5: (p) => <h5 className="text-base font-semibold" {...p} />,
+        h6: (p) => <h6 className="text-sm font-semibold" {...p} />,
 
-        p: ({ color: _color, ...props }) => <Text {...props}>{props.children}</Text>,
+        p: ({ color: _color, ...props }) => <p className="leading-7" {...props}>{props.children}</p>,
 
         ul: ({ className, ...props }) => <ul className={cn('list-inside list-disc', className)} {...props} />,
         ol: ({ className, ...props }) => <ul className={cn('list-inside list-decimal', className)} {...props} />,

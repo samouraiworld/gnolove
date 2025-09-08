@@ -5,7 +5,7 @@ import { useMemo, useState } from 'react';
 import AnalyticsContributorLineChart from './analytics-contributor-line-chart';
 import AnalyticsRecentActivity from './analytics-recent-activity';
 import AnalyticsTopContributorBarChart from './analytics-top-contributor-bar-chart';
-import { Box, Flex, Heading, Separator } from '@radix-ui/themes';
+import { Separator } from '@/components/ui/separator';
 
 import LayoutContainer from '@/layouts/layout-container';
 
@@ -41,38 +41,33 @@ const AnalyticsClientPage = () => {
   }, [contributors, timeFilter, selectedRepositories]);
 
   return (
-    <LayoutContainer mt="5">
-      <Box width="100%" my="5">
-        <Heading>Contributors Analytics</Heading>
-        <Separator size="4" my="6" />
-        <Flex
-          direction={{ initial: 'column', sm: 'row' }}
-          gap={{ initial: '6', sm: '0' }}
-          justify="between"
-          align="center"
-        >
-          <Flex gap="4" align="end">
-            <TimeRangeSelector onDateChange={setTimeFilter} defaultValue={timeFilter} mb="3" />
+    <LayoutContainer className="mt-5">
+      <div className="w-full my-5">
+        <h1 className="text-2xl font-semibold">Contributors Analytics</h1>
+        <Separator className="my-6" />
+        <div className="flex flex-col items-center justify-between gap-6 sm:flex-row sm:gap-0">
+          <div className="flex items-end gap-4">
+            <TimeRangeSelector onDateChange={setTimeFilter} defaultValue={timeFilter} className="mb-3" />
             <RepositoriesSelector
               repositories={repositories}
               selectedRepositories={selectedRepositories}
               onSelectedRepositoriesChange={setSelectedRepositories}
-              mb="3"
+              className="mb-3"
             />
-          </Flex>
+          </div>
           <AnalyticsTotalStats contributors={filteredContributors} />
-        </Flex>
-        <Flex direction={{ initial: 'column' }} mt="6" gap="3">
+        </div>
+        <div className="mt-6 flex flex-col gap-3">
           <AnalyticsTopContributorBarChart
             contributors={filteredContributors}
             selectedRepositories={selectedRepositories}
           />
-          <Flex direction={{ initial: 'column', lg: 'row' }} justify="center" align="center" mt="6" gap="3">
+          <div className="mt-6 flex flex-col items-center justify-center gap-3 lg:flex-row">
             <AnalyticsContributorLineChart contributors={filteredContributors} timeFilter={timeFilter} />
             <AnalyticsRecentActivity contributors={filteredContributors} timeFilter={timeFilter} />
-          </Flex>
-        </Flex>
-      </Box>
+          </div>
+        </div>
+      </div>
     </LayoutContainer>
   );
 };

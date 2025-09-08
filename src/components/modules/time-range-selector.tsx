@@ -1,11 +1,11 @@
 'use client';
 
-import { ComponentProps, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { Select, Flex, Text } from '@radix-ui/themes';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { TimeFilter } from '@/utils/github';
 
-type Props = ComponentProps<typeof Flex> & {
+type Props = React.HTMLAttributes<HTMLDivElement> & {
   onDateChange: (timeFilter: TimeFilter) => void;
   defaultValue?: TimeFilter;
   showLabel?: boolean;
@@ -32,23 +32,21 @@ const TimeRangeSelector = ({ onDateChange, defaultValue = TimeFilter.WEEKLY, sho
   };
 
   return (
-    <Flex direction="column" gap="1" {...props}>
+    <div className="flex flex-col gap-1" {...props}>
       {showLabel && (
-        <Text size="1" weight="medium">
-          Date range
-        </Text>
+        <span className="text-xs font-medium text-muted-foreground">Date range</span>
       )}
-      <Select.Root value={value} onValueChange={handleChange}>
-        <Select.Trigger variant="soft" />
-        <Select.Content>
+      <Select value={value} onValueChange={handleChange}>
+        <SelectTrigger className="w-[180px]"><SelectValue placeholder="Select range" /></SelectTrigger>
+        <SelectContent>
           {Object.entries(presets).map(([k, label]) => (
-            <Select.Item key={k} value={k}>
+            <SelectItem key={k} value={k}>
               {label}
-            </Select.Item>
+            </SelectItem>
           ))}
-        </Select.Content>
-      </Select.Root>
-    </Flex>
+        </SelectContent>
+      </Select>
+    </div>
   );
 };
 

@@ -4,8 +4,6 @@ import { useMemo } from 'react';
 
 import NextLink from 'next/link';
 
-import { Box, Flex, Grid, Heading, Text } from '@radix-ui/themes';
-
 import MilestoneProgress from '@/features/milestone-progress';
 
 import LayoutContainer from '@/layouts/layout-container';
@@ -47,9 +45,9 @@ const ScoreboardPage = ({ videos }: { videos: TYoutubeVideoPlaylist }) => {
 
   return (
     <LayoutContainer>
-      <Box mt="4">
+      <div className="mt-4">
         <video
-          className="motion-reduce:hidden h-full min-h-[200px] w-full object-cover rounded-4"
+          className="motion-reduce:hidden h-full min-h-[200px] w-full rounded-md object-cover"
           autoPlay
           loop
           muted
@@ -61,12 +59,12 @@ const ScoreboardPage = ({ videos }: { videos: TYoutubeVideoPlaylist }) => {
         <Image
           alt="Gnolove"
           src="/images/header.png"
-          className="hidden motion-reduce:block h-full min-h-[200px] w-full object-cover rounded-4"
+          className="hidden h-full min-h-[200px] w-full rounded-md object-cover motion-reduce:block"
           priority
           width={1920}
           height={1000}
         />
-      </Box>
+      </div>
 
       {milestone && (
         <NextLink className={cn(isOffline && 'pointer-events-none')} href="/milestone">
@@ -74,57 +72,48 @@ const ScoreboardPage = ({ videos }: { videos: TYoutubeVideoPlaylist }) => {
         </NextLink>
       )}
 
-      <Grid columns={{ initial: '1', md: '3' }} gap="4">
-        <Flex direction="column" gap="4">
-          <Heading as="h2" weight="bold" size="6" mt="6" asChild>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div className="flex flex-col gap-4">
+          <h2 className="mt-6 text-2xl font-bold">
             <NextLink
               href={`https://github.com/${REPOSITORY.owner}/${REPOSITORY.repository}/labels/help%20wanted`}
               target="_blank"
             >
               👋 Help Wanted!
             </NextLink>
-          </Heading>
+          </h2>
           {isIssuesPending ? <Loader /> : <IssuesTable issues={issues ?? []} showLabels="on-hover" />}
-        </Flex>
+        </div>
 
-        <Flex direction="column" gap="4">
-          <Heading as="h2" weight="bold" size="6" mt="6">
-            ✔️ Freshly Merged
-          </Heading>
+        <div className="flex flex-col gap-4">
+          <h2 className="mt-6 text-2xl font-bold">✔️ Freshly Merged</h2>
           {isAllTimePending ? <Loader /> : <PrsTable prs={lastMRs} />}
-        </Flex>
+        </div>
 
-        <Flex direction="column" gap="4">
-          <Heading as="h2" weight="bold" size="6" mt="6">
-            ⭐ New Rising gnome
-          </Heading>
+        <div className="flex flex-col gap-4">
+          <h2 className="mt-6 text-2xl font-bold">⭐ New Rising gnome</h2>
           {isNewContributorsPending ? <Loader /> : <UserTable users={newContributors ?? []} />}
-        </Flex>
-      </Grid>
+        </div>
+      </div>
 
-      <Flex justify="center" align="center" mt="6">
-        <Heading size="6" className="text-center">
-          🏅 Gnolove Scoreboard
-        </Heading>
-      </Flex>
+      <div className="mt-6 flex items-center justify-center">
+        <h2 className="text-2xl font-bold text-center">🏅 Gnolove Scoreboard</h2>
+      </div>
 
       <Scoreboard />
 
       {videos && videos.length > 0 && (
         <>
-          <Text weight="bold" size="6" mt="6">
-            🎥 Latest gnoland videos
-          </Text>
-
-          <Grid columns={{ initial: '1', xs: '2', md: '3' }} rows="auto" gap="2">
+          <h3 className="mt-6 text-xl font-bold">🎥 Latest gnoland videos</h3>
+          <div className="grid grid-cols-1 gap-2 xs:grid-cols-2 md:grid-cols-3">
             {videos.map((video: { snippet: { resourceId: { videoId: string } } }) => (
               <YoutubeEmbeddedVideo
                 key={video.snippet.resourceId.videoId}
-                className="overflow-hidden rounded-4"
+                className="overflow-hidden rounded-md"
                 src={`https://www.youtube.com/embed/${video.snippet.resourceId.videoId}`}
               />
             ))}
-          </Grid>
+          </div>
         </>
       )}
     </LayoutContainer>

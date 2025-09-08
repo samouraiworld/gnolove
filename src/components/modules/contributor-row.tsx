@@ -5,8 +5,10 @@ import { useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { ExternalLinkIcon, MagnifyingGlassIcon, StarFilledIcon } from '@radix-ui/react-icons';
-import { Badge, Flex, IconButton, Table, Text } from '@radix-ui/themes';
+import { ExternalLink, Search, Star } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { TableRow } from '@/components/ui/table';
 import { formatDistanceToNow } from 'date-fns';
 import { CircleDotIcon } from 'lucide-react';
 
@@ -33,9 +35,7 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
   const rankElement = useMemo(() => {
     if (rank < 3)
       return (
-        <StarFilledIcon
-          className={cn(rank === 0 && 'text-yellow-10', rank === 1 && 'text-gray-10', rank === 2 && 'text-bronze-10')}
-        />
+        <Star className={cn('h-4 w-4', rank === 0 && 'text-yellow-500', rank === 1 && 'text-gray-500', rank === 2 && 'text-amber-800')} />
       );
     return `${rank + 1} th`;
   }, [rank]);
@@ -54,17 +54,15 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
   };
 
   return (
-    <Table.Row className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-gray-a-2" key={contributor.id}>
+    <TableRow className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-muted/50" key={contributor.id}>
       {showRank && (
         <Cell className="text-center">
-          <Flex height="100%" align="center" justify="center">
-            {rankElement}
-          </Flex>
+          <div className="h-full flex items-center justify-center">{rankElement}</div>
         </Cell>
       )}
 
-      <Cell maxWidth={{ initial: '50px', xs: '100px', sm: '150px' }}>
-        <Flex width="100%" height="100%" align="center" gap="2">
+      <Cell>
+        <div className="w-full h-full flex items-center gap-2 max-w-[150px] sm:max-w-none">
           <Image
             src={contributor.avatarUrl}
             alt={`${contributor.login} avatar url`}
@@ -77,51 +75,43 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
             className={cn('min-w-0 max-w-[160px] xs:max-w-[180px] sm:max-w-none', { 'pointer-events-none': isOffline })}
             href={isOffline ? '' : `/@${contributor.login}`}
           >
-            <Text
-              truncate
-              title={contributor.name || contributor.login}
-              className={cn({ 'text-gray-8': isOffline })}
-              trim="both"
-            >
+            <span title={contributor.name || contributor.login} className={cn('truncate', { 'text-muted-foreground': isOffline })}>
               {contributor.name || contributor.login}
-            </Text>
+            </span>
           </Link>
 
           {team && (
-            <Badge color={team.color} size="1" className="hidden xs:inline">
+            <Badge className="hidden xs:inline">
               {team.name}
             </Badge>
           )}
 
           <Link href={`https://github.com/${contributor.login}`} target="_blank" rel="noopener noreferrer">
-            <ExternalLinkIcon className="shrink-0 text-blue-10" />
+            <ExternalLink className="h-4 w-4 shrink-0 text-primary" />
           </Link>
-        </Flex>
+        </div>
       </Cell>
 
       {contributor.LastContribution && 'title' in contributor.LastContribution ? (
         <Cell onClick={onLastContributionClick} className="group hidden text-left lg:table-cell">
-          <Flex width="100%" height="100%" align="center" gap="2" className="text-1">
-            <Flex direction="column">
-              <Flex align="center" gap="1">
-                {/*<GitPullRequestIcon className="size-3 group-hover:text-accent-10" />*/}
-                {/*<Text className="group-hover:text-accent-10">PR</Text>*/}
+          <div className="w-full h-full flex items-center gap-2 text-sm">
+            <div className="flex flex-col">
+              <div className="flex items-center gap-1">
+                <CircleDotIcon className="size-3 group-hover:text-primary" />
+                <span className="group-hover:text-primary">Last Contrib</span>
 
-                <CircleDotIcon className="size-3 group-hover:text-accent-10" />
-                <Text className="group-hover:text-accent-10">Last Contrib</Text>
+                <span className="text-muted-foreground">{formatDistanceToNow(contributor.LastContribution.createdAt)}</span>
+              </div>
 
-                <Text color="gray">{formatDistanceToNow(contributor.LastContribution.createdAt)}</Text>
-              </Flex>
-
-              <Text color="gray" className="max-w-52 truncate">
+              <span className="text-muted-foreground max-w-52 truncate">
                 {contributor.LastContribution.title}
-              </Text>
-            </Flex>
-          </Flex>
+              </span>
+            </div>
+          </div>
         </Cell>
       ) : (
         <Cell className="hidden text-left lg:table-cell">
-          <Text color="gray">-</Text>
+          <span className="text-muted-foreground">-</span>
         </Cell>
       )}
 
@@ -134,15 +124,15 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
       <Cell className="text-center align-middle font-bold">{contributor.score.toFixed(2)}</Cell>
 
       <Cell className="text-center">
-        <Flex height="100%" align="center" justify="center">
+        <div className="h-full flex items-center justify-center">
           <ContributionsDialog user={contributor}>
-            <IconButton variant="ghost">
-              <MagnifyingGlassIcon />
-            </IconButton>
+            <Button variant="ghost" size="icon">
+              <Search className="h-4 w-4" />
+            </Button>
           </ContributionsDialog>
-        </Flex>
+        </div>
       </Cell>
-    </Table.Row>
+    </TableRow>
   );
 };
 

@@ -3,8 +3,10 @@
 import { memo, useCallback, useMemo, useState, useTransition } from 'react';
 
 import MilestoneListItem from '@/components/features/milestone/milestone-list-item';
-import { CheckCircledIcon, CircleIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
-import { Grid, Flex, Text, Badge, Box, Card, Separator, IconButton } from '@radix-ui/themes';
+import { CheckCircle2, Circle, ChevronDown, ChevronUp } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
+import { Button } from '@/components/ui/button';
 import ResponsiveCarousel from '../../modules/responsive-carousel';
 
 import { TIssue } from '@/utils/schemas';
@@ -28,7 +30,7 @@ const KanbanColumn = memo(
   ({
     title,
     issues,
-    badgeColor,
+    badgeColor: _badgeColor,
     count,
     icon,
     isCollapsed,
@@ -51,51 +53,43 @@ const KanbanColumn = memo(
     }, [onToggleCollapse]);
 
     return (
-      <Card size="1" variant="ghost" style={{ height: 'fit-content' }}>
-        <Flex align="center" justify="between" mb="4" p="3">
-          <Flex align="center" gap="2">
+      <div className="h-fit rounded-md border">
+        <div className="flex items-center justify-between gap-2 p-3">
+          <div className="flex items-center gap-2">
             {icon}
-            <Text size="4" weight="bold">
-              {title}
-            </Text>
-            <Badge size="2" color={badgeColor} variant="soft">
-              {count}
-            </Badge>
-          </Flex>
-          <IconButton variant="ghost" size="2" onClick={handleToggle} disabled={isPending}>
+            <span className="text-lg font-bold">{title}</span>
+            <Badge variant="secondary" className="text-xs">{count}</Badge>
+          </div>
+          <Button variant="ghost" size="icon" onClick={handleToggle} disabled={isPending}>
             {isPending ? (
               <Loader width={16} height={16} />
             ) : isCollapsed ? (
-              <ChevronDownIcon width="16" height="16" />
+              <ChevronDown className="h-4 w-4" />
             ) : (
-              <ChevronUpIcon width="16" height="16" />
+              <ChevronUp className="h-4 w-4" />
             )}
-          </IconButton>
-        </Flex>
+          </Button>
+        </div>
 
         {!isCollapsed && (
           <>
-            <Separator size="4" mb="4" />
-            <Box px="3" pb="3">
-              <ResponsiveCarousel id={`scroller-${title.replace(/\s+/g, '-').toLowerCase()}`} itemsPerScroll={2}>
-                <Flex direction={{ initial: 'column', sm: 'row' }} gap="3" wrap={{ initial: 'nowrap', sm: 'nowrap' }}>
-                  {issues.length > 0 ? (
-                    issues.map((issue) => (
-                      <Box key={issue.id} className="sm:snap-start sm:min-w-[280px] sm:w-[clamp(280px,33vw,420px)]">
-                        <MilestoneListItem issue={issue} />
-                      </Box>
-                    ))
-                  ) : (
-                    <Box p="8">
-                      <Text size="3" color="gray">{`No ${title.toLowerCase()}`}</Text>
-                    </Box>
-                  )}
-                </Flex>
-              </ResponsiveCarousel>
-            </Box>
+            <Separator className="mb-4" />
+            <div className="px-3 pb-3">
+              {issues.length > 0 ? (
+                <ResponsiveCarousel id={`scroller-${title.replace(/\s+/g, '-').toLowerCase()}`} items={issues.map((issue) => (
+                  <div key={issue.id} className="sm:snap-start sm:min-w-[280px] sm:w-[clamp(280px,33vw,420px)]">
+                    <MilestoneListItem issue={issue} />
+                  </div>
+                ))} />
+              ) : (
+                <div className="p-8">
+                  <span className="text-base text-muted-foreground">{`No ${title.toLowerCase()}`}</span>
+                </div>
+              )}
+            </div>
           </>
         )}
-      </Card>
+      </div>
     );
   },
 );
@@ -115,37 +109,33 @@ const MilestoneList = ({ issues }: MilestoneListProps) => {
   );
 
   return (
-    <Box mt="6">
-      <Card size="2" variant="surface" mb="6">
-        <Flex direction={{ initial: 'column', sm: 'row' }} align="center" justify="between" p="4">
-          <Text size="4" weight="medium">
-            Milestone progress
-          </Text>
-          <Flex align="center" gap="4">
-            <Flex align="center" gap="2">
-              <CircleIcon color="green" />
-              <Text size="3">{openIssues.length} open</Text>
-            </Flex>
-            <Flex align="center" gap="2">
-              <CheckCircledIcon color="gray" />
-              <Text size="3">{closedIssues.length} closed</Text>
-            </Flex>
-            <Separator orientation="vertical" size="2" className="hidden sm:block" />
-            <Text size="3" weight="bold">
-              Total: {issues.length}
-            </Text>
-          </Flex>
-        </Flex>
-      </Card>
+    <div className="mt-6">
+      <div className="mb-6 rounded-md border p-4">
+        <div className="flex flex-col items-center justify-between gap-2 sm:flex-row">
+          <span className="text-xl font-medium">Milestone progress</span>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <Circle className="h-4 w-4 text-green-600" />
+              <span className="text-base">{openIssues.length} open</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="h-4 w-4 text-muted-foreground" />
+              <span className="text-base">{closedIssues.length} closed</span>
+            </div>
+            <Separator orientation="vertical" className="hidden h-6 sm:block" />
+            <span className="text-base font-bold">Total: {issues.length}</span>
+          </div>
+        </div>
+      </div>
 
       {/* Stacked sections; rows scroll horizontally on sm+ */}
-      <Grid columns="1" gap="6">
+      <div className="grid grid-cols-1 gap-6">
         <KanbanColumn
           title="Open Issues"
           issues={openIssues}
           badgeColor="green"
           count={openIssues.length}
-          icon={<CircleIcon color="green" width="18" height="18" />}
+          icon={<Circle className="h-[18px] w-[18px] text-green-600" />}
           isCollapsed={openColumnCollapsed}
           onToggleCollapse={() => setOpenColumnCollapsed(!openColumnCollapsed)}
         />
@@ -154,12 +144,12 @@ const MilestoneList = ({ issues }: MilestoneListProps) => {
           issues={closedIssues}
           badgeColor="gray"
           count={closedIssues.length}
-          icon={<CheckCircledIcon color="gray" width="18" height="18" />}
+          icon={<CheckCircle2 className="h-[18px] w-[18px] text-muted-foreground" />}
           isCollapsed={closedColumnCollapsed}
           onToggleCollapse={() => setClosedColumnCollapsed(!closedColumnCollapsed)}
         />
-      </Grid>
-    </Box>
+      </div>
+    </div>
   );
 };
 

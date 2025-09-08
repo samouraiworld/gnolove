@@ -2,8 +2,8 @@
 
 import { useTheme } from 'next-themes';
 
-import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
-import { IconButton } from '@radix-ui/themes';
+import { Moon, Sun } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const ThemeSwitch = () => {
   const { theme, setTheme } = useTheme();
@@ -13,9 +13,9 @@ const ThemeSwitch = () => {
   };
 
   return (
-    <IconButton onClick={onClick} suppressHydrationWarning>
-      {theme === 'light' ? <MoonIcon /> : <SunIcon />}
-    </IconButton>
+    <Button variant="ghost" size="icon" onClick={onClick} suppressHydrationWarning aria-label="Toggle theme">
+      {theme === 'light' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+    </Button>
   );
 };
 

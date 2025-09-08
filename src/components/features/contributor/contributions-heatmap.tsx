@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Tooltip } from '@radix-ui/themes';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { useMemo } from 'react';
 
 type HeatmapDay = {
@@ -52,16 +52,14 @@ const ContributionSquare = ({ level, date, count }: { level: number; date: Date;
   };
 
   return (
-    <Tooltip content={getTooltipContent()}>
-      <Box
-        width='10px'
-        height='10px'
-        style={{
-          backgroundColor: getColor(level),
-          borderRadius: '2px',
-          cursor: 'pointer',
-        }}
-      />
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <div
+          className="h-[10px] w-[10px] cursor-pointer rounded-[2px]"
+          style={{ backgroundColor: getColor(level) }}
+        />
+      </TooltipTrigger>
+      <TooltipContent className="text-xs">{getTooltipContent()}</TooltipContent>
     </Tooltip>
   );
 };
@@ -115,12 +113,12 @@ const ContributionsHeatmap = ({ data }: { data: HeatmapDay[] }) => {
   const weeks = useMemo(() => getHeatmapWeeks(data), [data]);
 
   return (
-    <Flex direction="column" gap='4' py='2' overflowX="auto">
+    <div className="flex flex-col gap-4 overflow-x-auto py-2">
       {/* Graph grid */}
       {/* Contribution squares */}
-      <Flex gap='1'>
+      <div className="flex gap-1">
         {weeks.map((week, weekIndex) => (
-          <Flex key={weekIndex} direction='column' gap='1'>
+          <div key={weekIndex} className="flex flex-col gap-1">
             {week.map((contribution, dayIndex) => (
               <ContributionSquare
                 key={dayIndex}
@@ -129,27 +127,23 @@ const ContributionsHeatmap = ({ data }: { data: HeatmapDay[] }) => {
                 count={contribution.contributions}
               />
             ))}
-          </Flex>
+          </div>
         ))}
-      </Flex>
+      </div>
 
       {/* Legend */}
-      <Flex align='center' gap='2'>
-        <Text size='1' color='gray'>
-          Less
-        </Text>
-        <Flex gap='1'>
+      <div className="flex items-center gap-2">
+        <span className="text-xs text-muted-foreground">Less</span>
+        <div className="flex gap-1">
           <ContributionSquare level={0} date={new Date()} count={0} />
           <ContributionSquare level={1} date={new Date()} count={1} />
           <ContributionSquare level={2} date={new Date()} count={4} />
           <ContributionSquare level={3} date={new Date()} count={8} />
           <ContributionSquare level={4} date={new Date()} count={12} />
-        </Flex>
-        <Text size='1' color='gray'>
-          More
-        </Text>
-      </Flex>
-    </Flex>
+        </div>
+        <span className="text-xs text-muted-foreground">More</span>
+      </div>
+    </div>
   );
 };
 

@@ -1,4 +1,4 @@
-import { Badge } from '@radix-ui/themes';
+import { Badge } from '@/components/ui/badge';
 import { emojify } from 'node-emoji';
 
 import { TLabel } from '@/utils/schemas';
@@ -16,7 +16,7 @@ const Label = ({ label: { color: rawColor, name } }: LabelProps) => {
   const background = `rgba(${rgbColor[0]}, ${rgbColor[1]}, ${rgbColor[2]}, .2)`;
 
   return (
-    <Badge size="1" color="gray" style={!isWhite ? { background, color } : undefined}>
+    <Badge className="text-[11px] font-normal" style={!isWhite ? { background, color } : undefined}>
       {emojify(name)}
     </Badge>
   );

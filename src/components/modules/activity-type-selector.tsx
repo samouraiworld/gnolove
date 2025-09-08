@@ -1,12 +1,12 @@
 'use client';
 
-import { ComponentProps, useState } from 'react';
+import { useState } from 'react';
 
-import { Select, Flex } from '@radix-ui/themes';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 export type ActivityType = 'commits' | 'pullRequests' | 'issues';
 
-type Props = ComponentProps<typeof Flex> & {
+type Props = React.HTMLAttributes<HTMLDivElement> & {
   onActivityTypeChange: (type: ActivityType) => void;
   defaultValue?: ActivityType;
 };
@@ -17,7 +17,7 @@ const labels: Record<ActivityType, string> = {
   issues: 'Issues',
 };
 
-const ActivityTypeSelector = ({ onActivityTypeChange, defaultValue = 'commits', ...props }: Props) => {
+const ActivityTypeSelector = ({ onActivityTypeChange, defaultValue = 'commits', className, ...props }: Props) => {
   const [value, setValue] = useState<ActivityType>(defaultValue);
 
   const handleChange = (newValue: string) => {
@@ -27,18 +27,18 @@ const ActivityTypeSelector = ({ onActivityTypeChange, defaultValue = 'commits', 
   };
 
   return (
-    <Flex {...props} direction="column" gap="1">
-      <Select.Root value={value} onValueChange={handleChange}>
-        <Select.Trigger variant="soft" />
-        <Select.Content>
+    <div className={`flex flex-col gap-1 ${className ?? ''}`} {...props}>
+      <Select value={value} onValueChange={handleChange}>
+        <SelectTrigger className="w-[180px]"><SelectValue placeholder="Select type" /></SelectTrigger>
+        <SelectContent>
           {Object.entries(labels).map(([k, label]) => (
-            <Select.Item key={k} value={k}>
+            <SelectItem key={k} value={k}>
               {label}
-            </Select.Item>
+            </SelectItem>
           ))}
-        </Select.Content>
-      </Select.Root>
-    </Flex>
+        </SelectContent>
+      </Select>
+    </div>
   );
 };
 

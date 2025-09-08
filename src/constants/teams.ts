@@ -1,8 +1,6 @@
-import { BadgeProps } from '@radix-ui/themes';
-
 export interface Team {
   name: string;
-  color: BadgeProps['color'];
+  color: string;
   members: string[];
 }
 

@@ -1,51 +1,52 @@
-import { Card, Flex, Heading, Text, Badge, IconButton } from '@radix-ui/themes';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { TContributor } from '@/utils/schemas';
 import { Star, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 
 const ContributorTopRepos = ({ contributor }: { contributor: TContributor }) => {
   return (
-    <Card style={{ height: '100%' }}>
-      <Flex direction='column' gap='4' p='4' height='100%' overflowY='auto'>
-        <Heading size='3'>Top Repositories</Heading>
+    <div className="h-full rounded-md border p-4">
+      <div className='flex h-full flex-col gap-4 overflow-y-auto'>
+        <h3 className='text-lg font-semibold'>Top Repositories</h3>
         {contributor.topRepositories.length === 0 ? (
-          <Text size='2' color='gray'>
+          <p className='text-sm text-muted-foreground'>
             Nothing to see here (for now ;))
-          </Text>
+          </p>
         ) : (
-          <Flex direction='column' gap='4'>
+          <div className='flex flex-col gap-4'>
             {contributor.topRepositories.map((repo) => (
-              <Flex key={repo.url} align='start' justify='between'>
-                <Flex direction='column' gap='1'>
-                  <Flex align='center' gap='2'>
-                    <Text size='2' weight='medium'>
+              <div key={repo.url} className='flex items-start justify-between'>
+                <div className='flex flex-col gap-1'>
+                  <div className='flex items-center gap-2'>
+                    <span className='text-sm font-medium'>
                       {repo.nameWithOwner}
-                    </Text>
-                    <Badge variant='outline' size='1'>
+                    </span>
+                    <Badge variant='outline' className='h-5 px-2 text-[11px]'>
                       {repo.primaryLanguage}
                     </Badge>
-                  </Flex>
-                  <Text size='1' color='gray'>
+                  </div>
+                  <span className='text-xs text-muted-foreground'>
                     {repo.description}
-                  </Text>
-                  <Flex align='center' gap='1'>
+                  </span>
+                  <div className='flex items-center gap-1'>
                     <Star size={12} />
-                    <Text size='1' color='gray'>
+                    <span className='text-xs text-muted-foreground'>
                       {repo.stargazerCount}
-                    </Text>
-                  </Flex>
-                </Flex>
+                    </span>
+                  </div>
+                </div>
                 <Link href={repo.url} target='_blank' rel='noopener noreferrer'>
-                  <IconButton variant='ghost' size='1'>
+                  <Button variant='ghost' size='icon'>
                     <ExternalLink size={12} />
-                  </IconButton>
+                  </Button>
                 </Link>
-              </Flex>
+              </div>
             ))}
-          </Flex>
+          </div>
         )}
-      </Flex>
-    </Card>
+      </div>
+    </div>
   );
 };
 

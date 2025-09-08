@@ -1,7 +1,9 @@
 'use client';
 
-import { MixerHorizontalIcon } from '@radix-ui/react-icons';
-import { Button, Checkbox, CheckboxGroup, Flex, Popover, Separator, Text } from '@radix-ui/themes';
+import { SlidersHorizontal } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 
 type Repository = {
   id: string;
@@ -21,6 +23,18 @@ const RepositoriesSelector = ({
   onSelectedRepositoriesChange,
   ...props
 }: Props & React.ComponentProps<typeof Button>) => {
+  const [open, setOpen] = useState(false);
+  const popoverRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const onDocClick = (e: MouseEvent) => {
+      if (popoverRef.current && !popoverRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', onDocClick);
+    return () => document.removeEventListener('mousedown', onDocClick);
+  }, []);
+
   const handleSelectAllToggle = () => {
     if (selectedRepositories.length === repositories.length) {
       onSelectedRepositoriesChange([]);
@@ -30,38 +44,41 @@ const RepositoriesSelector = ({
   };
 
   return (
-    <Popover.Root>
-      <Popover.Trigger>
-        <Button variant="soft" {...(props as React.ComponentProps<typeof Button>)}>
-          <MixerHorizontalIcon />
-          Repositories
-        </Button>
-      </Popover.Trigger>
-      <Popover.Content>
-        <Text as="label" size="2">
-          <Flex as="span" gap="2">
-            <Checkbox
+    <div className="relative inline-block">
+      <Button variant="secondary" onClick={() => setOpen((v) => !v)} {...(props as React.ComponentProps<typeof Button>)}>
+        <SlidersHorizontal className="mr-2 h-4 w-4" /> Repositories
+      </Button>
+      {open && (
+        <div ref={popoverRef} className="absolute z-50 mt-2 w-64 rounded-md border bg-popover p-3 text-popover-foreground shadow-md">
+          <label className="flex items-center gap-2 text-sm">
+            <input
+              type="checkbox"
               checked={selectedRepositories.length === repositories.length}
-              onCheckedChange={handleSelectAllToggle}
-            />{' '}
+              onChange={handleSelectAllToggle}
+            />
             Select/Unselect All
-          </Flex>
-        </Text>
-
-        <Separator size="4" my="2" />
-
-        <CheckboxGroup.Root
-          value={selectedRepositories}
-          onValueChange={onSelectedRepositoriesChange}
-        >
-          {repositories.map(({ id, name, owner }) => (
-            <CheckboxGroup.Item key={id} value={id}>
-              {owner}/{name}
-            </CheckboxGroup.Item>
-          ))}
-        </CheckboxGroup.Root>
-      </Popover.Content>
-    </Popover.Root>
+          </label>
+          <Separator className="my-2" />
+          <div className="flex max-h-60 flex-col gap-2 overflow-auto text-sm">
+            {repositories.map(({ id, name, owner }) => (
+              <label key={id} className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={selectedRepositories.includes(id)}
+                  onChange={(e) => {
+                    const checked = e.target.checked;
+                    onSelectedRepositoriesChange(
+                      checked ? [...selectedRepositories, id] : selectedRepositories.filter((x) => x !== id)
+                    );
+                  }}
+                />
+                {owner}/{name}
+              </label>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 

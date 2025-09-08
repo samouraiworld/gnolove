@@ -1,5 +1,6 @@
-import { ExternalLinkIcon } from '@radix-ui/react-icons';
-import { Flex, FlexProps, Progress, Text } from '@radix-ui/themes';
+import { ExternalLink } from 'lucide-react';
+import { Progress } from '@/components/ui/progress';
+import React from 'react';
 
 import { TMilestone } from '@/utils/schemas';
 
@@ -7,23 +8,20 @@ export interface MilestoneProgressProps {
   milestone: TMilestone;
 }
 
-const MilestoneProgress = ({ milestone, ...props }: MilestoneProgressProps & FlexProps) => {
+const MilestoneProgress = ({ milestone, className, ...props }: MilestoneProgressProps & React.HTMLAttributes<HTMLDivElement>) => {
   const closedIssues = milestone.issues.filter(({ state }) => state === 'CLOSED');
   const openIssues = milestone.issues.filter(({ state }) => state === 'OPEN');
 
   const progress = (closedIssues.length / (openIssues.length + closedIssues.length)) * 100;
 
   return (
-    <Flex direction="column" gap="2" {...props}>
-      <Flex align="center" justify="center" gap="2">
-        <Text weight="bold">
-          {milestone.title} ({progress.toFixed(2)}%)
-        </Text>
-        <ExternalLinkIcon className="text-blue-10" />
-      </Flex>
-
-      <Progress className="w-full" color="green" value={progress} />
-    </Flex>
+    <div className={`flex flex-col gap-2 ${className ?? ''}`} {...props}>
+      <div className="flex items-center justify-center gap-2">
+        <span className="font-bold">{milestone.title} ({progress.toFixed(2)}%)</span>
+        <ExternalLink className="h-4 w-4 text-primary" />
+      </div>
+      <Progress className="w-full" value={progress} />
+    </div>
   );
 };
 

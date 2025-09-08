@@ -2,7 +2,7 @@
 
 import { ReactElement, useMemo, useState } from 'react';
 
-import { Avatar, Card, Flex, Heading, Text } from '@radix-ui/themes';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { parseISO, compareAsc } from 'date-fns';
 import { ArrowDownToLine } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Customized, CustomizedProps } from 'recharts';
@@ -135,7 +135,12 @@ const AnalyticsContributorLineChart = ({ contributors, timeFilter }: Props) => {
               height={35}
               className="pointer-events-none"
             >
-              <Avatar src={avatarUrl} fallback={login[0]} size="1" radius="full" />
+              <div className="h-[24px] w-[24px] overflow-hidden rounded-full">
+                <Avatar>
+                  <AvatarImage src={avatarUrl} alt={login} />
+                  <AvatarFallback>{login[0]}</AvatarFallback>
+                </Avatar>
+              </div>
             </foreignObject>
           );
         })}
@@ -150,10 +155,10 @@ const AnalyticsContributorLineChart = ({ contributors, timeFilter }: Props) => {
   }, [data, activityType]);
 
   return (
-    <Card className="h-[500px] w-full max-w-[650px] px-0">
-      <Heading size="3" align="center">
-        <ActivityTypeSelector onActivityTypeChange={setActivityType} mb="3" display="inline-flex" /> activity
-      </Heading>
+    <div className="h-[500px] w-full max-w-[650px] px-0 border rounded-md">
+      <h2 className="py-3 text-center text-lg font-semibold">
+        <ActivityTypeSelector onActivityTypeChange={setActivityType} className="mb-3 inline-flex" /> activity
+      </h2>
       <ResponsiveContainer minWidth={0} height="100%">
         <LineChart data={data} margin={{ top: 10, right: 40, bottom: 42, left: -10 }}>
           <XAxis
@@ -171,14 +176,14 @@ const AnalyticsContributorLineChart = ({ contributors, timeFilter }: Props) => {
                 renderEntries={(payload) => {
                   const sortedPayload = (payload as Entry[]).slice().sort((a, b) => b.value - a.value);
                   return sortedPayload.map((entry, index) => (
-                    <Flex key={index} gap="1">
-                      <Text size="1" style={{ color: entry.color }}>
+                    <div key={index} className="flex items-center gap-1">
+                      <span className="text-xs" style={{ color: entry.color }}>
                         {entry.name}:
-                      </Text>
-                      <Text size="1" weight="bold" style={{ color: entry.color }}>
+                      </span>
+                      <span className="text-xs font-bold" style={{ color: entry.color }}>
                         {entry.value}
-                      </Text>
-                    </Flex>
+                      </span>
+                    </div>
                   ));
                 }}
               />
@@ -200,7 +205,7 @@ const AnalyticsContributorLineChart = ({ contributors, timeFilter }: Props) => {
       <CSVExportButton className="absolute right-4 top-2" data={data} filename={filename}>
         <ArrowDownToLine size={20} />
       </CSVExportButton>
-    </Card>
+    </div>
   );
 };
 

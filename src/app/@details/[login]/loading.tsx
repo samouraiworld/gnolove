@@ -1,14 +1,14 @@
 'use client';
 
 import Loader from '@/elements/loader';
-import { Dialog, Flex } from '@radix-ui/themes';
+import { DialogTitle } from '@/components/ui/dialog';
 
 const Loading = () => {
   return (
-    <Flex align='center' gap='2'>
-      <Dialog.Title mb='0'>Loading...</Dialog.Title>
+    <div className='flex items-center gap-2'>
+      <DialogTitle className='m-0'>Loading...</DialogTitle>
       <Loader width={24} height={24} />
-    </Flex>
+    </div>
   );
 };
 

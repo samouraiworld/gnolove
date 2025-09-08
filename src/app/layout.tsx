@@ -3,14 +3,11 @@ import { ReactNode } from 'react';
 
 import { ThemeProvider } from 'next-themes';
 
-import { LinkNone2Icon } from '@radix-ui/react-icons';
-import { Box, Button, Flex, Theme } from '@radix-ui/themes';
+import { Link2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 import ThemeSwitch from '@/modules/theme-switch';
-
-import Toaster from '@/elements/toast';
-
-import ToastProvider from '@/contexts/toast-context';
+import { Toaster } from '@/components/ui/sonner';
 
 import { AdenaAddress } from '@/modules/adena-address';
 import { GithubLink } from '@/modules/github-link';
@@ -23,15 +20,16 @@ import { Analytics } from '@vercel/analytics/next';
 
 import { OfflineProvider } from '@/contexts/offline-context';
 import OfflineBanner from '@/elements/offline-banner';
+import { TooltipProvider } from '@/components/ui/tooltip';
 
 interface RootLayoutProps {
-  children?: ReactNode;
-  details?: ReactNode;
+  children: ReactNode;
+  details: ReactNode;
 }
 
 const RootLayout = ({ children, details }: RootLayoutProps) => {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -45,47 +43,35 @@ const RootLayout = ({ children, details }: RootLayoutProps) => {
         <OfflineProvider>
           <QueryClientWrapper>
             <ThemeProvider defaultTheme="light" attribute="class">
-              <Theme>
-                <ToastProvider>
-                  <AdenaProvider>
-                    <Toaster />
+              <TooltipProvider>
+                <AdenaProvider>
+                  <div className="fixed top-0 left-0 w-full p-2 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
+                    <div className="flex items-center justify-between">
+                      <MobileNavDrawer />
+                      <NavHeader />
+                      <div className="flex items-center justify-end gap-2">
+                        <div className="hidden items-center gap-2">
+                          <AdenaAddress />
 
-                    <Box
-                      position="fixed"
-                      top="0"
-                      left="0"
-                      width="100%"
-                      p="2"
-                      className="z-50"
-                      style={{ background: 'var(--accent-1)', borderBottom: '1px solid var(--gray-a3)' }}
-                    >
-                      <Flex justify="between" align="center">
+                          <GithubLink>
+                            <Button variant="secondary" size="sm" className="gap-2">
+                              <Link2 className="h-4 w-4" />
+                              Link Github Account
+                            </Button>
+                          </GithubLink>
+                        </div>
 
-                        <MobileNavDrawer />
-                        <NavHeader />
-                        <Flex gap="2" align="center" justify="end">
-                          <Flex gap="2" align="center" hidden>
-                            <AdenaAddress />
+                        <ThemeSwitch />
+                      </div>
+                    </div>
+                  </div>
 
-                            <GithubLink>
-                              <Button variant="soft">
-                                <LinkNone2Icon />
-                                Link Github Account
-                              </Button>
-                            </GithubLink>
-                          </Flex>
+                  {children}
 
-                          <ThemeSwitch />
-                        </Flex>
-                      </Flex>
-                    </Box>
-
-                    {children}
-
-                    {details}
-                  </AdenaProvider>
-                </ToastProvider>
-              </Theme>
+                  {details}
+                </AdenaProvider>
+              </TooltipProvider>
+              <Toaster />
             </ThemeProvider>
           </QueryClientWrapper>
           <OfflineBanner />

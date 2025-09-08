@@ -1,9 +1,10 @@
-import { Table } from '@radix-ui/themes';
+import React from 'react';
+import { TableCell } from '@/components/ui/table';
 
-const Cell = ({ children, ...props }: React.ComponentProps<typeof Table.Cell>) => (
-  <Table.Cell p={{ initial: '1', xs: '1', sm: '3' }} {...props}>
+const Cell = ({ children, className, ...props }: React.ComponentProps<typeof TableCell>) => (
+  <TableCell className={`p-2 sm:p-3 ${className ?? ''}`} {...props}>
     {children}
-  </Table.Cell>
+  </TableCell>
 );
 
 export default Cell;

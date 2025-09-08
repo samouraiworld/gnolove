@@ -1,6 +1,7 @@
 'use client';
 
-import { Dialog, Button, Flex, IconButton } from '@radix-ui/themes';
+import { Dialog, DialogContent, DialogClose, DialogDescription, DialogTitle } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
 import { useOffline } from '@/contexts/offline-context';
 
@@ -8,23 +9,22 @@ const ErrorPage = ({ reset }: { reset: () => void }) => {
   const { isOffline } = useOffline();
 
   return (
-    <Flex direction='column' align='center' gap='4'>
-      <Dialog.Close className='absolute top-2 right-4'>
-        <IconButton disabled={isOffline} variant='outline' color='gray' size='1'>
-          <X size={16} />
-        </IconButton>
-      </Dialog.Close>
-      <Dialog.Title mb='0'>Something went wrong!</Dialog.Title>
-      <Dialog.Description>
-        We&apos;re sorry, but an unexpected error occurred. Please try again later.
-      </Dialog.Description>
-      <Button
-        onClick={reset}
-        style={{ width: '200px' }}
-      >
-        Try again
-      </Button>
-    </Flex>
+    <Dialog open>
+      <DialogContent>
+        <DialogClose asChild>
+          <Button disabled={isOffline} variant='outline' size='icon' className='absolute right-4 top-2'>
+            <X className='h-4 w-4' />
+          </Button>
+        </DialogClose>
+        <DialogTitle>Something went wrong!</DialogTitle>
+        <DialogDescription>
+          We&apos;re sorry, but an unexpected error occurred. Please try again later.
+        </DialogDescription>
+        <Button onClick={reset} className='w-[200px]'>
+          Try again
+        </Button>
+      </DialogContent>
+    </Dialog>
   );
 };
 

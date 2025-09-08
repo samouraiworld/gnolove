@@ -2,8 +2,8 @@
 
 import Image from 'next/image';
 
-import { ExternalLinkIcon } from '@radix-ui/react-icons';
-import { Flex, Table, Text } from '@radix-ui/themes';
+import { ExternalLink } from 'lucide-react';
+import { TableRow } from '@/components/ui/table';
 
 import Cell from '@/components/elements/cell';
 
@@ -20,9 +20,9 @@ const UserRow = ({ user }: UserRowProps) => {
   };
 
   return (
-    <Table.Row className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-gray-a-2" key={user.id}>
+    <TableRow className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-muted/50" key={user.id}>
       <Cell data-href={user.url} onClick={onClick}>
-        <Flex width="100%" height="100%" align="center" gap="2">
+        <div className="w-full h-full flex items-center gap-2">
           <Image
             src={user.avatarUrl}
             alt={`${user.login} avatar url`}
@@ -31,12 +31,12 @@ const UserRow = ({ user }: UserRowProps) => {
             className="-my-1 shrink-0 overflow-hidden rounded-full"
           />
 
-          <Text className="w-full truncate">{user.name || user.login}</Text>
+          <span className="w-full truncate">{user.name || user.login}</span>
 
-          <ExternalLinkIcon className="shrink-0 text-blue-10" />
-        </Flex>
+          <ExternalLink className="h-4 w-4 shrink-0 text-primary" />
+        </div>
       </Cell>
-    </Table.Row>
+    </TableRow>
   );
 };
 

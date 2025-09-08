@@ -2,8 +2,7 @@
 
 import { useMemo } from 'react';
 
-import { ChatBubbleIcon, CommitIcon, MixerVerticalIcon } from '@radix-ui/react-icons';
-import { Card, Flex, Heading, Text } from '@radix-ui/themes';
+import { MessageSquare, GitCommit, GitPullRequest } from 'lucide-react';
 import { ArrowDownToLine } from 'lucide-react';
 import { ResponsiveContainer, BarChart, XAxis, YAxis, Tooltip, Bar } from 'recharts';
 
@@ -35,29 +34,23 @@ const renderActivityEntries = (payload: any[], _label?: string | number) => {
   if (!payload || !payload[0]) return null;
   const p = payload[0].payload as ActivityDataPoint;
   return (
-    <Flex direction="column" gap="3">
-      <Flex gap="1">
-        <CommitIcon />
-        <Text size="1">Commits: </Text>
-        <Text size="1" weight="bold">
-          {p.commits}
-        </Text>
-      </Flex>
-      <Flex gap="1">
-        <ChatBubbleIcon />
-        <Text size="1">Issues: </Text>
-        <Text size="1" weight="bold">
-          {p.issues}
-        </Text>
-      </Flex>
-      <Flex gap="1">
-        <MixerVerticalIcon />
-        <Text size="1">PRs: </Text>
-        <Text size="1" weight="bold">
-          {p.prs}
-        </Text>
-      </Flex>
-    </Flex>
+    <div className="flex flex-col gap-3">
+      <div className="flex items-center gap-1">
+        <GitCommit className="h-4 w-4" />
+        <span className="text-xs">Commits: </span>
+        <span className="text-xs font-bold">{p.commits}</span>
+      </div>
+      <div className="flex items-center gap-1">
+        <MessageSquare className="h-4 w-4" />
+        <span className="text-xs">Issues: </span>
+        <span className="text-xs font-bold">{p.issues}</span>
+      </div>
+      <div className="flex items-center gap-1">
+        <GitPullRequest className="h-4 w-4" />
+        <span className="text-xs">PRs: </span>
+        <span className="text-xs font-bold">{p.prs}</span>
+      </div>
+    </div>
   );
 };
 
@@ -101,10 +94,8 @@ const AnalyticsRecentActivity = ({ contributors, timeFilter }: Props) => {
   }, [data]);
 
   return (
-    <Card className="h-[500px] w-full min-w-[350px] max-w-[650px] px-0">
-      <Heading size="3" align="center">
-        Recent activity
-      </Heading>
+    <div className="h-[500px] w-full min-w-[350px] max-w-[650px] px-0 border rounded-md">
+      <h2 className="py-3 text-center text-lg font-semibold">Recent activity</h2>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} margin={{ top: 10, right: 40, bottom: 20, left: -10 }}>
           <XAxis
@@ -130,9 +121,7 @@ const AnalyticsRecentActivity = ({ contributors, timeFilter }: Props) => {
                 renderLabel={(_label: string | number | undefined, payload?: any[]) => {
                   const date = payload?.[0]?.payload?.date;
                   return date ? (
-                    <Text size="2" weight="bold">
-                      {date}
-                    </Text>
+                    <span className="text-sm font-bold">{date}</span>
                   ) : null;
                 }}
               />
@@ -146,7 +135,7 @@ const AnalyticsRecentActivity = ({ contributors, timeFilter }: Props) => {
       <CSVExportButton className="absolute right-4 top-2" data={data} filename={filename}>
         <ArrowDownToLine size={20} />
       </CSVExportButton>
-    </Card>
+    </div>
   );
 };
 

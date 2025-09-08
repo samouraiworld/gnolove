@@ -5,8 +5,11 @@ import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 
-import { CheckIcon, Link1Icon } from '@radix-ui/react-icons';
-import { Badge, Button, Flex, FlexProps, Switch, Tabs, Text } from '@radix-ui/themes';
+import { Check, Link as LinkIcon } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Switch } from '@/components/ui/switch';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import ContributorTable from '@/modules/contributor-table';
 
@@ -28,12 +31,12 @@ const TIMEFILTER_MAP = {
 
 const fallbackMessages = [
   'Be the first to contribute during this period!',
-  'This gnome team is still warming up... 🔧',
+  'This gnome team is still warming up... ',
   'No activity yet — check back soon!',
-  'No gnomes contributed during this time — maybe they’re on a break? 🧙‍♂️',
+  'No gnomes contributed during this time — maybe they’re on a break? ',
 ];
 
-const Scoreboard = ({ ...props }: FlexProps) => {
+const Scoreboard = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
   const router = useRouter();
   const [copied, setCopied] = useState(false);
   const [fallbackMessage, setFallbackMessage] = useState('');
@@ -85,59 +88,51 @@ const Scoreboard = ({ ...props }: FlexProps) => {
   };
 
   return (
-    <Flex direction="column" {...props}>
-      <Tabs.Root value={timeFilter} onValueChange={(value) => setTimeFilter(value as TimeFilter)} mb="4">
-        <Tabs.List justify="center">
+    <div className="flex flex-col" {...props}>
+      <Tabs value={timeFilter} onValueChange={(value) => setTimeFilter(value as TimeFilter)} className="mb-4">
+        <TabsList className="justify-center">
           {Object.values(TimeFilter).map((value) => (
-            <Tabs.Trigger value={value} key={value}>
+            <TabsTrigger value={value} key={value}>
               {TIMEFILTER_MAP[value]}
-            </Tabs.Trigger>
+            </TabsTrigger>
           ))}
-        </Tabs.List>
-      </Tabs.Root>
+        </TabsList>
+      </Tabs>
 
-      <Flex
-        direction={{ initial: 'column', sm: 'row' }}
-        gap="2"
-        width="100%"
-        justify={{ initial: 'start', sm: 'between' }}
-        align={{ initial: 'start', sm: 'center' }}
-      >
-        <label htmlFor="excludeCoreTeam" className="my-2 flex flex-1 items-center gap-1">
+      <div className="flex w-full flex-col items-start gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <label htmlFor="excludeCoreTeam" className="my-2 flex flex-1 items-center gap-2">
           <Switch checked={exclude} onCheckedChange={setExclude} id="excludeCoreTeam" />
           <span className="flex items-center gap-2">
             Hide the <Badge>Core team</Badge>
           </span>
         </label>
 
-        <Button onClick={handleCopyUrl} variant="soft" mb="2">
-          {copied ? <CheckIcon /> : <Link1Icon />}
+        <Button onClick={handleCopyUrl} variant="secondary" className="mb-2 inline-flex items-center gap-2">
+          {copied ? <Check className="h-4 w-4" /> : <LinkIcon className="h-4 w-4" />}
           Share this board
         </Button>
 
-        <Flex mb="2" flexGrow="1" className="flex-1" justify="end" align="center">
+        <div className="mb-2 flex flex-1 items-center justify-end">
           <RepositoriesSelector
             repositories={repositories}
             selectedRepositories={selectedRepositories}
             onSelectedRepositoriesChange={setSelectedRepositories}
           />
-        </Flex>
-      </Flex>
+        </div>
+      </div>
 
       {isPending ? (
-        <Flex my="9" justify="center" align="center">
+        <div className="my-9 flex items-center justify-center">
           <Loader />
-        </Flex>
+        </div>
       ) : filteredContributors.length ? (
         <ContributorTable contributors={filteredContributors} sort showRank />
       ) : (
-        <Flex my="9" justify="center" align="center">
-          <Text className="italic" color="gray">
-            {fallbackMessage}
-          </Text>
-        </Flex>
+        <div className="my-9 flex items-center justify-center">
+          <span className="italic text-muted-foreground">{fallbackMessage}</span>
+        </div>
       )}
-    </Flex>
+    </div>
   );
 };
 

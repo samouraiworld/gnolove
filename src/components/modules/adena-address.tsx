@@ -1,6 +1,6 @@
 'use client';
 
-import { Text } from '@radix-ui/themes';
+import React from 'react';
 
 import { useAdena } from '@/contexts/adena-context';
 import Loader from '@/elements/loader';
@@ -11,10 +11,8 @@ export const AdenaAddress = () => {
   if (isLoading) return <Loader />;
   if (!adena)
     return (
-      <Text color="yellow" size="2">
-        Adena not installed
-      </Text>
+      <span className="text-sm text-yellow-500">Adena not installed</span>
     );
 
-  return <Text color="green">Adena installed</Text>;
+  return <span className="text-green-600">Adena installed</span>;
 };

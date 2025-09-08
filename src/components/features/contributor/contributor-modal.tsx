@@ -1,6 +1,6 @@
 'use client';
 
-import { Dialog } from '@radix-ui/themes';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 import { useRouter } from 'next/navigation';
 import { FC } from 'react';
 
@@ -16,15 +16,11 @@ const ContributorModal: FC<{ children: React.ReactNode }> = ({ children }) => {
   };
 
   return (
-    <Dialog.Root defaultOpen onOpenChange={handleClose}>
-      <Dialog.Content
-        maxHeight='88vh'
-        maxWidth='1000px'
-        style={{ overflow: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
-      >
+    <Dialog defaultOpen onOpenChange={handleClose}>
+      <DialogContent>
         { children }
-      </Dialog.Content>
-    </Dialog.Root>
+      </DialogContent>
+    </Dialog>
   );
 };
 

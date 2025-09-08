@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { Card, Box, Flex, Text } from '@radix-ui/themes';
 import { type TooltipProps } from 'recharts';
 
 // @TODO remove the any typing when recharts allows for better typing. (unknown typing doesn't satisfy ValueType constraints)
@@ -19,31 +18,29 @@ const RechartTooltip = (props: RechartTooltipProps) => {
   if (!active || !payload || !payload.length) return null;
 
   return (
-    <Card>
-      <Box mb="2">
+    <div className="rounded-md border bg-popover p-3 text-popover-foreground shadow-md">
+      <div className="mb-2">
         {renderLabel ? (
           renderLabel(label, payload)
         ) : (
-          <Text size="2" weight="bold">
-            {label}
-          </Text>
+          <span className="text-sm font-bold">{label}</span>
         )}
-      </Box>
-      <Flex direction="column" gap="2">
+      </div>
+      <div className="flex flex-col gap-2">
         {renderEntries
           ? renderEntries(payload, label)
           : payload.map((entry: any, i: number) => (
-            <Flex key={i} gap="2">
-              <Text size="1" style={{ color: entry.color }}>
+            <div key={i} className="flex items-center gap-2">
+              <span className="text-xs" style={{ color: entry.color }}>
                 {entry.name}:
-              </Text>
-              <Text size="1" weight="bold" style={{ color: entry.color }}>
+              </span>
+              <span className="text-xs font-bold" style={{ color: entry.color }}>
                 {entry.value}
-              </Text>
-            </Flex>
+              </span>
+            </div>
           ))}
-      </Flex>
-    </Card>
+      </div>
+    </div>
   );
 };
 

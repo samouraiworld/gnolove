@@ -2,8 +2,10 @@
 
 import { useMemo, useState } from 'react';
 
-import { ArrowLeftIcon, ArrowRightIcon } from '@radix-ui/react-icons';
-import { Button, Dialog, Flex, Table, Text } from '@radix-ui/themes';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@/components/ui/table';
 
 import Label from '@/elements/label';
 
@@ -13,7 +15,7 @@ import { getIssueOrPRScore } from '@/utils/score';
 
 import useGetScoreFactors from '@/hooks/use-get-score-factors';
 
-export interface ContributionsDialogProps extends Dialog.RootProps {
+export interface ContributionsDialogProps extends React.ComponentProps<typeof Dialog> {
   user: TEnhancedUserWithStats;
 }
 
@@ -23,7 +25,7 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
   const [page, setPage] = useState(0);
 
   const issuesAndPRsChunks = useMemo((): (TIssue | TPullRequest)[][] => {
-    const sortedIssuesAndPRs = [...(user.issues ?? []), ...(user.pullRequests ?? [])].toSorted(
+    const sortedIssuesAndPRs = [...(user.issues ?? []), ...(user.pullRequests ?? [])].sort(
       (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
     );
 
@@ -34,121 +36,95 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
   const maxPage = useMemo(() => issuesAndPRsChunks.length, [issuesAndPRsChunks]);
 
   return (
-    <Dialog.Root {...props}>
-      <Dialog.Trigger>{children}</Dialog.Trigger>
+    <Dialog {...props}>
+      <DialogTrigger asChild>{children}</DialogTrigger>
 
-      <Dialog.Content maxWidth="550px">
-        <Dialog.Title>{user.name || user.login} contributions</Dialog.Title>
-        <Dialog.Description size="2" mb="4">
+      <DialogContent className="max-w-[550px]">
+        <DialogTitle>{user.name || user.login} contributions</DialogTitle>
+        <DialogDescription className="mb-4">
           Get information about all the contribution
-        </Dialog.Description>
+        </DialogDescription>
 
         {maxPage === 0 ? (
-          <Flex justify="center" align="center" py="6">
-            <Text size="2" color="gray" className="italic">
-              Could not find any contributions...
-            </Text>
-          </Flex>
+          <div className="flex items-center justify-center py-6">
+            <span className="italic text-sm text-muted-foreground">Could not find any contributions...</span>
+          </div>
         ) : (
           <>
-            <Table.Root size="1">
-              <Table.Body>
+            <Table>
+              <TableBody>
                 {issuesAndPRs.map((issueOrPR) => (
-                  <Table.Row
+                  <TableRow
                     key={issueOrPR.url}
                     onClick={() => window.open(issueOrPR.url, '_blank')}
-                    className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-gray-a-2"
+                    className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-muted/50"
                   >
-                    <Table.Cell>
-                      <Flex direction="column" py="2" gap="1">
-                        <Text size="1" className="text-wrap">
-                          {issueOrPR.title}
-                        </Text>
-                        <Flex gap="1" wrap="wrap">
+                    <TableCell>
+                      <div className="flex flex-col gap-1 py-2">
+                        <span className="text-xs break-words">{issueOrPR.title}</span>
+                        <div className="flex flex-wrap gap-1">
                           {'labels' in issueOrPR &&
                             issueOrPR.labels.map((label) => <Label key={label.name + label.color} label={label} />)}
-                        </Flex>
-                      </Flex>
-                    </Table.Cell>
-                    <Table.Cell>
-                      <Flex direction="column" height="100%" justify="center" py="2" gap="1">
-                        <Text size="1">+{getIssueOrPRScore(issueOrPR, scoreFactors)} points</Text>
-                      </Flex>
-                    </Table.Cell>
-                  </Table.Row>
+                        </div>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex h-full flex-col justify-center gap-1 py-2 text-xs">
+                        <span>+{getIssueOrPRScore(issueOrPR, scoreFactors)} points</span>
+                      </div>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </Table.Body>
-            </Table.Root>
+              </TableBody>
+            </Table>
 
-            <Flex width="100%" justify="between" align="center" mt="4">
-              <Button disabled={!page} onClick={() => setPage((p) => p - 1)} className="w-1/3" variant="soft">
-                <ArrowLeftIcon />
-                Previous
+            <div className="mt-4 flex w-full items-center justify-between">
+              <Button disabled={!page} onClick={() => setPage((p) => p - 1)} className="w-1/3" variant="secondary">
+                <ArrowLeft className="mr-2 h-4 w-4" /> Previous
               </Button>
 
-              <Text>
+              <span className="text-sm">
                 {page + 1}/{maxPage}
-              </Text>
+              </span>
 
               <Button
                 disabled={page + 1 === maxPage}
                 onClick={() => setPage((p) => p + 1)}
                 className="w-1/3"
-                variant="soft"
+                variant="secondary"
               >
-                Next
-                <ArrowRightIcon />
+                Next <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-            </Flex>
+            </div>
 
-            <Table.Root size="1" mt="3">
-              <Table.Body>
-                <Table.Row>
-                  <Table.RowHeaderCell>
-                    <Text size="1">Commits score</Text>
-                  </Table.RowHeaderCell>
-                  <Table.Cell align="right">
-                    <Text size="1">{user.TotalCommits * (scoreFactors?.commitFactor ?? 0)} points</Text>
-                  </Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                  <Table.RowHeaderCell>
-                    <Text size="1">PRs score</Text>
-                  </Table.RowHeaderCell>
-                  <Table.Cell align="right">
-                    <Text size="1">{user.TotalPrs * (scoreFactors?.prFactor ?? 0)} points</Text>
-                  </Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                  <Table.RowHeaderCell>
-                    <Text size="1">Reviewed MRs score</Text>
-                  </Table.RowHeaderCell>
-                  <Table.Cell align="right">
-                    <Text size="1">{user.TotalReviewedPullRequests * (scoreFactors?.reviewedPrFactor ?? 0)} points</Text>
-                  </Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                  <Table.RowHeaderCell>
-                    <Text size="1">Issues score</Text>
-                  </Table.RowHeaderCell>
-                  <Table.Cell align="right">
-                    <Text size="1">{user.TotalIssues * (scoreFactors?.issueFactor ?? 0)} points</Text>
-                  </Table.Cell>
-                </Table.Row>
-                <Table.Row>
-                  <Table.ColumnHeaderCell>
-                    <Text size="1">Total</Text>
-                  </Table.ColumnHeaderCell>
-                  <Table.ColumnHeaderCell align="right">
-                    <Text size="1">{user.score} points</Text>
-                  </Table.ColumnHeaderCell>
-                </Table.Row>
-              </Table.Body>
-            </Table.Root>
+            <Table className="mt-3">
+              <TableBody>
+                <TableRow>
+                  <TableHead>Commits score</TableHead>
+                  <TableCell className="text-right">{user.TotalCommits * (scoreFactors?.commitFactor ?? 0)} points</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableHead>PRs score</TableHead>
+                  <TableCell className="text-right">{user.TotalPrs * (scoreFactors?.prFactor ?? 0)} points</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableHead>Reviewed MRs score</TableHead>
+                  <TableCell className="text-right">{user.TotalReviewedPullRequests * (scoreFactors?.reviewedPrFactor ?? 0)} points</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableHead>Issues score</TableHead>
+                  <TableCell className="text-right">{user.TotalIssues * (scoreFactors?.issueFactor ?? 0)} points</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableHead>Total</TableHead>
+                  <TableHead className="text-right">{user.score} points</TableHead>
+                </TableRow>
+              </TableBody>
+            </Table>
           </>
         )}
-      </Dialog.Content>
-    </Dialog.Root>
+      </DialogContent>
+    </Dialog>
   );
 };
 

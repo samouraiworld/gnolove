@@ -1,4 +1,4 @@
-import { Table } from '@radix-ui/themes';
+import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 import UserRow from '@/modules/user-row';
 
@@ -12,21 +12,21 @@ export interface UserTableProps {
 
 const UserTable = ({ users, showHeader }: UserTableProps) => {
   return (
-    <Table.Root layout="auto">
+    <Table>
       {showHeader && (
-        <Table.Header>
-          <Table.Row>
-            <Table.ColumnHeaderCell className="w-full">Username</Table.ColumnHeaderCell>
-          </Table.Row>
-        </Table.Header>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-full">Username</TableHead>
+          </TableRow>
+        </TableHeader>
       )}
 
-      <Table.Body>
+      <TableBody>
         {users.map((user) => (
           <UserRow key={user.id} user={user} />
         ))}
-      </Table.Body>
-    </Table.Root>
+      </TableBody>
+    </Table>
   );
 };
 

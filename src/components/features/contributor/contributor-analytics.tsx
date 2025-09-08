@@ -3,7 +3,7 @@
 import { useMemo } from 'react';
 
 import ContributionsHeatmap from './contributions-heatmap';
-import { Box, Flex, Grid, Card, Text, Heading } from '@radix-ui/themes';
+import React from 'react';
 import { ArrowDownToLine } from 'lucide-react';
 import {
   Bar,
@@ -104,16 +104,14 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
   }, [contributor.contributionsPerDay]);
 
   return (
-    <Card style={{ height: '100%' }}>
-      <Flex direction="column" gap="4" height="100%" overflowY="auto">
-        <Card style={{ minHeight: 260 }}>
-          <Flex direction="column" gap="3">
-            <Heading size="3">Contribution Activity</Heading>
-            <Text size="2" color="gray">
-              Daily contributions over the past year
-            </Text>
+    <div className="h-full rounded-md border">
+      <div className="flex h-full flex-col gap-4 overflow-y-auto p-4">
+        <div className="relative min-h-[260px] rounded-md border p-3">
+          <div className="flex flex-col gap-3">
+            <h3 className="text-lg font-semibold">Contribution Activity</h3>
+            <p className="text-sm text-muted-foreground">Daily contributions over the past year</p>
             <ContributionsHeatmap data={heatmapData} />
-          </Flex>
+          </div>
           <CSVExportButton
             className="absolute right-2 top-2"
             data={heatmapData}
@@ -121,16 +119,16 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
           >
             <ArrowDownToLine size={20} />
           </CSVExportButton>
-        </Card>
+        </div>
 
         {/* Charts Grid */}
-        <Grid columns={{ initial: '1', lg: '2' }} gap="4">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
           {/* Repository Contributions Bar Chart */}
           {repositoryData.length > 0 && (
-            <Card>
-              <Flex direction="column" gap="3">
-                <Heading size="3">Contributions by Repository</Heading>
-                <Box height="300px">
+            <div className="relative rounded-md border p-3">
+              <div className="flex flex-col gap-3">
+                <h3 className="text-lg font-semibold">Contributions by Repository</h3>
+                <div style={{ height: '300px' }}>
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={repositoryData} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
                       <CartesianGrid strokeDasharray="3 3" stroke="var(--gray-6)" />
@@ -147,8 +145,8 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
                       <Bar dataKey="contributions" fill="var(--accent-9)" radius={[4, 4, 0, 0]} />
                     </BarChart>
                   </ResponsiveContainer>
-                </Box>
-              </Flex>
+                </div>
+              </div>
               <CSVExportButton
                 className="absolute right-2 top-2"
                 data={repositoryData}
@@ -156,13 +154,13 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
               >
                 <ArrowDownToLine size={20} />
               </CSVExportButton>
-            </Card>
+            </div>
           )}
           {/* Contribution Types Donut Chart */}
-          <Card>
-            <Flex direction="column" gap="3">
-              <Heading size="3">Contribution Types</Heading>
-              <Box style={{ height: '300px' }}>
+          <div className="relative rounded-md border p-3">
+            <div className="flex flex-col gap-3">
+              <h3 className="text-lg font-semibold">Contribution Types</h3>
+              <div style={{ height: '300px' }}>
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
@@ -182,7 +180,7 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
                     <Legend verticalAlign="bottom" height={36} wrapperStyle={{ fontSize: '12px' }} />
                   </PieChart>
                 </ResponsiveContainer>
-              </Box>
+              </div>
               <CSVExportButton
                 className="absolute right-2 top-2"
                 data={contributionTypeData}
@@ -190,15 +188,15 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
               >
                 <ArrowDownToLine size={20} />
               </CSVExportButton>
-            </Flex>
-          </Card>
+            </div>
+          </div>
 
           {/* Language Distribution */}
           {languageData.length > 0 && (
-            <Card>
-              <Flex direction="column" gap="3">
-                <Heading size="3">Programming Languages</Heading>
-                <Box style={{ height: '300px' }}>
+            <div className="relative rounded-md border p-3">
+              <div className="flex flex-col gap-3">
+                <h3 className="text-lg font-semibold">Programming Languages</h3>
+                <div style={{ height: '300px' }}>
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
                       <Pie data={languageData} cx="50%" cy="50%" outerRadius={100} dataKey="value">
@@ -210,8 +208,8 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
                       <Legend verticalAlign="bottom" height={36} wrapperStyle={{ fontSize: '12px' }} />
                     </PieChart>
                   </ResponsiveContainer>
-                </Box>
-              </Flex>
+                </div>
+              </div>
               <CSVExportButton
                 className="absolute right-2 top-2"
                 data={languageData}
@@ -219,14 +217,14 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
               >
                 <ArrowDownToLine size={20} />
               </CSVExportButton>
-            </Card>
+            </div>
           )}
 
           {/* Monthly Activity Trend */}
-          <Card>
-            <Flex direction="column" gap="3">
-              <Heading size="3">Monthly Activity Trend</Heading>
-              <Box style={{ height: '300px' }}>
+          <div className="relative rounded-md border p-3">
+            <div className="flex flex-col gap-3">
+              <h3 className="text-lg font-semibold">Monthly Activity Trend</h3>
+              <div style={{ height: '300px' }}>
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={monthlyActivityData} margin={{ top: 20, right: 30, left: -30, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="var(--gray-6)" />
@@ -239,7 +237,7 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
                     <Legend verticalAlign="bottom" height={36} wrapperStyle={{ fontSize: '12px' }} />
                   </BarChart>
                 </ResponsiveContainer>
-              </Box>
+              </div>
               <CSVExportButton
                 className="absolute right-2 top-2"
                 data={monthlyActivityData}
@@ -247,11 +245,11 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
               >
                 <ArrowDownToLine size={20} />
               </CSVExportButton>
-            </Flex>
-          </Card>
-        </Grid>
-      </Flex>
-    </Card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

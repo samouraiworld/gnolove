@@ -3,8 +3,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { HamburgerMenuIcon } from '@radix-ui/react-icons';
-import { Button, Flex, IconButton, Badge, Theme } from '@radix-ui/themes';
+import { Menu } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { Drawer } from 'vaul';
 
 import MinecraftHeart from '@/images/minecraft-heart.png';
@@ -21,43 +22,41 @@ const MobileNavDrawer = () => {
     <div className="md:hidden">
       <Drawer.Root direction="left">
         <Drawer.Trigger asChild>
-          <IconButton variant="ghost" ml="1" className="flex">
-            <HamburgerMenuIcon width="18" height="18" />
-          </IconButton>
+          <Button variant="ghost" size="icon" className="ml-1">
+            <Menu className="h-5 w-5" />
+          </Button>
         </Drawer.Trigger>
 
         <Drawer.Portal>
-          <Theme className="h-full">
-            <Drawer.Overlay className="fixed inset-0 z-100 bg-[rgba(0,0,0,0.4)]" />
+          <Drawer.Overlay className="fixed inset-0 z-[100] bg-black/40" />
 
-            <Drawer.Content className="radix-panel-bg fixed inset-y-0 left-0 z-101 w-3/4 overflow-y-auto p-8 pb-4">
-              <Drawer.Title className="sr-only">Mobile Navigation</Drawer.Title>
-              <Drawer.Description className="sr-only">Use this drawer to navigate through the site.</Drawer.Description>
+          <Drawer.Content className="fixed inset-y-0 left-0 z-[101] w-3/4 overflow-y-auto bg-background p-8 pb-4">
+            <Drawer.Title className="sr-only">Mobile Navigation</Drawer.Title>
+            <Drawer.Description className="sr-only">Use this drawer to navigate through the site.</Drawer.Description>
 
-              <Flex direction="column" justify="between" height="100%" gap="5">
-                <Flex direction="row" justify="between">
-                  <Image src={MinecraftHeart} alt="minecraft heart" width={20} height={20} />
-                </Flex>
+            <div className="flex h-full flex-col justify-between gap-5">
+              <div className="flex flex-row justify-between">
+                <Image src={MinecraftHeart} alt="minecraft heart" width={20} height={20} />
+              </div>
 
-                <Flex direction="column" align="start" gap="6" mt="8" flexGrow="1">
-                  {MENU_ITEMS.map((item) => (
-                    <Drawer.Close asChild key={item.href}>
-                      <Link className={cn(isOffline && 'pointer-events-none')} href={item.href}>
-                        <Button variant="ghost" size="4" asChild>
-                          <span>
-                            {item.label}
-                            {item.new && <Badge color='red'>new</Badge>}
-                          </span>
-                        </Button>
-                      </Link>
-                    </Drawer.Close>
-                  ))}
-                </Flex>
+              <div className="mt-8 flex flex-col items-start gap-6 flex-grow">
+                {MENU_ITEMS.map((item) => (
+                  <Drawer.Close asChild key={item.href}>
+                    <Link className={cn(isOffline && 'pointer-events-none')} href={item.href}>
+                      <Button variant="ghost" size="lg" asChild>
+                        <span>
+                          {item.label}
+                          {item.new && <Badge className="ml-2" variant="destructive">new</Badge>}
+                        </span>
+                      </Button>
+                    </Link>
+                  </Drawer.Close>
+                ))}
+              </div>
 
-                <Footer />
-              </Flex>
-            </Drawer.Content>
-          </Theme>
+              <Footer />
+            </div>
+          </Drawer.Content>
         </Drawer.Portal>
       </Drawer.Root>
     </div>

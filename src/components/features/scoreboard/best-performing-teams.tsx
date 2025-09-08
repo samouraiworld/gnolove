@@ -65,7 +65,7 @@ const BestPerformingTeams = () => {
   };
 
   return (
-    <LayoutContainer mt="5">
+    <LayoutContainer className="mt-5">
       <Flex direction="column" gap="6" my="6">
         <Heading size="6" align="center">🏆 Best Performing Teams</Heading>
         <Flex align="center" justify="center" gap="2">

@@ -2,8 +2,10 @@
 
 import React, { ReactElement, useMemo } from 'react';
 
-import { InfoCircledIcon } from '@radix-ui/react-icons';
-import { Avatar, Card, Flex, Heading, IconButton, Text, Tooltip } from '@radix-ui/themes';
+import { Info } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import {
   BarChart,
   Bar,
@@ -89,32 +91,24 @@ const AnalyticsTopContributorBarChart = ({ contributors, selectedRepositories }:
     if (!payload || !payload[0]) return null;
     const p = payload[0].payload as TopContributorData;
     return (
-      <Flex direction="column" gap="3">
-        <Flex gap="1">
-          <Text size="1">Commits: </Text>
-          <Text size="1" weight="bold">
-            {p.commitsPercentage.toFixed(0)}%
-          </Text>
-        </Flex>
-        <Flex gap="1">
-          <Text size="1">Issues: </Text>
-          <Text size="1" weight="bold">
-            {p.issuesPercentage.toFixed(0)}%
-          </Text>
-        </Flex>
-        <Flex gap="1">
-          <Text size="1">PRs: </Text>
-          <Text size="1" weight="bold">
-            {p.pullRequestsPercentage.toFixed(0)}%
-          </Text>
-        </Flex>
-        <Flex gap="1">
-          <Text size="1">Gnolove Power: </Text>
-          <Text size="1" weight="bold">
-            {p.score.toFixed(0)}
-          </Text>
-        </Flex>
-      </Flex>
+      <div className="flex flex-col gap-3">
+        <div className="flex items-center gap-1">
+          <span className="text-xs">Commits: </span>
+          <span className="text-xs font-bold">{p.commitsPercentage.toFixed(0)}%</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <span className="text-xs">Issues: </span>
+          <span className="text-xs font-bold">{p.issuesPercentage.toFixed(0)}%</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <span className="text-xs">PRs: </span>
+          <span className="text-xs font-bold">{p.pullRequestsPercentage.toFixed(0)}%</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <span className="text-xs">Gnolove Power: </span>
+          <span className="text-xs font-bold">{p.score.toFixed(0)}</span>
+        </div>
+      </div>
     );
   };
 
@@ -135,7 +129,12 @@ const AnalyticsTopContributorBarChart = ({ contributors, selectedRepositories }:
 
           return (
             <foreignObject key={i} x={x} y={y - 34} width={35} height={35} className="pointer-events-none">
-              <Avatar src={c.avatarUrl} fallback={c.login[0]} size="1" radius="full" />
+              <div className="h-[24px] w-[24px] overflow-hidden rounded-full">
+                <Avatar>
+                  <AvatarImage src={c.avatarUrl} alt={c.login} />
+                  <AvatarFallback>{c.login[0]}</AvatarFallback>
+                </Avatar>
+              </div>
             </foreignObject>
           );
         })}
@@ -144,17 +143,20 @@ const AnalyticsTopContributorBarChart = ({ contributors, selectedRepositories }:
   };
 
   return (
-    <Card className="h-[350px] w-full px-0">
-      <Flex justify="center" align="center" gap="2">
-        <Heading size="3" align="center">
-          Top Contributors
-        </Heading>
-        <Tooltip content="The percentages are weighted by the Gnolove score calculation. This means that each contribution type (commits, issues, pull requests) is adjusted using predefined factors to reflect their relative importance in the overall score. This ensures a balanced representation of contributions based on their impact.">
-          <IconButton variant="ghost" radius="full" size="1">
-            <InfoCircledIcon className="cursor-pointer" />
-          </IconButton>
+    <div className="h-[350px] w-full px-0 border rounded-md">
+      <div className="flex items-center justify-center gap-2">
+        <h2 className="text-lg font-semibold text-center">Top Contributors</h2>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="ghost" size="icon" className="h-6 w-6">
+              <Info className="h-4 w-4" />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent className="max-w-xs text-xs">
+            The percentages are weighted by the Gnolove score calculation. This means that each contribution type (commits, issues, pull requests) is adjusted using predefined factors to reflect their relative importance in the overall score. This ensures a balanced representation of contributions based on their impact.
+          </TooltipContent>
         </Tooltip>
-      </Flex>
+      </div>
       <ResponsiveContainer minWidth={0} height="100%">
         <BarChart data={topContributors} layout="horizontal" margin={{ top: 10, right: 20, bottom: 20, left: 0 }}>
           <XAxis type="category" dataKey="login" hide />
@@ -172,7 +174,7 @@ const AnalyticsTopContributorBarChart = ({ contributors, selectedRepositories }:
           <Customized component={AvatarRenderer} />
         </BarChart>
       </ResponsiveContainer>
-    </Card>
+    </div>
   );
 };
 

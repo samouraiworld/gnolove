@@ -2,7 +2,8 @@ import { useMemo } from 'react';
 
 import Image from 'next/image';
 
-import { Flex, Table, Text, Tooltip } from '@radix-ui/themes';
+import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 import ContributorRow from '@/modules/contributor-row';
 
@@ -39,33 +40,39 @@ const ContributorTable = ({ contributors, sort, showRank }: ContributorTableProp
   }, [scoreFactors]);
 
   return (
-    <Table.Root layout="auto" variant='surface'>
-      <Table.Header>
-        <Table.Row>
-          {showRank && <Table.ColumnHeaderCell className="text-center">Rank</Table.ColumnHeaderCell>}
+    <Table>
+      <TableHeader>
+        <TableRow>
+          {showRank && <TableHead className="text-center">Rank</TableHead>}
 
-          <Table.ColumnHeaderCell className="w-full">Username</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="hidden lg:table-cell">Last Activity</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="hidden text-center sm:table-cell">Commits</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="hidden text-center sm:table-cell">Issues</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="hidden text-center sm:table-cell">PRs</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="text-center">
-            <Tooltip className="text-center font-mono" content={tooltipContent}>
-              <Flex width="100%" height="100%" justify="center" align="center" gap="1">
-                <Text className="hidden xs:inline">Gno Love Power</Text> <Image src={MinecraftHeart} alt="minecraft heart " width={12} height={12} />
-              </Flex>
+          <TableHead className="w-full">Username</TableHead>
+          <TableHead className="hidden lg:table-cell">Last Activity</TableHead>
+          <TableHead className="hidden text-center sm:table-cell">Commits</TableHead>
+          <TableHead className="hidden text-center sm:table-cell">Issues</TableHead>
+          <TableHead className="hidden text-center sm:table-cell">PRs</TableHead>
+          <TableHead className="text-center">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div className="w-full h-full flex justify-center items-center gap-1">
+                  <span className="hidden xs:inline">Gno Love Power</span>
+                  <Image src={MinecraftHeart} alt="minecraft heart " width={12} height={12} />
+                </div>
+              </TooltipTrigger>
+              <TooltipContent className="font-mono text-center">
+                {tooltipContent}
+              </TooltipContent>
             </Tooltip>
-          </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell></Table.ColumnHeaderCell>
-        </Table.Row>
-      </Table.Header>
+          </TableHead>
+          <TableHead></TableHead>
+        </TableRow>
+      </TableHeader>
 
-      <Table.Body>
+      <TableBody>
         {(sort ? contributors.sort((a, b) => b.score - a.score) : contributors).slice(0, 50).map((contributor, rank) => (
           <ContributorRow key={contributor.id} {...{ contributor, rank, showRank }} />
         ))}
-      </Table.Body>
-    </Table.Root>
+      </TableBody>
+    </Table>
   );
 };
 

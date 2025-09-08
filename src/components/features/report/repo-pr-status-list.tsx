@@ -1,7 +1,11 @@
 import { TPullRequest } from '@/utils/schemas';
-import { CheckCircledIcon, ExclamationTriangleIcon, InfoCircledIcon, MixerHorizontalIcon, QuestionMarkCircledIcon } from '@radix-ui/react-icons';
-import { Avatar, Box, Flex, Heading, Link, Text, Tooltip, HoverCard, IconButton, Separator } from '@radix-ui/themes';
+import { CheckCircle2, AlertTriangle, Info, SlidersHorizontal, CircleHelp } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 import Image from 'next/image';
+import NextLink from 'next/link';
 import { Status, STATUS_ORDER } from './report-client-page';
 import MinecraftHeart from '@/images/minecraft-heart.png';
 
@@ -14,9 +18,9 @@ const STATUS_TOOLTIPS: Record<Status, string> = {
 };
 
 const REVIEW_DECISION_ICON_MAP = {
-  APPROVED: <CheckCircledIcon color="green" />,
-  CHANGES_REQUESTED: <ExclamationTriangleIcon color="orange" />,
-  REVIEW_REQUIRED: <QuestionMarkCircledIcon color="blue" />,
+  APPROVED: <CheckCircle2 className="text-green-600 h-4 w-4" />,
+  CHANGES_REQUESTED: <AlertTriangle className="text-orange-600 h-4 w-4" />,
+  REVIEW_REQUIRED: <CircleHelp className="text-blue-600 h-4 w-4" />,
   '': <></>,
 };
 
@@ -28,28 +32,27 @@ interface RepoPRStatusListProps {
 
 const RepoPRStatusList = ({ repo, statusMap, isOffline }: RepoPRStatusListProps) => {
   return (
-    <Box key={repo} mb="5" pl={{ initial: '0', sm: '4' }}>
-      <Heading as="h3" size="4" style={{ backgroundColor: 'var(--color-background)' }} className="sticky top-[25px] z-20 py-1">
-        <Flex align="center" gap="2">
-          <MixerHorizontalIcon />
+    <div key={repo} className="mb-5 pl-0 sm:pl-4">
+      <h3 className="sticky top-[25px] z-20 py-1 bg-background text-base font-semibold">
+        <span className="inline-flex items-center gap-2">
+          <SlidersHorizontal className="h-4 w-4" />
           {repo}
-        </Flex>
-      </Heading>
-      <Flex direction="column" gap="4">
+        </span>
+      </h3>
+      <div className="flex flex-col gap-4">
         {STATUS_ORDER.map((status) =>
           statusMap[status] && statusMap[status].length > 0 ? (
-            <Box key={status} pl={{ initial: '0', sm: '2' }}>
-              <Box
-                width="100%"
-                style={{ backgroundColor: 'var(--color-background)' }}
-                className="sticky top-[55px] z-10 py-1 text-center"
-              >
-                <Tooltip content={STATUS_TOOLTIPS[status]}>
-                  <Heading as="h4" size="2" weight="bold" color="gray" className="inline-block cursor-help">
-                    {status.replace(/_/g, ' ').toUpperCase()}
-                  </Heading>
+            <div key={status} className="pl-0 sm:pl-2">
+              <div className="sticky top-[55px] z-10 w-full bg-background py-1 text-center">
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <h4 className="inline-block cursor-help text-sm font-bold text-muted-foreground">
+                      {status.replace(/_/g, ' ').toUpperCase()}
+                    </h4>
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs text-xs">{STATUS_TOOLTIPS[status]}</TooltipContent>
                 </Tooltip>
-              </Box>
+              </div>
               <ul className="sm:pl-4">
                 {[...statusMap[status]]
                   .sort((a, b) => {
@@ -58,112 +61,87 @@ const RepoPRStatusList = ({ repo, statusMap, isOffline }: RepoPRStatusListProps)
                     return aLogin.localeCompare(bLogin);
                   })
                   .map((pr: TPullRequest) => (
-                    <li key={pr.id} className="hover:bg-gray-2">
-                      <Flex
-                        gap="2"
-                        align={{ initial: 'start', sm: 'center' }}
-                        py={{ initial: '2', sm: '1' }}
-                        className="overflow-hidden"
-                        direction={{ initial: 'column', sm: 'row' }}
-                      >
-                        <Flex gap="2">
-                          <Avatar
-                            size="1"
-                            radius="full"
-                            src={pr.authorAvatarUrl}
-                            fallback={pr.authorLogin ? pr.authorLogin[0] : '?'}
-                          />
-                          <Link className="flex items-center" href={isOffline ? '' : `/@${pr.authorLogin}`}>
-                            <Tooltip content={pr.authorLogin}>
-                              <Text
-                                weight="bold"
-                                size="2"
-                              >
-                                {pr.authorLogin}
-                              </Text>
+                    <li key={pr.id} className="hover:bg-muted/50">
+                      <div className="flex flex-col overflow-hidden py-2 sm:flex-row sm:items-center sm:py-1 gap-2">
+                        <div className="flex items-center gap-2">
+                          <div className="h-6 w-6 overflow-hidden rounded-full">
+                            <Avatar>
+                              <AvatarImage src={pr.authorAvatarUrl} alt={pr.authorLogin || ''} />
+                              <AvatarFallback>{pr.authorLogin ? pr.authorLogin[0] : '?'}</AvatarFallback>
+                            </Avatar>
+                          </div>
+                          <NextLink className="flex items-center" href={isOffline ? '' : `/@${pr.authorLogin}`}>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <span className="text-sm font-bold">{pr.authorLogin}</span>
+                              </TooltipTrigger>
+                              <TooltipContent className="text-xs">{pr.authorLogin}</TooltipContent>
                             </Tooltip>
-                          </Link>
-                        </Flex>
-                        <Link className="flex items-center" href={isOffline ? '' : pr.url} target="_blank" rel="noopener noreferrer">
-                          <Tooltip content={pr.title}>
-                            <Text
-                              size="2"
-                            >
-                              {pr.title}
-                            </Text>
+                          </NextLink>
+                        </div>
+                        <a className="flex items-center" href={isOffline ? '' : pr.url} target="_blank" rel="noopener noreferrer">
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <span className="text-sm">{pr.title}</span>
+                            </TooltipTrigger>
+                            <TooltipContent className="text-xs max-w-sm">{pr.title}</TooltipContent>
                           </Tooltip>
-                        </Link>
-                        <Flex ml="auto" align="center" gap="4">
+                        </a>
+                        <div className="ml-auto flex items-center gap-4">
                           {(pr.reviews?.length ?? 0) > 10 && (
-                            <Tooltip content={`Loved PR, Reviewed more than ${pr.reviews?.length ?? 0} times`}>
-                              <Text size="2">
-                                <Image src={MinecraftHeart} alt="minecraft heart " width={12} height={12} />
-                              </Text>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <span className="inline-block">
+                                  <Image src={MinecraftHeart} alt="minecraft heart " width={12} height={12} />
+                                </span>
+                              </TooltipTrigger>
+                              <TooltipContent className="text-xs">{`Loved PR, Reviewed more than ${pr.reviews?.length ?? 0} times`}</TooltipContent>
                             </Tooltip>
                           )}
-                          <Tooltip content={pr.reviewDecision || 'No review decision'}>
-                            <Text className="sm:block hidden">
-                              {
-                                REVIEW_DECISION_ICON_MAP[
-                                  (pr.reviewDecision &&
-                                  ['APPROVED', 'CHANGES_REQUESTED', 'REVIEW_REQUIRED'].includes(pr.reviewDecision)
-                                    ? pr.reviewDecision
-                                    : '') as 'APPROVED' | 'CHANGES_REQUESTED' | 'REVIEW_REQUIRED' | ''
-                                ]
-                              }
-                            </Text>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <span className="hidden sm:block">
+                                {
+                                  REVIEW_DECISION_ICON_MAP[
+                                    (pr.reviewDecision && ['APPROVED', 'CHANGES_REQUESTED', 'REVIEW_REQUIRED'].includes(pr.reviewDecision)
+                                      ? pr.reviewDecision
+                                      : '') as 'APPROVED' | 'CHANGES_REQUESTED' | 'REVIEW_REQUIRED' | ''
+                                  ]
+                                }
+                              </span>
+                            </TooltipTrigger>
+                            <TooltipContent className="text-xs">{pr.reviewDecision || 'No review decision'}</TooltipContent>
                           </Tooltip>
-                          <HoverCard.Root>
-                            <HoverCard.Trigger>
-                              <IconButton variant="soft">
-                                <InfoCircledIcon />
-                              </IconButton>
-                            </HoverCard.Trigger>
-                            <HoverCard.Content width="360px">
-                              <Flex direction="column" gap="2" p="2">
-                                <Text size="2" weight="bold">
-                                  {pr.title}
-                                </Text>
-                                <Text size="1" weight="bold" color="gray">
-                                  PR #{pr.number} • {pr.state}
-                                </Text>
-                                <Text size="1" color="gray">
-                                  <Text weight="bold">Author: </Text> {pr.authorLogin}
-                                </Text>
-                                <Text size="1" color="gray">
-                                  <Text weight="bold">Review Decision: </Text> {pr.reviewDecision || 'N/A'}
-                                </Text>
-                                <Text size="1" color="gray">
-                                  <Text weight="bold">Created: </Text>{' '}
-                                  {pr.createdAt ? new Date(pr.createdAt).toLocaleString() : 'N/A'}
-                                </Text>
-                                <Text size="1" color="gray">
-                                  <Text weight="bold">Updated: </Text>{' '}
-                                  {pr.updatedAt ? new Date(pr.updatedAt).toLocaleString() : 'N/A'}
-                                </Text>
-                                <Text size="1" color="gray">
-                                  <Text weight="bold">URL: </Text>{' '}
-                                  <Link href={pr.url} target="_blank" rel="noopener noreferrer">
-                                    {pr.url}
-                                  </Link>
-                                </Text>
-                                <Text size="1" color="gray">
-                                  <Text weight="bold">Reviewed: </Text> {pr.reviews?.length} times
-                                </Text>
-                              </Flex>
-                            </HoverCard.Content>
-                          </HoverCard.Root>
-                        </Flex>
-                      </Flex>
-                      <Separator size="4" />
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button variant="ghost" size="icon">
+                                <Info className="h-4 w-4" />
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent className="max-w-md text-xs">
+                              <div className="flex flex-col gap-2 p-1">
+                                <span className="text-sm font-bold">{pr.title}</span>
+                                <span className="text-xs font-bold text-muted-foreground">PR #{pr.number} • {pr.state}</span>
+                                <span className="text-xs text-muted-foreground"><span className="font-bold">Author: </span>{pr.authorLogin}</span>
+                                <span className="text-xs text-muted-foreground"><span className="font-bold">Review Decision: </span>{pr.reviewDecision || 'N/A'}</span>
+                                <span className="text-xs text-muted-foreground"><span className="font-bold">Created: </span>{pr.createdAt ? new Date(pr.createdAt).toLocaleString() : 'N/A'}</span>
+                                <span className="text-xs text-muted-foreground"><span className="font-bold">Updated: </span>{pr.updatedAt ? new Date(pr.updatedAt).toLocaleString() : 'N/A'}</span>
+                                <span className="text-xs text-muted-foreground"><span className="font-bold">URL: </span><a href={pr.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">{pr.url}</a></span>
+                                <span className="text-xs text-muted-foreground"><span className="font-bold">Reviewed: </span>{pr.reviews?.length} times</span>
+                              </div>
+                            </TooltipContent>
+                          </Tooltip>
+                        </div>
+                      </div>
+                      <Separator className="my-2" />
                     </li>
                   ))}
               </ul>
-            </Box>
+            </div>
           ) : null,
         )}
-      </Flex>
-    </Box>
+      </div>
+    </div>
   );
 };
 
