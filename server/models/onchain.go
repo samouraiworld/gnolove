@@ -15,11 +15,21 @@ type GnoPackage struct {
 }
 
 type GnoProposal struct {
-	ID          string `gorm:"primaryKey" json:"id"`
-	Address     string `json:"address" gorm:"index"`
-	Path        string `json:"path" gorm:"index"`
+	ID              string `gorm:"primaryKey" json:"id"`
+	Address         string `json:"address" gorm:"index"`
+	Path            string `json:"path" gorm:"index"`
+	BlockHeight     int64  `json:"blockHeight" gorm:"index"`
+	Files           []File `json:"files" gorm:"constraint:OnDelete:CASCADE;"`
+	ExecutionHeight int64  `json:"executionHeight"`
+	Status          string `json:"status"`
+}
+
+type GnoVote struct {
+	ProposalID  string `json:"proposalID" gorm:"primaryKey,index"`
+	Address     string `json:"address" gorm:"primaryKey,index"`
 	BlockHeight int64  `json:"blockHeight" gorm:"index"`
-	Files       []File `json:"files" gorm:"constraint:OnDelete:CASCADE;"`
+	Vote        string `json:"vote"`
+	Hash        string `gorm:"primaryKey" json:"hash"`
 }
 
 type File struct {

@@ -10,6 +10,393 @@ import (
 	"github.com/Khan/genqlient/graphql"
 )
 
+// GetGovDAOExecutedProposalsGetTransactionsTransaction includes the requested fields of the GraphQL type Transaction.
+// The GraphQL type's documentation follows.
+//
+// Defines a transaction within a block, detailing its execution specifics and content.
+type GetGovDAOExecutedProposalsGetTransactionsTransaction struct {
+	// A sequential index representing the order of this Transaction within its Block. Unique within the context of its Block.
+	Index int `json:"index"`
+	// Hash from Transaction content in base64 encoding.
+	Hash string `json:"hash"`
+	// The success can determine whether the transaction succeeded or failed.
+	Success bool `json:"success"`
+	// The height of the Block in which this Transaction is included. Links the Transaction to its containing Block.
+	Block_height int `json:"block_height"`
+	// The declared amount of computational effort the sender is willing to pay for executing this Transaction.
+	Gas_wanted int `json:"gas_wanted"`
+	// The actual amount of computational effort consumed to execute this Transaction. It could be less or equal to `gas_wanted`.
+	Gas_used int `json:"gas_used"`
+	// The payload of the Transaction in a raw format, typically containing the
+	// instructions and any data necessary for execution.
+	Content_raw string `json:"content_raw"`
+	// `memo` are string information stored within a transaction.
+	// `memo` can be utilized to find or distinguish transactions.
+	// For example, when trading a specific exchange, you would utilize the memo field of the transaction.
+	Memo string `json:"memo"`
+	// The payload of a message shows the contents of the messages in a transaction.
+	// A message consists of `router`, `type`, and `value` (whose form depends on the `router` and `type`).
+	Messages []GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessage `json:"messages"`
+}
+
+// GetIndex returns GetGovDAOExecutedProposalsGetTransactionsTransaction.Index, and is useful for accessing the field via an interface.
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransaction) GetIndex() int { return v.Index }
+
+// GetHash returns GetGovDAOExecutedProposalsGetTransactionsTransaction.Hash, and is useful for accessing the field via an interface.
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransaction) GetHash() string { return v.Hash }
+
+// GetSuccess returns GetGovDAOExecutedProposalsGetTransactionsTransaction.Success, and is useful for accessing the field via an interface.
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransaction) GetSuccess() bool { return v.Success }
+
+// GetBlock_height returns GetGovDAOExecutedProposalsGetTransactionsTransaction.Block_height, and is useful for accessing the field via an interface.
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransaction) GetBlock_height() int {
+	return v.Block_height
+}
+
+// GetGas_wanted returns GetGovDAOExecutedProposalsGetTransactionsTransaction.Gas_wanted, and is useful for accessing the field via an interface.
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransaction) GetGas_wanted() int {
+	return v.Gas_wanted
+}
+
+// GetGas_used returns GetGovDAOExecutedProposalsGetTransactionsTransaction.Gas_used, and is useful for accessing the field via an interface.
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransaction) GetGas_used() int { return v.Gas_used }
+
+// GetContent_raw returns GetGovDAOExecutedProposalsGetTransactionsTransaction.Content_raw, and is useful for accessing the field via an interface.
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransaction) GetContent_raw() string {
+	return v.Content_raw
+}
+
+// GetMemo returns GetGovDAOExecutedProposalsGetTransactionsTransaction.Memo, and is useful for accessing the field via an interface.
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransaction) GetMemo() string { return v.Memo }
+
+// GetMessages returns GetGovDAOExecutedProposalsGetTransactionsTransaction.Messages, and is useful for accessing the field via an interface.
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransaction) GetMessages() []GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessage {
+	return v.Messages
+}
+
+// GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessage includes the requested fields of the GraphQL type TransactionMessage.
+type GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessage struct {
+	// The type of transaction message.
+	// The value of `typeUrl` can be `send`, `exec`, `add_package`, `run`.
+	TypeUrl string `json:"typeUrl"`
+	// The route of transaction message.
+	// The value of `route` can be `bank`, `vm`.
+	Route string `json:"route"`
+	// MessageValue is the content of the transaction.
+	// `value` can be of type `BankMsgSend`, `MsgCall`, `MsgAddPackage`, `MsgRun`, `UnexpectedMessage`.
+	Value GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValue `json:"-"`
+}
+
+// GetTypeUrl returns GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessage.TypeUrl, and is useful for accessing the field via an interface.
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessage) GetTypeUrl() string {
+	return v.TypeUrl
+}
+
+// GetRoute returns GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessage.Route, and is useful for accessing the field via an interface.
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessage) GetRoute() string {
+	return v.Route
+}
+
+// GetValue returns GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessage.Value, and is useful for accessing the field via an interface.
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessage) GetValue() GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValue {
+	return v.Value
+}
+
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessage) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessage
+		Value json.RawMessage `json:"value"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessage = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Value
+		src := firstPass.Value
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalGetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValue(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessage.Value: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalGetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessage struct {
+	TypeUrl string `json:"typeUrl"`
+
+	Route string `json:"route"`
+
+	Value json.RawMessage `json:"value"`
+}
+
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessage) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessage) __premarshalJSON() (*__premarshalGetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessage, error) {
+	var retval __premarshalGetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessage
+
+	retval.TypeUrl = v.TypeUrl
+	retval.Route = v.Route
+	{
+
+		dst := &retval.Value
+		src := v.Value
+		var err error
+		*dst, err = __marshalGetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValue(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessage.Value: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValue includes the requested fields of the GraphQL interface MessageValue.
+//
+// GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValue is implemented by the following types:
+// GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueBankMsgSend
+// GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgAddPackage
+// GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgCall
+// GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgRun
+// GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueUnexpectedMessage
+type GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValue interface {
+	implementsGraphQLInterfaceGetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValue()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() string
+}
+
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueBankMsgSend) implementsGraphQLInterfaceGetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValue() {
+}
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgAddPackage) implementsGraphQLInterfaceGetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValue() {
+}
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgCall) implementsGraphQLInterfaceGetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValue() {
+}
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgRun) implementsGraphQLInterfaceGetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValue() {
+}
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueUnexpectedMessage) implementsGraphQLInterfaceGetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValue() {
+}
+
+func __unmarshalGetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValue(b []byte, v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValue) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "BankMsgSend":
+		*v = new(GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueBankMsgSend)
+		return json.Unmarshal(b, *v)
+	case "MsgAddPackage":
+		*v = new(GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgAddPackage)
+		return json.Unmarshal(b, *v)
+	case "MsgCall":
+		*v = new(GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgCall)
+		return json.Unmarshal(b, *v)
+	case "MsgRun":
+		*v = new(GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgRun)
+		return json.Unmarshal(b, *v)
+	case "UnexpectedMessage":
+		*v = new(GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueUnexpectedMessage)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing MessageValue.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValue: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalGetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValue(v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValue) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueBankMsgSend:
+		typename = "BankMsgSend"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueBankMsgSend
+		}{typename, v}
+		return json.Marshal(result)
+	case *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgAddPackage:
+		typename = "MsgAddPackage"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgAddPackage
+		}{typename, v}
+		return json.Marshal(result)
+	case *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgCall:
+		typename = "MsgCall"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgCall
+		}{typename, v}
+		return json.Marshal(result)
+	case *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgRun:
+		typename = "MsgRun"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgRun
+		}{typename, v}
+		return json.Marshal(result)
+	case *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueUnexpectedMessage:
+		typename = "UnexpectedMessage"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueUnexpectedMessage
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValue: "%T"`, v)
+	}
+}
+
+// GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueBankMsgSend includes the requested fields of the GraphQL type BankMsgSend.
+// The GraphQL type's documentation follows.
+//
+// `BankMsgSend` is a message with a message router of `bank` and a message type of `send`.
+// `BankMsgSend` is the fund transfer tx message.
+type GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueBankMsgSend struct {
+	Typename string `json:"__typename"`
+}
+
+// GetTypename returns GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueBankMsgSend.Typename, and is useful for accessing the field via an interface.
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueBankMsgSend) GetTypename() string {
+	return v.Typename
+}
+
+// GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgAddPackage includes the requested fields of the GraphQL type MsgAddPackage.
+// The GraphQL type's documentation follows.
+//
+// `MsgAddPackage` is a message with a message router of `vm` and a message type of `add_package`.
+// `MsgAddPackage` is the package deployment tx message.
+type GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgAddPackage struct {
+	Typename string `json:"__typename"`
+}
+
+// GetTypename returns GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgAddPackage.Typename, and is useful for accessing the field via an interface.
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgAddPackage) GetTypename() string {
+	return v.Typename
+}
+
+// GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgCall includes the requested fields of the GraphQL type MsgCall.
+// The GraphQL type's documentation follows.
+//
+// `MsgCall` is a message with a message router of `vm` and a message type of `exec`.
+// `MsgCall` is the method invocation tx message.
+type GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgCall struct {
+	Typename string `json:"__typename"`
+	// the bech32 address of the function caller.
+	// ex) `g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5`
+	Caller string `json:"caller"`
+	// the gno package path.
+	Pkg_path string `json:"pkg_path"`
+	// the function name being invoked.
+	Func string `json:"func"`
+	// `args` are the arguments passed to the executed function.
+	Args []string `json:"args"`
+}
+
+// GetTypename returns GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgCall.Typename, and is useful for accessing the field via an interface.
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgCall) GetTypename() string {
+	return v.Typename
+}
+
+// GetCaller returns GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgCall.Caller, and is useful for accessing the field via an interface.
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgCall) GetCaller() string {
+	return v.Caller
+}
+
+// GetPkg_path returns GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgCall.Pkg_path, and is useful for accessing the field via an interface.
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgCall) GetPkg_path() string {
+	return v.Pkg_path
+}
+
+// GetFunc returns GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgCall.Func, and is useful for accessing the field via an interface.
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgCall) GetFunc() string {
+	return v.Func
+}
+
+// GetArgs returns GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgCall.Args, and is useful for accessing the field via an interface.
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgCall) GetArgs() []string {
+	return v.Args
+}
+
+// GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgRun includes the requested fields of the GraphQL type MsgRun.
+// The GraphQL type's documentation follows.
+//
+// `MsgRun` is a message with a message router of `vm` and a message type of `run`.
+// `MsgRun is the execute arbitrary Gno code tx message`.
+type GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgRun struct {
+	Typename string `json:"__typename"`
+}
+
+// GetTypename returns GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgRun.Typename, and is useful for accessing the field via an interface.
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgRun) GetTypename() string {
+	return v.Typename
+}
+
+// GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueUnexpectedMessage includes the requested fields of the GraphQL type UnexpectedMessage.
+// The GraphQL type's documentation follows.
+//
+// `UnexpectedMessage` is an Undefined Message, which is a message that decoding failed.
+type GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueUnexpectedMessage struct {
+	Typename string `json:"__typename"`
+}
+
+// GetTypename returns GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueUnexpectedMessage.Typename, and is useful for accessing the field via an interface.
+func (v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueUnexpectedMessage) GetTypename() string {
+	return v.Typename
+}
+
+// GetGovDAOExecutedProposalsResponse is returned by GetGovDAOExecutedProposals on success.
+type GetGovDAOExecutedProposalsResponse struct {
+	// EXPERIMENTAL: Retrieves a list of Transactions that match the given
+	// where criteria. If the result is incomplete due to errors, both partial
+	// results and errors are returned.
+	GetTransactions []GetGovDAOExecutedProposalsGetTransactionsTransaction `json:"getTransactions"`
+}
+
+// GetGetTransactions returns GetGovDAOExecutedProposalsResponse.GetTransactions, and is useful for accessing the field via an interface.
+func (v *GetGovDAOExecutedProposalsResponse) GetGetTransactions() []GetGovDAOExecutedProposalsGetTransactionsTransaction {
+	return v.GetTransactions
+}
+
 // GetGovDAOProposalsGetTransactionsTransaction includes the requested fields of the GraphQL type Transaction.
 // The GraphQL type's documentation follows.
 //
@@ -655,6 +1042,391 @@ type GetGovDAOProposalsResponse struct {
 
 // GetGetTransactions returns GetGovDAOProposalsResponse.GetTransactions, and is useful for accessing the field via an interface.
 func (v *GetGovDAOProposalsResponse) GetGetTransactions() []GetGovDAOProposalsGetTransactionsTransaction {
+	return v.GetTransactions
+}
+
+// GetGovDAOProposalsVotesGetTransactionsTransaction includes the requested fields of the GraphQL type Transaction.
+// The GraphQL type's documentation follows.
+//
+// Defines a transaction within a block, detailing its execution specifics and content.
+type GetGovDAOProposalsVotesGetTransactionsTransaction struct {
+	// A sequential index representing the order of this Transaction within its Block. Unique within the context of its Block.
+	Index int `json:"index"`
+	// Hash from Transaction content in base64 encoding.
+	Hash string `json:"hash"`
+	// The success can determine whether the transaction succeeded or failed.
+	Success bool `json:"success"`
+	// The height of the Block in which this Transaction is included. Links the Transaction to its containing Block.
+	Block_height int `json:"block_height"`
+	// The declared amount of computational effort the sender is willing to pay for executing this Transaction.
+	Gas_wanted int `json:"gas_wanted"`
+	// The actual amount of computational effort consumed to execute this Transaction. It could be less or equal to `gas_wanted`.
+	Gas_used int `json:"gas_used"`
+	// The payload of the Transaction in a raw format, typically containing the
+	// instructions and any data necessary for execution.
+	Content_raw string `json:"content_raw"`
+	// `memo` are string information stored within a transaction.
+	// `memo` can be utilized to find or distinguish transactions.
+	// For example, when trading a specific exchange, you would utilize the memo field of the transaction.
+	Memo string `json:"memo"`
+	// The payload of a message shows the contents of the messages in a transaction.
+	// A message consists of `router`, `type`, and `value` (whose form depends on the `router` and `type`).
+	Messages []GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessage `json:"messages"`
+}
+
+// GetIndex returns GetGovDAOProposalsVotesGetTransactionsTransaction.Index, and is useful for accessing the field via an interface.
+func (v *GetGovDAOProposalsVotesGetTransactionsTransaction) GetIndex() int { return v.Index }
+
+// GetHash returns GetGovDAOProposalsVotesGetTransactionsTransaction.Hash, and is useful for accessing the field via an interface.
+func (v *GetGovDAOProposalsVotesGetTransactionsTransaction) GetHash() string { return v.Hash }
+
+// GetSuccess returns GetGovDAOProposalsVotesGetTransactionsTransaction.Success, and is useful for accessing the field via an interface.
+func (v *GetGovDAOProposalsVotesGetTransactionsTransaction) GetSuccess() bool { return v.Success }
+
+// GetBlock_height returns GetGovDAOProposalsVotesGetTransactionsTransaction.Block_height, and is useful for accessing the field via an interface.
+func (v *GetGovDAOProposalsVotesGetTransactionsTransaction) GetBlock_height() int {
+	return v.Block_height
+}
+
+// GetGas_wanted returns GetGovDAOProposalsVotesGetTransactionsTransaction.Gas_wanted, and is useful for accessing the field via an interface.
+func (v *GetGovDAOProposalsVotesGetTransactionsTransaction) GetGas_wanted() int { return v.Gas_wanted }
+
+// GetGas_used returns GetGovDAOProposalsVotesGetTransactionsTransaction.Gas_used, and is useful for accessing the field via an interface.
+func (v *GetGovDAOProposalsVotesGetTransactionsTransaction) GetGas_used() int { return v.Gas_used }
+
+// GetContent_raw returns GetGovDAOProposalsVotesGetTransactionsTransaction.Content_raw, and is useful for accessing the field via an interface.
+func (v *GetGovDAOProposalsVotesGetTransactionsTransaction) GetContent_raw() string {
+	return v.Content_raw
+}
+
+// GetMemo returns GetGovDAOProposalsVotesGetTransactionsTransaction.Memo, and is useful for accessing the field via an interface.
+func (v *GetGovDAOProposalsVotesGetTransactionsTransaction) GetMemo() string { return v.Memo }
+
+// GetMessages returns GetGovDAOProposalsVotesGetTransactionsTransaction.Messages, and is useful for accessing the field via an interface.
+func (v *GetGovDAOProposalsVotesGetTransactionsTransaction) GetMessages() []GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessage {
+	return v.Messages
+}
+
+// GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessage includes the requested fields of the GraphQL type TransactionMessage.
+type GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessage struct {
+	// The type of transaction message.
+	// The value of `typeUrl` can be `send`, `exec`, `add_package`, `run`.
+	TypeUrl string `json:"typeUrl"`
+	// The route of transaction message.
+	// The value of `route` can be `bank`, `vm`.
+	Route string `json:"route"`
+	// MessageValue is the content of the transaction.
+	// `value` can be of type `BankMsgSend`, `MsgCall`, `MsgAddPackage`, `MsgRun`, `UnexpectedMessage`.
+	Value GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValue `json:"-"`
+}
+
+// GetTypeUrl returns GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessage.TypeUrl, and is useful for accessing the field via an interface.
+func (v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessage) GetTypeUrl() string {
+	return v.TypeUrl
+}
+
+// GetRoute returns GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessage.Route, and is useful for accessing the field via an interface.
+func (v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessage) GetRoute() string {
+	return v.Route
+}
+
+// GetValue returns GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessage.Value, and is useful for accessing the field via an interface.
+func (v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessage) GetValue() GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValue {
+	return v.Value
+}
+
+func (v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessage) UnmarshalJSON(b []byte) error {
+
+	if string(b) == "null" {
+		return nil
+	}
+
+	var firstPass struct {
+		*GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessage
+		Value json.RawMessage `json:"value"`
+		graphql.NoUnmarshalJSON
+	}
+	firstPass.GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessage = v
+
+	err := json.Unmarshal(b, &firstPass)
+	if err != nil {
+		return err
+	}
+
+	{
+		dst := &v.Value
+		src := firstPass.Value
+		if len(src) != 0 && string(src) != "null" {
+			err = __unmarshalGetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValue(
+				src, dst)
+			if err != nil {
+				return fmt.Errorf(
+					"unable to unmarshal GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessage.Value: %w", err)
+			}
+		}
+	}
+	return nil
+}
+
+type __premarshalGetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessage struct {
+	TypeUrl string `json:"typeUrl"`
+
+	Route string `json:"route"`
+
+	Value json.RawMessage `json:"value"`
+}
+
+func (v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessage) MarshalJSON() ([]byte, error) {
+	premarshaled, err := v.__premarshalJSON()
+	if err != nil {
+		return nil, err
+	}
+	return json.Marshal(premarshaled)
+}
+
+func (v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessage) __premarshalJSON() (*__premarshalGetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessage, error) {
+	var retval __premarshalGetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessage
+
+	retval.TypeUrl = v.TypeUrl
+	retval.Route = v.Route
+	{
+
+		dst := &retval.Value
+		src := v.Value
+		var err error
+		*dst, err = __marshalGetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValue(
+			&src)
+		if err != nil {
+			return nil, fmt.Errorf(
+				"unable to marshal GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessage.Value: %w", err)
+		}
+	}
+	return &retval, nil
+}
+
+// GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValue includes the requested fields of the GraphQL interface MessageValue.
+//
+// GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValue is implemented by the following types:
+// GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueBankMsgSend
+// GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgAddPackage
+// GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgCall
+// GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgRun
+// GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueUnexpectedMessage
+type GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValue interface {
+	implementsGraphQLInterfaceGetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValue()
+	// GetTypename returns the receiver's concrete GraphQL type-name (see interface doc for possible values).
+	GetTypename() string
+}
+
+func (v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueBankMsgSend) implementsGraphQLInterfaceGetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValue() {
+}
+func (v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgAddPackage) implementsGraphQLInterfaceGetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValue() {
+}
+func (v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgCall) implementsGraphQLInterfaceGetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValue() {
+}
+func (v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgRun) implementsGraphQLInterfaceGetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValue() {
+}
+func (v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueUnexpectedMessage) implementsGraphQLInterfaceGetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValue() {
+}
+
+func __unmarshalGetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValue(b []byte, v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValue) error {
+	if string(b) == "null" {
+		return nil
+	}
+
+	var tn struct {
+		TypeName string `json:"__typename"`
+	}
+	err := json.Unmarshal(b, &tn)
+	if err != nil {
+		return err
+	}
+
+	switch tn.TypeName {
+	case "BankMsgSend":
+		*v = new(GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueBankMsgSend)
+		return json.Unmarshal(b, *v)
+	case "MsgAddPackage":
+		*v = new(GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgAddPackage)
+		return json.Unmarshal(b, *v)
+	case "MsgCall":
+		*v = new(GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgCall)
+		return json.Unmarshal(b, *v)
+	case "MsgRun":
+		*v = new(GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgRun)
+		return json.Unmarshal(b, *v)
+	case "UnexpectedMessage":
+		*v = new(GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueUnexpectedMessage)
+		return json.Unmarshal(b, *v)
+	case "":
+		return fmt.Errorf(
+			"response was missing MessageValue.__typename")
+	default:
+		return fmt.Errorf(
+			`unexpected concrete type for GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValue: "%v"`, tn.TypeName)
+	}
+}
+
+func __marshalGetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValue(v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValue) ([]byte, error) {
+
+	var typename string
+	switch v := (*v).(type) {
+	case *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueBankMsgSend:
+		typename = "BankMsgSend"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueBankMsgSend
+		}{typename, v}
+		return json.Marshal(result)
+	case *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgAddPackage:
+		typename = "MsgAddPackage"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgAddPackage
+		}{typename, v}
+		return json.Marshal(result)
+	case *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgCall:
+		typename = "MsgCall"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgCall
+		}{typename, v}
+		return json.Marshal(result)
+	case *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgRun:
+		typename = "MsgRun"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgRun
+		}{typename, v}
+		return json.Marshal(result)
+	case *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueUnexpectedMessage:
+		typename = "UnexpectedMessage"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueUnexpectedMessage
+		}{typename, v}
+		return json.Marshal(result)
+	case nil:
+		return []byte("null"), nil
+	default:
+		return nil, fmt.Errorf(
+			`unexpected concrete type for GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValue: "%T"`, v)
+	}
+}
+
+// GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueBankMsgSend includes the requested fields of the GraphQL type BankMsgSend.
+// The GraphQL type's documentation follows.
+//
+// `BankMsgSend` is a message with a message router of `bank` and a message type of `send`.
+// `BankMsgSend` is the fund transfer tx message.
+type GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueBankMsgSend struct {
+	Typename string `json:"__typename"`
+}
+
+// GetTypename returns GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueBankMsgSend.Typename, and is useful for accessing the field via an interface.
+func (v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueBankMsgSend) GetTypename() string {
+	return v.Typename
+}
+
+// GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgAddPackage includes the requested fields of the GraphQL type MsgAddPackage.
+// The GraphQL type's documentation follows.
+//
+// `MsgAddPackage` is a message with a message router of `vm` and a message type of `add_package`.
+// `MsgAddPackage` is the package deployment tx message.
+type GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgAddPackage struct {
+	Typename string `json:"__typename"`
+}
+
+// GetTypename returns GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgAddPackage.Typename, and is useful for accessing the field via an interface.
+func (v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgAddPackage) GetTypename() string {
+	return v.Typename
+}
+
+// GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgCall includes the requested fields of the GraphQL type MsgCall.
+// The GraphQL type's documentation follows.
+//
+// `MsgCall` is a message with a message router of `vm` and a message type of `exec`.
+// `MsgCall` is the method invocation tx message.
+type GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgCall struct {
+	Typename string `json:"__typename"`
+	// the bech32 address of the function caller.
+	// ex) `g1jg8mtutu9khhfwc4nxmuhcpftf0pajdhfvsqf5`
+	Caller string `json:"caller"`
+	// the gno package path.
+	Pkg_path string `json:"pkg_path"`
+	// the function name being invoked.
+	Func string `json:"func"`
+	// `args` are the arguments passed to the executed function.
+	Args []string `json:"args"`
+}
+
+// GetTypename returns GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgCall.Typename, and is useful for accessing the field via an interface.
+func (v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgCall) GetTypename() string {
+	return v.Typename
+}
+
+// GetCaller returns GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgCall.Caller, and is useful for accessing the field via an interface.
+func (v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgCall) GetCaller() string {
+	return v.Caller
+}
+
+// GetPkg_path returns GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgCall.Pkg_path, and is useful for accessing the field via an interface.
+func (v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgCall) GetPkg_path() string {
+	return v.Pkg_path
+}
+
+// GetFunc returns GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgCall.Func, and is useful for accessing the field via an interface.
+func (v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgCall) GetFunc() string {
+	return v.Func
+}
+
+// GetArgs returns GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgCall.Args, and is useful for accessing the field via an interface.
+func (v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgCall) GetArgs() []string {
+	return v.Args
+}
+
+// GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgRun includes the requested fields of the GraphQL type MsgRun.
+// The GraphQL type's documentation follows.
+//
+// `MsgRun` is a message with a message router of `vm` and a message type of `run`.
+// `MsgRun is the execute arbitrary Gno code tx message`.
+type GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgRun struct {
+	Typename string `json:"__typename"`
+}
+
+// GetTypename returns GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgRun.Typename, and is useful for accessing the field via an interface.
+func (v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgRun) GetTypename() string {
+	return v.Typename
+}
+
+// GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueUnexpectedMessage includes the requested fields of the GraphQL type UnexpectedMessage.
+// The GraphQL type's documentation follows.
+//
+// `UnexpectedMessage` is an Undefined Message, which is a message that decoding failed.
+type GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueUnexpectedMessage struct {
+	Typename string `json:"__typename"`
+}
+
+// GetTypename returns GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueUnexpectedMessage.Typename, and is useful for accessing the field via an interface.
+func (v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueUnexpectedMessage) GetTypename() string {
+	return v.Typename
+}
+
+// GetGovDAOProposalsVotesResponse is returned by GetGovDAOProposalsVotes on success.
+type GetGovDAOProposalsVotesResponse struct {
+	// EXPERIMENTAL: Retrieves a list of Transactions that match the given
+	// where criteria. If the result is incomplete due to errors, both partial
+	// results and errors are returned.
+	GetTransactions []GetGovDAOProposalsVotesGetTransactionsTransaction `json:"getTransactions"`
+}
+
+// GetGetTransactions returns GetGovDAOProposalsVotesResponse.GetTransactions, and is useful for accessing the field via an interface.
+func (v *GetGovDAOProposalsVotesResponse) GetGetTransactions() []GetGovDAOProposalsVotesGetTransactionsTransaction {
 	return v.GetTransactions
 }
 
@@ -1334,6 +2106,14 @@ func (v *GetUserRegistrationsTransactionsTransactionMessagesTransactionMessageVa
 	return v.Typename
 }
 
+// __GetGovDAOExecutedProposalsInput is used internally by genqlient
+type __GetGovDAOExecutedProposalsInput struct {
+	StartBlock int `json:"StartBlock"`
+}
+
+// GetStartBlock returns __GetGovDAOExecutedProposalsInput.StartBlock, and is useful for accessing the field via an interface.
+func (v *__GetGovDAOExecutedProposalsInput) GetStartBlock() int { return v.StartBlock }
+
 // __GetGovDAOProposalsInput is used internally by genqlient
 type __GetGovDAOProposalsInput struct {
 	StartBlock int `json:"StartBlock"`
@@ -1341,6 +2121,14 @@ type __GetGovDAOProposalsInput struct {
 
 // GetStartBlock returns __GetGovDAOProposalsInput.StartBlock, and is useful for accessing the field via an interface.
 func (v *__GetGovDAOProposalsInput) GetStartBlock() int { return v.StartBlock }
+
+// __GetGovDAOProposalsVotesInput is used internally by genqlient
+type __GetGovDAOProposalsVotesInput struct {
+	StartBlock int `json:"StartBlock"`
+}
+
+// GetStartBlock returns __GetGovDAOProposalsVotesInput.StartBlock, and is useful for accessing the field via an interface.
+func (v *__GetGovDAOProposalsVotesInput) GetStartBlock() int { return v.StartBlock }
 
 // __GetPublishedPackagesInput is used internally by genqlient
 type __GetPublishedPackagesInput struct {
@@ -1357,6 +2145,58 @@ type __GetUserRegistrationsInput struct {
 
 // GetStartBlock returns __GetUserRegistrationsInput.StartBlock, and is useful for accessing the field via an interface.
 func (v *__GetUserRegistrationsInput) GetStartBlock() int { return v.StartBlock }
+
+func GetGovDAOExecutedProposals(
+	ctx context.Context,
+	client graphql.Client,
+	StartBlock int,
+) (*GetGovDAOExecutedProposalsResponse, error) {
+	req := &graphql.Request{
+		OpName: "GetGovDAOExecutedProposals",
+		Query: `
+query GetGovDAOExecutedProposals ($StartBlock: Int!) {
+	getTransactions(where: {success:{eq:true},messages:{value:{MsgCall:{func:{eq:"ExecuteProposal"}}}},_not:{block_height:{lt:$StartBlock}}}) {
+		index
+		hash
+		success
+		block_height
+		gas_wanted
+		gas_used
+		content_raw
+		memo
+		messages {
+			typeUrl
+			route
+			value {
+				__typename
+				... on MsgCall {
+					caller
+					pkg_path
+					func
+					args
+				}
+			}
+		}
+	}
+}
+`,
+		Variables: &__GetGovDAOExecutedProposalsInput{
+			StartBlock: StartBlock,
+		},
+	}
+	var err error
+
+	var data GetGovDAOExecutedProposalsResponse
+	resp := &graphql.Response{Data: &data}
+
+	err = client.MakeRequest(
+		ctx,
+		req,
+		resp,
+	)
+
+	return &data, err
+}
 
 func GetGovDAOProposals(
 	ctx context.Context,
@@ -1414,6 +2254,58 @@ query GetGovDAOProposals ($StartBlock: Int!) {
 	var err error
 
 	var data GetGovDAOProposalsResponse
+	resp := &graphql.Response{Data: &data}
+
+	err = client.MakeRequest(
+		ctx,
+		req,
+		resp,
+	)
+
+	return &data, err
+}
+
+func GetGovDAOProposalsVotes(
+	ctx context.Context,
+	client graphql.Client,
+	StartBlock int,
+) (*GetGovDAOProposalsVotesResponse, error) {
+	req := &graphql.Request{
+		OpName: "GetGovDAOProposalsVotes",
+		Query: `
+query GetGovDAOProposalsVotes ($StartBlock: Int!) {
+	getTransactions(where: {success:{eq:true},messages:{value:{MsgCall:{func:{eq:"MustVoteOnProposalSimple"}}}},_not:{block_height:{lt:$StartBlock}}}) {
+		index
+		hash
+		success
+		block_height
+		gas_wanted
+		gas_used
+		content_raw
+		memo
+		messages {
+			typeUrl
+			route
+			value {
+				__typename
+				... on MsgCall {
+					caller
+					pkg_path
+					func
+					args
+				}
+			}
+		}
+	}
+}
+`,
+		Variables: &__GetGovDAOProposalsVotesInput{
+			StartBlock: StartBlock,
+		},
+	}
+	var err error
+
+	var data GetGovDAOProposalsVotesResponse
 	resp := &graphql.Response{Data: &data}
 
 	err = client.MakeRequest(
