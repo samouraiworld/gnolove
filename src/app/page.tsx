@@ -15,6 +15,7 @@ import { prefetchRepositories } from '@/hooks/use-get-repositories';
 import { SearchParamsFilters } from '@/types/url-filters';
 import { getYoutubeChannelUploadsPlaylistId, getYoutubePlaylistVideos } from '@/app/actions';
 import { GNOLAND_YOUTUBE_CHANNEL_ID } from '@/constants/videos';
+import { prefetchScoreFactors } from '@/hooks/use-get-score-factors';
 
 export const metadata: Metadata = {
   title: 'Top of Gnome',
@@ -36,6 +37,7 @@ const HomePage = async ({ searchParams: { f, e, r } }: SearchParamsFilters) => {
     prefetchContributors(queryClient, { timeFilter, exclude, repositories: getIds(selectedRepositories) }),
     prefetchLastIssues(queryClient),
     prefetchNewContributors(queryClient),
+    prefetchScoreFactors(queryClient),
   ]);
 
   const uploadsPlaylistId = await getYoutubeChannelUploadsPlaylistId({ channelId: GNOLAND_YOUTUBE_CHANNEL_ID }).catch(() => {
