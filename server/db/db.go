@@ -27,6 +27,7 @@ func InitDB() (*gorm.DB, error) {
 		&models.GnoNamespace{},
 		&models.GnoPackage{},
 		&models.GnoProposal{},
+		&models.GnoVote{},
 		&models.File{},
 	)
 	if err != nil {
