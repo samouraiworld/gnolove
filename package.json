@@ -40,6 +40,7 @@
     "@vercel/kv": "^3.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "cmdk": "^1.1.1",
     "cross-env": "^7.0.3",
     "date-fns": "^4.1.0",
     "embla-carousel": "^8.6.0",

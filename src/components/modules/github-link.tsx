@@ -2,11 +2,11 @@
 
 import { Suspense, useEffect } from 'react';
 
+import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { GithubLinkDescriptionDialog } from './github-link-description-dialog';
 import { GithubLinkGhVerifyDialog } from './github-link-ghverify-dialog';
-import * as DialogPrimitive from '@radix-ui/react-dialog';
-
 import { toast } from 'sonner';
+
 import { useLinkGithub } from '@/hooks/use-link-github';
 
 // We have to wrap the GithubLink in a Suspense because it use useSearchParams

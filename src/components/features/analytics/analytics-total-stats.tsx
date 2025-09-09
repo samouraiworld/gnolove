@@ -3,10 +3,11 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { GitCommit, MessageSquare, GitPullRequest } from 'lucide-react';
-import { Separator } from '@/components/ui/separator';
 import { motion, animate } from 'motion/react';
 
 import { TEnhancedUserWithStats } from '@/utils/schemas';
+
+import { Separator } from '@/components/ui/separator';
 
 type Props = {
   contributors: TEnhancedUserWithStats[];
@@ -30,7 +31,7 @@ const StatItem = ({ icon, value, label }: { icon: React.ReactNode; value: number
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
         <span className="text-2xl font-bold">{animatedValue}</span>
       </motion.div>
-      <span className="text-sm text-muted-foreground">{label}</span>
+      <span className="text-muted-foreground text-sm">{label}</span>
     </div>
   );
 };

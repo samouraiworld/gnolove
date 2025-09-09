@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from 'react';
 
-import { Button } from '@/components/ui/button';
-import { Switch } from '@/components/ui/switch';
-import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-
 import { useAdena } from '@/contexts/adena-context';
+
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Switch } from '@/components/ui/switch';
 
 export const GithubLinkDescriptionDialog = (props: React.ComponentProps<typeof Dialog>) => {
   const { adena } = useAdena();
@@ -34,7 +34,7 @@ export const GithubLinkDescriptionDialog = (props: React.ComponentProps<typeof D
 
       <DialogContent className="max-w-[800px]">
         <DialogTitle>Link your Github account to your Gno Wallet</DialogTitle>
-        <DialogDescription className="mb-4 text-sm text-muted-foreground">
+        <DialogDescription className="text-muted-foreground mb-4 text-sm">
           <p>Here is the process we will follow to link your Github account to your Gno Wallet:</p>
           <ul className="list-disc pl-6">
             <li>Use Github OAuth to ensure you are the owner of this Github account</li>

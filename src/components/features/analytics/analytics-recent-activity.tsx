@@ -94,7 +94,7 @@ const AnalyticsRecentActivity = ({ contributors, timeFilter }: Props) => {
   }, [data]);
 
   return (
-    <div className="h-[500px] w-full min-w-[350px] max-w-[650px] px-0 border rounded-md">
+    <div className="h-[500px] w-full max-w-[650px] min-w-[350px] rounded-md border px-0">
       <h2 className="py-3 text-center text-lg font-semibold">Recent activity</h2>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} margin={{ top: 10, right: 40, bottom: 20, left: -10 }}>
@@ -120,9 +120,7 @@ const AnalyticsRecentActivity = ({ contributors, timeFilter }: Props) => {
                 renderEntries={renderActivityEntries}
                 renderLabel={(_label: string | number | undefined, payload?: any[]) => {
                   const date = payload?.[0]?.payload?.date;
-                  return date ? (
-                    <span className="text-sm font-bold">{date}</span>
-                  ) : null;
+                  return date ? <span className="text-sm font-bold">{date}</span> : null;
                 }}
               />
             }
@@ -132,7 +130,7 @@ const AnalyticsRecentActivity = ({ contributors, timeFilter }: Props) => {
           <Bar maxBarSize={15} radius={[4, 4, 0, 0]} dataKey="prs" fill={fillColors.prs} />
         </BarChart>
       </ResponsiveContainer>
-      <CSVExportButton className="absolute right-4 top-2" data={data} filename={filename}>
+      <CSVExportButton className="absolute top-2 right-4" data={data} filename={filename}>
         <ArrowDownToLine size={20} />
       </CSVExportButton>
     </div>

@@ -4,30 +4,27 @@ import { useState, useMemo, useEffect } from 'react';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import { ArrowLeft, ArrowRight, User } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import { ScrollArea } from '@/components/ui/scroll-area';
-
+import RepoPRStatusList from './repo-pr-status-list';
 import { endOfWeek, subWeeks, addWeeks, format, isAfter, getWeek, setWeek, startOfWeek } from 'date-fns';
 import { enUS } from 'date-fns/locale';
-
-import RepositoriesSelector from '@/modules/repositories-selector';
+import { ArrowLeft, ArrowRight, User } from 'lucide-react';
+import TeamSelector from '@/modules/team-selector';
 
 import Loader from '@/elements/loader';
 
 import { useOffline } from '@/contexts/offline-context';
 
 import useGetPullRequestsReport from '@/hooks/use-get-pullrequests-report';
-import useGetRepositories from '@/hooks/use-get-repositories';
+import useSelectedRepositories from '@/hooks/use-selected-repositories';
 
 import { TPullRequest } from '@/utils/schemas';
 
 import TEAMS from '@/constants/teams';
 
 import LayoutContainer from '@/components/layouts/layout-container';
-import TeamSelector from '@/modules/team-selector';
-import RepoPRStatusList from './repo-pr-status-list';
+import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Separator } from '@/components/ui/separator';
 
 type RepoStatusMap = {
   [repo: string]: {
@@ -49,7 +46,15 @@ function groupPRsByRepoAndStatus(
   STATUS_ORDER.forEach((status) => {
     const prs = (pullRequests || {})[status] || [];
     prs.forEach((pr) => {
-      const repo = selectedRepositories.find((r) => pr.url.includes(r));
+      // When no repositories are selected, treat as "all repositories"
+      // and derive the repo name from the PR URL (owner/name).
+      let repo: string | undefined;
+      if (selectedRepositories.length === 0) {
+        const match = pr.url.match(/github\.com\/([^/]+\/[^/]+)/i);
+        repo = match?.[1];
+      } else {
+        repo = selectedRepositories.find((r) => pr.url.includes(r));
+      }
       if (!repo) return;
       if (pr.authorLogin && !teamMembers.includes(pr.authorLogin)) return;
       if (!repoStatusMap[repo]) repoStatusMap[repo] = {};
@@ -74,19 +79,16 @@ const ReportClientPage = () => {
   const [startDate, setStartDate] = useState<Date>(startOfWeek(initialRefDate, { weekStartsOn: 0 }));
   const [endDate, setEndDate] = useState<Date>(endOfWeek(initialRefDate, { weekStartsOn: 0 }));
   const [selectedTeams, setSelectedTeams] = useState<string[]>(['Core Team']);
-  const [selectedRepositories, setSelectedRepositories] = useState<string[]>(['gnolang/gno']);
-
-  const { data: repositories = [] } = useGetRepositories();
+  const selectedRepositories = useSelectedRepositories();
   const { data: pullRequests, isPending } = useGetPullRequestsReport({ startDate, endDate });
 
   // Sync week with URL: initialize from ?week= and update URL when week changes via navigation buttons
   useEffect(() => {
     const weekParam = Number(searchParams.get('week'));
     if (!Number.isNaN(weekParam) && weekParam >= 1 && weekParam <= 53) {
-      const targetEnd = endOfWeek(
-        setWeek(new Date(), weekParam, { weekStartsOn: 0, firstWeekContainsDate: 1 }),
-        { weekStartsOn: 0 },
-      );
+      const targetEnd = endOfWeek(setWeek(new Date(), weekParam, { weekStartsOn: 0, firstWeekContainsDate: 1 }), {
+        weekStartsOn: 0,
+      });
       const targetStart = startOfWeek(targetEnd, { weekStartsOn: 0 });
       setStartDate(targetStart);
       setEndDate(targetEnd);
@@ -157,8 +159,9 @@ const ReportClientPage = () => {
             </span>
             Weekly report
           </h1>
-          <span className="text-sm text-muted-foreground sm:text-base">
-            Week from {format(startDate, 'MMMM d, yyyy', { locale: enUS })} to {format(endDate, 'MMMM d, yyyy', { locale: enUS })}
+          <span className="text-muted-foreground text-sm sm:text-base">
+            Week from {format(startDate, 'MMMM d, yyyy', { locale: enUS })} to{' '}
+            {format(endDate, 'MMMM d, yyyy', { locale: enUS })}
           </span>
         </div>
         <div className="flex items-center justify-between gap-2">
@@ -171,12 +174,6 @@ const ReportClientPage = () => {
               teams={TEAMS}
               selectedTeams={selectedTeams}
               onSelectedTeamsChange={setSelectedTeams}
-              className="mb-3"
-            />
-            <RepositoriesSelector
-              repositories={repositories}
-              selectedRepositories={selectedRepositories}
-              onSelectedRepositoriesChange={setSelectedRepositories}
               className="mb-3"
             />
           </div>
@@ -206,7 +203,11 @@ const ReportClientPage = () => {
                 );
 
               if (!teamRepoStatusMap.foundAny) {
-                return <span className="text-sm text-muted-foreground">No pull requests found for these teams and repositories.</span>;
+                return (
+                  <span className="text-muted-foreground text-sm">
+                    No pull requests found for these teams and repositories.
+                  </span>
+                );
               }
               return (
                 <div>
@@ -227,7 +228,10 @@ const ReportClientPage = () => {
                     const sortedRepos = [...gnolangRepos, ...otherRepos];
                     return (
                       <div key={teamName} className="mb-8 p-1">
-                        <h2 className="sticky -top-[5px] z-30 flex items-center gap-2 py-1 text-xl font-semibold" style={{ backgroundColor: 'var(--color-background)' }}>
+                        <h2
+                          className="sticky -top-[5px] z-30 flex items-center gap-2 py-1 text-xl font-semibold"
+                          style={{ backgroundColor: 'var(--color-background)' }}
+                        >
                           <User className="h-4 w-4" />
                           {teamName}
                         </h2>

@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from 'react';
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { TimeFilter } from '@/utils/github';
+
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 type Props = React.HTMLAttributes<HTMLDivElement> & {
   onDateChange: (timeFilter: TimeFilter) => void;
@@ -33,11 +34,11 @@ const TimeRangeSelector = ({ onDateChange, defaultValue = TimeFilter.WEEKLY, sho
 
   return (
     <div className="flex flex-col gap-1" {...props}>
-      {showLabel && (
-        <span className="text-xs font-medium text-muted-foreground">Date range</span>
-      )}
+      {showLabel && <span className="text-muted-foreground text-xs font-medium">Date range</span>}
       <Select value={value} onValueChange={handleChange}>
-        <SelectTrigger className="w-[180px]"><SelectValue placeholder="Select range" /></SelectTrigger>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Select range" />
+        </SelectTrigger>
         <SelectContent>
           {Object.entries(presets).map(([k, label]) => (
             <SelectItem key={k} value={k}>

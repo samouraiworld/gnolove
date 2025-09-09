@@ -2,17 +2,19 @@
 
 import { memo, useCallback, useMemo, useState, useTransition } from 'react';
 
-import MilestoneListItem from '@/components/features/milestone/milestone-list-item';
 import { CheckCircle2, Circle, ChevronDown, ChevronUp } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { Button } from '@/components/ui/button';
-import ResponsiveCarousel from '../../modules/responsive-carousel';
 
-import { TIssue } from '@/utils/schemas';
+import Loader from '@/elements/loader';
 
 import { cmpCreatedAt } from '@/utils/github';
-import Loader from '@/elements/loader';
+import { TIssue } from '@/utils/schemas';
+
+import MilestoneListItem from '@/components/features/milestone/milestone-list-item';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+
+import ResponsiveCarousel from '../../modules/responsive-carousel';
 
 interface MilestoneListProps {
   issues: TIssue[];
@@ -58,7 +60,9 @@ const KanbanColumn = memo(
           <div className="flex items-center gap-2">
             {icon}
             <span className="text-lg font-bold">{title}</span>
-            <Badge variant="secondary" className="text-xs">{count}</Badge>
+            <Badge variant="secondary" className="text-xs">
+              {count}
+            </Badge>
           </div>
           <Button variant="ghost" size="icon" onClick={handleToggle} disabled={isPending}>
             {isPending ? (
@@ -76,14 +80,17 @@ const KanbanColumn = memo(
             <Separator className="mb-4" />
             <div className="px-3 pb-3">
               {issues.length > 0 ? (
-                <ResponsiveCarousel id={`scroller-${title.replace(/\s+/g, '-').toLowerCase()}`} items={issues.map((issue) => (
-                  <div key={issue.id} className="sm:snap-start sm:min-w-[280px] sm:w-[clamp(280px,33vw,420px)]">
-                    <MilestoneListItem issue={issue} />
-                  </div>
-                ))} />
+                <ResponsiveCarousel
+                  id={`scroller-${title.replace(/\s+/g, '-').toLowerCase()}`}
+                  items={issues.map((issue) => (
+                    <div key={issue.id}>
+                      <MilestoneListItem issue={issue} />
+                    </div>
+                  ))}
+                />
               ) : (
                 <div className="p-8">
-                  <span className="text-base text-muted-foreground">{`No ${title.toLowerCase()}`}</span>
+                  <span className="text-muted-foreground text-base">{`No ${title.toLowerCase()}`}</span>
                 </div>
               )}
             </div>
@@ -119,7 +126,7 @@ const MilestoneList = ({ issues }: MilestoneListProps) => {
               <span className="text-base">{openIssues.length} open</span>
             </div>
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="h-4 w-4 text-muted-foreground" />
+              <CheckCircle2 className="text-muted-foreground h-4 w-4" />
               <span className="text-base">{closedIssues.length} closed</span>
             </div>
             <Separator orientation="vertical" className="hidden h-6 sm:block" />
@@ -144,7 +151,7 @@ const MilestoneList = ({ issues }: MilestoneListProps) => {
           issues={closedIssues}
           badgeColor="gray"
           count={closedIssues.length}
-          icon={<CheckCircle2 className="h-[18px] w-[18px] text-muted-foreground" />}
+          icon={<CheckCircle2 className="text-muted-foreground h-[18px] w-[18px]" />}
           isCollapsed={closedColumnCollapsed}
           onToggleCollapse={() => setClosedColumnCollapsed(!closedColumnCollapsed)}
         />

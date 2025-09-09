@@ -1,10 +1,12 @@
 'use client';
 
-import { useMemo } from 'react';
+import { Suspense, useMemo } from 'react';
 
+import Image from 'next/image';
 import NextLink from 'next/link';
 
 import MilestoneProgress from '@/features/milestone-progress';
+import Scoreboard from '@/features/scoreboard/scoreboard';
 
 import LayoutContainer from '@/layouts/layout-container';
 
@@ -12,7 +14,10 @@ import IssuesTable from '@/modules/issues-table';
 import PrsTable from '@/modules/prs-table';
 import UserTable from '@/modules/user-table';
 
+import Loader from '@/elements/loader';
 import YoutubeEmbeddedVideo from '@/elements/youtube-embedded-video';
+
+import { useOffline } from '@/contexts/offline-context';
 
 import useGetContributors from '@/hooks/use-get-contributors';
 import useGetLastIssues from '@/hooks/use-get-last-issues';
@@ -20,15 +25,11 @@ import useGetMilestone from '@/hooks/use-get-milestone';
 import useGetNewContributors from '@/hooks/use-get-new-contributors';
 
 import { getLastMRs, TimeFilter } from '@/utils/github';
-
-import REPOSITORY from '@/constants/repository';
-
-import Scoreboard from '@/features/scoreboard/scoreboard';
-import { useOffline } from '@/contexts/offline-context';
-import { cn } from '@/utils/style';
-import Loader from '@/elements/loader';
 import { TYoutubeVideoPlaylist } from '@/utils/schemas';
-import Image from 'next/image';
+import { cn } from '@/utils/style';
+
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { GitPullRequest, Star, Users } from 'lucide-react';
 
 const ScoreboardPage = ({ videos }: { videos: TYoutubeVideoPlaylist }) => {
   const { data: allTimeContributors, isPending: isAllTimePending } = useGetContributors({
@@ -45,14 +46,18 @@ const ScoreboardPage = ({ videos }: { videos: TYoutubeVideoPlaylist }) => {
 
   return (
     <LayoutContainer>
+      <div>
+        <h1 className="text-3xl font-bold text-foreground">Gnolove</h1>
+        <p className="text-muted-foreground">Overview of contributions across GNO-related repositories</p>
+      </div>
       <div className="mt-4">
         <video
-          className="motion-reduce:hidden h-full min-h-[200px] w-full rounded-md object-cover"
+          className="h-full min-h-[200px] w-full rounded-md object-cover motion-reduce:hidden"
           autoPlay
           loop
           muted
           playsInline
-          poster='/images/header.png'
+          poster="/images/header.png"
         >
           <source src="/videos/gnolove_drone-on-the-desk-video.mp4" type="video/mp4" />
         </video>
@@ -67,45 +72,82 @@ const ScoreboardPage = ({ videos }: { videos: TYoutubeVideoPlaylist }) => {
       </div>
 
       {milestone && (
-        <NextLink className={cn(isOffline && 'pointer-events-none')} href="/milestone">
+        <NextLink className={cn('my-6 block', { 'pointer-events-none': isOffline })} href="/milestone">
           <MilestoneProgress milestone={milestone} />
         </NextLink>
       )}
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        <div className="flex flex-col gap-4">
-          <h2 className="mt-6 text-2xl font-bold">
-            <NextLink
-              href={`https://github.com/${REPOSITORY.owner}/${REPOSITORY.repository}/labels/help%20wanted`}
-              target="_blank"
-            >
-              👋 Help Wanted!
-            </NextLink>
-          </h2>
-          {isIssuesPending ? <Loader /> : <IssuesTable issues={issues ?? []} showLabels="on-hover" />}
-        </div>
+      {/* Key Metrics */}
+      <div className="grid gap-4 md:grid-cols-2">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Contributors</CardTitle>
+            <Users className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{allTimeContributors?.length}</div>
+          </CardContent>
+        </Card>
 
-        <div className="flex flex-col gap-4">
-          <h2 className="mt-6 text-2xl font-bold">✔️ Freshly Merged</h2>
-          {isAllTimePending ? <Loader /> : <PrsTable prs={lastMRs} />}
-        </div>
-
-        <div className="flex flex-col gap-4">
-          <h2 className="mt-6 text-2xl font-bold">⭐ New Rising gnome</h2>
-          {isNewContributorsPending ? <Loader /> : <UserTable users={newContributors ?? []} />}
-        </div>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Active PRs</CardTitle>
+            <GitPullRequest className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{lastMRs.length}</div>
+          </CardContent>
+        </Card>
       </div>
 
-      <div className="mt-6 flex items-center justify-center">
-        <h2 className="text-2xl font-bold text-center">🏅 Gnolove Scoreboard</h2>
-      </div>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 my-6">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Help Wanted!</CardTitle>
+            <Star className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            {isIssuesPending ? <Loader /> : <IssuesTable issues={issues ?? []} showLabels="on-hover" />}
+          </CardContent>
+        </Card>
 
-      <Scoreboard />
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Freshly Merged</CardTitle>
+            <GitPullRequest className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            {isAllTimePending ? <Loader /> : <PrsTable prs={lastMRs} />}
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">New Rising gnome</CardTitle>
+            <Users className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            {isNewContributorsPending ? <Loader /> : <UserTable users={newContributors ?? []} />}
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-sm font-medium">Top contributors</CardTitle>
+            <CardDescription>Most active contributors this month</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Suspense fallback={<Loader />}>
+              <Scoreboard />
+            </Suspense>
+          </CardContent>
+        </Card>
+      </div>
 
       {videos && videos.length > 0 && (
         <>
           <h3 className="mt-6 text-xl font-bold">🎥 Latest gnoland videos</h3>
-          <div className="grid grid-cols-1 gap-2 xs:grid-cols-2 md:grid-cols-3">
+          <div className="xs:grid-cols-2 grid grid-cols-1 gap-2 md:grid-cols-3">
             {videos.map((video: { snippet: { resourceId: { videoId: string } } }) => (
               <YoutubeEmbeddedVideo
                 key={video.snippet.resourceId.videoId}

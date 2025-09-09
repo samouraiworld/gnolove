@@ -3,11 +3,11 @@
 import Image from 'next/image';
 
 import { ExternalLink } from 'lucide-react';
-import { TableRow } from '@/components/ui/table';
-
-import Cell from '@/components/elements/cell';
 
 import { TUser } from '@/utils/schemas';
+
+import Cell from '@/components/elements/cell';
+import { TableRow } from '@/components/ui/table';
 
 export interface UserRowProps {
   user: TUser;
@@ -20,9 +20,9 @@ const UserRow = ({ user }: UserRowProps) => {
   };
 
   return (
-    <TableRow className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-muted/50" key={user.id}>
+    <TableRow className="hover:bg-muted/50 cursor-pointer transition-all duration-300 ease-in-out" key={user.id}>
       <Cell data-href={user.url} onClick={onClick}>
-        <div className="w-full h-full flex items-center gap-2">
+        <div className="flex h-full w-full items-center gap-2">
           <Image
             src={user.avatarUrl}
             alt={`${user.login} avatar url`}
@@ -33,7 +33,7 @@ const UserRow = ({ user }: UserRowProps) => {
 
           <span className="w-full truncate">{user.name || user.login}</span>
 
-          <ExternalLink className="h-4 w-4 shrink-0 text-primary" />
+          <ExternalLink className="text-primary h-4 w-4 shrink-0" />
         </div>
       </Cell>
     </TableRow>

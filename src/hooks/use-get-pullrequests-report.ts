@@ -1,4 +1,5 @@
 import { QueryClient, useQuery } from '@tanstack/react-query';
+
 import { getPullrequestsReportByDate } from '@/app/actions';
 
 export const QUERY_KEY = ['pullrequests-report'];

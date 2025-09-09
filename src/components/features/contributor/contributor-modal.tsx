@@ -1,8 +1,10 @@
 'use client';
 
-import { Dialog, DialogContent } from '@/components/ui/dialog';
-import { useRouter } from 'next/navigation';
 import { FC } from 'react';
+
+import { useRouter } from 'next/navigation';
+
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 
 const ContributorModal: FC<{ children: React.ReactNode }> = ({ children }) => {
   const router = useRouter();
@@ -17,9 +19,7 @@ const ContributorModal: FC<{ children: React.ReactNode }> = ({ children }) => {
 
   return (
     <Dialog defaultOpen onOpenChange={handleClose}>
-      <DialogContent>
-        { children }
-      </DialogContent>
+      <DialogContent>{children}</DialogContent>
     </Dialog>
   );
 };

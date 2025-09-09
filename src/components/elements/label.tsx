@@ -1,8 +1,9 @@
-import { Badge } from '@/components/ui/badge';
 import { emojify } from 'node-emoji';
 
 import { TLabel } from '@/utils/schemas';
 import { hexToRGB } from '@/utils/style';
+
+import { Badge } from '@/components/ui/badge';
 
 export interface LabelProps {
   label: TLabel;

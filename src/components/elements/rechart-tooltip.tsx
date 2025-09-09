@@ -18,13 +18,9 @@ const RechartTooltip = (props: RechartTooltipProps) => {
   if (!active || !payload || !payload.length) return null;
 
   return (
-    <div className="rounded-md border bg-popover p-3 text-popover-foreground shadow-md">
+    <div className="bg-popover text-popover-foreground rounded-md border p-3 shadow-md">
       <div className="mb-2">
-        {renderLabel ? (
-          renderLabel(label, payload)
-        ) : (
-          <span className="text-sm font-bold">{label}</span>
-        )}
+        {renderLabel ? renderLabel(label, payload) : <span className="text-sm font-bold">{label}</span>}
       </div>
       <div className="flex flex-col gap-2">
         {renderEntries

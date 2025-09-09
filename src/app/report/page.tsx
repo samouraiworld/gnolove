@@ -26,10 +26,11 @@ export async function generateMetadata({ searchParams }: { searchParams?: { week
   };
 }
 
-const ReportPage = async ({ searchParams }: { searchParams?: { week?: string } }) => {
+const ReportPage = async ({ searchParams }: { searchParams: Promise<{ week?: string }> }) => {
+  const { week } = await searchParams;
   const queryClient = new QueryClient();
   const now = new Date();
-  const weekParam = Number(searchParams?.week);
+  const weekParam = Number(week);
   const refDate =
     !Number.isNaN(weekParam) && weekParam >= 1 && weekParam <= 53
       ? setWeek(now, weekParam, { weekStartsOn: 0, firstWeekContainsDate: 1 })

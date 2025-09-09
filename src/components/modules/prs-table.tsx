@@ -1,11 +1,11 @@
 'use client';
 
 import { ExternalLink } from 'lucide-react';
-import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-
-import Cell from '@/components/elements/cell';
 
 import { TPullRequest } from '@/utils/schemas';
+
+import Cell from '@/components/elements/cell';
+import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 export interface IssuesTableProps extends React.ComponentProps<typeof Table> {
   prs: TPullRequest[];
@@ -36,13 +36,13 @@ const PrsTable = ({ prs, showHeader, ...props }: IssuesTableProps) => {
               data-href={url}
               onClick={onClick.bind(null, url)}
               key={id}
-              className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-muted/50"
+              className="hover:bg-muted/50 cursor-pointer transition-all duration-300 ease-in-out"
             >
               <Cell className="max-w-0">
-                <div className="w-full h-full flex items-center gap-2">
+                <div className="flex h-full w-full items-center gap-2">
                   <span className="w-full truncate">{title}</span>
 
-                  <ExternalLink className="h-4 w-4 shrink-0 text-primary" />
+                  <ExternalLink className="text-primary h-4 w-4 shrink-0" />
                 </div>
               </Cell>
             </TableRow>

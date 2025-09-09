@@ -4,8 +4,9 @@ import { useState, useEffect, useRef } from 'react';
 
 import { useSearchParams } from 'next/navigation';
 
-import { useAdena } from '@/contexts/adena-context';
 import { toast } from 'sonner';
+
+import { useAdena } from '@/contexts/adena-context';
 
 type GhUser = {
   github_user: any;

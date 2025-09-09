@@ -49,7 +49,7 @@ export const GithubLinkGhVerifyDialog = ({
             />
           </div>
 
-          <div className="inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+          <div className="bg-opacity-50 inset-0 flex items-center justify-center bg-gray-800">
             <div className="w-full max-w-lg rounded-lg bg-white p-6 shadow-xl">
               <h4 className="mb-2 font-bold text-red-600">
                 Adena is not installed, please request verification yourself:
@@ -64,7 +64,9 @@ export const GithubLinkGhVerifyDialog = ({
         </DialogDescription>
 
         <div className="flex flex-col items-center justify-center">
-          <p className="text-sm text-muted-foreground">Once you have executed the tx, click the button below to continue.</p>
+          <p className="text-muted-foreground text-sm">
+            Once you have executed the tx, click the button below to continue.
+          </p>
           <Button onClick={() => onContinue(address)} className="mt-4 bg-green-600 hover:bg-green-700">
             Continue
           </Button>

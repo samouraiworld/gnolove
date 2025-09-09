@@ -2,7 +2,6 @@
 
 import { ReactElement, useMemo, useState } from 'react';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { parseISO, compareAsc } from 'date-fns';
 import { ArrowDownToLine } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Customized, CustomizedProps } from 'recharts';
@@ -13,6 +12,7 @@ import { TEnhancedUserWithStats } from '@/utils/schemas';
 import CSVExportButton from '@/components/elements/csv-export-button';
 import RechartTooltip from '@/components/elements/rechart-tooltip';
 import ActivityTypeSelector, { ActivityType } from '@/components/modules/activity-type-selector';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 const labelMap: Record<ActivityType, string> = {
   commits: 'Commits',
@@ -155,7 +155,7 @@ const AnalyticsContributorLineChart = ({ contributors, timeFilter }: Props) => {
   }, [data, activityType]);
 
   return (
-    <div className="h-[500px] w-full max-w-[650px] px-0 border rounded-md">
+    <div className="h-[500px] w-full max-w-[650px] rounded-md border px-0">
       <h2 className="py-3 text-center text-lg font-semibold">
         <ActivityTypeSelector onActivityTypeChange={setActivityType} className="mb-3 inline-flex" /> activity
       </h2>
@@ -202,7 +202,7 @@ const AnalyticsContributorLineChart = ({ contributors, timeFilter }: Props) => {
           <Customized component={AvatarRenderer} />
         </LineChart>
       </ResponsiveContainer>
-      <CSVExportButton className="absolute right-4 top-2" data={data} filename={filename}>
+      <CSVExportButton className="absolute top-2 right-4" data={data} filename={filename}>
         <ArrowDownToLine size={20} />
       </CSVExportButton>
     </div>

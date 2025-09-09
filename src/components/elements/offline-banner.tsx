@@ -1,8 +1,10 @@
 'use client';
 
 import React from 'react';
-import { useOffline } from '@/contexts/offline-context';
+
 import { AnimatePresence, motion } from 'motion/react';
+
+import { useOffline } from '@/contexts/offline-context';
 
 const OfflineBanner: React.FC = () => {
   const { isOffline } = useOffline();
@@ -15,7 +17,7 @@ const OfflineBanner: React.FC = () => {
           exit={{ y: '100%' }}
           initial={{ y: '100%' }}
           transition={{ ease: 'easeOut' }}
-          className="fixed bottom-0 left-0 z-50 w-full text-center bg-red-9 text-white-a-12"
+          className="bg-red-9 text-white-a-12 fixed bottom-0 left-0 z-50 w-full text-center"
         >
           You are offline. Some features may not be available.
         </motion.div>
@@ -23,6 +25,5 @@ const OfflineBanner: React.FC = () => {
     </AnimatePresence>
   );
 };
-
 
 export default OfflineBanner;

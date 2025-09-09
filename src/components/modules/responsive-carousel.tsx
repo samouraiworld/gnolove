@@ -1,9 +1,12 @@
 'use client';
 
 import React, { useMemo } from 'react';
+
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
-import { Carousel, CarouselContent, CarouselItem } from '../ui/carousel';
+
 import { cn } from '@/utils/style';
+
+import { Carousel, CarouselContent, CarouselItem } from '../ui/carousel';
 
 export interface ResponsiveCarouselProps {
   id?: string;
@@ -11,18 +14,18 @@ export interface ResponsiveCarouselProps {
   items: React.ReactNode[];
 }
 
-const ResponsiveCarousel: React.FC<ResponsiveCarouselProps> = ({
-  className,
-  items
-}) => {
+const ResponsiveCarousel: React.FC<ResponsiveCarouselProps> = ({ className, items }) => {
   const wheelPlugin = useMemo(() => WheelGesturesPlugin(), []);
 
   return (
     <div className={cn(className, 'select-none')}>
-      <Carousel opts={{ align: 'start', dragFree: true, containScroll: 'trimSnaps', loop: false }} plugins={[wheelPlugin]}>
+      <Carousel
+        opts={{ align: 'start', dragFree: true, containScroll: 'trimSnaps', loop: false }}
+        plugins={[wheelPlugin]}
+      >
         <CarouselContent>
           {items.map((item, index) => (
-            <CarouselItem key={index}>{item}</CarouselItem>
+            <CarouselItem className="basis-1/3" key={index}>{item}</CarouselItem>
           ))}
         </CarouselContent>
       </Carousel>

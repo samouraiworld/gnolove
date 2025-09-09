@@ -1,9 +1,9 @@
 'use client';
 
 import { useMemo } from 'react';
+import React from 'react';
 
 import ContributionsHeatmap from './contributions-heatmap';
-import React from 'react';
 import { ArrowDownToLine } from 'lucide-react';
 import {
   Bar,
@@ -109,11 +109,11 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
         <div className="relative min-h-[260px] rounded-md border p-3">
           <div className="flex flex-col gap-3">
             <h3 className="text-lg font-semibold">Contribution Activity</h3>
-            <p className="text-sm text-muted-foreground">Daily contributions over the past year</p>
+            <p className="text-muted-foreground text-sm">Daily contributions over the past year</p>
             <ContributionsHeatmap data={heatmapData} />
           </div>
           <CSVExportButton
-            className="absolute right-2 top-2"
+            className="absolute top-2 right-2"
             data={heatmapData}
             filename={`yearly-contributions-${contributor.name || contributor.login}`}
           >
@@ -148,7 +148,7 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
                 </div>
               </div>
               <CSVExportButton
-                className="absolute right-2 top-2"
+                className="absolute top-2 right-2"
                 data={repositoryData}
                 filename={`repository-contributions-${contributor.name || contributor.login}`}
               >
@@ -182,7 +182,7 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
                 </ResponsiveContainer>
               </div>
               <CSVExportButton
-                className="absolute right-2 top-2"
+                className="absolute top-2 right-2"
                 data={contributionTypeData}
                 filename={`contribution-types-${contributor.name || contributor.login}`}
               >
@@ -211,7 +211,7 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
                 </div>
               </div>
               <CSVExportButton
-                className="absolute right-2 top-2"
+                className="absolute top-2 right-2"
                 data={languageData}
                 filename={`language-distribution-${contributor.name || contributor.login}`}
               >
@@ -239,7 +239,7 @@ const ContributorAnalytics = ({ contributor }: { contributor: TContributor }) =>
                 </ResponsiveContainer>
               </div>
               <CSVExportButton
-                className="absolute right-2 top-2"
+                className="absolute top-2 right-2"
                 data={monthlyActivityData}
                 filename={monthlyActivityFilename}
               >

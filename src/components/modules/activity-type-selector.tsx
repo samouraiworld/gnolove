@@ -29,7 +29,9 @@ const ActivityTypeSelector = ({ onActivityTypeChange, defaultValue = 'commits', 
   return (
     <div className={`flex flex-col gap-1 ${className ?? ''}`} {...props}>
       <Select value={value} onValueChange={handleChange}>
-        <SelectTrigger className="w-[180px]"><SelectValue placeholder="Select type" /></SelectTrigger>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Select type" />
+        </SelectTrigger>
         <SelectContent>
           {Object.entries(labels).map(([k, label]) => (
             <SelectItem key={k} value={k}>

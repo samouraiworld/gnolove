@@ -3,17 +3,18 @@
 import { useMemo, useState } from 'react';
 
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Table, TableBody, TableCell, TableHead, TableRow } from '@/components/ui/table';
 
 import Label from '@/elements/label';
+
+import useGetScoreFactors from '@/hooks/use-get-score-factors';
 
 import { chunk } from '@/utils/array';
 import { TEnhancedUserWithStats, TIssue, TPullRequest } from '@/utils/schemas';
 import { getIssueOrPRScore } from '@/utils/score';
 
-import useGetScoreFactors from '@/hooks/use-get-score-factors';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@/components/ui/table';
 
 export interface ContributionsDialogProps extends React.ComponentProps<typeof Dialog> {
   user: TEnhancedUserWithStats;
@@ -41,13 +42,11 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
 
       <DialogContent className="max-w-[550px]">
         <DialogTitle>{user.name || user.login} contributions</DialogTitle>
-        <DialogDescription className="mb-4">
-          Get information about all the contribution
-        </DialogDescription>
+        <DialogDescription className="mb-4">Get information about all the contribution</DialogDescription>
 
         {maxPage === 0 ? (
           <div className="flex items-center justify-center py-6">
-            <span className="italic text-sm text-muted-foreground">Could not find any contributions...</span>
+            <span className="text-muted-foreground text-sm italic">Could not find any contributions...</span>
           </div>
         ) : (
           <>
@@ -57,7 +56,7 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
                   <TableRow
                     key={issueOrPR.url}
                     onClick={() => window.open(issueOrPR.url, '_blank')}
-                    className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-muted/50"
+                    className="hover:bg-muted/50 cursor-pointer transition-all duration-300 ease-in-out"
                   >
                     <TableCell>
                       <div className="flex flex-col gap-1 py-2">
@@ -101,7 +100,9 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
               <TableBody>
                 <TableRow>
                   <TableHead>Commits score</TableHead>
-                  <TableCell className="text-right">{user.TotalCommits * (scoreFactors?.commitFactor ?? 0)} points</TableCell>
+                  <TableCell className="text-right">
+                    {user.TotalCommits * (scoreFactors?.commitFactor ?? 0)} points
+                  </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableHead>PRs score</TableHead>
@@ -109,11 +110,15 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
                 </TableRow>
                 <TableRow>
                   <TableHead>Reviewed MRs score</TableHead>
-                  <TableCell className="text-right">{user.TotalReviewedPullRequests * (scoreFactors?.reviewedPrFactor ?? 0)} points</TableCell>
+                  <TableCell className="text-right">
+                    {user.TotalReviewedPullRequests * (scoreFactors?.reviewedPrFactor ?? 0)} points
+                  </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableHead>Issues score</TableHead>
-                  <TableCell className="text-right">{user.TotalIssues * (scoreFactors?.issueFactor ?? 0)} points</TableCell>
+                  <TableCell className="text-right">
+                    {user.TotalIssues * (scoreFactors?.issueFactor ?? 0)} points
+                  </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableHead>Total</TableHead>

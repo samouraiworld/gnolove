@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { TableCell } from '@/components/ui/table';
 
 const Cell = ({ children, className, ...props }: React.ComponentProps<typeof TableCell>) => (

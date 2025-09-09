@@ -1,13 +1,14 @@
 'use client';
 
 import { ExternalLink, Info } from 'lucide-react';
-import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
+import Cell from '@/elements/cell';
 import Label from '@/elements/label';
 
 import { TIssue } from '@/utils/schemas';
-import Cell from '@/elements/cell';
+
+import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 export interface IssuesTableProps extends React.ComponentProps<typeof Table> {
   issues: TIssue[];
@@ -39,16 +40,16 @@ const IssuesTable = ({ issues, showLabels, showHeader, ...props }: IssuesTablePr
             data-href={url}
             onClick={onClick.bind(null, url)}
             key={id}
-            className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-muted/50"
+            className="hover:bg-muted/50 cursor-pointer transition-all duration-300 ease-in-out"
           >
             <Cell className="max-w-0">
-              <div className="w-full h-full flex items-center gap-2">
+              <div className="flex h-full w-full items-center gap-2">
                 <span className="w-full truncate">{title}</span>
 
                 {showLabels === 'on-hover' && (
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <Info className="h-4 w-4 shrink-0 text-primary" />
+                      <Info className="h-4 w-4 shrink-0" />
                     </TooltipTrigger>
                     <TooltipContent>
                       <div className="flex flex-wrap gap-2">
@@ -58,7 +59,7 @@ const IssuesTable = ({ issues, showLabels, showHeader, ...props }: IssuesTablePr
                   </Tooltip>
                 )}
 
-                <ExternalLink className="h-4 w-4 shrink-0 text-primary" />
+                <ExternalLink className="text-primary h-4 w-4 shrink-0" />
               </div>
             </Cell>
 

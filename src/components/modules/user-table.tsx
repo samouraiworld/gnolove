@@ -1,8 +1,8 @@
-import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-
 import UserRow from '@/modules/user-row';
 
 import { TUser } from '@/utils/schemas';
+
+import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 export interface UserTableProps {
   users: TUser[];

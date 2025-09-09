@@ -1,15 +1,16 @@
 import { useMemo } from 'react';
 
+import { formatDistanceToNow } from 'date-fns';
 import { Calendar, User } from 'lucide-react';
+
+import { deduplicateByKey } from '@/utils/array';
+import { TIssue } from '@/utils/schemas';
+
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { formatDistanceToNow } from 'date-fns';
-
-import { TIssue } from '@/utils/schemas';
-
-import { deduplicateByKey } from '@/utils/array';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 
 const stateBadgeClass = (state: string) => {
   switch (state.toUpperCase()) {
@@ -33,12 +34,17 @@ const MilestoneListItem = ({ issue }: { issue: TIssue }) => {
   const assignees = useMemo(() => deduplicateByKey(issue.assignees, (a) => a.user.id), [issue.assignees]);
 
   return (
-    <div className="h-[250px] rounded-md border">
-      <div className="flex h-full flex-col justify-between gap-1 p-3">
+    <Card className="h-[250px] flex flex-col">
+      <CardContent className="flex flex-1 flex-col gap-2 p-3">
         <div className="flex min-h-[6em] flex-grow flex-col gap-2">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <a href={issue.url} target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:underline">
+              <a
+                href={issue.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground text-sm hover:underline"
+              >
                 #{issue.number}
               </a>
               <Badge className={`h-5 px-2 text-xs ${stateBadgeClass(issue.state)}`}>{issue.state}</Badge>
@@ -61,7 +67,10 @@ const MilestoneListItem = ({ issue }: { issue: TIssue }) => {
                   {labels.length > 5 && (
                     <div
                       className="pointer-events-none absolute bottom-0 left-0 h-6 w-full"
-                      style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, var(--background) 90%)', zIndex: 1 }}
+                      style={{
+                        background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, var(--background) 90%)',
+                        zIndex: 1,
+                      }}
                     />
                   )}
                 </div>
@@ -69,7 +78,7 @@ const MilestoneListItem = ({ issue }: { issue: TIssue }) => {
 
               {assignees.length > 0 && (
                 <div className="mt-3 flex flex-wrap items-center gap-2">
-                  <span className="text-sm text-muted-foreground">Assignees:</span>
+                  <span className="text-muted-foreground text-sm">Assignees:</span>
                   {assignees.map(({ user }) => (
                     <Tooltip key={user.id}>
                       <TooltipTrigger asChild>
@@ -92,32 +101,31 @@ const MilestoneListItem = ({ issue }: { issue: TIssue }) => {
             </div>
           )}
         </div>
+      </CardContent>
 
-        <div>
-          <Separator className="my-3" />
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="h-6 w-6 overflow-hidden rounded-full">
-                <Avatar>
-                  <AvatarImage src={issue.author?.avatarUrl || ''} alt={issue.author?.login || 'unknown'} />
-                  <AvatarFallback>
-                    <User className="h-3 w-3" />
-                  </AvatarFallback>
-                </Avatar>
-              </div>
-              <span className="text-sm text-muted-foreground">{issue.author?.login ?? 'Unknown'}</span>
-            </div>
+      <Separator className="mx-3" />
 
-            {issue.createdAt && (
-              <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                <Calendar className="h-3 w-3" />
-                <span>{formatDistanceToNow(issue.createdAt, { addSuffix: true })}</span>
-              </div>
-            )}
+      <CardFooter className="justify-between px-3 py-3">
+        <div className="flex items-center gap-2">
+          <div className="h-6 w-6 overflow-hidden rounded-full">
+            <Avatar>
+              <AvatarImage src={issue.author?.avatarUrl || ''} alt={issue.author?.login || 'unknown'} />
+              <AvatarFallback>
+                <User className="h-3 w-3" />
+              </AvatarFallback>
+            </Avatar>
           </div>
+          <span className="text-muted-foreground text-sm">{issue.author?.login ?? 'Unknown'}</span>
         </div>
-      </div>
-    </div>
+
+        {issue.createdAt && (
+          <div className="text-muted-foreground flex items-center gap-1 text-xs">
+            <Calendar className="h-3 w-3" />
+            <span>{formatDistanceToNow(issue.createdAt, { addSuffix: true })}</span>
+          </div>
+        )}
+      </CardFooter>
+    </Card>
   );
 };
 

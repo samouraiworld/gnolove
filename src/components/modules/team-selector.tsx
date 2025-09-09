@@ -1,7 +1,9 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+
 import { Users2 } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 
@@ -35,11 +37,18 @@ const TeamSelector = ({
 
   return (
     <div className="relative inline-block">
-      <Button variant="secondary" onClick={() => setOpen((v) => !v)} {...(props as React.ComponentProps<typeof Button>)}>
+      <Button
+        variant="secondary"
+        onClick={() => setOpen((v) => !v)}
+        {...(props as React.ComponentProps<typeof Button>)}
+      >
         <Users2 className="mr-2 h-4 w-4" /> Teams
       </Button>
       {open && (
-        <div ref={popoverRef} className="absolute z-50 mt-2 w-64 rounded-md border bg-popover p-3 text-popover-foreground shadow-md">
+        <div
+          ref={popoverRef}
+          className="bg-popover text-popover-foreground absolute z-50 mt-2 w-64 rounded-md border p-3 shadow-md"
+        >
           <label className="flex items-center gap-2 text-sm">
             <input type="checkbox" checked={selectedTeams.length === teams.length} onChange={handleSelectAllToggle} />
             Select/Unselect All

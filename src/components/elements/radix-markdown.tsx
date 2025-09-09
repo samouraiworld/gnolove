@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Markdown, { Options } from 'react-markdown';
 
 import { cn } from '@/utils/style';
@@ -15,7 +16,11 @@ const RadixMarkdown = ({ components, ...props }: Readonly<Options>) => {
         h5: (p) => <h5 className="text-base font-semibold" {...p} />,
         h6: (p) => <h6 className="text-sm font-semibold" {...p} />,
 
-        p: ({ color: _color, ...props }) => <p className="leading-7" {...props}>{props.children}</p>,
+        p: ({ color: _color, ...props }) => (
+          <p className="leading-7" {...props}>
+            {props.children}
+          </p>
+        ),
 
         ul: ({ className, ...props }) => <ul className={cn('list-inside list-disc', className)} {...props} />,
         ol: ({ className, ...props }) => <ul className={cn('list-inside list-decimal', className)} {...props} />,

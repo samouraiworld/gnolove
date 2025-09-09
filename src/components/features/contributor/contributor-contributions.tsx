@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { TContributor } from '@/utils/schemas';
 
 const ContributorContributions = ({ contributor }: { contributor: TContributor }) => {

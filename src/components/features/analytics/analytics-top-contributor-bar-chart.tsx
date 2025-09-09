@@ -3,9 +3,6 @@
 import React, { ReactElement, useMemo } from 'react';
 
 import { Info } from 'lucide-react';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import {
   BarChart,
   Bar,
@@ -18,11 +15,14 @@ import {
   Customized,
 } from 'recharts';
 
+import useGetScoreFactors from '@/hooks/use-get-score-factors';
+
 import { TEnhancedUserWithStats } from '@/utils/schemas';
 
 import RechartTooltip from '@/components/elements/rechart-tooltip';
-
-import useGetScoreFactors from '@/hooks/use-get-score-factors';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 type Props = {
   contributors: TEnhancedUserWithStats[];
@@ -143,9 +143,9 @@ const AnalyticsTopContributorBarChart = ({ contributors, selectedRepositories }:
   };
 
   return (
-    <div className="h-[350px] w-full px-0 border rounded-md">
+    <div className="h-[350px] w-full rounded-md border px-0">
       <div className="flex items-center justify-center gap-2">
-        <h2 className="text-lg font-semibold text-center">Top Contributors</h2>
+        <h2 className="text-center text-lg font-semibold">Top Contributors</h2>
         <Tooltip>
           <TooltipTrigger asChild>
             <Button variant="ghost" size="icon" className="h-6 w-6">
@@ -153,7 +153,9 @@ const AnalyticsTopContributorBarChart = ({ contributors, selectedRepositories }:
             </Button>
           </TooltipTrigger>
           <TooltipContent className="max-w-xs text-xs">
-            The percentages are weighted by the Gnolove score calculation. This means that each contribution type (commits, issues, pull requests) is adjusted using predefined factors to reflect their relative importance in the overall score. This ensures a balanced representation of contributions based on their impact.
+            The percentages are weighted by the Gnolove score calculation. This means that each contribution type
+            (commits, issues, pull requests) is adjusted using predefined factors to reflect their relative importance
+            in the overall score. This ensures a balanced representation of contributions based on their impact.
           </TooltipContent>
         </Tooltip>
       </div>

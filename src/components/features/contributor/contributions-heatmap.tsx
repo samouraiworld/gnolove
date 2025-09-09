@@ -1,5 +1,6 @@
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { useMemo } from 'react';
+
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 type HeatmapDay = {
   date: string;
@@ -54,10 +55,7 @@ const ContributionSquare = ({ level, date, count }: { level: number; date: Date;
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <div
-          className="h-[10px] w-[10px] cursor-pointer rounded-[2px]"
-          style={{ backgroundColor: getColor(level) }}
-        />
+        <div className="h-[10px] w-[10px] cursor-pointer rounded-[2px]" style={{ backgroundColor: getColor(level) }} />
       </TooltipTrigger>
       <TooltipContent className="text-xs">{getTooltipContent()}</TooltipContent>
     </Tooltip>
@@ -86,7 +84,7 @@ const getHeatmapWeeks = (data: HeatmapDay[]): HeatmapDay[][] => {
 
   // Pad end
   const lastDayOfWeek = lastDate.getDay();
-  const padEnd = (7 - ((lastDayOfWeek + 6) % 7) - 1);
+  const padEnd = 7 - ((lastDayOfWeek + 6) % 7) - 1;
   for (let i = 0; i < padEnd; i++) {
     const padDate = new Date(lastDate);
     padDate.setDate(lastDate.getDate() + i + 1);
@@ -95,7 +93,7 @@ const getHeatmapWeeks = (data: HeatmapDay[]): HeatmapDay[][] => {
 
   // Remove future dates
   today.setHours(0, 0, 0, 0);
-  const filtered = padded.filter(day => {
+  const filtered = padded.filter((day) => {
     const dayDate = new Date(day.date);
     dayDate.setHours(0, 0, 0, 0);
     return dayDate <= today;
@@ -133,7 +131,7 @@ const ContributionsHeatmap = ({ data }: { data: HeatmapDay[] }) => {
 
       {/* Legend */}
       <div className="flex items-center gap-2">
-        <span className="text-xs text-muted-foreground">Less</span>
+        <span className="text-muted-foreground text-xs">Less</span>
         <div className="flex gap-1">
           <ContributionSquare level={0} date={new Date()} count={0} />
           <ContributionSquare level={1} date={new Date()} count={1} />
@@ -141,7 +139,7 @@ const ContributionsHeatmap = ({ data }: { data: HeatmapDay[] }) => {
           <ContributionSquare level={3} date={new Date()} count={8} />
           <ContributionSquare level={4} date={new Date()} count={12} />
         </div>
-        <span className="text-xs text-muted-foreground">More</span>
+        <span className="text-muted-foreground text-xs">More</span>
       </div>
     </div>
   );
