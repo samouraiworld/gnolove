@@ -16,17 +16,15 @@ const ContributorProfile = ({ contributor }: { contributor: TContributor }) => {
       <div className="flex flex-col gap-4">
         <div className="rounded-md border p-6">
           <div className="flex flex-col items-center gap-4">
-            <div className="h-24 w-24 overflow-hidden rounded-full">
-              <Avatar>
-                <AvatarImage src={contributor.avatarUrl} alt={contributor.name} />
-                <AvatarFallback>
-                  {contributor.name
-                    .split(' ')
-                    .map((n) => n[0])
-                    .join('')}
-                </AvatarFallback>
-              </Avatar>
-            </div>
+            <Avatar>
+              <AvatarImage src={contributor.avatarUrl} alt={contributor.name} />
+              <AvatarFallback>
+                {contributor.name
+                  .split(' ')
+                  .map((n) => n[0])
+                  .join('')}
+              </AvatarFallback>
+            </Avatar>
 
             <div className="flex flex-col items-center gap-2">
               <h2 className="text-center text-xl font-semibold">{contributor.name}</h2>

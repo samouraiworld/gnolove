@@ -8,9 +8,7 @@ import ContributorOnchain from './contributor-onchain';
 import ContributorProfile from './contributor-profile';
 import ContributorRecentActivities from './contributor-recent-activities';
 import ContributorTopRepos from './contributor-top-repos';
-import { Check, Copy, GitCommit, GitPullRequest, MessageSquare, Star, X } from 'lucide-react';
-
-import { useOffline } from '@/contexts/offline-context';
+import { Check, Copy, GitCommit, GitPullRequest, MessageSquare, Star } from 'lucide-react';
 
 import useGetContributor from '@/hooks/use-get-contributor';
 import useGetUserNamespaces from '@/hooks/use-get-user-namespaces';
@@ -21,7 +19,7 @@ import { HttpError } from '@/utils/fetcher';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { DialogClose, DialogTitle } from '@/components/ui/dialog';
+import { DialogTitle } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const ContributorContent = ({ login }: { login: string }) => {
@@ -30,7 +28,6 @@ const ContributorContent = ({ login }: { login: string }) => {
   const { data: namespaces } = useGetUserNamespaces(contributor?.wallet ?? '');
   const { data: proposals } = useGetUserProposals(contributor?.wallet ?? '');
   const [loginCopied, setLoginCopied] = useState(false);
-  const { isOffline } = useOffline();
 
   if (isLoading) {
     return <DialogTitle>Loading…</DialogTitle>;
@@ -72,11 +69,6 @@ const ContributorContent = ({ login }: { login: string }) => {
             </Button>
           </div>
         </div>
-        <DialogClose asChild>
-          <Button disabled={isOffline} variant="outline" size="icon">
-            <X width={16} height={16} />
-          </Button>
-        </DialogClose>
       </div>
 
       <div className="grid flex-1 grid-cols-1 gap-6 md:grid-cols-3">

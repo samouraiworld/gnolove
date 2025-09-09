@@ -23,6 +23,7 @@ import useGetContributors from '@/hooks/use-get-contributors';
 import useGetLastIssues from '@/hooks/use-get-last-issues';
 import useGetMilestone from '@/hooks/use-get-milestone';
 import useGetNewContributors from '@/hooks/use-get-new-contributors';
+import useSelectedRepositories from '@/hooks/use-selected-repositories';
 
 import { getLastMRs, TimeFilter } from '@/utils/github';
 import { TYoutubeVideoPlaylist } from '@/utils/schemas';
@@ -32,15 +33,17 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { GitPullRequest, Star, Users } from 'lucide-react';
 
 const ScoreboardPage = ({ videos }: { videos: TYoutubeVideoPlaylist }) => {
-  const { data: allTimeContributors, isPending: isAllTimePending } = useGetContributors({
-    timeFilter: TimeFilter.ALL_TIME,
+  const selectedRepositories = useSelectedRepositories();
+  const { data: contributors, isPending: isContributorsPending } = useGetContributors({
+    timeFilter: TimeFilter.MONTHLY,
+    repositories: selectedRepositories,
   });
 
   const { data: milestone } = useGetMilestone();
   const { data: issues, isPending: isIssuesPending } = useGetLastIssues();
   const { data: newContributors, isPending: isNewContributorsPending } = useGetNewContributors();
 
-  const lastMRs = useMemo(() => getLastMRs(allTimeContributors ?? [], 5), [allTimeContributors]);
+  const lastMRs = useMemo(() => getLastMRs(contributors ?? [], 5), [contributors]);
 
   const { isOffline } = useOffline();
 
@@ -77,29 +80,6 @@ const ScoreboardPage = ({ videos }: { videos: TYoutubeVideoPlaylist }) => {
         </NextLink>
       )}
 
-      {/* Key Metrics */}
-      <div className="grid gap-4 md:grid-cols-2">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Contributors</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{allTimeContributors?.length}</div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active PRs</CardTitle>
-            <GitPullRequest className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{lastMRs.length}</div>
-          </CardContent>
-        </Card>
-      </div>
-
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 my-6">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -117,13 +97,13 @@ const ScoreboardPage = ({ videos }: { videos: TYoutubeVideoPlaylist }) => {
             <GitPullRequest className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            {isAllTimePending ? <Loader /> : <PrsTable prs={lastMRs} />}
+            {isContributorsPending ? <Loader /> : <PrsTable prs={lastMRs} />}
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">New Rising gnome</CardTitle>
+            <CardTitle className="text-sm font-medium">New Rising Gnomes</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -133,8 +113,8 @@ const ScoreboardPage = ({ videos }: { videos: TYoutubeVideoPlaylist }) => {
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-sm font-medium">Top contributors</CardTitle>
-            <CardDescription>Most active contributors this month</CardDescription>
+            <CardTitle className="text-sm font-medium">Top contributors this month</CardTitle>
+            <CardDescription>Most active contributors this month (5 / {contributors?.length})</CardDescription>
           </CardHeader>
           <CardContent>
             <Suspense fallback={<Loader />}>

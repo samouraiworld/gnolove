@@ -19,7 +19,7 @@ const ContributorModal: FC<{ children: React.ReactNode }> = ({ children }) => {
 
   return (
     <Dialog defaultOpen onOpenChange={handleClose}>
-      <DialogContent>{children}</DialogContent>
+      <DialogContent className="max-w-4xl max-h-[calc(100vh-10rem)] overflow-y-auto">{children}</DialogContent>
     </Dialog>
   );
 };
