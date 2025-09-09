@@ -2,13 +2,17 @@ import { Metadata } from 'next';
 
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 
-import AnalyticsClientPage from '@/components/features/analytics/analytics-client-page';
 import { prefetchContributors } from '@/hooks/use-get-contributors';
 import { prefetchRepositories } from '@/hooks/use-get-repositories';
+
 import { getIds } from '@/utils/array';
 import { getTimeFilterFromSearchParam, TimeFilter } from '@/utils/github';
 import { getSelectedRepositoriesFromSearchParam } from '@/utils/repositories';
+
 import { SearchParamsFilters } from '@/types/url-filters';
+
+import AnalyticsClientPage from '@/components/features/analytics/analytics-client-page';
+import { prefetchScoreFactors } from '@/hooks/use-get-score-factors';
 
 export const metadata: Metadata = {
   title: 'Analytics',
@@ -26,6 +30,7 @@ const AnalyticsPage = async ({ searchParams: { f, e, r } }: SearchParamsFilters)
   await Promise.all([
     prefetchContributors(queryClient, { timeFilter: TimeFilter.ALL_TIME }),
     prefetchContributors(queryClient, { timeFilter, exclude, repositories: getIds(selectedRepositories) }),
+    prefetchScoreFactors(queryClient),
   ]);
 
   return (
