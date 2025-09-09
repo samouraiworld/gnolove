@@ -99,7 +99,7 @@ func HandleGetAllProposals(db *gorm.DB) http.HandlerFunc {
 		w.Header().Set("Content-Type", "application/json")
 		var pkgs []models.GnoProposal
 		address := r.URL.Query().Get("address")
-		query := db.Model(&models.GnoProposal{}).Preload("Files")
+		query := db.Model(&models.GnoProposal{}).Preload("Files").Preload("Votes")
 
 		if address != "" {
 			query = query.Where("address = ?", address)

@@ -15,13 +15,14 @@ type GnoPackage struct {
 }
 
 type GnoProposal struct {
-	ID              string `gorm:"primaryKey" json:"id"`
-	Address         string `json:"address" gorm:"index"`
-	Path            string `json:"path" gorm:"index"`
-	BlockHeight     int64  `json:"blockHeight" gorm:"index"`
-	Files           []File `json:"files" gorm:"constraint:OnDelete:CASCADE;"`
-	ExecutionHeight int64  `json:"executionHeight"`
-	Status          string `json:"status"`
+	ID              string    `gorm:"primaryKey" json:"id"`
+	Address         string    `json:"address" gorm:"index"`
+	Path            string    `json:"path" gorm:"index"`
+	BlockHeight     int64     `json:"blockHeight" gorm:"index"`
+	Files           []File    `json:"files" gorm:"constraint:OnDelete:CASCADE;"`
+	Votes           []GnoVote `json:"votes" gorm:"foreignKey:ProposalID;references:ID;constraint:OnDelete:CASCADE;"`
+	ExecutionHeight int64     `json:"executionHeight"`
+	Status          string    `json:"status"`
 }
 
 type GnoVote struct {
