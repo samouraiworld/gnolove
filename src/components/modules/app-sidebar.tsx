@@ -23,12 +23,14 @@ export function AppSidebar() {
   return (
     <Sidebar collapsible='icon'>
       <SidebarHeader>
-        <div className='flex items-center gap-2 px-2'>
-          <Image src={MinecraftHeart} alt='Gnolove' width={24} height={24} />
-          <span className='text-lg font-bold text-sidebar-foreground group-data-[collapsible=icon]:hidden'>
-            Gnolove
-          </span>
-        </div>
+        <Link href="/">
+          <div className='flex items-center gap-2 px-2'>
+            <Image src={MinecraftHeart} alt='Gnolove' width={24} height={24} />
+            <span className='text-lg font-bold text-sidebar-foreground group-data-[collapsible=icon]:hidden'>
+              Gnolove
+            </span>
+          </div>
+        </Link>
       </SidebarHeader>
 
       <SidebarContent>

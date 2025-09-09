@@ -6,6 +6,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Check, ChevronsUpDown, SlidersHorizontal } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import useGetRepositories from '@/hooks/use-get-repositories';
@@ -65,12 +66,27 @@ const RepositoriesSelector = () => {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="secondary" role="combobox" aria-expanded={open} className="w-[240px] justify-between">
+        <Button
+          variant="secondary"
+          role="combobox"
+          aria-expanded={open}
+          aria-label="Select repositories"
+          title={label}
+          className="w-20 justify-center sm:w-[240px] sm:justify-between relative"
+        >
           <span className="flex items-center gap-2 truncate">
             <SlidersHorizontal className="h-4 w-4" />
-            <span className="truncate">{label}</span>
+            <span className="hidden sm:inline truncate">{label}</span>
           </span>
-          <ChevronsUpDown className="ml-2 h-4 w-4 opacity-50" />
+          <ChevronsUpDown className="ml-2 hidden h-4 w-4 opacity-50 sm:inline" />
+          {/* Mobile-only badge showing number of selected repositories */}
+          {selectedIds.length > 0 && (
+            <span className="absolute -right-1 -top-1 block sm:hidden">
+              <Badge className="h-5 min-w-5 px-1 text-[10px] leading-none flex items-center justify-center">
+                {selectedIds.length}
+              </Badge>
+            </span>
+          )}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0" align="start">

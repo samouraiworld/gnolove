@@ -24,8 +24,9 @@ import useGetLastIssues from '@/hooks/use-get-last-issues';
 import useGetMilestone from '@/hooks/use-get-milestone';
 import useGetNewContributors from '@/hooks/use-get-new-contributors';
 import useSelectedRepositories from '@/hooks/use-selected-repositories';
+import useTimeFilter from '@/hooks/use-time-filter';
 
-import { getLastMRs, TimeFilter } from '@/utils/github';
+import { getLastMRs } from '@/utils/github';
 import { TYoutubeVideoPlaylist } from '@/utils/schemas';
 import { cn } from '@/utils/style';
 
@@ -34,8 +35,9 @@ import { GitPullRequest, Star, Users } from 'lucide-react';
 
 const ScoreboardPage = ({ videos }: { videos: TYoutubeVideoPlaylist }) => {
   const selectedRepositories = useSelectedRepositories();
+  const timeFilter = useTimeFilter();
   const { data: contributors, isPending: isContributorsPending } = useGetContributors({
-    timeFilter: TimeFilter.MONTHLY,
+    timeFilter,
     repositories: selectedRepositories,
   });
 

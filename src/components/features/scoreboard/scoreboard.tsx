@@ -8,15 +8,16 @@ import Loader from '@/elements/loader';
 
 import useGetContributors from '@/hooks/use-get-contributors';
 import useSelectedRepositories from '@/hooks/use-selected-repositories';
+import useTimeFilter from '@/hooks/use-time-filter';
 
-import { TimeFilter } from '@/utils/github';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
 const Scoreboard = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
   const selectedRepositories = useSelectedRepositories();
+  const timeFilter = useTimeFilter();
   const { data: contributors, isPending } = useGetContributors({
-    timeFilter: TimeFilter.MONTHLY,
+    timeFilter,
     repositories: selectedRepositories,
   });
 

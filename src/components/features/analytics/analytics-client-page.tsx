@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import AnalyticsContributorLineChart from './analytics-contributor-line-chart';
 import AnalyticsRecentActivity from './analytics-recent-activity';
@@ -10,16 +10,16 @@ import LayoutContainer from '@/layouts/layout-container';
 
 import useGetContributors from '@/hooks/use-get-contributors';
 import useSelectedRepositories from '@/hooks/use-selected-repositories';
+import useTimeFilter from '@/hooks/use-time-filter';
 
 import { filterContributionsByRepo } from '@/utils/contributors';
 import { TimeFilter } from '@/utils/github';
 
 import AnalyticsTotalStats from '@/components/features/analytics/analytics-total-stats';
-import TimeRangeSelector from '@/components/modules/time-range-selector';
 import { Separator } from '@/components/ui/separator';
 
 const AnalyticsClientPage = () => {
-  const [timeFilter, setTimeFilter] = useState<TimeFilter>(TimeFilter.WEEKLY);
+  const timeFilter = useTimeFilter(TimeFilter.WEEKLY);
   const selectedRepositories = useSelectedRepositories();
 
   const { data: contributors } = useGetContributors({
@@ -44,9 +44,7 @@ const AnalyticsClientPage = () => {
         <h1 className="text-2xl font-semibold">Contributors Analytics</h1>
         <Separator className="my-6" />
         <div className="flex flex-col items-center justify-between gap-6 sm:flex-row sm:gap-0">
-          <div className="flex items-end gap-4">
-            <TimeRangeSelector onDateChange={setTimeFilter} defaultValue={timeFilter} className="mb-3" />
-          </div>
+          <div className="flex items-end gap-4" />
           <AnalyticsTotalStats contributors={filteredContributors} />
         </div>
         <div className="mt-6 flex flex-col gap-3">

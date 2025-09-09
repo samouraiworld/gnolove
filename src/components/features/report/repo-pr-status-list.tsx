@@ -133,26 +133,26 @@ const RepoPRStatusList = ({ repo, statusMap, isOffline }: RepoPRStatusListProps)
                             <TooltipContent className="max-w-md text-xs">
                               <div className="flex flex-col gap-2 p-1">
                                 <span className="text-sm font-bold">{pr.title}</span>
-                                <span className="text-muted-foreground text-xs font-bold">
+                                <span className="text-xs font-bold">
                                   PR #{pr.number} • {pr.state}
                                 </span>
-                                <span className="text-muted-foreground text-xs">
+                                <span className="text-xs">
                                   <span className="font-bold">Author: </span>
                                   {pr.authorLogin}
                                 </span>
-                                <span className="text-muted-foreground text-xs">
+                                <span className="text-xs">
                                   <span className="font-bold">Review Decision: </span>
                                   {pr.reviewDecision || 'N/A'}
                                 </span>
-                                <span className="text-muted-foreground text-xs">
+                                <span className="text-xs">
                                   <span className="font-bold">Created: </span>
                                   {pr.createdAt ? new Date(pr.createdAt).toLocaleString() : 'N/A'}
                                 </span>
-                                <span className="text-muted-foreground text-xs">
+                                <span className="text-xs">
                                   <span className="font-bold">Updated: </span>
                                   {pr.updatedAt ? new Date(pr.updatedAt).toLocaleString() : 'N/A'}
                                 </span>
-                                <span className="text-muted-foreground text-xs">
+                                <span className="text-xs">
                                   <span className="font-bold">URL: </span>
                                   <a
                                     href={pr.url}
@@ -163,7 +163,7 @@ const RepoPRStatusList = ({ repo, statusMap, isOffline }: RepoPRStatusListProps)
                                     {pr.url}
                                   </a>
                                 </span>
-                                <span className="text-muted-foreground text-xs">
+                                <span className="text-xs">
                                   <span className="font-bold">Reviewed: </span>
                                   {pr.reviews?.length} times
                                 </span>

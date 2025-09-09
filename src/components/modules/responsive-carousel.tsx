@@ -25,7 +25,7 @@ const ResponsiveCarousel: React.FC<ResponsiveCarouselProps> = ({ className, item
       >
         <CarouselContent>
           {items.map((item, index) => (
-            <CarouselItem className="basis-1/3" key={index}>{item}</CarouselItem>
+            <CarouselItem className="sm:basis-1/3" key={index}>{item}</CarouselItem>
           ))}
         </CarouselContent>
       </Carousel>

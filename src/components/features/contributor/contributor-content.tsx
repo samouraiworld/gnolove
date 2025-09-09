@@ -55,11 +55,13 @@ const ContributorContent = ({ login }: { login: string }) => {
     setLoginCopied(true);
   };
 
+  const hasOnchain = Boolean((packages?.length ?? 0) || (namespaces?.length ?? 0) || (proposals?.length ?? 0));
+
   return (
-    <div className="flex h-full flex-col md:overflow-hidden">
+    <div className="flex h-full min-w-0 flex-col md:overflow-hidden">
       <div className="mb-4 flex items-center justify-between">
         <div className="flex flex-col items-start gap-2 md:flex-row md:items-center">
-          <DialogTitle className="m-0">{contributor.name || contributor.login}</DialogTitle>
+          <DialogTitle className="mt-2">{contributor.name || contributor.login}</DialogTitle>
           <div className="flex items-center gap-1">
             <Badge variant="secondary" className="text-xs">
               gnolove.world/@{contributor.login}
@@ -71,15 +73,15 @@ const ContributorContent = ({ login }: { login: string }) => {
         </div>
       </div>
 
-      <div className="grid flex-1 grid-cols-1 gap-6 md:grid-cols-3">
+      <div className="grid flex-1 min-w-0 grid-cols-1 gap-6 md:grid-cols-3">
         {/* Left Column - Profile Info */}
-        <div className="min-h-0">
+        <div className="min-h-0 min-w-0">
           <ContributorProfile contributor={contributor} />
         </div>
 
         {/* Right Column - Activity & Contributions */}
-        <div className="min-h-0 md:col-span-2">
-          <div className="flex h-full flex-col gap-4">
+        <div className="min-h-0 min-w-0 md:col-span-2">
+          <div className="flex h-full min-w-0 flex-col gap-4">
             {/* Metrics */}
             <div className="mt-4 grid grid-cols-2 gap-4 md:mt-0 md:grid-cols-4">
               <div className="rounded-md border p-3">
@@ -123,44 +125,36 @@ const ContributorContent = ({ login }: { login: string }) => {
               </div>
             </div>
 
-            <div className="min-h-0 flex-1">
+            <div className="min-h-0 min-w-0 flex-1">
               {/* Tabs for different views */}
               <Tabs
-                defaultValue={packages?.length || namespaces?.length || proposals?.length ? 'onchain' : 'analytics'}
-                className="flex h-full flex-col gap-4"
+                defaultValue={hasOnchain ? 'onchain' : 'analytics'}
+                className="flex h-full min-w-0 w-full sm:w-auto flex-col gap-4 items-start"
               >
-                <TabsList className="min-h-10">
-                  {packages?.length || namespaces?.length || proposals?.length ? (
-                    <TabsTrigger value="onchain">GNO Chain</TabsTrigger>
-                  ) : null}
-                  <TabsTrigger value="analytics">Analytics</TabsTrigger>
-                  <TabsTrigger value="activity">Recent Activity</TabsTrigger>
-                  <TabsTrigger value="repositories">Top Repositories</TabsTrigger>
-                  <TabsTrigger value="contributions">Contributions</TabsTrigger>
+                <TabsList className="min-h-10 w-full px-2 bg-transparent rounded-none sm:w-auto overflow-x-auto whitespace-nowrap sticky top-0 z-10 justify-start gap-1">
+                  <TabsTrigger className="shrink-0" value="onchain" disabled={!hasOnchain}>On-chain</TabsTrigger>
+                  <TabsTrigger className="shrink-0" value="analytics">Analytics</TabsTrigger>
+                  <TabsTrigger className="shrink-0" value="activity">Recent Activity</TabsTrigger>
+                  <TabsTrigger className="shrink-0" value="repositories">Top Repositories</TabsTrigger>
+                  <TabsTrigger className="shrink-0" value="contributions">Contributions</TabsTrigger>
                 </TabsList>
 
-                <div className="min-h-0">
-                  {packages?.length || namespaces?.length || proposals?.length ? (
-                    <TabsContent value="onchain" className="h-full">
-                      <ContributorOnchain
-                        packages={packages ?? []}
-                        namespaces={namespaces ?? []}
-                        proposals={proposals ?? []}
-                      />
-                    </TabsContent>
-                  ) : null}
-                  <TabsContent value="analytics" className="h-full">
+                <div className="min-h-0 min-w-0 w-full">
+                  <TabsContent value="onchain" className="min-h-0 w-full overflow-x-hidden">
+                    <ContributorOnchain packages={packages ?? []} namespaces={namespaces ?? []} proposals={proposals ?? []} />
+                  </TabsContent>
+                  <TabsContent value="analytics" className="min-h-0 w-full overflow-x-hidden">
                     <ContributorAnalytics contributor={contributor} />
                   </TabsContent>
-                  <TabsContent value="activity" className="h-full">
+                  <TabsContent value="activity" className="min-h-0 w-full overflow-x-hidden">
                     <ContributorRecentActivities contributor={contributor} />
                   </TabsContent>
 
-                  <TabsContent value="repositories" className="h-full">
+                  <TabsContent value="repositories" className="min-h-0 w-full overflow-x-hidden">
                     <ContributorTopRepos contributor={contributor} />
                   </TabsContent>
 
-                  <TabsContent value="contributions" className="h-full">
+                  <TabsContent value="contributions" className="min-h-0 w-full overflow-x-hidden">
                     <ContributorContributions contributor={contributor} />
                   </TabsContent>
                 </div>

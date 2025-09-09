@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { useMemo } from 'react';
 
 import Image from 'next/image';
@@ -10,14 +9,13 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
 import { Masonry } from 'masonic';
 
-import TimeRangeSelector from '@/modules/time-range-selector';
-
 import Loader from '@/elements/loader';
 
 import { useOffline } from '@/contexts/offline-context';
 
 import useGetContributors from '@/hooks/use-get-contributors';
 import useSelectedRepositories from '@/hooks/use-selected-repositories';
+import useTimeFilter from '@/hooks/use-time-filter';
 
 import { TimeFilter } from '@/utils/github';
 import { cn } from '@/utils/style';
@@ -29,7 +27,7 @@ import { Star } from 'lucide-react';
 
 const BestPerformingTeams = () => {
   const { isOffline } = useOffline();
-  const [timeFilter, setTimeFilter] = useState<TimeFilter>(TimeFilter.ALL_TIME);
+  const timeFilter = useTimeFilter(TimeFilter.ALL_TIME);
   const selectedRepositories = useSelectedRepositories();
   const { data: contributors, isPending } = useGetContributors({ timeFilter, repositories: selectedRepositories });
 
@@ -76,10 +74,7 @@ const BestPerformingTeams = () => {
     <LayoutContainer className="mt-5">
       <div className="flex flex-col gap-6 my-6">
         <h1 className="text-2xl font-bold text-center">🏆 Best Performing Teams</h1>
-        <div className="flex items-center justify-center gap-2">
-          <span className="text-sm">Showing:</span>
-          <TimeRangeSelector onDateChange={setTimeFilter} defaultValue={timeFilter} showLabel={false} />
-        </div>
+        <div className="flex items-center justify-center gap-2" />
         {isPending ? (
           <div className="flex my-9 justify-center align-center">
             <Loader />

@@ -19,7 +19,18 @@ const ContributorModal: FC<{ children: React.ReactNode }> = ({ children }) => {
 
   return (
     <Dialog defaultOpen onOpenChange={handleClose}>
-      <DialogContent className="max-w-4xl max-h-[calc(100vh-10rem)] overflow-y-auto">{children}</DialogContent>
+      <DialogContent
+        className="
+          top-0 left-0 translate-x-0 translate-y-0 h-[100dvh] max-h-[100dvh] w-screen rounded-none p-4
+          pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]
+          overflow-hidden sm:overflow-auto
+          sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:h-auto sm:max-h-[calc(100vh-4rem)] sm:w-full sm:max-w-4xl sm:rounded-lg sm:p-6
+        "
+      >
+        <div className="flex h-full min-h-0 flex-col overflow-y-auto overflow-x-hidden overscroll-contain">
+          {children}
+        </div>
+      </DialogContent>
     </Dialog>
   );
 };

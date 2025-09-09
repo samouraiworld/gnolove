@@ -17,6 +17,7 @@ import TEAMS from '@/constants/teams';
 import { Badge } from '@/components/ui/badge';
 import { TableRow } from '@/components/ui/table';
 import Cell from '@/elements/cell';
+import ContributionsDialog from '@/modules/contributions-dialog';
 
 export interface ContributorRowProps {
   contributor: TEnhancedUserWithStats;
@@ -89,12 +90,14 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
       </Cell>
 
       <Cell>
-        <div className="text-right">
-          <p className="font-medium text-sm">{contributor.score.toFixed(2)}</p>
-          <p className="text-xs text-muted-foreground">
-            {contributor.TotalPrs} PRs • {contributor.TotalCommits} commits
-          </p>
-        </div>
+        <ContributionsDialog user={contributor}>
+          <div className="text-right">
+            <p className="font-medium text-sm">{contributor.score.toFixed(2)}</p>
+            <p className="text-xs text-muted-foreground">
+              {contributor.TotalPrs} PRs • {contributor.TotalCommits} commits
+            </p>
+          </div>
+        </ContributionsDialog>
       </Cell>
     </TableRow>
   );
