@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-import MilestoneProgress from '@/features/milestone-progress';
+import MilestoneProgress from '@/features/milestone/milestone-progress';
 import MilestoneList from '@/features/milestone/milestone-list';
 
 import LayoutContainer from '@/layouts/layout-container';

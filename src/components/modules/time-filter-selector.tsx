@@ -50,11 +50,11 @@ const TimeFilterSelector = () => {
           aria-expanded={open}
           aria-label="Select time filter"
           title={label}
-          className="w-20 justify-center sm:w-[180px] sm:justify-between"
+          className="w-auto max-w-full justify-center sm:w-[180px] sm:justify-between"
         >
           <span className="flex items-center gap-2 truncate">
             <CalendarClock className="h-4 w-4" />
-            <span className="hidden sm:inline truncate">{label}</span>
+            <span className="inline truncate">{label}</span>
           </span>
           <ChevronsUpDown className="ml-2 hidden h-4 w-4 opacity-50 sm:inline" />
         </Button>

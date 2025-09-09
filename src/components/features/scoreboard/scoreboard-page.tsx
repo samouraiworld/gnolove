@@ -5,7 +5,7 @@ import { Suspense, useMemo } from 'react';
 import Image from 'next/image';
 import NextLink from 'next/link';
 
-import MilestoneProgress from '@/features/milestone-progress';
+import MilestoneProgress from '@/features/milestone/milestone-progress';
 import Scoreboard from '@/features/scoreboard/scoreboard';
 
 import LayoutContainer from '@/layouts/layout-container';

@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import { TUTORIAL_VIDEOS_YOUTUBE_PLAYLIST_ID } from '@/features/tutorials/constants';
+import { TUTORIAL_VIDEOS_YOUTUBE_PLAYLIST_ID } from '@/constants/videos';
 
 import LayoutContainer from '@/layouts/layout-container';
 

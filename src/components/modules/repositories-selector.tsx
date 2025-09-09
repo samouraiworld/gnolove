@@ -58,7 +58,7 @@ const RepositoriesSelector = () => {
       const repo = repositories?.find((r) => r.id === selectedIds[0]);
       return repo ? `${repo.owner}/${repo.name}` : '1 repository';
     }
-    return `${selectedIds.length} repositories`;
+    return `${selectedIds.map((id) => id).join(', ')}`;
   }, [selectedIds, repositories]);
 
   if (!repositories?.length) return null;
@@ -72,11 +72,11 @@ const RepositoriesSelector = () => {
           aria-expanded={open}
           aria-label="Select repositories"
           title={label}
-          className="w-20 justify-center sm:w-[240px] sm:justify-between relative"
+          className="w-auto max-w-full justify-center sm:w-[260px] sm:justify-between relative"
         >
           <span className="flex items-center gap-2 truncate">
             <SlidersHorizontal className="h-4 w-4" />
-            <span className="hidden sm:inline truncate">{label}</span>
+            <span className="hidden truncate sm:inline">{label}</span>
           </span>
           <ChevronsUpDown className="ml-2 hidden h-4 w-4 opacity-50 sm:inline" />
           {/* Mobile-only badge showing number of selected repositories */}

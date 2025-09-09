@@ -1,1 +1,3 @@
 export const GNOLAND_YOUTUBE_CHANNEL_ID = 'UCHlHaup7HEDQFQrb1goxAkg';
+
+export const TUTORIAL_VIDEOS_YOUTUBE_PLAYLIST_ID = 'PLJZrQikyfMc-kBojXgAojOz4UQPuq4DiY';
