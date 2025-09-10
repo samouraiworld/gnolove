@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import PreservingLink from '@/components/elements/preserving-link';
 import { usePathname } from 'next/navigation';
 import {
   Sidebar,
@@ -23,14 +23,14 @@ export function AppSidebar() {
   return (
     <Sidebar collapsible='icon'>
       <SidebarHeader>
-        <Link href="/">
+        <PreservingLink href="/">
           <div className='flex items-center gap-2 px-2'>
             <Image src={MinecraftHeart} alt='Gnolove' width={24} height={24} />
             <span className='text-lg font-bold text-sidebar-foreground group-data-[collapsible=icon]:hidden'>
               Gnolove
             </span>
           </div>
-        </Link>
+        </PreservingLink>
       </SidebarHeader>
 
       <SidebarContent>
@@ -42,10 +42,10 @@ export function AppSidebar() {
                 return (
                   <SidebarMenuItem key={item.name}>
                     <SidebarMenuButton asChild isActive={isActive} tooltip={item.name}>
-                      <Link href={item.href}>
+                      <PreservingLink href={item.href}>
                         <item.icon className='h-4 w-4' />
                         <span>{item.name}</span>
-                      </Link>
+                      </PreservingLink>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 );

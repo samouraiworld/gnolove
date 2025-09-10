@@ -29,7 +29,7 @@ const TimeFilterSelector = () => {
 
   const selected = useMemo<TimeFilter>(() => {
     const raw = searchParams.get(PARAM_KEY);
-    return raw && isTimeFilter(raw) ? (raw as TimeFilter) : TimeFilter.MONTHLY;
+    return raw && isTimeFilter(raw) ? (raw as TimeFilter) : TimeFilter.ALL_TIME;
   }, [searchParams]);
 
   const label = useMemo(() => options.find((o) => o.key === selected)?.label || 'All time', [selected]);
@@ -38,7 +38,8 @@ const TimeFilterSelector = () => {
     const params = new URLSearchParams(searchParams.toString());
     if (value === TimeFilter.ALL_TIME) params.delete(PARAM_KEY);
     else params.set(PARAM_KEY, value);
-    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    const query = params.toString();
+    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
   };
 
   return (

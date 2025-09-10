@@ -94,7 +94,7 @@ const AnalyticsRecentActivity = ({ contributors, timeFilter }: Props) => {
   }, [data]);
 
   return (
-    <div className="h-[500px] w-full max-w-[650px] min-w-[350px] rounded-md border px-0">
+    <div className="h-[500px] w-full max-w-[650px] min-w-[350px] rounded-md border px-0 relative">
       <h2 className="py-3 text-center text-lg font-semibold">Recent activity</h2>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} margin={{ top: 10, right: 40, bottom: 20, left: -10 }}>

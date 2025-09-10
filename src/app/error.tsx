@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import PreservingLink from '@/components/elements/preserving-link';
 
 import { X } from 'lucide-react';
 
@@ -23,7 +23,7 @@ export default function GlobalError({ reset }: { reset: () => void }) {
       <div className="flex gap-2">
         <Button onClick={reset}>Try again</Button>
         <Button variant="outline" asChild>
-          <Link href="/">Go to homepage</Link>
+          <PreservingLink href="/">Go to homepage</PreservingLink>
         </Button>
       </div>
     </div>

@@ -123,3 +123,15 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* --- Tailwind v4 custom utilities migrated from tailwind.config --- */
+@keyframes heartPulse {
+  0%, 100% { transform: scale(1); }
+  10% { transform: scale(1.1); }
+  25% { transform: scale(1); }
+  40% { transform: scale(1.2); }
+}
+
+@layer utilities {
+  .animate-heart-pulse { animation: heartPulse 1s ease-in-out infinite; }
+}

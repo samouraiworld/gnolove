@@ -9,21 +9,35 @@ const RadixMarkdown = ({ components, ...props }: Readonly<Options>) => {
     <Markdown
       {...props}
       components={{
-        h1: (p) => <h1 className="text-3xl font-bold" {...p} />,
-        h2: (p) => <h2 className="text-2xl font-semibold" {...p} />,
-        h3: (p) => <h3 className="text-xl font-semibold" {...p} />,
-        h4: (p) => <h4 className="text-lg font-semibold" {...p} />,
-        h5: (p) => <h5 className="text-base font-semibold" {...p} />,
-        h6: (p) => <h6 className="text-sm font-semibold" {...p} />,
+        h1: ({ node: _node, className, ...rest }) => (
+          <h1 className={cn('text-3xl font-bold', className)} {...rest} />
+        ),
+        h2: ({ node: _node, className, ...rest }) => (
+          <h2 className={cn('text-2xl font-semibold', className)} {...rest} />
+        ),
+        h3: ({ node: _node, className, ...rest }) => (
+          <h3 className={cn('text-xl font-semibold', className)} {...rest} />
+        ),
+        h4: ({ node: _node, className, ...rest }) => (
+          <h4 className={cn('text-lg font-semibold', className)} {...rest} />
+        ),
+        h5: ({ node: _node, className, ...rest }) => (
+          <h5 className={cn('text-base font-semibold', className)} {...rest} />
+        ),
+        h6: ({ node: _node, className, ...rest }) => (
+          <h6 className={cn('text-sm font-semibold', className)} {...rest} />
+        ),
 
-        p: ({ color: _color, ...props }) => (
-          <p className="leading-7" {...props}>
-            {props.children}
+        p: ({ node: _node, className, children, ...rest }) => (
+          <p className={cn('leading-7', className)} {...rest}>
+            {children}
           </p>
         ),
 
         ul: ({ className, ...props }) => <ul className={cn('list-inside list-disc', className)} {...props} />,
-        ol: ({ className, ...props }) => <ul className={cn('list-inside list-decimal', className)} {...props} />,
+        ol: ({ className, node: _node, ...rest }) => (
+          <ol className={cn('list-inside list-decimal', className)} {...rest} />
+        ),
 
         ...components,
       }}

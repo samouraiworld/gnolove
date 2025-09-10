@@ -19,7 +19,7 @@ const ContributorProfile = ({ contributor }: { contributor: TContributor }) => {
             <Avatar>
               <AvatarImage src={contributor.avatarUrl} alt={contributor.name} />
               <AvatarFallback>
-                {contributor.name
+                {(contributor.name || contributor.login || 'U')
                   .split(' ')
                   .map((n) => n[0])
                   .join('')}
@@ -84,10 +84,10 @@ const ContributorProfile = ({ contributor }: { contributor: TContributor }) => {
               <div>
                 <div className="text-muted-foreground mb-1 text-xs">Wallet Address</div>
                 <div className="flex items-center gap-2">
-                  <div className="bg-muted flex-1 overflow-hidden rounded-md p-2 font-mono text-xs text-ellipsis">
+                  <div className="bg-muted flex-1 overflow-hidden rounded-md p-2 font-mono text-xs text-ellipsis whitespace-nowrap">
                     {contributor.wallet}
                   </div>
-                  <Button variant="ghost" size="icon" onClick={() => navigator.clipboard.writeText(contributor.wallet)}>
+                  <Button variant="outline" size="icon" onClick={() => navigator.clipboard.writeText(contributor.wallet)}>
                     <Copy size={12} />
                   </Button>
                 </div>

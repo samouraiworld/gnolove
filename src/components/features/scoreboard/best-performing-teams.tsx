@@ -3,7 +3,6 @@
 import { useMemo } from 'react';
 
 import Image from 'next/image';
-import Link from 'next/link';
 
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
@@ -24,6 +23,7 @@ import teams from '@/constants/teams';
 
 import LayoutContainer from '@/components/layouts/layout-container';
 import { Star } from 'lucide-react';
+import PreservingLink from '@/elements/preserving-link';
 
 const BestPerformingTeams = () => {
   const { isOffline } = useOffline();
@@ -60,14 +60,27 @@ const BestPerformingTeams = () => {
     [filteredContributors],
   );
 
+  const ordinal = (n: number) => {
+    const v = n % 100;
+    if (v >= 11 && v <= 13) return 'th';
+    switch (n % 10) {
+      case 1: return 'st';
+      case 2: return 'nd';
+      case 3: return 'rd';
+      default: return 'th';
+    }
+  };
   const rankElement = (rank: number) => {
-    if (rank < 3)
+    if (rank < 3) {
       return (
         <Star
           className={cn(rank === 0 && 'text-yellow-10', rank === 1 && 'text-gray-10', rank === 2 && 'text-bronze-10')}
+          aria-label={`Rank ${rank + 1}`}
         />
       );
-    return `${rank + 1}th`;
+    }
+    const r = rank + 1;
+    return `${r}${ordinal(r)}`;
   };
 
   return (
@@ -76,7 +89,7 @@ const BestPerformingTeams = () => {
         <h1 className="text-2xl font-bold text-center">🏆 Best Performing Teams</h1>
         <div className="flex items-center justify-center gap-2" />
         {isPending ? (
-          <div className="flex my-9 justify-center align-center">
+          <div className="flex my-9 justify-center items-center">
             <Loader />
           </div>
         ) : (
@@ -126,7 +139,7 @@ const BestPerformingTeams = () => {
                               ) : (
                                 <div className="w-6 h-6 rounded-full bg-gray-10" />
                               )}
-                              <Link href={isOffline ? '' : `/@${member.login}`}>
+                              <PreservingLink href={isOffline ? '' : `/@${member.login}`}>
                                 <span
                                   className={cn(
                                     'hover:text-blue-10 block overflow-hidden text-ellipsis whitespace-nowrap truncate',
@@ -135,7 +148,7 @@ const BestPerformingTeams = () => {
                                 >
                                   {member.name || member.login}
                                 </span>
-                              </Link>
+                              </PreservingLink>
                             </div>
                           </TableCell>
                           <TableCell align="right">{member.score.toFixed(2)}</TableCell>

@@ -37,11 +37,11 @@ const ContributorRecentActivities = ({ contributor }: { contributor: TContributo
                     })}
                   </span>
                 </div>
-                <Link href={activity.url} target="_blank" rel="noopener noreferrer">
-                  <Button variant="ghost" size="icon">
+                <Button asChild variant="ghost" size="icon">
+                  <Link href={activity.url} target="_blank" rel="noopener noreferrer">
                     <ExternalLink size={12} />
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </div>
             ))}
         </div>

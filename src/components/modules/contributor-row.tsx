@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
+import PreservingLink from '@/components/elements/preserving-link';
 
 import { ExternalLink, Star } from 'lucide-react';
 
@@ -69,7 +70,7 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
             className="shrink-0 overflow-hidden rounded-full"
           />
 
-          <Link
+          <PreservingLink
             className={cn('xs:max-w-[180px] max-w-[160px] min-w-0 sm:max-w-none', { 'pointer-events-none': isOffline })}
             href={isOffline ? '' : `/@${contributor.login}`}
           >
@@ -79,7 +80,7 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
             >
               {contributor.name || contributor.login}
             </span>
-          </Link>
+          </PreservingLink>
 
           {team && <Badge className="xs:inline hidden">{team.name}</Badge>}
 

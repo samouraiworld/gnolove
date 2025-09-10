@@ -155,7 +155,7 @@ const AnalyticsContributorLineChart = ({ contributors, timeFilter }: Props) => {
   }, [data, activityType]);
 
   return (
-    <div className="h-[500px] w-full max-w-[650px] rounded-md border px-0">
+    <div className="h-[500px] w-full max-w-[650px] rounded-md border px-0 relative">
       <h2 className="py-3 text-center text-lg font-semibold">
         <ActivityTypeSelector onActivityTypeChange={setActivityType} className="mb-3 inline-flex" /> activity
       </h2>

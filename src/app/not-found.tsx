@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import PreservingLink from '@/components/elements/preserving-link';
 
 import { Button } from '@/components/ui/button';
 
@@ -15,7 +15,7 @@ export default function GlobalNotFound() {
       </p>
       <div className="flex gap-2">
         <Button asChild>
-          <Link href="/">Go to homepage</Link>
+          <PreservingLink href="/">Go to homepage</PreservingLink>
         </Button>
       </div>
     </div>

@@ -3,7 +3,6 @@
 import { Suspense, useMemo } from 'react';
 
 import Image from 'next/image';
-import NextLink from 'next/link';
 
 import MilestoneProgress from '@/features/milestone/milestone-progress';
 import Scoreboard from '@/features/scoreboard/scoreboard';
@@ -32,6 +31,7 @@ import { cn } from '@/utils/style';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { GitPullRequest, Star, Users } from 'lucide-react';
+import PreservingLink from '@/elements/preserving-link';
 
 const ScoreboardPage = ({ videos }: { videos: TYoutubeVideoPlaylist }) => {
   const selectedRepositories = useSelectedRepositories();
@@ -77,9 +77,9 @@ const ScoreboardPage = ({ videos }: { videos: TYoutubeVideoPlaylist }) => {
       </div>
 
       {milestone && (
-        <NextLink className={cn('my-6 block', { 'pointer-events-none': isOffline })} href="/milestone">
+        <PreservingLink className={cn('my-6 block', { 'pointer-events-none': isOffline })} href="/milestone">
           <MilestoneProgress milestone={milestone} />
-        </NextLink>
+        </PreservingLink>
       )}
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 my-6">

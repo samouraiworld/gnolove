@@ -2,18 +2,26 @@
 
 import { FC } from 'react';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { REPOSITORIES_PARAM_KEY, TIME_FILTER_PARAM_KEY } from '@/constants/search-params';
 
 const ContributorModal: FC<{ children: React.ReactNode }> = ({ children }) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const handleClose = () => {
     if (window.history.length > 1) {
       router.back();
     } else {
-      router.push('/');
+      const carry = new URLSearchParams();
+      const r = searchParams.get(REPOSITORIES_PARAM_KEY);
+      const f = searchParams.get(TIME_FILTER_PARAM_KEY);
+      if (r) carry.set(REPOSITORIES_PARAM_KEY, r);
+      if (f) carry.set(TIME_FILTER_PARAM_KEY, f);
+      const qs = carry.toString();
+      router.push(qs ? `/?${qs}` : '/');
     }
   };
 

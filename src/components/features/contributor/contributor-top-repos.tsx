@@ -31,11 +31,11 @@ const ContributorTopRepos = ({ contributor }: { contributor: TContributor }) => 
                     <span className="text-muted-foreground text-xs">{repo.stargazerCount}</span>
                   </div>
                 </div>
-                <Link href={repo.url} target="_blank" rel="noopener noreferrer">
-                  <Button variant="ghost" size="icon">
+                <Button asChild variant="ghost" size="icon" aria-label={`Open ${repo.nameWithOwner} in new tab`}>
+                  <Link href={repo.url} target="_blank" rel="noopener noreferrer">
                     <ExternalLink size={12} />
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </div>
             ))}
           </div>

@@ -11,7 +11,7 @@ import useSelectedRepositories from '@/hooks/use-selected-repositories';
 import useTimeFilter from '@/hooks/use-time-filter';
 
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
+import PreservingLink from '@/components/elements/preserving-link';
 
 const Scoreboard = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
   const selectedRepositories = useSelectedRepositories();
@@ -33,7 +33,7 @@ const Scoreboard = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
         <>
           <ContributorTable contributors={filteredContributors.slice(0, 5)} sort showRank />
           <Button className='mt-2' variant="outline" asChild>
-            <Link href="/contributors">View all contributors</Link>
+            <PreservingLink href="/contributors">View all contributors</PreservingLink>
           </Button>
         </>
       ) : (

@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import NextLink from 'next/link';
 
 import { Status, STATUS_ORDER } from './report-client-page';
 import { CheckCircle2, AlertTriangle, Info, SlidersHorizontal, CircleHelp } from 'lucide-react';
@@ -12,6 +11,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import PreservingLink from '@/elements/preserving-link';
+import Link from 'next/link';
 
 const STATUS_TOOLTIPS: Record<Status, string> = {
   blocked: 'PRs are technically mergeable but blocked.',
@@ -74,16 +75,16 @@ const RepoPRStatusList = ({ repo, statusMap, isOffline }: RepoPRStatusListProps)
                               <AvatarFallback>{pr.authorLogin ? pr.authorLogin[0] : '?'}</AvatarFallback>
                             </Avatar>
                           </div>
-                          <NextLink className="flex items-center" href={isOffline ? '' : `/@${pr.authorLogin}`}>
+                          <PreservingLink className="flex items-center" href={isOffline ? '' : `/@${pr.authorLogin}`}>
                             <Tooltip>
                               <TooltipTrigger asChild>
                                 <span className="text-sm font-bold">{pr.authorLogin}</span>
                               </TooltipTrigger>
                               <TooltipContent className="text-xs">{pr.authorLogin}</TooltipContent>
                             </Tooltip>
-                          </NextLink>
+                          </PreservingLink>
                         </div>
-                        <a
+                        <Link
                           className="flex items-center"
                           href={isOffline ? '' : pr.url}
                           target="_blank"
@@ -95,7 +96,7 @@ const RepoPRStatusList = ({ repo, statusMap, isOffline }: RepoPRStatusListProps)
                             </TooltipTrigger>
                             <TooltipContent className="max-w-sm text-xs">{pr.title}</TooltipContent>
                           </Tooltip>
-                        </a>
+                        </Link>
                         <div className="ml-auto flex items-center gap-4">
                           {(pr.reviews?.length ?? 0) > 10 && (
                             <Tooltip>
@@ -154,14 +155,14 @@ const RepoPRStatusList = ({ repo, statusMap, isOffline }: RepoPRStatusListProps)
                                 </span>
                                 <span className="text-xs">
                                   <span className="font-bold">URL: </span>
-                                  <a
+                                  <Link
                                     href={pr.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="underline underline-offset-4"
                                   >
                                     {pr.url}
-                                  </a>
+                                  </Link>
                                 </span>
                                 <span className="text-xs">
                                   <span className="font-bold">Reviewed: </span>

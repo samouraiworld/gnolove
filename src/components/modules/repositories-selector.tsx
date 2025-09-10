@@ -13,6 +13,8 @@ import useGetRepositories from '@/hooks/use-get-repositories';
 import { REPOSITORIES_PARAM_KEY } from '@/constants/search-params';
 
 const PARAM_KEY = REPOSITORIES_PARAM_KEY;
+// Must mirror server default in server/handler/stats.go:getRepositoriesWithRequest
+const DEFAULT_REPOSITORIES = ['gnolang/gno'];
 
 const RepositoriesSelector = () => {
   const { data: repositories } = useGetRepositories();
@@ -39,6 +41,13 @@ const RepositoriesSelector = () => {
 
   const allIds = useMemo(() => repositories?.map((r) => r.id) || [], [repositories]);
   const allSelected = selectedIds.length > 0 && selectedIds.length === allIds.length;
+  // When no selection is provided, server defaults to DEFAULT_REPOSITORIES
+  const defaultIds = useMemo(
+    () => repositories?.filter((r) => DEFAULT_REPOSITORIES.includes(`${r.owner}/${r.name}`)).map((r) => r.id) || [],
+    [repositories],
+  );
+  const useDefaults = selectedIds.length === 0;
+  const effectiveSelectedIds = useDefaults ? defaultIds : selectedIds;
 
   const toggleAll = () => {
     if (allSelected) setSelectedIds([]);
@@ -53,13 +62,24 @@ const RepositoriesSelector = () => {
   };
 
   const label = useMemo(() => {
-    if (selectedIds.length === 0) return 'All repositories';
+    if (selectedIds.length === 0) {
+      if (defaultIds.length === 0) return 'All repositories';
+      if (defaultIds.length === 1) {
+        const repo = repositories?.find((r) => r.id === defaultIds[0]);
+        return repo ? `${repo.owner}/${repo.name}` : '1 repository';
+      }
+      // Multiple defaults
+      const names = repositories
+        ?.filter((r) => defaultIds.includes(r.id))
+        .map((r) => `${r.owner}/${r.name}`);
+      return names && names.length > 0 ? names.join(', ') : 'All repositories';
+    }
     if (selectedIds.length === 1) {
       const repo = repositories?.find((r) => r.id === selectedIds[0]);
       return repo ? `${repo.owner}/${repo.name}` : '1 repository';
     }
     return `${selectedIds.map((id) => id).join(', ')}`;
-  }, [selectedIds, repositories]);
+  }, [selectedIds, repositories, defaultIds]);
 
   if (!repositories?.length) return null;
 
@@ -106,7 +126,7 @@ const RepositoriesSelector = () => {
             <CommandSeparator />
             <CommandGroup heading="Repositories">
               {repositories?.map((repo) => {
-                const checked = selectedIds.includes(repo.id);
+                const checked = effectiveSelectedIds.includes(repo.id);
                 return (
                   <CommandItem
                     key={repo.id}

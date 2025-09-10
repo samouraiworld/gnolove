@@ -17,21 +17,21 @@ const Footer = ({ className, ...props }: Props) => {
       <div className="flex flex-col items-center gap-2">
         <p className="text-muted-foreground text-sm">Join the Gno.land Ecosystem!</p>
         <div className="flex gap-4">
-          <NextLink href="https://x.com/_gnoland" target="_blank">
-            <Button variant="ghost" size="icon" aria-label="Twitter">
+          <Button asChild variant="ghost" size="icon" aria-label="Twitter">
+            <NextLink href="https://x.com/_gnoland" target="_blank">
               <Twitter className="h-5 w-5" />
-            </Button>
-          </NextLink>
-          <NextLink href="https://github.com/gnolang" target="_blank">
-            <Button variant="ghost" size="icon" aria-label="GitHub">
+            </NextLink>
+          </Button>
+          <Button asChild variant="ghost" size="icon" aria-label="GitHub">
+            <NextLink href="https://github.com/gnolang" target="_blank">
               <Github className="h-5 w-5" />
-            </Button>
-          </NextLink>
-          <NextLink href="https://discord.gg/YFtMjWwUN7" target="_blank">
-            <Button variant="ghost" size="icon" aria-label="Discord community">
+            </NextLink>
+          </Button>
+          <Button asChild variant="ghost" size="icon" aria-label="Discord community">
+            <NextLink href="https://discord.gg/YFtMjWwUN7" target="_blank">
               <MessageCircle className="h-5 w-5" />
-            </Button>
-          </NextLink>
+            </NextLink>
+          </Button>
         </div>
       </div>
 
@@ -41,7 +41,7 @@ const Footer = ({ className, ...props }: Props) => {
         <div className="mb-2 flex items-center">
           <p className="text-sm">
             Gnolove.world is cooked with ❤️ by{' '}
-            <NextLink className="underline underline-offset-4" href="https://www.samourai.world" target="_blank">
+            <NextLink className="underline underline-offset-4" href="https://www.samourai.world" target="_blank" rel="noopener noreferrer">
               www.samourai.world
             </NextLink>
           </p>
@@ -52,6 +52,7 @@ const Footer = ({ className, ...props }: Props) => {
             className="text-sm underline underline-offset-4"
             href="https://github.com/samouraiworld/gnolove"
             target="_blank"
+            rel="noopener noreferrer"
           >
             Contribute on GitHub
           </NextLink>

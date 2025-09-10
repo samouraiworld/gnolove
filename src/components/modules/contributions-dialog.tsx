@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { ComponentProps, useMemo } from 'react';
 
 import useGetScoreFactors from '@/hooks/use-get-score-factors';
 
@@ -10,7 +10,7 @@ import { getIssueOrPRScore } from '@/utils/score';
 
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
-export interface ContributionsDialogProps extends React.ComponentProps<typeof Tooltip> {
+export interface ContributionsDialogProps extends ComponentProps<typeof Tooltip> {
   user: TEnhancedUserWithStats;
 }
 
