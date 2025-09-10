@@ -332,7 +332,7 @@ export const VoteSchema = z.object({
   proposalID: z.string(),
   address: z.string(),
   blockHeight: z.number(),
-  vote: z.string(),
+  vote: z.enum(['YES', 'NO', 'ABSTAIN']),
   hash: z.string(),
 });
 export type TVote = z.infer<typeof VoteSchema>;

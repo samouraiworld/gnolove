@@ -2,7 +2,7 @@
 
 import { Badge, Box, Card, Flex, Grid, Heading, Separator, Text } from '@radix-ui/themes';
 import useGetProposal from '@/hooks/use-get-proposal';
-import { aggregateVotes, capitalize, getProgressColorClass, getProposalTitle, getStatusColor, percent } from '@/utils/govdao';
+import { aggregateVotes, capitalize, getProposalTitle, getStatusColor, percent } from '@/utils/govdao';
 import RadixMarkdown from '@/elements/radix-markdown';
 import CodeBlock from '@/elements/code-block';
 import { guessLanguageFromFilename } from '@/utils/govdao';
@@ -26,7 +26,6 @@ const ProposalDetail = ({ id }: { id: string }) => {
 
   const status = (proposal.status || 'active').toLowerCase();
   const statusColor: any = getStatusColor(status);
-  const progressColor = getProgressColorClass(forPct, againstPct);
 
   return (
     <Grid columns={{ initial: '1', md: '2' }} gap="4" pt="8">
@@ -43,12 +42,12 @@ const ProposalDetail = ({ id }: { id: string }) => {
           <Separator my="2" />
           <Text mb="2" color="gray">Voting Progress</Text>
           <Box className="h-2 w-full rounded-full bg-red-6 relative overflow-hidden">
-            <Box className={`absolute left-0 top-0 h-full ${progressColor}`} style={{ width: `${forPct}%` }} />
+            <Box className='absolute left-0 top-0 h-full bg-green-9' width={`${forPct}%`} />
           </Box>
           <Flex mt="2" justify="between">
             <Text color="green" size="2">For {forPct}%</Text>
-            <Text color="red" size="2">Against {againstPct}%</Text>
             <Text color="gray" size="2">Abstain {abstainPct}%</Text>
+            <Text color="red" size="2">Against {againstPct}%</Text>
           </Flex>
         </Flex>
       </Card>

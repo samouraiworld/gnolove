@@ -9,7 +9,7 @@ import useGetProposals from '@/hooks/use-get-proposals';
 import { TProposal } from '@/utils/schemas';
 import Loader from '@/elements/loader';
 import StatCard from '@/features/govdao/stat-card';
-import { aggregateVotes, capitalize, getProgressColorClass, getProposalTitle, getStatusColor, percent } from '@/utils/govdao';
+import { aggregateVotes, capitalize, getProposalTitle, getStatusColor, percent } from '@/utils/govdao';
 
 // Title extraction moved to utils/govdao
 
@@ -54,7 +54,6 @@ const ProposalCard = ({ proposal }: { proposal: TProposal }) => {
 
   const status = (proposal.status || 'active').toLowerCase();
   const statusColor: any = getStatusColor(status);
-  const progressColor = getProgressColorClass(forPct, againstPct);
 
   return (
     <Card>
@@ -70,12 +69,12 @@ const ProposalCard = ({ proposal }: { proposal: TProposal }) => {
         </Heading>
         <Text mb="2" color="gray">Proposal path: {proposal.path}</Text>
         <Box className="h-2 w-full rounded-full bg-red-6 relative overflow-hidden">
-          <Box className={`absolute left-0 top-0 h-full ${progressColor}`} width={`${forPct}%`} />
+          <Box className='absolute left-0 top-0 h-full bg-green-9' width={`${forPct}%`} />
         </Box>
         <Flex mt="2" justify="between">
           <Text color="green" size="2">For {forPct}%</Text>
-          <Text color="red" size="2">Against {againstPct}%</Text>
           <Text color="gray" size="2">Abstain {abstainPct}%</Text>
+          <Text color="red" size="2">Against {againstPct}%</Text>
         </Flex>
       </Flex>
     </Card>

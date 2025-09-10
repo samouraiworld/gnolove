@@ -7,8 +7,8 @@ export type VoteTotals = { for: number; against: number; abstain: number; unknow
 export const aggregateVotes = (votes: TVote[] | undefined): VoteTotals => {
   return (votes || []).reduce<VoteTotals>((acc, v) => {
     const key = (v.vote || '').toLowerCase();
-    if (key === 'for') acc.for += 1;
-    else if (key === 'against') acc.against += 1;
+    if (key === 'yes') acc.for += 1;
+    else if (key === 'no') acc.against += 1;
     else if (key === 'abstain') acc.abstain += 1;
     else acc.unknown += 1;
     acc.total += 1;
@@ -24,12 +24,6 @@ export const getStatusColor = (status?: string): 'green' | 'red' | 'violet' | 'g
   if (s === 'rejected') return 'red';
   if (s === 'created') return 'violet';
   return 'gray';
-};
-
-export const getProgressColorClass = (forPct: number, againstPct: number) => {
-  if (forPct > againstPct) return 'bg-green-9';
-  if (againstPct > forPct) return 'bg-red-9';
-  return 'bg-gray-9';
 };
 
 export const getProposalTitle = (p: TProposal) => {
