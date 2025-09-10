@@ -7,7 +7,7 @@ import { CheckIcon, CopyIcon } from '@radix-ui/react-icons';
 type CodeBlockProps = {
   value: string;
   language?: string;
-  height?: number | string;
+  height?: number;
 };
 
 const CodeBlock = ({ value, language = '', height = 360 }: CodeBlockProps) => {
@@ -21,7 +21,6 @@ const CodeBlock = ({ value, language = '', height = 360 }: CodeBlockProps) => {
       setCopied(true);
       setTimeout(() => setCopied(false), 1200);
     } catch (err) {
-      // eslint-disable-next-line no-console
       console.error('Copy failed', err);
     }
   }, [value]);

@@ -11,8 +11,6 @@ import Loader from '@/elements/loader';
 import StatCard from '@/features/govdao/stat-card';
 import { aggregateVotes, capitalize, getProposalTitle, getStatusColor, percent } from '@/utils/govdao';
 
-// Title extraction moved to utils/govdao
-
 // Filters bar
 const Filters = ({
   query,
@@ -56,28 +54,30 @@ const ProposalCard = ({ proposal }: { proposal: TProposal }) => {
   const statusColor: any = getStatusColor(status);
 
   return (
-    <Card>
-      <Flex direction="column" gap="2">
-        <Flex align="center" justify="between">
-          <Badge color={statusColor} variant="soft">
-            {capitalize(status)}
-          </Badge>
-          <Text color="gray" size="2">ID: {proposal.id}</Text>
+    <NextLink href={`/govdao/proposal/${proposal.id}`}>
+      <Card>
+        <Flex direction="column" gap="2">
+          <Flex align="center" justify="between">
+            <Badge color={statusColor} variant="soft">
+              {capitalize(status)}
+            </Badge>
+            <Text color="gray" size="2">ID: {proposal.id}</Text>
+          </Flex>
+          <Heading size="4">
+            {getProposalTitle(proposal)}
+          </Heading>
+          <Text mb="2" color="gray">Proposal path: {proposal.path}</Text>
+          <Box className="h-2 w-full rounded-full bg-red-6 relative overflow-hidden">
+            <Box className='absolute left-0 top-0 h-full bg-green-9' width={`${forPct}%`} />
+          </Box>
+          <Flex mt="2" justify="between">
+            <Text color="green" size="2">For {forPct}%</Text>
+            <Text color="gray" size="2">Abstain {abstainPct}%</Text>
+            <Text color="red" size="2">Against {againstPct}%</Text>
+          </Flex>
         </Flex>
-        <Heading size="4" asChild>
-          <NextLink href={`/govdao/proposal/${proposal.id}`}>{getProposalTitle(proposal)}</NextLink>
-        </Heading>
-        <Text mb="2" color="gray">Proposal path: {proposal.path}</Text>
-        <Box className="h-2 w-full rounded-full bg-red-6 relative overflow-hidden">
-          <Box className='absolute left-0 top-0 h-full bg-green-9' width={`${forPct}%`} />
-        </Box>
-        <Flex mt="2" justify="between">
-          <Text color="green" size="2">For {forPct}%</Text>
-          <Text color="gray" size="2">Abstain {abstainPct}%</Text>
-          <Text color="red" size="2">Against {againstPct}%</Text>
-        </Flex>
-      </Flex>
-    </Card>
+      </Card>
+    </NextLink>
   );
 };
 
@@ -112,7 +112,7 @@ const GovdaoPage = () => {
       const matchesQuery = [p.id, p.path, p.address].some((field) => field?.toLowerCase().includes(query.toLowerCase()));
       const matchesStatus = status === 'all' ? true : (p.status || '').toLowerCase() === status;
       return matchesQuery && matchesStatus;
-    });
+    }).reverse();
   }, [data, query, status]);
 
   const metrics = useMemo(() => {

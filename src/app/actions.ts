@@ -144,7 +144,8 @@ export const getProposalsByUser = async (address: string) => {
 
 // Temporary helper to fetch a single proposal by id until backend provides an endpoint
 export const getProposal = async (id: string) => {
-  if (!id) throw new Error('Proposal id is required');
+  if (!id) throw new HttpError('Proposal id is required', { status: 400, statusText: 'Bad Request' });
+
   const proposals = await getProposals();
   const found = proposals.find((p) => p.id === id);
   if (!found) throw new HttpError('Proposal not found', { status: 404 });
