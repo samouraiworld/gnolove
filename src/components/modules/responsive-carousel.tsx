@@ -15,13 +15,13 @@ export interface ResponsiveCarouselProps {
 }
 
 const ResponsiveCarousel: React.FC<ResponsiveCarouselProps> = ({ className, items }) => {
-  const wheelPlugin = useMemo(() => WheelGesturesPlugin(), []);
+  const plugins = useMemo(() => [WheelGesturesPlugin()], []);
 
   return (
     <div className={cn(className, 'select-none')}>
       <Carousel
         opts={{ align: 'start', dragFree: true, containScroll: 'trimSnaps', loop: false }}
-        plugins={[wheelPlugin]}
+        plugins={plugins}
       >
         <CarouselContent>
           {items.map((item, index) => (

@@ -137,13 +137,13 @@ const BestPerformingTeams = () => {
                                   className="shrink-0 overflow-hidden rounded-full"
                                 />
                               ) : (
-                                <div className="w-6 h-6 rounded-full bg-gray-10" />
+                                <div className="w-6 h-6 rounded-full bg-gray-200" />
                               )}
                               <PreservingLink href={isOffline ? '' : `/@${member.login}`}>
                                 <span
                                   className={cn(
-                                    'hover:text-blue-10 block overflow-hidden text-ellipsis whitespace-nowrap truncate',
-                                    { 'text-gray-8': isOffline },
+                                    'hover:text-blue-100 block overflow-hidden text-ellipsis whitespace-nowrap truncate',
+                                    { 'text-gray-500': isOffline },
                                   )}
                                 >
                                   {member.name || member.login}
