@@ -74,7 +74,7 @@ const BestPerformingTeams = () => {
     if (rank < 3) {
       return (
         <Star
-          className={cn(rank === 0 && 'text-yellow-10', rank === 1 && 'text-gray-10', rank === 2 && 'text-bronze-10')}
+          className={cn(rank === 0 && 'text-yellow-500', rank === 1 && 'text-gray-500', rank === 2 && 'text-amber-800')}
           aria-label={`Rank ${rank + 1}`}
         />
       );

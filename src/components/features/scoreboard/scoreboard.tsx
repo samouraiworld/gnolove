@@ -22,6 +22,7 @@ const Scoreboard = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
   });
 
   const filteredContributors = useMemo(() => (contributors ?? []).filter(({ score }) => score), [contributors]);
+  const top5 = useMemo(() => filteredContributors.slice().sort((a, b) => b.score - a.score).slice(0, 5), [filteredContributors]);
 
   return (
     <div className="flex flex-col" {...props}>
@@ -31,7 +32,7 @@ const Scoreboard = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
         </div>
       ) : filteredContributors.length ? (
         <>
-          <ContributorTable contributors={filteredContributors.slice(0, 5)} sort showRank />
+          <ContributorTable contributors={top5} sort showRank />
           <Button className='mt-2' variant="outline" asChild>
             <PreservingLink href="/contributors">View all contributors</PreservingLink>
           </Button>

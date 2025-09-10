@@ -55,10 +55,10 @@ const RepositoriesSelector = () => {
   };
 
   const toggleOne = (id: string) => {
-    const next = selectedIds.includes(id)
-      ? selectedIds.filter((x) => x !== id)
-      : [...selectedIds, id];
+    const base = useDefaults ? defaultIds : selectedIds;
+    const next = base.includes(id) ? base.filter((x) => x !== id) : [...base, id];
     setSelectedIds(next);
+    setOpen(false);
   };
 
   const label = useMemo(() => {

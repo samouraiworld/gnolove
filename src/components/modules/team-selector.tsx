@@ -2,10 +2,9 @@
 
 import { useState } from 'react';
 
-import { Users2 } from 'lucide-react';
+import { Check, Users2 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import {
   Command,
@@ -30,7 +29,6 @@ const TeamSelector = ({
   const [open, setOpen] = useState(false);
 
   const allSelected = selectedTeams.length === teams.length && teams.length > 0;
-  const someSelected = selectedTeams.length > 0 && !allSelected;
 
   const toggleAll = () => {
     if (allSelected) {
@@ -68,14 +66,7 @@ const TeamSelector = ({
                   toggleAll();
                 }}
               >
-                <Checkbox
-                  checked={allSelected ? true : someSelected ? 'indeterminate' : false}
-                  className="mr-2"
-                  aria-label="Select all"
-                  // Prevent the checkbox from stealing focus styling inside command
-                  onCheckedChange={() => toggleAll()}
-                  onClick={(e) => e.stopPropagation()}
-                />
+                <Check className={`mr-2 h-4 w-4 ${allSelected ? 'opacity-100' : 'opacity-0'}`} />
                 {allSelected ? 'Unselect all' : 'Select all'}
               </CommandItem>
             </CommandGroup>
@@ -91,13 +82,7 @@ const TeamSelector = ({
                       toggleOne(name);
                     }}
                   >
-                    <Checkbox
-                      checked={checked}
-                      className="mr-2"
-                      aria-label={`Toggle ${name}`}
-                      onClick={(e) => e.stopPropagation()}
-                      onCheckedChange={() => toggleOne(name)}
-                    />
+                    <Check className={`mr-2 h-4 w-4 ${checked ? 'opacity-100' : 'opacity-0'}`} />
                     <span className="truncate">{name}</span>
                   </CommandItem>
                 );

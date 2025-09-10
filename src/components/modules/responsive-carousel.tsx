@@ -6,7 +6,7 @@ import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 
 import { cn } from '@/utils/style';
 
-import { Carousel, CarouselContent, CarouselItem } from '../ui/carousel';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../ui/carousel';
 
 export interface ResponsiveCarouselProps {
   id?: string;
@@ -28,6 +28,8 @@ const ResponsiveCarousel: React.FC<ResponsiveCarouselProps> = ({ className, item
             <CarouselItem className="sm:basis-1/3" key={index}>{item}</CarouselItem>
           ))}
         </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
       </Carousel>
     </div>
   );

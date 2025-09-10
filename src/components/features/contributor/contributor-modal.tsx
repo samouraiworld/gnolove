@@ -11,22 +11,24 @@ const ContributorModal: FC<{ children: React.ReactNode }> = ({ children }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const handleClose = () => {
-    if (window.history.length > 1) {
-      router.back();
-    } else {
-      const carry = new URLSearchParams();
-      const r = searchParams.get(REPOSITORIES_PARAM_KEY);
-      const f = searchParams.get(TIME_FILTER_PARAM_KEY);
-      if (r) carry.set(REPOSITORIES_PARAM_KEY, r);
-      if (f) carry.set(TIME_FILTER_PARAM_KEY, f);
-      const qs = carry.toString();
-      router.push(qs ? `/?${qs}` : '/');
+  const handleOpenChange = (open: boolean) => {
+    if (!open) {
+      if (window.history.state?.idx > 0) {
+        router.back();
+      } else {
+        const carry = new URLSearchParams();
+        const r = searchParams.get(REPOSITORIES_PARAM_KEY);
+        const f = searchParams.get(TIME_FILTER_PARAM_KEY);
+        if (r) carry.set(REPOSITORIES_PARAM_KEY, r);
+        if (f) carry.set(TIME_FILTER_PARAM_KEY, f);
+        const qs = carry.toString();
+        router.push(qs ? `/?${qs}` : '/');
+      }
     }
   };
 
   return (
-    <Dialog defaultOpen onOpenChange={handleClose}>
+    <Dialog defaultOpen onOpenChange={handleOpenChange}>
       <DialogContent
         className="
           top-0 left-0 translate-x-0 translate-y-0 h-[100dvh] max-h-[100dvh] w-screen rounded-none p-4
