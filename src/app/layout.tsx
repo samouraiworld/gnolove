@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 
 import { Analytics } from '@vercel/analytics/next';
 import { ThemeProvider } from 'next-themes';
@@ -42,9 +42,13 @@ const RootLayout = ({ children, details }: RootLayoutProps) => {
               <TooltipProvider>
                 <AdenaProvider>
                   <SidebarProvider>
-                    <AppSidebar />
+                    <Suspense fallback={null}>
+                      <AppSidebar />
+                    </Suspense>
                     <SidebarInset>
-                      <Header />
+                      <Suspense fallback={null}>
+                        <Header />
+                      </Suspense>
                       {children}
                       {details}
                     </SidebarInset>
