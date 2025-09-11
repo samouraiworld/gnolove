@@ -12,12 +12,17 @@ export const MENU_ITEMS = [
   {
     label: 'Report',
     href: '/report',
-    new: true,
+    new: false,
   },
   {
     label: 'Milestone',
     href: '/milestone',
     new: false,
+  },
+  {
+    label: 'GovDAO',
+    href: '/govdao',
+    new: true,
   },
   {
     label: 'Analytics',

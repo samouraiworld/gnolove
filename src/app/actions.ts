@@ -10,6 +10,7 @@ import {
   MilestoneSchema,
   NamespacesSchema,
   PackagesSchema,
+  ProposalsSchema,
   PullRequestReportSchema,
   RepositorySchema,
   ScoreFactorsSchema,
@@ -133,14 +134,22 @@ export const getProposals = async (address?: string) => {
   const res = await fetch(url.toString(), { cache: 'no-cache' });
   const data = await res.json();
 
-  // Lazily import to avoid circular import issues
-  const { ProposalsSchema } = await import('@/utils/schemas');
   return ProposalsSchema.parse(data);
 };
 
 export const getProposalsByUser = async (address: string) => {
   if (!address) return [];
   return getProposals(address);
+};
+
+// Temporary helper to fetch a single proposal by id until backend provides an endpoint
+export const getProposal = async (id: string) => {
+  if (!id) throw new HttpError('Proposal id is required', { status: 400, statusText: 'Bad Request' });
+
+  const proposals = await getProposals();
+  const found = proposals.find((p) => p.id === id);
+  if (!found) throw new HttpError('Proposal not found', { status: 404 });
+  return found;
 };
 
 export const getScoreFactors = async () => {

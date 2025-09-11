@@ -328,12 +328,24 @@ export const ProposalFileSchema = z.object({
 });
 export type TProposalFile = z.infer<typeof ProposalFileSchema>;
 
+export const VoteSchema = z.object({
+  proposalID: z.string(),
+  address: z.string(),
+  blockHeight: z.number(),
+  vote: z.enum(['YES', 'NO', 'ABSTAIN']),
+  hash: z.string(),
+});
+export type TVote = z.infer<typeof VoteSchema>;
+
 export const ProposalSchema = z.object({
   id: z.string(),
   address: z.string(),
   path: z.string(),
   blockHeight: z.number(),
   files: z.array(ProposalFileSchema).default([]),
+  votes: z.array(VoteSchema).default([]),
+  executionHeight: z.number().default(0),
+  status: z.string().default(''),
 });
 export const ProposalsSchema = z.array(ProposalSchema);
 export type TProposal = z.infer<typeof ProposalSchema>;
