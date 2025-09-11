@@ -9,9 +9,7 @@ interface OfflineContextValue {
 const OfflineContext = createContext<OfflineContextValue>({ isOffline: false });
 
 export const OfflineProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [isOffline, setIsOffline] = useState(() =>
-    typeof navigator !== 'undefined' ? !navigator.onLine : false,
-  );
+  const [isOffline, setIsOffline] = useState(() => (typeof navigator !== 'undefined' ? !navigator.onLine : false));
 
   useEffect(() => {
     const updateOnlineStatus = () => setIsOffline(!navigator.onLine);
@@ -24,11 +22,7 @@ export const OfflineProvider: React.FC<{ children: React.ReactNode }> = ({ child
     };
   }, []);
 
-  return (
-    <OfflineContext.Provider value={{ isOffline }}>
-      {children}
-    </OfflineContext.Provider>
-  );
+  return <OfflineContext.Provider value={{ isOffline }}>{children}</OfflineContext.Provider>;
 };
 
 export const useOffline = () => {

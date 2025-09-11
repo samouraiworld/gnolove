@@ -1,55 +1,52 @@
-import { Badge, Box, Card, Flex, Heading, IconButton, Text } from '@radix-ui/themes';
-import { ExternalLink, GitPullRequest, MessageSquare } from 'lucide-react';
-import { TContributor } from '@/utils/schemas';
 import Link from 'next/link';
+
+import { ExternalLink, GitPullRequest, MessageSquare } from 'lucide-react';
+
+import { TContributor } from '@/utils/schemas';
+
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
 const ContributorRecentActivities = ({ contributor }: { contributor: TContributor }) => {
   return (
-    <Card style={{ height: '100%' }}>
-      <Flex direction='column' gap='4' p='4' height='100%' overflowY='auto'>
-        <Heading size='3'>Recent Activity</Heading>
-        <Flex direction='column' gap='4'>
-          {[
-            ...contributor.recentIssues,
-            ...contributor.recentPullRequests,
-          ]
+    <div className="h-full rounded-md border p-4">
+      <div className="flex h-full flex-col gap-4 overflow-y-auto">
+        <h3 className="text-lg font-semibold">Recent Activity</h3>
+        <div className="flex flex-col gap-4">
+          {[...contributor.recentIssues, ...contributor.recentPullRequests]
             .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
             .map((activity) => (
-              <Flex key={`${activity.type}-${activity.title}`} align='start' gap='3'>
-                <Box mt='1'>
-                  {activity.type === 'pull_request' && <GitPullRequest size={16} color='blue' />}
-                  {activity.type === 'issue' && <MessageSquare size={16} color='orange' />}
-                </Box>
-                <Flex direction='column' gap='1' style={{ flex: 1 }}>
-                  <Flex align='center' gap='2'>
-                    <Text size='2' weight='medium'>
-                      {activity.repository}
-                    </Text>
-                    <Badge variant='outline' size='1'>
+              <div key={`${activity.type}-${activity.title}`} className="flex items-start gap-3">
+                <div className="mt-1">
+                  {activity.type === 'pull_request' && <GitPullRequest size={16} color="blue" />}
+                  {activity.type === 'issue' && <MessageSquare size={16} color="orange" />}
+                </div>
+                <div className="flex flex-1 flex-col gap-1">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium">{activity.repository}</span>
+                    <Badge variant="outline" className="h-5 px-2 text-[11px]">
                       {activity.type}
                     </Badge>
-                  </Flex>
-                  <Text size='2' color='gray'>
-                    {activity.title}
-                  </Text>
-                  <Text size='1' color='gray'>
+                  </div>
+                  <span className="text-muted-foreground text-sm">{activity.title}</span>
+                  <span className="text-muted-foreground text-xs">
                     {new Date(activity.createdAt).toLocaleDateString('en-US', {
                       year: 'numeric',
                       month: 'long',
                       day: 'numeric',
                     })}
-                  </Text>
-                </Flex>
-                <Link href={activity.url} target='_blank' rel='noopener noreferrer'>
-                  <IconButton variant='ghost' size='1'>
+                  </span>
+                </div>
+                <Button asChild variant="ghost" size="icon">
+                  <Link href={activity.url} target="_blank" rel="noopener noreferrer">
                     <ExternalLink size={12} />
-                  </IconButton>
-                </Link>
-              </Flex>
+                  </Link>
+                </Button>
+              </div>
             ))}
-        </Flex>
-      </Flex>
-    </Card>
+        </div>
+      </div>
+    </div>
   );
 };
 

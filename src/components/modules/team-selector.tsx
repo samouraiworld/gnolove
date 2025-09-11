@@ -1,7 +1,20 @@
 'use client';
 
-import { Button, Popover, CheckboxGroup, Checkbox, Separator, Text, Flex } from '@radix-ui/themes';
-import { PersonIcon } from '@radix-ui/react-icons';
+import { useState } from 'react';
+
+import { Check, Users2 } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+} from '@/components/ui/command';
 
 const TeamSelector = ({
   teams,
@@ -13,41 +26,72 @@ const TeamSelector = ({
   selectedTeams: string[];
   onSelectedTeamsChange: (selected: string[]) => void;
 } & React.ComponentProps<typeof Button>) => {
-  const handleSelectAllToggle = () => {
-    if (selectedTeams.length === teams.length) {
+  const [open, setOpen] = useState(false);
+
+  const allSelected = selectedTeams.length === teams.length && teams.length > 0;
+
+  const toggleAll = () => {
+    if (allSelected) {
       onSelectedTeamsChange([]);
     } else {
-      onSelectedTeamsChange(teams.map((team) => team.name));
+      onSelectedTeamsChange(teams.map((t) => t.name));
+    }
+  };
+
+  const toggleOne = (name: string) => {
+    if (selectedTeams.includes(name)) {
+      onSelectedTeamsChange(selectedTeams.filter((x) => x !== name));
+    } else {
+      onSelectedTeamsChange([...selectedTeams, name]);
     }
   };
 
   return (
-    <Popover.Root>
-      <Popover.Trigger>
-        <Button variant="soft" {...(props as React.ComponentProps<typeof Button>)}>
-          <PersonIcon /> Teams
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button variant="secondary" {...(props as React.ComponentProps<typeof Button>)}>
+          <Users2 className="mr-2 h-4 w-4" />
+          Teams{selectedTeams.length > 0 ? ` (${selectedTeams.length})` : ''}
         </Button>
-      </Popover.Trigger>
-      <Popover.Content>
-        <Text as="label" size="2">
-          <Flex as="span" gap="2">
-            <Checkbox checked={selectedTeams.length === teams.length} onCheckedChange={handleSelectAllToggle} />{' '}
-            Select/Unselect All
-          </Flex>
-        </Text>
-        <Separator size="4" my="2" />
-        <CheckboxGroup.Root
-          value={selectedTeams}
-          onValueChange={onSelectedTeamsChange}
-        >
-          {teams.map(({ name }) => (
-            <CheckboxGroup.Item key={name} value={name}>
-              {name}
-            </CheckboxGroup.Item>
-          ))}
-        </CheckboxGroup.Root>
-      </Popover.Content>
-    </Popover.Root>
+      </PopoverTrigger>
+      <PopoverContent className="w-64 p-0" align="start">
+        <Command>
+          <CommandInput placeholder="Search teams..." />
+          <CommandList>
+            <CommandEmpty>No team found.</CommandEmpty>
+            <CommandGroup heading="Actions">
+              <CommandItem
+                value="toggle-all"
+                onSelect={() => {
+                  toggleAll();
+                }}
+              >
+                <Check className={`mr-2 h-4 w-4 ${allSelected ? 'opacity-100' : 'opacity-0'}`} />
+                {allSelected ? 'Unselect all' : 'Select all'}
+              </CommandItem>
+            </CommandGroup>
+            <CommandSeparator />
+            <CommandGroup heading="Teams">
+              {teams.map(({ name }) => {
+                const checked = selectedTeams.includes(name);
+                return (
+                  <CommandItem
+                    key={name}
+                    value={name}
+                    onSelect={() => {
+                      toggleOne(name);
+                    }}
+                  >
+                    <Check className={`mr-2 h-4 w-4 ${checked ? 'opacity-100' : 'opacity-0'}`} />
+                    <span className="truncate">{name}</span>
+                  </CommandItem>
+                );
+              })}
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      </PopoverContent>
+    </Popover>
   );
 };
 

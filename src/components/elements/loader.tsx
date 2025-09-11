@@ -1,20 +1,14 @@
-import Image, { ImageProps } from 'next/image';
+import React from 'react';
 
-import { Flex } from '@radix-ui/themes';
+import Image, { ImageProps } from 'next/image';
 
 import MinecraftHeart from '@/images/minecraft-heart.png';
 
 const Loader = (props?: Omit<ImageProps, 'src' | 'alt'>) => {
   return (
-    <Flex className="animate-heartPulse">
-      <Image
-        alt="Loading Heart"
-        height={28}
-        src={MinecraftHeart}
-        width={28}
-        {...props}
-      />
-    </Flex>
+    <div className="animate-heart-pulse">
+      <Image alt="Loading Heart" height={28} src={MinecraftHeart} width={28} {...props} />
+    </div>
   );
 };
 

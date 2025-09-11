@@ -1,5 +1,5 @@
 import clsx, { ClassValue } from 'clsx';
-import { twMerge } from 'tw-merge';
+import { twMerge } from 'tailwind-merge';
 
 /**
  * Conditionally render and merge the class names of a React component.

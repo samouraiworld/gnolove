@@ -1,13 +1,13 @@
 'use client';
 
-import { ExternalLinkIcon } from '@radix-ui/react-icons';
-import { Flex, Table, Text } from '@radix-ui/themes';
-
-import Cell from '@/components/elements/cell';
+import { ExternalLink } from 'lucide-react';
 
 import { TPullRequest } from '@/utils/schemas';
 
-export interface IssuesTableProps extends Table.RootProps {
+import Cell from '@/components/elements/cell';
+import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+
+export interface IssuesTableProps extends React.ComponentProps<typeof Table> {
   prs: TPullRequest[];
 
   showHeader?: boolean;
@@ -20,36 +20,36 @@ const PrsTable = ({ prs, showHeader, ...props }: IssuesTableProps) => {
   };
 
   return (
-    <Table.Root {...props}>
+    <Table {...props}>
       {showHeader && (
-        <Table.Header>
-          <Table.Row>
-            <Table.ColumnHeaderCell>Title</Table.ColumnHeaderCell>
-          </Table.Row>
-        </Table.Header>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Title</TableHead>
+          </TableRow>
+        </TableHeader>
       )}
 
-      <Table.Body>
+      <TableBody>
         {prs.map(({ id, title, url }) => {
           return (
-            <Table.Row
+            <TableRow
               data-href={url}
               onClick={onClick.bind(null, url)}
               key={id}
-              className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-grayA-2"
+              className="hover:bg-muted/50 cursor-pointer transition-all duration-300 ease-in-out"
             >
               <Cell className="max-w-0">
-                <Flex width="100%" height="100%" align="center" gap="2">
-                  <Text className="w-full truncate">{title}</Text>
+                <div className="flex h-full w-full items-center gap-2">
+                  <span className="w-full truncate">{title}</span>
 
-                  <ExternalLinkIcon className="shrink-0 text-blue-10" />
-                </Flex>
+                  <ExternalLink className="text-primary h-4 w-4 shrink-0" />
+                </div>
               </Cell>
-            </Table.Row>
+            </TableRow>
           );
         })}
-      </Table.Body>
-    </Table.Root>
+      </TableBody>
+    </Table>
   );
 };
 

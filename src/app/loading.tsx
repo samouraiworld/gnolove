@@ -1,11 +1,12 @@
-import { Flex } from '@radix-ui/themes';
+import React from 'react';
+
 import Loader from '@/elements/loader';
 
 const LoadingPage = () => {
   return (
-    <Flex align="center" justify="center" height="100vh" width="100vw" direction="column" gap="4">
+    <div className="flex h-screen w-full flex-col items-center justify-center gap-4">
       <Loader />
-    </Flex>
+    </div>
   );
 };
 

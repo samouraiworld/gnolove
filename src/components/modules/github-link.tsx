@@ -2,15 +2,15 @@
 
 import { Suspense, useEffect } from 'react';
 
+import * as DialogPrimitive from '@radix-ui/react-dialog';
 import { GithubLinkDescriptionDialog } from './github-link-description-dialog';
 import { GithubLinkGhVerifyDialog } from './github-link-ghverify-dialog';
-import { Dialog } from '@radix-ui/themes';
+import { toast } from 'sonner';
 
-import { useToast } from '@/contexts/toast-context';
 import { useLinkGithub } from '@/hooks/use-link-github';
 
 // We have to wrap the GithubLink in a Suspense because it use useSearchParams
-export const GithubLink = (props: Dialog.RootProps) => {
+export const GithubLink = (props: DialogPrimitive.DialogProps) => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <GithubLinkWithoutSuspense {...props} />
@@ -18,22 +18,13 @@ export const GithubLink = (props: Dialog.RootProps) => {
   );
 };
 
-const GithubLinkWithoutSuspense = (props: Dialog.RootProps) => {
+const GithubLinkWithoutSuspense = (props: DialogPrimitive.DialogProps) => {
   const { ghUser, isShowGhVerifyDialog, showGhVerifyDialog, resolveRef, linkingState } = useLinkGithub();
-
-  const { addToast, removeToast } = useToast();
 
   useEffect(() => {
     if (!linkingState) return;
 
-    const toastId = addToast({
-      title: 'Linking Github account',
-      message: linkingState,
-      mode: 'info',
-    });
-    return () => {
-      toastId && removeToast(toastId);
-    };
+    toast(linkingState);
   }, [linkingState]);
 
   return (

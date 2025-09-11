@@ -1,6 +1,10 @@
-import { Box, Flex, Card, Avatar, Text, Heading, Separator, IconButton } from '@radix-ui/themes';
-import { TContributor } from '@/utils/schemas';
 import { Calendar, Copy, Github, Globe, MapPin, Twitter } from 'lucide-react';
+
+import { TContributor } from '@/utils/schemas';
+
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 
 const ContributorProfile = ({ contributor }: { contributor: TContributor }) => {
   const websiteUrl = /^https?:\/\//i.test(contributor.websiteUrl ?? '')
@@ -8,133 +12,102 @@ const ContributorProfile = ({ contributor }: { contributor: TContributor }) => {
     : `https://${contributor.websiteUrl}`;
 
   return (
-    <Box height='100%' overflow='auto'>
-      <Flex direction='column' gap='4'>
-        <Card>
-          <Flex direction='column' align='center' gap='4' p='6'>
-            <Avatar
-              size='8'
-              src={contributor.avatarUrl}
-              fallback={contributor.name
-                .split(' ')
-                .map((n) => n[0])
-                .join('')}
-            />
+    <div className="h-full overflow-auto">
+      <div className="flex flex-col gap-4">
+        <div className="rounded-md border p-6">
+          <div className="flex flex-col items-center gap-4">
+            <Avatar>
+              <AvatarImage src={contributor.avatarUrl} alt={contributor.name} />
+              <AvatarFallback>
+                {(contributor.name || contributor.login || 'U')
+                  .split(' ')
+                  .map((n) => n[0])
+                  .join('')}
+              </AvatarFallback>
+            </Avatar>
 
-            <Flex direction='column' align='center' gap='2'>
-              <Heading size='5' align='center'>{contributor.name}</Heading>
-              <Text size='2' color='gray'>
-                @{contributor.login}
-              </Text>
-              <Text size='2' align='center'>
-                {contributor.bio}
-              </Text>
-            </Flex>
+            <div className="flex flex-col items-center gap-2">
+              <h2 className="text-center text-xl font-semibold">{contributor.name}</h2>
+              <span className="text-muted-foreground text-sm">@{contributor.login}</span>
+              <span className="text-center text-sm">{contributor.bio}</span>
+            </div>
 
             {contributor.location && (
-              <Flex align='center' gap='2'>
+              <div className="flex items-center gap-2">
                 <MapPin size={16} />
-                <Text size='2' color='gray'>
-                  {contributor.location}
-                </Text>
-              </Flex>
+                <span className="text-muted-foreground text-sm">{contributor.location}</span>
+              </div>
             )}
 
             {contributor.joinDate && (
-              <Flex align='center' gap='2'>
+              <div className="flex items-center gap-2">
                 <Calendar size={16} />
-                <Text size='2' color='gray'>
+                <span className="text-muted-foreground text-sm">
                   Joined{' '}
                   {new Date(contributor.joinDate).toLocaleDateString('en-US', {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
                   })}
-                </Text>
-              </Flex>
+                </span>
+              </div>
             )}
 
-            <Flex gap='2'>
-              <IconButton variant='outline' size='2' asChild>
-                <a
-                  href={contributor.url}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
+            <div className="flex gap-2">
+              <Button variant="outline" size="icon" asChild>
+                <a href={contributor.url} target="_blank" rel="noopener noreferrer">
                   <Github size={16} />
                 </a>
-              </IconButton>
+              </Button>
               {contributor.twitterUsername && (
-                <IconButton variant='outline' size='2' asChild>
-                  <a
-                    href={`https://x.com/${contributor.twitterUsername}`}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                  >
+                <Button variant="outline" size="icon" asChild>
+                  <a href={`https://x.com/${contributor.twitterUsername}`} target="_blank" rel="noopener noreferrer">
                     <Twitter size={16} />
                   </a>
-                </IconButton>
+                </Button>
               )}
               {contributor.websiteUrl && (
-                <IconButton variant='outline' size='2' asChild>
-                  <a href={websiteUrl} target='_blank' rel='noopener noreferrer'>
+                <Button variant="outline" size="icon" asChild>
+                  <a href={websiteUrl} target="_blank" rel="noopener noreferrer">
                     <Globe size={16} />
                   </a>
-                </IconButton>
+                </Button>
               )}
-            </Flex>
-          </Flex>
-        </Card>
+            </div>
+          </div>
+        </div>
 
-        {/* On-Chain Profile */}
         {contributor.wallet && (
-          <Card>
-            <Flex direction='column' gap='3' p='4'>
-              <Heading size='3'>On-Chain Profile</Heading>
-              <Box>
-                <Text size='1' color='gray' mb='1'>
-                  Wallet Address
-                </Text>
-                <Flex align='center' gap='2'>
-                  <Box
-                    p='4'
-                    overflow='hidden'
-                    style={{
-                      backgroundColor: 'var(--gray-3)',
-                      borderRadius: '4px',
-                      fontFamily: 'monospace',
-                      fontSize: '12px',
-                      flex: 1,
-                      textOverflow: 'ellipsis',
-                    }}
-                  >
+          <div className="rounded-md border p-4">
+            <div className="flex flex-col gap-3">
+              <h3 className="text-lg font-semibold">On-Chain Profile</h3>
+              <div>
+                <div className="text-muted-foreground mb-1 text-xs">Wallet Address</div>
+                <div className="flex items-center gap-2">
+                  <div className="bg-muted flex-1 overflow-hidden rounded-md p-2 font-mono text-xs text-ellipsis whitespace-nowrap">
                     {contributor.wallet}
-                  </Box>
-                  <IconButton variant='ghost' size='1' onClick={() => navigator.clipboard.writeText(contributor.wallet)}>
+                  </div>
+                  <Button variant="outline" size="icon" onClick={() => navigator.clipboard.writeText(contributor.wallet)}>
                     <Copy size={12} />
-                  </IconButton>
-                </Flex>
-              </Box>
+                  </Button>
+                </div>
+              </div>
 
-              <Separator size='4' />
+              <Separator className="my-2" />
 
               {contributor.gnoBalance && (
-                <Flex direction='column' gap='2'>
-                  <Flex justify='between'>
-                    <Text size='1' color='gray'>
-                      GNO Balance
-                    </Text>
-                    <Text size='1' style={{ fontFamily: 'monospace' }}>
-                      {contributor.gnoBalance}
-                    </Text>
-                  </Flex>
-                </Flex>
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground text-xs">GNO Balance</span>
+                    <span className="font-mono text-xs">{contributor.gnoBalance}</span>
+                  </div>
+                </div>
               )}
-            </Flex>
-          </Card>
+            </div>
+          </div>
         )}
-      </Flex>
-    </Box>
+      </div>
+    </div>
   );
 };
 

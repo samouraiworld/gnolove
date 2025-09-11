@@ -28,7 +28,7 @@ export const getIds = <T extends { id: string }>(arr: T[]): string[] => {
  */
 export function deduplicateByKey<T, K>(arr: T[], keyFn: (item: T) => K): T[] {
   const seen = new Set<K>();
-  return arr.filter(item => {
+  return arr.filter((item) => {
     const key = keyFn(item);
     if (seen.has(key)) return false;
     seen.add(key);
