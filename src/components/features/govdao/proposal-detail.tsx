@@ -1,6 +1,6 @@
 'use client';
 
-import { Badge, Box, Card, Flex, Grid, Heading, Separator, Tabs, Text } from '@radix-ui/themes';
+import { Badge, BadgeProps, Box, Card, Flex, Grid, Heading, Separator, Tabs, Text } from '@radix-ui/themes';
 import useGetProposal from '@/hooks/use-get-proposal';
 import { aggregateVotes, capitalize, getProposalTitle, getStatusColor, percent } from '@/utils/govdao';
 import RadixMarkdown from '@/elements/radix-markdown';
@@ -25,7 +25,7 @@ const ProposalDetail = ({ id }: { id: string }) => {
   const abstainPct = percent(totals.abstain, totals.total);
 
   const status = (proposal.status || 'active').toLowerCase();
-  const statusColor: any = getStatusColor(status);
+  const statusColor: BadgeProps['color'] = getStatusColor(status);
 
   return (
     <Flex direction="column" gap="4" pt="6">
@@ -69,14 +69,14 @@ const ProposalDetail = ({ id }: { id: string }) => {
                     {[...proposal.votes]
                       .sort((a, b) => b.blockHeight - a.blockHeight)
                       .map((v) => {
-                        const color = v.vote === 'YES' ? 'green' : v.vote === 'NO' ? 'red' : 'gray';
+                        const color: BadgeProps['color'] = v.vote === 'YES' ? 'green' : v.vote === 'NO' ? 'red' : 'gray';
                         return (
                           <Card key={`${v.proposalID}-${v.address}-${v.hash}`} className="p-2">
                             <Flex align="center" justify="between">
                               <Flex direction="column">
                                 <Text size="2" weight="bold">{v.address}</Text>
                               </Flex>
-                              <Badge color={color as any} variant="soft">{v.vote}</Badge>
+                              <Badge color={color} variant="soft">{v.vote}</Badge>
                             </Flex>
                           </Card>
                         );
