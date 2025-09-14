@@ -3,6 +3,8 @@
 import { useCallback, useMemo, useState } from 'react';
 import { Box, Flex, IconButton, Text } from '@radix-ui/themes';
 import { CheckIcon, CopyIcon } from '@radix-ui/react-icons';
+import { useTheme } from 'next-themes';
+import { cn } from '@/utils/style';
 
 type CodeBlockProps = {
   value: string;
@@ -12,6 +14,7 @@ type CodeBlockProps = {
 
 const CodeBlock = ({ value, language = '', height = 360 }: CodeBlockProps) => {
   const [copied, setCopied] = useState(false);
+  const { theme } = useTheme();
 
   const lines = useMemo(() => value.split(/\r?\n/), [value]);
 
@@ -43,7 +46,7 @@ const CodeBlock = ({ value, language = '', height = 360 }: CodeBlockProps) => {
             ))}
           </Box>
           <Box className='px-3 py-2'>
-            <pre className='m-0 leading-6 whitespace-pre font-mono text-[13px] text-gray-3'>
+            <pre className={cn('m-0 leading-6 whitespace-pre font-mono text-[13px]', {'text-whiteA-12': theme === 'dark', 'text-gray-3': theme === 'light' })}>
               <code>{value}</code>
             </pre>
           </Box>
