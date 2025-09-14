@@ -110,6 +110,8 @@ func main() {
 	router.HandleFunc("/pull-requests/report", handler.GetPullrequestsReportByDate(prRepo))
 	router.HandleFunc("/score-factors", handler.HandleGetScoreFactors)
 	router.HandleFunc("/milestones/{number}", handler.GetMilestone(database))
+	router.HandleFunc("/users", handler.HandleGetUsersByWallets(database))
+	router.HandleFunc("/users/{address}", handler.HandleGetUserByWallet(database))
 	router.HandleFunc("/contributors/newest", handler.HandleGetNewestContributors(database))
 	router.HandleFunc("/github/verify", handler.HandleVerifyGithubAccount(signer, database))
 	router.HandleFunc("/github/oauth/exchange", handler.HandleGetGithubUserAndTokenByCode(signer, database))
