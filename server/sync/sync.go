@@ -13,6 +13,7 @@ import (
 	"go.uber.org/zap"
 	"golang.org/x/oauth2"
 
+	rpcclient "github.com/gnolang/gno/tm2/pkg/bft/rpc/client"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 )
@@ -23,6 +24,7 @@ type Syncer struct {
 	repositories  []models.Repository
 	logger        *zap.SugaredLogger
 	graphqlClient graphql.Client
+	rpcClient     *rpcclient.RPCClient
 }
 
 func NewSyncer(db *gorm.DB, repositories []models.Repository, logger *zap.SugaredLogger) *Syncer {
@@ -32,12 +34,18 @@ func NewSyncer(db *gorm.DB, repositories []models.Repository, logger *zap.Sugare
 	httpClient := oauth2.NewClient(context.Background(), src)
 	client := githubv4.NewClient(httpClient)
 	gqlClient := graphql.NewClient(os.Getenv("GNO_GRAPHQL_ENDPOINT"), nil)
+	rpcClient, err := rpcclient.NewHTTPClient(os.Getenv("GNO_RPC_ENDPOINT"))
+	if err != nil {
+		panic(err)
+	}
+
 	return &Syncer{
 		db:            db,
 		client:        client,
 		repositories:  repositories,
 		logger:        logger,
 		graphqlClient: gqlClient,
+		rpcClient:     rpcClient,
 	}
 }
 
