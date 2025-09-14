@@ -14,7 +14,8 @@ type CodeBlockProps = {
 
 const CodeBlock = ({ value, language = '', height = 360 }: CodeBlockProps) => {
   const [copied, setCopied] = useState(false);
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === 'dark';
 
   const lines = useMemo(() => value.split(/\r?\n/), [value]);
 
@@ -46,7 +47,7 @@ const CodeBlock = ({ value, language = '', height = 360 }: CodeBlockProps) => {
             ))}
           </Box>
           <Box className='px-3 py-2'>
-            <pre className={cn('m-0 leading-6 whitespace-pre font-mono text-[13px]', {'text-whiteA-12': theme === 'dark', 'text-gray-3': theme === 'light' })}>
+            <pre className={cn('m-0 leading-6 whitespace-pre font-mono text-[13px]', isDark ? 'text-whiteA-12' : 'text-gray-3')}>
               <code>{value}</code>
             </pre>
           </Box>
