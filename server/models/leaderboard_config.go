@@ -13,7 +13,7 @@ type LeaderboardConfig struct {
 	UserID string `gorm:"index;not null" json:"userId"`
 
 	// Webhook destination
-	Type       string `gorm:"type:varchar(20);default:discord" json:"type"` // "discord" | "slack"
+	Platform   string `gorm:"type:varchar(20);default:discord" json:"platform"` // "discord" | "slack"
 	WebhookURL string `gorm:"type:text;not null" json:"webhookUrl"`
 
 	// Comma-separated list of allowed repositories (owner/name). If empty, all repos.

@@ -84,7 +84,7 @@ func HandleCreateLeaderboardConfig(db *gorm.DB) http.HandlerFunc {
 		cfg := models.LeaderboardConfig{
 			ID:                   b.ID,
 			UserID:               b.UserID,
-			Type:                 platform,
+			Platform:             platform,
 			WebhookURL:           b.WebhookURL,
 			SelectedRepositories: b.SelectedRepositories,
 			Timeline:             timeline,
@@ -142,7 +142,7 @@ func HandleDeleteLeaderboardConfig(db *gorm.DB) http.HandlerFunc {
 func HandleUpdateLeaderboardConfigByID(db *gorm.DB) http.HandlerFunc {
 	type body struct {
 		UserID               string  `json:"userId"`
-		Type                 *string `json:"type"`
+		Platform             *string `json:"platform"`
 		WebhookURL           *string `json:"webhookUrl"`
 		SelectedRepositories *string `json:"selectedRepositories"`
 		Timeline             *string `json:"timeline"`
@@ -174,9 +174,9 @@ func HandleUpdateLeaderboardConfigByID(db *gorm.DB) http.HandlerFunc {
 		}
 
 		updates := map[string]interface{}{}
-		if b.Type != nil && strings.TrimSpace(*b.Type) != "" {
-			t := strings.ToLower(strings.TrimSpace(*b.Type))
-			updates["type"] = t
+		if b.Platform != nil && strings.TrimSpace(*b.Platform) != "" {
+			t := strings.ToLower(strings.TrimSpace(*b.Platform))
+			updates["platform"] = t
 		}
 		if b.WebhookURL != nil {
 			updates["webhook_url"] = strings.TrimSpace(*b.WebhookURL)

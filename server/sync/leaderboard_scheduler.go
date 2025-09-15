@@ -76,7 +76,7 @@ func (s *Syncer) runDueLeaderboardJobs() {
 		}
 
 		msg := FormatLeaderboardMessage(stats)
-		if err := SendLeaderboardWebhook(cfg.Type, cfg.WebhookURL, msg); err != nil {
+		if err := SendLeaderboardWebhook(cfg.Platform, cfg.WebhookURL, msg); err != nil {
 			s.logger.Errorf("leaderboard scheduler: send error for cfg %d: %v", cfg.ID, err)
 		} else {
 			s.logger.Infof("leaderboard scheduler: sent leaderboard for cfg %d", cfg.ID)
