@@ -21,6 +21,8 @@ import (
 	"github.com/subosito/gotenv"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
+
+	clerk "github.com/clerk/clerk-sdk-go/v2"
 	clerkhttp "github.com/clerk/clerk-sdk-go/v2/http"
 )
 
@@ -42,6 +44,10 @@ func LoggingMiddleware(next http.Handler) http.Handler {
 
 func main() {
 	gotenv.Load()
+	if os.Getenv("CLERK_SECRET_KEY") == "" {
+		panic("CLERK_SECRET_KEY is not set")
+	}
+	clerk.SetKey(os.Getenv("CLERK_SECRET_KEY"))
 	zapLogger, err := zap.NewDevelopment()
 	if err != nil {
 		panic(err)
@@ -120,7 +126,7 @@ func main() {
 	router.HandleFunc("/contributors/{login}", contributor.HandleGetContributor(database))
 	router.Post("/github/link", handler.HandleLink(database))
 
-	// Leaderboard configuration routes (per-user) - protected by Clerk
+	// Leaderboard configuration routes protected by Clerk
 	router.Group(func(r chi.Router) {
 		r.Use(clerkhttp.WithHeaderAuthorization())
 		r.Get("/leaderboard/configs", handler.HandleGetLeaderboardConfigs(database))
