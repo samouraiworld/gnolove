@@ -3,6 +3,7 @@ package sync
 import (
 	"context"
 	"fmt"
+	"regexp"
 	"strings"
 
 	"github.com/samouraiworld/topofgnomes/server/gnoindexerql"
@@ -119,7 +120,13 @@ func (s *Syncer) syncProposals(ctx context.Context) error {
 					GnoProposalID: proposalID,
 				})
 			}
+			title, description, err := s.getProposalTitleAndDescription(proposalID)
+			if err != nil {
+				return fmt.Errorf("failed to get proposal title and description: %w", err)
+			}
 			proposal := &models.GnoProposal{
+				Title:       title,
+				Description: description,
 				ID:          proposalID,
 				Address:     messageRunValue.Caller,
 				Path:        createProposalEvent.Pkg_path,
@@ -163,6 +170,24 @@ func (s *Syncer) syncProposals(ctx context.Context) error {
 	}
 
 	return nil
+}
+
+func (s *Syncer) getProposalTitleAndDescription(proposalID string) (string, string, error) {
+	data, err := s.rpcClient.ABCIQuery("vm/qeval", []byte(fmt.Sprintf("gno.land/r/gov/dao.GetProposal(cross,%s)", proposalID)))
+	if err != nil {
+		return "", "", err
+	}
+
+	// Match all top-level parentheses contents: ("..." something)
+	re := regexp.MustCompile(`\("([^"]+)" string\)`)
+
+	matches := re.FindAllSubmatch(data.Response.Data, -1)
+	if len(matches) < 2 {
+		// not title or description found but not an error
+		return "", "", nil
+	}
+
+	return string(matches[0][1]), string(matches[1][1]), nil
 }
 
 func (s *Syncer) syncVotesOnProposals(ctx context.Context) error {

@@ -16,6 +16,8 @@ type GnoPackage struct {
 
 type GnoProposal struct {
 	ID              string    `gorm:"primaryKey" json:"id"`
+	Title           string    `json:"title"`
+	Description     string    `json:"description"`
 	Address         string    `json:"address" gorm:"index"`
 	Path            string    `json:"path" gorm:"index"`
 	BlockHeight     int64     `json:"blockHeight" gorm:"index"`
