@@ -44,10 +44,11 @@ func LoggingMiddleware(next http.Handler) http.Handler {
 
 func main() {
 	gotenv.Load()
-	if os.Getenv("CLERK_SECRET_KEY") == "" {
-		panic("CLERK_SECRET_KEY is not set")
+	if os.Getenv("CLERK_SECRET_KEY") != "" {
+		clerk.SetKey(os.Getenv("CLERK_SECRET_KEY"))
+	} else {
+		logger.Warn("CLERK_SECRET_KEY not set")
 	}
-	clerk.SetKey(os.Getenv("CLERK_SECRET_KEY"))
 	zapLogger, err := zap.NewDevelopment()
 	if err != nil {
 		panic(err)
