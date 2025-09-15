@@ -1,5 +1,6 @@
 import '@/styles/globals.css';
 import { ReactNode } from 'react';
+import type { Metadata } from 'next';
 
 import { ThemeProvider } from 'next-themes';
 
@@ -23,6 +24,90 @@ import { Analytics } from '@vercel/analytics/next';
 
 import { OfflineProvider } from '@/contexts/offline-context';
 import OfflineBanner from '@/elements/offline-banner';
+
+// Site-wide SEO metadata
+export const metadata: Metadata = {
+  // Core
+  metadataBase: new URL('https://gnolove.world'),
+  applicationName: 'Gnolove',
+  title: {
+    default: 'Gnolove',
+    template: 'Gnolove — %s',
+  },
+  description:
+    'Gnolove is a scoreboard for the Gno chain that showcases contributors, open‑source repositories, and activity across the Gnoland ecosystem.',
+  keywords: [
+    'Gnolove',
+    'Gno',
+    'Gnoland',
+    'Gno chain',
+    'Cosmos',
+    'contributors',
+    'open source',
+    'scoreboard',
+    'developer activity',
+    'leaderboard',
+  ],
+  authors: [{ name: 'Samourai Coop' }],
+  creator: 'Samourai Coop',
+  publisher: 'Samourai Coop',
+
+  // Open Graph
+  openGraph: {
+    type: 'website',
+    url: 'https://gnolove.world',
+    siteName: 'Gnolove',
+    title: 'Gnolove — Gno Chain Contributors Scoreboard',
+    description:
+      'Explore contributors, repositories, and activity across the Gno chain. Discover top gnomes, trending repos, and community milestones.',
+    images: [
+      {
+        url: '/images/header.png',
+        width: 1200,
+        height: 630,
+        alt: 'Gnolove — Gno Chain Contributors Scoreboard',
+      },
+    ],
+  },
+
+  // Twitter
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Gnolove — Gno Chain Contributors Scoreboard',
+    description:
+      'Scoreboard of contributors, open‑source repositories and activity related to the Gno chain.',
+    images: ['/images/header.png'],
+  },
+
+  // Robots & indexing
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+
+  // Icons and manifest
+  icons: {
+    icon: [
+      { url: '/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
+      { url: '/favicon-32x32.png', type: 'image/png', sizes: '32x32' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+    shortcut: ['/favicon-32x32.png'],
+  },
+  manifest: '/site.webmanifest',
+
+  // Canonicals
+  alternates: {
+    canonical: 'https://gnolove.world',
+  },
+};
 
 interface RootLayoutProps {
   children?: ReactNode;
