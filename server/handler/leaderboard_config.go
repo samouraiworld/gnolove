@@ -120,11 +120,15 @@ func HandleDeleteLeaderboardConfig(db *gorm.DB) http.HandlerFunc {
 			_ = json.NewEncoder(w).Encode(map[string]string{"error": "invalid id"})
 			return
 		}
-		if err := db.Where("id = ? AND user_id = ?", id, userID).Delete(&models.LeaderboardConfig{}).Error; err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			_ = json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
+		var conf models.LeaderboardConfig
+		db.Model(&models.LeaderboardConfig{}).Where("id = ?", id).Find(&conf)
+		// check if user can delete it
+		if conf.UserID != userID {
+			w.WriteHeader(http.StatusUnauthorized)
+			_ = json.NewEncoder(w).Encode(map[string]string{"error": "unauthorized"})
 			return
 		}
+		db.Delete(&conf)
 		_ = json.NewEncoder(w).Encode(map[string]string{"success": "true"})
 	}
 }
