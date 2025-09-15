@@ -8,42 +8,42 @@ import {
 import type { TMonitoringWebhook, TMonitoringWebhookKind } from '@/utils/schemas';
 
 export const MONITORING_BASE_KEY = ['monitoring-webhooks'] as const;
-export const monitoringKey = (kind: TMonitoringWebhookKind, userId?: string) => [...MONITORING_BASE_KEY, kind, userId] as const;
+export const monitoringKey = (kind: TMonitoringWebhookKind) => [...MONITORING_BASE_KEY, kind] as const;
 
-export function useMonitoringWebhooks(kind: TMonitoringWebhookKind, userId?: string) {
+export function useMonitoringWebhooks(kind: TMonitoringWebhookKind) {
   return useQuery({
-    queryKey: monitoringKey(kind, userId),
-    queryFn: () => listMonitoringWebhooks(kind, userId!),
-    enabled: Boolean(kind && userId),
+    queryKey: monitoringKey(kind),
+    queryFn: () => listMonitoringWebhooks(kind),
+    enabled: Boolean(kind),
   });
 }
 
-export function useCreateMonitoringWebhook(kind: TMonitoringWebhookKind, userId: string) {
+export function useCreateMonitoringWebhook(kind: TMonitoringWebhookKind) {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: (payload: Omit<TMonitoringWebhook, 'ID'>) => createMonitoringWebhook(kind, payload),
+    mutationFn: (payload: Omit<TMonitoringWebhook, 'ID' | 'UserID'>) => createMonitoringWebhook(kind, payload),
     onSuccess: () => {
-      qc.invalidateQueries({ queryKey: monitoringKey(kind, userId) });
+      qc.invalidateQueries({ queryKey: monitoringKey(kind) });
     },
   });
 }
 
-export function useUpdateMonitoringWebhook(kind: TMonitoringWebhookKind, userId: string) {
+export function useUpdateMonitoringWebhook(kind: TMonitoringWebhookKind) {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: (payload: TMonitoringWebhook) => updateMonitoringWebhook(kind, payload),
+    mutationFn: (payload: Omit<TMonitoringWebhook, 'UserID'>) => updateMonitoringWebhook(kind, payload),
     onSuccess: () => {
-      qc.invalidateQueries({ queryKey: monitoringKey(kind, userId) });
+      qc.invalidateQueries({ queryKey: monitoringKey(kind) });
     },
   });
 }
 
-export function useDeleteMonitoringWebhook(kind: TMonitoringWebhookKind, userId: string) {
+export function useDeleteMonitoringWebhook(kind: TMonitoringWebhookKind) {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: (id: number) => deleteMonitoringWebhook(kind, id, userId),
+    mutationFn: (id: number) => deleteMonitoringWebhook(kind, id),
     onSuccess: () => {
-      qc.invalidateQueries({ queryKey: monitoringKey(kind, userId) });
+      qc.invalidateQueries({ queryKey: monitoringKey(kind) });
     },
   });
 }

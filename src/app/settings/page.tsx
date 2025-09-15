@@ -31,7 +31,7 @@ export default async function SettingsPage() {
         <Heading size="6">Settings</Heading>
 
         {kinds.map((k) => (
-          <WebhooksSectionClient key={k} kind={k as Kind} userId={userId} />
+          <WebhooksSectionClient key={k} kind={k as Kind} />
         ))}
       </Box>
     </LayoutContainer>

@@ -2,6 +2,7 @@
 
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
+import { auth } from '@clerk/nextjs/server';
 
 import { fetchJson, HttpError } from '@/utils/fetcher';
 import { TimeFilter } from '@/utils/github';
@@ -49,8 +50,10 @@ export const getContributors = async (timeFilter: TimeFilter, excludeCoreTeam?: 
 };
 
 // Monitoring webhooks (GOVDAO, VALIDATOR)
-export const listMonitoringWebhooks = async (kind: TMonitoringWebhookKind, userId: string): Promise<TMonitoringWebhook[]> => {
+export const listMonitoringWebhooks = async (kind: TMonitoringWebhookKind): Promise<TMonitoringWebhook[]> => {
   if (!ENV.NEXT_PUBLIC_MONITORING_API_URL) throw new Error('Monitoring API base URL is not configured');
+  const { userId } = auth();
+  if (!userId) throw new Error('Not authenticated');
   const url = new URL(`/webhooks/${kind}?user_id=${encodeURIComponent(userId)}`, ENV.NEXT_PUBLIC_MONITORING_API_URL);
   const data = await fetchJson(url.toString(), { cache: 'no-cache' });
   return MonitoringWebhookSchema.array().parse(data);
@@ -58,11 +61,13 @@ export const listMonitoringWebhooks = async (kind: TMonitoringWebhookKind, userI
 
 export const createMonitoringWebhook = async (
   kind: TMonitoringWebhookKind,
-  payload: Omit<TMonitoringWebhook, 'ID'>,
+  payload: Omit<TMonitoringWebhook, 'ID' | 'UserID'>,
 ): Promise<void> => {
   if (!ENV.NEXT_PUBLIC_MONITORING_API_URL) throw new Error('Monitoring API base URL is not configured');
+  const { userId } = auth();
+  if (!userId) throw new Error('Not authenticated');
   const url = new URL(`/webhooks/${kind}`, ENV.NEXT_PUBLIC_MONITORING_API_URL);
-  const body = MonitoringWebhookSchema.omit({ ID: true }).parse(payload);
+  const body = { ...MonitoringWebhookSchema.omit({ ID: true }).parse({ ...payload, UserID: userId }), UserID: userId } as Omit<TMonitoringWebhook, 'ID'>;
   const res = await fetch(url.toString(), { method: 'POST', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json' } });
   if (!res.ok) {
     const text = await res.text().catch(() => '');
@@ -73,11 +78,13 @@ export const createMonitoringWebhook = async (
 
 export const updateMonitoringWebhook = async (
   kind: TMonitoringWebhookKind,
-  payload: TMonitoringWebhook,
+  payload: Omit<TMonitoringWebhook, 'UserID'>,
 ): Promise<void> => {
   if (!ENV.NEXT_PUBLIC_MONITORING_API_URL) throw new Error('Monitoring API base URL is not configured');
+  const { userId } = auth();
+  if (!userId) throw new Error('Not authenticated');
   const url = new URL(`/webhooks/${kind}`, ENV.NEXT_PUBLIC_MONITORING_API_URL);
-  const body = MonitoringWebhookSchema.parse(payload);
+  const body = { ...MonitoringWebhookSchema.parse({ ...payload, UserID: userId }), UserID: userId } as TMonitoringWebhook;
   const res = await fetch(url.toString(), { method: 'PUT', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json' } });
   if (!res.ok) {
     const text = await res.text().catch(() => '');
@@ -89,9 +96,10 @@ export const updateMonitoringWebhook = async (
 export const deleteMonitoringWebhook = async (
   kind: TMonitoringWebhookKind,
   id: number,
-  userId: string,
 ): Promise<void> => {
   if (!ENV.NEXT_PUBLIC_MONITORING_API_URL) throw new Error('Monitoring API base URL is not configured');
+  const { userId } = auth();
+  if (!userId) throw new Error('Not authenticated');
   const url = new URL(`/webhooks/${kind}?id=${encodeURIComponent(String(id))}&user_id=${encodeURIComponent(userId)}`, ENV.NEXT_PUBLIC_MONITORING_API_URL);
   const res = await fetch(url.toString(), { method: 'DELETE' });
   if (!res.ok) {

@@ -8,11 +8,11 @@ import { useToast } from '@/contexts/toast-context';
 import type { TMonitoringWebhook as Webhook, TMonitoringWebhookKind as WebhookKind } from '@/utils/schemas';
 import WebhookFormClient from './webhook-form';
 
-export default function WebhooksSectionClient({ kind, userId }: { kind: WebhookKind; userId: string }) {
-  const { data, isLoading } = useMonitoringWebhooks(kind, userId);
+export default function WebhooksSectionClient({ kind }: { kind: WebhookKind }) {
+  const { data, isLoading } = useMonitoringWebhooks(kind);
   const { addToast } = useToast();
   const [editItem, setEditItem] = useState<Webhook | undefined>(undefined);
-  const del = useDeleteMonitoringWebhook(kind, userId);
+  const del = useDeleteMonitoringWebhook(kind);
   const handleDelete = async (wh: Webhook) => {
     try {
       await del.mutateAsync(wh.ID!);
@@ -33,7 +33,7 @@ export default function WebhooksSectionClient({ kind, userId }: { kind: WebhookK
         </Text>
 
         <Box mt="3">
-          <WebhookFormClient kind={kind} userId={userId} onDone={() => setEditItem(undefined)} initial={editItem} />
+          <WebhookFormClient kind={kind} onDone={() => setEditItem(undefined)} initial={editItem} />
         </Box>
 
         <Separator my="3" />

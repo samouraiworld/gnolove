@@ -15,11 +15,11 @@ export type WebhookFormValues = {
   description?: string;
 };
 
-export default function WebhookFormClient({ kind, userId, initial, onDone }: { kind: WebhookKind; userId: string; initial?: Webhook; onDone?: () => void }) {
+export default function WebhookFormClient({ kind, initial, onDone }: { kind: WebhookKind; initial?: Webhook; onDone?: () => void }) {
   const isEdit = Boolean(initial?.ID);
   const { addToast } = useToast();
-  const create = useCreateMonitoringWebhook(kind, userId);
-  const update = useUpdateMonitoringWebhook(kind, userId);
+  const create = useCreateMonitoringWebhook(kind);
+  const update = useUpdateMonitoringWebhook(kind);
   const formRef = useRef<HTMLFormElement | null>(null);
 
   // Local form schema matching form field names
@@ -51,7 +51,6 @@ export default function WebhookFormClient({ kind, userId, initial, onDone }: { k
       URL: values.url,
       Type: values.type,
       Description: values.description,
-      UserID: userId,
     };
     try {
       if (isEdit && initial?.ID) {
