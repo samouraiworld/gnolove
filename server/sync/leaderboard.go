@@ -376,38 +376,3 @@ func SendLeaderboardWebhook(platform, webhookURL, content string) error {
 		return fmt.Errorf("unsupported platform: %s", platform)
 	}
 }
-
-// Cron job: send weekly leaderboard to Discord
-func (s *Syncer) StartLeaderboardNotifier() {
-	// Schedule: Friday 15:00 UTC (0 15 * * 5)
-	go func() {
-		for {
-			now := time.Now().UTC()
-			next := time.Date(now.Year(), now.Month(), now.Day(), 15, 0, 0, 0, time.UTC)
-			for next.Weekday() != time.Friday || !next.After(now) {
-				next = next.Add(24 * time.Hour)
-			}
-			d := next.Sub(now)
-			time.Sleep(d)
-			// Run job
-			oneWeekAgo := next.AddDate(0, 0, -7)
-			stats, err := GetContributorsWithScores(s.db, oneWeekAgo)
-			if err != nil {
-				s.logger.Errorf("Leaderboard cron: %v", err)
-				continue
-			}
-			msg := FormatLeaderboardMessage(stats)
-			webhookURL := os.Getenv("DISCORD_WEBHOOK_URL")
-			if webhookURL == "" {
-				s.logger.Error("DISCORD_WEBHOOK_URL not set")
-				continue
-			}
-			err = SendDiscordLeaderboard(webhookURL, msg)
-			if err != nil {
-				s.logger.Errorf("Failed to send Discord leaderboard: %v", err)
-			} else {
-				s.logger.Info("Sent Discord leaderboard successfully")
-			}
-		}
-	}()
-}

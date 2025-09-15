@@ -90,11 +90,11 @@ func main() {
 		panic(err)
 	}
 
-	// Start the Discord leaderboard cron job if webhook is configured
+	// Seed a system leaderboard config if DISCORD_WEBHOOK_URL is present
 	if os.Getenv("DISCORD_WEBHOOK_URL") != "" {
-		syncer.StartLeaderboardNotifier()
-	} else {
-		logger.Warn("DISCORD_WEBHOOK_URL not set, skipping leaderboard notifier")
+		if err := sync.SeedSystemLeaderboardConfig(database, logger); err != nil {
+			logger.Errorf("failed to seed system leaderboard config: %v", err)
+		}
 	}
 
 	// Start personal scheduler for per-user leaderboard configuration
