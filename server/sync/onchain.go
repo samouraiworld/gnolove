@@ -183,7 +183,8 @@ func (s *Syncer) getProposalTitleAndDescription(proposalID string) (string, stri
 
 	matches := re.FindAllSubmatch(data.Response.Data, -1)
 	if len(matches) < 2 {
-		return "", "", fmt.Errorf("no title found for proposal %s", proposalID)
+		// not title or description found but not an error
+		return "", "", nil
 	}
 
 	return string(matches[0][1]), string(matches[1][1]), nil
