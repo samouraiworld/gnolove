@@ -21,7 +21,7 @@ export function useMonitoringWebhooks(kind: TMonitoringWebhookKind, userId?: str
 export function useCreateMonitoringWebhook(kind: TMonitoringWebhookKind, userId: string) {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: (payload: Omit<TMonitoringWebhook, 'id'>) => createMonitoringWebhook(kind, payload),
+    mutationFn: (payload: Omit<TMonitoringWebhook, 'ID'>) => createMonitoringWebhook(kind, payload),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: monitoringKey(kind, userId) });
     },

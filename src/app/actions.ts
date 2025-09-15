@@ -58,7 +58,7 @@ export const listMonitoringWebhooks = async (kind: TMonitoringWebhookKind, userI
 
 export const createMonitoringWebhook = async (
   kind: TMonitoringWebhookKind,
-  payload: Omit<TMonitoringWebhook, 'id'>,
+  payload: Omit<TMonitoringWebhook, 'ID'>,
 ): Promise<void> => {
   if (!ENV.NEXT_PUBLIC_MONITORING_API_URL) throw new Error('Monitoring API base URL is not configured');
   const url = new URL(`/webhooks/${kind}`, ENV.NEXT_PUBLIC_MONITORING_API_URL);

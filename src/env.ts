@@ -11,7 +11,7 @@ const EnvSchema = z.object({
   NEXT_PUBLIC_API_URL: z.string(),
 
   // Monitoring API base URL
-  NEXT_PUBLIC_MONITORING_API_URL: z.string().optional(),
+  NEXT_PUBLIC_MONITORING_API_URL: z.string().url().optional(),
 
   YOUTUBE_API_KEY: z.string().optional(),
 
