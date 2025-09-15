@@ -172,8 +172,6 @@ func ParseTimeline(now time.Time, timeline string) time.Time {
 	}
 }
 
-// (intentionally left blank in this hunk; duplicate removed below where helpers are defined)
-
 // Get contributors with stats and scores for the given period
 func GetContributorsWithScores(db *gorm.DB, since time.Time) ([]ContributorStats, error) {
 	var users []models.User
