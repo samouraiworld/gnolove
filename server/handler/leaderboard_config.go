@@ -17,7 +17,7 @@ import (
 func HandleGetLeaderboardConfigs(db *gorm.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-		claims, ok := clermwSessionClaims(r)
+		claims, ok := clerk.SessionClaimsFromContext(r.Context())
 		if !ok || strings.TrimSpace(claims.Subject) == "" {
 			w.WriteHeader(http.StatusUnauthorized)
 			_ = json.NewEncoder(w).Encode(map[string]string{"error": "unauthorized"})
@@ -50,7 +50,7 @@ func HandleCreateLeaderboardConfig(db *gorm.DB) http.HandlerFunc {
 	}
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-		claims, ok := clermwSessionClaims(r)
+		claims, ok := clerk.SessionClaimsFromContext(r.Context())
 		if !ok || strings.TrimSpace(claims.Subject) == "" {
 			w.WriteHeader(http.StatusUnauthorized)
 			_ = json.NewEncoder(w).Encode(map[string]string{"error": "unauthorized"})
@@ -125,7 +125,7 @@ func HandleDeleteLeaderboardConfig(db *gorm.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		idStr := chi.URLParam(r, "id")
-		claims, ok := clermwSessionClaims(r)
+		claims, ok := clerk.SessionClaimsFromContext(r.Context())
 		if !ok || strings.TrimSpace(claims.Subject) == "" {
 			w.WriteHeader(http.StatusUnauthorized)
 			_ = json.NewEncoder(w).Encode(map[string]string{"error": "unauthorized"})
@@ -161,7 +161,7 @@ func HandleUpdateLeaderboardConfigByID(db *gorm.DB) http.HandlerFunc {
 	}
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-		claims, ok := clermwSessionClaims(r)
+		claims, ok := clerk.SessionClaimsFromContext(r.Context())
 		if !ok || strings.TrimSpace(claims.Subject) == "" {
 			w.WriteHeader(http.StatusUnauthorized)
 			_ = json.NewEncoder(w).Encode(map[string]string{"error": "unauthorized"})
@@ -233,10 +233,4 @@ func HandleUpdateLeaderboardConfigByID(db *gorm.DB) http.HandlerFunc {
 		}
 		_ = json.NewEncoder(w).Encode(cfg)
 	}
-}
-
-// clermwSessionClaims extracts Clerk session claims from the request context.
-func clermwSessionClaims(r *http.Request) (*clerk.SessionClaims, bool) {
-	claims, ok := clerk.SessionClaimsFromContext(r.Context())
-	return claims, ok
 }
