@@ -21,6 +21,7 @@ import (
 	"github.com/subosito/gotenv"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
+	clerkhttp "github.com/clerk/clerk-sdk-go/v2/http"
 )
 
 var database *gorm.DB
@@ -119,11 +120,14 @@ func main() {
 	router.HandleFunc("/contributors/{login}", contributor.HandleGetContributor(database))
 	router.Post("/github/link", handler.HandleLink(database))
 
-	// Leaderboard configuration routes (per-user)
-	router.Get("/leaderboard/configs", handler.HandleGetLeaderboardConfigs(database))
-	router.Post("/leaderboard/configs", handler.HandleCreateLeaderboardConfig(database))
-	router.Put("/leaderboard/configs/{id}", handler.HandleUpdateLeaderboardConfigByID(database))
-	router.Delete("/leaderboard/configs/{id}", handler.HandleDeleteLeaderboardConfig(database))
+	// Leaderboard configuration routes (per-user) - protected by Clerk
+	router.Group(func(r chi.Router) {
+		r.Use(clerkhttp.WithHeaderAuthorization())
+		r.Get("/leaderboard/configs", handler.HandleGetLeaderboardConfigs(database))
+		r.Post("/leaderboard/configs", handler.HandleCreateLeaderboardConfig(database))
+		r.Put("/leaderboard/configs/{id}", handler.HandleUpdateLeaderboardConfigByID(database))
+		r.Delete("/leaderboard/configs/{id}", handler.HandleDeleteLeaderboardConfig(database))
+	})
 
 	// Onchain package contributions endpoints
 	router.HandleFunc("/onchain/packages", handler.HandleGetAllPackages(database))

@@ -10,18 +10,20 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/samouraiworld/topofgnomes/server/models"
 	"gorm.io/gorm"
+	clerk "github.com/clerk/clerk-sdk-go/v2"
 )
 
 // HandleGetLeaderboardConfigs returns all leaderboard configs for a given userId
 func HandleGetLeaderboardConfigs(db *gorm.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-		userID := r.URL.Query().Get("userId")
-		if strings.TrimSpace(userID) == "" {
-			w.WriteHeader(http.StatusBadRequest)
-			_ = json.NewEncoder(w).Encode(map[string]string{"error": "userId is required"})
+		claims, ok := clermwSessionClaims(r)
+		if !ok || strings.TrimSpace(claims.Subject) == "" {
+			w.WriteHeader(http.StatusUnauthorized)
+			_ = json.NewEncoder(w).Encode(map[string]string{"error": "unauthorized"})
 			return
 		}
+		userID := claims.Subject
 
 		var configs []models.LeaderboardConfig
 		if err := db.Where("user_id = ?", userID).Order("id desc").Find(&configs).Error; err != nil {
@@ -37,7 +39,6 @@ func HandleGetLeaderboardConfigs(db *gorm.DB) http.HandlerFunc {
 func HandleCreateLeaderboardConfig(db *gorm.DB) http.HandlerFunc {
 	type body struct {
 		ID                   uint   `json:"id"`
-		UserID               string `json:"userId"`
 		Platform             string `json:"platform"`
 		WebhookURL           string `json:"webhookUrl"`
 		SelectedRepositories string `json:"selectedRepositories"`
@@ -49,15 +50,22 @@ func HandleCreateLeaderboardConfig(db *gorm.DB) http.HandlerFunc {
 	}
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
+		claims, ok := clermwSessionClaims(r)
+		if !ok || strings.TrimSpace(claims.Subject) == "" {
+			w.WriteHeader(http.StatusUnauthorized)
+			_ = json.NewEncoder(w).Encode(map[string]string{"error": "unauthorized"})
+			return
+		}
+		userID := claims.Subject
 		var b body
 		if err := json.NewDecoder(r.Body).Decode(&b); err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			_ = json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
 			return
 		}
-		if strings.TrimSpace(b.UserID) == "" || strings.TrimSpace(b.WebhookURL) == "" {
+		if strings.TrimSpace(b.WebhookURL) == "" {
 			w.WriteHeader(http.StatusBadRequest)
-			_ = json.NewEncoder(w).Encode(map[string]string{"error": "userId and webhookUrl are required"})
+			_ = json.NewEncoder(w).Encode(map[string]string{"error": "webhookUrl is required"})
 			return
 		}
 		// Enforce create-only semantics: reject if ID provided
@@ -83,7 +91,7 @@ func HandleCreateLeaderboardConfig(db *gorm.DB) http.HandlerFunc {
 
 		cfg := models.LeaderboardConfig{
 			ID:                   b.ID,
-			UserID:               b.UserID,
+			UserID:               userID,
 			Platform:             platform,
 			WebhookURL:           b.WebhookURL,
 			SelectedRepositories: b.SelectedRepositories,
@@ -117,12 +125,13 @@ func HandleDeleteLeaderboardConfig(db *gorm.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		idStr := chi.URLParam(r, "id")
-		userID := r.URL.Query().Get("userId")
-		if strings.TrimSpace(userID) == "" {
-			w.WriteHeader(http.StatusBadRequest)
-			_ = json.NewEncoder(w).Encode(map[string]string{"error": "userId is required"})
+		claims, ok := clermwSessionClaims(r)
+		if !ok || strings.TrimSpace(claims.Subject) == "" {
+			w.WriteHeader(http.StatusUnauthorized)
+			_ = json.NewEncoder(w).Encode(map[string]string{"error": "unauthorized"})
 			return
 		}
+		userID := claims.Subject
 		id, err := strconv.Atoi(idStr)
 		if err != nil || id <= 0 {
 			w.WriteHeader(http.StatusBadRequest)
@@ -141,7 +150,6 @@ func HandleDeleteLeaderboardConfig(db *gorm.DB) http.HandlerFunc {
 // HandleUpdateLeaderboardConfigByID updates a specific leaderboard config by id
 func HandleUpdateLeaderboardConfigByID(db *gorm.DB) http.HandlerFunc {
 	type body struct {
-		UserID               string  `json:"userId"`
 		Platform             *string `json:"platform"`
 		WebhookURL           *string `json:"webhookUrl"`
 		SelectedRepositories *string `json:"selectedRepositories"`
@@ -153,6 +161,13 @@ func HandleUpdateLeaderboardConfigByID(db *gorm.DB) http.HandlerFunc {
 	}
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
+		claims, ok := clermwSessionClaims(r)
+		if !ok || strings.TrimSpace(claims.Subject) == "" {
+			w.WriteHeader(http.StatusUnauthorized)
+			_ = json.NewEncoder(w).Encode(map[string]string{"error": "unauthorized"})
+			return
+		}
+		userID := claims.Subject
 		idStr := chi.URLParam(r, "id")
 		id, err := strconv.Atoi(idStr)
 		if err != nil || id <= 0 {
@@ -165,11 +180,6 @@ func HandleUpdateLeaderboardConfigByID(db *gorm.DB) http.HandlerFunc {
 		if err := json.NewDecoder(r.Body).Decode(&b); err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			_ = json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
-			return
-		}
-		if strings.TrimSpace(b.UserID) == "" {
-			w.WriteHeader(http.StatusBadRequest)
-			_ = json.NewEncoder(w).Encode(map[string]string{"error": "userId is required"})
 			return
 		}
 
@@ -209,7 +219,7 @@ func HandleUpdateLeaderboardConfigByID(db *gorm.DB) http.HandlerFunc {
 			return
 		}
 
-		if err := db.Model(&models.LeaderboardConfig{}).Where("id = ? AND user_id = ?", id, b.UserID).Updates(updates).Error; err != nil {
+		if err := db.Model(&models.LeaderboardConfig{}).Where("id = ? AND user_id = ?", id, userID).Updates(updates).Error; err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			_ = json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
 			return
@@ -223,4 +233,10 @@ func HandleUpdateLeaderboardConfigByID(db *gorm.DB) http.HandlerFunc {
 		}
 		_ = json.NewEncoder(w).Encode(cfg)
 	}
+}
+
+// clermwSessionClaims extracts Clerk session claims from the request context.
+func clermwSessionClaims(r *http.Request) (*clerk.SessionClaims, bool) {
+	claims, ok := clerk.SessionClaimsFromContext(r.Context())
+	return claims, ok
 }
