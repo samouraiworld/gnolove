@@ -100,7 +100,7 @@ export const ReviewSchema: z.ZodType = z.lazy(() =>
     createdAt: z.string(),
     pullRequest: z.lazy(() => PullRequestSchema).nullable(),
     author: UserSchema.nullish(),
-  })
+  }),
 );
 
 export type TReview = z.infer<typeof ReviewSchema>;
@@ -131,11 +131,11 @@ export const PullRequestSchema = z.preprocess(preprocessPullRequest, PullRequest
 export type TPullRequest = z.infer<typeof PullRequestSchema>;
 
 export const PullRequestReportSchema = z.object({
-  merged: z.array(PullRequestSchema).nullable(),            
-  in_progress: z.array(PullRequestSchema).nullable(),      
-  reviewed: z.array(PullRequestSchema).nullable(),        
+  merged: z.array(PullRequestSchema).nullable(),
+  in_progress: z.array(PullRequestSchema).nullable(),
+  reviewed: z.array(PullRequestSchema).nullable(),
   waiting_for_review: z.array(PullRequestSchema).nullable(),
-  blocked: z.array(PullRequestSchema).nullable(),        
+  blocked: z.array(PullRequestSchema).nullable(),
 });
 
 export type TPullRequestReport = z.infer<typeof PullRequestReportSchema>;
@@ -278,7 +278,7 @@ export const ContributorSchema = z.object({
   pullRequestsPerMonth: z.array(TimeCountSchema),
   issuesPerMonth: z.array(TimeCountSchema),
   contributionsPerDay: z.array(TimeCountSchema),
-  topContributedRepositories: z.array(TopContributedRepo)
+  topContributedRepositories: z.array(TopContributedRepo),
 });
 
 export type TContributorRepository = z.infer<typeof ContributorRepositorySchema>;
@@ -309,9 +309,9 @@ export type TPackages = z.infer<typeof PackagesSchema>;
  * Represents a namespace contribution.
  */
 export const NamespaceSchema = z.object({
-  hash:        z.string(),
-  namespace:   z.string(),
-  address:     z.string(),
+  hash: z.string(),
+  namespace: z.string(),
+  address: z.string(),
   blockHeight: z.number(),
 });
 export const NamespacesSchema = z.array(NamespaceSchema);
@@ -374,13 +374,15 @@ export const YoutubeVideoSchema = z.object({
   channelId: z.string(),
   title: z.string(),
   description: z.string(),
-  thumbnails: z.object({
-    default: ThumbnailSchema,
-    medium: ThumbnailSchema,
-    high: ThumbnailSchema,
-    standard: ThumbnailSchema,
-    maxres: ThumbnailSchema,
-  }).partial(),
+  thumbnails: z
+    .object({
+      default: ThumbnailSchema,
+      medium: ThumbnailSchema,
+      high: ThumbnailSchema,
+      standard: ThumbnailSchema,
+      maxres: ThumbnailSchema,
+    })
+    .partial(),
   channelTitle: z.string(),
   playlistId: z.string(),
   position: z.number(),
@@ -390,10 +392,12 @@ export const YoutubeVideoSchema = z.object({
 });
 export type TYoutubeVideo = z.infer<typeof YoutubeVideoSchema>;
 
-export const YoutubeVideoPlaylistSchema = z.array(z.object({
-  kind: z.string(),
-  etag: z.string(),
-  id: YoutubePlaylistIdSchema,
-  snippet: YoutubeVideoSchema,
-}));
+export const YoutubeVideoPlaylistSchema = z.array(
+  z.object({
+    kind: z.string(),
+    etag: z.string(),
+    id: YoutubePlaylistIdSchema,
+    snippet: YoutubeVideoSchema,
+  }),
+);
 export type TYoutubeVideoPlaylist = z.infer<typeof YoutubeVideoPlaylistSchema>;

@@ -1,14 +1,16 @@
 'use client';
 
-import { ExternalLinkIcon, InfoCircledIcon } from '@radix-ui/react-icons';
-import { Flex, HoverCard, Table, Text } from '@radix-ui/themes';
+import { ExternalLink, Info } from 'lucide-react';
 
+import Cell from '@/elements/cell';
 import Label from '@/elements/label';
 
 import { TIssue } from '@/utils/schemas';
-import Cell from '@/elements/cell';
 
-export interface IssuesTableProps extends Table.RootProps {
+import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+
+export interface IssuesTableProps extends React.ComponentProps<typeof Table> {
   issues: TIssue[];
 
   showHeader?: boolean;
@@ -22,59 +24,58 @@ const IssuesTable = ({ issues, showLabels, showHeader, ...props }: IssuesTablePr
   };
 
   return (
-    <Table.Root {...props}>
+    <Table {...props}>
       {showHeader && (
-        <Table.Header>
-          <Table.Row>
-            <Table.ColumnHeaderCell>Title</Table.ColumnHeaderCell>
-            {showLabels === 'as-column' && <Table.ColumnHeaderCell>Labels</Table.ColumnHeaderCell>}
-          </Table.Row>
-        </Table.Header>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Title</TableHead>
+            {showLabels === 'as-column' && <TableHead>Labels</TableHead>}
+          </TableRow>
+        </TableHeader>
       )}
 
-      <Table.Body>
+      <TableBody>
         {issues.map(({ id, title, labels, url }) => (
-          <Table.Row
+          <TableRow
             data-href={url}
             onClick={onClick.bind(null, url)}
             key={id}
-            className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-grayA-2"
+            className="hover:bg-muted/50 cursor-pointer transition-all duration-300 ease-in-out"
           >
             <Cell className="max-w-0">
-              <Flex width="100%" height="100%" align="center" gap="2">
-                <Text className="w-full truncate">{title}</Text>
+              <div className="flex h-full w-full items-center gap-2">
+                <span className="w-full truncate">{title}</span>
 
                 {showLabels === 'on-hover' && (
-                  <HoverCard.Root>
-                    <HoverCard.Trigger>
-                      <InfoCircledIcon className="shrink-0 text-blue-10" />
-                    </HoverCard.Trigger>
-
-                    <Flex gap="2" wrap="wrap" asChild>
-                      <HoverCard.Content size="1">
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Info className="h-4 w-4 shrink-0" />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <div className="flex flex-wrap gap-2">
                         {labels && labels.map((label) => <Label label={label} key={label.name + label.color} />)}
-                      </HoverCard.Content>
-                    </Flex>
-                  </HoverCard.Root>
+                      </div>
+                    </TooltipContent>
+                  </Tooltip>
                 )}
 
-                <ExternalLinkIcon className="shrink-0 text-blue-10" />
-              </Flex>
+                <ExternalLink className="text-primary h-4 w-4 shrink-0" />
+              </div>
             </Cell>
 
             {showLabels === 'as-column' && (
               <Cell>
-                <Flex gap="2" wrap="wrap">
+                <div className="flex flex-wrap gap-2">
                   {labels.map((label) => (
                     <Label label={label} key={label.name + label.color} />
                   ))}
-                </Flex>
+                </div>
               </Cell>
             )}
-          </Table.Row>
+          </TableRow>
         ))}
-      </Table.Body>
-    </Table.Root>
+      </TableBody>
+    </Table>
   );
 };
 

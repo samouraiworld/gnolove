@@ -18,7 +18,8 @@ export const metadata: Metadata = {
   title: 'Analytics',
 };
 
-const AnalyticsPage = async ({ searchParams: { f, e, r } }: SearchParamsFilters) => {
+const AnalyticsPage = async ({ searchParams }: SearchParamsFilters) => {
+  const { f, e, r } = await searchParams;
   const timeFilter = getTimeFilterFromSearchParam(f, TimeFilter.ALL_TIME);
   const exclude = !!e;
   const queryClient = new QueryClient();

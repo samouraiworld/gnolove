@@ -1,24 +1,24 @@
-import { Flex, FlexProps, ScrollArea } from '@radix-ui/themes';
+import { HTMLAttributes } from 'react';
 
 import Footer from '@/modules/footer';
 
 import { cn } from '@/utils/style';
 
-const LayoutContainer = ({ className, ...props }: FlexProps) => {
+import { ScrollArea } from '@/components/ui/scroll-area';
+
+type Props = HTMLAttributes<HTMLDivElement> & { className?: string };
+
+const LayoutContainer = ({ className, ...props }: Props) => {
   return (
-    <Flex className="h-screen w-screen" pt={{ initial: '8', sm: '4', lg: '0' }} asChild>
+    <div className="min-h-screen w-full pt-8 sm:pt-4 lg:pt-0">
       <ScrollArea>
-        <Flex
-          p={{ initial: '2', sm: '4', lg: '7' }}
-          gap="2"
-          direction="column"
-          className={cn('max-w-screen mx-auto w-full min-w-0 max-w-7xl overflow-hidden', className)}
+        <div
+          className={cn('mx-auto w-full max-w-7xl min-w-0 space-y-2 overflow-hidden p-2 sm:p-4 lg:p-7', className)}
           {...props}
         />
-
         <Footer />
       </ScrollArea>
-    </Flex>
+    </div>
   );
 };
 export default LayoutContainer;

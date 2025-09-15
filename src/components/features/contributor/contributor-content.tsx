@@ -1,20 +1,26 @@
 'use client';
 
-import useGetContributor from '@/hooks/use-get-contributor';
-import { Badge, Box, Button, Card, Dialog, Flex, Grid, Heading, IconButton, Tabs, Text } from '@radix-ui/themes';
-import { Check, Copy, GitCommit, GitPullRequest, MessageSquare, Star, X } from 'lucide-react';
+import { useState } from 'react';
+
+import ContributorAnalytics from './contributor-analytics';
+import ContributorContributions from './contributor-contributions';
+import ContributorOnchain from './contributor-onchain';
 import ContributorProfile from './contributor-profile';
 import ContributorRecentActivities from './contributor-recent-activities';
 import ContributorTopRepos from './contributor-top-repos';
-import ContributorContributions from './contributor-contributions';
-import { useState } from 'react';
-import ContributorAnalytics from './contributor-analytics';
-import { useOffline } from '@/contexts/offline-context';
-import ContributorOnchain from './contributor-onchain';
-import useGetUserPackages from '@/hooks/use-get-user-packages';
+import { Check, Copy, GitCommit, GitPullRequest, MessageSquare, Star } from 'lucide-react';
+
+import useGetContributor from '@/hooks/use-get-contributor';
 import useGetUserNamespaces from '@/hooks/use-get-user-namespaces';
+import useGetUserPackages from '@/hooks/use-get-user-packages';
 import useGetUserProposals from '@/hooks/use-get-user-proposals';
+
 import { HttpError } from '@/utils/fetcher';
+
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { DialogTitle } from '@/components/ui/dialog';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const ContributorContent = ({ login }: { login: string }) => {
   const { data: contributor, isError, error, isLoading } = useGetContributor(login);
@@ -22,28 +28,25 @@ const ContributorContent = ({ login }: { login: string }) => {
   const { data: namespaces } = useGetUserNamespaces(contributor?.wallet ?? '');
   const { data: proposals } = useGetUserProposals(contributor?.wallet ?? '');
   const [loginCopied, setLoginCopied] = useState(false);
-  const { isOffline } = useOffline();
-  
+
   if (isLoading) {
-    return <Dialog.Title>Loading…</Dialog.Title>;
+    return <DialogTitle>Loading…</DialogTitle>;
   }
 
   if (isError) {
     if (error instanceof HttpError && error.status === 404) {
-      return <Dialog.Title>Contributor not found</Dialog.Title>;
+      return <DialogTitle>Contributor not found</DialogTitle>;
     }
     return (
-      <Box>
-        <Dialog.Title>Something went wrong</Dialog.Title>
-        <Text size='2' color='gray'>
-          Unable to load contributor details. Please try again.
-        </Text>
-      </Box>
+      <div>
+        <DialogTitle>Something went wrong</DialogTitle>
+        <p className="text-muted-foreground text-sm">Unable to load contributor details. Please try again.</p>
+      </div>
     );
   }
 
   if (!contributor) {
-    return <Dialog.Title>Contributor not found</Dialog.Title>;
+    return <DialogTitle>Contributor not found</DialogTitle>;
   }
 
   const handleCopy = () => {
@@ -52,136 +55,115 @@ const ContributorContent = ({ login }: { login: string }) => {
     setLoginCopied(true);
   };
 
+  const hasOnchain = Boolean((packages?.length ?? 0) || (namespaces?.length ?? 0) || (proposals?.length ?? 0));
+
   return (
-    <Flex direction='column' height='100%' overflow={{ md: 'hidden' }}>
-      <Flex
-        justify='between'
-        align='center'
-        mb='4'
-      >
-        <Flex direction={{ initial: 'column', md: 'row' }} align={{ initial: 'start', md: 'center' }} gap='2'>
-          <Dialog.Title mb='0'>{contributor.name || contributor.login}</Dialog.Title>
-          <Flex gap='1' align='center'>
-            <Badge color='gray' variant='soft' size='1'>
+    <div className="flex h-full min-w-0 flex-col md:overflow-hidden">
+      <div className="mb-4 flex items-center justify-between">
+        <div className="flex flex-col items-start gap-2 md:flex-row md:items-center">
+          <DialogTitle className="mt-2">{contributor.name || contributor.login}</DialogTitle>
+          <div className="flex items-center gap-1">
+            <Badge variant="secondary" className="text-xs">
               gnolove.world/@{contributor.login}
             </Badge>
-            <Button variant='outline' size='1' onClick={handleCopy}>
-              {loginCopied ? (<Check size={12} />) : (<Copy size={12} />)}
+            <Button variant="outline" size="sm" onClick={handleCopy}>
+              {loginCopied ? <Check size={12} /> : <Copy size={12} />}
             </Button>
-          </Flex>
-        </Flex>
-        <Dialog.Close>
-          <IconButton disabled={isOffline} variant='outline' color='gray' size='1'>
-            <X width={16} height={16} />
-          </IconButton>
-        </Dialog.Close>
-      </Flex>
+          </div>
+        </div>
+      </div>
 
-      <Grid
-        columns={{ initial: '1', md: '3' }}
-        gap={{ initial: '0', md: '6' }}
-        minHeight={{ md: '0' }}
-        style={{ flex: 1 }}
-      >
+      <div className="grid flex-1 min-w-0 grid-cols-1 gap-6 md:grid-cols-3">
         {/* Left Column - Profile Info */}
-        <Box minHeight={{ md: '0' }}>
+        <div className="min-h-0 min-w-0">
           <ContributorProfile contributor={contributor} />
-        </Box>
+        </div>
 
         {/* Right Column - Activity & Contributions */}
-        <Box gridColumn='span 2' minHeight={{ md: '0' }}>
-          <Flex direction='column' gap='4' height='100%'>
+        <div className="min-h-0 min-w-0 md:col-span-2">
+          <div className="flex h-full min-w-0 flex-col gap-4">
             {/* Metrics */}
-            <Grid columns={{ initial: '2', md: '4' }} mt={{ initial: '4', md: '0' }} gap='4'>
-              <Card>
-                <Flex direction='column' align='center' gap='2' p='3'>
-                  <Heading size='6'>{contributor.totalCommits}</Heading>
-                  <Flex align='center' gap='1'>
+            <div className="mt-4 grid grid-cols-2 gap-4 md:mt-0 md:grid-cols-4">
+              <div className="rounded-md border p-3">
+                <div className="flex flex-col items-center gap-2">
+                  <div className="text-2xl font-semibold">{contributor.totalCommits}</div>
+                  <div className="flex items-center gap-1">
                     <GitCommit size={12} />
-                    <Text size='1' color='gray'>
-                      Commits
-                    </Text>
-                  </Flex>
-                </Flex>
-              </Card>
+                    <span className="text-muted-foreground text-xs">Commits</span>
+                  </div>
+                </div>
+              </div>
 
-              <Card>
-                <Flex direction='column' align='center' gap='2' p='3'>
-                  <Heading size='6'>{contributor.totalPullRequests}</Heading>
-                  <Flex align='center' gap='1'>
+              <div className="rounded-md border p-3">
+                <div className="flex flex-col items-center gap-2">
+                  <div className="text-2xl font-semibold">{contributor.totalPullRequests}</div>
+                  <div className="flex items-center gap-1">
                     <GitPullRequest size={12} />
-                    <Text size='1' color='gray'>
-                      Pull Requests
-                    </Text>
-                  </Flex>
-                </Flex>
-              </Card>
+                    <span className="text-muted-foreground text-xs">Pull Requests</span>
+                  </div>
+                </div>
+              </div>
 
-              <Card>
-                <Flex direction='column' align='center' gap='2' p='3'>
-                  <Heading size='6'>{contributor.totalIssues}</Heading>
-                  <Flex align='center' gap='1'>
+              <div className="rounded-md border p-3">
+                <div className="flex flex-col items-center gap-2">
+                  <div className="text-2xl font-semibold">{contributor.totalIssues}</div>
+                  <div className="flex items-center gap-1">
                     <MessageSquare size={12} />
-                    <Text size='1' color='gray'>
-                      Issues
-                    </Text>
-                  </Flex>
-                </Flex>
-              </Card>
+                    <span className="text-muted-foreground text-xs">Issues</span>
+                  </div>
+                </div>
+              </div>
 
-              <Card>
-                <Flex direction='column' align='center' gap='2' p='3'>
-                  <Heading size='6'>{contributor.totalStars}</Heading>
-                  <Flex align='center' gap='1'>
+              <div className="rounded-md border p-3">
+                <div className="flex flex-col items-center gap-2">
+                  <div className="text-2xl font-semibold">{contributor.totalStars}</div>
+                  <div className="flex items-center gap-1">
                     <Star size={12} />
-                    <Text size='1' color='gray'>
-                      Stars
-                    </Text>
-                  </Flex>
-                </Flex>
-              </Card>
-            </Grid>
+                    <span className="text-muted-foreground text-xs">Stars</span>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-            <Box minHeight='0' style={{ flex: 1 }}>
+            <div className="min-h-0 min-w-0 flex-1">
               {/* Tabs for different views */}
-              <Tabs.Root defaultValue={(packages?.length || namespaces?.length || proposals?.length) ? 'onchain' : 'analytics'} style={{ display: 'flex', flexDirection: 'column', gap: '4', height: '100%' }}>
-                <Tabs.List style={{ minHeight: '40px' }}>
-                  {(packages?.length || namespaces?.length || proposals?.length) ? (
-                    <Tabs.Trigger value='onchain'>GNO Chain</Tabs.Trigger>
-                  ) : null}
-                  <Tabs.Trigger value='analytics'>Analytics</Tabs.Trigger>
-                  <Tabs.Trigger value='activity'>Recent Activity</Tabs.Trigger>
-                  <Tabs.Trigger value='repositories'>Top Repositories</Tabs.Trigger>
-                  <Tabs.Trigger value='contributions'>Contributions</Tabs.Trigger>
-                </Tabs.List>
+              <Tabs
+                defaultValue={hasOnchain ? 'onchain' : 'analytics'}
+                className="flex h-full min-w-0 w-full sm:w-auto flex-col gap-4 items-start"
+              >
+                <TabsList className="min-h-10 w-full px-2 bg-transparent rounded-none sm:w-auto overflow-x-auto whitespace-nowrap sticky top-0 z-10 justify-start gap-1">
+                  <TabsTrigger className="shrink-0" value="onchain" disabled={!hasOnchain}>On-chain</TabsTrigger>
+                  <TabsTrigger className="shrink-0" value="analytics">Analytics</TabsTrigger>
+                  <TabsTrigger className="shrink-0" value="activity">Recent Activity</TabsTrigger>
+                  <TabsTrigger className="shrink-0" value="repositories">Top Repositories</TabsTrigger>
+                  <TabsTrigger className="shrink-0" value="contributions">Contributions</TabsTrigger>
+                </TabsList>
 
-                <Box minHeight={{ md: '0' }}>
-                  {(packages?.length || namespaces?.length || proposals?.length) ? (
-                    <Tabs.Content value='onchain' style={{ height: '100%'}}>
-                      <ContributorOnchain packages={packages ?? []} namespaces={namespaces ?? []} proposals={proposals ?? []} />
-                    </Tabs.Content>
-                  ) : null}
-                  <Tabs.Content value='analytics' style={{ height: '100%'}}>
+                <div className="min-h-0 min-w-0 w-full">
+                  <TabsContent value="onchain" className="min-h-0 w-full overflow-x-hidden">
+                    <ContributorOnchain packages={packages ?? []} namespaces={namespaces ?? []} proposals={proposals ?? []} />
+                  </TabsContent>
+                  <TabsContent value="analytics" className="min-h-0 w-full overflow-x-hidden">
                     <ContributorAnalytics contributor={contributor} />
-                  </Tabs.Content>
-                  <Tabs.Content value='activity' style={{ height: '100%'}}>
+                  </TabsContent>
+                  <TabsContent value="activity" className="min-h-0 w-full overflow-x-hidden">
                     <ContributorRecentActivities contributor={contributor} />
-                  </Tabs.Content>
+                  </TabsContent>
 
-                  <Tabs.Content value='repositories' style={{ height: '100%'}}>
+                  <TabsContent value="repositories" className="min-h-0 w-full overflow-x-hidden">
                     <ContributorTopRepos contributor={contributor} />
-                  </Tabs.Content>
+                  </TabsContent>
 
-                  <Tabs.Content value='contributions' style={{ height: '100%'}}>
+                  <TabsContent value="contributions" className="min-h-0 w-full overflow-x-hidden">
                     <ContributorContributions contributor={contributor} />
-                  </Tabs.Content>
-                </Box>
-              </Tabs.Root>
-            </Box>
-          </Flex>
-        </Box>
-      </Grid>
-    </Flex>
+                  </TabsContent>
+                </div>
+              </Tabs>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

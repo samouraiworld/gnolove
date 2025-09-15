@@ -1,16 +1,18 @@
 'use client';
 
-import Papa from 'papaparse';
-import { Button, ButtonProps } from '@radix-ui/themes';
-import { useToast } from '@/contexts/toast-context';
+import { ComponentProps } from 'react';
 
-interface CSVExportButtonProps<T = any> extends ButtonProps {
+import Papa from 'papaparse';
+import { toast } from 'sonner';
+
+import { Button } from '@/components/ui/button';
+
+interface CSVExportButtonProps<T = any> extends ComponentProps<typeof Button> {
   data: T[];
   filename?: string;
 }
 
 const CSVExportButton = ({ data, filename = 'data', ...props }: CSVExportButtonProps) => {
-  const { addToast } = useToast();
   const handleCSVExport = () => {
     try {
       const csv = Papa.unparse(data);
@@ -24,18 +26,14 @@ const CSVExportButton = ({ data, filename = 'data', ...props }: CSVExportButtonP
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
     } catch (error) {
-      addToast({
-        title: 'Error',
-        message: 'Failed to export CSV',
-        mode: 'negative',
-      });
+      toast.error('Failed to export CSV');
     }
   };
 
   return (
     <Button
       onClick={handleCSVExport}
-      size="1"
+      size="sm"
       variant="ghost"
       title={`Export ${filename} as CSV`}
       aria-label={`Export ${filename} as CSV`}

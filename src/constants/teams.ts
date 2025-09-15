@@ -1,8 +1,6 @@
-import { BadgeProps } from '@radix-ui/themes';
-
 export interface Team {
   name: string;
-  color: BadgeProps['color'];
+  color: string;
   members: string[];
 }
 
@@ -32,33 +30,17 @@ const TEAMS: Team[] = [
   {
     name: 'All in Bits',
     color: 'yellow',
-    members: [
-      'albttx',
-      'alexiscolin',
-      'tbruyelle',
-      'leohhhn',
-      'n2p5',
-      'michelleellen',
-    ],
+    members: ['albttx', 'alexiscolin', 'tbruyelle', 'leohhhn', 'n2p5', 'michelleellen'],
   },
   {
     name: 'Onbloc',
     color: 'purple',
-    members: [
-      'notJoon',
-      'r3v4s',
-      'adr-sk',
-      'jinoosss',
-    ],
+    members: ['notJoon', 'r3v4s', 'adr-sk', 'jinoosss'],
   },
   {
     name: 'VarMeta',
     color: 'yellow',
-    members: [
-      'linhpn99',
-      'thinhnx-var',
-      'AnhVAR',
-    ],
+    members: ['linhpn99', 'thinhnx-var', 'AnhVAR'],
   },
   {
     name: 'Samourai.world',
@@ -81,27 +63,19 @@ const TEAMS: Team[] = [
   {
     name: 'Berty',
     color: 'green',
-    members: [
-      'jefft0',
-      'D4ryl00',
-      'iuricmp',
-    ],
+    members: ['jefft0', 'D4ryl00', 'iuricmp'],
   },
   {
     name: 'DevX',
     color: 'brown',
-    members: [
-      'ilgooz',
-      'jeronimoalbi', 
-      'salmad3',
-    ],
+    members: ['ilgooz', 'jeronimoalbi', 'salmad3'],
   },
   {
     name: 'Grants',
     color: 'pink',
     members: [
       'NicolasMelet',
-      'Chaegnal', 
+      'Chaegnal',
       'paulogarithm',
       'louonezime',
       'Milosevic02',

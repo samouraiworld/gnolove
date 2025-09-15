@@ -2,11 +2,12 @@
 
 import { useEffect, useMemo, useState } from 'react';
 
-import { CommitIcon, ChatBubbleIcon, MixerVerticalIcon } from '@radix-ui/react-icons';
-import { Flex, Box, Text, Separator } from '@radix-ui/themes';
+import { GitCommit, MessageSquare, GitPullRequest } from 'lucide-react';
 import { motion, animate } from 'motion/react';
 
 import { TEnhancedUserWithStats } from '@/utils/schemas';
+
+import { Separator } from '@/components/ui/separator';
 
 type Props = {
   contributors: TEnhancedUserWithStats[];
@@ -25,17 +26,13 @@ const StatItem = ({ icon, value, label }: { icon: React.ReactNode; value: number
   }, [value]);
 
   return (
-    <Flex align="center" justify="center" px="4" gap="3">
-      <Box mb="1">{icon}</Box>
+    <div className="flex items-center justify-center gap-3 px-4">
+      <div className="mb-1">{icon}</div>
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-        <Text size="6" weight="bold">
-          {animatedValue}
-        </Text>
+        <span className="text-2xl font-bold">{animatedValue}</span>
       </motion.div>
-      <Text size="2" color="gray">
-        {label}
-      </Text>
-    </Flex>
+      <span className="text-muted-foreground text-sm">{label}</span>
+    </div>
   );
 };
 
@@ -52,13 +49,13 @@ const AnalyticsTotalStats = ({ contributors }: Props) => {
   }, [contributors]);
 
   return (
-    <Flex align="center" justify="center">
-      <StatItem icon={<CommitIcon />} value={totalCommits} label="Commits" />
-      <Separator orientation="vertical" size="2" />
-      <StatItem icon={<ChatBubbleIcon />} value={totalIssues} label="Issues" />
-      <Separator orientation="vertical" size="2" />
-      <StatItem icon={<MixerVerticalIcon />} value={totalPRs} label="PRs" />
-    </Flex>
+    <div className="flex items-center justify-center">
+      <StatItem icon={<GitCommit className="h-5 w-5" />} value={totalCommits} label="Commits" />
+      <Separator orientation="vertical" className="mx-2 h-6" />
+      <StatItem icon={<MessageSquare className="h-5 w-5" />} value={totalIssues} label="Issues" />
+      <Separator orientation="vertical" className="mx-2 h-6" />
+      <StatItem icon={<GitPullRequest className="h-5 w-5" />} value={totalPRs} label="PRs" />
+    </div>
   );
 };
 

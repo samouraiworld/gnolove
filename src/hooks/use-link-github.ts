@@ -4,8 +4,9 @@ import { useState, useEffect, useRef } from 'react';
 
 import { useSearchParams } from 'next/navigation';
 
+import { toast } from 'sonner';
+
 import { useAdena } from '@/contexts/adena-context';
-import { useToast } from '@/contexts/toast-context';
 
 type GhUser = {
   github_user: any;
@@ -22,7 +23,6 @@ export const useLinkGithub = () => {
   const [address, setAddress] = useState('');
   const [ghUser, setGhUser] = useState<any>();
   const [linkingState, setLinkingState] = useState('');
-  const { addToast } = useToast();
 
   const searchParams = useSearchParams();
   const code = searchParams.get('code');
@@ -181,11 +181,7 @@ export const useLinkGithub = () => {
       setLinkingState(`Your github account: ${ghData.github_user.login} has been linked to your Adena account`);
     } catch (e: any) {
       console.error(e);
-      addToast({
-        title: 'Error',
-        message: e.message,
-        mode: 'negative',
-      });
+      toast.error(e.message);
     }
   };
 

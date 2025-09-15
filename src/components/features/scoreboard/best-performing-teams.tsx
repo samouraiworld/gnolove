@@ -1,87 +1,97 @@
 'use client';
 
-import { useState } from 'react';
-import { Box, Card, Flex, Heading, Table, Text } from '@radix-ui/themes';
 import { useMemo } from 'react';
 
-import teams from '@/constants/teams';
-import Link from 'next/link';
-import { StarFilledIcon } from '@radix-ui/react-icons';
-import { cn } from '@/utils/style';
+import Image from 'next/image';
+
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
+import { Masonry } from 'masonic';
+
+import Loader from '@/elements/loader';
+
+import { useOffline } from '@/contexts/offline-context';
 
 import useGetContributors from '@/hooks/use-get-contributors';
+import useSelectedRepositories from '@/hooks/use-selected-repositories';
+import useTimeFilter from '@/hooks/use-time-filter';
+
 import { TimeFilter } from '@/utils/github';
+import { cn } from '@/utils/style';
+
+import teams from '@/constants/teams';
+
 import LayoutContainer from '@/components/layouts/layout-container';
-import { useOffline } from '@/contexts/offline-context';
-import Image from 'next/image';
-import { Masonry } from 'masonic';
-import useGetRepositories from '@/hooks/use-get-repositories';
-import RepositoriesSelector from '@/modules/repositories-selector';
-import TimeRangeSelector from '@/modules/time-range-selector';
-import Loader from '@/elements/loader';
+import { Star } from 'lucide-react';
+import PreservingLink from '@/elements/preserving-link';
 
 const BestPerformingTeams = () => {
   const { isOffline } = useOffline();
-  const [timeFilter, setTimeFilter] = useState<TimeFilter>(TimeFilter.ALL_TIME);
-  const [selectedRepositories, setSelectedRepositories] = useState<string[]>([]);
-  const { data: repositories = [] } = useGetRepositories();
+  const timeFilter = useTimeFilter(TimeFilter.ALL_TIME);
+  const selectedRepositories = useSelectedRepositories();
   const { data: contributors, isPending } = useGetContributors({ timeFilter, repositories: selectedRepositories });
 
-  const filteredContributors = useMemo(
-    () => (contributors ?? []).filter(({ score }) => score),
-    [contributors],
+  const filteredContributors = useMemo(() => (contributors ?? []).filter(({ score }) => score), [contributors]);
+
+  const teamScores = useMemo(
+    () =>
+      teams
+        .map((team) => {
+          // Map members to their score and login
+          const membersWithScore: { avatarUrl: string; name: string; login: string; score: number }[] = [];
+          for (const memberLogin of team.members) {
+            const contributor = filteredContributors?.find((c) => c.login.toLowerCase() === memberLogin.toLowerCase());
+            if (!contributor) continue;
+            membersWithScore.push({
+              avatarUrl: contributor.avatarUrl,
+              name: contributor.name,
+              login: contributor.login,
+              score: contributor.score,
+            });
+          }
+          // Sort members by score descending
+          const sortedMembers = membersWithScore.sort((a, b) => b.score - a.score);
+          // Calculate total score
+          const totalScore = membersWithScore.reduce((sum, m) => sum + m.score, 0);
+          return { ...team, totalScore, members: sortedMembers };
+        })
+        .sort((a, b) => b.totalScore - a.totalScore)
+        .filter(({ totalScore }) => totalScore > 0),
+    [filteredContributors],
   );
 
-  const teamScores = useMemo(() =>
-    teams.map(team => {
-      // Map members to their score and login
-      const membersWithScore: { avatarUrl: string; name: string; login: string; score: number }[] = []; 
-      for (const memberLogin of team.members) {
-        const contributor = filteredContributors?.find(c => c.login.toLowerCase() === memberLogin.toLowerCase());
-        if (!contributor) continue;
-        membersWithScore.push({
-          avatarUrl: contributor.avatarUrl,
-          name: contributor.name,
-          login: contributor.login,
-          score: contributor.score,
-        });
-      }
-      // Sort members by score descending
-      const sortedMembers = membersWithScore.sort((a, b) => b.score - a.score);
-      // Calculate total score
-      const totalScore = membersWithScore.reduce((sum, m) => sum + m.score, 0);
-      return { ...team, totalScore, members: sortedMembers };
-    }).sort((a, b) => b.totalScore - a.totalScore).filter(({ totalScore }) => totalScore > 0)
-  , [filteredContributors]);
-
+  const ordinal = (n: number) => {
+    const v = n % 100;
+    if (v >= 11 && v <= 13) return 'th';
+    switch (n % 10) {
+      case 1: return 'st';
+      case 2: return 'nd';
+      case 3: return 'rd';
+      default: return 'th';
+    }
+  };
   const rankElement = (rank: number) => {
-    if (rank < 3)
+    if (rank < 3) {
       return (
-        <StarFilledIcon
-          className={cn(rank === 0 && 'text-yellow-10', rank === 1 && 'text-gray-10', rank === 2 && 'text-bronze-10')}
+        <Star
+          className={cn(rank === 0 && 'text-yellow-500', rank === 1 && 'text-gray-500', rank === 2 && 'text-amber-800')}
+          aria-label={`Rank ${rank + 1}`}
         />
       );
-    return `${rank + 1}th`;
+    }
+    const r = rank + 1;
+    return `${r}${ordinal(r)}`;
   };
 
   return (
-    <LayoutContainer mt="5">
-      <Flex direction="column" gap="6" my="6">
-        <Heading size="6" align="center">🏆 Best Performing Teams</Heading>
-        <Flex align="center" justify="center" gap="2">
-          <Text size="2">Showing:</Text>
-          <TimeRangeSelector onDateChange={setTimeFilter} defaultValue={timeFilter} showLabel={false} />
-          <Text size="2">for:</Text>
-          <RepositoriesSelector
-            repositories={repositories}
-            selectedRepositories={selectedRepositories}
-            onSelectedRepositoriesChange={setSelectedRepositories}
-          />
-        </Flex>
+    <LayoutContainer className="mt-5">
+      <div className="flex flex-col gap-6 my-6">
+        <h1 className="text-2xl font-bold text-center">🏆 Best Performing Teams</h1>
+        <div className="flex items-center justify-center gap-2" />
         {isPending ? (
-          <Flex my="9" justify="center" align="center">
+          <div className="flex my-9 justify-center items-center">
             <Loader />
-          </Flex>
+          </div>
         ) : (
           <Masonry
             maxColumnCount={3}
@@ -91,29 +101,33 @@ const BestPerformingTeams = () => {
             items={teamScores}
             itemKey={(item) => item.name}
             overscanBy={teamScores.length}
-            render={({index, data: { name, totalScore, members }}) => (
+            render={({ index, data: { name, totalScore, members } }) => (
               <Card className="break-inside-avoid" key={name}>
-                <Flex direction="column" gap="2">
-                  <Flex align="center" gap="2">
-                    {rankElement(index)}
-                    <Heading size="4" weight="bold">{name}</Heading>
-                  </Flex>
-                  <Flex align="center" gap="4">
-                    <Flex align="center" gap="2">
-                      <Text size="2" weight="bold">Score: </Text>
-                      <Text size="2">{totalScore}</Text>
-                    </Flex>
-                    <Flex align="center" gap="2">
-                      <Text size="2" weight="bold">Members: </Text>
-                      <Text size="2">{members.length}</Text>
-                    </Flex>
-                  </Flex>
-                  <Table.Root>
-                    <Table.Body>
+                <CardHeader>
+                  <div className="flex flex-col gap-2">
+                    <div className="flex items-center gap-2">
+                      {rankElement(index)}
+                      <h2 className="text-lg font-semibold">{name}</h2>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-semibold">Score:</span>
+                        <span className="text-sm">{totalScore}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-semibold">Members:</span>
+                        <span className="text-sm">{members.length}</span>
+                      </div>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <Table>
+                    <TableBody>
                       {members.map((member) => (
-                        <Table.Row key={member.login}>
-                          <Table.Cell>
-                            <Flex align="center" gap="2">
+                        <TableRow key={member.login}>
+                          <TableCell>
+                            <div className="flex items-center gap-2">
                               {member.avatarUrl ? (
                                 <Image
                                   src={member.avatarUrl!}
@@ -123,24 +137,31 @@ const BestPerformingTeams = () => {
                                   className="shrink-0 overflow-hidden rounded-full"
                                 />
                               ) : (
-                                <Box width="24" height="24" />
+                                <div className="w-6 h-6 rounded-full bg-gray-200" />
                               )}
-                              <Link href={isOffline ? '' : `/@${member.login}`}>
-                                <Text truncate className={cn('block overflow-hidden text-ellipsis whitespace-nowrap hover:text-blue-10', { 'text-gray-8': isOffline })}>{member.name || member.login}</Text>
-                              </Link>
-                            </Flex>
-                          </Table.Cell>
-                          <Table.Cell align="right">{member.score.toFixed(2)}</Table.Cell>
-                        </Table.Row>
+                              <PreservingLink href={isOffline ? '' : `/@${member.login}`}>
+                                <span
+                                  className={cn(
+                                    'hover:text-blue-100 block overflow-hidden text-ellipsis whitespace-nowrap truncate',
+                                    { 'text-gray-500': isOffline },
+                                  )}
+                                >
+                                  {member.name || member.login}
+                                </span>
+                              </PreservingLink>
+                            </div>
+                          </TableCell>
+                          <TableCell align="right">{member.score.toFixed(2)}</TableCell>
+                        </TableRow>
                       ))}
-                    </Table.Body>
-                  </Table.Root>
-                </Flex>
+                    </TableBody>
+                  </Table>
+                </CardContent>
               </Card>
             )}
           />
         )}
-      </Flex>
+      </div>
     </LayoutContainer>
   );
 };

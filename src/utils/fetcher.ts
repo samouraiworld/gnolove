@@ -16,10 +16,11 @@ export async function fetchJson<T = unknown>(url: string | URL, init?: RequestIn
   const res = await fetch(typeof url === 'string' ? url : url.toString(), init);
   if (!res.ok) {
     const bodyText = await res.text();
-    throw new HttpError(
-      `Request failed: ${res.status} ${res.statusText}${bodyText ? ` - ${bodyText}` : ''}`,
-      { status: res.status, statusText: res.statusText, bodyText }
-    );
+    throw new HttpError(`Request failed: ${res.status} ${res.statusText}${bodyText ? ` - ${bodyText}` : ''}`, {
+      status: res.status,
+      statusText: res.statusText,
+      bodyText,
+    });
   }
   return res.json() as Promise<T>;
 }

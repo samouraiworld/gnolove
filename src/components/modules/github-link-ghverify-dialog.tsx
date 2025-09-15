@@ -2,9 +2,11 @@
 
 import { useState } from 'react';
 
-import { Button, Dialog, Flex, Text, TextField } from '@radix-ui/themes';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
 
-export interface GithubLinkGhVerifyDialogProps extends Dialog.RootProps {
+export interface GithubLinkGhVerifyDialogProps extends React.ComponentProps<typeof Dialog> {
   open?: boolean;
   ghLogin: string;
   onContinue: (address: string) => void;
@@ -32,42 +34,44 @@ export const GithubLinkGhVerifyDialog = ({
   };
 
   return (
-    <Dialog.Root open={open} {...props}>
-      <Dialog.Content maxWidth="550px">
-        <Dialog.Title>Request Verification</Dialog.Title>
-        <Dialog.Description size="2" mb="4">
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '10px' }}>
-            <span style={{ marginRight: '10px' }}>Your Gno Address</span>
-            <TextField.Root
+    <Dialog open={open} {...props}>
+      <DialogContent className="max-w-[550px]">
+        <DialogTitle>Request Verification</DialogTitle>
+        <DialogDescription className="mb-4">
+          <div className="mb-2 flex items-center justify-center gap-2">
+            <span>Your Gno Address</span>
+            <Input
               type="text"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               placeholder="g1..."
-              style={{ minWidth: '350px' }}
+              className="min-w-[350px]"
             />
           </div>
 
-          <div className="bg-gray-800 inset-0 flex items-center justify-center bg-opacity-50">
-            <div className="bg-white rounded-lg shadow-xl w-full max-w-lg p-6">
-              <h4 className="text-red-600 mb-2 font-bold" style={{ color: 'red' }}>
+          <div className="bg-opacity-50 inset-0 flex items-center justify-center bg-gray-800">
+            <div className="w-full max-w-lg rounded-lg bg-white p-6 shadow-xl">
+              <h4 className="mb-2 font-bold text-red-600">
                 Adena is not installed, please request verification yourself:
               </h4>
-              <div className="bg-black text-green-400 rounded-lg shadow-md relative overflow-auto p-4">
+              <div className="relative overflow-auto rounded-lg bg-black p-4 text-green-400 shadow-md">
                 <pre className="text-sm">
                   <code>{generateCommand(ghLogin)}</code>
                 </pre>
               </div>
             </div>
           </div>
-        </Dialog.Description>
+        </DialogDescription>
 
-        <Flex justify="center" align="center" direction="column">
-          <Text size="2">Once you have executed the tx, click the button below to continue.</Text>
-          <Button color="green" onClick={() => onContinue(address)} mt="4">
+        <div className="flex flex-col items-center justify-center">
+          <p className="text-muted-foreground text-sm">
+            Once you have executed the tx, click the button below to continue.
+          </p>
+          <Button onClick={() => onContinue(address)} className="mt-4 bg-green-600 hover:bg-green-700">
             Continue
           </Button>
-        </Flex>
-      </Dialog.Content>
-    </Dialog.Root>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 };

@@ -1,34 +1,32 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import AnalyticsContributorLineChart from './analytics-contributor-line-chart';
 import AnalyticsRecentActivity from './analytics-recent-activity';
 import AnalyticsTopContributorBarChart from './analytics-top-contributor-bar-chart';
-import { Box, Flex, Heading, Separator } from '@radix-ui/themes';
 
 import LayoutContainer from '@/layouts/layout-container';
 
 import useGetContributors from '@/hooks/use-get-contributors';
-import useGetRepositories from '@/hooks/use-get-repositories';
+import useSelectedRepositories from '@/hooks/use-selected-repositories';
+import useTimeFilter from '@/hooks/use-time-filter';
 
 import { filterContributionsByRepo } from '@/utils/contributors';
 import { TimeFilter } from '@/utils/github';
 
 import AnalyticsTotalStats from '@/components/features/analytics/analytics-total-stats';
-import RepositoriesSelector from '@/components/modules/repositories-selector';
-import TimeRangeSelector from '@/components/modules/time-range-selector';
+import { Separator } from '@/components/ui/separator';
 
 const AnalyticsClientPage = () => {
-  const [timeFilter, setTimeFilter] = useState<TimeFilter>(TimeFilter.WEEKLY);
-  const [selectedRepositories, setSelectedRepositories] = useState<string[]>(['gnolang/gno']);
+  const timeFilter = useTimeFilter(TimeFilter.WEEKLY);
+  const selectedRepositories = useSelectedRepositories();
 
   const { data: contributors } = useGetContributors({
     timeFilter,
     exclude: false,
     repositories: selectedRepositories,
   });
-  const { data: repositories = [] } = useGetRepositories();
 
   const filteredContributors = useMemo(() => {
     if (!contributors) return [];
@@ -41,38 +39,25 @@ const AnalyticsClientPage = () => {
   }, [contributors, timeFilter, selectedRepositories]);
 
   return (
-    <LayoutContainer mt="5">
-      <Box width="100%" my="5">
-        <Heading>Contributors Analytics</Heading>
-        <Separator size="4" my="6" />
-        <Flex
-          direction={{ initial: 'column', sm: 'row' }}
-          gap={{ initial: '6', sm: '0' }}
-          justify="between"
-          align="center"
-        >
-          <Flex gap="4" align="end">
-            <TimeRangeSelector onDateChange={setTimeFilter} defaultValue={timeFilter} mb="3" />
-            <RepositoriesSelector
-              repositories={repositories}
-              selectedRepositories={selectedRepositories}
-              onSelectedRepositoriesChange={setSelectedRepositories}
-              mb="3"
-            />
-          </Flex>
+    <LayoutContainer className="mt-5">
+      <div className="my-5 w-full">
+        <h1 className="text-2xl font-semibold">Contributors Analytics</h1>
+        <Separator className="my-6" />
+        <div className="flex flex-col items-center justify-between gap-6 sm:flex-row sm:gap-0">
+          <div className="flex items-end gap-4" />
           <AnalyticsTotalStats contributors={filteredContributors} />
-        </Flex>
-        <Flex direction={{ initial: 'column' }} mt="6" gap="3">
+        </div>
+        <div className="mt-6 flex flex-col gap-3">
           <AnalyticsTopContributorBarChart
             contributors={filteredContributors}
             selectedRepositories={selectedRepositories}
           />
-          <Flex direction={{ initial: 'column', lg: 'row' }} justify="center" align="center" mt="6" gap="3">
+          <div className="mt-6 flex flex-col items-center justify-center gap-3 lg:flex-row">
             <AnalyticsContributorLineChart contributors={filteredContributors} timeFilter={timeFilter} />
             <AnalyticsRecentActivity contributors={filteredContributors} timeFilter={timeFilter} />
-          </Flex>
-        </Flex>
-      </Box>
+          </div>
+        </div>
+      </div>
     </LayoutContainer>
   );
 };

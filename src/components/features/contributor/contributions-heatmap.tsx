@@ -1,5 +1,6 @@
-import { Box, Flex, Text, Tooltip } from '@radix-ui/themes';
 import { useMemo } from 'react';
+
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
 type HeatmapDay = {
   date: string;
@@ -52,16 +53,11 @@ const ContributionSquare = ({ level, date, count }: { level: number; date: Date;
   };
 
   return (
-    <Tooltip content={getTooltipContent()}>
-      <Box
-        width='10px'
-        height='10px'
-        style={{
-          backgroundColor: getColor(level),
-          borderRadius: '2px',
-          cursor: 'pointer',
-        }}
-      />
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <div className="h-[10px] w-[10px] cursor-pointer rounded-[2px]" style={{ backgroundColor: getColor(level) }} />
+      </TooltipTrigger>
+      <TooltipContent className="text-xs">{getTooltipContent()}</TooltipContent>
     </Tooltip>
   );
 };
@@ -88,7 +84,7 @@ const getHeatmapWeeks = (data: HeatmapDay[]): HeatmapDay[][] => {
 
   // Pad end
   const lastDayOfWeek = lastDate.getDay();
-  const padEnd = (7 - ((lastDayOfWeek + 6) % 7) - 1);
+  const padEnd = 7 - ((lastDayOfWeek + 6) % 7) - 1;
   for (let i = 0; i < padEnd; i++) {
     const padDate = new Date(lastDate);
     padDate.setDate(lastDate.getDate() + i + 1);
@@ -97,7 +93,7 @@ const getHeatmapWeeks = (data: HeatmapDay[]): HeatmapDay[][] => {
 
   // Remove future dates
   today.setHours(0, 0, 0, 0);
-  const filtered = padded.filter(day => {
+  const filtered = padded.filter((day) => {
     const dayDate = new Date(day.date);
     dayDate.setHours(0, 0, 0, 0);
     return dayDate <= today;
@@ -115,12 +111,12 @@ const ContributionsHeatmap = ({ data }: { data: HeatmapDay[] }) => {
   const weeks = useMemo(() => getHeatmapWeeks(data), [data]);
 
   return (
-    <Flex direction="column" gap='4' py='2' overflowX="auto">
+    <div className="flex flex-col gap-4 overflow-x-auto py-2">
       {/* Graph grid */}
       {/* Contribution squares */}
-      <Flex gap='1'>
+      <div className="flex gap-1">
         {weeks.map((week, weekIndex) => (
-          <Flex key={weekIndex} direction='column' gap='1'>
+          <div key={weekIndex} className="flex flex-col gap-1">
             {week.map((contribution, dayIndex) => (
               <ContributionSquare
                 key={dayIndex}
@@ -129,27 +125,23 @@ const ContributionsHeatmap = ({ data }: { data: HeatmapDay[] }) => {
                 count={contribution.contributions}
               />
             ))}
-          </Flex>
+          </div>
         ))}
-      </Flex>
+      </div>
 
       {/* Legend */}
-      <Flex align='center' gap='2'>
-        <Text size='1' color='gray'>
-          Less
-        </Text>
-        <Flex gap='1'>
+      <div className="flex items-center gap-2">
+        <span className="text-muted-foreground text-xs">Less</span>
+        <div className="flex gap-1">
           <ContributionSquare level={0} date={new Date()} count={0} />
           <ContributionSquare level={1} date={new Date()} count={1} />
           <ContributionSquare level={2} date={new Date()} count={4} />
           <ContributionSquare level={3} date={new Date()} count={8} />
           <ContributionSquare level={4} date={new Date()} count={12} />
-        </Flex>
-        <Text size='1' color='gray'>
-          More
-        </Text>
-      </Flex>
-    </Flex>
+        </div>
+        <span className="text-muted-foreground text-xs">More</span>
+      </div>
+    </div>
   );
 };
 

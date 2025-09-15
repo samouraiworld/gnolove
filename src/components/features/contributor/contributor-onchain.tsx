@@ -1,16 +1,26 @@
 'use client';
 
-import { TNamespace, TPackage, TProposal } from '@/utils/schemas';
-import { Card, Flex, Heading, Text, Grid, Select, Tabs, Box, Badge } from '@radix-ui/themes';
-import Link from 'next/link';
 import { useMemo, useState } from 'react';
 
-const ContributorOnchain = ({ packages, namespaces, proposals }: { packages: TPackage[]; namespaces: TNamespace[]; proposals: TProposal[] }) => {
+import Link from 'next/link';
+
+import { TNamespace, TPackage, TProposal } from '@/utils/schemas';
+
+import { Badge } from '@/components/ui/badge';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
+const ContributorOnchain = ({
+  packages,
+  namespaces,
+  proposals,
+}: {
+  packages: TPackage[];
+  namespaces: TNamespace[];
+  proposals: TProposal[];
+}) => {
   // Extract unique namespaces from packages for filtering
-  const namespaceOptions = useMemo(
-    () => Array.from(new Set(packages.map((pkg) => pkg.namespace))),
-    [packages]
-  );
+  const namespaceOptions = useMemo(() => Array.from(new Set(packages.map((pkg) => pkg.namespace))), [packages]);
   const [selectedNamespace, setSelectedNamespace] = useState<string>('all');
   const [nsSort, setNsSort] = useState<'desc' | 'asc'>('desc');
   const [prSort, setPrSort] = useState<'desc' | 'asc'>('desc');
@@ -20,19 +30,17 @@ const ContributorOnchain = ({ packages, namespaces, proposals }: { packages: TPa
   const packagesData = useMemo(
     () =>
       packages
-        .filter((pkg) =>
-          selectedNamespace === 'all' ? true : pkg.namespace === selectedNamespace
-        )
+        .filter((pkg) => (selectedNamespace === 'all' ? true : pkg.namespace === selectedNamespace))
         .map(({ path, namespace }) => ({
           name: path.split(`${namespace}/`)[1],
           namespace,
           path,
           url: /^https?:\/\//i.test(path ?? '') ? path : `https://${path}`,
         })),
-    [packages, selectedNamespace]
+    [packages, selectedNamespace],
   );
 
-  const hasAny = (packages.length + namespaces.length + proposals.length) > 0;
+  const hasAny = packages.length + namespaces.length + proposals.length > 0;
 
   // Sorted helpers
   const namespacesSorted = useMemo(() => {
@@ -52,161 +60,163 @@ const ContributorOnchain = ({ packages, namespaces, proposals }: { packages: TPa
   }, [proposalsSorted, proposalQuery]);
 
   return (
-    <Card style={{ height: '100%' }}>
-      <Flex direction='column' gap='4' height='100%' overflowY='auto'>
-        <Heading size='5'>On-chain Contributions</Heading>
+    <div className="h-full rounded-md border">
+      <div className="flex h-full flex-col gap-4 overflow-y-auto p-4">
+        <h2 className="text-xl font-semibold">On-chain Contributions</h2>
         {hasAny ? (
-          <Tabs.Root defaultValue='packages' style={{ display: 'flex', flexDirection: 'column', gap: '4', height: '100%' }}>
-            <Tabs.List>
-              <Tabs.Trigger value='packages'>
-                <Flex align='center' gap='2'>
+          <Tabs defaultValue="packages" className="flex h-full flex-col gap-4">
+            <TabsList>
+              <TabsTrigger value="packages">
+                <span className="inline-flex items-center gap-2">
                   <span>Packages</span>
-                  <Badge variant='soft'>{packages.length}</Badge>
-                </Flex>
-              </Tabs.Trigger>
-              <Tabs.Trigger value='namespaces'>
-                <Flex align='center' gap='2'>
+                  <Badge variant="secondary">{packages.length}</Badge>
+                </span>
+              </TabsTrigger>
+              <TabsTrigger value="namespaces">
+                <span className="inline-flex items-center gap-2">
                   <span>Namespaces</span>
-                  <Badge variant='soft'>{namespaces.length}</Badge>
-                </Flex>
-              </Tabs.Trigger>
-              <Tabs.Trigger value='proposals'>
-                <Flex align='center' gap='2'>
+                  <Badge variant="secondary">{namespaces.length}</Badge>
+                </span>
+              </TabsTrigger>
+              <TabsTrigger value="proposals">
+                <span className="inline-flex items-center gap-2">
                   <span>Proposals</span>
-                  <Badge variant='soft'>{proposals.length}</Badge>
-                </Flex>
-              </Tabs.Trigger>
-            </Tabs.List>
+                  <Badge variant="secondary">{proposals.length}</Badge>
+                </span>
+              </TabsTrigger>
+            </TabsList>
 
-            <Box>
-              <Tabs.Content value='packages'>
-                <Text size='2' mb='2'>{packages.length} packages</Text>
-                <Flex align='center' gap='2' mb='2'>
-                  <Text size='2'>Filter by namespace:</Text>
-                  <Select.Root
-                    value={selectedNamespace}
-                    onValueChange={setSelectedNamespace}
-                  >
-                    <Select.Trigger placeholder='All' />
-                    <Select.Content>
-                      <Select.Item value='all'>All</Select.Item>
+            <div>
+              <TabsContent value="packages">
+                <p className="mb-2 text-sm">{packages.length} packages</p>
+                <div className="mb-2 flex items-center gap-2">
+                  <span className="text-sm">Filter by namespace:</span>
+                  <Select value={selectedNamespace} onValueChange={setSelectedNamespace}>
+                    <SelectTrigger className="w-[160px]">
+                      <SelectValue placeholder="All" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All</SelectItem>
                       {namespaceOptions.map((ns) => (
-                        <Select.Item key={ns} value={ns}>
+                        <SelectItem key={ns} value={ns}>
                           {ns}
-                        </Select.Item>
+                        </SelectItem>
                       ))}
-                    </Select.Content>
-                  </Select.Root>
-                </Flex>
+                    </SelectContent>
+                  </Select>
+                </div>
                 {packagesData.length ? (
-                  <Grid columns={{ initial: '1', lg: '3' }} gap='4'>
+                  <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
                     {packagesData.map((pkg) => (
                       <Link
                         href={pkg.url}
                         key={pkg.path}
-                        target='_blank'
-                        rel='noopener noreferrer'
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="rounded-md border p-3"
                       >
-                        <Card>
-                          <Flex direction='column' gap='2'>
-                            <Text size='1'>/{pkg.namespace}</Text>
-                            <Heading size='5'>{pkg.name}</Heading>
-                            <Text size='2'>Explore {pkg.name}</Text>
-                          </Flex>
-                        </Card>
+                        <div className="flex flex-col gap-2">
+                          <span className="text-muted-foreground text-xs">/{pkg.namespace}</span>
+                          <h4 className="text-lg font-semibold">{pkg.name}</h4>
+                          <span className="text-sm">Explore {pkg.name}</span>
+                        </div>
                       </Link>
                     ))}
-                  </Grid>
+                  </div>
                 ) : (
-                  <Text size='2'>No packages found.</Text>
+                  <p className="text-sm">No packages found.</p>
                 )}
-              </Tabs.Content>
+              </TabsContent>
 
-              <Tabs.Content value='namespaces'>
-                <Flex align='center' justify='between' mb='2'>
-                  <Text size='2'>{namespacesSorted.length} namespaces</Text>
-                  <Flex align='center' gap='2'>
-                    <Text size='2' color='gray'>Sort</Text>
-                    <Select.Root value={nsSort} onValueChange={(v) => setNsSort(v as 'desc' | 'asc')}>
-                      <Select.Trigger />
-                      <Select.Content>
-                        <Select.Item value='desc'>Newest</Select.Item>
-                        <Select.Item value='asc'>Oldest</Select.Item>
-                      </Select.Content>
-                    </Select.Root>
-                  </Flex>
-                </Flex>
+              <TabsContent value="namespaces">
+                <div className="mb-2 flex items-center justify-between">
+                  <p className="text-sm">{namespacesSorted.length} namespaces</p>
+                  <div className="flex items-center gap-2">
+                    <span className="text-muted-foreground text-sm">Sort</span>
+                    <Select value={nsSort} onValueChange={(v) => setNsSort(v as 'desc' | 'asc')}>
+                      <SelectTrigger className="w-[140px]">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="desc">Newest</SelectItem>
+                        <SelectItem value="asc">Oldest</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
                 {namespacesSorted.length ? (
-                  <Grid columns={{ initial: '1', lg: '3' }} gap='4'>
+                  <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
                     {namespacesSorted.map((ns) => (
-                      <Card key={`${ns.namespace}-${ns.hash}`}>
-                        <Flex direction='column' gap='2'>
-                          <Text size='1' color='gray'>Owner</Text>
-                          <Text size='2' style={{ fontFamily: 'monospace' }}>{ns.address}</Text>
-                          <Heading size='5'>/{ns.namespace}</Heading>
-                          <Text size='1' color='gray'>Block #{ns.blockHeight}</Text>
-                        </Flex>
-                      </Card>
+                      <div key={`${ns.namespace}-${ns.hash}`} className="rounded-md border p-3">
+                        <div className="flex flex-col gap-2">
+                          <span className="text-muted-foreground text-xs">Owner</span>
+                          <span className="font-mono text-sm">{ns.address}</span>
+                          <h4 className="text-lg font-semibold">/{ns.namespace}</h4>
+                          <span className="text-muted-foreground text-xs">Block #{ns.blockHeight}</span>
+                        </div>
+                      </div>
                     ))}
-                  </Grid>
+                  </div>
                 ) : (
-                  <Text size='2'>No namespaces found.</Text>
+                  <p className="text-sm">No namespaces found.</p>
                 )}
-              </Tabs.Content>
+              </TabsContent>
 
-              <Tabs.Content value='proposals'>
-                <Flex direction='column' gap='2' mb='2'>
-                  <Flex align='center' justify='between'>
-                    <Text size='2'>{proposalsShown.length} proposals</Text>
-                    <Flex align='center' gap='2'>
-                      <Text size='2' color='gray'>Sort</Text>
-                      <Select.Root value={prSort} onValueChange={(v) => setPrSort(v as 'desc' | 'asc')}>
-                        <Select.Trigger />
-                        <Select.Content>
-                          <Select.Item value='desc'>Newest</Select.Item>
-                          <Select.Item value='asc'>Oldest</Select.Item>
-                        </Select.Content>
-                      </Select.Root>
-                    </Flex>
-                  </Flex>
-                  <Flex align='center' gap='2'>
-                    <Text size='2' color='gray'>Filter</Text>
+              <TabsContent value="proposals">
+                <div className="mb-2 flex flex-col gap-2">
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm">{proposalsShown.length} proposals</p>
+                    <div className="flex items-center gap-2">
+                      <span className="text-muted-foreground text-sm">Sort</span>
+                      <Select value={prSort} onValueChange={(v) => setPrSort(v as 'desc' | 'asc')}>
+                        <SelectTrigger className="w-[140px]">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="desc">Newest</SelectItem>
+                          <SelectItem value="asc">Oldest</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-muted-foreground text-sm">Filter</span>
                     <input
                       value={proposalQuery}
                       onChange={(e) => setProposalQuery(e.target.value)}
-                      placeholder='Filter by path...'
-                      style={{ flex: 1, padding: '8px 10px', border: '1px solid var(--gray-a6)', borderRadius: 6 }}
+                      placeholder="Filter by path..."
+                      className="flex-1 rounded-md border px-3 py-2 text-sm"
                     />
-                  </Flex>
-                </Flex>
+                  </div>
+                </div>
                 {proposalsShown.length ? (
-                  <Grid columns={{ initial: '1', lg: '2' }} gap='4'>
+                  <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
                     {proposalsShown.map((p) => (
-                      <Card key={p.id}>
-                        <Flex direction='column' gap='2'>
-                          <Text size='1' color='gray'>Author</Text>
-                          <Text size='2' style={{ fontFamily: 'monospace' }}>{p.address}</Text>
-                          <Text size='1' color='gray'>Path</Text>
-                          <Text size='2' style={{ wordBreak: 'break-word' }}>{p.path}</Text>
-                          <Text size='1' color='gray'>Files</Text>
-                          <Text size='2'>{p.files.length}</Text>
-                          <Text size='1' color='gray'>Block</Text>
-                          <Text size='2'>#{p.blockHeight}</Text>
-                        </Flex>
-                      </Card>
+                      <div key={p.id} className="rounded-md border p-3">
+                        <div className="flex flex-col gap-2">
+                          <span className="text-muted-foreground text-xs">Author</span>
+                          <span className="font-mono text-sm">{p.address}</span>
+                          <span className="text-muted-foreground text-xs">Path</span>
+                          <span className="text-sm break-words">{p.path}</span>
+                          <span className="text-muted-foreground text-xs">Files</span>
+                          <span className="text-sm">{p.files.length}</span>
+                          <span className="text-muted-foreground text-xs">Block</span>
+                          <span className="text-sm">#{p.blockHeight}</span>
+                        </div>
+                      </div>
                     ))}
-                  </Grid>
+                  </div>
                 ) : (
-                  <Text size='2'>No proposals found.</Text>
+                  <p className="text-sm">No proposals found.</p>
                 )}
-              </Tabs.Content>
-            </Box>
-          </Tabs.Root>
+              </TabsContent>
+            </div>
+          </Tabs>
         ) : (
-          <Text size='2'>Nothing to see here (for now :))</Text>
+          <p className="text-sm">Nothing to see here (for now :))</p>
         )}
-      </Flex>
-    </Card>
+      </div>
+    </div>
   );
 };
 

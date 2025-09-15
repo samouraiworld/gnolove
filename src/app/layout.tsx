@@ -1,37 +1,31 @@
-import '@/styles/globals.css';
-import { ReactNode } from 'react';
-
-import { ThemeProvider } from 'next-themes';
-
-import { LinkNone2Icon } from '@radix-ui/react-icons';
-import { Box, Button, Flex, Theme } from '@radix-ui/themes';
-
-import ThemeSwitch from '@/modules/theme-switch';
-
-import Toaster from '@/elements/toast';
-
-import ToastProvider from '@/contexts/toast-context';
-
-import { AdenaAddress } from '@/modules/adena-address';
-import { GithubLink } from '@/modules/github-link';
-import AdenaProvider from '@/contexts/adena-context';
-import QueryClientWrapper from '@/wrappers/query-client';
-import MobileNavDrawer from '@/modules/mobile-nav-drawer';
-import NavHeader from '@/modules/nav-header';
+import { ReactNode, Suspense } from 'react';
 
 import { Analytics } from '@vercel/analytics/next';
+import { ThemeProvider } from 'next-themes';
 
-import { OfflineProvider } from '@/contexts/offline-context';
+import '@/styles/globals.css';
+
 import OfflineBanner from '@/elements/offline-banner';
 
+import AdenaProvider from '@/contexts/adena-context';
+import { OfflineProvider } from '@/contexts/offline-context';
+
+import QueryClientWrapper from '@/wrappers/query-client';
+
+import { Toaster } from '@/components/ui/sonner';
+import { TooltipProvider } from '@/components/ui/tooltip';
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
+import { AppSidebar } from '@/modules/app-sidebar';
+import { Header } from '@/modules/header';
+
 interface RootLayoutProps {
-  children?: ReactNode;
-  details?: ReactNode;
+  children: ReactNode;
+  details: ReactNode;
 }
 
 const RootLayout = ({ children, details }: RootLayoutProps) => {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -45,47 +39,23 @@ const RootLayout = ({ children, details }: RootLayoutProps) => {
         <OfflineProvider>
           <QueryClientWrapper>
             <ThemeProvider defaultTheme="light" attribute="class">
-              <Theme>
-                <ToastProvider>
-                  <AdenaProvider>
-                    <Toaster />
-
-                    <Box
-                      position="fixed"
-                      top="0"
-                      left="0"
-                      width="100%"
-                      p="2"
-                      className="z-50"
-                      style={{ background: 'var(--accent-1)', borderBottom: '1px solid var(--gray-a3)' }}
-                    >
-                      <Flex justify="between" align="center">
-
-                        <MobileNavDrawer />
-                        <NavHeader />
-                        <Flex gap="2" align="center" justify="end">
-                          <Flex gap="2" align="center" hidden>
-                            <AdenaAddress />
-
-                            <GithubLink>
-                              <Button variant="soft">
-                                <LinkNone2Icon />
-                                Link Github Account
-                              </Button>
-                            </GithubLink>
-                          </Flex>
-
-                          <ThemeSwitch />
-                        </Flex>
-                      </Flex>
-                    </Box>
-
-                    {children}
-
-                    {details}
-                  </AdenaProvider>
-                </ToastProvider>
-              </Theme>
+              <TooltipProvider>
+                <AdenaProvider>
+                  <SidebarProvider>
+                    <Suspense fallback={null}>
+                      <AppSidebar />
+                    </Suspense>
+                    <SidebarInset>
+                      <Suspense fallback={null}>
+                        <Header />
+                      </Suspense>
+                      {children}
+                      {details}
+                    </SidebarInset>
+                  </SidebarProvider>
+                </AdenaProvider>
+              </TooltipProvider>
+              <Toaster />
             </ThemeProvider>
           </QueryClientWrapper>
           <OfflineBanner />
