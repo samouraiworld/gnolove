@@ -351,6 +351,20 @@ export const ProposalsSchema = z.array(ProposalSchema);
 export type TProposal = z.infer<typeof ProposalSchema>;
 export type TProposals = z.infer<typeof ProposalsSchema>;
 
+// Monitoring webhooks
+export const MonitoringWebhookSchema = z.object({
+  ID: z.number().optional(),
+  UserID: z.string(),
+  URL: z.string().url(),
+  Type: z.enum(['discord', 'slack']),
+  Description: z.string().optional(),
+  CreatedAt: z.string().optional(),
+  LastCheckedID: z.number().optional(),
+});
+
+export type TMonitoringWebhook = z.infer<typeof MonitoringWebhookSchema>;
+export type TMonitoringWebhookKind = 'govdao' | 'validator';
+
 export const ScoreFactorsSchema = z.object({
   prFactor: z.number(),
   issueFactor: z.number(),

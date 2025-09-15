@@ -10,6 +10,9 @@ const EnvSchema = z.object({
 
   NEXT_PUBLIC_API_URL: z.string(),
 
+  // Monitoring API base URL
+  NEXT_PUBLIC_MONITORING_API_URL: z.string().optional(),
+
   YOUTUBE_API_KEY: z.string().optional(),
 
   NEXT_PUBLIC_MONITORING_API_URL: z.string(),
@@ -19,6 +22,8 @@ const ENV = EnvSchema.parse({
   GITHUB_API_TOKEN: process.env.GITHUB_API_TOKEN,
 
   NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+
+  NEXT_PUBLIC_MONITORING_API_URL: process.env.NEXT_PUBLIC_MONITORING_API_URL,
 
   YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY,
 
