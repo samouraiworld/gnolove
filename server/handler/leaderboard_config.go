@@ -6,10 +6,12 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+	"time"
 
 	clerk "github.com/clerk/clerk-sdk-go/v2"
 	"github.com/go-chi/chi/v5"
 	"github.com/samouraiworld/topofgnomes/server/models"
+	"github.com/samouraiworld/topofgnomes/server/schedule"
 	"gorm.io/gorm"
 )
 
@@ -92,6 +94,10 @@ func HandleCreateLeaderboardConfig(db *gorm.DB) http.HandlerFunc {
 			_ = json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
 			return
 		}
+
+		now := time.Now().UTC()
+		nr := schedule.ComputeNextRunWithAnchor(cfg.AnchorAt, cfg.Timezone, now, cfg.Frequency)
+		cfg.NextRunAt = &nr
 
 		if err := db.Create(&cfg).Error; err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
