@@ -89,6 +89,9 @@ func main() {
 		logger.Warn("DISCORD_WEBHOOK_URL not set, skipping leaderboard notifier")
 	}
 
+	// Start personal scheduler for per-user leaderboard configuration
+	syncer.StartPersonalLeaderboardScheduler()
+
 	cache, err := ristretto.NewCache(&ristretto.Config{
 		NumCounters: 100000,    // number of keys to track frequency of (10M).
 		MaxCost:     100000000, // maximum cost of cache (1GB).
@@ -115,6 +118,12 @@ func main() {
 	router.HandleFunc("/github/oauth/exchange", handler.HandleGetGithubUserAndTokenByCode(signer, database))
 	router.HandleFunc("/contributors/{login}", contributor.HandleGetContributor(database))
 	router.Post("/github/link", handler.HandleLink(database))
+
+	// Leaderboard configuration routes (per-user)
+	router.Get("/leaderboard/configs", handler.HandleGetLeaderboardConfigs(database))
+	router.Post("/leaderboard/configs", handler.HandleCreateLeaderboardConfig(database))
+	router.Put("/leaderboard/configs/{id}", handler.HandleUpdateLeaderboardConfigByID(database))
+	router.Delete("/leaderboard/configs/{id}", handler.HandleDeleteLeaderboardConfig(database))
 
 	// Onchain package contributions endpoints
 	router.HandleFunc("/onchain/packages", handler.HandleGetAllPackages(database))
