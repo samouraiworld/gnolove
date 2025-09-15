@@ -346,6 +346,8 @@ export const ProposalSchema = z.object({
   votes: z.array(VoteSchema).default([]),
   executionHeight: z.number().default(0),
   status: z.string().default(''),
+  title: z.string().default(''),
+  description: z.string().default(''),
 });
 export const ProposalsSchema = z.array(ProposalSchema);
 export type TProposal = z.infer<typeof ProposalSchema>;

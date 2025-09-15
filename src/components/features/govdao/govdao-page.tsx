@@ -66,6 +66,9 @@ const ProposalCard = ({ proposal }: { proposal: TProposal }) => {
           <Heading size="4">
             {getProposalTitle(proposal)}
           </Heading>
+          {proposal.description && (
+            <Text mb="2">{proposal.description}</Text>
+          )}
           <Text mb="2" color="gray">Proposal path: {proposal.path}</Text>
           <Box className="h-2 w-full rounded-full bg-red-6 relative overflow-hidden">
             <Box className='absolute left-0 top-0 h-full bg-green-9' width={`${forPct}%`} />

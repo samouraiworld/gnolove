@@ -36,6 +36,9 @@ const ProposalDetail = ({ id }: { id: string }) => {
         </Flex>
         <Text color="gray" size="2">ID: {proposal.id}</Text>
       </Flex>
+      {proposal.description && (
+        <Text mb="2">{proposal.description}</Text>
+      )}
       <Text color="gray">{proposal.path}</Text>
 
       <Grid columns={{ initial: '1', md: '3' }} gap="4">

@@ -27,6 +27,7 @@ export const getStatusColor = (status?: string): 'green' | 'red' | 'violet' | 'g
 };
 
 export const getProposalTitle = (p: TProposal) => {
+  if (p.title) return p.title;
   const file = p.files?.[0];
   if (!file) return p.path || p.id;
   if (file.name && file.name.trim().length > 0) return file.name.replace(/\.[^/.]+$/, '');
