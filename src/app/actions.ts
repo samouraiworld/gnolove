@@ -53,7 +53,7 @@ export const getContributors = async (timeFilter: TimeFilter, excludeCoreTeam?: 
 export const listMonitoringWebhooks = async (kind: TMonitoringWebhookKind): Promise<TMonitoringWebhook[]> => {
   if (!ENV.NEXT_PUBLIC_MONITORING_API_URL) throw new Error('Monitoring API base URL is not configured');
   const { userId } = auth();
-  if (!userId) throw new Error('Not authenticated');
+  if (!userId) throw new HttpError('Not authenticated', { status: 401, statusText: 'Forbidden' });
   const url = new URL(`/webhooks/${kind}?user_id=${encodeURIComponent(userId)}`, ENV.NEXT_PUBLIC_MONITORING_API_URL);
   const data = await fetchJson(url.toString(), { cache: 'no-cache' });
   return MonitoringWebhookSchema.array().parse(data);
@@ -65,7 +65,7 @@ export const createMonitoringWebhook = async (
 ): Promise<void> => {
   if (!ENV.NEXT_PUBLIC_MONITORING_API_URL) throw new Error('Monitoring API base URL is not configured');
   const { userId } = auth();
-  if (!userId) throw new Error('Not authenticated');
+  if (!userId) throw new HttpError('Not authenticated', { status: 401, statusText: 'Forbidden' });
   const url = new URL(`/webhooks/${kind}`, ENV.NEXT_PUBLIC_MONITORING_API_URL);
   const body = { ...MonitoringWebhookSchema.omit({ ID: true }).parse({ ...payload, UserID: userId }), UserID: userId } as Omit<TMonitoringWebhook, 'ID'>;
   const res = await fetch(url.toString(), { method: 'POST', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json' } });
@@ -82,7 +82,7 @@ export const updateMonitoringWebhook = async (
 ): Promise<void> => {
   if (!ENV.NEXT_PUBLIC_MONITORING_API_URL) throw new Error('Monitoring API base URL is not configured');
   const { userId } = auth();
-  if (!userId) throw new Error('Not authenticated');
+  if (!userId) throw new HttpError('Not authenticated', { status: 401, statusText: 'Forbidden' });
   const url = new URL(`/webhooks/${kind}`, ENV.NEXT_PUBLIC_MONITORING_API_URL);
   const body = { ...MonitoringWebhookSchema.parse({ ...payload, UserID: userId }), UserID: userId } as TMonitoringWebhook;
   const res = await fetch(url.toString(), { method: 'PUT', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json' } });
@@ -99,7 +99,7 @@ export const deleteMonitoringWebhook = async (
 ): Promise<void> => {
   if (!ENV.NEXT_PUBLIC_MONITORING_API_URL) throw new Error('Monitoring API base URL is not configured');
   const { userId } = auth();
-  if (!userId) throw new Error('Not authenticated');
+  if (!userId) throw new HttpError('Not authenticated', { status: 401, statusText: 'Forbidden' });
   const url = new URL(`/webhooks/${kind}?id=${encodeURIComponent(String(id))}&user_id=${encodeURIComponent(userId)}`, ENV.NEXT_PUBLIC_MONITORING_API_URL);
   const res = await fetch(url.toString(), { method: 'DELETE' });
   if (!res.ok) {
