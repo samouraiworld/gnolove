@@ -13,23 +13,19 @@ func (s *Syncer) StartPersonalLeaderboardScheduler() {
 	go func() {
 		ticker := time.NewTicker(1 * time.Minute)
 		defer ticker.Stop()
-		for {
-			select {
-			case <-ticker.C:
-				s.runDueLeaderboardJobs()
-			}
+		for range ticker.C {
+			s.runDueLeaderboardJobs()
 		}
 	}()
 }
 
 func (s *Syncer) runDueLeaderboardJobs() {
 	var configs []models.LeaderboardConfig
-	if err := s.db.Where("active = ?", true).Find(&configs).Error; err != nil {
+	now := time.Now().UTC()
+	if err := s.db.Where("active = ? AND (next_run_at IS NULL OR next_run_at <= ?)", true, now).Find(&configs).Error; err != nil {
 		s.logger.Errorf("leaderboard scheduler: failed to load configs: %v", err)
 		return
 	}
-
-	now := time.Now().UTC()
 
 	for i := range configs {
 		cfg := configs[i]
@@ -66,7 +62,6 @@ func (s *Syncer) runDueLeaderboardJobs() {
 		stats, err := GetContributorsWithScoresFiltered(s.db, since, includeRepos)
 		if err != nil {
 			s.logger.Errorf("leaderboard scheduler: stats error for cfg %d: %v", cfg.ID, err)
-			// still reschedule to avoid tight loops
 			next := computeNextRunWithAnchor(cfg.AnchorAt, cfg.Timezone, now, cfg.Frequency)
 			_ = s.db.Model(&models.LeaderboardConfig{}).Where("id = ?", cfg.ID).Updates(map[string]interface{}{
 				"next_run_at": next,
@@ -94,9 +89,13 @@ func (s *Syncer) runDueLeaderboardJobs() {
 // If anchorAt is nil, falls back to simple interval from `from`.
 func computeNextRunWithAnchor(anchorAt *time.Time, tz string, from time.Time, frequency string) time.Time {
 	freq := strings.ToLower(strings.TrimSpace(frequency))
-	if tz == "" { tz = "UTC" }
+	if tz == "" {
+		tz = "UTC"
+	}
 	loc, err := time.LoadLocation(tz)
-	if err != nil { loc = time.UTC }
+	if err != nil {
+		loc = time.UTC
+	}
 
 	if anchorAt == nil {
 		// Fallback to simple interval from current time
@@ -149,23 +148,35 @@ func computeNextRunWithAnchor(anchorAt *time.Time, tz string, from time.Time, fr
 			// next month
 			y, m := nowLocal.Year(), nowLocal.Month()
 			m++
-			if m > 12 { y++; m = 1 }
+			if m > 12 {
+				y++
+				m = 1
+			}
 			// clamp day to last day of next month
 			lastDay := lastDayOfMonth(y, m)
-			if targetDay > lastDay { targetDay = lastDay }
+			if targetDay > lastDay {
+				targetDay = lastDay
+			}
 			candidate = time.Date(y, m, targetDay, anchorLocal.Hour(), anchorLocal.Minute(), anchorLocal.Second(), 0, loc)
 		} else {
 			// this month at target day
 			lastDay := lastDayOfMonth(nowLocal.Year(), nowLocal.Month())
-			if targetDay > lastDay { targetDay = lastDay }
+			if targetDay > lastDay {
+				targetDay = lastDay
+			}
 			candidate = time.Date(nowLocal.Year(), nowLocal.Month(), targetDay, anchorLocal.Hour(), anchorLocal.Minute(), anchorLocal.Second(), 0, loc)
 			if !candidate.After(nowLocal) {
 				// move to next month if still not after
 				y, m := nowLocal.Year(), nowLocal.Month()
 				m++
-				if m > 12 { y++; m = 1 }
+				if m > 12 {
+					y++
+					m = 1
+				}
 				lastDay := lastDayOfMonth(y, m)
-				if targetDay > lastDay { targetDay = lastDay }
+				if targetDay > lastDay {
+					targetDay = lastDay
+				}
 				candidate = time.Date(y, m, targetDay, anchorLocal.Hour(), anchorLocal.Minute(), anchorLocal.Second(), 0, loc)
 			}
 		}

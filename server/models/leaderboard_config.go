@@ -9,7 +9,7 @@ type LeaderboardConfig struct {
 	CreatedAt time.Time `json:"createdAt"`
 	UpdatedAt time.Time `json:"updatedAt"`
 
-	// Clerk user id or GitHub user id stored in users table (we use models.User.ID)
+	// Clerk user id stored in users table
 	UserID string `gorm:"index;not null" json:"userId"`
 
 	// Webhook destination
