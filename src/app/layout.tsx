@@ -54,6 +54,7 @@ export const metadata: Metadata = {
 
   // Open Graph
   openGraph: {
+    locale: 'en_US',
     type: 'website',
     url: 'https://gnolove.world',
     siteName: 'Gnolove',
