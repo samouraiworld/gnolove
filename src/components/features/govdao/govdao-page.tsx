@@ -112,7 +112,7 @@ const GovdaoPage = () => {
   const filtered = useMemo(() => {
     const list = (data ?? []) as TProposal[];
     return list.filter((p) => {
-      const matchesQuery = [p.id, p.path, p.address].some((field) => field?.toLowerCase().includes(query.toLowerCase()));
+      const matchesQuery = [p.id, p.path, p.address, p.title, p.description].some((field) => field?.toLowerCase().includes(query.toLowerCase()));
       const matchesStatus = status === 'all' ? true : (p.status || '').toLowerCase() === status;
       return matchesQuery && matchesStatus;
     }).reverse();
