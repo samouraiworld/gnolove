@@ -2,6 +2,7 @@ package sync
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"regexp"
 	"strings"
@@ -181,13 +182,32 @@ func (s *Syncer) getProposalTitleAndDescription(proposalID string) (string, stri
 	// Match all top-level parentheses contents: ("..." something)
 	re := regexp.MustCompile(`\("([^"]+)" string\)`)
 
-	matches := re.FindAllSubmatch(data.Response.Data, -1)
+	matches := re.FindAllString(string(data.Response.Data), -1)
 	if len(matches) < 2 {
 		// not title or description found but not an error
 		return "", "", nil
 	}
+	title, err := extractGnoStringResponse(matches[0])
+	if err != nil {
+		return "", "", err
+	}
 
-	return string(matches[0][1]), string(matches[1][1]), nil
+	description, err := extractGnoStringResponse(matches[1])
+	if err != nil {
+		return "", "", err
+	}
+
+	return title, description, nil
+}
+
+func extractGnoStringResponse(res string) (string, error) {
+	// Remove '(' and 'string)' from effective response
+	res = strings.TrimLeft(res, "(")
+	res = strings.TrimRight(res, " string)")
+
+	var resFormatted string
+	err := json.Unmarshal([]byte(res), &resFormatted)
+	return resFormatted, err
 }
 
 func (s *Syncer) syncVotesOnProposals(ctx context.Context) error {
