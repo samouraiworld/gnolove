@@ -2,8 +2,10 @@
 
 import { z } from 'zod';
 
+import { fetchJson, HttpError } from '@/utils/fetcher';
 import { TimeFilter } from '@/utils/github';
 import {
+  BlockHeightSchema,
   ContributorSchema,
   EnhancedUserWithStatsSchema,
   IssueSchema,
@@ -14,16 +16,17 @@ import {
   PullRequestReportSchema,
   RepositorySchema,
   ScoreFactorsSchema,
+  TMonitoringMetrics,
   UserSchema,
   YoutubePlaylistIdSchema,
   YoutubeVideoPlaylistSchema,
 } from '@/utils/schemas';
+import { parseValidatorMetrics } from '@/utils/validators';
 
 import MILESTONE from '@/constants/milestone';
 import TEAMS from '@/constants/teams';
 
 import ENV from '@/env';
-import { fetchJson, HttpError } from '@/utils/fetcher';
 
 export const getContributors = async (timeFilter: TimeFilter, excludeCoreTeam?: boolean, repositories?: string[]) => {
   const url = new URL('/stats', ENV.NEXT_PUBLIC_API_URL);
@@ -160,7 +163,10 @@ export const getScoreFactors = async () => {
   return ScoreFactorsSchema.parse(data);
 };
 
-export const getYoutubeChannelUploadsPlaylistId = async (searchParams: { channelId?: string; channelUsername?: string }) => {
+export const getYoutubeChannelUploadsPlaylistId = async (searchParams: {
+  channelId?: string;
+  channelUsername?: string;
+}) => {
   if (!ENV.YOUTUBE_API_KEY) {
     throw new Error('YouTube API key is not configured.');
   }
@@ -181,7 +187,10 @@ export const getYoutubeChannelUploadsPlaylistId = async (searchParams: { channel
 
   url.searchParams.set('key', ENV.YOUTUBE_API_KEY);
 
-  const data = await fetchJson<{ items: Array<{ contentDetails: { relatedPlaylists: { uploads: string } } }>; }>(url.toString(), { next: { revalidate: 86400 } });
+  const data = await fetchJson<{ items: Array<{ contentDetails: { relatedPlaylists: { uploads: string } } }> }>(
+    url.toString(),
+    { next: { revalidate: 86400 } },
+  );
 
   const uploads = data.items[0]?.contentDetails?.relatedPlaylists?.uploads;
   if (!uploads) {
@@ -220,7 +229,9 @@ export const getYoutubePlaylistVideos = async (playlistId: string, maxResults: n
 
   if (!data || !Array.isArray(data.items)) {
     const apiErrorMessage = data?.error?.message || data?.message;
-    throw new Error(`Invalid YouTube response: items missing or not an array${apiErrorMessage ? ` - ${apiErrorMessage}` : ''}`);
+    throw new Error(
+      `Invalid YouTube response: items missing or not an array${apiErrorMessage ? ` - ${apiErrorMessage}` : ''}`,
+    );
   }
 
   if (data.items.length === 0) {
@@ -237,4 +248,20 @@ export const getYoutubePlaylistVideos = async (playlistId: string, maxResults: n
   });
 
   return YoutubeVideoPlaylistSchema.parse(filteredItems);
+};
+
+export const getMonitoringMetrics = async () => {
+  const url = new URL('/metrics', ENV.NEXT_PUBLIC_MONITORING_API_URL);
+  const res = await fetch(url.toString(), { cache: 'no-cache' });
+  const text = await res.text();
+  const parsedValidatorMetrics = parseValidatorMetrics(text);
+
+  return parsedValidatorMetrics;
+};
+
+export const getBlockHeight = async () => {
+  const url = new URL('/block_height', ENV.NEXT_PUBLIC_MONITORING_API_URL);
+  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+
+  return BlockHeightSchema.parse(data);
 };

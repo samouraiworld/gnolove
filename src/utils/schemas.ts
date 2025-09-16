@@ -397,3 +397,35 @@ export const YoutubeVideoPlaylistSchema = z.array(z.object({
   snippet: YoutubeVideoSchema,
 }));
 export type TYoutubeVideoPlaylist = z.infer<typeof YoutubeVideoPlaylistSchema>;
+
+export const validatorMetricSchema = z.object({
+  moniker: z.string(),
+  validator_address: z.string(),
+  gnoland_consecutive_missed_blocks: z.number().optional(),
+  gnoland_missed_blocks: z.number().optional(),
+  gnoland_validator_participation_rate: z.number().optional(),
+});
+
+export const validatorsMetricsSchema = z.array(validatorMetricSchema);
+
+export const serverMetricsSchema = z.object({
+  process_cpu_seconds_total: z.number().optional(),
+  process_resident_memory_bytes: z.number().optional(),
+  process_start_time_seconds: z.number().optional(),
+  go_goroutines: z.number().optional(),
+});
+
+export const monitoringMetricsSchema = z.object({
+  validators: validatorsMetricsSchema,
+  server: serverMetricsSchema,
+});
+
+export type TValidatorMetric = z.infer<typeof validatorMetricSchema>;
+export type TServerMetrics = z.infer<typeof serverMetricsSchema>;
+export type TMonitoringMetrics = z.infer<typeof monitoringMetricsSchema>;
+
+export const BlockHeightSchema = z.object({
+  last_stored: z.number()
+});
+
+export type TBlockHeight = z.infer<typeof BlockHeightSchema>;
