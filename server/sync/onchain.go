@@ -202,8 +202,8 @@ func (s *Syncer) getProposalTitleAndDescription(proposalID string) (string, stri
 
 func extractGnoStringResponse(res string) (string, error) {
 	// Remove '(' and 'string)' from effective response
-	res = strings.TrimLeft(res, "(")
-	res = strings.TrimRight(res, " string)")
+	res = strings.TrimPrefix(res, "(")
+	res = strings.TrimSuffix(res, " string)")
 
 	var resFormatted string
 	err := json.Unmarshal([]byte(res), &resFormatted)
