@@ -30,6 +30,7 @@ import TEAMS from '@/constants/teams';
 
 import ENV from '@/env';
 import { MonitoringWebhookSchema, TMonitoringWebhook, TMonitoringWebhookKind } from '@/utils/schemas';
+import { auth } from '@clerk/nextjs/server';
 
 export const getContributors = async (timeFilter: TimeFilter, excludeCoreTeam?: boolean, repositories?: string[]) => {
   const url = new URL('/stats', ENV.NEXT_PUBLIC_API_URL);
@@ -51,8 +52,11 @@ export const getContributors = async (timeFilter: TimeFilter, excludeCoreTeam?: 
 // Monitoring webhooks (GOVDAO, VALIDATOR)
 export const listMonitoringWebhooks = async (kind: TMonitoringWebhookKind): Promise<TMonitoringWebhook[]> => {
   if (!ENV.NEXT_PUBLIC_MONITORING_API_URL) throw new Error('Monitoring API base URL is not configured');
+  const { getToken } = auth();
+  const token = await getToken();
+  if (!token) throw new Error('Authentication required');
   const url = new URL(`/webhooks/${kind}`, ENV.NEXT_PUBLIC_MONITORING_API_URL);
-  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+  const data = await fetchJson(url.toString(), { cache: 'no-cache', headers: { Authorization: `Bearer ${token}` } });
   return MonitoringWebhookSchema.array().parse(data);
 };
 
@@ -61,9 +65,12 @@ export const createMonitoringWebhook = async (
   payload: Omit<TMonitoringWebhook, 'ID' | 'UserID'>,
 ): Promise<void> => {
   if (!ENV.NEXT_PUBLIC_MONITORING_API_URL) throw new Error('Monitoring API base URL is not configured');
+  const { getToken } = auth();
+  const token = await getToken();
+  if (!token) throw new Error('Authentication required');
   const url = new URL(`/webhooks/${kind}`, ENV.NEXT_PUBLIC_MONITORING_API_URL);
-  const body = MonitoringWebhookSchema.omit({ ID: true }).parse(payload);
-  const res = await fetch(url.toString(), { method: 'POST', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json' } });
+  const body = MonitoringWebhookSchema.omit({ ID: true, UserID: true }).parse(payload);
+  const res = await fetch(url.toString(), { method: 'POST', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` } });
   if (!res.ok) {
     const text = await res.text().catch(() => '');
     throw new HttpError(`Request failed: ${res.status} ${res.statusText}${text ? ` - ${text}` : ''}`, { status: res.status, statusText: res.statusText, bodyText: text });
@@ -76,9 +83,12 @@ export const updateMonitoringWebhook = async (
   payload: Omit<TMonitoringWebhook, 'UserID'>,
 ): Promise<void> => {
   if (!ENV.NEXT_PUBLIC_MONITORING_API_URL) throw new Error('Monitoring API base URL is not configured');
+  const { getToken } = auth();
+  const token = await getToken();
+  if (!token) throw new Error('Authentication required');
   const url = new URL(`/webhooks/${kind}`, ENV.NEXT_PUBLIC_MONITORING_API_URL);
-  const body = MonitoringWebhookSchema.parse(payload);
-  const res = await fetch(url.toString(), { method: 'PUT', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json' } });
+  const body = MonitoringWebhookSchema.omit({ UserID: true }).parse(payload);
+  const res = await fetch(url.toString(), { method: 'PUT', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` } });
   if (!res.ok) {
     const text = await res.text().catch(() => '');
     throw new HttpError(`Request failed: ${res.status} ${res.statusText}${text ? ` - ${text}` : ''}`, { status: res.status, statusText: res.statusText, bodyText: text });
@@ -91,8 +101,11 @@ export const deleteMonitoringWebhook = async (
   id: number,
 ): Promise<void> => {
   if (!ENV.NEXT_PUBLIC_MONITORING_API_URL) throw new Error('Monitoring API base URL is not configured');
+  const { getToken } = auth();
+  const token = await getToken();
+  if (!token) throw new Error('Authentication required');
   const url = new URL(`/webhooks/${kind}?id=${encodeURIComponent(String(id))}`, ENV.NEXT_PUBLIC_MONITORING_API_URL);
-  const res = await fetch(url.toString(), { method: 'DELETE' });
+  const res = await fetch(url.toString(), { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } });
   if (!res.ok) {
     const text = await res.text().catch(() => '');
     throw new HttpError(`Request failed: ${res.status} ${res.statusText}${text ? ` - ${text}` : ''}`, { status: res.status, statusText: res.statusText, bodyText: text });
