@@ -3,13 +3,13 @@ import { auth } from '@clerk/nextjs/server';
 import WebhooksSectionClient from '@/features/settings/webhooks-section';
 import LayoutContainer from '@/layouts/layout-container';
 import { Metadata } from 'next';
+import { TMonitoringWebhookKind } from '@/utils/schemas';
 
 export const metadata: Metadata = {
   title: 'Account settings',
 };
 
-const kinds = ['govdao', 'validator'] as const;
-type Kind = (typeof kinds)[number];
+const kinds: TMonitoringWebhookKind[] = ['govdao', 'validator'];
 
 export default async function SettingsPage() {
   const { userId } = auth();
@@ -31,7 +31,7 @@ export default async function SettingsPage() {
         <Heading size="6">Settings</Heading>
 
         {kinds.map((k) => (
-          <WebhooksSectionClient key={k} kind={k as Kind} />
+          <WebhooksSectionClient key={k} kind={k} />
         ))}
       </Box>
     </LayoutContainer>
