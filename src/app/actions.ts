@@ -16,7 +16,6 @@ import {
   PullRequestReportSchema,
   RepositorySchema,
   ScoreFactorsSchema,
-  TMonitoringMetrics,
   UserSchema,
   YoutubePlaylistIdSchema,
   YoutubeVideoPlaylistSchema,

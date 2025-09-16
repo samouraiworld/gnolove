@@ -81,8 +81,8 @@ const ValidatorGridItem = ({ validator }: { validator: TValidatorMetric }) => {
 };
 
 const ValidatorsClientPage = () => {
-  let { data: metrics, isLoading } = useGetValidatorsMetrics();
-  const { data: blockHeight, error } = useGetBlockHeight();
+  const { data: metrics, isLoading } = useGetValidatorsMetrics();
+  const { data: blockHeight } = useGetBlockHeight();
   const [query, setQuery] = useState('');
 
   const avgParticipationRate = useMemo(() => {
