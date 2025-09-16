@@ -16,7 +16,7 @@ export default function WebhooksSectionClient({ kind }: { kind: WebhookKind }) {
   const handleDelete = async (wh: Webhook) => {
     try {
       await del.mutateAsync(wh.ID!);
-      addToast({ title: 'Webhook deleted', message: `${wh.Type.toUpperCase()}`, mode: 'positive' });
+      addToast({ title: 'Webhook deleted', message: '', mode: 'positive' });
     } catch (err: unknown) {
       addToast({ title: 'Error deleting webhook', message: String((err as any)?.message ?? err), mode: 'negative' });
     }
@@ -41,14 +41,14 @@ export default function WebhooksSectionClient({ kind }: { kind: WebhookKind }) {
         {isLoading ? (
           <Text>Loading...</Text>
         ) : !data || data.length === 0 ? (
-          <Box p="3" className="rounded-md" style={{ background: 'var(--accent-a2)' }}>
+          <Box p="3" className="rounded-md bg-[var(--accent-a2)]">
             <Text color="gray">No webhooks yet. Add one above to start receiving notifications.</Text>
           </Box>
         ) : (
           <>
             {/* Desktop/tablet (md+) */}
-            <Box className="hidden md:block" style={{ overflowX: 'auto' }}>
-              <Table.Root variant="surface" style={{ minWidth: 600 }}>
+            <Box className="hidden md:block overflow-x-auto">
+              <Table.Root variant="surface" className="min-w-[600px]">
                 <Table.Header>
                   <Table.Row>
                     <Table.ColumnHeaderCell>URL</Table.ColumnHeaderCell>
@@ -60,18 +60,13 @@ export default function WebhooksSectionClient({ kind }: { kind: WebhookKind }) {
                 <Table.Body>
                   {data.map((w) => (
                     <Table.Row key={`${w.ID}-${w.URL}`}>
-                      <Table.Cell style={{ maxWidth: 420 }}>
+                      <Table.Cell className="max-w-[420px]">
                         <Link
                           href={w.URL}
                           target="_blank"
                           title={w.URL}
-                          style={{
-                            display: 'block',
-                            maxWidth: '100%',
-                            wordBreak: 'break-all',
-                            overflowWrap: 'anywhere',
-                            whiteSpace: 'normal',
-                          }}
+                          rel="noopener"
+                          className="block max-w-full truncate overflow-hidden whitespace-normal"
                         >
                           {w.URL}
                         </Link>
@@ -122,8 +117,9 @@ export default function WebhooksSectionClient({ kind }: { kind: WebhookKind }) {
                     <Link
                       href={w.URL}
                       target="_blank"
+                      rel="noopener"
                       title={w.URL}
-                      style={{ display: 'block', wordBreak: 'break-all', overflowWrap: 'anywhere' }}
+                      className="block word-break-break-all overflow-wrap-anywhere"
                     >
                       {w.URL}
                     </Link>

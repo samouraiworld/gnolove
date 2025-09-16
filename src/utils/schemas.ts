@@ -357,7 +357,7 @@ export const MonitoringWebhookSchema = z.object({
   UserID: z.string(),
   URL: z.string().url(),
   Type: z.enum(['discord', 'slack']),
-  Description: z.string().optional(),
+  Description: z.string(),
   CreatedAt: z.string().optional(),
   LastCheckedID: z.number().optional(),
 });

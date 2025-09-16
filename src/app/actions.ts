@@ -87,6 +87,7 @@ export const updateMonitoringWebhook = async (
   const token = await getToken();
   if (!token) throw new Error('Authentication required');
   const url = new URL(`/webhooks/${kind}`, ENV.NEXT_PUBLIC_MONITORING_API_URL);
+  if (payload.ID == null) throw new Error('ID is required for updates');
   const body = MonitoringWebhookSchema.omit({ UserID: true }).parse(payload);
   const res = await fetch(url.toString(), { method: 'PUT', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` } });
   if (!res.ok) {
