@@ -11,11 +11,6 @@ import (
 	"gorm.io/gorm"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/robfig/cron/v3"
-)
-
-var (
-	c = cron.New()
 )
 
 func checkWebhookInput(webhook *models.LeaderboardWebhook) error {
@@ -43,12 +38,6 @@ func checkWebhookInput(webhook *models.LeaderboardWebhook) error {
 	if webhook.Cron == "" {
 		// Default to Friday 15:00 UTC
 		webhook.Cron = "0 15 * * 5"
-	} else {
-		// Validate cron expression
-		_, err := cron.ParseStandard(webhook.Cron)
-		if err != nil {
-			return fmt.Errorf("invalid cron expression")
-		}
 	}
 	return nil
 }
