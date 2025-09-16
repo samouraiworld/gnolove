@@ -17,10 +17,12 @@ import {
   RepositorySchema,
   ScoreFactorsSchema,
   UserSchema,
+  validatorLastIncidentsSchema,
+  validatorsParticipationSchema,
   YoutubePlaylistIdSchema,
   YoutubeVideoPlaylistSchema,
 } from '@/utils/schemas';
-import { parseValidatorMetrics } from '@/utils/validators';
+import { EValidatorPeriod } from '@/utils/validators';
 
 import MILESTONE from '@/constants/milestone';
 import TEAMS from '@/constants/teams';
@@ -249,13 +251,13 @@ export const getYoutubePlaylistVideos = async (playlistId: string, maxResults: n
   return YoutubeVideoPlaylistSchema.parse(filteredItems);
 };
 
-export const getMonitoringMetrics = async () => {
-  const url = new URL('/metrics', ENV.NEXT_PUBLIC_MONITORING_API_URL);
-  const res = await fetch(url.toString(), { cache: 'no-cache' });
-  const text = await res.text();
-  const parsedValidatorMetrics = parseValidatorMetrics(text);
+export const getValidators = async (timeFilter: EValidatorPeriod = EValidatorPeriod.MONTH) => {
+  const url = new URL('/Participation', ENV.NEXT_PUBLIC_MONITORING_API_URL);
+  url.searchParams.set('period', timeFilter);
 
-  return parsedValidatorMetrics;
+  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+
+  return validatorsParticipationSchema.parse(data);
 };
 
 export const getBlockHeight = async () => {
@@ -263,4 +265,11 @@ export const getBlockHeight = async () => {
   const data = await fetchJson(url.toString(), { cache: 'no-cache' });
 
   return BlockHeightSchema.parse(data);
+};
+
+export const getValidatorLastIncident = async () => {
+  const url = new URL('/latest_incidents', ENV.NEXT_PUBLIC_MONITORING_API_URL);
+  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+
+  return validatorLastIncidentsSchema.parse(data || []);
 };
