@@ -1,4 +1,4 @@
-package sync
+package handler
 
 import (
 	"bytes"
@@ -11,7 +11,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/samouraiworld/topofgnomes/server/handler"
 	"github.com/samouraiworld/topofgnomes/server/models"
 	"gorm.io/gorm"
 )
@@ -29,20 +28,20 @@ type ContributorStats struct {
 }
 
 // Get contributors with stats and scores for the given period
-func GetContributorsWithScores(db *gorm.DB, since time.Time) ([]ContributorStats, error) {
+func GetContributorsWithScores(db *gorm.DB, since time.Time, repositories []string) ([]ContributorStats, error) {
 	var users []models.User
 	if err := db.Find(&users).Error; err != nil {
 		return nil, err
 	}
 
-	// Build excluded repositories slice from env var (comma or space separated)
+	// Build excluded repositories slice from env var (comma separated)
 	excludedEnv := os.Getenv("LEADERBOARD_EXCLUDED_REPOS")
 	var excludedRepos []string
 	if strings.TrimSpace(excludedEnv) == "" {
 		// Default exclusion
 		excludedRepos = []string{"samouraiworld/gnomonitoring"}
 	} else {
-		parts := strings.FieldsFunc(excludedEnv, func(r rune) bool { return r == ',' || r == ' ' || r == '\n' || r == '\t' })
+		parts := strings.FieldsFunc(excludedEnv, func(r rune) bool { return r == ',' })
 		for _, p := range parts {
 			if s := strings.TrimSpace(p); s != "" {
 				excludedRepos = append(excludedRepos, s)
@@ -62,6 +61,9 @@ func GetContributorsWithScores(db *gorm.DB, since time.Time) ([]ContributorStats
 		if len(excludedRepos) > 0 {
 			q = q.Where("repository_id NOT IN ?", excludedRepos)
 		}
+		if len(repositories) > 0 {
+			q = q.Where("repository_id IN ?", repositories)
+		}
 		if err := q.Group("author_id").Scan(&commitResults).Error; err != nil {
 			return nil, err
 		}
@@ -77,6 +79,9 @@ func GetContributorsWithScores(db *gorm.DB, since time.Time) ([]ContributorStats
 		if len(excludedRepos) > 0 {
 			q = q.Where("repository_id NOT IN ?", excludedRepos)
 		}
+		if len(repositories) > 0 {
+			q = q.Where("repository_id IN ?", repositories)
+		}
 		if err := q.Group("author_id").Scan(&issueResults).Error; err != nil {
 			return nil, err
 		}
@@ -91,6 +96,9 @@ func GetContributorsWithScores(db *gorm.DB, since time.Time) ([]ContributorStats
 		q := db.Table("pull_requests").Select("author_id, COUNT(*) as count").Where("created_at >= ?", since)
 		if len(excludedRepos) > 0 {
 			q = q.Where("repository_id NOT IN ?", excludedRepos)
+		}
+		if len(repositories) > 0 {
+			q = q.Where("repository_id IN ?", repositories)
 		}
 		if err := q.Group("author_id").Scan(&prResults).Error; err != nil {
 			return nil, err
@@ -112,6 +120,9 @@ func GetContributorsWithScores(db *gorm.DB, since time.Time) ([]ContributorStats
 		if len(excludedRepos) > 0 {
 			q = q.Where("reviews.repository_id NOT IN ?", excludedRepos)
 		}
+		if len(repositories) > 0 {
+			q = q.Where("repository_id IN ?", repositories)
+		}
 		if err := q.Group("reviews.author_id").Scan(&reviewedResults).Error; err != nil {
 			return nil, err
 		}
@@ -127,7 +138,7 @@ func GetContributorsWithScores(db *gorm.DB, since time.Time) ([]ContributorStats
 		issues := issuesMap[user.ID]
 		prs := prsMap[user.ID]
 		reviewed := reviewedMap[user.ID]
-		score := handler.CalculateScore(commits, issues, prs, reviewed)
+		score := CalculateScore(commits, issues, prs, reviewed)
 		if score > 0 {
 			stats = append(stats, ContributorStats{
 				UserID:        user.ID,
@@ -158,7 +169,7 @@ func FormatLeaderboardMessage(stats []ContributorStats) string {
 	// Add a concise legend so the scoring is explicit for users
 	// Uses factors from handler/score.go to stay consistent with backend logic
 	message += fmt.Sprintf("Scoring: 💻×%.0f + 🔀×%.0f + 🐛×%.1f + 🧐×%.0f\n\n",
-		handler.CommitFactor, handler.PRFactor, handler.IssueFactor, handler.ReviewedPRFactor)
+		CommitFactor, PRFactor, IssueFactor, ReviewedPRFactor)
 	podiumEmojis := []string{"🥇", "🥈", "🥉"}
 	for i, c := range stats {
 		var position string
@@ -182,8 +193,8 @@ func FormatLeaderboardMessage(stats []ContributorStats) string {
 	return message
 }
 
-// Send leaderboard to Discord webhook
-func SendDiscordLeaderboard(webhookURL, content string) error {
+// Send leaderboard to webhook
+func SendLeaderboard(webhookURL, content string) error {
 	payload := map[string]string{"content": content}
 	b, err := json.Marshal(payload)
 	if err != nil {
@@ -205,36 +216,15 @@ func SendDiscordLeaderboard(webhookURL, content string) error {
 }
 
 // Cron job: send weekly leaderboard to Discord
-func (s *Syncer) StartLeaderboardNotifier() {
-	// Schedule: Friday 15:00 UTC (0 15 * * 5)
-	go func() {
-		for {
-			now := time.Now().UTC()
-			next := time.Date(now.Year(), now.Month(), now.Day(), 15, 0, 0, 0, time.UTC)
-			for next.Weekday() != time.Friday || !next.After(now) {
-				next = next.Add(24 * time.Hour)
-			}
-			d := next.Sub(now)
-			time.Sleep(d)
-			// Run job
-			oneWeekAgo := next.AddDate(0, 0, -7)
-			stats, err := GetContributorsWithScores(s.db, oneWeekAgo)
-			if err != nil {
-				s.logger.Errorf("Leaderboard cron: %v", err)
-				continue
-			}
-			msg := FormatLeaderboardMessage(stats)
-			webhookURL := os.Getenv("DISCORD_WEBHOOK_URL")
-			if webhookURL == "" {
-				s.logger.Error("DISCORD_WEBHOOK_URL not set")
-				continue
-			}
-			err = SendDiscordLeaderboard(webhookURL, msg)
-			if err != nil {
-				s.logger.Errorf("Failed to send Discord leaderboard: %v", err)
-			} else {
-				s.logger.Info("Sent Discord leaderboard successfully")
-			}
-		}
-	}()
+func TriggerLeaderboardWebhook(db *gorm.DB, webhook models.LeaderboardWebhook) error {
+	stats, err := GetContributorsWithScores(db, time.Now().AddDate(0, 0, -7), webhook.Repositories)
+	if err != nil {
+		return fmt.Errorf("%v", err)
+	}
+	msg := FormatLeaderboardMessage(stats)
+	err = SendLeaderboard(webhook.Url, msg)
+	if err != nil {
+		return fmt.Errorf("%v", err)
+	}
+	return nil
 }
