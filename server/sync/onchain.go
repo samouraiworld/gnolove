@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"regexp"
 	"strings"
 
 	"github.com/samouraiworld/topofgnomes/server/gnoindexerql"
@@ -174,25 +173,22 @@ func (s *Syncer) syncProposals(ctx context.Context) error {
 }
 
 func (s *Syncer) getProposalTitleAndDescription(proposalID string) (string, string, error) {
-	data, err := s.rpcClient.ABCIQuery("vm/qeval", []byte(fmt.Sprintf("gno.land/r/gov/dao.GetProposal(cross,%s)", proposalID)))
+	titleData, err := s.rpcClient.ABCIQuery("vm/qeval", []byte(fmt.Sprintf("gno.land/r/gov/dao.MustGetProposal(cross,%s).Title()", proposalID)))
 	if err != nil {
 		return "", "", err
 	}
 
-	// Match all top-level parentheses contents: ("..." something)
-	re := regexp.MustCompile(`\("([^"]+)" string\)`)
-
-	matches := re.FindAllString(string(data.Response.Data), -1)
-	if len(matches) < 2 {
-		// not title or description found but not an error
-		return "", "", nil
-	}
-	title, err := extractGnoStringResponse(matches[0])
+	title, err := extractGnoStringResponse(string(titleData.Response.Data))
 	if err != nil {
 		return "", "", err
 	}
 
-	description, err := extractGnoStringResponse(matches[1])
+	descriptionData, err := s.rpcClient.ABCIQuery("vm/qeval", []byte(fmt.Sprintf("gno.land/r/gov/dao.MustGetProposal(cross,%s).Description()", proposalID)))
+	if err != nil {
+		return "", "", err
+	}
+
+	description, err := extractGnoStringResponse(string(descriptionData.Response.Data))
 	if err != nil {
 		return "", "", err
 	}
