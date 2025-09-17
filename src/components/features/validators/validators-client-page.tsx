@@ -161,6 +161,16 @@ const ValidatorsClientPage = () => {
     return total / validators.length;
   }, [validators]);
 
+  const filteredValidators = useMemo(() => {
+    if (!validators) return [];
+    if (!query.trim()) return validators;
+    const q = query.trim().toLowerCase();
+    return validators.filter(
+      (v: TValidatorParticipation) =>
+        v.Addr.toLowerCase().includes(q) || v.Moniker.toLowerCase().includes(q)
+    );
+  }, [validators, query]);
+
   const periodStart = getPeriodStart(period);
   // Group incidents by date and stack by level
   const filteredIncidents = useMemo(() => {
@@ -216,7 +226,7 @@ const ValidatorsClientPage = () => {
       <Grid columns={{ initial: '1', md: '3' }} gap="3">
         <StatCard icon={<LayersIcon />} title="Block height" value={blockHeight?.last_stored || 0} />
         <StatCard icon={<CheckCircledIcon />} title="Active validators" value={validators?.length} />
-        <StatCard icon={<ActivityLogIcon />} title="Avg participation rate" value={avgParticipationRate + ' %'} />
+        <StatCard icon={<ActivityLogIcon />} title="Avg participation rate" value={avgParticipationRate ? avgParticipationRate + ' %' : 'N/A'} />
       </Grid>
 
       <Flex justify="between" align="center" my="4" gap="3">
@@ -291,9 +301,15 @@ const ValidatorsClientPage = () => {
       </Flex>
 
       <Grid columns={{ initial: '1', md: '2' }} gap="3">
-        {validators.map((validator: TValidatorParticipation) => (
-          <ValidatorCardItem key={validator.Addr} validator={validator} />
-        ))}
+        {filteredValidators.length > 0 ? (
+          filteredValidators.map((validator: TValidatorParticipation) => (
+            <ValidatorCardItem key={validator.Addr} validator={validator} />
+          ))
+        ) : (
+          <Box p="4">
+            <Text>No validators found.</Text>
+          </Box>
+        )}
       </Grid>
     </Box>
   );
