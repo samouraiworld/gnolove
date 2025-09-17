@@ -365,6 +365,14 @@ export const MonitoringWebhookSchema = z.object({
 export type TMonitoringWebhook = z.infer<typeof MonitoringWebhookSchema>;
 export type TMonitoringWebhookKind = 'govdao' | 'validator';
 
+export const ReportHourSchema = z.object({
+  UserID: z.string(),
+  DailyReportHour: z.number().default(9),
+  DailyReportMinute: z.number().default(0),
+  Timezone: z.string().default('Europe/Paris'),
+});
+export type TReportHour = z.infer<typeof ReportHourSchema>;
+
 export const ScoreFactorsSchema = z.object({
   prFactor: z.number(),
   issueFactor: z.number(),

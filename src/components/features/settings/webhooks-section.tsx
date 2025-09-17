@@ -1,17 +1,19 @@
 'use client';
 
-import { useState } from 'react';
 import { Button, Flex, Link, Heading, Section, Separator, Table, Text, Box, AlertDialog } from '@radix-ui/themes';
 import { Trash2 } from 'lucide-react';
 import { useDeleteMonitoringWebhook, useMonitoringWebhooks } from '@/hooks/use-monitoring-webhooks';
 import { useToast } from '@/contexts/toast-context';
 import type { TMonitoringWebhook as Webhook, TMonitoringWebhookKind as WebhookKind } from '@/utils/schemas';
 import WebhookFormClient from './webhook-form';
+import ReportHourSettings from './report-hour-settings';
+import { useState } from 'react';
 
 export default function WebhooksSectionClient({ kind }: { kind: WebhookKind }) {
   const { data, isLoading } = useMonitoringWebhooks(kind);
   const { addToast } = useToast();
   const [editItem, setEditItem] = useState<Webhook | undefined>(undefined);
+
   const del = useDeleteMonitoringWebhook(kind);
   const handleDelete = async (wh: Webhook) => {
     try {
@@ -31,6 +33,10 @@ export default function WebhooksSectionClient({ kind }: { kind: WebhookKind }) {
         <Text size="2" color="gray">
           Configure team notifications for {kind === 'govdao' ? 'GOVDAO proposals' : 'validator events'}. Add your Discord or Slack webhooks and an optional description.
         </Text>
+
+        {kind === 'validator' && (data?.length ?? 0) > 0 && (
+          <ReportHourSettings />
+        )}
 
         <Box mt="3">
           <WebhookFormClient kind={kind} onDone={() => setEditItem(undefined)} initial={editItem} />

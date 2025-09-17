@@ -15,8 +15,10 @@ import {
   PackagesSchema,
   ProposalsSchema,
   PullRequestReportSchema,
+  ReportHourSchema,
   RepositorySchema,
   ScoreFactorsSchema,
+  TReportHour,
   UserSchema,
   ValidatorLastIncidentsSchema,
   ValidatorsParticipationSchema,
@@ -107,6 +109,33 @@ export const deleteMonitoringWebhook = async (
   if (!token) throw new Error('Authentication required');
   const url = new URL(`/webhooks/${kind}?id=${encodeURIComponent(String(id))}`, ENV.NEXT_PUBLIC_MONITORING_API_URL);
   const res = await fetch(url.toString(), { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } });
+  if (!res.ok) {
+    const text = await res.text().catch(() => '');
+    throw new HttpError(`Request failed: ${res.status} ${res.statusText}${text ? ` - ${text}` : ''}`, { status: res.status, statusText: res.statusText, bodyText: text });
+  }
+  revalidatePath('/settings');
+};
+
+export const getReportHour = async () => {
+  if (!ENV.NEXT_PUBLIC_MONITORING_API_URL) throw new Error('Monitoring API base URL is not configured');
+  const { getToken } = auth();
+  const token = await getToken();
+  if (!token) throw new Error('Authentication required');
+  const url = new URL('/usersH', ENV.NEXT_PUBLIC_MONITORING_API_URL);
+
+  const data = await fetchJson(url.toString(), { cache: 'no-cache', headers: { Authorization: `Bearer ${token}` } });
+  if (!data) return ReportHourSchema.parse({ DailyReportHour: 9, DailyReportMinute: 0, Timezone: 'Europe/Paris' });
+  return ReportHourSchema.parse(data);
+};
+
+export const updateReportHour = async (payload: Omit<TReportHour, 'UserID'>) => {
+  if (!ENV.NEXT_PUBLIC_MONITORING_API_URL) throw new Error('Monitoring API base URL is not configured');
+  const { getToken } = auth();
+  const token = await getToken();
+  if (!token) throw new Error('Authentication required');
+  const url = new URL('/usersH', ENV.NEXT_PUBLIC_MONITORING_API_URL);
+
+  const res = await fetch(url.toString(), { cache: 'no-cache', method: 'PUT', body: JSON.stringify(payload), headers: { Authorization: `Bearer ${token}` } });
   if (!res.ok) {
     const text = await res.text().catch(() => '');
     throw new HttpError(`Request failed: ${res.status} ${res.statusText}${text ? ` - ${text}` : ''}`, { status: res.status, statusText: res.statusText, bodyText: text });
