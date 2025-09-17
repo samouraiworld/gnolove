@@ -21,7 +21,7 @@ const Page = async () => {
   await Promise.all([
     prefetchValidators(queryClient, EValidatorPeriod.MONTH),
     prefetchBlockHeight(queryClient),
-    prefetchValidatorsLastIncident(queryClient),
+    prefetchValidatorsLastIncident(queryClient, EValidatorPeriod.MONTH),
   ]);
 
   return (

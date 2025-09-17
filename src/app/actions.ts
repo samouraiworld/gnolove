@@ -267,8 +267,10 @@ export const getBlockHeight = async () => {
   return BlockHeightSchema.parse(data);
 };
 
-export const getValidatorLastIncident = async () => {
+export const getValidatorLastIncident = async (timeFilter: EValidatorPeriod = EValidatorPeriod.MONTH) => {
   const url = new URL('/latest_incidents', ENV.NEXT_PUBLIC_MONITORING_API_URL);
+  url.searchParams.set('period', timeFilter);
+
   const data = await fetchJson(url.toString(), { cache: 'no-cache' });
 
   return validatorLastIncidentsSchema.parse(data || []);
