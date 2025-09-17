@@ -201,9 +201,7 @@ func extractGnoStringResponse(res string) (string, error) {
 	res = strings.TrimPrefix(res, "(")
 	res = strings.TrimSuffix(res, " string)")
 
-	var resFormatted string
-	err := json.Unmarshal([]byte(res), &resFormatted)
-	return resFormatted, err
+	return strconv.Unquote(res)
 }
 
 func (s *Syncer) syncVotesOnProposals(ctx context.Context) error {
