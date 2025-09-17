@@ -4,6 +4,9 @@ import WebhooksSectionClient from '@/features/settings/webhooks-section';
 import LayoutContainer from '@/layouts/layout-container';
 import { Metadata } from 'next';
 import { TMonitoringWebhookKind } from '@/utils/schemas';
+import { prefetchMonitoringWebhooks } from '@/hooks/use-monitoring-webhooks';
+import { prefetchReportHour } from '@/hooks/use-monitoring-webhooks';
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 
 export const metadata: Metadata = {
   title: 'Account settings',
@@ -25,15 +28,21 @@ export default async function SettingsPage() {
     );
   }
 
+  const queryClient = new QueryClient();
+
+  await Promise.all([...kinds.map((k) => prefetchMonitoringWebhooks(queryClient, k)), prefetchReportHour(queryClient)]);
+
   return (
     <LayoutContainer>
-      <Box pt="9">
-        <Heading size="6">Settings</Heading>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <Box pt="9">
+          <Heading size="6">Settings</Heading>
 
-        {kinds.map((k) => (
-          <WebhooksSectionClient key={k} kind={k} />
-        ))}
-      </Box>
+          {kinds.map((k) => (
+            <WebhooksSectionClient key={k} kind={k} />
+          ))}
+        </Box>
+      </HydrationBoundary>
     </LayoutContainer>
   );
 }

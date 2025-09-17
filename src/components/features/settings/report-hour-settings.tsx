@@ -33,7 +33,7 @@ const ReportHourSettings = () => {
     formState: { errors, isSubmitting, isValid },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { hour: reportHour?.DailyReportHour ?? 9, minute: reportHour?.DailyReportMinute ?? 0, timezone: reportHour?.Timezone ?? defaultTimezone },
+    defaultValues: { hour: reportHour?.daily_report_hour ?? 9, minute: reportHour?.daily_report_minute ?? 0, timezone: reportHour?.Timezone ?? defaultTimezone },
     mode: 'onChange',
     reValidateMode: 'onChange',
   });
@@ -41,9 +41,9 @@ const ReportHourSettings = () => {
   const onSubmit = async (values: FormValues) => {
     try {
       await updateReportHour.mutateAsync({
-        DailyReportHour: Math.max(0, Math.min(23, values.hour)),
-        DailyReportMinute: Math.max(0, Math.min(59, values.minute)),
-        Timezone: values.timezone || defaultTimezone,
+        hour: Math.max(0, Math.min(23, values.hour)),
+        minute: Math.max(0, Math.min(59, values.minute)),
+        timezone: values.timezone || defaultTimezone,
       });
       addToast({ title: 'Reporting time updated', message: 'This applies to all validator webhooks.', mode: 'positive' });
     } catch (err: unknown) {
@@ -139,7 +139,7 @@ const ReportHourSettings = () => {
 
         {!isReportHourLoading && reportHour && (
           <Text size="1" color="gray" className="mt-2 block">
-            Current: {String(reportHour.DailyReportHour).padStart(2, '0')}:{String(reportHour.DailyReportMinute).padStart(2, '0')} ({reportHour.Timezone})
+            Current: {String(reportHour.daily_report_hour).padStart(2, '0')}:{String(reportHour.daily_report_minute).padStart(2, '0')} ({reportHour.Timezone})
           </Text>
         )}
       </Box>

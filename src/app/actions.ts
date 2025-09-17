@@ -18,7 +18,6 @@ import {
   ReportHourSchema,
   RepositorySchema,
   ScoreFactorsSchema,
-  TReportHour,
   UserSchema,
   ValidatorLastIncidentsSchema,
   ValidatorsParticipationSchema,
@@ -64,14 +63,14 @@ export const listMonitoringWebhooks = async (kind: TMonitoringWebhookKind): Prom
 
 export const createMonitoringWebhook = async (
   kind: TMonitoringWebhookKind,
-  payload: Omit<TMonitoringWebhook, 'ID' | 'UserID'>,
+  payload: Omit<TMonitoringWebhook, 'ID'>,
 ): Promise<void> => {
   if (!ENV.NEXT_PUBLIC_MONITORING_API_URL) throw new Error('Monitoring API base URL is not configured');
   const { getToken } = auth();
   const token = await getToken();
   if (!token) throw new Error('Authentication required');
   const url = new URL(`/webhooks/${kind}`, ENV.NEXT_PUBLIC_MONITORING_API_URL);
-  const body = MonitoringWebhookSchema.omit({ ID: true, UserID: true }).parse(payload);
+  const body = MonitoringWebhookSchema.omit({ ID: true }).parse(payload);
   const res = await fetch(url.toString(), { method: 'POST', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` } });
   if (!res.ok) {
     const text = await res.text().catch(() => '');
@@ -82,7 +81,7 @@ export const createMonitoringWebhook = async (
 
 export const updateMonitoringWebhook = async (
   kind: TMonitoringWebhookKind,
-  payload: Omit<TMonitoringWebhook, 'UserID'>,
+  payload: TMonitoringWebhook,
 ): Promise<void> => {
   if (!ENV.NEXT_PUBLIC_MONITORING_API_URL) throw new Error('Monitoring API base URL is not configured');
   const { getToken } = auth();
@@ -90,7 +89,7 @@ export const updateMonitoringWebhook = async (
   if (!token) throw new Error('Authentication required');
   const url = new URL(`/webhooks/${kind}`, ENV.NEXT_PUBLIC_MONITORING_API_URL);
   if (payload.ID == null) throw new Error('ID is required for updates');
-  const body = MonitoringWebhookSchema.omit({ UserID: true }).parse(payload);
+  const body = MonitoringWebhookSchema.parse(payload);
   const res = await fetch(url.toString(), { method: 'PUT', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` } });
   if (!res.ok) {
     const text = await res.text().catch(() => '');
@@ -128,7 +127,7 @@ export const getReportHour = async () => {
   return ReportHourSchema.parse(data);
 };
 
-export const updateReportHour = async (payload: Omit<TReportHour, 'UserID'>) => {
+export const updateReportHour = async (payload: { hour: number; minute: number; timezone: string }) => {
   if (!ENV.NEXT_PUBLIC_MONITORING_API_URL) throw new Error('Monitoring API base URL is not configured');
   const { getToken } = auth();
   const token = await getToken();

@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import type { QueryClient } from '@tanstack/react-query';
 import {
   createMonitoringWebhook,
   deleteMonitoringWebhook,
@@ -7,7 +8,7 @@ import {
   updateMonitoringWebhook,
   updateReportHour,
 } from '@/app/actions';
-import type { TMonitoringWebhook, TMonitoringWebhookKind, TReportHour } from '@/utils/schemas';
+import type { TMonitoringWebhook, TMonitoringWebhookKind } from '@/utils/schemas';
 
 export const MONITORING_BASE_KEY = ['monitoring-webhooks'] as const;
 export const monitoringKey = (kind: TMonitoringWebhookKind) => [...MONITORING_BASE_KEY, kind] as const;
@@ -60,9 +61,23 @@ export function useGetReportHour() {
 export function useUpdateReportHour() {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: (payload: Omit<TReportHour, 'UserID'>) => updateReportHour(payload),
+    mutationFn: (payload: { hour: number; minute: number; timezone: string }) => updateReportHour(payload),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ['report-hour'] });
     },
   });
 }
+
+export const prefetchMonitoringWebhooks = (qc: QueryClient, kind: TMonitoringWebhookKind) => {
+  return qc.prefetchQuery({
+    queryKey: monitoringKey(kind),
+    queryFn: () => listMonitoringWebhooks(kind),
+  });
+};
+
+export const prefetchReportHour = (qc: QueryClient) => {
+  return qc.prefetchQuery({
+    queryKey: ['report-hour'],
+    queryFn: () => getReportHour(),
+  });
+};

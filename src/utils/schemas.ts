@@ -354,7 +354,6 @@ export type TProposals = z.infer<typeof ProposalsSchema>;
 // Monitoring webhooks
 export const MonitoringWebhookSchema = z.object({
   ID: z.number().optional(),
-  UserID: z.string(),
   URL: z.string().url(),
   Type: z.enum(['discord', 'slack']),
   Description: z.string(),
@@ -366,9 +365,8 @@ export type TMonitoringWebhook = z.infer<typeof MonitoringWebhookSchema>;
 export type TMonitoringWebhookKind = 'govdao' | 'validator';
 
 export const ReportHourSchema = z.object({
-  UserID: z.string(),
-  DailyReportHour: z.number().default(9),
-  DailyReportMinute: z.number().default(0),
+  daily_report_hour: z.number().default(9),
+  daily_report_minute: z.number().default(0),
   Timezone: z.string().default('Europe/Paris'),
 });
 export type TReportHour = z.infer<typeof ReportHourSchema>;
