@@ -152,22 +152,6 @@ const ValidatorsClientPage = () => {
   const { data: lastIncidents } = useGetValidatorsLastIncident();
   const [query, setQuery] = useState('');
 
-  if (isLoading) {
-    return (
-      <Flex align="center" justify="center" className="min-h-screen">
-        <Loader />
-      </Flex>
-    );
-  }
-
-  if (!validators) {
-    return (
-      <Flex align="center" justify="center" className="min-h-screen">
-        <Text>No metrics available</Text>
-      </Flex>
-    );
-  }
-
   const avgParticipationRate = useMemo(() => {
     if (!validators) return 0;
     const total = validators.reduce(
@@ -203,6 +187,22 @@ const ValidatorsClientPage = () => {
 
     return Object.values(grouped).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
   }, [lastIncidents, periodStart]);
+
+  if (isLoading) {
+    return (
+      <Flex align="center" justify="center" className="min-h-screen">
+        <Loader />
+      </Flex>
+    );
+  }
+
+  if (!validators) {
+    return (
+      <Flex align="center" justify="center" className="min-h-screen">
+        <Text>No metrics available</Text>
+      </Flex>
+    );
+  }
 
   return (
     <Box my="4">
