@@ -105,7 +105,7 @@ func GetContributorsWithScores(db *gorm.DB, since time.Time, repositories []stri
 	return stats, nil
 }
 
-// Format leaderboard message for Discord (same as frontend)
+// Format leaderboard message for Discord / Slack (same as frontend)
 func FormatLeaderboardMessage(stats []ContributorStats) string {
 	if len(stats) == 0 {
 		return "No contributions found in the last week! 😢"
@@ -160,9 +160,20 @@ func SendLeaderboard(webhookURL, content string) error {
 	return nil
 }
 
-// Cron job: send weekly leaderboard to Discord
+// Cron job: send weekly leaderboard to Discord / Slack
 func TriggerLeaderboardWebhook(db *gorm.DB, webhook models.LeaderboardWebhook) error {
-	stats, err := GetContributorsWithScores(db, time.Now().AddDate(0, 0, -7), webhook.Repositories)
+	// Compute since date based on frequency of webhook
+	now := time.Now()
+	var since time.Time
+	switch webhook.Frequency {
+	case "daily":
+		since = now.AddDate(0, 0, -1)
+	case "weekly":
+		since = now.AddDate(0, 0, -7)
+	default:
+		since = now.AddDate(0, 0, -7)
+	}
+	stats, err := GetContributorsWithScores(db, since, webhook.Repositories)
 	if err != nil {
 		return fmt.Errorf("%v", err)
 	}

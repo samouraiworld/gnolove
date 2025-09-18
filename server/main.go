@@ -24,8 +24,6 @@ import (
 
 	"github.com/clerk/clerk-sdk-go/v2"
 	clerkhttp "github.com/clerk/clerk-sdk-go/v2/http"
-
-	"github.com/robfig/cron/v3"
 )
 
 var database *gorm.DB
@@ -33,9 +31,6 @@ var database *gorm.DB
 const port = 3333
 
 var logger *zap.SugaredLogger
-
-// Init cron scheduler globally
-var scheduler *cron.Cron
 
 // LoggingMiddleware logs the duration of each request
 func LoggingMiddleware(next http.Handler) http.Handler {
@@ -45,11 +40,6 @@ func LoggingMiddleware(next http.Handler) http.Handler {
 		duration := time.Since(start)
 		logger.Infof("[%s] %s %s took %s", time.Now().Format("2006-01-02 15:04:05"), r.Method, r.URL.Path, duration)
 	})
-}
-
-func InitScheduler() {
-	scheduler = cron.New()
-	scheduler.Start()
 }
 
 func main() {
@@ -82,16 +72,11 @@ func main() {
 		clerk.SetKey(os.Getenv("CLERK_SECRET_KEY"))
 	}
 
-	InitScheduler()
 	if os.Getenv("DISCORD_WEBHOOK_URL") != "" {
-		err = handler.InitCustomGnoloveWebhook(database, scheduler)
+		err = handler.InitCustomGnoloveWebhook(database)
 		if err != nil {
 			logger.Warn("Failed to init custom gnolove webhook", err)
 		}
-	}
-	err = handler.InitActiveLeaderboardWebhooks(database, scheduler)
-	if err != nil {
-		logger.Warn("Failed to init active leaderboard webhooks", err)
 	}
 
 	signer := signer.New(
@@ -133,6 +118,9 @@ func main() {
 	// repositories
 	prRepo := infrarepo.NewPullRequestRepository(database)
 
+	// Start triggering leaderboard webhooks
+	go handler.LoopTriggerLeaderboardWebhooks(database)
+
 	router.HandleFunc("/repositories", handler.HandleGetRepository(database))
 	router.HandleFunc("/stats", handler.HandleGetUserStats(database, cache))
 	router.HandleFunc("/users", handler.HandleGetUsers(database))
@@ -151,9 +139,9 @@ func main() {
 	router.Group(func(r chi.Router) {
 		r.Use(clerkhttp.WithHeaderAuthorization())
 		r.Get("/leaderboard-webhooks", handler.HandleGetLeaderboardWebhooks(database))
-		r.Post("/leaderboard-webhooks", handler.HandleCreateLeaderboardWebhook(database, scheduler))
-		r.Put("/leaderboard-webhooks/{id}", handler.HandleUpdateLeaderboardWebhook(database, scheduler))
-		r.Delete("/leaderboard-webhooks/{id}", handler.HandleDeleteLeaderboardWebhook(database, scheduler))
+		r.Post("/leaderboard-webhooks", handler.HandleCreateLeaderboardWebhook(database))
+		r.Put("/leaderboard-webhooks/{id}", handler.HandleUpdateLeaderboardWebhook(database))
+		r.Delete("/leaderboard-webhooks/{id}", handler.HandleDeleteLeaderboardWebhook(database))
 	})
 
 	// Onchain package contributions endpoints
