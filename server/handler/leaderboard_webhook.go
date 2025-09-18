@@ -5,8 +5,10 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"os"
 
 	"github.com/clerk/clerk-sdk-go/v2"
+	"github.com/robfig/cron/v3"
 	"github.com/samouraiworld/topofgnomes/server/models"
 	"gorm.io/gorm"
 
@@ -38,6 +40,71 @@ func checkWebhookInput(webhook *models.LeaderboardWebhook) error {
 	if webhook.Cron == "" {
 		// Default to Friday 15:00 UTC
 		webhook.Cron = "0 15 * * 5"
+	} else {
+		_, err := cron.NewParser(cron.Minute | cron.Hour | cron.Dom | cron.Month | cron.Dow).Parse(webhook.Cron)
+		if err != nil {
+			return fmt.Errorf("invalid cron expression")
+		}
+	}
+	return nil
+}
+
+func enableCronJob(scheduler *cron.Cron, webhook models.LeaderboardWebhook, database *gorm.DB) (cron.EntryID, error) {
+	id, err := scheduler.AddFunc(webhook.Cron, func() {
+		TriggerLeaderboardWebhook(database, webhook)
+	})
+	if err != nil {
+		return 0, err
+	}
+	return id, nil
+}
+
+func disableCronJob(scheduler *cron.Cron, webhook models.LeaderboardWebhook) {
+	scheduler.Remove(webhook.CronId)
+}
+
+// Init custom gnolove webhook, that sends to Samourai Discord
+func InitCustomGnoloveWebhook(db *gorm.DB, scheduler *cron.Cron) error {
+	var webhook models.LeaderboardWebhook
+	db.First(&webhook, "url = ?", os.Getenv("DISCORD_WEBHOOK_URL"))
+	if webhook.ID != 0 {
+		return nil
+	}
+	customWebhook := models.LeaderboardWebhook{
+		Url:    os.Getenv("DISCORD_WEBHOOK_URL"),
+		Type:   "discord",
+		Cron:   "0 15 * * 5",
+		Active: true,
+	}
+	id, err := enableCronJob(scheduler, customWebhook, db)
+	if err != nil {
+		return err
+	}
+	customWebhook.CronId = id
+	if err := db.Create(&customWebhook).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
+// Init cron jobs for all active webhooks on server startup
+func InitActiveLeaderboardWebhooks(db *gorm.DB, scheduler *cron.Cron) error {
+	webhooks := []models.LeaderboardWebhook{}
+	err := db.Find(&webhooks).Where("active = ?", true).Error
+	if err != nil {
+		return err
+	}
+
+	for _, wh := range webhooks {
+		id, err := enableCronJob(scheduler, wh, db)
+		if err != nil {
+			return err
+		}
+
+		wh.CronId = id
+		if err := db.Save(&wh).Error; err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -65,7 +132,7 @@ func HandleGetLeaderboardWebhooks(db *gorm.DB) http.HandlerFunc {
 }
 
 // Create a leaderboard webhook for the user
-func HandleCreateLeaderboardWebhook(db *gorm.DB) http.HandlerFunc {
+func HandleCreateLeaderboardWebhook(db *gorm.DB, scheduler *cron.Cron) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		claims, ok := clerk.SessionClaimsFromContext(r.Context())
@@ -89,6 +156,13 @@ func HandleCreateLeaderboardWebhook(db *gorm.DB) http.HandlerFunc {
 			w.Write([]byte(err.Error()))
 			return
 		}
+		id, err := enableCronJob(scheduler, webhook, db)
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write([]byte(err.Error()))
+			return
+		}
+		webhook.CronId = id
 		err = db.Create(&webhook).Error
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
@@ -102,7 +176,7 @@ func HandleCreateLeaderboardWebhook(db *gorm.DB) http.HandlerFunc {
 }
 
 // Update a leaderboard webhook for the user
-func HandleUpdateLeaderboardWebhook(db *gorm.DB) http.HandlerFunc {
+func HandleUpdateLeaderboardWebhook(db *gorm.DB, scheduler *cron.Cron) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		claims, ok := clerk.SessionClaimsFromContext(r.Context())
@@ -137,21 +211,32 @@ func HandleUpdateLeaderboardWebhook(db *gorm.DB) http.HandlerFunc {
 			w.Write([]byte(err.Error()))
 			return
 		}
+		if webhook.Active {
+			if webhook.CronId != 0 {
+				id, err := enableCronJob(scheduler, webhook, db)
+				if err != nil {
+					w.WriteHeader(http.StatusInternalServerError)
+					w.Write([]byte(err.Error()))
+					return
+				}
+				webhook.CronId = id
+			}
+		} else {
+			disableCronJob(scheduler, webhook)
+			webhook.CronId = 0
+		}
 		err = db.Save(&webhook).Error
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			w.Write([]byte(err.Error()))
 			return
 		}
-		if !webhook.Active {
-
-		}
 		json.NewEncoder(w).Encode(webhook)
 	}
 }
 
 // Delete a leaderboard webhook for the user
-func HandleDeleteLeaderboardWebhook(db *gorm.DB) http.HandlerFunc {
+func HandleDeleteLeaderboardWebhook(db *gorm.DB, scheduler *cron.Cron) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		claims, ok := clerk.SessionClaimsFromContext(r.Context())
@@ -180,6 +265,7 @@ func HandleDeleteLeaderboardWebhook(db *gorm.DB) http.HandlerFunc {
 			w.Write([]byte(err.Error()))
 			return
 		}
+		disableCronJob(scheduler, webhook)
 		w.WriteHeader(http.StatusOK)
 	}
 }
