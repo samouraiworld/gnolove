@@ -13,6 +13,7 @@ type LeaderboardWebhook struct {
 	Day          int       `gorm:"column:day;not null;check:day >= 0 AND day <= 6" json:"day" default:"4"`
 	Hour         int       `gorm:"column:hour;not null" json:"hour" default:"15"`
 	Minute       int       `gorm:"column:minute;not null" json:"minute" default:"0"`
+	Timezone     string    `gorm:"column:timezone;not null" json:"timezone" default:"Europe/Paris"`
 	Repositories []string  `gorm:"column:repositories;type:text;serializer:json" json:"repositories"`
 	Active       bool      `gorm:"column:active;not null;default:true" json:"active" default:"true"`
 	NextRunAt    time.Time `gorm:"column:next_run_at;not null" json:"nextRunAt"`
