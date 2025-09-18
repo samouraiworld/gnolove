@@ -134,7 +134,7 @@ export const updateReportHour = async (payload: { hour: number; minute: number; 
   if (!token) throw new Error('Authentication required');
   const url = new URL('/usersH', ENV.NEXT_PUBLIC_MONITORING_API_URL);
 
-  const res = await fetch(url.toString(), { cache: 'no-cache', method: 'PUT', body: JSON.stringify(payload), headers: { Authorization: `Bearer ${token}` } });
+  const res = await fetch(url.toString(), { cache: 'no-cache', method: 'PUT', body: JSON.stringify(payload), headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` } });
   if (!res.ok) {
     const text = await res.text().catch(() => '');
     throw new HttpError(`Request failed: ${res.status} ${res.statusText}${text ? ` - ${text}` : ''}`, { status: res.status, statusText: res.statusText, bodyText: text });
