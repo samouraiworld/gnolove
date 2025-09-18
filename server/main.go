@@ -150,7 +150,7 @@ func main() {
 	// Leaderboard webhook endpoints
 	router.Group(func(r chi.Router) {
 		r.Use(clerkhttp.WithHeaderAuthorization())
-		r.HandleFunc("/leaderboard-webhooks", handler.HandleGetLeaderboardWebhooks(database))
+		r.Get("/leaderboard-webhooks", handler.HandleGetLeaderboardWebhooks(database))
 		r.Post("/leaderboard-webhooks", handler.HandleCreateLeaderboardWebhook(database, scheduler))
 		r.Put("/leaderboard-webhooks/{id}", handler.HandleUpdateLeaderboardWebhook(database, scheduler))
 		r.Delete("/leaderboard-webhooks/{id}", handler.HandleDeleteLeaderboardWebhook(database, scheduler))
