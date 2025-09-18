@@ -18,7 +18,10 @@ import (
 
 func calculateNextRunAt(webhook *models.LeaderboardWebhook) time.Time {
 	now := time.Now()
-	loc := time.Local
+	loc, err := time.LoadLocation(webhook.Timezone)
+	if err != nil {
+		loc = time.Local
+	}
 
 	switch webhook.Frequency {
 	case "daily":
