@@ -27,12 +27,9 @@ type ContributorStats struct {
 	Score         float64
 }
 
-// Get contributors with stats and scores for the given period
+// Get contributors with stats and scores for the given period and repositories
 func GetContributorsWithScores(db *gorm.DB, since time.Time, repositories []string) ([]ContributorStats, error) {
 	var users []models.User
-	if err := db.Find(&users).Error; err != nil {
-		return nil, err
-	}
 
 	// Build excluded repositories slice from env var (comma separated)
 	excludedEnv := os.Getenv("LEADERBOARD_EXCLUDED_REPOS")
@@ -49,95 +46,43 @@ func GetContributorsWithScores(db *gorm.DB, since time.Time, repositories []stri
 		}
 	}
 
-	// Aggregate all counts in one query per table
-	type countResult struct {
-		AuthorID string
-		Count    int64
-	}
-	commitsMap := map[string]int64{}
-	var commitResults []countResult
-	{
-		q := db.Table("commits").Select("author_id, COUNT(*) as count").Where("created_at >= ?", since)
+	// Preload associations with conditions (since + repositories filters)
+	cond := func(tx *gorm.DB) *gorm.DB {
+		tx2 := tx.Where("created_at >= ?", since)
 		if len(excludedRepos) > 0 {
-			q = q.Where("repository_id NOT IN ?", excludedRepos)
+			tx2 = tx2.Where("repository_id NOT IN ?", excludedRepos)
 		}
 		if len(repositories) > 0 {
-			q = q.Where("repository_id IN ?", repositories)
+			tx2 = tx2.Where("repository_id IN ?", repositories)
 		}
-		if err := q.Group("author_id").Scan(&commitResults).Error; err != nil {
-			return nil, err
-		}
-	}
-	for _, r := range commitResults {
-		commitsMap[r.AuthorID] = r.Count
+		return tx2
 	}
 
-	issuesMap := map[string]int64{}
-	var issueResults []countResult
-	{
-		q := db.Table("issues").Select("author_id, COUNT(*) as count").Where("created_at >= ?", since)
-		if len(excludedRepos) > 0 {
-			q = q.Where("repository_id NOT IN ?", excludedRepos)
-		}
-		if len(repositories) > 0 {
-			q = q.Where("repository_id IN ?", repositories)
-		}
-		if err := q.Group("author_id").Scan(&issueResults).Error; err != nil {
-			return nil, err
-		}
-	}
-	for _, r := range issueResults {
-		issuesMap[r.AuthorID] = r.Count
-	}
+	// Retrieve users with data based on conditions
+	err := db.Model(&models.User{}).
+		Preload("Issues", cond).
+		Preload("Commits", cond).
+		Preload("PullRequests", cond).
+		Preload("Reviews", func(tx *gorm.DB) *gorm.DB {
+			scoped := cond(tx)
+			return scoped.
+				Joins("JOIN pull_requests ON pull_requests.id = reviews.pull_request_id").
+				Where("pull_requests.state = ?", "MERGED").
+				Where("pull_requests.author_id <> reviews.author_id")
+		}).
+		Find(&users).Error
 
-	prsMap := map[string]int64{}
-	var prResults []countResult
-	{
-		q := db.Table("pull_requests").Select("author_id, COUNT(*) as count").Where("created_at >= ?", since)
-		if len(excludedRepos) > 0 {
-			q = q.Where("repository_id NOT IN ?", excludedRepos)
-		}
-		if len(repositories) > 0 {
-			q = q.Where("repository_id IN ?", repositories)
-		}
-		if err := q.Group("author_id").Scan(&prResults).Error; err != nil {
-			return nil, err
-		}
-	}
-	for _, r := range prResults {
-		prsMap[r.AuthorID] = r.Count
-	}
-
-	reviewedMap := map[string]int64{}
-	var reviewedResults []countResult
-	{
-		q := db.Table("reviews").
-			Select("reviews.author_id, COUNT(*) AS count").
-			Joins("JOIN pull_requests ON pull_requests.id = reviews.pull_request_id").
-			Where("reviews.created_at >= ?", since).
-			Where("pull_requests.state = ?", "MERGED").
-			Where("pull_requests.author_id <> reviews.author_id")
-		if len(excludedRepos) > 0 {
-			q = q.Where("reviews.repository_id NOT IN ?", excludedRepos)
-		}
-		if len(repositories) > 0 {
-			q = q.Where("repository_id IN ?", repositories)
-		}
-		if err := q.Group("reviews.author_id").Scan(&reviewedResults).Error; err != nil {
-			return nil, err
-		}
-	}
-	for _, r := range reviewedResults {
-		reviewedMap[r.AuthorID] = r.Count
+	if err != nil {
+		return nil, err
 	}
 
 	// Now build the stats slice
 	stats := make([]ContributorStats, 0, len(users))
 	for _, user := range users {
-		commits := commitsMap[user.ID]
-		issues := issuesMap[user.ID]
-		prs := prsMap[user.ID]
-		reviewed := reviewedMap[user.ID]
+		commits := int64(len(user.Commits))
+		issues := int64(len(user.Issues))
+		prs := int64(len(user.PullRequests))
+		reviewed := int64(len(user.Reviews))
 		score := CalculateScore(commits, issues, prs, reviewed)
 		if score > 0 {
 			stats = append(stats, ContributorStats{
