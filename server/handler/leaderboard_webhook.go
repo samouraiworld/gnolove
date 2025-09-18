@@ -6,25 +6,70 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"strings"
+	"time"
 
 	"github.com/clerk/clerk-sdk-go/v2"
-	"github.com/robfig/cron/v3"
 	"github.com/samouraiworld/topofgnomes/server/models"
 	"gorm.io/gorm"
 
 	"github.com/go-chi/chi/v5"
 )
 
+func calculateNextRunAt(webhook *models.LeaderboardWebhook) time.Time {
+	now := time.Now()
+	loc := time.Local
+
+	switch webhook.Frequency {
+	case "daily":
+		candidate := time.Date(now.Year(), now.Month(), now.Day(), webhook.Hour, webhook.Minute, 0, 0, loc)
+		if candidate.Before(now) {
+			candidate = candidate.AddDate(0, 0, 1)
+		}
+		return candidate
+	case "weekly":
+		candidate := time.Date(now.Year(), now.Month(), now.Day(), webhook.Hour, webhook.Minute, 0, 0, loc)
+		todayDay := int(now.Weekday())
+		targetDay := webhook.Day
+		daysAhead := (targetDay - todayDay + 7) % 7
+		if daysAhead == 0 && candidate.Before(now) {
+			daysAhead = 7
+		}
+		return candidate.AddDate(0, 0, daysAhead)
+	default:
+		// Default is weekly
+		candidate := time.Date(now.Year(), now.Month(), now.Day(), webhook.Hour, webhook.Minute, 0, 0, loc)
+		todayDay := int(now.Weekday())
+		targetDay := webhook.Day
+		daysAhead := (targetDay - todayDay + 7) % 7
+		if daysAhead == 0 && candidate.Before(now) {
+			daysAhead = 7
+		}
+		return candidate.AddDate(0, 0, daysAhead)
+	}
+}
+
 func checkWebhookInput(webhook *models.LeaderboardWebhook) error {
 	if webhook.Type != "discord" && webhook.Type != "slack" {
 		return fmt.Errorf("invalid type")
 	}
-	if webhook.Url == "" {
+	if strings.TrimSpace(webhook.Url) == "" {
 		return fmt.Errorf("url is required")
 	}
-	_, err := url.ParseRequestURI(webhook.Url)
-	if err != nil {
+	if _, err := url.ParseRequestURI(webhook.Url); err != nil {
 		return fmt.Errorf("invalid url")
+	}
+	if webhook.Frequency != "daily" && webhook.Frequency != "weekly" {
+		return fmt.Errorf("invalid frequency")
+	}
+	if webhook.Hour < 0 || webhook.Hour > 23 {
+		return fmt.Errorf("hour must be between 0 and 23")
+	}
+	if webhook.Minute < 0 || webhook.Minute > 59 {
+		return fmt.Errorf("minute must be between 0 and 59")
+	}
+	if webhook.Frequency == "weekly" && (webhook.Day < 0 || webhook.Day > 6) {
+		return fmt.Errorf("day must be 0..6 (0=Sunday..6=Saturday) for weekly frequency")
 	}
 	if len(webhook.Repositories) == 0 {
 		// Push all repositories if no repositories are specified
@@ -37,74 +82,34 @@ func checkWebhookInput(webhook *models.LeaderboardWebhook) error {
 			webhook.Repositories[i] = repo.ID
 		}
 	}
-	if webhook.Cron == "" {
-		// Default to Friday 15:00 UTC
-		webhook.Cron = "0 15 * * 5"
+	if webhook.Active {
+		webhook.NextRunAt = calculateNextRunAt(webhook)
 	} else {
-		_, err := cron.NewParser(cron.Minute | cron.Hour | cron.Dom | cron.Month | cron.Dow).Parse(webhook.Cron)
-		if err != nil {
-			return fmt.Errorf("invalid cron expression")
-		}
+		webhook.NextRunAt = time.Time{}
 	}
+
 	return nil
 }
 
-func enableCronJob(scheduler *cron.Cron, webhook models.LeaderboardWebhook, database *gorm.DB) (cron.EntryID, error) {
-	id, err := scheduler.AddFunc(webhook.Cron, func() {
-		TriggerLeaderboardWebhook(database, webhook)
-	})
-	if err != nil {
-		return 0, err
-	}
-	return id, nil
-}
-
-func disableCronJob(scheduler *cron.Cron, webhook models.LeaderboardWebhook) {
-	scheduler.Remove(webhook.CronId)
-}
-
-// Init custom gnolove webhook, that sends to Samourai Discord
-func InitCustomGnoloveWebhook(db *gorm.DB, scheduler *cron.Cron) error {
+// Init custom gnolove webhook, that sends to Samourai Coop Discord
+func InitCustomGnoloveWebhook(db *gorm.DB) error {
 	var webhook models.LeaderboardWebhook
 	db.First(&webhook, "url = ?", os.Getenv("DISCORD_WEBHOOK_URL"))
 	if webhook.ID != 0 {
 		return nil
 	}
 	customWebhook := models.LeaderboardWebhook{
-		Url:    os.Getenv("DISCORD_WEBHOOK_URL"),
-		Type:   "discord",
-		Cron:   "0 15 * * 5",
-		Active: true,
+		Url:       os.Getenv("DISCORD_WEBHOOK_URL"),
+		Type:      "discord",
+		Frequency: "weekly",
+		Day:       4,
+		Hour:      15,
+		Minute:    0,
+		Active:    true,
 	}
-	id, err := enableCronJob(scheduler, customWebhook, db)
-	if err != nil {
-		return err
-	}
-	customWebhook.CronId = id
+	customWebhook.NextRunAt = calculateNextRunAt(&customWebhook)
 	if err := db.Create(&customWebhook).Error; err != nil {
 		return err
-	}
-	return nil
-}
-
-// Init cron jobs for all active webhooks on server startup
-func InitActiveLeaderboardWebhooks(db *gorm.DB, scheduler *cron.Cron) error {
-	webhooks := []models.LeaderboardWebhook{}
-	err := db.Find(&webhooks).Where("active = ?", true).Error
-	if err != nil {
-		return err
-	}
-
-	for _, wh := range webhooks {
-		id, err := enableCronJob(scheduler, wh, db)
-		if err != nil {
-			return err
-		}
-
-		wh.CronId = id
-		if err := db.Save(&wh).Error; err != nil {
-			return err
-		}
 	}
 	return nil
 }
@@ -132,7 +137,7 @@ func HandleGetLeaderboardWebhooks(db *gorm.DB) http.HandlerFunc {
 }
 
 // Create a leaderboard webhook for the user
-func HandleCreateLeaderboardWebhook(db *gorm.DB, scheduler *cron.Cron) http.HandlerFunc {
+func HandleCreateLeaderboardWebhook(db *gorm.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		claims, ok := clerk.SessionClaimsFromContext(r.Context())
@@ -156,13 +161,6 @@ func HandleCreateLeaderboardWebhook(db *gorm.DB, scheduler *cron.Cron) http.Hand
 			w.Write([]byte(err.Error()))
 			return
 		}
-		id, err := enableCronJob(scheduler, webhook, db)
-		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			w.Write([]byte(err.Error()))
-			return
-		}
-		webhook.CronId = id
 		err = db.Create(&webhook).Error
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
@@ -176,7 +174,7 @@ func HandleCreateLeaderboardWebhook(db *gorm.DB, scheduler *cron.Cron) http.Hand
 }
 
 // Update a leaderboard webhook for the user
-func HandleUpdateLeaderboardWebhook(db *gorm.DB, scheduler *cron.Cron) http.HandlerFunc {
+func HandleUpdateLeaderboardWebhook(db *gorm.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		claims, ok := clerk.SessionClaimsFromContext(r.Context())
@@ -211,20 +209,6 @@ func HandleUpdateLeaderboardWebhook(db *gorm.DB, scheduler *cron.Cron) http.Hand
 			w.Write([]byte(err.Error()))
 			return
 		}
-		if webhook.Active {
-			if webhook.CronId != 0 {
-				id, err := enableCronJob(scheduler, webhook, db)
-				if err != nil {
-					w.WriteHeader(http.StatusInternalServerError)
-					w.Write([]byte(err.Error()))
-					return
-				}
-				webhook.CronId = id
-			}
-		} else {
-			disableCronJob(scheduler, webhook)
-			webhook.CronId = 0
-		}
 		err = db.Save(&webhook).Error
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
@@ -236,7 +220,7 @@ func HandleUpdateLeaderboardWebhook(db *gorm.DB, scheduler *cron.Cron) http.Hand
 }
 
 // Delete a leaderboard webhook for the user
-func HandleDeleteLeaderboardWebhook(db *gorm.DB, scheduler *cron.Cron) http.HandlerFunc {
+func HandleDeleteLeaderboardWebhook(db *gorm.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		claims, ok := clerk.SessionClaimsFromContext(r.Context())
@@ -265,7 +249,35 @@ func HandleDeleteLeaderboardWebhook(db *gorm.DB, scheduler *cron.Cron) http.Hand
 			w.Write([]byte(err.Error()))
 			return
 		}
-		disableCronJob(scheduler, webhook)
 		w.WriteHeader(http.StatusOK)
+	}
+}
+
+// Loop through active leaderboard webhooks and trigger them
+func LoopTriggerLeaderboardWebhooks(db *gorm.DB) {
+	for {
+		time.Sleep(1 * time.Minute)
+		var webhooks []models.LeaderboardWebhook
+		err := db.Where("active = ?", true).Find(&webhooks).Error
+		if err != nil {
+			fmt.Println("Failed to find webhooks", err)
+			continue
+		}
+		for i := range webhooks {
+			webhook := webhooks[i]
+			if webhook.NextRunAt.After(time.Now()) {
+				continue
+			}
+			err := TriggerLeaderboardWebhook(db, webhook)
+			if err != nil {
+				fmt.Println("Failed to send leaderboard webhook", err)
+				continue
+			}
+			webhook.NextRunAt = calculateNextRunAt(&webhook)
+			err = db.Save(&webhook).Error
+			if err != nil {
+				fmt.Println("Failed to update NextRunAt", err)
+			}
+		}
 	}
 }
