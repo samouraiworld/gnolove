@@ -402,17 +402,17 @@ export const YoutubeVideoPlaylistSchema = z.array(
 );
 export type TYoutubeVideoPlaylist = z.infer<typeof YoutubeVideoPlaylistSchema>;
 
-export const validatorParticipationSchema = z.object({
+export const ValidatorParticipationSchema = z.object({
   Addr: z.string(),
   Moniker: z.string(),
   ParticipationRate: z.number(),
 });
 
-export type TValidatorParticipation = z.infer<typeof validatorParticipationSchema>;
+export type TValidatorParticipation = z.infer<typeof ValidatorParticipationSchema>;
 
-export const validatorsParticipationSchema = z.array(validatorParticipationSchema);
+export const ValidatorsParticipationSchema = z.array(ValidatorParticipationSchema);
 
-export type TValidatorsParticipation = z.infer<typeof validatorsParticipationSchema>;
+export type TValidatorsParticipation = z.infer<typeof ValidatorsParticipationSchema>;
 
 export const BlockHeightSchema = z.object({
   last_stored: z.number(),
@@ -421,7 +421,7 @@ export const BlockHeightSchema = z.object({
 export type TBlockHeight = z.infer<typeof BlockHeightSchema>;
 
 
-export const validatorLastIncidentSchema = z.object({
+export const ValidatorLastIncidentSchema = z.object({
   Moniker: z.string(),
   Addr: z.string(),
   Level: z.string(),
@@ -431,6 +431,6 @@ export const validatorLastIncidentSchema = z.object({
   SentAt: z.string(),
 }).nullable();
 
-export const validatorLastIncidentsSchema = z.array(validatorLastIncidentSchema);
+export const ValidatorLastIncidentsSchema = z.array(ValidatorLastIncidentSchema);
 
-export type TValidatorLastIncident = z.infer<typeof validatorLastIncidentSchema>;
+export type TValidatorLastIncident = z.infer<typeof ValidatorLastIncidentSchema>;

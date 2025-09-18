@@ -17,8 +17,8 @@ import {
   RepositorySchema,
   ScoreFactorsSchema,
   UserSchema,
-  validatorLastIncidentsSchema,
-  validatorsParticipationSchema,
+  ValidatorLastIncidentsSchema,
+  ValidatorsParticipationSchema,
   YoutubePlaylistIdSchema,
   YoutubeVideoPlaylistSchema,
 } from '@/utils/schemas';
@@ -257,7 +257,7 @@ export const getValidators = async (timeFilter: EValidatorPeriod = EValidatorPer
 
   const data = await fetchJson(url.toString(), { cache: 'no-cache' });
 
-  return validatorsParticipationSchema.parse(data);
+  return ValidatorsParticipationSchema.parse(data);
 };
 
 export const getBlockHeight = async () => {
@@ -273,5 +273,5 @@ export const getValidatorLastIncident = async (timeFilter: EValidatorPeriod = EV
 
   const data = await fetchJson(url.toString(), { cache: 'no-cache' });
 
-  return validatorLastIncidentsSchema.parse(data || []);
+  return ValidatorLastIncidentsSchema.parse(data || []);
 };
