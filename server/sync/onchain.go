@@ -3,6 +3,7 @@ package sync
 import (
 	"context"
 	"fmt"
+	"regexp"
 	"strconv"
 	"strings"
 
@@ -280,4 +281,43 @@ func getAttrKey(attributs []gnoindexerql.GetGovDAOProposalsGetTransactionsTransa
 	}
 
 	return ""
+}
+
+func (s *Syncer) syncGovDaoMembers() error {
+	s.logger.Info("Syncing Gov Dao Members")
+	// input is of the form T1|T2|T3 | g1<address>
+	// so the tier is member[1] and the address is member[2]
+	regex := regexp.MustCompile(`(T1|T2|T3)\s\|\s((g1)[a-zA-Z0-9]+)`)
+
+	page := 1
+	for {
+		membersData, err := s.rpcClient.ABCIQuery("vm/qeval", []byte(fmt.Sprintf(`gno.land/r/gov/dao/v3/memberstore.Render("members?page=%d")`, page)))
+		if err != nil {
+			return err
+		}
+
+		members := regex.FindAllStringSubmatch(string(membersData.Response.Data), -1)
+		for _, member := range members {
+			if len(member) < 3 {
+				s.logger.Errorf("invalid member %s", member)
+				continue
+			}
+
+			GovDaoMember := &models.GovDaoMember{
+				Address: member[2],
+				Tier:    member[1],
+			}
+			err = s.db.Save(GovDaoMember).Error
+			if err != nil {
+				return err
+			}
+		}
+
+		if len(members) == 0 {
+			break
+		}
+		page++
+	}
+
+	return nil
 }
