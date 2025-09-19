@@ -29,15 +29,15 @@ const ProposalDetail = ({ id }: { id: string }) => {
 
   return (
     <Flex direction="column" gap="4" pt="6">
-      <Flex align="center" justify="between">
-        <Flex align="center" gap="3">
+      <Flex align={{ initial: 'start', md: 'center' }} direction={{ initial: 'column', md: 'row' }} justify="between">
+        <Flex align={{ initial: 'start', md: 'center' }} gap="3" direction={{ initial: 'column', md: 'row' }}>
           <Badge color={statusColor} variant="soft">{capitalize(status)}</Badge>
           <Heading size="6">{getProposalTitle(proposal)}</Heading>
         </Flex>
-        <Text color="gray" size="2">ID: {proposal.id}</Text>
+        <Text color="gray" size="2" mt={{ initial: '2', md: '0' }}>ID: {proposal.id}</Text>
       </Flex>
       {proposal.description && (
-        <Text mb="2">{proposal.description}</Text>
+        <RadixMarkdown>{proposal.description}</RadixMarkdown>
       )}
       <Text color="gray">{proposal.path}</Text>
 

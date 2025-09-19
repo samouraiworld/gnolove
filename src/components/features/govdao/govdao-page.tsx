@@ -10,6 +10,7 @@ import { TProposal } from '@/utils/schemas';
 import Loader from '@/elements/loader';
 import StatCard from '@/features/govdao/stat-card';
 import { aggregateVotes, capitalize, getProposalTitle, getStatusColor, percent } from '@/utils/govdao';
+import RadixMarkdown from '@/elements/radix-markdown';
 
 // Filters bar
 const Filters = ({
@@ -67,7 +68,7 @@ const ProposalCard = ({ proposal }: { proposal: TProposal }) => {
             {getProposalTitle(proposal)}
           </Heading>
           {proposal.description && (
-            <Text mb="2">{proposal.description}</Text>
+            <RadixMarkdown>{proposal.description}</RadixMarkdown>
           )}
           <Text mb="2" color="gray">Proposal path: {proposal.path}</Text>
           <Box className="h-2 w-full rounded-full bg-red-6 relative overflow-hidden">
