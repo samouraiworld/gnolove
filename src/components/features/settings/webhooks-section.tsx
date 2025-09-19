@@ -31,7 +31,7 @@ export default function WebhooksSectionClient({ kind }: { kind: WebhookKind }) {
           {kind === 'govdao' ? 'GOVDAO webhooks' : 'Validators webhooks'}
         </Heading>
         <Text size="2" color="gray">
-          Configure team notifications for {kind === 'govdao' ? 'GOVDAO proposals' : 'validator events'}. Add your Discord or Slack webhooks and an optional description.
+          Configure team notifications for {kind === 'govdao' ? 'GOVDAO proposals' : 'validator events'}. Add your Discord or Slack webhooks and a description. {kind === 'govdao' ? 'GovDAO webhooks are triggered when a GovDAO activity is detected.' : 'Validator webhooks are triggered periodically.'}
         </Text>
 
         {kind === 'validator' && (data?.length ?? 0) > 0 && (
