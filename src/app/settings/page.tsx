@@ -1,4 +1,4 @@
-import { Box, Heading, Text } from '@radix-ui/themes';
+import { Box, Heading } from '@radix-ui/themes';
 import { auth } from '@clerk/nextjs/server';
 import WebhooksSectionClient from '@/features/settings/webhooks-section';
 import LayoutContainer from '@/layouts/layout-container';
@@ -7,6 +7,7 @@ import { TMonitoringWebhookKind } from '@/utils/schemas';
 import { prefetchMonitoringWebhooks } from '@/hooks/use-monitoring-webhooks';
 import { prefetchReportHour } from '@/hooks/use-monitoring-webhooks';
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
+import { notFound } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'Account settings',
@@ -18,14 +19,7 @@ export default async function SettingsPage() {
   const { userId } = auth();
 
   if (!userId) {
-    return (
-      <Box p="5" pt="9">
-        <Heading size="6" mb="3">
-          Settings
-        </Heading>
-        <Text>Please sign in to configure your monitoring.</Text>
-      </Box>
-    );
+    notFound();
   }
 
   const queryClient = new QueryClient();
