@@ -1,6 +1,7 @@
 import { Box, Flex, Card, Avatar, Text, Heading, Separator, IconButton } from '@radix-ui/themes';
 import { TContributor } from '@/utils/schemas';
 import { Calendar, Copy, Github, Globe, MapPin, Twitter } from 'lucide-react';
+import Copyable from '@/elements/copyable';
 
 const ContributorProfile = ({ contributor }: { contributor: TContributor }) => {
   const websiteUrl = /^https?:\/\//i.test(contributor.websiteUrl ?? '')
@@ -96,23 +97,7 @@ const ContributorProfile = ({ contributor }: { contributor: TContributor }) => {
                   Wallet Address
                 </Text>
                 <Flex align='center' gap='2'>
-                  <Box
-                    p='4'
-                    overflow='hidden'
-                    style={{
-                      backgroundColor: 'var(--gray-3)',
-                      borderRadius: '4px',
-                      fontFamily: 'monospace',
-                      fontSize: '12px',
-                      flex: 1,
-                      textOverflow: 'ellipsis',
-                    }}
-                  >
-                    {contributor.wallet}
-                  </Box>
-                  <IconButton variant='ghost' size='1' onClick={() => navigator.clipboard.writeText(contributor.wallet)}>
-                    <Copy size={12} />
-                  </IconButton>
+                    <Copyable>{contributor.wallet}</Copyable>
                 </Flex>
               </Box>
 
