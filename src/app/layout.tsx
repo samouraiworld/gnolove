@@ -24,6 +24,7 @@ import { Analytics } from '@vercel/analytics/next';
 
 import { OfflineProvider } from '@/contexts/offline-context';
 import OfflineBanner from '@/elements/offline-banner';
+import { ClerkProvider } from '@clerk/nextjs';
 
 // Site-wide SEO metadata
 export const metadata: Metadata = {
@@ -128,55 +129,57 @@ const RootLayout = ({ children, details }: RootLayoutProps) => {
       </head>
 
       <body>
-        <OfflineProvider>
-          <QueryClientWrapper>
-            <ThemeProvider defaultTheme="light" attribute="class">
-              <Theme>
-                <ToastProvider>
-                  <AdenaProvider>
-                    <Toaster />
+        <ClerkProvider>
+          <OfflineProvider>
+            <QueryClientWrapper>
+              <ThemeProvider defaultTheme="light" attribute="class">
+                <Theme>
+                  <ToastProvider>
+                    <AdenaProvider>
+                      <Toaster />
 
-                    <Box
-                      position="fixed"
-                      top="0"
-                      left="0"
-                      width="100%"
-                      p="2"
-                      className="z-50"
-                      style={{ background: 'var(--accent-1)', borderBottom: '1px solid var(--gray-a3)' }}
-                    >
-                      <Flex justify="between" align="center">
+                      <Box
+                        position="fixed"
+                        top="0"
+                        left="0"
+                        width="100%"
+                        p="2"
+                        className="z-50"
+                        style={{ background: 'var(--accent-1)', borderBottom: '1px solid var(--gray-a3)' }}
+                      >
+                        <Flex justify="between" align="center">
 
-                        <MobileNavDrawer />
-                        <NavHeader />
-                        <Flex gap="2" align="center" justify="end">
-                          <Flex gap="2" align="center" hidden>
-                            <AdenaAddress />
+                          <MobileNavDrawer />
+                          <NavHeader />
+                          <Flex gap="2" align="center" justify="end">
+                            <Flex gap="2" align="center" hidden>
+                              <AdenaAddress />
 
-                            <GithubLink>
-                              <Button variant="soft">
-                                <LinkNone2Icon />
-                                Link Github Account
-                              </Button>
-                            </GithubLink>
+                              <GithubLink>
+                                <Button variant="soft">
+                                  <LinkNone2Icon />
+                                  Link Github Account
+                                </Button>
+                              </GithubLink>
+                            </Flex>
+
+                            <ThemeSwitch />
                           </Flex>
-
-                          <ThemeSwitch />
                         </Flex>
-                      </Flex>
-                    </Box>
+                      </Box>
 
-                    {children}
+                      {children}
 
-                    {details}
-                  </AdenaProvider>
-                </ToastProvider>
-              </Theme>
-            </ThemeProvider>
-          </QueryClientWrapper>
-          <OfflineBanner />
-          <Analytics />
-        </OfflineProvider>
+                      {details}
+                    </AdenaProvider>
+                  </ToastProvider>
+                </Theme>
+              </ThemeProvider>
+            </QueryClientWrapper>
+            <OfflineBanner />
+            <Analytics />
+          </OfflineProvider>
+        </ClerkProvider>
       </body>
     </html>
   );
