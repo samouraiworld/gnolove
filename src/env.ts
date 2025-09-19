@@ -14,8 +14,6 @@ const EnvSchema = z.object({
   NEXT_PUBLIC_MONITORING_API_URL: z.string().url().optional(),
 
   YOUTUBE_API_KEY: z.string().optional(),
-
-  NEXT_PUBLIC_MONITORING_API_URL: z.string(),
 });
 
 const ENV = EnvSchema.parse({
@@ -26,8 +24,6 @@ const ENV = EnvSchema.parse({
   NEXT_PUBLIC_MONITORING_API_URL: process.env.NEXT_PUBLIC_MONITORING_API_URL,
 
   YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY,
-
-  NEXT_PUBLIC_MONITORING_API_URL: process.env.NEXT_PUBLIC_MONITORING_API_URL,
 });
 
 export default ENV;
