@@ -10,9 +10,10 @@ const EnvSchema = z.object({
 
   NEXT_PUBLIC_API_URL: z.string(),
 
-  YOUTUBE_API_KEY: z.string().optional(),
+  // Monitoring API base URL
+  NEXT_PUBLIC_MONITORING_API_URL: z.string().url().optional(),
 
-  NEXT_PUBLIC_MONITORING_API_URL: z.string(),
+  YOUTUBE_API_KEY: z.string().optional(),
 });
 
 const ENV = EnvSchema.parse({
@@ -20,9 +21,9 @@ const ENV = EnvSchema.parse({
 
   NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
 
-  YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY,
-
   NEXT_PUBLIC_MONITORING_API_URL: process.env.NEXT_PUBLIC_MONITORING_API_URL,
+
+  YOUTUBE_API_KEY: process.env.YOUTUBE_API_KEY,
 });
 
 export default ENV;
