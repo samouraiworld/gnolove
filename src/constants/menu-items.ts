@@ -25,6 +25,11 @@ export const MENU_ITEMS = [
     new: true,
   },
   {
+    label: 'Validators',
+    href: '/validators',
+    new: true,
+  },
+  {
     label: 'Analytics',
     href: '/analytics',
     new: false,
