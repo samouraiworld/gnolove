@@ -10,6 +10,7 @@ import { TProposal } from '@/utils/schemas';
 import Loader from '@/elements/loader';
 import StatCard from '@/features/govdao/stat-card';
 import { aggregateVotes, capitalize, getProposalTitle, getStatusColor, percent } from '@/utils/govdao';
+import RadixMarkdown from '@/elements/radix-markdown';
 
 // Filters bar
 const Filters = ({
@@ -66,6 +67,9 @@ const ProposalCard = ({ proposal }: { proposal: TProposal }) => {
           <Heading size="4">
             {getProposalTitle(proposal)}
           </Heading>
+          {proposal.description && (
+            <RadixMarkdown>{proposal.description}</RadixMarkdown>
+          )}
           <Text mb="2" color="gray">Proposal path: {proposal.path}</Text>
           <Box className="h-2 w-full rounded-full bg-red-6 relative overflow-hidden">
             <Box className='absolute left-0 top-0 h-full bg-green-9' width={`${forPct}%`} />
@@ -109,7 +113,7 @@ const GovdaoPage = () => {
   const filtered = useMemo(() => {
     const list = (data ?? []) as TProposal[];
     return list.filter((p) => {
-      const matchesQuery = [p.id, p.path, p.address].some((field) => field?.toLowerCase().includes(query.toLowerCase()));
+      const matchesQuery = [p.id, p.path, p.address, p.title, p.description].some((field) => field?.toLowerCase().includes(query.toLowerCase()));
       const matchesStatus = status === 'all' ? true : (p.status || '').toLowerCase() === status;
       return matchesQuery && matchesStatus;
     }).reverse();
