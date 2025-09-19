@@ -2,8 +2,8 @@ package sync
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
+	"strconv"
 	"strings"
 
 	"github.com/samouraiworld/topofgnomes/server/gnoindexerql"
