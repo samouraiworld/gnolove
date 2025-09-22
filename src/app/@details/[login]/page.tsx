@@ -18,8 +18,11 @@ export async function generateMetadata({ params }: { params: { login: string } }
   };
 }
 
-const ContributorPage = async ({ params }: { params: { login: string } }) => {
-  const { login } = params;
+const ContributorPage = async ({ params }: { params: Promise<{ login: string }> }) => {
+  const { login } = await params;
+  if (!login) {
+    return null;
+  }
   const decodedLogin = decodeURIComponent(login);
   const match = decodedLogin.match(/^([^@]*)@([^@]+)$/);
   if (!match) {
