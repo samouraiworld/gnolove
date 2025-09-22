@@ -56,7 +56,7 @@ const Tutorials = ({ playlistItems }: { playlistItems?: TYoutubeVideoPlaylist })
                 <YoutubeEmbeddedVideo
                   className="overflow-hidden rounded-4"
                   loading="lazy"
-                  src={`https://www.youtube.com/embed/${video.snippet.resourceId.videoId}`}
+                  id={video.snippet.resourceId.videoId}
                 />
                 <Text size='3'>{video.snippet.title}</Text>
               </Flex>

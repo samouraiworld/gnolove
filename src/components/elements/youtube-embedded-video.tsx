@@ -6,21 +6,16 @@ import Image from 'next/image';
 import { cn } from '@/utils/style';
 import Loader from '@/elements/loader';
 
-export interface YoutubeEmbeddedVideoProps extends ComponentProps<'iframe'> {}
+export interface YoutubeEmbeddedVideoProps extends ComponentProps<'iframe'> {
+  id: string;
+}
 
-const YoutubeEmbeddedVideo = ({ className, src, loading = 'lazy', title, ...props }: YoutubeEmbeddedVideoProps) => {
+const YoutubeEmbeddedVideo = ({ className, src, loading = 'lazy', title, id, ...props }: YoutubeEmbeddedVideoProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const videoId = useMemo(() => {
-    if (!src) return null;
-    const match = src.match(/youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/);
-    if (match?.[1]) return match[1];
-    return null;
-  }, [src]);
-
   const thumbnail = useMemo(() => {
-    return videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : null;
-  }, [videoId]);
+    return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : null;
+  }, [id]);
 
   return (
     <div className={cn('relative aspect-video w-full overflow-hidden', className)}>
@@ -52,7 +47,7 @@ const YoutubeEmbeddedVideo = ({ className, src, loading = 'lazy', title, ...prop
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
-        src={src}
+        src={src || `https://www.youtube.com/embed/${id}`}
         loading={loading as any}
         onLoad={() => setIsLoaded(true)}
         {...props}

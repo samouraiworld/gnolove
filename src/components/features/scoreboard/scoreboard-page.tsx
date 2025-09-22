@@ -121,7 +121,7 @@ const ScoreboardPage = ({ videos }: { videos?: TYoutubeVideoPlaylist }) => {
               <YoutubeEmbeddedVideo
                 key={video.snippet.resourceId.videoId}
                 className="overflow-hidden rounded-4"
-                src={`https://www.youtube.com/embed/${video.snippet.resourceId.videoId}`}
+                id={video.snippet.resourceId.videoId}
               />
             ))}
           </Grid>
