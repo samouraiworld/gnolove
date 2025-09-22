@@ -9,9 +9,9 @@ import { getYoutubePlaylistVideos } from '@/app/actions';
 import { TUTORIAL_VIDEOS_YOUTUBE_PLAYLIST_ID } from '@/features/tutorials/constants';
 import Loader from '@/elements/loader';
 
-const Tutorials = ({ playlistItems }: { playlistItems: TYoutubeVideoPlaylist }) => {
-  const [videos, setVideos] = useState(playlistItems.items);
-  const [nextPageToken, setNextPageToken] = useState(playlistItems.nextPageToken);
+const Tutorials = ({ playlistItems }: { playlistItems?: TYoutubeVideoPlaylist }) => {
+  const [videos, setVideos] = useState(playlistItems?.items ?? []);
+  const [nextPageToken, setNextPageToken] = useState(playlistItems?.nextPageToken);
   const [loadingNextVideos, setLoadingNextVideos] = useState(false);
 
   const loadMoreVideos = async () => {

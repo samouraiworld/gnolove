@@ -10,17 +10,10 @@ export const metadata: Metadata = {
 };
 
 const TutorialsPage = async () => {
-  const playlistItems: TYoutubeVideoPlaylist = await getYoutubePlaylistVideos(TUTORIAL_VIDEOS_YOUTUBE_PLAYLIST_ID, 6)
+  const playlistItems: TYoutubeVideoPlaylist | undefined = await getYoutubePlaylistVideos(TUTORIAL_VIDEOS_YOUTUBE_PLAYLIST_ID, 6)
     .catch((err) => {
       console.error('Tutorials YouTube fetch failed', err);
-      return {
-        kind: '',
-        etag: '',
-        items: [],
-        nextPageToken: '',
-        prevPageToken: '',
-        pageInfo: { totalResults: 0, resultsPerPage: 0 },
-      } as TYoutubeVideoPlaylist;
+      return undefined;
     });
 
   return (

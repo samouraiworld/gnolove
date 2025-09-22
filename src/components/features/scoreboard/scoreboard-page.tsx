@@ -32,7 +32,7 @@ import Loader from '@/elements/loader';
 import { TYoutubeVideoPlaylist } from '@/utils/schemas';
 import Image from 'next/image';
 
-const ScoreboardPage = ({ videos }: { videos: TYoutubeVideoPlaylist }) => {
+const ScoreboardPage = ({ videos }: { videos?: TYoutubeVideoPlaylist }) => {
   const { data: allTimeContributors, isPending: isAllTimePending } = useGetContributors({
     timeFilter: TimeFilter.ALL_TIME,
   });
@@ -110,14 +110,14 @@ const ScoreboardPage = ({ videos }: { videos: TYoutubeVideoPlaylist }) => {
 
       <Scoreboard />
 
-      {videos && videos.length > 0 && (
+      {videos && videos.items.length > 0 && (
         <>
           <Text weight="bold" size="6" mt="6">
             🎥 Latest gnoland videos
           </Text>
 
           <Grid columns={{ initial: '1', xs: '2', md: '3' }} rows="auto" gap="2">
-            {videos.map((video: { snippet: { resourceId: { videoId: string } } }) => (
+            {videos.items.map((video: { snippet: { resourceId: { videoId: string } } }) => (
               <YoutubeEmbeddedVideo
                 key={video.snippet.resourceId.videoId}
                 className="overflow-hidden rounded-4"
