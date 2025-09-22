@@ -30,25 +30,15 @@ func calculateNextRunAt(webhook *models.LeaderboardWebhook) time.Time {
 			candidate = candidate.AddDate(0, 0, 1)
 		}
 		return candidate
-	case "weekly":
-		candidate := time.Date(now.Year(), now.Month(), now.Day(), webhook.Hour, webhook.Minute, 0, 0, loc)
-		todayDay := int(now.Weekday())
-		targetDay := webhook.Day
-		daysAhead := (targetDay - todayDay + 7) % 7
-		if daysAhead == 0 && candidate.Before(now) {
-			daysAhead = 7
-		}
-		return candidate.AddDate(0, 0, daysAhead)
 	default:
 		// Default is weekly
-		candidate := time.Date(now.Year(), now.Month(), now.Day(), webhook.Hour, webhook.Minute, 0, 0, loc)
-		todayDay := int(now.Weekday())
-		targetDay := webhook.Day
-		daysAhead := (targetDay - todayDay + 7) % 7
-		if daysAhead == 0 && candidate.Before(now) {
-			daysAhead = 7
+		// Get last sunday and then add up the day and hour/minute based on the one specified by the user
+		lastSunday := time.Now().In(loc).AddDate(0, 0, -int(time.Now().Weekday())).Truncate(24 * time.Hour)
+		candidate := lastSunday.Add(time.Duration(webhook.Hour)*time.Hour+time.Duration(webhook.Minute)*time.Minute).AddDate(0, 0, webhook.Day)
+		if candidate.Before(time.Now()) {
+			candidate = candidate.AddDate(0, 0, 7)
 		}
-		return candidate.AddDate(0, 0, daysAhead)
+		return candidate
 	}
 }
 
@@ -261,16 +251,13 @@ func LoopTriggerLeaderboardWebhooks(db *gorm.DB) {
 	for {
 		time.Sleep(1 * time.Minute)
 		var webhooks []models.LeaderboardWebhook
-		err := db.Where("active = ?", true).Find(&webhooks).Error
+		err := db.Where("active = ? & next_run_at <= ?", true, time.Now()).Find(&webhooks).Error
 		if err != nil {
 			fmt.Println("Failed to find webhooks", err)
 			continue
 		}
 		for i := range webhooks {
 			webhook := webhooks[i]
-			if webhook.NextRunAt.After(time.Now()) {
-				continue
-			}
 			err := TriggerLeaderboardWebhook(db, webhook)
 			if err != nil {
 				fmt.Println("Failed to send leaderboard webhook", err)
