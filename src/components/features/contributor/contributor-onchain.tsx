@@ -1,5 +1,6 @@
 'use client';
 
+import Copyable from '@/elements/copyable';
 import { TNamespace, TPackage, TProposal } from '@/utils/schemas';
 import { Card, Flex, Heading, Text, Grid, Select, Tabs, Box, Badge } from '@radix-ui/themes';
 import Link from 'next/link';
@@ -142,7 +143,7 @@ const ContributorOnchain = ({ packages, namespaces, proposals }: { packages: TPa
                       <Card key={`${ns.namespace}-${ns.hash}`}>
                         <Flex direction='column' gap='2'>
                           <Text size='1' color='gray'>Owner</Text>
-                          <Text size='2' style={{ fontFamily: 'monospace' }}>{ns.address}</Text>
+                          <Copyable>{ns.address}</Copyable>
                           <Heading size='5'>/{ns.namespace}</Heading>
                           <Text size='1' color='gray'>Block #{ns.blockHeight}</Text>
                         </Flex>
@@ -185,7 +186,7 @@ const ContributorOnchain = ({ packages, namespaces, proposals }: { packages: TPa
                       <Card key={p.id}>
                         <Flex direction='column' gap='2'>
                           <Text size='1' color='gray'>Author</Text>
-                          <Text size='2' style={{ fontFamily: 'monospace' }}>{p.address}</Text>
+                          <Copyable>{p.address}</Copyable>
                           <Text size='1' color='gray'>Path</Text>
                           <Text size='2' style={{ wordBreak: 'break-word' }}>{p.path}</Text>
                           <Text size='1' color='gray'>Files</Text>

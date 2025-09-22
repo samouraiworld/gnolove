@@ -6,11 +6,13 @@ import { aggregateVotes, capitalize, getProposalTitle, getStatusColor, percent }
 import RadixMarkdown from '@/elements/radix-markdown';
 import CodeBlock from '@/elements/code-block';
 import { guessLanguageFromFilename } from '@/utils/govdao';
+import Copyable from '@/elements/copyable';
+import React from 'react';
 
-const DetailRow = ({ label, value }: { label: string; value: string }) => (
+const DetailRow = ({ label, value }: { label: string; value: string | React.ReactNode }) => (
   <Flex justify="between" wrap="wrap" align="center">
     <Text color="gray">{label}</Text>
-    <Text>{value}</Text>
+    {typeof value === 'string' ? <Text>{value}</Text> : value}
   </Flex>
 );
 
@@ -77,7 +79,7 @@ const ProposalDetail = ({ id }: { id: string }) => {
                           <Card key={`${v.proposalID}-${v.address}-${v.hash}`} className="p-2">
                             <Flex align="center" justify="between">
                               <Flex direction="column">
-                                <Text size="2" weight="bold">{v.address}</Text>
+                                <Copyable className="font-bold">{v.address}</Copyable>
                               </Flex>
                               <Badge color={color} variant="soft">{v.vote}</Badge>
                             </Flex>
@@ -121,7 +123,7 @@ const ProposalDetail = ({ id }: { id: string }) => {
         <Card className="col-span-full md:col-span-1">
           <Flex direction="column" gap="3">
             <Heading size="4">Details</Heading>
-            <DetailRow label="Proposer" value={proposal.address} />
+            <DetailRow label="Proposer" value={<Copyable className="pl-5">{proposal.address}</Copyable>} />
             <DetailRow label="Block Height" value={String(proposal.blockHeight)} />
             <DetailRow label="Execution Height" value={proposal.executionHeight ? String(proposal.executionHeight) : '-'} />
             <DetailRow label="Files" value={String(proposal.files?.length ?? 0)} />
