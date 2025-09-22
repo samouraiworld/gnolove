@@ -4,8 +4,24 @@ import { Container, Flex, Heading, Text, Card, Grid, Badge, Button, Section } fr
 import YoutubeEmbeddedVideo from '@/elements/youtube-embedded-video';
 import Link from 'next/link';
 import { TYoutubeVideoPlaylist } from '@/utils/schemas';
+import { useState } from 'react';
+import { getYoutubePlaylistVideos } from '@/app/actions';
+import { TUTORIAL_VIDEOS_YOUTUBE_PLAYLIST_ID } from '@/features/tutorials/constants';
+import Loader from '@/elements/loader';
 
-const Tutorials = ({ videos }: { videos: TYoutubeVideoPlaylist }) => {
+const Tutorials = ({ playlistItems }: { playlistItems?: TYoutubeVideoPlaylist }) => {
+  const [videos, setVideos] = useState(playlistItems?.items ?? []);
+  const [nextPageToken, setNextPageToken] = useState(playlistItems?.nextPageToken);
+  const [loadingNextVideos, setLoadingNextVideos] = useState(false);
+
+  const loadMoreVideos = async () => {
+    setLoadingNextVideos(true);
+    const newVideos = await getYoutubePlaylistVideos(TUTORIAL_VIDEOS_YOUTUBE_PLAYLIST_ID, 6, nextPageToken);
+    setVideos([...videos, ...newVideos.items]);
+    setNextPageToken(newVideos.nextPageToken);
+    setLoadingNextVideos(false);
+  };
+
   return (
     <Container size='4' py='6'>
       <Section>
@@ -22,7 +38,7 @@ const Tutorials = ({ videos }: { videos: TYoutubeVideoPlaylist }) => {
                 📚 Learning Hub
               </Badge>
               <Text size='2' color='gray'>
-                {videos?.length} video(s) available
+                {playlistItems?.pageInfo?.totalResults} video(s) available
               </Text>
             </Flex>
             <Link href='https://www.youtube.com/playlist?list=PLJZrQikyfMc-kBojXgAojOz4UQPuq4DiY' target='_blank' rel='noopener noreferrer'>
@@ -40,13 +56,22 @@ const Tutorials = ({ videos }: { videos: TYoutubeVideoPlaylist }) => {
                 <YoutubeEmbeddedVideo
                   className="overflow-hidden rounded-4"
                   loading="lazy"
-                  src={`https://www.youtube.com/embed/${video.snippet.resourceId.videoId}`}
+                  id={video.snippet.resourceId.videoId}
                 />
                 <Text size='3'>{video.snippet.title}</Text>
               </Flex>
             </Card>
           ))}
         </Grid>
+
+        {nextPageToken && (
+          <Flex align='center' justify='center' mt='6'>
+            <Button size='2' color='red' variant='solid' onClick={loadMoreVideos} disabled={loadingNextVideos}>
+              Load More
+              {loadingNextVideos && <Loader width={16} height={16} />}
+            </Button>
+          </Flex>
+        )}
       </Section>
     </Container>
   );

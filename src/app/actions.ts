@@ -18,6 +18,7 @@ import {
   ReportHourSchema,
   RepositorySchema,
   ScoreFactorsSchema,
+  TYoutubeVideoPlaylist,
   UserSchema,
   ValidatorLastIncidentsSchema,
   ValidatorsParticipationSchema,
@@ -297,7 +298,7 @@ export const getYoutubeChannelUploadsPlaylistId = async (searchParams: {
   return YoutubePlaylistIdSchema.parse(uploads);
 };
 
-export const getYoutubePlaylistVideos = async (playlistId: string, maxResults: number = 50) => {
+export const getYoutubePlaylistVideos = async (playlistId: string, maxResults: number = 50, pageToken?: string) => {
   if (!ENV.YOUTUBE_API_KEY) {
     throw new Error('YouTube API key is not configured.');
   }
@@ -310,33 +311,20 @@ export const getYoutubePlaylistVideos = async (playlistId: string, maxResults: n
   url.searchParams.set('playlistId', playlistId);
   url.searchParams.set('maxResults', clampedMax.toString());
   url.searchParams.set('key', ENV.YOUTUBE_API_KEY);
+  if (pageToken) url.searchParams.set('pageToken', pageToken);
 
-  const data = await fetchJson<{
-    items: Array<{
-      snippet: {
-        title: string;
-        resourceId: {
-          videoId: string;
-        };
-      };
-    }>;
-    error?: { message?: string };
-    message?: string;
-  }>(url.toString(), { next: { revalidate: 3600 } });
+  const data = await fetchJson<TYoutubeVideoPlaylist>(url.toString(), { next: { revalidate: 3600 } });
 
   if (!data || !Array.isArray(data.items)) {
-    const apiErrorMessage = data?.error?.message || data?.message;
-    throw new Error(
-      `Invalid YouTube response: items missing or not an array${apiErrorMessage ? ` - ${apiErrorMessage}` : ''}`,
-    );
+    throw new Error('Invalid YouTube response: items missing or not an array');
   }
 
   if (data.items.length === 0) {
     throw new HttpError('Playlist not found / Playlist items not found', { status: 404 });
   }
 
-  // Filter out deleted or private videos and any entries without a valid videoId
   const filteredItems = data.items.filter((item) => {
+    // Filter out deleted or private videos and any entries without a valid videoId
     const title = item?.snippet?.title;
     const videoId = item?.snippet?.resourceId?.videoId;
     const isDeleted = typeof title === 'string' && title.toLowerCase() === 'deleted video';
@@ -344,7 +332,12 @@ export const getYoutubePlaylistVideos = async (playlistId: string, maxResults: n
     return Boolean(videoId) && !isDeleted && !isPrivate;
   });
 
-  return YoutubeVideoPlaylistSchema.parse(filteredItems);
+  const playlist = {
+    ...data,
+    items: filteredItems,
+  };
+
+  return YoutubeVideoPlaylistSchema.parse(playlist);
 };
 
 export const getValidators = async (timeFilter: EValidatorPeriod = EValidatorPeriod.MONTH) => {

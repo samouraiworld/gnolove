@@ -414,14 +414,24 @@ export const YoutubeVideoSchema = z.object({
 });
 export type TYoutubeVideo = z.infer<typeof YoutubeVideoSchema>;
 
-export const YoutubeVideoPlaylistSchema = z.array(
-  z.object({
-    kind: z.string(),
-    etag: z.string(),
-    id: YoutubePlaylistIdSchema,
-    snippet: YoutubeVideoSchema,
+export const YoutubeVideoPlaylistSchema = z.object({
+  kind: z.string(),
+  etag: z.string(),
+  nextPageToken: z.string().optional(),
+  prevPageToken: z.string().optional(),
+  pageInfo: z.object({
+    totalResults: z.number(),
+    resultsPerPage: z.number(),
   }),
-);
+  items: z.array(
+    z.object({
+      kind: z.string(),
+      etag: z.string(),
+      id: YoutubePlaylistIdSchema,
+      snippet: YoutubeVideoSchema,
+    }),
+  ),
+});
 export type TYoutubeVideoPlaylist = z.infer<typeof YoutubeVideoPlaylistSchema>;
 
 export const ValidatorParticipationSchema = z.object({

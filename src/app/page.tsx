@@ -47,8 +47,8 @@ const HomePage = async ({ searchParams: { f, e, r } }: SearchParamsFilters) => {
   const videos = uploadsPlaylistId ?
     await getYoutubePlaylistVideos(uploadsPlaylistId, 6).catch(() => {
       console.error('YouTube videos prefetch failed');
-      return [];
-    }) : [];
+      return undefined;
+    }) : undefined;
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
