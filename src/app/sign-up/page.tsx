@@ -1,10 +1,10 @@
 import { Box } from '@radix-ui/themes';
 import { SignUp } from '@clerk/nextjs';
-import { hasClerkKeys } from '@/utils/clerk';
+import { isClerkEnabled } from '@/utils/clerk';
 import { redirect } from 'next/navigation';
 
 export default function Page() {
-  if (!hasClerkKeys) {
+  if (!isClerkEnabled) {
     redirect('/');
   }
 

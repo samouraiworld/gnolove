@@ -1,6 +1,6 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 import { NextRequest, NextResponse } from 'next/server';
-import { hasClerkKeys } from './utils/clerk';
+import { isClerkEnabled } from './utils/clerk';
 
 // Protect /settings and any nested routes
 const isProtectedRoute = createRouteMatcher(['/settings(.*)']);
@@ -19,7 +19,7 @@ const disabledMiddleware = (req: NextRequest) => {
   return NextResponse.next();
 };
 
-export default hasClerkKeys ? enabledMiddleware : disabledMiddleware;
+export default isClerkEnabled ? enabledMiddleware : disabledMiddleware;
 
 export const config = {
   // Skip static files and _next, protect everything else via the middleware above
