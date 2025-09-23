@@ -78,12 +78,12 @@ const reviewDecisionToEmoji = {
 };
 
 const generateMarkdownReport = (startDate: Date, endDate: Date, selectedTeams: string[], teamRepoStatusMap: TeamRepoStatusMap) => {
-  let md = `# Weekly PR Report\n`;
+  let md = '# Weekly PR Report\n';
   md += `**Week:** ${format(startDate, 'MMMM d, yyyy')} - ${format(endDate, 'MMMM d, yyyy')}\n\n`;
-  md += `**Legend:**\n`;
-  md += `- 🟢 Approved\n`;
-  md += `- 🟠 Changes Requested\n`;
-  md += `- 🔵 Review Required\n\n`;
+  md += '**Legend:**\n';
+  md += '- 🟢 Approved\n';
+  md += '- 🟠 Changes Requested\n';
+  md += '- 🔵 Review Required\n\n';
 
   selectedTeams.forEach((teamName) => {
     const repoStatusMap = teamRepoStatusMap.map[teamName];
@@ -117,7 +117,7 @@ const generateMarkdownReport = (startDate: Date, endDate: Date, selectedTeams: s
           if (pr.reviewDecision) {
             md += ` ${reviewDecisionToEmoji[(pr.reviewDecision as keyof typeof reviewDecisionToEmoji)] || ''}`;
           }
-          md += `\n \n`;
+          md += '\n \n';
         });
       });
     });
