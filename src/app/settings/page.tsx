@@ -8,6 +8,7 @@ import { prefetchMonitoringWebhooks } from '@/hooks/use-monitoring-webhooks';
 import { prefetchReportHour } from '@/hooks/use-monitoring-webhooks';
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 import { hasClerkKeys } from '@/utils/clerk';
+import { redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'Account settings',
@@ -16,7 +17,11 @@ export const metadata: Metadata = {
 const kinds: TMonitoringWebhookKind[] = ['govdao', 'validator'];
 
 export default async function SettingsPage() {
-  const { userId } = hasClerkKeys ? auth() : { userId: null };
+  if (!hasClerkKeys) {
+    redirect('/');
+  }
+
+  const { userId } = auth();
 
   if (!userId) {
     return (
