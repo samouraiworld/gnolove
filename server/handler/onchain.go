@@ -115,3 +115,22 @@ func HandleGetAllProposals(db *gorm.DB) http.HandlerFunc {
 		json.NewEncoder(w).Encode(pkgs)
 	}
 }
+
+// HandleGetGovdaoMembers handles GET /api/onchain/govdao-members
+// It returns all the current govdao members registered on the Gno blockchain
+func HandleGetGovdaoMembers(db *gorm.DB) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		var members []models.GovDaoMember
+		query := db.Model(&models.GovDaoMember{})
+
+		err := query.Find(&members).Error
+		if err != nil {
+			log.Printf("[HandleGetAllProposals] DB error : %v", err)
+			w.WriteHeader(http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
+			return
+		}
+		json.NewEncoder(w).Encode(members)
+	}
+}

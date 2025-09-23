@@ -285,6 +285,18 @@ func getAttrKey(attributs []gnoindexerql.GetGovDAOProposalsGetTransactionsTransa
 
 func (s *Syncer) syncGovDaoMembers() error {
 	s.logger.Info("Syncing Gov Dao Members")
+	allMembers := []models.GovDaoMember{}
+	err := s.db.Model(&models.GovDaoMember{}).Find(&allMembers).Error
+	if err != nil {
+		return fmt.Errorf("failed to get all members: %w", err)
+	}
+
+	// Verify the existent members are still in the list, if not remove them
+	toRemove := make(map[string]struct{}, len(allMembers))
+	for _, member := range allMembers {
+		toRemove[member.Address] = struct{}{}
+	}
+
 	// input is of the form T1|T2|T3 | g1<address>
 	// so the tier is member[1] and the address is member[2]
 	regex := regexp.MustCompile(`(T1|T2|T3)\s\|\s((g1)[a-zA-Z0-9]+)`)
@@ -311,12 +323,22 @@ func (s *Syncer) syncGovDaoMembers() error {
 			if err != nil {
 				return err
 			}
+			// Member still en list don't need to be removed
+			delete(toRemove, GovDaoMember.Address)
 		}
 
 		if len(members) == 0 {
 			break
 		}
 		page++
+	}
+
+	// Remove members that are no longer in the list
+	for address := range toRemove {
+		err = s.db.Where("address = ?", address).Delete(&models.GovDaoMember{}).Error
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil
