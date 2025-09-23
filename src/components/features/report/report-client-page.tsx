@@ -32,7 +32,7 @@ import { useOffline } from '@/contexts/offline-context';
 import useGetPullRequestsReport from '@/hooks/use-get-pullrequests-report';
 import useGetRepositories from '@/hooks/use-get-repositories';
 
-import { TPullRequest } from '@/utils/schemas';
+import { TPullRequest, TPullRequestReport } from '@/utils/schemas';
 
 import TEAMS from '@/constants/teams';
 
@@ -54,13 +54,12 @@ type TeamRepoStatusMap = {
 type RepoStatusArray = [
   repo: string,
   statusMap: {
-    [status in 'in_progress' | 'waiting_for_review' | 'reviewed' | 'merged' | 'blocked']?: TPullRequest[];
+    [status in Status]?: TPullRequest[];
   }
 ];
+export type Status = keyof TPullRequestReport;
 
-export type Status = 'blocked' | 'in_progress' | 'merged' | 'reviewed' | 'waiting_for_review';
-
-export const STATUS_ORDER: Status[] = ['waiting_for_review', 'in_progress', 'reviewed', 'merged', 'blocked'];
+export const STATUS_ORDER = ['waiting_for_review', 'in_progress', 'reviewed', 'merged', 'blocked'] as const satisfies readonly Status[];;
 
 const statusToEmoji = {
   waiting_for_review: '🕒',
@@ -265,22 +264,20 @@ const ReportClientPage = () => {
             <ArrowLeftIcon />
             <Text className="hidden sm:block">Previous Week</Text>
           </Button>
-          <Flex gap="2">
+          <Flex direction={{ initial: 'column', sm: 'row' }} gap={{ initial: '1', sm: '2' }}>
             <TeamSelector
               teams={TEAMS}
               selectedTeams={selectedTeams}
               onSelectedTeamsChange={setSelectedTeams}
-              mb="3"
             />
             <RepositoriesSelector
               repositories={repositories}
               selectedRepositories={selectedRepositories}
               onSelectedRepositoriesChange={setSelectedRepositories}
-              mb="3"
             />
-            <Button onClick={handleCopyMarkdown} variant="soft" mb="2">
+            <Button onClick={handleCopyMarkdown} variant="soft">
               {copied ? <CheckIcon /> : <CopyIcon />}
-              Markdown
+              Copy as markdown
             </Button>
           </Flex>
           <Button
