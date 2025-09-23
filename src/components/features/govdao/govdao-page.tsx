@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import NextLink from 'next/link';
-import { Badge, Box, Card, Flex, Grid, Heading, SegmentedControl, Text, TextField } from '@radix-ui/themes';
+import { Badge, Box, Card, Flex, Grid, Heading, SegmentedControl, Text, TextField, Button } from '@radix-ui/themes';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 
 import useGetProposals from '@/hooks/use-get-proposals';
@@ -12,6 +12,9 @@ import StatCard from '@/features/govdao/stat-card';
 import { aggregateVotes, capitalize, getProposalTitle, getStatusColor, percent } from '@/utils/govdao';
 import RadixMarkdown from '@/elements/radix-markdown';
 
+import useGetGovdaoMembers from '@/hooks/use-get-govdao-members';
+import { AdenaSDK, TransactionBuilder, BroadcastType,MsgCallMessage } from '@adena-wallet/sdk';
+import { useToast } from '@/contexts/toast-context';
 // Filters bar
 const Filters = ({
   query,
@@ -44,52 +47,103 @@ const Filters = ({
   </Flex>
 );
 
-
-const ProposalCard = ({ proposal }: { proposal: TProposal }) => {
+const ProposalCard = ({
+  proposal,
+  isGovDaoMember,
+  adena,
+}: {
+  proposal: TProposal;
+  isGovDaoMember: boolean;
+  adena: AdenaSDK;
+}) => {
   const totals = aggregateVotes(proposal.votes);
   const forPct = percent(totals.for, totals.total);
   const againstPct = percent(totals.against, totals.total);
   const abstainPct = percent(totals.abstain, totals.total);
+  const { addToast } = useToast();
 
   const status = (proposal.status || 'active').toLowerCase();
   const statusColor: any = getStatusColor(status);
 
+  const vote = async (vote: string) => {
+    const sender = await adena.getAccount();
+    const transactionRequest = {
+      tx: TransactionBuilder.create()
+        .messages(
+          {
+            type: '/vm.m_call',
+            value: {
+              caller: sender.data?.address,
+              pkg_path: proposal.path,
+              func: 'MustVoteOnProposalSimple',
+              args: [proposal.id, vote],
+            },
+          } as MsgCallMessage)
+        .build(),
+      broadcastType: BroadcastType.SYNC,
+    };
+    try {
+      await adena.signTransaction(transactionRequest);
+    } catch (err) {
+      addToast({ title: 'Error', message: String((err as any)?.message ?? err), mode: 'negative' });
+    }
+  };
+
   return (
-    <NextLink href={`/govdao/proposal/${proposal.id}`}>
-      <Card>
-        <Flex direction="column" gap="2">
-          <Flex align="center" justify="between">
-            <Badge color={statusColor} variant="soft">
-              {capitalize(status)}
-            </Badge>
-            <Text color="gray" size="2">ID: {proposal.id}</Text>
-          </Flex>
-          <Heading size="4">
+    <Grid rows={{ initial: '1', md: '2' }} gap="3">
+      <NextLink href={`/govdao/proposal/${proposal.id}`}>
+        <Card>
+          <Flex direction="column" gap="2">
+            <Flex align="center" justify="between">
+              <Badge color={statusColor} variant="soft">
+                {capitalize(status)}
+              </Badge>
+              <Text color="gray" size="2">ID: {proposal.id}</Text>
+            </Flex>
+            <Heading size="4">
             {getProposalTitle(proposal)}
           </Heading>
           {proposal.description && (
             <RadixMarkdown>{proposal.description}</RadixMarkdown>
           )}
-          <Text mb="2" color="gray">Proposal path: {proposal.path}</Text>
-          <Box className="h-2 w-full rounded-full bg-red-6 relative overflow-hidden">
+            <Text mb="2" color="gray">Proposal path: {proposal.path}</Text>
+            <Box className="h-2 w-full rounded-full bg-red-6 relative overflow-hidden">
             <Box className='absolute left-0 top-0 h-full bg-green-9' width={`${forPct}%`} />
-          </Box>
-          <Flex mt="2" justify="between">
-            <Text color="green" size="2">For {forPct}%</Text>
-            <Text color="gray" size="2">Abstain {abstainPct}%</Text>
-            <Text color="red" size="2">Against {againstPct}%</Text>
+            </Box>
+            <Flex mt="2" justify="between">
+              <Text color="green" size="2">For {forPct}%</Text>
+              <Text color="gray" size="2">Abstain {abstainPct}%</Text>
+              <Text color="red" size="2">Against {againstPct}%</Text>
+            </Flex>
           </Flex>
-        </Flex>
-      </Card>
-    </NextLink>
+        </Card>
+      </NextLink>
+      {isGovDaoMember && proposal.status === 'created' && (
+        <Grid columns={{ initial: '1', md: '3' }} gap="3">
+          <Button mt="2" mb="4" color="green" onClick={() => vote('YES')}>
+            For
+          </Button>
+          <Button mt="2" mb="4" color="gray" onClick={() => vote('ABSTAIN')}>
+            Abstain
+          </Button>
+          <Button mt="2" mb="4" color="red" onClick={() => vote('NO')}>
+            Against
+          </Button>
+        </Grid>
+      )}
+    </Grid>
   );
 };
 
 const GovdaoPage = () => {
   const { data, isPending } = useGetProposals();
-
+  const { data: members, isPending: membersIsPending } = useGetGovdaoMembers();
+    
   const [query, setQuery] = useState('');
   const [status, setStatus] = useState('all');
+  const [wallet, setWallet] = useState('');
+    
+  const [adenaSDK] = useState(AdenaSDK.createAdenaWallet());
 
   const statuses = useMemo(() => {
     const list = (data ?? []) as TProposal[];
@@ -135,6 +189,17 @@ const GovdaoPage = () => {
     return { executedCount, activeCount, uniqueVoters: uniqueVoters.size, avgVotes };
   }, [data]);
 
+  const handleAdenaConnection = async () => {
+    await adenaSDK.connectWallet();
+    const account = await adenaSDK.getAccount();
+    setWallet(account.data?.address || '');
+    adenaSDK?.onChangeAccount({callback: (address: string) => setWallet(address)});
+  };
+  const isGovDaoMember = useMemo(() => {
+    if (!members) return false;
+    return members.some((m) => m.address === wallet);
+  }, [members, wallet]);
+
   return (
     <Box>
       <Flex align="center" justify="between" mt="4" mb="3">
@@ -143,7 +208,23 @@ const GovdaoPage = () => {
           <Text color="gray">Track proposals, votes, and governance activities across GNO protocols</Text>
         </Box>
       </Flex>
-
+      {wallet ? (
+        <Box my="4">
+          <Text>✅ Connected wallet: {wallet}</Text>
+        </Box>
+      ) : (
+        <Button mt="2" mb="4" onClick={async () => handleAdenaConnection()}>
+          {' '}
+          Connect your wallet to vote in proposals{' '}
+        </Button>
+      )}
+      {wallet && (
+        <Box my="4">
+          <Text>
+            {isGovDaoMember ? '✅ You are a GovDAO member' : '❌ You are not a GovDAO member, only members can vote'}
+          </Text>
+        </Box>
+      )}
       <Grid columns={{ initial: '1', md: '4' }} gap="3">
         <StatCard title="Active Proposals" value={metrics.activeCount} hint="Status: created" />
         <StatCard title="Unique Voters" value={metrics.uniqueVoters} hint="Distinct addresses voted" />
@@ -155,12 +236,12 @@ const GovdaoPage = () => {
         <Filters query={query} setQuery={setQuery} status={status} setStatus={setStatus} statuses={statuses} legend={legend} />
       </Box>
 
-      {isPending ? (
+      {isPending || membersIsPending ? (
         <Loader />
       ) : (
         <Grid columns={{ initial: '1', md: '2' }} gap="3">
           {filtered.map((p) => (
-            <ProposalCard key={p.id} proposal={p} />
+            <ProposalCard key={p.id} proposal={p} isGovDaoMember={isGovDaoMember} adena={adenaSDK} />
           ))}
         </Grid>
       )}

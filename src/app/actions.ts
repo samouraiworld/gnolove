@@ -14,6 +14,7 @@ import {
   NamespacesSchema,
   PackagesSchema,
   ProposalsSchema,
+  GovdaoMembersSchema,
   PullRequestReportSchema,
   ReportHourSchema,
   RepositorySchema,
@@ -236,6 +237,16 @@ export const getProposals = async (address?: string) => {
   const data = await res.json();
 
   return ProposalsSchema.parse(data);
+};
+
+// On-chain Gov dao members
+export const getGovdaoMembers = async () => {
+  const url = new URL('/onchain/govdao-members', ENV.NEXT_PUBLIC_API_URL);
+
+  const res = await fetch(url.toString(), { cache: 'no-cache' });
+  const data = await res.json();
+
+  return GovdaoMembersSchema.parse(data);
 };
 
 export const getProposalsByUser = async (address: string) => {
