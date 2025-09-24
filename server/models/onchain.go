@@ -35,6 +35,11 @@ type GnoVote struct {
 	Hash        string `gorm:"primaryKey" json:"hash"`
 }
 
+type GovDaoMember struct {
+	Address string `json:"address" gorm:"primaryKey"`
+	Tier    string `json:"tier"`
+}
+
 type File struct {
 	ID   string `gorm:"primaryKey" json:"id"`
 	Name string `json:"name"`
