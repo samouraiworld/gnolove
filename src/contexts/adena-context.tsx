@@ -7,6 +7,8 @@ interface AdenaContext {
   isLoading: boolean;
   setAdena: (adena: any) => void;
   setIsLoading: (isLoading: boolean) => void;
+  handleConnect: () => Promise<void>;
+  address: string;
 }
 
 const defaultContext = {
@@ -14,6 +16,8 @@ const defaultContext = {
   isLoading: false,
   setAdena: () => {},
   setIsLoading: () => {},
+  handleConnect: async () => {},
+  address: '',
 } satisfies AdenaContext;
 
 export const AdenaContext = createContext<AdenaContext>(defaultContext);
@@ -23,6 +27,7 @@ export const useAdena = () => useContext(AdenaContext);
 const AdenaProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [adena, setAdena] = useState<any>(defaultContext.adena);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [address, setAddress] = useState<string>('');
 
   useLayoutEffect(() => {
     // If adena is already in the window, set it
@@ -31,6 +36,7 @@ const AdenaProvider: FC<{ children: ReactNode }> = ({ children }) => {
       setIsLoading(false);
     } else {
       // If adena is not in the window, wait for it to be loaded
+      setIsLoading(false);
       window.onload = async () => {
         if (typeof window !== 'undefined') {
           setAdena((window as any).adena);
@@ -40,7 +46,26 @@ const AdenaProvider: FC<{ children: ReactNode }> = ({ children }) => {
     }
   }, []);
 
-  return <AdenaContext.Provider value={{ adena, isLoading, setAdena, setIsLoading }}>{children}</AdenaContext.Provider>;
+  const handleConnect = async () => {
+    try {
+      await adena.AddEstablish('Adena');
+      adena.On('changedAccount', function (address: string){
+        setAddress(address);
+      });
+      try {
+        const response = await adena.GetAccount();
+        setAddress(response.data?.address);
+      } catch (error) {}
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  return (
+    <AdenaContext.Provider value={{ adena, isLoading, setAdena, setIsLoading, handleConnect, address }}>
+      {children}
+    </AdenaContext.Provider>
+  );
 };
 
 export default AdenaProvider;
