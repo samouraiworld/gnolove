@@ -14,6 +14,7 @@ import (
 	"github.com/samouraiworld/topofgnomes/server/db"
 	"github.com/samouraiworld/topofgnomes/server/handler"
 	"github.com/samouraiworld/topofgnomes/server/handler/contributor"
+	"github.com/samouraiworld/topofgnomes/server/handler/report"
 	infrarepo "github.com/samouraiworld/topofgnomes/server/infra/repository"
 	"github.com/samouraiworld/topofgnomes/server/models"
 	"github.com/samouraiworld/topofgnomes/server/signer"
@@ -135,6 +136,7 @@ func main() {
 	router.HandleFunc("/contributors/{login}", contributor.HandleGetContributor(database))
 	router.Post("/github/link", handler.HandleLink(database))
 
+	// reports
 	// Leaderboard webhook endpoints
 	router.Group(func(r chi.Router) {
 		r.Use(clerkhttp.WithHeaderAuthorization())
@@ -143,6 +145,7 @@ func main() {
 		r.Put("/leaderboard-webhooks/{id}", handler.HandleUpdateLeaderboardWebhook(database))
 		r.Delete("/leaderboard-webhooks/{id}", handler.HandleDeleteLeaderboardWebhook(database))
 	})
+	router.HandleFunc("/reports/weekly", report.HandleGetReportByWeek(database))
 
 	// Onchain package contributions endpoints
 	router.HandleFunc("/onchain/packages", handler.HandleGetAllPackages(database))

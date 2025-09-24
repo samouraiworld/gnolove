@@ -26,8 +26,11 @@ type MistralResponse struct {
 	} `json:"choices"`
 }
 
+// Configuration constants for Mistral API
 const (
+	mistralModel        = "mistral-small-latest"
 	mistralBaseURL      = "https://api.mistral.ai/v1/"
+	mistralTemperature  = 0.7
 	authorizationHeader = "Authorization"
 	contentTypeHeader   = "Content-Type"
 	applicationJSON     = "application/json"
@@ -38,54 +41,30 @@ func setHeaders(req *http.Request, apiKey string) {
 	req.Header.Set(contentTypeHeader, applicationJSON)
 }
 
-var responseFormatSchema = map[string]interface{}{
-	"type":        "object",
-	"name":        "BiweeklyGnolandReport",
-	"description": "A whimsical and concise bi-weekly report summarizing the activity of the Gnoland ecosystem.",
-	"properties": map[string]interface{}{
-		"projects": map[string]interface{}{
-			"type":        "array",
-			"description": "A list of project reports with stylized summaries.",
-			"items": map[string]interface{}{
-				"type": "object",
-				"properties": map[string]interface{}{
-					"project_name": map[string]interface{}{
-						"type":        "string",
-						"description": "The name of the project in the Gnoland ecosystem.",
-					},
-					"summary": map[string]interface{}{
-						"type":        "string",
-						"description": "A short, metaphorical summary (one paragraph) describing PRs merged, issues opened, and contributors' actions, with poetic or mythical tone.",
-					},
-				},
-				"required": []string{"project_name", "summary"},
-			},
-		},
-	},
-	"required": []string{"projects"},
-	"strict":   false,
-}
-
-func callMistralAPI(apiKey, systemPrompt, userPrompt string) (string, error) {
+func callMistralAPI(apiKey, systemPrompt, userPrompt string, outputFormatSchema map[string]interface{}) (string, error) {
 	url := fmt.Sprintf("%schat/completions", mistralBaseURL)
 
 	body := map[string]interface{}{
-		"model":       "mistral-small-latest",
-		"temperature": 0.7,
+		"model":       mistralModel,
+		"temperature": mistralTemperature,
 		"messages": []map[string]string{
 			{"role": "system", "content": systemPrompt},
 			{"role": "user", "content": userPrompt},
 		},
-		"response_format": map[string]interface{}{
+		"safe_prompt": false,
+	}
+
+	// If a outputFormatSchema is provided, add response_format to the body
+	if len(outputFormatSchema) > 0 && outputFormatSchema != nil {
+		body["response_format"] = map[string]interface{}{
 			"type": "json_schema",
 			"json_schema": map[string]interface{}{
 				"name":        "string",
 				"description": "string",
-				"schema":      responseFormatSchema, // Use "schema" instead of "json_schema"
+				"schema":      outputFormatSchema,
 				"strict":      false,
 			},
-		},
-		"safe_prompt": false,
+		}
 	}
 
 	jsonBody, err := json.Marshal(body)
@@ -107,11 +86,9 @@ func callMistralAPI(apiKey, systemPrompt, userPrompt string) (string, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		// Log the response body for debugging
 		var responseBody bytes.Buffer
 		_, _ = responseBody.ReadFrom(resp.Body)
 		fmt.Printf("Response Body: %s\n", responseBody.String())
-
 		return "", fmt.Errorf("unexpected status code: %d", resp.StatusCode)
 	}
 
@@ -120,9 +97,8 @@ func callMistralAPI(apiKey, systemPrompt, userPrompt string) (string, error) {
 		return "", fmt.Errorf("failed to decode response: %w", err)
 	}
 
-	// Extract the message content from the first choice
 	if len(mistralResp.Choices) == 0 || mistralResp.Choices[0].Message["content"] == "" {
-		return "", errors.New("no valid response message found")
+		return "", errors.New("no valid mistral response message found")
 	}
 
 	content := mistralResp.Choices[0].Message["content"]
@@ -130,11 +106,11 @@ func callMistralAPI(apiKey, systemPrompt, userPrompt string) (string, error) {
 	return content, nil
 }
 
-func AskMistral(systemPrompt, userPrompt string) (string, error) {
+func AskMistral(systemPrompt, userPrompt string, outputFormatSchema map[string]interface{}) (string, error) {
 	apiKey := os.Getenv("MISTRAL_API_KEY")
 	if apiKey == "" {
 		return "", errors.New("MISTRAL_API_KEY environment variable is not set")
 	}
 
-	return callMistralAPI(apiKey, systemPrompt, userPrompt)
+	return callMistralAPI(apiKey, systemPrompt, userPrompt, outputFormatSchema)
 }
