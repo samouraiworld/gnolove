@@ -13,6 +13,7 @@ import StatCard from '@/features/govdao/stat-card';
 import Loader from '@/elements/loader';
 import RadixMarkdown from '@/elements/radix-markdown';
 
+import { useAdena } from '@/contexts/adena-context';
 import { useToast } from '@/contexts/toast-context';
 
 import useGetGovdaoMembers from '@/hooks/use-get-govdao-members';
@@ -58,32 +59,24 @@ const Filters = ({
   </Flex>
 );
 
-const ProposalCard = ({
-  proposal,
-  isGovDaoMember,
-  adena,
-}: {
-  proposal: TProposal;
-  isGovDaoMember: boolean;
-  adena: AdenaSDK;
-}) => {
+const ProposalCard = ({ proposal, isGovDaoMember }: { proposal: TProposal; isGovDaoMember: boolean }) => {
   const totals = aggregateVotes(proposal.votes);
   const forPct = percent(totals.for, totals.total);
   const againstPct = percent(totals.against, totals.total);
   const abstainPct = percent(totals.abstain, totals.total);
   const { addToast } = useToast();
+  const { adena, address } = useAdena();
 
   const status = (proposal.status || 'active').toLowerCase();
   const statusColor: any = getStatusColor(status);
 
   const vote = async (vote: string) => {
-    const sender = await adena.getAccount();
     const transactionRequest = {
       tx: TransactionBuilder.create()
         .messages({
           type: '/vm.m_call',
           value: {
-            caller: sender.data?.address,
+            caller: address,
             pkg_path: proposal.path,
             func: 'MustVoteOnProposalSimple',
             args: [proposal.id, vote],
@@ -161,7 +154,7 @@ const GovdaoPage = () => {
 
   const [query, setQuery] = useState('');
   const [status, setStatus] = useState('all');
-  const [wallet, setWallet] = useState('');
+  const { address } = useAdena();
 
   const [adenaSDK] = useState(AdenaSDK.createAdenaWallet());
 
@@ -214,16 +207,10 @@ const GovdaoPage = () => {
     return { executedCount, activeCount, uniqueVoters: uniqueVoters.size, avgVotes };
   }, [data]);
 
-  const handleAdenaConnection = async () => {
-    await adenaSDK.connectWallet();
-    const account = await adenaSDK.getAccount();
-    setWallet(account.data?.address || '');
-    adenaSDK?.onChangeAccount({ callback: (address: string) => setWallet(address) });
-  };
   const isGovDaoMember = useMemo(() => {
     if (!members) return false;
-    return members.some((m) => m.address === wallet);
-  }, [members, wallet]);
+    return members.some((m) => m.address === address);
+  }, [members, address]);
 
   return (
     <Box>
@@ -233,22 +220,14 @@ const GovdaoPage = () => {
           <Text color="gray">Track proposals, votes, and governance activities across GNO protocols</Text>
         </Box>
       </Flex>
-      {wallet ? (
-        <Box my="4">
-          <Text>✅ Connected wallet: {wallet}</Text>
-        </Box>
-      ) : (
-        <Button mt="2" mb="4" onClick={async () => handleAdenaConnection()}>
-          {' '}
-          Connect your wallet to vote in proposals{' '}
-        </Button>
-      )}
-      {wallet && (
-        <Box my="4">
-          <Text>
-            {isGovDaoMember ? '✅ You are a GovDAO member' : '❌ You are not a GovDAO member, only members can vote'}
-          </Text>
-        </Box>
+      {address && (
+        <>
+          <Box my="4">
+            <Text>
+              {isGovDaoMember ? '✅ You are a GovDAO member' : '❌ You are not a GovDAO member, only members can vote'}
+            </Text>
+          </Box>
+        </>
       )}
       <Grid columns={{ initial: '1', md: '4' }} gap="3">
         <StatCard title="Active Proposals" value={metrics.activeCount} hint="Status: created" />
@@ -273,7 +252,7 @@ const GovdaoPage = () => {
       ) : (
         <Grid columns={{ initial: '1', md: '2' }} gap="3">
           {filtered.map((p) => (
-            <ProposalCard key={p.id} proposal={p} isGovDaoMember={isGovDaoMember} adena={adenaSDK} />
+            <ProposalCard key={p.id} proposal={p} isGovDaoMember={isGovDaoMember} />
           ))}
         </Grid>
       )}

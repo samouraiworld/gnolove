@@ -1,30 +1,30 @@
-import '@/styles/globals.css';
 import { ReactNode } from 'react';
-import type { Metadata } from 'next';
 
+import { Analytics } from '@vercel/analytics/next';
+import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
 
 import { LinkNone2Icon } from '@radix-ui/react-icons';
 import { Box, Button, Flex, Theme } from '@radix-ui/themes';
 
-import ThemeSwitch from '@/modules/theme-switch';
-
-import Toaster from '@/elements/toast';
-
-import ToastProvider from '@/contexts/toast-context';
+import '@/styles/globals.css';
 
 import { AdenaAddress } from '@/modules/adena-address';
 import { GithubLink } from '@/modules/github-link';
-import AdenaProvider from '@/contexts/adena-context';
-import QueryClientWrapper from '@/wrappers/query-client';
 import MobileNavDrawer from '@/modules/mobile-nav-drawer';
 import NavHeader from '@/modules/nav-header';
+import ThemeSwitch from '@/modules/theme-switch';
 
-import { Analytics } from '@vercel/analytics/next';
-
-import { OfflineProvider } from '@/contexts/offline-context';
+import ConnectWalletButton from '@/elements/connect-wallet-button';
 import OfflineBanner from '@/elements/offline-banner';
+import Toaster from '@/elements/toast';
+
+import AdenaProvider from '@/contexts/adena-context';
+import { OfflineProvider } from '@/contexts/offline-context';
 import AuthProvider from '@/contexts/auth-provider';
+import ToastProvider from '@/contexts/toast-context';
+
+import QueryClientWrapper from '@/wrappers/query-client';
 
 // Site-wide SEO metadata
 export const metadata: Metadata = {
@@ -76,8 +76,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Gnolove — Gno Chain Contributors Scoreboard',
-    description:
-      'Scoreboard of contributors, open‑source repositories and activity related to the Gno chain.',
+    description: 'Scoreboard of contributors, open‑source repositories and activity related to the Gno chain.',
     images: ['/images/header.png'],
   },
 
@@ -159,13 +158,11 @@ const RootLayout = ({ children, details }: RootLayoutProps) => {
                         style={{ background: 'var(--accent-1)', borderBottom: '1px solid var(--gray-a3)' }}
                       >
                         <Flex justify="between" align="center">
-
                           <MobileNavDrawer />
                           <NavHeader />
                           <Flex gap="2" align="center" justify="end">
                             <Flex gap="2" align="center" hidden>
                               <AdenaAddress />
-
                               <GithubLink>
                                 <Button variant="soft">
                                   <LinkNone2Icon />
@@ -173,7 +170,7 @@ const RootLayout = ({ children, details }: RootLayoutProps) => {
                                 </Button>
                               </GithubLink>
                             </Flex>
-
+                            <ConnectWalletButton />
                             <ThemeSwitch />
                           </Flex>
                         </Flex>
