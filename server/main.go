@@ -119,7 +119,9 @@ func main() {
 	router.HandleFunc("/contributors/{login}", contributor.HandleGetContributor(database))
 	router.Post("/github/link", handler.HandleLink(database))
 
+	// reports
 	router.HandleFunc("/report", report.HandleGetLastReport(database))
+	router.HandleFunc("/reports/weekly", report.HandleGetReportByWeek(database))
 
 	// Onchain package contributions endpoints
 	router.HandleFunc("/onchain/packages", handler.HandleGetAllPackages(database))

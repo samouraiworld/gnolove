@@ -149,7 +149,7 @@ func (s *Syncer) StartSynchonizing() error {
 		go func() {
 			for {
 				currentTime := time.Now()
-				if currentTime.Weekday() == time.Friday && currentTime.Hour() == 14 && currentTime.Minute() == 58 {
+				if currentTime.Weekday() == time.Sunday && currentTime.Hour() == 23 && currentTime.Minute() == 58 {
 					s.logger.Info("Starting report synchronization.")
 					err := s.syncReports()
 					if err != nil {
@@ -176,6 +176,7 @@ func (s *Syncer) syncReports() error {
 	s.logger.Infof("Report generated successfully: %s", report.ID)
 	return nil
 }
+
 func (s *Syncer) syncPRs(repository models.Repository) error {
 	lastUpdatedTime := getLastUpdatedPR(*s.db, repository.ID)
 
