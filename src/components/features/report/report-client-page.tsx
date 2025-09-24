@@ -7,6 +7,8 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
+  CheckIcon,
+  CopyIcon,
   PersonIcon,
 } from '@radix-ui/react-icons';
 import {
@@ -30,7 +32,7 @@ import { useOffline } from '@/contexts/offline-context';
 import useGetPullRequestsReport from '@/hooks/use-get-pullrequests-report';
 import useGetRepositories from '@/hooks/use-get-repositories';
 
-import { TPullRequest } from '@/utils/schemas';
+import { TPullRequest, TPullRequestReport } from '@/utils/schemas';
 
 import TEAMS from '@/constants/teams';
 
@@ -40,13 +42,88 @@ import RepoPRStatusList from './repo-pr-status-list';
 
 type RepoStatusMap = {
   [repo: string]: {
-    [status: string]: TPullRequest[];
+    [status in 'in_progress' | 'waiting_for_review' | 'reviewed' | 'merged' | 'blocked']?: TPullRequest[];
   };
 };
 
-export type Status = 'blocked' | 'in_progress' | 'merged' | 'reviewed' | 'waiting_for_review';
+type TeamRepoStatusMap = {
+  map: Record<string, RepoStatusMap>;
+  foundAny: boolean;
+}
 
-export const STATUS_ORDER: Status[] = ['waiting_for_review', 'in_progress', 'reviewed', 'merged', 'blocked'];
+type RepoStatusArray = [
+  repo: string,
+  statusMap: {
+    [status in Status]?: TPullRequest[];
+  }
+];
+export type Status = keyof TPullRequestReport;
+
+export const STATUS_ORDER = ['waiting_for_review', 'in_progress', 'reviewed', 'merged', 'blocked'] as const satisfies readonly Status[];
+
+const statusToEmoji = {
+  waiting_for_review: '🕒',
+  in_progress: '🚧',
+  reviewed: '✅',
+  merged: '🔀',
+  blocked: '⛔',
+};
+
+const reviewDecisionToEmoji = {
+  APPROVED: '🟢',
+  CHANGES_REQUESTED: '🟠',
+  REVIEW_REQUIRED: '🔵',
+  '': '',
+};
+
+const generateMarkdownReport = (startDate: Date, endDate: Date, selectedTeams: string[], teamRepoStatusMap: TeamRepoStatusMap) => {
+  let md = '# Weekly PR Report\n';
+  md += `**Week:** ${format(startDate, 'MMMM d, yyyy')} - ${format(endDate, 'MMMM d, yyyy')}\n\n`;
+  md += '**Legend:**\n';
+  md += '- 🟢 Approved\n';
+  md += '- 🟠 Changes Requested\n';
+  md += '- 🔵 Review Required\n\n';
+
+  selectedTeams.forEach((teamName) => {
+    const repoStatusMap = teamRepoStatusMap.map[teamName];
+    if (!repoStatusMap || Object.keys(repoStatusMap).length === 0) {
+      md += `No pull requests found for team **${teamName}**.\n\n`;
+      return md;
+    }
+
+    md += `## 👥 ${teamName}\n`;
+
+    const gnolangRepos: RepoStatusArray[] = [];
+    const otherRepos: RepoStatusArray[] = [];
+
+    Object.entries(repoStatusMap).forEach(([repo, statusMap]) => {
+      if (repo.startsWith('gnolang/')) gnolangRepos.push([repo, statusMap]);
+      else otherRepos.push([repo, statusMap]);
+    });
+    otherRepos.sort(([a], [b]) => a.localeCompare(b));
+
+    const sortedRepos = [...gnolangRepos, ...otherRepos];
+
+    sortedRepos.forEach(([repo, statusMap]) => {
+      md += `\n\n### ${repo}\n\n`;
+      STATUS_ORDER.forEach((status) => {
+        const prs = statusMap[status] || [];
+        if (prs.length === 0) return;
+        md += `\n  - #### ${statusToEmoji[status] || ''} ${status.replace(/_/g, ' ').toUpperCase()}\n`;
+        prs.forEach((pr) => {
+          md += `    - **${pr.title}**  `;
+          md += `([#${pr.number}](${pr.url})) by @${pr.authorLogin}`;
+          if (pr.reviewDecision) {
+            md += ` ${reviewDecisionToEmoji[(pr.reviewDecision as keyof typeof reviewDecisionToEmoji)] || ''}`;
+          }
+          md += '\n \n';
+        });
+      });
+    });
+  });
+
+  return md;
+};
 
 function groupPRsByRepoAndStatus(
   pullRequests: Record<Status, TPullRequest[]>,
@@ -84,6 +161,7 @@ const ReportClientPage = () => {
   const [endDate, setEndDate] = useState<Date>(endOfWeek(initialRefDate, { weekStartsOn: 0 }));
   const [selectedTeams, setSelectedTeams] = useState<string[]>(['Core Team']);
   const [selectedRepositories, setSelectedRepositories] = useState<string[]>(['gnolang/gno']);
+  const [copied, setCopied] = useState(false);
 
   const { data: repositories = [] } = useGetRepositories();
   const { data: pullRequests, isPending } = useGetPullRequestsReport({ startDate, endDate });
@@ -133,7 +211,7 @@ const ReportClientPage = () => {
     }
   };
 
-  const teamRepoStatusMap = useMemo(() => {
+  const teamRepoStatusMap: TeamRepoStatusMap = useMemo(() => {
     if (!pullRequests) return { map: {}, foundAny: false };
 
     const map: Record<string, RepoStatusMap> = {};
@@ -156,6 +234,17 @@ const ReportClientPage = () => {
     return { map, foundAny };
   }, [pullRequests, selectedRepositories, selectedTeams]);
 
+  const handleCopyMarkdown = async () => {
+    const md = generateMarkdownReport(startDate, endDate, selectedTeams, teamRepoStatusMap);
+    try {
+      await navigator.clipboard.writeText(md);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (e) {
+      setCopied(false);
+    }
+  };
+
   return (
     <LayoutContainer mt={{ initial: '2', sm: '5' }}>
       <Flex direction="column" gap="4" flexGrow="1">
@@ -175,19 +264,21 @@ const ReportClientPage = () => {
             <ArrowLeftIcon />
             <Text className="hidden sm:block">Previous Week</Text>
           </Button>
-          <Flex gap="2">
+          <Flex direction={{ initial: 'column', sm: 'row' }} gap={{ initial: '1', sm: '2' }}>
             <TeamSelector
               teams={TEAMS}
               selectedTeams={selectedTeams}
               onSelectedTeamsChange={setSelectedTeams}
-              mb="3"
             />
             <RepositoriesSelector
               repositories={repositories}
               selectedRepositories={selectedRepositories}
               onSelectedRepositoriesChange={setSelectedRepositories}
-              mb="3"
             />
+            <Button onClick={handleCopyMarkdown} variant="soft">
+              {copied ? <CheckIcon /> : <CopyIcon />}
+              Copy as markdown
+            </Button>
           </Flex>
           <Button
             variant="ghost"
