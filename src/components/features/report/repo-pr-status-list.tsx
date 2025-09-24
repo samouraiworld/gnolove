@@ -32,7 +32,7 @@ const weeksAgo = (dateString: string): number => {
   const date = new Date(dateString);
   const now = new Date();
   return differenceInWeeks(now, date);
-}
+};
 
 const RepoPRStatusList = ({ repo, statusMap, isOffline }: RepoPRStatusListProps) => {
   return (
