@@ -1,4 +1,4 @@
-package report
+package ai
 
 // ProjectReport represents a single project's summary in the report.
 type ProjectReport struct {

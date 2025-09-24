@@ -1,4 +1,4 @@
-package report
+package ai
 
 import (
 	"encoding/json"

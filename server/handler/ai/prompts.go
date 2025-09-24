@@ -1,4 +1,4 @@
-package report
+package ai
 
 var reportOutputFormatSchema = map[string]interface{}{
 	"type":        "object",
