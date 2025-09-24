@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/Khan/genqlient/graphql"
-	"github.com/samouraiworld/topofgnomes/server/handler/report"
+	"github.com/samouraiworld/topofgnomes/server/handler/ai"
 	"github.com/samouraiworld/topofgnomes/server/models"
 	"github.com/shurcooL/githubv4"
 	"go.uber.org/zap"
@@ -172,7 +172,7 @@ func (s *Syncer) StartSynchonizing() error {
 }
 
 func (s *Syncer) syncReports() error {
-	report, err := report.GenerateReport(s.db)
+	report, err := ai.GenerateReport(s.db)
 	if err != nil {
 		s.logger.Errorf("Failed to generate report: %v", err)
 		return err
