@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 
 import NextLink from 'next/link';
 
-import { AdenaSDK, TransactionBuilder, BroadcastType, MsgCallMessage } from '@adena-wallet/sdk';
+import { TransactionBuilder, BroadcastType, MsgCallMessage } from '@adena-wallet/sdk';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { Badge, Box, Card, Flex, Grid, Heading, SegmentedControl, Text, TextField, Button } from '@radix-ui/themes';
 
@@ -71,21 +71,23 @@ const ProposalCard = ({ proposal, isGovDaoMember }: { proposal: TProposal; isGov
   const statusColor: any = getStatusColor(status);
 
   const vote = async (vote: string) => {
-    const transactionRequest = {
-      tx: TransactionBuilder.create()
-        .messages({
-          type: '/vm.m_call',
-          value: {
-            caller: address,
-            pkg_path: proposal.path,
-            func: 'MustVoteOnProposalSimple',
-            args: [proposal.id, vote],
-          },
-        } as MsgCallMessage)
-        .build(),
-      broadcastType: BroadcastType.SYNC,
-    };
+    if (!adena) return;
     try {
+      const transactionRequest = {
+        tx: TransactionBuilder.create()
+          .messages({
+            type: '/vm.m_call',
+            value: {
+              caller: address,
+              pkg_path: proposal.path,
+              func: 'MustVoteOnProposalSimple',
+              args: [proposal.id, vote],
+            },
+          } as MsgCallMessage)
+          .build(),
+        broadcastType: BroadcastType.SYNC,
+      };
+
       await adena.signTransaction(transactionRequest);
     } catch (err) {
       addToast({ title: 'Error', message: String((err as any)?.message ?? err), mode: 'negative' });
@@ -155,8 +157,6 @@ const GovdaoPage = () => {
   const [query, setQuery] = useState('');
   const [status, setStatus] = useState('all');
   const { address } = useAdena();
-
-  const [adenaSDK] = useState(AdenaSDK.createAdenaWallet());
 
   const statuses = useMemo(() => {
     const list = (data ?? []) as TProposal[];
