@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 
 import NextLink from 'next/link';
 
-import { AdenaSDK, TransactionBuilder, BroadcastType, MsgCallMessage } from '@adena-wallet/sdk';
+import { TransactionBuilder, BroadcastType, MsgCallMessage } from '@adena-wallet/sdk';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { Badge, Box, Card, Flex, Grid, Heading, SegmentedControl, Text, TextField, Button } from '@radix-ui/themes';
 
@@ -13,6 +13,7 @@ import StatCard from '@/features/govdao/stat-card';
 import Loader from '@/elements/loader';
 import RadixMarkdown from '@/elements/radix-markdown';
 
+import { useAdena } from '@/contexts/adena-context';
 import { useToast } from '@/contexts/toast-context';
 
 import useGetGovdaoMembers from '@/hooks/use-get-govdao-members';
@@ -20,8 +21,6 @@ import useGetProposals from '@/hooks/use-get-proposals';
 
 import { aggregateVotes, capitalize, getProposalTitle, getStatusColor, percent } from '@/utils/govdao';
 import { TProposal } from '@/utils/schemas';
-
-import { useAdena } from '@/contexts/adena-context';
 
 // Filters bar
 const Filters = ({
@@ -60,13 +59,7 @@ const Filters = ({
   </Flex>
 );
 
-const ProposalCard = ({
-  proposal,
-  isGovDaoMember,
-}: {
-  proposal: TProposal;
-  isGovDaoMember: boolean;
-}) => {
+const ProposalCard = ({ proposal, isGovDaoMember }: { proposal: TProposal; isGovDaoMember: boolean }) => {
   const totals = aggregateVotes(proposal.votes);
   const forPct = percent(totals.for, totals.total);
   const againstPct = percent(totals.against, totals.total);
@@ -78,21 +71,23 @@ const ProposalCard = ({
   const statusColor: any = getStatusColor(status);
 
   const vote = async (vote: string) => {
-    const transactionRequest = {
-      tx: TransactionBuilder.create()
-        .messages({
-          type: '/vm.m_call',
-          value: {
-            caller: address,
-            pkg_path: proposal.path,
-            func: 'MustVoteOnProposalSimple',
-            args: [proposal.id, vote],
-          },
-        } as MsgCallMessage)
-        .build(),
-      broadcastType: BroadcastType.SYNC,
-    };
+    if (!adena) return;
     try {
+      const transactionRequest = {
+        tx: TransactionBuilder.create()
+          .messages({
+            type: '/vm.m_call',
+            value: {
+              caller: address,
+              pkg_path: proposal.path,
+              func: 'MustVoteOnProposalSimple',
+              args: [proposal.id, vote],
+            },
+          } as MsgCallMessage)
+          .build(),
+        broadcastType: BroadcastType.SYNC,
+      };
+
       await adena.signTransaction(transactionRequest);
     } catch (err) {
       addToast({ title: 'Error', message: String((err as any)?.message ?? err), mode: 'negative' });
@@ -134,7 +129,7 @@ const ProposalCard = ({
           </Flex>
         </Card>
       </NextLink>
-      {isGovDaoMember && proposal.status === 'created' && (
+      {adena && isGovDaoMember && proposal.status === 'created' && (
         <Grid columns={{ initial: '1', md: '3' }} gap="3">
           <Button mt="2" mb="4" color="green" onClick={() => vote('YES')}>
             For
@@ -154,12 +149,10 @@ const ProposalCard = ({
 const GovdaoPage = () => {
   const { data, isPending } = useGetProposals();
   const { data: members, isPending: membersIsPending } = useGetGovdaoMembers();
-  
+
   const [query, setQuery] = useState('');
   const [status, setStatus] = useState('all');
   const { address } = useAdena();
-
-  const [adenaSDK] = useState(AdenaSDK.createAdenaWallet());
 
   const statuses = useMemo(() => {
     const list = (data ?? []) as TProposal[];
@@ -255,7 +248,7 @@ const GovdaoPage = () => {
       ) : (
         <Grid columns={{ initial: '1', md: '2' }} gap="3">
           {filtered.map((p) => (
-            <ProposalCard key={p.id} proposal={p} isGovDaoMember={isGovDaoMember} adena={adena} />
+            <ProposalCard key={p.id} proposal={p} isGovDaoMember={isGovDaoMember}/>
           ))}
         </Grid>
       )}
