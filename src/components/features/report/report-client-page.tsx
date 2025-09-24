@@ -59,7 +59,7 @@ type RepoStatusArray = [
 ];
 export type Status = keyof TPullRequestReport;
 
-export const STATUS_ORDER = ['waiting_for_review', 'in_progress', 'reviewed', 'merged', 'blocked'] as const satisfies readonly Status[];;
+export const STATUS_ORDER = ['waiting_for_review', 'in_progress', 'reviewed', 'merged', 'blocked'] as const satisfies readonly Status[];
 
 const statusToEmoji = {
   waiting_for_review: '🕒',
