@@ -1,9 +1,11 @@
 import { TPullRequest } from '@/utils/schemas';
-import { CheckCircledIcon, ExclamationTriangleIcon, InfoCircledIcon, MixerHorizontalIcon, QuestionMarkCircledIcon } from '@radix-ui/react-icons';
+import { CheckCircledIcon, ExclamationTriangleIcon, InfoCircledIcon, LapTimerIcon, MixerHorizontalIcon, QuestionMarkCircledIcon } from '@radix-ui/react-icons';
 import { Avatar, Box, Flex, Heading, Link, Text, Tooltip, HoverCard, IconButton, Separator } from '@radix-ui/themes';
 import Image from 'next/image';
 import { Status, STATUS_ORDER } from './report-client-page';
 import MinecraftHeart from '@/images/minecraft-heart.png';
+import { differenceInWeeks } from 'date-fns';
+
 
 const STATUS_TOOLTIPS: Record<Status, string> = {
   blocked: 'PRs is technically mergeable but blocked.',
@@ -24,6 +26,12 @@ interface RepoPRStatusListProps {
   repo: string;
   statusMap: { [status: string]: TPullRequest[] };
   isOffline: boolean;
+}
+
+const weeksAgo = (dateString: string): number => {
+  const date = new Date(dateString);
+  const now = new Date();
+  return differenceInWeeks(now, date);
 }
 
 const RepoPRStatusList = ({ repo, statusMap, isOffline }: RepoPRStatusListProps) => {
@@ -94,6 +102,13 @@ const RepoPRStatusList = ({ repo, statusMap, isOffline }: RepoPRStatusListProps)
                           </Tooltip>
                         </Link>
                         <Flex ml="auto" align="center" gap="4">
+                          {pr.createdAt && weeksAgo(pr.createdAt) > 24 && (
+                            <Tooltip content={`Old PR, created ${weeksAgo(pr.createdAt)} weeks ago`}>
+                              <Text size="2">
+                                <LapTimerIcon color="gray" />
+                              </Text>
+                            </Tooltip>
+                          )}
                           {(pr.reviews?.length ?? 0) > 10 && (
                             <Tooltip content={`Loved PR, Reviewed more than ${pr.reviews?.length ?? 0} times`}>
                               <Text size="2">
@@ -105,10 +120,10 @@ const RepoPRStatusList = ({ repo, statusMap, isOffline }: RepoPRStatusListProps)
                             <Text className="sm:block hidden">
                               {
                                 REVIEW_DECISION_ICON_MAP[
-                                  (pr.reviewDecision &&
+                                (pr.reviewDecision &&
                                   ['APPROVED', 'CHANGES_REQUESTED', 'REVIEW_REQUIRED'].includes(pr.reviewDecision)
-                                    ? pr.reviewDecision
-                                    : '') as 'APPROVED' | 'CHANGES_REQUESTED' | 'REVIEW_REQUIRED' | ''
+                                  ? pr.reviewDecision
+                                  : '') as 'APPROVED' | 'CHANGES_REQUESTED' | 'REVIEW_REQUIRED' | ''
                                 ]
                               }
                             </Text>
