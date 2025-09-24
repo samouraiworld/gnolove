@@ -171,7 +171,7 @@ This command will start indexing all important elements on the repository then s
 #### Reports endpoints
 
 - **Get Latest Report**
-  `GET /report`
+  `GET ai/report`
   Returns the latest weekly report for the Gnoland ecosystem, formatted as a JSON object.
 
   _No parameters._
@@ -191,7 +191,7 @@ This command will start indexing all important elements on the repository then s
   ```
 
 - **Get Report by Date Range**
-  `GET /reports/weekly?start=YYYY-MM-DDTHH:MM:SSZ&end=YYYY-MM-DDTHH:MM:SSZ`
+  `GET ai/reports/weekly?start=YYYY-MM-DDTHH:MM:SSZ&end=YYYY-MM-DDTHH:MM:SSZ`
   Returns the report for a specific date range (usually a week period). Dates must be in RFC3339 format.
 
   **Query Parameters:**
@@ -349,7 +349,7 @@ This command will start indexing all important elements on the repository then s
 | Namespace   | string | Foreign key to Namespace       |
 | BlockHeight | int64  | Block height registered        |
 
-# Report Model
+# AI Report Model
 
 The `Report` model stores generated ecosystem reports:
 
