@@ -15,7 +15,7 @@ type LeaderboardWebhook struct {
 	Minute       int       `gorm:"column:minute;not null;default:0" json:"minute"`
 	Timezone     string    `gorm:"column:timezone;not null;default:'Europe/Paris'" json:"timezone"`
 	Repositories []string  `gorm:"column:repositories;type:text;serializer:json" json:"repositories"`
-	Active       bool      `gorm:"column:active;not null;default:true" json:"active" default:"true"`
+	Active       bool      `gorm:"column:active;not null;default:true" json:"active"`
 	NextRunAt    time.Time `gorm:"column:next_run_at;" json:"nextRunAt"`
 	CreatedAt    time.Time `gorm:"column:created_at;autoCreateTime" json:"createdAt"`
 	UpdatedAt    time.Time `gorm:"column:updated_at;autoUpdateTime" json:"updatedAt"`
