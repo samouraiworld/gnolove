@@ -8,8 +8,8 @@ import { Button, Dialog, Flex, Table, Text } from '@radix-ui/themes';
 import Label from '@/elements/label';
 
 import { chunk } from '@/utils/array';
-import { TEnhancedUserWithStats, TIssue, TPullRequest } from '@/utils/schemas';
-import { getIssueOrPRScore } from '@/utils/score';
+import { TEnhancedUserWithStats, TIssue, TPullRequest, TReview, TCommit, TLabel } from '@/utils/schemas';
+import { getContributionScore } from '@/utils/score';
 
 import useGetScoreFactors from '@/hooks/use-get-score-factors';
 
@@ -22,16 +22,17 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
 
   const [page, setPage] = useState(0);
 
-  const issuesAndPRsChunks = useMemo((): (TIssue | TPullRequest)[][] => {
-    const sortedIssuesAndPRs = [...(user.issues ?? []), ...(user.pullRequests ?? [])].toSorted(
+  const contributionsChunks = useMemo((): (TIssue | TPullRequest | TReview | TCommit)[][] => {
+    const sortedContributions = [...(user.issues ?? []), ...(user.pullRequests ?? []), ...(user.reviews ?? []), ...(user.commits ?? [])].toSorted(
       (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
     );
 
-    return chunk(sortedIssuesAndPRs, 7);
-  }, [user.issues, user.pullRequests]);
+    return chunk(sortedContributions, 7);
+  }, [user.issues, user.pullRequests, user.reviews, user.commits]);
 
-  const issuesAndPRs = useMemo(() => issuesAndPRsChunks[page] ?? [], [issuesAndPRsChunks, page]);
-  const maxPage = useMemo(() => issuesAndPRsChunks.length, [issuesAndPRsChunks]);
+
+  const contributions = useMemo(() => contributionsChunks[page] ?? [], [contributionsChunks, page]);
+  const maxPage = useMemo(() => contributionsChunks.length, [contributionsChunks]);
 
   return (
     <Dialog.Root {...props}>
@@ -40,7 +41,7 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
       <Dialog.Content maxWidth="550px">
         <Dialog.Title>{user.name || user.login} contributions</Dialog.Title>
         <Dialog.Description size="2" mb="4">
-          Get information about all the contribution
+          Get information about all the contributions
         </Dialog.Description>
 
         {maxPage === 0 ? (
@@ -53,26 +54,26 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
           <>
             <Table.Root size="1">
               <Table.Body>
-                {issuesAndPRs.map((issueOrPR) => (
+                {contributions.map((contribution) => (
                   <Table.Row
-                    key={issueOrPR.url}
-                    onClick={() => window.open(issueOrPR.url, '_blank')}
+                    key={contribution.url}
+                    onClick={() => window.open(contribution.url, '_blank')}
                     className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-grayA-2"
                   >
                     <Table.Cell>
                       <Flex direction="column" py="2" gap="1">
                         <Text size="1" className="text-wrap">
-                          {issueOrPR.title}
+                          {contribution.title}
                         </Text>
                         <Flex gap="1" wrap="wrap">
-                          {'labels' in issueOrPR &&
-                            issueOrPR.labels.map((label) => <Label key={label.name + label.color} label={label} />)}
+                          {'labels' in contribution &&
+                            contribution.labels.map((label: TLabel) => <Label key={label.name + label.color} label={label} />)}
                         </Flex>
                       </Flex>
                     </Table.Cell>
                     <Table.Cell>
                       <Flex direction="column" height="100%" justify="center" py="2" gap="1">
-                        <Text size="1">+{getIssueOrPRScore(issueOrPR, scoreFactors)} points</Text>
+                        <Text size="1">+{getContributionScore(contribution, scoreFactors)} points</Text>
                       </Flex>
                     </Table.Cell>
                   </Table.Row>

@@ -171,6 +171,7 @@ export const EnhancedBaseUserSchema = UserBaseSchema.extend({
   commits: z.array(CommitSchema).nullish(),
   issues: z.array(IssueSchema).nullish(),
   pullRequests: z.array(PullRequestSchema).nullish(),
+  reviews: z.array(ReviewSchema).nullish(),
   LastContribution: IssueSchema.or(PullRequestSchema).or(CommitSchema).nullish(),
 });
 
