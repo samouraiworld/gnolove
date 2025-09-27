@@ -21,7 +21,7 @@ import useGetLastIssues from '@/hooks/use-get-last-issues';
 import useGetMilestone from '@/hooks/use-get-milestone';
 import useGetNewContributors from '@/hooks/use-get-new-contributors';
 
-import { getLastMRs, TimeFilter } from '@/utils/github';
+import { getLastPRs, TimeFilter } from '@/utils/github';
 
 import REPOSITORY from '@/constants/repository';
 
@@ -41,7 +41,7 @@ const ScoreboardPage = ({ videos }: { videos?: TYoutubeVideoPlaylist }) => {
   const { data: issues, isPending: isIssuesPending } = useGetLastIssues();
   const { data: newContributors, isPending: isNewContributorsPending } = useGetNewContributors();
 
-  const lastMRs = useMemo(() => getLastMRs(allTimeContributors ?? [], 5), [allTimeContributors]);
+  const lastPRs = useMemo(() => getLastPRs(allTimeContributors ?? [], 5), [allTimeContributors]);
 
   const { isOffline } = useOffline();
 
@@ -91,7 +91,7 @@ const ScoreboardPage = ({ videos }: { videos?: TYoutubeVideoPlaylist }) => {
           <Heading as="h2" weight="bold" size="6" mt="6">
             ✔️ Freshly Merged
           </Heading>
-          {isAllTimePending ? <Loader /> : <PrsTable prs={lastMRs} />}
+          {isAllTimePending ? <Loader /> : <PrsTable prs={lastPRs} />}
         </Flex>
 
         <Flex direction="column" gap="4">
