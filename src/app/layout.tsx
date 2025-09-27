@@ -109,6 +109,18 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://gnolove.world',
   },
+  
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+  },
+};
+
+export const viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#111113' },
+  ],
 };
 
 interface RootLayoutProps {
