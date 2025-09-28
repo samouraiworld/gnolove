@@ -116,6 +116,30 @@ func HandleGetAllProposals(db *gorm.DB) http.HandlerFunc {
 	}
 }
 
+// HandleGetProposal handles GET /api/onchain/proposal/{id}
+// It returns a specific proposal registered on the Gno blockchain
+func HandleGetProposal(db *gorm.DB) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		var pkgs []models.GnoProposal
+		id := chi.URLParam(r, "id")
+		query := db.Model(&models.GnoProposal{}).Preload("Files").Preload("Votes")
+
+		if id != "" {
+			query = query.Where("id = ?", id)
+		}
+
+		err := query.Find(&pkgs).Error
+		if err != nil {
+			log.Printf("[HandleGetAllProposals] DB error : %v", err)
+			w.WriteHeader(http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
+			return
+		}
+		json.NewEncoder(w).Encode(pkgs)
+	}
+}
+
 // HandleGetGovdaoMembers handles GET /api/onchain/govdao-members
 // It returns all the current govdao members registered on the Gno blockchain
 func HandleGetGovdaoMembers(db *gorm.DB) http.HandlerFunc {
