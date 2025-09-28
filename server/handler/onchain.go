@@ -131,7 +131,7 @@ func HandleGetProposal(db *gorm.DB) http.HandlerFunc {
 
 		err := query.Find(&pkgs).Error
 		if err != nil {
-			log.Printf("[HandleGetAllProposals] DB error : %v", err)
+			log.Printf("[HandleGetProposal] DB error : %v", err)
 			w.WriteHeader(http.StatusInternalServerError)
 			json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
 			return
