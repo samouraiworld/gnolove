@@ -57,13 +57,13 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
                 {contributions.map((contribution) => (
                   <Table.Row
                     key={contribution.url}
-                    onClick={() => window.open(contribution.url, '_blank')}
+                    onClick={() => window.open(contribution.url || contribution.pullRequest?.url, '_blank')}
                     className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-grayA-2"
                   >
                     <Table.Cell>
                       <Flex direction="column" py="2" gap="1">
                         <Text size="1" className="text-wrap">
-                          {contribution.title}
+                          {contribution.title || contribution.pullRequest?.title}
                         </Text>
                         <Flex gap="1" wrap="wrap">
                           {'labels' in contribution &&
