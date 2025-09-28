@@ -9,6 +9,7 @@ import { guessLanguageFromFilename } from '@/utils/govdao';
 import Copyable from '@/elements/copyable';
 import { useMemo } from 'react';
 import useGetGovdaoMembers from '@/hooks/use-get-govdao-members';
+import useGetUsers from '@/hooks/use-get-users';
 
 const DetailRow = ({ label, value }: { label: string; value: string | React.ReactNode }) => (
   <Flex justify="between" wrap="wrap" align="center">
@@ -22,6 +23,8 @@ const ProposalDetail = ({ id }: { id: string }) => {
   const { data: members } = useGetGovdaoMembers();
 
   if (!proposal || !members) return null;
+
+  const { data: users } = useGetUsers(proposal.votes.map((vote) => vote.address));
 
   const votes = proposal.votes || [];
 
@@ -40,6 +43,8 @@ const ProposalDetail = ({ id }: { id: string }) => {
 
   const status = (proposal.status || 'active').toLowerCase();
   const statusColor: BadgeProps['color'] = getStatusColor(status);
+
+  const getUser = (address: string) => users?.find((user) => user.wallet === address);
 
   return (
     <Flex direction="column" gap="4" pt="6">
@@ -92,7 +97,7 @@ const ProposalDetail = ({ id }: { id: string }) => {
                             <Card key={`${v.proposalID}-${v.address}-${v.hash}`} className="p-2">
                               <Flex align="center" justify="between">
                                 <Flex direction="column">
-                                  <Copyable className="font-bold">{v.address}</Copyable>
+                                  <Copyable className="font-bold">{getUser(v.address)?.login || getUser(v.address)?.name || v.address}</Copyable>
                                 </Flex>
                                 <Badge color={color} variant="soft">{v.vote}</Badge>
                               </Flex>

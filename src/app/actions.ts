@@ -15,6 +15,7 @@ import {
   MonitoringWebhookSchema,
   NamespacesSchema,
   PackagesSchema,
+  ProposalSchema,
   ProposalsSchema,
   GovdaoMembersSchema,
   PullRequestReportSchema,
@@ -25,6 +26,7 @@ import {
   TMonitoringWebhook,
   TMonitoringWebhookKind,
   TYoutubeVideoPlaylist,
+  UserBaseSchema,
   UserSchema,
   ValidatorLastIncidentsSchema,
   ValidatorsParticipationSchema,
@@ -258,14 +260,15 @@ export const getProposalsByUser = async (address: string) => {
   return getProposals(address);
 };
 
-// Temporary helper to fetch a single proposal by id until backend provides an endpoint
 export const getProposal = async (id: string) => {
   if (!id) throw new HttpError('Proposal id is required', { status: 400, statusText: 'Bad Request' });
+  const url = new URL(`/onchain/proposals/${id}`, ENV.NEXT_PUBLIC_API_URL);
 
-  const proposals = await getProposals();
-  const found = proposals.find((p) => p.id === id);
-  if (!found) throw new HttpError('Proposal not found', { status: 404 });
-  return found;
+  const res = await fetch(url.toString(), { cache: 'no-cache' });
+  const data = await res.json();
+
+  if (data.error) throw new HttpError(data.error, { status: 404, statusText: data.error });
+  return ProposalSchema.parse(data);
 };
 
 export const getScoreFactors = async () => {
@@ -459,6 +462,15 @@ export const forceVotesIndexation = async () => {
   }
 };
 
-export async function invalidateProposals() {
+export const invalidateProposals = () => {
   revalidatePath('/govdao/proposals');
-}
+};
+
+export const getUsers = async (addresses?: string[]) => {
+  const url = new URL('/users', ENV.NEXT_PUBLIC_MONITORING_API_URL);
+  if (addresses) url.searchParams.set('addresses', addresses.join(','));
+
+  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+
+  return z.array(UserBaseSchema).parse(data || []);
+};
