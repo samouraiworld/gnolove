@@ -21,6 +21,7 @@ import useGetProposals from '@/hooks/use-get-proposals';
 
 import { aggregateVotes, capitalize, getProposalTitle, getStatusColor, percent } from '@/utils/govdao';
 import { TProposal } from '@/utils/schemas';
+import { emojify } from 'node-emoji';
 
 // Filters bar
 const Filters = ({
@@ -95,9 +96,9 @@ const ProposalCard = ({ proposal, isGovDaoMember }: { proposal: TProposal; isGov
   };
 
   return (
-    <Grid rows={{ initial: '1', md: '2' }} gap="3">
+    <Flex direction="column" gap="1">
       <NextLink href={`/govdao/proposal/${proposal.id}`}>
-        <Card className="h-[380px]">
+        <Card className="h-[380px] hover:bg-gray-4">
           <Flex direction="column" gap="2" className="h-full">
             <Flex align="center" justify="between">
               <Badge color={statusColor} variant="soft">
@@ -134,19 +135,22 @@ const ProposalCard = ({ proposal, isGovDaoMember }: { proposal: TProposal; isGov
         </Card>
       </NextLink>
       {adena && isGovDaoMember && proposal.status === 'created' && (
-        <Grid columns={{ initial: '1', md: '3' }} gap="3">
-          <Button mt="2" mb="4" color="green" onClick={() => vote('YES')}>
+        <Flex gap="2">
+          <Button className="flex-1" color="green" onClick={() => vote('YES')}>
             For
+            <Box ml="1">{emojify('👍')}</Box>
           </Button>
-          <Button mt="2" mb="4" color="gray" onClick={() => vote('ABSTAIN')}>
+          <Button className="flex-1" color="gray" onClick={() => vote('ABSTAIN')}>
             Abstain
+            <Box ml="1">{emojify('🤷')}</Box>
           </Button>
-          <Button mt="2" mb="4" color="red" onClick={() => vote('NO')}>
+          <Button className="flex-1" color="red" onClick={() => vote('NO')}>
             Against
+            <Box ml="1">{emojify('👎')}</Box>
           </Button>
-        </Grid>
+        </Flex>
       )}
-    </Grid>
+    </Flex>
   );
 };
 
@@ -250,7 +254,7 @@ const GovdaoPage = () => {
       {isPending || membersIsPending ? (
         <Loader />
       ) : (
-        <Grid columns={{ initial: '1', md: '2' }} gap="3">
+        <Grid columns={{ initial: '1', md: '2' }} gap="6">
           {filtered.map((p) => (
             <ProposalCard key={p.id} proposal={p} isGovDaoMember={isGovDaoMember} />
           ))}
