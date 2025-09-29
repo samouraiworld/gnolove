@@ -8,7 +8,7 @@ import { Button, Dialog, Flex, Table, Text } from '@radix-ui/themes';
 import Label from '@/elements/label';
 
 import { chunk } from '@/utils/array';
-import { TEnhancedUserWithStats, TIssue, TPullRequest, TReview, TCommit, TLabel } from '@/utils/schemas';
+import { TEnhancedUserWithStats, TIssue, TPullRequest, TReview, TCommit } from '@/utils/schemas';
 import { getContributionScore } from '@/utils/score';
 
 import useGetScoreFactors from '@/hooks/use-get-score-factors';
@@ -23,9 +23,12 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
   const [page, setPage] = useState(0);
 
   const contributionsChunks = useMemo((): (TIssue | TPullRequest | TReview | TCommit)[][] => {
-    const sortedContributions = [...(user.issues ?? []), ...(user.pullRequests ?? []), ...(user.reviews ?? []), ...(user.commits ?? [])].toSorted(
-      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-    );
+    const sortedContributions = [
+      ...(user.issues ?? []).map((i) => ({ ...i, label: { name: 'issue', color: '7028e4' } })),
+      ...(user.pullRequests ?? []).map((pr) => ({ ...pr, label: { name: 'pullRequest', color: '2563eb' } })),
+      ...(user.reviews ?? []).map((r) => ({ ...r, label: { name: 'review', color: '16a34a' } })),
+      ...(user.commits ?? []).map((c) => ({ ...c, label: { name: 'commit', color: '9ca3af' } })),
+    ].toSorted((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
     return chunk(sortedContributions, 7);
   }, [user.issues, user.pullRequests, user.reviews, user.commits]);
@@ -66,8 +69,7 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
                           {contribution.title || contribution.pullRequest?.title}
                         </Text>
                         <Flex gap="1" wrap="wrap">
-                          {'labels' in contribution &&
-                            contribution.labels.map((label: TLabel) => <Label key={label.name + label.color} label={label} />)}
+                          {'label' in contribution && <Label key={contribution.label.name + contribution.label.color} label={contribution.label} />}
                         </Flex>
                       </Flex>
                     </Table.Cell>

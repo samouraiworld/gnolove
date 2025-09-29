@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { ExternalLinkIcon, MagnifyingGlassIcon, StarFilledIcon } from '@radix-ui/react-icons';
 import { Badge, Flex, IconButton, Table, Text } from '@radix-ui/themes';
 import { formatDistanceToNow } from 'date-fns';
-import { CircleDotIcon } from 'lucide-react';
+import { ArrowBigRight, CircleDotIcon } from 'lucide-react';
 
 import ContributionsDialog from '@/modules/contributions-dialog';
 
@@ -74,13 +74,13 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
           />
 
           <Link
-            className={cn('min-w-0 max-w-[160px] xs:max-w-[180px] sm:max-w-none', { 'pointer-events-none': isOffline })}
+            className={cn('min-w-0 max-w-[160px] xs:max-w-[180px] sm:max-w-none hover:underline hover:text-red-10', { 'pointer-events-none': isOffline })}
             href={isOffline ? '' : `/@${contributor.login}`}
           >
             <Text
               truncate
               title={contributor.name || contributor.login}
-              className={cn({ 'text-gray-8': isOffline })}
+              className={cn('group flex items-center gap-1', { 'text-gray-8': isOffline })}
               trim="both"
             >
               {contributor.name || contributor.login}
