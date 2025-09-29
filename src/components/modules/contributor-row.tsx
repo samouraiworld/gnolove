@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { ExternalLinkIcon, MagnifyingGlassIcon, StarFilledIcon } from '@radix-ui/react-icons';
 import { Badge, Flex, IconButton, Table, Text } from '@radix-ui/themes';
 import { formatDistanceToNow } from 'date-fns';
-import { ArrowBigRight, CircleDotIcon } from 'lucide-react';
+import { CircleDotIcon } from 'lucide-react';
 
 import ContributionsDialog from '@/modules/contributions-dialog';
 
