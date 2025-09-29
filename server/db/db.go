@@ -1,6 +1,9 @@
 package db
 
 import (
+	"fmt"
+	"os"
+
 	"github.com/samouraiworld/topofgnomes/server/models"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -9,7 +12,12 @@ import (
 
 func InitDB() (*gorm.DB, error) {
 	var err error
-	db, err := gorm.Open(sqlite.Open("db/database.db"), &gorm.Config{
+	dbPath := os.Getenv("DATABASE_PATH")
+	if dbPath == "" {
+		fmt.Println("DATABASE_PATH environment variable is not set, using default path")
+		dbPath = "db/database.db"
+	}
+	db, err := gorm.Open(sqlite.Open(dbPath), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Silent),
 	})
 	if err != nil {
