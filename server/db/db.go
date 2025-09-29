@@ -9,7 +9,9 @@ import (
 
 func InitDB() (*gorm.DB, error) {
 	var err error
-	db, err := gorm.Open(sqlite.Open("db/database.db"), &gorm.Config{
+	// When running the backend server in local environment, change the path to "db/database.db"
+	// Do NOT commit this change
+	db, err := gorm.Open(sqlite.Open("/db/database.db"), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Silent),
 	})
 	if err != nil {
