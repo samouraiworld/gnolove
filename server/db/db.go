@@ -12,9 +12,9 @@ import (
 
 func InitDB() (*gorm.DB, error) {
 	var err error
-	dbPath := os.Getenv("DB_PATH")
+	dbPath := os.Getenv("DATABASE_PATH")
 	if dbPath == "" {
-		fmt.Println("DB_PATH environment variable is not set, using default path")
+		fmt.Println("DATABASE_PATH environment variable is not set, using default path")
 		dbPath = "db/database.db"
 	}
 	db, err := gorm.Open(sqlite.Open(dbPath), &gorm.Config{
