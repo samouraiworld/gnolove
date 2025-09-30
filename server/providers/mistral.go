@@ -62,7 +62,6 @@ func callMistralAPI(apiKey, systemPrompt, userPrompt string, outputFormatSchema 
 				"name":        "string",
 				"description": "string",
 				"schema":      outputFormatSchema,
-				"strict":      false,
 			},
 		}
 	}
