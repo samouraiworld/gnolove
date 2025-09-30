@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/Khan/genqlient/graphql"
+	"github.com/robfig/cron/v3"
 	"github.com/samouraiworld/topofgnomes/server/handler/ai"
 	"github.com/samouraiworld/topofgnomes/server/models"
 	"github.com/shurcooL/githubv4"
@@ -151,19 +152,22 @@ func (s *Syncer) StartSynchonizing() error {
 	}()
 
 	if os.Getenv("MISTRAL_API_KEY") != "" {
-		go func() {
-			for {
-				currentTime := time.Now()
-				if currentTime.Weekday() == time.Sunday && currentTime.Hour() == 23 && currentTime.Minute() == 58 {
-					s.logger.Info("Starting report synchronization.")
-					err := s.syncReports()
-					if err != nil {
-						s.logger.Errorf("error while syncing reports %s", err.Error())
-					}
-				}
-				<-time.Tick(1 * time.Minute)
+		c := cron.New()
+
+		// Schedule the task to run every Sunday at 23:59
+		_, err := c.AddFunc("59 23 * * 0", func() {
+			s.logger.Info("Starting report synchronization.")
+			err := s.syncReports()
+			if err != nil {
+				s.logger.Errorf("error while syncing reports %s", err.Error())
 			}
-		}()
+		})
+
+		if err != nil {
+			s.logger.Errorf("Failed to schedule report synchronization: %v", err)
+		}
+
+		c.Start()
 	} else {
 		s.logger.Warn("MISTRAL_API_KEY is not set. Report synchronization will not start.")
 	}
