@@ -121,7 +121,7 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
                 </Table.Row>
                 <Table.Row>
                   <Table.RowHeaderCell>
-                    <Text size="1">Reviewed MRs score</Text>
+                    <Text size="1">Reviewed PRs score</Text>
                   </Table.RowHeaderCell>
                   <Table.Cell align="right">
                     <Text size="1">{user.TotalReviewedPullRequests * (scoreFactors?.reviewedPrFactor ?? 0)} points</Text>
