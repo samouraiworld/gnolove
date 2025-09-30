@@ -101,21 +101,19 @@ func GenerateReport(db *gorm.DB) (models.Report, error) {
 		})
 	}
 
-	// Prepare response data
-	responseData := map[string]interface{}{
+	// Prepare ai input data
+	inputData := map[string]interface{}{
 		"pullRequests": formattedPullRequests,
 		"issues":       formattedIssues,
 	}
 
-	// fmt.Printf("Choices: %+v\n", responseData)
-
-	responseJSON, err := json.Marshal(responseData)
+	inputDataJSON, err := json.Marshal(inputData)
 	if err != nil {
 		return models.Report{}, err
 	}
 
 	// Generate report using AskAssistant
-	assistantResponse, err := providers.AskMistral(reportSystemPrompt, string(responseJSON), reportOutputFormatSchema)
+	assistantResponse, err := providers.AskMistral(reportSystemPrompt, string(inputDataJSON), reportOutputFormatSchema)
 	if err != nil {
 		return models.Report{}, err
 	}
