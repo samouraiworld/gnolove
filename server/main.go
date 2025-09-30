@@ -149,6 +149,7 @@ func main() {
 	// ai endpoints
 	router.HandleFunc("/ai/report", ai.HandleGetLastReport(database))
 	router.HandleFunc("/ai/report/weekly", ai.HandleGetReportByWeek(database))
+	router.HandleFunc("/ai/reports", ai.HandleGetAllReports(database))
 
 	// Onchain package contributions endpoints
 	router.HandleFunc("/onchain/packages", handler.HandleGetAllPackages(database))

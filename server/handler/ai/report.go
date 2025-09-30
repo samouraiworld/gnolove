@@ -83,3 +83,33 @@ func HandleGetReportByWeek(db *gorm.DB) http.HandlerFunc {
 		}
 	}
 }
+
+func HandleGetAllReports(db *gorm.DB) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+
+		reports, err := GetAllReports(db)
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
+			return
+		}
+
+		var gnoReports []GnoReport
+		for _, report := range reports {
+			var obj GnoReport
+			if err := json.Unmarshal([]byte(report.Data), &obj); err != nil {
+				w.WriteHeader(http.StatusInternalServerError)
+				json.NewEncoder(w).Encode(map[string]string{"error": "Failed to decode report data"})
+				return
+			}
+			gnoReports = append(gnoReports, obj)
+		}
+
+		if err := json.NewEncoder(w).Encode(gnoReports); err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(map[string]string{"error": "Failed to encode reports"})
+			return
+		}
+	}
+}
