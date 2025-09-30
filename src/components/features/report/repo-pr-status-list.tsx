@@ -112,12 +112,12 @@ const RepoPRStatusList = ({ repo, statusMap, isOffline }: RepoPRStatusListProps)
                             {updatedWeeksAgo !== null && createdWeeksAgo !== null &&
                               updatedWeeksAgo > STALE_PR_WEEKS_THRESHOLD &&
                               createdWeeksAgo > OLD_PR_WEEKS_THRESHOLD && (
-                                <Tooltip content={`Old PR, created ${createdWeeksAgo} weeks ago with no updates for ${updatedWeeksAgo} weeks`}>
-                                  <Text size="2">
-                                    <LapTimerIcon color="gray" />
-                                  </Text>
-                                </Tooltip>
-                              )}
+                              <Tooltip content={`Old PR, created ${createdWeeksAgo} weeks ago with no updates for ${updatedWeeksAgo} weeks`}>
+                                <Text size="2">
+                                  <LapTimerIcon color="gray" />
+                                </Text>
+                              </Tooltip>
+                            )}
                             {(pr.reviews?.length ?? 0) > LOVE_PR_REVIEWS_THRESHOLD && (
                               <Tooltip content={`Loved PR, Reviewed more than ${pr.reviews?.length ?? 0} times`}>
                                 <Text size="2">
