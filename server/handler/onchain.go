@@ -123,13 +123,16 @@ func HandleGetProposal(db *gorm.DB) http.HandlerFunc {
 		w.Header().Set("Content-Type", "application/json")
 		var proposal models.GnoProposal
 		id := chi.URLParam(r, "id")
-		query := db.Model(&models.GnoProposal{}).Preload("Files").Preload("Votes")
 
-		if id != "" {
-			query = query.Where("id = ?", id)
+		if id == "" {
+			log.Printf("[HandleGetProposal] Missing id parameter")
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(map[string]string{"error": "id parameter is required"})
+			return
 		}
 
-		err := query.First(&proposal).Error
+		err := db.Model(&models.GnoProposal{}).Preload("Files").Preload("Votes").Where("id = ?", id).First(&proposal).Error
+
 		if err != nil {
 			if err == gorm.ErrRecordNotFound {
 				log.Printf("[HandleGetProposal] Proposal not found: %s", id)
