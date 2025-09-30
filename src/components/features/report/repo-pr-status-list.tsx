@@ -6,6 +6,9 @@ import { Status, STATUS_ORDER } from './report-client-page';
 import MinecraftHeart from '@/images/minecraft-heart.png';
 import { differenceInWeeks } from 'date-fns';
 
+const LOVE_PR_REVIEWS_THRESHOLD = 10;
+const OLD_PR_WEEKS_THRESHOLD = 24;
+const STALE_PR_WEEKS_THRESHOLD = 12;
 
 const STATUS_TOOLTIPS: Record<Status, string> = {
   blocked: 'PRs is technically mergeable but blocked.',
@@ -102,14 +105,14 @@ const RepoPRStatusList = ({ repo, statusMap, isOffline }: RepoPRStatusListProps)
                           </Tooltip>
                         </Link>
                         <Flex ml="auto" align="center" gap="4">
-                          {pr.createdAt && weeksAgo(pr.createdAt) > 24 && (
-                            <Tooltip content={`Old PR, created ${weeksAgo(pr.createdAt)} weeks ago`}>
+                          {pr.createdAt && weeksAgo(pr.updatedAt) > STALE_PR_WEEKS_THRESHOLD && weeksAgo(pr.createdAt) > OLD_PR_WEEKS_THRESHOLD && (
+                            <Tooltip content={`Old PR, created ${weeksAgo(pr.createdAt)} weeks ago with no updates for ${weeksAgo(pr.updatedAt)} weeks`}>
                               <Text size="2">
                                 <LapTimerIcon color="gray" />
                               </Text>
                             </Tooltip>
                           )}
-                          {(pr.reviews?.length ?? 0) > 10 && (
+                          {(pr.reviews?.length ?? 0) > LOVE_PR_REVIEWS_THRESHOLD && (
                             <Tooltip content={`Loved PR, Reviewed more than ${pr.reviews?.length ?? 0} times`}>
                               <Text size="2">
                                 <Image src={MinecraftHeart} alt="minecraft heart " width={12} height={12} />
