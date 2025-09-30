@@ -156,7 +156,6 @@ func (s *Syncer) StartSynchonizing() error {
 
 		// Schedule the task to run every Sunday at 23:59
 		_, err := c.AddFunc("59 23 * * 0", func() {
-			s.logger.Info("Starting report synchronization.")
 			err := s.syncReports()
 			if err != nil {
 				s.logger.Errorf("error while syncing reports %s", err.Error())
@@ -165,9 +164,11 @@ func (s *Syncer) StartSynchonizing() error {
 
 		if err != nil {
 			s.logger.Errorf("Failed to schedule report synchronization: %v", err)
+			return fmt.Errorf("failed to schedule report synchronization: %w", err)
 		}
 
 		c.Start()
+		s.logger.Info("Report synchronization started (runs every Sunday at 23:59 UTC)")
 	} else {
 		s.logger.Warn("MISTRAL_API_KEY is not set. Report synchronization will not start.")
 	}
