@@ -51,7 +51,7 @@ func GenerateReport(db *gorm.DB) (models.Report, error) {
 
 	// Fetch merged pull requests
 	var pullRequests []models.PullRequest
-	if err := db.Where("state = ? AND created_at BETWEEN ? AND ?", "MERGED", startTime, endTime).
+	if err := db.Where("state = ? AND merged_at BETWEEN ? AND ?", "MERGED", startTime, endTime).
 		Preload("Author").Find(&pullRequests).Error; err != nil {
 		return models.Report{}, err
 	}
