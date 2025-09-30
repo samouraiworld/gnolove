@@ -44,7 +44,7 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
       <Dialog.Content maxWidth="550px">
         <Dialog.Title>{user.name || user.login} contributions</Dialog.Title>
         <Dialog.Description size="2" mb="4">
-          Get information about all the contributions
+          Get information about all contributions
         </Dialog.Description>
 
         {maxPage === 0 ? (
