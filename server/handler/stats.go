@@ -53,7 +53,7 @@ func getUserStats(db *gorm.DB, startTime time.Time, exclude, repositories []stri
 
 	for _, user := range users {
 		user.Reviews = slices.DeleteFunc(user.Reviews, func(review models.Review) bool {
-			return review.PullRequest.State != "MERGED"
+			return review.PullRequest.State != "MERGED" || review.PullRequest.AuthorID == review.AuthorID
 		})
 		if getLastContribution(user) == nil {
 			continue
@@ -72,13 +72,14 @@ func getUserStats(db *gorm.DB, startTime time.Time, exclude, repositories []stri
 				Commits:      user.Commits,
 				Issues:       user.Issues,
 				PullRequests: user.PullRequests,
+				Reviews:      user.Reviews,
 			},
 			TotalCommits:              len(user.Commits),
 			TotalPrs:                  len(user.PullRequests),
 			TotalIssues:               len(user.Issues),
 			TotalReviewedPullRequests: len(user.Reviews),
 			LastContribution:          getLastContribution(user),
-			Score:                    score,
+			Score:                     score,
 		})
 	}
 

@@ -103,11 +103,16 @@ func GetContributorsWithScores(db *gorm.DB, since time.Time) ([]ContributorStats
 	reviewedMap := map[string]int64{}
 	var reviewedResults []countResult
 	{
-		q := db.Table("reviews").Select("author_id, COUNT(*) as count").Where("created_at >= ?", since)
+		q := db.Table("reviews").
+			Select("reviews.author_id, COUNT(*) AS count").
+			Joins("JOIN pull_requests ON pull_requests.id = reviews.pull_request_id").
+			Where("reviews.created_at >= ?", since).
+			Where("pull_requests.state = ?", "MERGED").
+			Where("pull_requests.author_id <> reviews.author_id")
 		if len(excludedRepos) > 0 {
-			q = q.Where("repository_id NOT IN ?", excludedRepos)
+			q = q.Where("reviews.repository_id NOT IN ?", excludedRepos)
 		}
-		if err := q.Group("author_id").Scan(&reviewedResults).Error; err != nil {
+		if err := q.Group("reviews.author_id").Scan(&reviewedResults).Error; err != nil {
 			return nil, err
 		}
 	}
