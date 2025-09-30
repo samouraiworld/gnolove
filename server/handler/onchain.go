@@ -116,12 +116,12 @@ func HandleGetAllProposals(db *gorm.DB) http.HandlerFunc {
 	}
 }
 
-// HandleGetProposal handles GET /api/onchain/proposal/{id}
+// HandleGetProposal handles GET /api/onchain/proposals/{id}
 // It returns a specific proposal registered on the Gno blockchain
 func HandleGetProposal(db *gorm.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-		var pkgs []models.GnoProposal
+		var proposal models.GnoProposal
 		id := chi.URLParam(r, "id")
 		query := db.Model(&models.GnoProposal{}).Preload("Files").Preload("Votes")
 
@@ -129,14 +129,20 @@ func HandleGetProposal(db *gorm.DB) http.HandlerFunc {
 			query = query.Where("id = ?", id)
 		}
 
-		err := query.Find(&pkgs).Error
+		err := query.First(&proposal).Error
 		if err != nil {
+			if err == gorm.ErrRecordNotFound {
+				log.Printf("[HandleGetProposal] Proposal not found: %s", id)
+				w.WriteHeader(http.StatusNotFound)
+				json.NewEncoder(w).Encode(map[string]string{"error": "proposal not found"})
+				return
+			}
 			log.Printf("[HandleGetProposal] DB error : %v", err)
 			w.WriteHeader(http.StatusInternalServerError)
 			json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
 			return
 		}
-		json.NewEncoder(w).Encode(pkgs)
+		json.NewEncoder(w).Encode(proposal)
 	}
 }
 
