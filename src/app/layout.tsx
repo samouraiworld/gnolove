@@ -24,7 +24,7 @@ import { Analytics } from '@vercel/analytics/next';
 
 import { OfflineProvider } from '@/contexts/offline-context';
 import OfflineBanner from '@/elements/offline-banner';
-import { ClerkProvider } from '@clerk/nextjs';
+import AuthProvider from '@/contexts/auth-provider';
 
 // Site-wide SEO metadata
 export const metadata: Metadata = {
@@ -140,7 +140,7 @@ const RootLayout = ({ children, details }: RootLayoutProps) => {
       </head>
 
       <body>
-        <ClerkProvider>
+        <AuthProvider>
           <OfflineProvider>
             <QueryClientWrapper>
               <ThemeProvider defaultTheme="light" attribute="class">
@@ -190,7 +190,7 @@ const RootLayout = ({ children, details }: RootLayoutProps) => {
             <OfflineBanner />
             <Analytics />
           </OfflineProvider>
-        </ClerkProvider>
+        </AuthProvider>
       </body>
     </html>
   );
