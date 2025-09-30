@@ -68,114 +68,121 @@ const RepoPRStatusList = ({ repo, statusMap, isOffline }: RepoPRStatusListProps)
                     const bLogin = b.authorLogin || '';
                     return aLogin.localeCompare(bLogin);
                   })
-                  .map((pr: TPullRequest) => (
-                    <li key={pr.id} className="hover:bg-gray-2">
-                      <Flex
-                        gap="2"
-                        align={{ initial: 'start', sm: 'center' }}
-                        py={{ initial: '2', sm: '1' }}
-                        className="overflow-hidden"
-                        direction={{ initial: 'column', sm: 'row' }}
-                      >
-                        <Flex gap="2">
-                          <Avatar
-                            size="1"
-                            radius="full"
-                            src={pr.authorAvatarUrl}
-                            fallback={pr.authorLogin ? pr.authorLogin[0] : '?'}
-                          />
-                          <Link className="flex items-center" href={isOffline ? '' : `/@${pr.authorLogin}`}>
-                            <Tooltip content={pr.authorLogin}>
+                  .map((pr: TPullRequest) => {
+                    const updatedWeeksAgo = pr.updatedAt ? weeksAgo(pr.updatedAt) : null;
+                    const createdWeeksAgo = pr.createdAt ? weeksAgo(pr.createdAt) : null;
+                    
+                    return (
+                      <li key={pr.id} className="hover:bg-gray-2">
+                        <Flex
+                          gap="2"
+                          align={{ initial: 'start', sm: 'center' }}
+                          py={{ initial: '2', sm: '1' }}
+                          className="overflow-hidden"
+                          direction={{ initial: 'column', sm: 'row' }}
+                        >
+                          <Flex gap="2">
+                            <Avatar
+                              size="1"
+                              radius="full"
+                              src={pr.authorAvatarUrl}
+                              fallback={pr.authorLogin ? pr.authorLogin[0] : '?'}
+                            />
+                            <Link className="flex items-center" href={isOffline ? '' : `/@${pr.authorLogin}`}>
+                              <Tooltip content={pr.authorLogin}>
+                                <Text
+                                  weight="bold"
+                                  size="2"
+                                >
+                                  {pr.authorLogin}
+                                </Text>
+                              </Tooltip>
+                            </Link>
+                          </Flex>
+                          <Link className="flex items-center" href={isOffline ? '' : pr.url} target="_blank" rel="noopener noreferrer">
+                            <Tooltip content={pr.title}>
                               <Text
-                                weight="bold"
                                 size="2"
                               >
-                                {pr.authorLogin}
+                                {pr.title}
                               </Text>
                             </Tooltip>
                           </Link>
-                        </Flex>
-                        <Link className="flex items-center" href={isOffline ? '' : pr.url} target="_blank" rel="noopener noreferrer">
-                          <Tooltip content={pr.title}>
-                            <Text
-                              size="2"
-                            >
-                              {pr.title}
-                            </Text>
-                          </Tooltip>
-                        </Link>
-                        <Flex ml="auto" align="center" gap="4">
-                          {pr.createdAt && weeksAgo(pr.updatedAt) > STALE_PR_WEEKS_THRESHOLD && weeksAgo(pr.createdAt) > OLD_PR_WEEKS_THRESHOLD && (
-                            <Tooltip content={`Old PR, created ${weeksAgo(pr.createdAt)} weeks ago with no updates for ${weeksAgo(pr.updatedAt)} weeks`}>
-                              <Text size="2">
-                                <LapTimerIcon color="gray" />
+                          <Flex ml="auto" align="center" gap="4">
+                            {updatedWeeksAgo !== null && createdWeeksAgo !== null &&
+                              updatedWeeksAgo > STALE_PR_WEEKS_THRESHOLD &&
+                              createdWeeksAgo > OLD_PR_WEEKS_THRESHOLD && (
+                                <Tooltip content={`Old PR, created ${createdWeeksAgo} weeks ago with no updates for ${updatedWeeksAgo} weeks`}>
+                                  <Text size="2">
+                                    <LapTimerIcon color="gray" />
+                                  </Text>
+                                </Tooltip>
+                              )}
+                            {(pr.reviews?.length ?? 0) > LOVE_PR_REVIEWS_THRESHOLD && (
+                              <Tooltip content={`Loved PR, Reviewed more than ${pr.reviews?.length ?? 0} times`}>
+                                <Text size="2">
+                                  <Image src={MinecraftHeart} alt="minecraft heart " width={12} height={12} />
+                                </Text>
+                              </Tooltip>
+                            )}
+                            <Tooltip content={pr.reviewDecision || 'No review decision'}>
+                              <Text className="sm:block hidden">
+                                {
+                                  REVIEW_DECISION_ICON_MAP[
+                                  (pr.reviewDecision &&
+                                    ['APPROVED', 'CHANGES_REQUESTED', 'REVIEW_REQUIRED'].includes(pr.reviewDecision)
+                                    ? pr.reviewDecision
+                                    : '') as 'APPROVED' | 'CHANGES_REQUESTED' | 'REVIEW_REQUIRED' | ''
+                                  ]
+                                }
                               </Text>
                             </Tooltip>
-                          )}
-                          {(pr.reviews?.length ?? 0) > LOVE_PR_REVIEWS_THRESHOLD && (
-                            <Tooltip content={`Loved PR, Reviewed more than ${pr.reviews?.length ?? 0} times`}>
-                              <Text size="2">
-                                <Image src={MinecraftHeart} alt="minecraft heart " width={12} height={12} />
-                              </Text>
-                            </Tooltip>
-                          )}
-                          <Tooltip content={pr.reviewDecision || 'No review decision'}>
-                            <Text className="sm:block hidden">
-                              {
-                                REVIEW_DECISION_ICON_MAP[
-                                (pr.reviewDecision &&
-                                  ['APPROVED', 'CHANGES_REQUESTED', 'REVIEW_REQUIRED'].includes(pr.reviewDecision)
-                                  ? pr.reviewDecision
-                                  : '') as 'APPROVED' | 'CHANGES_REQUESTED' | 'REVIEW_REQUIRED' | ''
-                                ]
-                              }
-                            </Text>
-                          </Tooltip>
-                          <HoverCard.Root>
-                            <HoverCard.Trigger>
-                              <IconButton variant="soft">
-                                <InfoCircledIcon />
-                              </IconButton>
-                            </HoverCard.Trigger>
-                            <HoverCard.Content width="360px">
-                              <Flex direction="column" gap="2" p="2">
-                                <Text size="2" weight="bold">
-                                  {pr.title}
-                                </Text>
-                                <Text size="1" weight="bold" color="gray">
-                                  PR #{pr.number} • {pr.state}
-                                </Text>
-                                <Text size="1" color="gray">
-                                  <Text weight="bold">Author: </Text> {pr.authorLogin}
-                                </Text>
-                                <Text size="1" color="gray">
-                                  <Text weight="bold">Review Decision: </Text> {pr.reviewDecision || 'N/A'}
-                                </Text>
-                                <Text size="1" color="gray">
-                                  <Text weight="bold">Created: </Text>{' '}
-                                  {pr.createdAt ? new Date(pr.createdAt).toLocaleString() : 'N/A'}
-                                </Text>
-                                <Text size="1" color="gray">
-                                  <Text weight="bold">Updated: </Text>{' '}
-                                  {pr.updatedAt ? new Date(pr.updatedAt).toLocaleString() : 'N/A'}
-                                </Text>
-                                <Text size="1" color="gray">
-                                  <Text weight="bold">URL: </Text>{' '}
-                                  <Link href={pr.url} target="_blank" rel="noopener noreferrer">
-                                    {pr.url}
-                                  </Link>
-                                </Text>
-                                <Text size="1" color="gray">
-                                  <Text weight="bold">Reviewed: </Text> {pr.reviews?.length} times
-                                </Text>
-                              </Flex>
-                            </HoverCard.Content>
-                          </HoverCard.Root>
+                            <HoverCard.Root>
+                              <HoverCard.Trigger>
+                                <IconButton variant="soft">
+                                  <InfoCircledIcon />
+                                </IconButton>
+                              </HoverCard.Trigger>
+                              <HoverCard.Content width="360px">
+                                <Flex direction="column" gap="2" p="2">
+                                  <Text size="2" weight="bold">
+                                    {pr.title}
+                                  </Text>
+                                  <Text size="1" weight="bold" color="gray">
+                                    PR #{pr.number} • {pr.state}
+                                  </Text>
+                                  <Text size="1" color="gray">
+                                    <Text weight="bold">Author: </Text> {pr.authorLogin}
+                                  </Text>
+                                  <Text size="1" color="gray">
+                                    <Text weight="bold">Review Decision: </Text> {pr.reviewDecision || 'N/A'}
+                                  </Text>
+                                  <Text size="1" color="gray">
+                                    <Text weight="bold">Created: </Text>{' '}
+                                    {pr.createdAt ? new Date(pr.createdAt).toLocaleString() : 'N/A'}
+                                  </Text>
+                                  <Text size="1" color="gray">
+                                    <Text weight="bold">Updated: </Text>{' '}
+                                    {pr.updatedAt ? new Date(pr.updatedAt).toLocaleString() : 'N/A'}
+                                  </Text>
+                                  <Text size="1" color="gray">
+                                    <Text weight="bold">URL: </Text>{' '}
+                                    <Link href={pr.url} target="_blank" rel="noopener noreferrer">
+                                      {pr.url}
+                                    </Link>
+                                  </Text>
+                                  <Text size="1" color="gray">
+                                    <Text weight="bold">Reviewed: </Text> {pr.reviews?.length} times
+                                  </Text>
+                                </Flex>
+                              </HoverCard.Content>
+                            </HoverCard.Root>
+                          </Flex>
                         </Flex>
-                      </Flex>
-                      <Separator size="4" />
-                    </li>
-                  ))}
+                        <Separator size="4" />
+                      </li>
+                    );
+                  })}
               </ul>
             </Box>
           ) : null,
