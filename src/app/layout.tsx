@@ -24,7 +24,7 @@ import { Analytics } from '@vercel/analytics/next';
 
 import { OfflineProvider } from '@/contexts/offline-context';
 import OfflineBanner from '@/elements/offline-banner';
-import { ClerkProvider } from '@clerk/nextjs';
+import AuthProvider from '@/contexts/auth-provider';
 
 // Site-wide SEO metadata
 export const metadata: Metadata = {
@@ -109,6 +109,18 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://gnolove.world',
   },
+  
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+  },
+};
+
+export const viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#111113' },
+  ],
 };
 
 interface RootLayoutProps {
@@ -125,11 +137,10 @@ const RootLayout = ({ children, details }: RootLayoutProps) => {
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="msapplication-TileColor" content="#da532c" />
-        <meta name="theme-color" content="#ffffff" />
       </head>
 
       <body>
-        <ClerkProvider>
+        <AuthProvider>
           <OfflineProvider>
             <QueryClientWrapper>
               <ThemeProvider defaultTheme="light" attribute="class">
@@ -179,7 +190,7 @@ const RootLayout = ({ children, details }: RootLayoutProps) => {
             <OfflineBanner />
             <Analytics />
           </OfflineProvider>
-        </ClerkProvider>
+        </AuthProvider>
       </body>
     </html>
   );

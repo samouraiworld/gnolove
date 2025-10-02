@@ -1,14 +1,14 @@
-import { TEnhancedUserWithStats, TIssue, TPullRequest, TScoreFactors } from '@/utils/schemas';
+import { TEnhancedUserWithStats, TIssue, TPullRequest, TCommit, TReview, TScoreFactors } from '@/utils/schemas';
 
 /**
  * Get the score of an issue or PR
  * @param issueOrPR The issue or PR to get the score from
  */
-export const getIssueOrPRScore = (issueOrPR: TIssue | TPullRequest, scoreFactors?: TScoreFactors) => {
-  const isIssue = 'assignees' in issueOrPR;
-
-  if (isIssue) return scoreFactors?.issueFactor;
-  return scoreFactors?.prFactor;
+export const getContributionScore = (contribution: TIssue | TPullRequest | TCommit | TReview, scoreFactors?: TScoreFactors) => {
+  if ('assignees' in contribution) return scoreFactors?.issueFactor;
+  if ('reviews' in contribution) return scoreFactors?.prFactor;
+  if ('pullRequestID' in contribution) return scoreFactors?.reviewedPrFactor;
+  return scoreFactors?.commitFactor;
 };
 
 /**

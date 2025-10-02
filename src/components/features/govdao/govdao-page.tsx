@@ -56,8 +56,8 @@ const ProposalCard = ({ proposal }: { proposal: TProposal }) => {
 
   return (
     <NextLink href={`/govdao/proposal/${proposal.id}`}>
-      <Card>
-        <Flex direction="column" gap="2">
+      <Card className="h-[380px]">
+        <Flex direction="column" gap="2" className="h-full">
           <Flex align="center" justify="between">
             <Badge color={statusColor} variant="soft">
               {capitalize(status)}
@@ -68,13 +68,15 @@ const ProposalCard = ({ proposal }: { proposal: TProposal }) => {
             {getProposalTitle(proposal)}
           </Heading>
           {proposal.description && (
-            <RadixMarkdown>{proposal.description}</RadixMarkdown>
+            <Box className="flex-1 min-h-0 overflow-auto">
+              <RadixMarkdown>{proposal.description}</RadixMarkdown>
+            </Box>
           )}
-          <Text mb="2" color="gray">Proposal path: {proposal.path}</Text>
-          <Box className="h-2 w-full rounded-full bg-red-6 relative overflow-hidden">
+          <Text mb="2" color="gray" className="truncate shrink-0" title={`Proposal path: ${proposal.path}`}>Proposal path: {proposal.path}</Text>
+          <Box className="h-2 w-full rounded-full bg-red-6 relative overflow-hidden shrink-0">
             <Box className='absolute left-0 top-0 h-full bg-green-9' width={`${forPct}%`} />
           </Box>
-          <Flex mt="2" justify="between">
+          <Flex mt="2" justify="between" className="shrink-0">
             <Text color="green" size="2">For {forPct}%</Text>
             <Text color="gray" size="2">Abstain {abstainPct}%</Text>
             <Text color="red" size="2">Against {againstPct}%</Text>

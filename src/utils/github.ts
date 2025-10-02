@@ -61,11 +61,11 @@ export const cmpUpdatedAt = <T extends { createdAt: string | Date }>(objA: T, ob
 };
 
 /**
- * Get the last MRs from a list of contributors
+ * Get the last PRs from a list of contributors
  * @param contributors The contributors
- * @param last The number of MRs to get
+ * @param last The number of PRs to get
  */
-export const getLastMRs = (contributors: TEnhancedUserWithStats[], last: number) => {
+export const getLastPRs = (contributors: TEnhancedUserWithStats[], last: number) => {
   const prs = contributors
     .map(({ pullRequests }) => pullRequests)
     .filter(isDefined)
