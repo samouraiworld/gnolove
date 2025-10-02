@@ -374,6 +374,5 @@ export const getUsers = async (addresses?: string[]) => {
 
   const data = await fetchJson(url.toString(), { cache: 'no-cache' });
 
-  console.log(data);
   return z.array(UserBaseSchema).parse(data || []);
 };
