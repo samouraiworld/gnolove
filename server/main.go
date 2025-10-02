@@ -119,7 +119,7 @@ func main() {
 	prRepo := infrarepo.NewPullRequestRepository(database)
 
 	// Start triggering leaderboard webhooks
-	go handler.LoopTriggerLeaderboardWebhooks(database)
+	go handler.LoopTriggerLeaderboardWebhooks(database, logger)
 
 	router.HandleFunc("/repositories", handler.HandleGetRepository(database))
 	router.HandleFunc("/stats", handler.HandleGetUserStats(database, cache))

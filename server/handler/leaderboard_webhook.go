@@ -11,6 +11,7 @@ import (
 
 	"github.com/clerk/clerk-sdk-go/v2"
 	"github.com/samouraiworld/topofgnomes/server/models"
+	"go.uber.org/zap"
 	"gorm.io/gorm"
 
 	"github.com/go-chi/chi/v5"
@@ -248,26 +249,26 @@ func HandleDeleteLeaderboardWebhook(db *gorm.DB) http.HandlerFunc {
 }
 
 // Loop through active leaderboard webhooks and trigger them
-func LoopTriggerLeaderboardWebhooks(db *gorm.DB) {
+func LoopTriggerLeaderboardWebhooks(db *gorm.DB, logger *zap.SugaredLogger) {
 	for {
 		time.Sleep(1 * time.Minute)
 		var webhooks []models.LeaderboardWebhook
-		err := db.Where("active = ? AND next_run_at <= ?", true, time.Now()).Find(&webhooks).Error
+		err := db.Where("active AND next_run_at <= ?", time.Now()).Find(&webhooks).Error
 		if err != nil {
-			fmt.Println("Failed to find webhooks", err)
+			logger.Error("Failed to find webhooks", err)
 			continue
 		}
 		for i := range webhooks {
 			webhook := webhooks[i]
 			err := TriggerLeaderboardWebhook(db, webhook)
 			if err != nil {
-				fmt.Println("Failed to send leaderboard webhook", err)
+				logger.Error("Failed to send leaderboard webhook", err)
 				continue
 			}
 			webhook.NextRunAt = calculateNextRunAt(&webhook)
 			err = db.Save(&webhook).Error
 			if err != nil {
-				fmt.Println("Failed to update NextRunAt", err)
+				logger.Error("Failed to update NextRunAt", err)
 			}
 		}
 	}
