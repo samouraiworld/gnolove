@@ -7,8 +7,6 @@ import AnalyticsRecentActivity from './analytics-recent-activity';
 import AnalyticsTopContributorBarChart from './analytics-top-contributor-bar-chart';
 import { Box, Flex, Heading, Separator } from '@radix-ui/themes';
 
-import LayoutContainer from '@/layouts/layout-container';
-
 import useGetContributors from '@/hooks/use-get-contributors';
 import useGetRepositories from '@/hooks/use-get-repositories';
 
@@ -41,39 +39,37 @@ const AnalyticsClientPage = () => {
   }, [contributors, timeFilter, selectedRepositories]);
 
   return (
-    <LayoutContainer mt="5">
-      <Box width="100%" my="5">
-        <Heading>Contributors Analytics</Heading>
-        <Separator size="4" my="6" />
-        <Flex
-          direction={{ initial: 'column', sm: 'row' }}
-          gap={{ initial: '6', sm: '0' }}
-          justify="between"
-          align="center"
-        >
-          <Flex gap="4" align="end">
-            <TimeRangeSelector onDateChange={setTimeFilter} defaultValue={timeFilter} mb="3" />
-            <RepositoriesSelector
-              repositories={repositories}
-              selectedRepositories={selectedRepositories}
-              onSelectedRepositoriesChange={setSelectedRepositories}
-              mb="3"
-            />
-          </Flex>
-          <AnalyticsTotalStats contributors={filteredContributors} />
-        </Flex>
-        <Flex direction={{ initial: 'column' }} mt="6" gap="3">
-          <AnalyticsTopContributorBarChart
-            contributors={filteredContributors}
+    <Box width="100%" my="5">
+      <Heading>Contributors Analytics</Heading>
+      <Separator size="4" my="6" />
+      <Flex
+        direction={{ initial: 'column', sm: 'row' }}
+        gap={{ initial: '6', sm: '0' }}
+        justify="between"
+        align="center"
+      >
+        <Flex gap="4" align="end">
+          <TimeRangeSelector onDateChange={setTimeFilter} defaultValue={timeFilter} mb="3" />
+          <RepositoriesSelector
+            repositories={repositories}
             selectedRepositories={selectedRepositories}
+            onSelectedRepositoriesChange={setSelectedRepositories}
+            mb="3"
           />
-          <Flex direction={{ initial: 'column', lg: 'row' }} justify="center" align="center" mt="6" gap="3">
-            <AnalyticsContributorLineChart contributors={filteredContributors} timeFilter={timeFilter} />
-            <AnalyticsRecentActivity contributors={filteredContributors} timeFilter={timeFilter} />
-          </Flex>
         </Flex>
-      </Box>
-    </LayoutContainer>
+        <AnalyticsTotalStats contributors={filteredContributors} />
+      </Flex>
+      <Flex direction={{ initial: 'column' }} mt="6" gap="3">
+        <AnalyticsTopContributorBarChart
+          contributors={filteredContributors}
+          selectedRepositories={selectedRepositories}
+        />
+        <Flex direction={{ initial: 'column', lg: 'row' }} justify="center" align="center" mt="6" gap="3">
+          <AnalyticsContributorLineChart contributors={filteredContributors} timeFilter={timeFilter} />
+          <AnalyticsRecentActivity contributors={filteredContributors} timeFilter={timeFilter} />
+        </Flex>
+      </Flex>
+    </Box>
   );
 };
 

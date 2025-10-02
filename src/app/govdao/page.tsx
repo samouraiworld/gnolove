@@ -14,11 +14,11 @@ const Page = async () => {
   await prefetchProposals(queryClient);
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <LayoutContainer>
+    <LayoutContainer>
+      <HydrationBoundary state={dehydrate(queryClient)}>
         <GovdaoPage />
-      </LayoutContainer>
-    </HydrationBoundary>
+      </HydrationBoundary>
+    </LayoutContainer>
   );
 };
 
