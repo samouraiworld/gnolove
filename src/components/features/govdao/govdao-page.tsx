@@ -139,7 +139,7 @@ const GovdaoPage = () => {
 
   return (
     <Box>
-      <Flex align="center" justify="between" mt="4" mb="3">
+      <Flex align="center" justify="between" mb="3">
         <Box>
           <Heading size="7">Governance DAO</Heading>
           <Text color="gray">Track proposals, votes, and governance activities across GNO protocols</Text>

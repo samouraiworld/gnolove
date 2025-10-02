@@ -1,24 +1,21 @@
-import { Flex, FlexProps, ScrollArea } from '@radix-ui/themes';
+import { Box, BoxProps, Flex, FlexProps, ScrollArea } from '@radix-ui/themes';
 
 import Footer from '@/modules/footer';
 
 import { cn } from '@/utils/style';
 
-const LayoutContainer = ({ className, ...props }: FlexProps) => {
-  return (
-    <Flex className="h-screen w-screen" pt={{ initial: '8', sm: '4', lg: '0' }} asChild>
-      <ScrollArea>
-        <Flex
-          p={{ initial: '2', sm: '4', lg: '7' }}
-          gap="2"
-          direction="column"
-          className={cn('max-w-screen mx-auto w-full min-w-0 max-w-7xl overflow-hidden', className)}
-          {...props}
-        />
+import React from 'react';
 
-        <Footer />
+const LayoutContainer: React.FC<BoxProps & { children: React.ReactNode }> = ({ children, className, ...props }) => {
+  return (
+    <Box className={cn('min-h-[100dvh] mx-auto w-full min-w-0 max-w-7xl overflow-hidden pb-40', className)} pt="9" asChild>
+      <ScrollArea>
+        <Box px={{ initial: '1', sm: '4', lg: '7' }} {...props}>
+          {children}
+        </Box>
+        <Footer className="absolute bottom-0 left-0 right-0" />
       </ScrollArea>
-    </Flex>
+    </Box>
   );
 };
 export default LayoutContainer;

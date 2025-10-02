@@ -16,6 +16,7 @@ import { SearchParamsFilters } from '@/types/url-filters';
 import { getYoutubeChannelUploadsPlaylistId, getYoutubePlaylistVideos } from '@/app/actions';
 import { GNOLAND_YOUTUBE_CHANNEL_ID } from '@/constants/videos';
 import { prefetchScoreFactors } from '@/hooks/use-get-score-factors';
+import LayoutContainer from '@/layouts/layout-container';
 
 export const metadata: Metadata = {
   title: 'Top of Gnome',
@@ -51,9 +52,11 @@ const HomePage = async ({ searchParams: { f, e, r } }: SearchParamsFilters) => {
     }) : undefined;
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <ScoreboardPage videos={videos} />
-    </HydrationBoundary>
+    <LayoutContainer>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <ScoreboardPage videos={videos} />
+      </HydrationBoundary>
+    </LayoutContainer>
   );
 };
 

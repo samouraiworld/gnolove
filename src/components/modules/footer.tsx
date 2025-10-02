@@ -7,7 +7,7 @@ import { cn } from '@/utils/style';
 
 const Footer = ({ className, ...props }: FlexProps) => {
   return (
-    <Flex direction="column" align="center" gap="1" className={cn(className)} {...props}>
+    <Flex mt="5" direction="column" align="center" gap="1" className={cn(className)} {...props}>
       <Flex direction="column" align="center" gap="2">
         <Text size="2" className="text-accent-10">
           Join the Gno.land Ecosystem!

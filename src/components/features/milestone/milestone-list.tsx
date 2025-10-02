@@ -115,8 +115,8 @@ const MilestoneList = ({ issues }: MilestoneListProps) => {
   );
 
   return (
-    <Box mt="6">
-      <Card size="2" variant="surface" mb="6">
+    <Box>
+      <Card size="2" variant="surface" my="6">
         <Flex direction={{ initial: 'column', sm: 'row' }} align="center" justify="between" p="4">
           <Text size="4" weight="medium">
             Milestone progress

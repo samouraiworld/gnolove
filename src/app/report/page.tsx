@@ -44,7 +44,7 @@ const ReportPage = async ({ searchParams }: { searchParams?: { week?: string } }
   ]);
 
   return (
-    <LayoutContainer mt={{ initial: '2', sm: '5' }}>
+    <LayoutContainer>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <ReportClientPage />
       </HydrationBoundary>

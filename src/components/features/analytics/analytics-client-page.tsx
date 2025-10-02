@@ -39,10 +39,10 @@ const AnalyticsClientPage = () => {
   }, [contributors, timeFilter, selectedRepositories]);
 
   return (
-    <Box width="100%" my="5">
+    <Box width="100%">
       <Heading>Contributors Analytics</Heading>
-      <Separator size="4" my="6" />
       <Flex
+        mt="4"
         direction={{ initial: 'column', sm: 'row' }}
         gap={{ initial: '6', sm: '0' }}
         justify="between"
@@ -64,7 +64,7 @@ const AnalyticsClientPage = () => {
           contributors={filteredContributors}
           selectedRepositories={selectedRepositories}
         />
-        <Flex direction={{ initial: 'column', lg: 'row' }} justify="center" align="center" mt="6" gap="3">
+        <Flex direction={{ initial: 'column', lg: 'row' }} justify="center" align="center" mt="3" gap="3">
           <AnalyticsContributorLineChart contributors={filteredContributors} timeFilter={timeFilter} />
           <AnalyticsRecentActivity contributors={filteredContributors} timeFilter={timeFilter} />
         </Flex>
