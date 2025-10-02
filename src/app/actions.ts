@@ -10,7 +10,9 @@ import {
   ContributorSchema,
   EnhancedUserWithStatsSchema,
   IssueSchema,
+  LeaderboardWebhookSchema,
   MilestoneSchema,
+  MonitoringWebhookSchema,
   NamespacesSchema,
   PackagesSchema,
   ProposalsSchema,
@@ -18,6 +20,9 @@ import {
   ReportHourSchema,
   RepositorySchema,
   ScoreFactorsSchema,
+  TLeaderboardWebhook,
+  TMonitoringWebhook,
+  TMonitoringWebhookKind,
   TYoutubeVideoPlaylist,
   UserSchema,
   ValidatorLastIncidentsSchema,
@@ -31,7 +36,6 @@ import MILESTONE from '@/constants/milestone';
 import TEAMS from '@/constants/teams';
 
 import ENV from '@/env';
-import { MonitoringWebhookSchema, TMonitoringWebhook, TMonitoringWebhookKind, LeaderboardWebhookSchema, TLeaderboardWebhook } from '@/utils/schemas';
 import { auth } from '@clerk/nextjs/server';
 
 export const getContributors = async (timeFilter: TimeFilter, excludeCoreTeam?: boolean, repositories?: string[]) => {
