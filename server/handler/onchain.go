@@ -116,6 +116,39 @@ func HandleGetAllProposals(db *gorm.DB) http.HandlerFunc {
 	}
 }
 
+// HandleGetProposal handles GET /api/onchain/proposals/{id}
+// It returns a specific proposal registered on the Gno blockchain
+func HandleGetProposal(db *gorm.DB) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		var proposal models.GnoProposal
+		id := chi.URLParam(r, "id")
+
+		if id == "" {
+			log.Printf("[HandleGetProposal] Missing id parameter")
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(map[string]string{"error": "id parameter is required"})
+			return
+		}
+
+		err := db.Model(&models.GnoProposal{}).Preload("Files").Preload("Votes").Where("id = ?", id).First(&proposal).Error
+
+		if err != nil {
+			if err == gorm.ErrRecordNotFound {
+				log.Printf("[HandleGetProposal] Proposal not found: %s", id)
+				w.WriteHeader(http.StatusNotFound)
+				json.NewEncoder(w).Encode(map[string]string{"error": "proposal not found"})
+				return
+			}
+			log.Printf("[HandleGetProposal] DB error : %v", err)
+			w.WriteHeader(http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
+			return
+		}
+		json.NewEncoder(w).Encode(proposal)
+	}
+}
+
 // HandleGetGovdaoMembers handles GET /api/onchain/govdao-members
 // It returns all the current govdao members registered on the Gno blockchain
 func HandleGetGovdaoMembers(db *gorm.DB) http.HandlerFunc {

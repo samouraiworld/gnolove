@@ -126,6 +126,7 @@ func main() {
 	router.HandleFunc("/onchain/namespaces", handler.HandleGetAllNamespaces(database))
 	router.HandleFunc("/onchain/namespaces/{address}", handler.HandleGetNamespacesByUser(database))
 	router.HandleFunc("/onchain/proposals", handler.HandleGetAllProposals(database))
+	router.HandleFunc("/onchain/proposals/{id}", handler.HandleGetProposal(database))
 	router.HandleFunc("/onchain/govdao-members", handler.HandleGetGovdaoMembers(database))
 
 	logger.Infof("Server running on port %d", port)
