@@ -7,7 +7,8 @@ import RadixMarkdown from '@/elements/radix-markdown';
 import CodeBlock from '@/elements/code-block';
 import { guessLanguageFromFilename } from '@/utils/govdao';
 import Copyable from '@/elements/copyable';
-import React from 'react';
+import { useMemo } from 'react';
+import useGetGovdaoMembers from '@/hooks/use-get-govdao-members';
 
 const DetailRow = ({ label, value }: { label: string; value: string | React.ReactNode }) => (
   <Flex justify="between" wrap="wrap" align="center">
@@ -18,8 +19,17 @@ const DetailRow = ({ label, value }: { label: string; value: string | React.Reac
 
 const ProposalDetail = ({ id }: { id: string }) => {
   const { data: proposal } = useGetProposal(id);
+  const { data: members } = useGetGovdaoMembers();
 
   if (!proposal) return null;
+
+  const votedAddresses = useMemo(() => {
+    return new Set((proposal?.votes ?? []).map((v) => v.address.toLowerCase()));
+  }, [proposal.votes]);
+
+  const nonVoters = useMemo(() => {
+    return (members ?? []).filter((m) => !votedAddresses.has(m.address.toLowerCase()));
+  }, [members, votedAddresses]);
 
   const totals = aggregateVotes(proposal.votes);
   const forPct = percent(totals.for, totals.total);
@@ -69,27 +79,46 @@ const ProposalDetail = ({ id }: { id: string }) => {
               </Tabs.Content>
 
               <Tabs.Content value="votes">
-                {proposal.votes.length > 0 ? (
-                  <Flex direction="column" gap="2">
-                    {[...proposal.votes]
-                      .sort((a, b) => b.blockHeight - a.blockHeight)
-                      .map((v) => {
-                        const color: BadgeProps['color'] = v.vote === 'YES' ? 'green' : v.vote === 'NO' ? 'red' : 'gray';
-                        return (
-                          <Card key={`${v.proposalID}-${v.address}-${v.hash}`} className="p-2">
-                            <Flex align="center" justify="between">
-                              <Flex direction="column">
-                                <Copyable className="font-bold">{v.address}</Copyable>
+                <Flex direction="column" gap="3">
+                  {proposal.votes.length > 0 ? (
+                    <Flex direction="column" gap="2">
+                      {[...proposal.votes]
+                        .sort((a, b) => b.blockHeight - a.blockHeight)
+                        .map((v) => {
+                          const color: BadgeProps['color'] = v.vote === 'YES' ? 'green' : v.vote === 'NO' ? 'red' : 'gray';
+                          return (
+                            <Card key={`${v.proposalID}-${v.address}-${v.hash}`} className="p-2">
+                              <Flex align="center" justify="between">
+                                <Flex direction="column">
+                                  <Copyable className="font-bold">{v.address}</Copyable>
+                                </Flex>
+                                <Badge color={color} variant="soft">{v.vote}</Badge>
                               </Flex>
-                              <Badge color={color} variant="soft">{v.vote}</Badge>
+                            </Card>
+                          );
+                        })}
+                    </Flex>
+                  ) : (
+                    <Text color="gray">No votes yet.</Text>
+                  )}
+
+                  {nonVoters && nonVoters.length > 0 && (
+                    <>
+                      <Separator my="2" />
+                      <Heading size="3">Did not vote ({nonVoters?.length ?? 0})</Heading>
+                      <Flex direction="column" gap="2">
+                        {nonVoters.map((m) => (
+                          <Card key={`nonvoter-${m.address}`} className="p-2">
+                            <Flex align="center" justify="between">
+                              <Copyable className="font-bold">{m.address}</Copyable>
+                              <Text color="gray" size="2">{m.tier}</Text>
                             </Flex>
                           </Card>
-                        );
-                      })}
-                  </Flex>
-                ) : (
-                  <Text color="gray">No votes yet.</Text>
-                )}
+                        ))}
+                      </Flex>
+                    </>
+                  )}
+                </Flex>
               </Tabs.Content>
 
               <Tabs.Content value="files">
