@@ -167,3 +167,40 @@ func HandleGetGovdaoMembers(db *gorm.DB) http.HandlerFunc {
 		json.NewEncoder(w).Encode(members)
 	}
 }
+
+// HandleGetVotesByUser handles GET /onchain/votes/{address}
+// It returns the list of votes made by a specific address across all proposals.
+func HandleGetVotesByUser(db *gorm.DB) http.HandlerFunc {
+	type voteWithProposal struct {
+		ProposalID    string `json:"proposalId"`
+		ProposalTitle string `json:"proposalTitle"`
+		Vote          string `json:"vote"`
+	}
+
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		address := chi.URLParam(r, "address")
+		if address == "" {
+			log.Printf("[HandleGetVotesByUser] Missing address parameter")
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(map[string]string{"error": "address parameter is required"})
+			return
+		}
+
+		var results []voteWithProposal
+		err := db.Table("gno_votes as v").
+			Select("p.id as proposal_id, p.title as proposal_title, v.vote").
+			Joins("JOIN gno_proposals p ON p.id = v.proposal_id").
+			Where("v.address = ?", address).
+			Order("p.block_height DESC, v.block_height DESC").
+			Scan(&results).Error
+		if err != nil {
+			log.Printf("[HandleGetVotesByUser] DB error for address %s: %v", address, err)
+			w.WriteHeader(http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
+			return
+		}
+
+		json.NewEncoder(w).Encode(results)
+	}
+}

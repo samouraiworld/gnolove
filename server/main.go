@@ -154,6 +154,7 @@ func main() {
 	router.HandleFunc("/onchain/proposals", handler.HandleGetAllProposals(database))
 	router.HandleFunc("/onchain/proposals/{id}", handler.HandleGetProposal(database))
 	router.HandleFunc("/onchain/govdao-members", handler.HandleGetGovdaoMembers(database))
+	router.HandleFunc("/onchain/votes/{address}", handler.HandleGetVotesByUser(database))
 
 	logger.Infof("Server running on port %d", port)
 	err = http.ListenAndServe(fmt.Sprintf(":%d", port), router)
