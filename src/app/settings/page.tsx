@@ -1,14 +1,17 @@
 import { Box, Heading, Text } from '@radix-ui/themes';
 import { auth } from '@clerk/nextjs/server';
 import WebhooksSectionClient from '@/features/settings/webhooks-section';
+import LeaderboardWebhooksSection from '@/features/settings/leaderboard-webhooks-section';
 import LayoutContainer from '@/layouts/layout-container';
 import { Metadata } from 'next';
 import { TMonitoringWebhookKind } from '@/utils/schemas';
 import { prefetchMonitoringWebhooks } from '@/hooks/use-monitoring-webhooks';
 import { prefetchReportHour } from '@/hooks/use-monitoring-webhooks';
+import { prefetchLeaderboardWebhooks } from '@/hooks/use-leaderboard-webhooks';
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 import { isClerkEnabled } from '@/utils/clerk';
 import { redirect } from 'next/navigation';
+import { prefetchRepositories } from '@/hooks/use-get-repositories';
 
 export const metadata: Metadata = {
   title: 'Account settings',
@@ -36,7 +39,12 @@ export default async function SettingsPage() {
 
   const queryClient = new QueryClient();
 
-  await Promise.all([...kinds.map((k) => prefetchMonitoringWebhooks(queryClient, k)), prefetchReportHour(queryClient)]);
+  await Promise.all([
+    ...kinds.map((k) => prefetchMonitoringWebhooks(queryClient, k)),
+    prefetchReportHour(queryClient),
+    prefetchLeaderboardWebhooks(queryClient),
+    prefetchRepositories(queryClient),
+  ]);
 
   return (
     <LayoutContainer>
@@ -47,6 +55,8 @@ export default async function SettingsPage() {
           {kinds.map((k) => (
             <WebhooksSectionClient key={k} kind={k} />
           ))}
+
+          <LeaderboardWebhooksSection />
         </Box>
       </HydrationBoundary>
     </LayoutContainer>
