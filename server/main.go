@@ -13,6 +13,7 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/samouraiworld/topofgnomes/server/db"
 	"github.com/samouraiworld/topofgnomes/server/handler"
+	"github.com/samouraiworld/topofgnomes/server/handler/ai"
 	"github.com/samouraiworld/topofgnomes/server/handler/contributor"
 	infrarepo "github.com/samouraiworld/topofgnomes/server/infra/repository"
 	"github.com/samouraiworld/topofgnomes/server/models"
@@ -135,6 +136,11 @@ func main() {
 	router.HandleFunc("/contributors/{login}", contributor.HandleGetContributor(database))
 	router.Post("/github/link", handler.HandleLink(database))
 
+	// ai endpoints
+	router.HandleFunc("/ai/report", ai.HandleGetLastReport(database))
+	router.HandleFunc("/ai/report/weekly", ai.HandleGetReportByWeek(database))
+	router.HandleFunc("/ai/reports", ai.HandleGetAllReports(database))
+  
 	// Leaderboard webhook endpoints
 	router.Group(func(r chi.Router) {
 		r.Use(clerkhttp.WithHeaderAuthorization())
