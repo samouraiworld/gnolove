@@ -21,15 +21,15 @@ const ProposalDetail = ({ id }: { id: string }) => {
   const { data: proposal } = useGetProposal(id);
   const { data: members } = useGetGovdaoMembers();
 
-  if (!proposal) return null;
-
   const votedAddresses = useMemo(() => {
     return new Set((proposal?.votes ?? []).map((v) => v.address.toLowerCase()));
-  }, [proposal.votes]);
+  }, [proposal?.votes]);
 
   const nonVoters = useMemo(() => {
     return (members ?? []).filter((m) => !votedAddresses.has(m.address.toLowerCase()));
   }, [members, votedAddresses]);
+
+  if (!proposal) return null;
 
   const totals = aggregateVotes(proposal.votes);
   const forPct = percent(totals.for, totals.total);
