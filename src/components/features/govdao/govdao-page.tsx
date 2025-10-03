@@ -1,16 +1,27 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import NextLink from 'next/link';
-import { Badge, Box, Card, Flex, Grid, Heading, SegmentedControl, Text, TextField } from '@radix-ui/themes';
-import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 
-import useGetProposals from '@/hooks/use-get-proposals';
-import { TProposal } from '@/utils/schemas';
-import Loader from '@/elements/loader';
+import NextLink from 'next/link';
+
+import { TransactionBuilder, BroadcastType, MsgCallMessage } from '@adena-wallet/sdk';
+import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import { Badge, Box, Card, Flex, Grid, Heading, SegmentedControl, Text, TextField, Button } from '@radix-ui/themes';
+
 import StatCard from '@/features/govdao/stat-card';
-import { aggregateVotes, capitalize, getProposalTitle, getStatusColor, percent } from '@/utils/govdao';
+
+import Loader from '@/elements/loader';
 import RadixMarkdown from '@/elements/radix-markdown';
+
+import { useAdena } from '@/contexts/adena-context';
+import { useToast } from '@/contexts/toast-context';
+
+import useGetGovdaoMembers from '@/hooks/use-get-govdao-members';
+import useGetProposals from '@/hooks/use-get-proposals';
+
+import { aggregateVotes, capitalize, getProposalTitle, getStatusColor, percent } from '@/utils/govdao';
+import { TProposal } from '@/utils/schemas';
+import { emojify } from 'node-emoji';
 
 // Filters bar
 const Filters = ({
@@ -29,7 +40,12 @@ const Filters = ({
   legend: Array<{ key: string; count: number; color: any }>;
 }) => (
   <Flex align="center" justify="between" wrap="wrap">
-    <TextField.Root placeholder="Search proposals..." value={query} onChange={(e) => setQuery(e.target.value)} className="max-w-[420px]">
+    <TextField.Root
+      placeholder="Search proposals..."
+      value={query}
+      onChange={(e) => setQuery(e.target.value)}
+      className="max-w-[420px]"
+    >
       <TextField.Slot>
         <MagnifyingGlassIcon />
       </TextField.Slot>
@@ -44,54 +60,107 @@ const Filters = ({
   </Flex>
 );
 
-
-const ProposalCard = ({ proposal }: { proposal: TProposal }) => {
+const ProposalCard = ({ proposal, isGovDaoMember }: { proposal: TProposal; isGovDaoMember: boolean }) => {
   const totals = aggregateVotes(proposal.votes);
   const forPct = percent(totals.for, totals.total);
   const againstPct = percent(totals.against, totals.total);
   const abstainPct = percent(totals.abstain, totals.total);
+  const { addToast } = useToast();
+  const { adena, address } = useAdena();
 
   const status = (proposal.status || 'active').toLowerCase();
   const statusColor: any = getStatusColor(status);
 
+  const vote = async (vote: string) => {
+    if (!adena) return;
+    try {
+      const transactionRequest = {
+        tx: TransactionBuilder.create()
+          .messages({
+            type: '/vm.m_call',
+            value: {
+              caller: address,
+              pkg_path: proposal.path,
+              func: 'MustVoteOnProposalSimple',
+              args: [proposal.id, vote],
+            },
+          } as MsgCallMessage)
+          .build(),
+        broadcastType: BroadcastType.SYNC,
+      };
+
+      await adena.signTransaction(transactionRequest);
+    } catch (err) {
+      addToast({ title: 'Error', message: String((err as any)?.message ?? err), mode: 'negative' });
+    }
+  };
+
   return (
-    <NextLink href={`/govdao/proposal/${proposal.id}`}>
-      <Card className="h-[380px]">
-        <Flex direction="column" gap="2" className="h-full">
-          <Flex align="center" justify="between">
-            <Badge color={statusColor} variant="soft">
-              {capitalize(status)}
-            </Badge>
-            <Text color="gray" size="2">ID: {proposal.id}</Text>
-          </Flex>
-          <Heading size="4">
-            {getProposalTitle(proposal)}
-          </Heading>
-          {proposal.description && (
-            <Box className="flex-1 min-h-0 overflow-auto">
-              <RadixMarkdown>{proposal.description}</RadixMarkdown>
+    <Flex direction="column" gap="1">
+      <NextLink href={`/govdao/proposal/${proposal.id}`}>
+        <Card className="h-[380px] hover:bg-gray-4">
+          <Flex direction="column" gap="2" className="h-full">
+            <Flex align="center" justify="between">
+              <Badge color={statusColor} variant="soft">
+                {capitalize(status)}
+              </Badge>
+              <Text color="gray" size="2">
+                ID: {proposal.id}
+              </Text>
+            </Flex>
+            <Heading size="4">{getProposalTitle(proposal)}</Heading>
+            {proposal.description && (
+              <Box className="min-h-0 flex-1 overflow-auto">
+                <RadixMarkdown>{proposal.description}</RadixMarkdown>
+              </Box>
+            )}
+            <Text mb="2" color="gray" className="shrink-0 truncate" title={`Proposal path: ${proposal.path}`}>
+              Proposal path: {proposal.path}
+            </Text>
+            <Box className="relative h-2 w-full shrink-0 overflow-hidden rounded-full bg-red-6">
+              <Box className="absolute left-0 top-0 h-full bg-green-9" width={`${forPct}%`} />
             </Box>
-          )}
-          <Text mb="2" color="gray" className="truncate shrink-0" title={`Proposal path: ${proposal.path}`}>Proposal path: {proposal.path}</Text>
-          <Box className="h-2 w-full rounded-full bg-red-6 relative overflow-hidden shrink-0">
-            <Box className='absolute left-0 top-0 h-full bg-green-9' width={`${forPct}%`} />
-          </Box>
-          <Flex mt="2" justify="between" className="shrink-0">
-            <Text color="green" size="2">For {forPct}%</Text>
-            <Text color="gray" size="2">Abstain {abstainPct}%</Text>
-            <Text color="red" size="2">Against {againstPct}%</Text>
+            <Flex mt="2" justify="between" className="shrink-0">
+              <Text color="green" size="2">
+                For {forPct}%
+              </Text>
+              <Text color="gray" size="2">
+                Abstain {abstainPct}%
+              </Text>
+              <Text color="red" size="2">
+                Against {againstPct}%
+              </Text>
+            </Flex>
           </Flex>
+        </Card>
+      </NextLink>
+      {adena && isGovDaoMember && proposal.status === 'created' && (
+        <Flex gap="2">
+          <Button className="flex-1" color="green" onClick={() => vote('YES')}>
+            For
+            <Box ml="1">{emojify('👍')}</Box>
+          </Button>
+          <Button className="flex-1" color="gray" onClick={() => vote('ABSTAIN')}>
+            Abstain
+            <Box ml="1">{emojify('🤷')}</Box>
+          </Button>
+          <Button className="flex-1" color="red" onClick={() => vote('NO')}>
+            Against
+            <Box ml="1">{emojify('👎')}</Box>
+          </Button>
         </Flex>
-      </Card>
-    </NextLink>
+      )}
+    </Flex>
   );
 };
 
 const GovdaoPage = () => {
   const { data, isPending } = useGetProposals();
+  const { data: members, isPending: membersIsPending } = useGetGovdaoMembers();
 
   const [query, setQuery] = useState('');
   const [status, setStatus] = useState('all');
+  const { address } = useAdena();
 
   const statuses = useMemo(() => {
     const list = (data ?? []) as TProposal[];
@@ -106,7 +175,8 @@ const GovdaoPage = () => {
       acc[s] = (acc[s] || 0) + 1;
       return acc;
     }, {});
-    const colorFor = (s: string): any => (s === 'executed' ? 'green' : s === 'rejected' ? 'red' : s === 'created' ? 'violet' : 'gray');
+    const colorFor = (s: string): any =>
+      s === 'executed' ? 'green' : s === 'rejected' ? 'red' : s === 'created' ? 'violet' : 'gray';
     const entries = Object.entries(counts).map(([key, count]) => ({ key, count, color: colorFor(key) }));
     const total = list.length;
     return [{ key: 'all', count: total, color: 'gray' }, ...entries];
@@ -114,11 +184,15 @@ const GovdaoPage = () => {
 
   const filtered = useMemo(() => {
     const list = (data ?? []) as TProposal[];
-    return list.filter((p) => {
-      const matchesQuery = [p.id, p.path, p.address, p.title, p.description].some((field) => field?.toLowerCase().includes(query.toLowerCase()));
-      const matchesStatus = status === 'all' ? true : (p.status || '').toLowerCase() === status;
-      return matchesQuery && matchesStatus;
-    }).reverse();
+    return list
+      .filter((p) => {
+        const matchesQuery = [p.id, p.path, p.address, p.title, p.description].some((field) =>
+          field?.toLowerCase().includes(query.toLowerCase()),
+        );
+        const matchesStatus = status === 'all' ? true : (p.status || '').toLowerCase() === status;
+        return matchesQuery && matchesStatus;
+      })
+      .reverse();
   }, [data, query, status]);
 
   const metrics = useMemo(() => {
@@ -137,6 +211,11 @@ const GovdaoPage = () => {
     return { executedCount, activeCount, uniqueVoters: uniqueVoters.size, avgVotes };
   }, [data]);
 
+  const isGovDaoMember = useMemo(() => {
+    if (!members) return false;
+    return members.some((m) => m.address === address);
+  }, [members, address]);
+
   return (
     <Box>
       <Flex align="center" justify="between" mt="4" mb="3">
@@ -145,7 +224,15 @@ const GovdaoPage = () => {
           <Text color="gray">Track proposals, votes, and governance activities across GNO protocols</Text>
         </Box>
       </Flex>
-
+      {address && (
+        <>
+          <Box my="4">
+            <Text>
+              {isGovDaoMember ? '✅ You are a GovDAO member' : '❌ You are not a GovDAO member, only members can vote'}
+            </Text>
+          </Box>
+        </>
+      )}
       <Grid columns={{ initial: '1', md: '4' }} gap="3">
         <StatCard title="Active Proposals" value={metrics.activeCount} hint="Status: created" />
         <StatCard title="Unique Voters" value={metrics.uniqueVoters} hint="Distinct addresses voted" />
@@ -154,15 +241,22 @@ const GovdaoPage = () => {
       </Grid>
 
       <Box my="4">
-        <Filters query={query} setQuery={setQuery} status={status} setStatus={setStatus} statuses={statuses} legend={legend} />
+        <Filters
+          query={query}
+          setQuery={setQuery}
+          status={status}
+          setStatus={setStatus}
+          statuses={statuses}
+          legend={legend}
+        />
       </Box>
 
-      {isPending ? (
+      {isPending || membersIsPending ? (
         <Loader />
       ) : (
-        <Grid columns={{ initial: '1', md: '2' }} gap="3">
+        <Grid columns={{ initial: '1', md: '2' }} gap="6">
           {filtered.map((p) => (
-            <ProposalCard key={p.id} proposal={p} />
+            <ProposalCard key={p.id} proposal={p} isGovDaoMember={isGovDaoMember} />
           ))}
         </Grid>
       )}

@@ -354,6 +354,13 @@ export const ProposalsSchema = z.array(ProposalSchema);
 export type TProposal = z.infer<typeof ProposalSchema>;
 export type TProposals = z.infer<typeof ProposalsSchema>;
 
+// Gov dao members
+export const GovdaoMemberSchema = z.object({
+  address: z.string(),
+  tier: z.string(),
+});
+export const GovdaoMembersSchema = z.array(GovdaoMemberSchema);
+
 // Monitoring webhooks
 export const MonitoringWebhookSchema = z.object({
   ID: z.number().optional(),

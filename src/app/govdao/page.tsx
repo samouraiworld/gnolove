@@ -3,6 +3,7 @@ import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query
 
 import GovdaoPage from '@/features/govdao/govdao-page';
 import { prefetchProposals } from '@/hooks/use-get-proposals';
+import { prefetchGovdaoMembers } from '@/hooks/use-get-govdao-members';
 import LayoutContainer from '@/layouts/layout-container';
 
 export const metadata: Metadata = {
@@ -11,7 +12,11 @@ export const metadata: Metadata = {
 
 const Page = async () => {
   const queryClient = new QueryClient();
-  await prefetchProposals(queryClient);
+  
+  await Promise.all([
+    prefetchProposals(queryClient),
+    prefetchGovdaoMembers(queryClient),
+  ]);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

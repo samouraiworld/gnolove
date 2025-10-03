@@ -14,6 +14,8 @@
     "generate-contributors-no-format": "tsx src/scripts/generate-contributors.ts"
   },
   "dependencies": {
+    "@adena-wallet/sdk": "^0.0.12",
+    "@bufbuild/protobuf": "^2.9.0",
     "@clerk/nextjs": "^5.2.8",
     "@hookform/resolvers": "^3.9.0",
     "@next/env": "^14.2.13",
