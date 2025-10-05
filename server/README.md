@@ -446,7 +446,7 @@ These requests are user-scoped and therefore need to be authenticated with a Cle
 | Body        | string | File content                 |
 | GnoProposalID | string | Proposal ID                 |
 
-### LeaderboardWebhook
+### Leaderboard Webhook
 | Field       | Type   | Description                    |
 |-------------|--------|--------------------------------|
 | ID          | uint | Primary key, webhook ID        |

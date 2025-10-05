@@ -44,13 +44,19 @@ https://github.com/gnolang/gno
 
 ---
 
-### Getting started
+# Getting started
 1. Clone the repository
    ```bash
    git clone https://github.com/samouraiworld/gnolove.git
+   cd ./gnolove
    ```
 
-2. Set up environment variables
+2. Install dependencies
+   ```bash
+   pnpm install
+   ```
+
+3. Set up environment variables
    ```bash
    cp .env.example .env
    ```
@@ -66,7 +72,8 @@ https://github.com/gnolang/gno
     - `NEXT_PUBLIC_API_URL`: The API URL. Default: [http://localhost:3333](http://localhost:3333).
 
   ```bash
-  cd server && cp .env.example .env
+  cd server
+  cp .env.example .env
   ```
 
   Required environment variables:
@@ -78,23 +85,20 @@ https://github.com/gnolang/gno
     - `GITHUB_GRAPHQL_ENDPOINT`: Your GitHub GraphQL endpoint. Default: [https://api.github.com/graphql](https://api.github.com/graphql)
     - `GITHUB_REPOSITORIES`: A list of space-separated Github repositories we'll look for activity on.
     - `GHVERIFY_OWNER_MNEMONIC`: Your GitHub verify owner mnemonic. Create one in Adena
-    - `GHVERIFY_REALM_PATH`: Your GitHub verify realm path. Default: [https://gno.land/r/demo/ghverify](https://gno.land/r/demo/ghverify)
-    - `GOVDAO_REALM_PATH`: Your GovDAO realm path. Default: [https://gno.land/r/demo/govdao](https://gno.land/r/demo/govdao)
-    - `GNO_GRAPHQL_ENDPOINT`: Your Gno GraphQL endpoint. Default: [https://indexer.test6.testnets.gno.land/graphql/query](https://indexer.test6.testnets.gno.land/graphql/query)
-
-3. Install dependencies
-   ```bash
-   cd gnolove && pnpm install
-   ```
+    - `GHVERIFY_REALM_PATH`: Your Gno ghverify realm path.
+    - `GOVDAO_REALM_PATH`: Your Gno GovDAO realm path.
+    - `GNO_GRAPHQL_ENDPOINT`: The Gno GraphQL endpoint. Default: [https://indexer.test7.testnets.gno.land/graphql/query](https://indexer.test7.testnets.gno.land/graphql/query)
 
 4. Run the server (backend)
    ```bash
-   cd server && go run .
+   cd server
+   go run .
    ```
 
 5. Run the client (frontend) in another terminal
    ```bash
-   cd .. && pnpm run dev
+   cd ..
+   pnpm run dev
    ```
 
 ---
