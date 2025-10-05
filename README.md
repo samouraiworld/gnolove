@@ -50,27 +50,29 @@ https://github.com/gnolang/gno
 
 2. Set up environment variables
   `cp .env.example .env`
+
   Required environment variables:
-  - `GITHUB_API_TOKEN`: Your GitHub API token. Create one at https://github.com/settings/tokens
-  - `NEXT_PUBLIC_GNO_CHAIN_ID`: The chain ID of the Gno chain. Default: test5
-  - `NEXT_PUBLIC_OAUTH_CLIENT_ID`: Your OAuth client ID. Create one at https://github.com/settings/applications/new
-  - `NEXT_PUBLIC_REDIRECT_PROXY`: Your redirect proxy. Create one at https://github.com/settings/applications/new
-  - `NEXT_PUBLIC_GHVERIFY_REALM_PATH`: Your GitHub realm path. Default: gno.land/r/demo/ghverify
-  - `NEXT_PUBLIC_PROFILE_REALM_PATH`: Your profile realm path. Default: gno.land/r/demo/profile
-  - `NEXT_PUBLIC_API_URL`: The API URL. Default: http://localhost:3333.
+    - `GITHUB_API_TOKEN`: Your GitHub API token. Create one at [https://github.com/settings/tokens](https://github.com/settings/tokens)
+    - `NEXT_PUBLIC_GNO_CHAIN_ID`: The chain ID of the Gno chain. Default: test5
+    - `NEXT_PUBLIC_OAUTH_CLIENT_ID`: Your OAuth client ID. Create one at [https://github.com/settings/applications/new](https://github.com/settings/applications/new)
+    - `NEXT_PUBLIC_REDIRECT_PROXY`: Your redirect proxy. Create one at [https://github.com/settings/applications/new](https://github.com/settings/applications/new)
+    - `NEXT_PUBLIC_GHVERIFY_REALM_PATH`: Your GitHub realm path. Default: [https://gno.land/r/demo/ghverify](https://gno.land/r/demo/ghverify)
+    - `NEXT_PUBLIC_PROFILE_REALM_PATH`: Your profile realm path. Default: [https://gno.land/r/demo/profile](https://gno.land/r/demo/profile)
+    - `NEXT_PUBLIC_API_URL`: The API URL. Default: [http://localhost:3333](http://localhost:3333).
 
   `cd server && cp .env.example .env`
+
   Required environment variables:
-  - `GITHUB_API_TOKEN`: Your GitHub API token. Create one at https://github.com/settings/tokens
-  - `GITHUB_OAUTH_CLIENT_ID`: Your OAuth client ID. Create one at https://github.com/settings/applications/new
-  - `GITHUB_OAUTH_CLIENT_SECRET`: Your OAuth client secret. Create one at https://github.com/settings/applications/new
-  - `GITHUB_OAUTH_REDIRECT_URL`: Your OAuth redirect URL. Default: http://localhost:5500
-  - `GITHUB_GRAPHQL_ENDPOINT`: Your GitHub GraphQL endpoint. Default: https://api.github.com/graphql
-  - `GITHUB_REPOSITORIES`: A list of space-separated Github repositories we'll look for activity on.
-  - `GHVERIFY_OWNER_MNEMONIC`: Your GitHub verify owner mnemonic. Create one in Adena
-  - `GHVERIFY_REALM_PATH`: Your GitHub verify realm path. Default: gno.land/r/demo/ghverify
-  - `GOVDAO_REALM_PATH`: Your GovDAO realm path. Default: gno.land/r/demo/govdao
-  - `GNO_GRAPHQL_ENDPOINT`: Your Gno GraphQL endpoint. Default: https://indexer.test6.testnets.gno.land/graphql/query
+    - `GITHUB_API_TOKEN`: Your GitHub API token. Create one at [https://github.com/settings/tokens](https://github.com/settings/tokens)
+    - `GITHUB_OAUTH_CLIENT_ID`: Your OAuth client ID. Create one at [https://github.com/settings/applications/new](https://github.com/settings/applications/new)
+    - `GITHUB_OAUTH_CLIENT_SECRET`: Your OAuth client secret. Create one at [https://github.com/settings/applications/new](https://github.com/settings/applications/new)
+    - `GITHUB_OAUTH_REDIRECT_URL`: Your OAuth redirect URL. Default: [http://localhost:5500](http://localhost:5500)
+    - `GITHUB_GRAPHQL_ENDPOINT`: Your GitHub GraphQL endpoint. Default: [https://api.github.com/graphql](https://api.github.com/graphql)
+    - `GITHUB_REPOSITORIES`: A list of space-separated Github repositories we'll look for activity on.
+    - `GHVERIFY_OWNER_MNEMONIC`: Your GitHub verify owner mnemonic. Create one in Adena
+    - `GHVERIFY_REALM_PATH`: Your GitHub verify realm path. Default: [https://gno.land/r/demo/ghverify](https://gno.land/r/demo/ghverify)
+    - `GOVDAO_REALM_PATH`: Your GovDAO realm path. Default: [https://gno.land/r/demo/govdao](https://gno.land/r/demo/govdao)
+    - `GNO_GRAPHQL_ENDPOINT`: Your Gno GraphQL endpoint. Default: [https://indexer.test6.testnets.gno.land/graphql/query](https://indexer.test6.testnets.gno.land/graphql/query)
 
 3. Install dependencies
   `cd gnolove && pnpm install`
@@ -78,7 +80,7 @@ https://github.com/gnolang/gno
 4. Run the server (backend)
   `cd server && go run .`
 
-5. Run the client (frontend)
+5. Run the client (frontend) in another terminal
   `cd .. && pnpm run dev`
 
 ---
