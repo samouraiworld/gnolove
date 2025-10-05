@@ -227,7 +227,7 @@ These requests are user-scoped and therefore need to be authenticated with a Cle
 
 - **Create leaderboard webhook**  
   `POST /leaderboard-webhooks`  
-  Body: `{ "url": "..." }`  
+  Body: `{ "url": "...", "type": "discord", "frequency": "daily", "day": 0, "hour": 0, "minute": 0, "timezone": "UTC", "repositories": ["..."], "active": true }`  
   Creates a new leaderboard webhook.
 
   | Field   | In   | Type   | Required | Description           |
@@ -243,7 +243,7 @@ These requests are user-scoped and therefore need to be authenticated with a Cle
 
 - **Update leaderboard webhook**  
   `PUT /leaderboard-webhooks/{id}`  
-  Body: `{ "url": "..." }`  
+  Body: `{ "url": "...", "type": "discord", "frequency": "daily", "day": 0, "hour": 0, "minute": 0, "timezone": "UTC", "repositories": ["..."], "active": true }`  
   Updates an existing leaderboard webhook.
 
   | Field   | In   | Type   | Required | Description           |
