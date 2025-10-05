@@ -1,12 +1,12 @@
 # Gnolove Server
 
-This server will index all the Pull requests, Issues, review, Contributors, etc on gnolang/gno repository (currently hardcoded but could be fully configurable).
+This server will index all the commits, pull requests, issues, reviews, contributors, etc on gno-ecosystem repositories.
 
 
 ### How to launch the service
 
 Prerequisites: 
-- Golang > 1.23.0
+- Golang > 1.24.0
 
 ```sh
 ## On Mac
@@ -47,7 +47,23 @@ This command will start indexing all important elements on the repository then s
 
 #### Contributors & Users
 
-- **Get contributor profile**  
+- **Get all users**  
+  `GET /users`  
+  Returns all users. Add an optional list of addresses to filter by.
+
+  | Parameter | In   | Type   | Required | Description                    |
+  |-----------|------|--------|----------|--------------------------------|
+  | address   | query | string | No      | Wallet address                 |
+
+- **Get user by address**  
+  `GET /users/{address}`  
+  Returns detailed profile and contribution stats for a specific GitHub user.
+
+  | Parameter | In   | Type   | Required | Description                    |
+  |-----------|------|--------|----------|--------------------------------|
+  | address   | path | string | Yes      | Wallet address                 |
+
+- **Get contributor by login**  
   `GET /contributors/{login}`  
   Returns detailed profile and contribution stats for a specific GitHub user.
 
@@ -97,6 +113,18 @@ This command will start indexing all important elements on the repository then s
   Returns all tracked repositories.
 
   _No parameters._
+
+#### Pull Requests
+
+- **Get pull requests report**  
+  `GET /pull-requests/report`  
+  Returns a report of pull requests, optionally filtered by repositories.
+
+  | Parameter    | In    | Type   | Required | Description                                                         |
+  |--------------|-------|--------|----------|---------------------------------------------------------------------|
+  | repositories | query | string | No       | Comma-separated repository IDs (owner/name)                         |
+  | startDate    | query | string | No       | Start date (RFC3339 or YYYY-MM-DD)                                  |
+  | endDate      | query | string | No       | End date (RFC3339 or YYYY-MM-DD)                                    |
 
 #### Milestones
 
@@ -167,6 +195,73 @@ This command will start indexing all important elements on the repository then s
   | Parameter | In   | Type   | Required | Description             |
   |-----------|------|--------|----------|-------------------------|
   | address   | path | string | Yes      | Wallet address (bech32) |
+
+- **Get proposals**  
+  `GET /onchain/proposals`  
+  Returns all registered proposals.
+
+  | Parameter | In   | Type   | Required | Description             |
+  |-----------|------|--------|----------|-------------------------|
+  | address   | query | string | No      | Wallet address (bech32) |
+
+- **Get proposal by id**  
+  `GET /onchain/proposals/{id}`  
+  Returns a specific proposal.
+
+  | Parameter | In   | Type   | Required | Description             |
+  |-----------|------|--------|----------|-------------------------|
+  | id        | path | string | Yes      | Proposal ID             |
+
+- **Get govdao members**  
+  `GET /onchain/govdao-members`  
+  Returns all registered govdao members.
+
+  _No parameters._
+
+#### Leaderboard Webhooks
+These requests are user-scoped and therefore need to be authenticated with a Clerk token. They will return 401s if they're not authenticated.
+- **Get leaderboard webhooks**  
+  `GET /leaderboard-webhooks`  
+  Returns all leaderboard webhooks.
+
+  _No parameters._
+
+- **Create leaderboard webhook**  
+  `POST /leaderboard-webhooks`  
+  Body: `{ "url": "..." }`  
+  Creates a new leaderboard webhook.
+
+  | Field   | In   | Type   | Required | Description           |
+  |---------|------|--------|----------|-----------------------|
+  | url     | body | string | Yes      | Webhook URL           |
+  | type    | body | string | Yes      | Webhook type (discord, slack) |
+  | frequency | body | string | Yes      | Webhook frequency (daily, weekly) |
+  | day     | body | int    | No       | Day of the week (0=Sunday, 6=Saturday) for weekly frequency |
+  | hour    | body | int    | Yes      | Hour of the day (0-23) |
+  | minute  | body | int    | Yes      | Minute of the hour (0-59) |
+  | timezone | body | string | Yes      | Timezone (e.g. "America/New_York") |
+  | repositories | body | string | No       | Comma-separated repository IDs (owner/name) |
+
+- **Update leaderboard webhook**  
+  `PUT /leaderboard-webhooks/{id}`  
+  Body: `{ "url": "..." }`  
+  Updates an existing leaderboard webhook.
+
+  | Field   | In   | Type   | Required | Description           |
+  |---------|------|--------|----------|-----------------------|
+  | url     | body | string | Yes      | Webhook URL           |
+  | type    | body | string | Yes      | Webhook type (discord, slack) |
+  | frequency | body | string | Yes      | Webhook frequency (daily, weekly) |
+  | day     | body | int    | No       | Day of the week (0=Sunday, 6=Saturday) for weekly frequency |
+  | hour    | body | int    | Yes      | Hour of the day (0-23) |
+  | minute  | body | int    | Yes      | Minute of the hour (0-59) |
+  | timezone | body | string | Yes      | Timezone (e.g. "America/New_York") |
+  | repositories | body | string | No       | Comma-separated repository IDs (owner/name) |
+  | active  | body | bool   | Yes      | Whether the webhook is active |
+
+- **Delete leaderboard webhook**  
+  `DELETE /leaderboard-webhooks/{id}`  
+  Deletes an existing leaderboard webhook.
 
 ---
 
@@ -313,4 +408,59 @@ This command will start indexing all important elements on the repository then s
 | Path        | string | Primary key, package path       |
 | Namespace   | string | Foreign key to Namespace        |
 | BlockHeight | int64  | Block height registered         |
+
+### GnoProposal
+| Field       | Type   | Description                    |
+|-------------|--------|--------------------------------|
+| ID          | string | Primary key, proposal ID        |
+| Title       | string | Proposal title                  |
+| Description | string | Proposal description            |
+| Address     | string | Proposal origin address        |
+| Path        | string | Proposal path        |
+| BlockHeight | int64  | Block height registered         |
+| Files       | []File | Files in this proposal          |
+| Votes       | []GnoVote | Votes on this proposal          |
+| ExecutionHeight | int64 | Execution height                |
+| Status      | string | Proposal status                 |
+
+### GnoVote
+| Field       | Type   | Description                    |
+|-------------|--------|--------------------------------|
+| ProposalID  | string | Primary key, proposal ID        |
+| Address     | string | Voter address        |
+| BlockHeight | int64  | Block height registered         |
+| Vote        | string | Proposal vote  (yes/abstain/no)               |
+| Hash        | string | Proposal hash                 |
+
+### GovDaoMember
+| Field       | Type   | Description                    |
+|-------------|--------|--------------------------------|
+| Address     | string | Primary key, wallet address        |
+| Tier        | string | Member tier                 |
+
+### File
+| Field       | Type   | Description                    |
+|-------------|--------|--------------------------------|
+| ID          | string | Primary key, file ID        |
+| Name        | string | File name                 |
+| Body        | string | File content                 |
+| GnoProposalID | string | Proposal ID                 |
+
+### LeaderboardWebhook
+| Field       | Type   | Description                    |
+|-------------|--------|--------------------------------|
+| ID          | uint | Primary key, webhook ID        |
+| Url         | string | Webhook URL                 |
+| UserID      | string | User ID                 |
+| Type        | string | Webhook type (discord/slack)  |
+| Frequency   | string | Webhook frequency (daily/weekly) |
+| Day         | int    | Day of the week (0-6)         |
+| Hour        | int    | Hour of the day (0-23)        |
+| Minute      | int    | Minute of the hour (0-59)     |
+| Timezone    | string | Timezone                      |
+| Repositories| []string | Repositories to monitor       |
+| Active      | bool   | Webhook active status         |
+| NextRunAt   | time.Time | Next run time                 |
+| CreatedAt   | time.Time | Webhook creation time         |
+| UpdatedAt   | time.Time | Webhook update time           |
 
