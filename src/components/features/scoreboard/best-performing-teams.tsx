@@ -64,7 +64,7 @@ const BestPerformingTeams = () => {
   };
 
   return (
-    <Flex direction="column" gap="6">
+    <Flex direction="column" gap="6" mt="6">
       <Heading size="6" align="center">🏆 Best Performing Teams</Heading>
       <Flex align="center" justify="center" gap="2">
         <Text size="2">Showing:</Text>
