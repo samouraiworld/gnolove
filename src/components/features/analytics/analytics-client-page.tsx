@@ -5,7 +5,7 @@ import { useMemo, useState } from 'react';
 import AnalyticsContributorLineChart from './analytics-contributor-line-chart';
 import AnalyticsRecentActivity from './analytics-recent-activity';
 import AnalyticsTopContributorBarChart from './analytics-top-contributor-bar-chart';
-import { Box, Flex, Heading, Separator } from '@radix-ui/themes';
+import { Box, Flex, Heading } from '@radix-ui/themes';
 
 import useGetContributors from '@/hooks/use-get-contributors';
 import useGetRepositories from '@/hooks/use-get-repositories';

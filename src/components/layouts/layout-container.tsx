@@ -1,4 +1,4 @@
-import { Box, BoxProps, Flex, FlexProps, ScrollArea } from '@radix-ui/themes';
+import { Box, BoxProps, ScrollArea } from '@radix-ui/themes';
 
 import Footer from '@/modules/footer';
 

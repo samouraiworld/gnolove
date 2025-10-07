@@ -50,8 +50,7 @@ const BestPerformingTeams = () => {
       // Calculate total score
       const totalScore = membersWithScore.reduce((sum, m) => sum + m.score, 0);
       return { ...team, totalScore, members: sortedMembers };
-    }).sort((a, b) => b.totalScore - a.totalScore).filter(({ totalScore }) => totalScore > 0)
-    , [filteredContributors]);
+    }).sort((a, b) => b.totalScore - a.totalScore).filter(({ totalScore }) => totalScore > 0), [filteredContributors]);
 
   const rankElement = (rank: number) => {
     if (rank < 3)
