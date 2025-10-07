@@ -112,8 +112,10 @@ func GenerateReport(db *gorm.DB) (models.Report, error) {
 		return models.Report{}, err
 	}
 
+	userPrompt := string(inputDataJSON)
+
 	// Generate report using AskAssistant
-	assistantResponse, err := providers.AskMistral(reportSystemPrompt, string(inputDataJSON), reportOutputFormatSchema)
+	assistantResponse, err := providers.AskMistral(reportSystemPrompt, userPrompt, reportOutputFormatSchema)
 	if err != nil {
 		return models.Report{}, err
 	}
@@ -132,9 +134,10 @@ func GenerateReport(db *gorm.DB) (models.Report, error) {
 
 	// Create a new report instance
 	report := models.Report{
-		ID:        uuid.New().String(),
-		CreatedAt: time.Now(),
-		Data:      string(formattedData),
+		ID:         uuid.New().String(),
+		CreatedAt:  time.Now(),
+		Data:       string(formattedData),
+		UserPrompt: userPrompt,
 	}
 
 	// Save the report to the database

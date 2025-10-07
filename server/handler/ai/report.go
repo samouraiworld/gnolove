@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/samouraiworld/topofgnomes/server/models"
 	"gorm.io/gorm"
 )
 
@@ -18,20 +19,25 @@ func HandleGetLastReport(db *gorm.DB) http.HandlerFunc {
 				http.Error(w, err.Error(), http.StatusNotFound)
 				return
 			}
-			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 
-		var obj GnoReport
-		if err := json.Unmarshal([]byte(lastReport.Data), &obj); err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(map[string]string{"error": "Failed to decode report data"})
+		dataObj, promptObj, err := unmarshalReportData(*lastReport)
+		if err != nil {
+			http.Error(w, "Failed to decode report data or user prompt", http.StatusInternalServerError)
 			return
 		}
-		if err := json.NewEncoder(w).Encode(obj); err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(map[string]string{"error": "Failed to encode report"})
+
+		response := map[string]interface{}{
+			"id":         lastReport.ID,
+			"createdAt":  lastReport.CreatedAt,
+			"data":       dataObj,
+			"userPrompt": promptObj,
+		}
+
+		if err := json.NewEncoder(w).Encode(response); err != nil {
+			http.Error(w, "Failed to encode response", http.StatusInternalServerError)
 			return
 		}
 	}
@@ -65,20 +71,25 @@ func HandleGetReportByWeek(db *gorm.DB) http.HandlerFunc {
 				http.Error(w, err.Error(), http.StatusNotFound)
 				return
 			}
-			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 
-		var obj GnoReport
-		if err := json.Unmarshal([]byte(report.Data), &obj); err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(map[string]string{"error": "Failed to decode report data"})
+		dataObj, promptObj, err := unmarshalReportData(*report)
+		if err != nil {
+			http.Error(w, "Failed to decode report data or user prompt", http.StatusInternalServerError)
 			return
 		}
-		if err := json.NewEncoder(w).Encode(obj); err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(map[string]string{"error": "Failed to encode report"})
+
+		response := map[string]interface{}{
+			"id":         report.ID,
+			"createdAt":  report.CreatedAt,
+			"data":       dataObj,
+			"userPrompt": promptObj,
+		}
+
+		if err := json.NewEncoder(w).Encode(response); err != nil {
+			http.Error(w, "Failed to encode response", http.StatusInternalServerError)
 			return
 		}
 	}
@@ -90,26 +101,47 @@ func HandleGetAllReports(db *gorm.DB) http.HandlerFunc {
 
 		reports, err := GetAllReports(db)
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 
-		var gnoReports []GnoReport
+		var formattedReports []map[string]interface{}
 		for _, report := range reports {
-			var obj GnoReport
-			if err := json.Unmarshal([]byte(report.Data), &obj); err != nil {
-				w.WriteHeader(http.StatusInternalServerError)
-				json.NewEncoder(w).Encode(map[string]string{"error": "Failed to decode report data"})
+			dataObj, promptObj, err := unmarshalReportData(report)
+			if err != nil {
+				http.Error(w, "Failed to decode report data or user prompt", http.StatusInternalServerError)
 				return
 			}
-			gnoReports = append(gnoReports, obj)
+
+			formattedReports = append(formattedReports, map[string]interface{}{
+				"id":         report.ID,
+				"createdAt":  report.CreatedAt,
+				"data":       dataObj,
+				"userPrompt": promptObj,
+			})
 		}
 
-		if err := json.NewEncoder(w).Encode(gnoReports); err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(map[string]string{"error": "Failed to encode reports"})
+		if formattedReports == nil {
+			formattedReports = []map[string]interface{}{}
+		}
+		if err := json.NewEncoder(w).Encode(formattedReports); err != nil {
+			http.Error(w, "Failed to encode response", http.StatusInternalServerError)
 			return
 		}
 	}
+}
+
+func unmarshalReportData(report models.Report) (map[string]interface{}, map[string]interface{}, error) {
+	var dataObj map[string]interface{}
+	var promptObj map[string]interface{}
+
+	if err := json.Unmarshal([]byte(report.Data), &dataObj); err != nil {
+		return nil, nil, err
+	}
+
+	if err := json.Unmarshal([]byte(report.UserPrompt), &promptObj); err != nil {
+		return nil, nil, err
+	}
+
+	return dataObj, promptObj, nil
 }
