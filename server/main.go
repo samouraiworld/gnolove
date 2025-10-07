@@ -145,7 +145,7 @@ func main() {
 		r.Put("/leaderboard-webhooks/{id}", handler.HandleUpdateLeaderboardWebhook(database))
 		r.Delete("/leaderboard-webhooks/{id}", handler.HandleDeleteLeaderboardWebhook(database))
 	})
-	router.HandleFunc("/reports/weekly", report.HandleGetReportByWeek(database))
+
 	// ai endpoints
 	router.HandleFunc("/ai/report", ai.HandleGetLastReport(database))
 	router.HandleFunc("/ai/report/weekly", ai.HandleGetReportByWeek(database))
