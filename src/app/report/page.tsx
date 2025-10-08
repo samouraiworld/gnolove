@@ -7,6 +7,7 @@ import ReportClientPage from '@/features/report/report-client-page';
 
 import { prefetchPullRequestsReport } from '@/hooks/use-get-pullrequests-report';
 import { prefetchRepositories } from '@/hooks/use-get-repositories';
+import LayoutContainer from '@/layouts/layout-container';
 
 export async function generateMetadata({ searchParams }: { searchParams?: { week?: string } }): Promise<Metadata> {
   const now = new Date();
@@ -43,9 +44,11 @@ const ReportPage = async ({ searchParams }: { searchParams?: { week?: string } }
   ]);
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <ReportClientPage />
-    </HydrationBoundary>
+    <LayoutContainer>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <ReportClientPage />
+      </HydrationBoundary>
+    </LayoutContainer>
   );
 };
 

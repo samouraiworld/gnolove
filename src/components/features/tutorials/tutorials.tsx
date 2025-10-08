@@ -23,7 +23,7 @@ const Tutorials = ({ playlistItems }: { playlistItems?: TYoutubeVideoPlaylist })
   };
 
   return (
-    <Container size='4' py='6'>
+    <Container size='4'>
       <Section>
         <Flex direction='column' align='center' mb='8'>
           <Heading size='8' align='center' color='red' className='font-mono'>

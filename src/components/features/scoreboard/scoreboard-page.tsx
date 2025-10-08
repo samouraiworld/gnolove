@@ -8,8 +8,6 @@ import { Box, Flex, Grid, Heading, Text } from '@radix-ui/themes';
 
 import MilestoneProgress from '@/features/milestone-progress';
 
-import LayoutContainer from '@/layouts/layout-container';
-
 import IssuesTable from '@/modules/issues-table';
 import PrsTable from '@/modules/prs-table';
 import UserTable from '@/modules/user-table';
@@ -46,8 +44,8 @@ const ScoreboardPage = ({ videos }: { videos?: TYoutubeVideoPlaylist }) => {
   const { isOffline } = useOffline();
 
   return (
-    <LayoutContainer>
-      <Box mt="4">
+    <Flex gap="4" direction="column">
+      <Box my="4">
         <video
           className="motion-reduce:hidden h-full min-h-[200px] w-full object-cover rounded-4"
           autoPlay
@@ -127,7 +125,7 @@ const ScoreboardPage = ({ videos }: { videos?: TYoutubeVideoPlaylist }) => {
           </Grid>
         </>
       )}
-    </LayoutContainer>
+    </Flex>
   );
 };
 

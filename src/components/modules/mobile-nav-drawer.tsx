@@ -39,7 +39,7 @@ const MobileNavDrawer = () => {
                   <Image src={MinecraftHeart} alt="minecraft heart" width={20} height={20} />
                 </Flex>
 
-                <Flex direction="column" align="start" gap="6" mt="8" flexGrow="1">
+                <Flex direction="column" align="start" justify="center" gap="6" flexGrow="1">
                   {MENU_ITEMS.map((item) => (
                     <Drawer.Close asChild key={item.href}>
                       <Link className={cn(isOffline && 'pointer-events-none')} href={item.href}>
