@@ -23,17 +23,16 @@ func HandleGetLastReport(db *gorm.DB) http.HandlerFunc {
 			return
 		}
 
-		dataObj, promptObj, err := unmarshalReportData(*lastReport)
+		dataObj, err := unmarshalReportData(*lastReport)
 		if err != nil {
 			http.Error(w, "Failed to decode report data or user prompt", http.StatusInternalServerError)
 			return
 		}
 
 		response := map[string]interface{}{
-			"id":         lastReport.ID,
-			"createdAt":  lastReport.CreatedAt,
-			"data":       dataObj,
-			"userPrompt": promptObj,
+			"id":        lastReport.ID,
+			"createdAt": lastReport.CreatedAt,
+			"data":      dataObj,
 		}
 
 		if err := json.NewEncoder(w).Encode(response); err != nil {
@@ -75,17 +74,16 @@ func HandleGetReportByWeek(db *gorm.DB) http.HandlerFunc {
 			return
 		}
 
-		dataObj, promptObj, err := unmarshalReportData(*report)
+		dataObj, err := unmarshalReportData(*report)
 		if err != nil {
 			http.Error(w, "Failed to decode report data or user prompt", http.StatusInternalServerError)
 			return
 		}
 
 		response := map[string]interface{}{
-			"id":         report.ID,
-			"createdAt":  report.CreatedAt,
-			"data":       dataObj,
-			"userPrompt": promptObj,
+			"id":        report.ID,
+			"createdAt": report.CreatedAt,
+			"data":      dataObj,
 		}
 
 		if err := json.NewEncoder(w).Encode(response); err != nil {
@@ -107,17 +105,16 @@ func HandleGetAllReports(db *gorm.DB) http.HandlerFunc {
 
 		var formattedReports []map[string]interface{}
 		for _, report := range reports {
-			dataObj, promptObj, err := unmarshalReportData(report)
+			dataObj, err := unmarshalReportData(report)
 			if err != nil {
 				http.Error(w, "Failed to decode report data or user prompt", http.StatusInternalServerError)
 				return
 			}
 
 			formattedReports = append(formattedReports, map[string]interface{}{
-				"id":         report.ID,
-				"createdAt":  report.CreatedAt,
-				"data":       dataObj,
-				"userPrompt": promptObj,
+				"id":        report.ID,
+				"createdAt": report.CreatedAt,
+				"data":      dataObj,
 			})
 		}
 
@@ -131,17 +128,12 @@ func HandleGetAllReports(db *gorm.DB) http.HandlerFunc {
 	}
 }
 
-func unmarshalReportData(report models.Report) (map[string]interface{}, map[string]interface{}, error) {
+func unmarshalReportData(report models.Report) (map[string]interface{}, error) {
 	var dataObj map[string]interface{}
-	var promptObj map[string]interface{}
 
 	if err := json.Unmarshal([]byte(report.Data), &dataObj); err != nil {
-		return nil, nil, err
+		return nil, err
 	}
 
-	if err := json.Unmarshal([]byte(report.UserPrompt), &promptObj); err != nil {
-		return nil, nil, err
-	}
-
-	return dataObj, promptObj, nil
+	return dataObj, nil
 }
