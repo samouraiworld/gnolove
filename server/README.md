@@ -168,6 +168,41 @@ This command will start indexing all important elements on the repository then s
   |-----------|------|--------|----------|-------------------------|
   | address   | path | string | Yes      | Wallet address (bech32) |
 
+#### Reports endpoints
+
+- **Get Latest Report**
+  `GET ai/report`
+  Returns the latest weekly report for the Gnoland ecosystem, formatted as a JSON object.
+
+  _No parameters._
+
+  **Response Example:**
+
+  ```json
+  {
+    "cycle": "weekly Report #17 — July 24, 2025",
+    "projects": [
+      {
+        "name": "gnolang/gno",
+        "summary": "The ancient scriptstone of Gno hummed with activity this cycle..."
+      }
+    ]
+  }
+  ```
+
+- **Get Report by Date Range**
+  `GET ai/reports/weekly?start=YYYY-MM-DDTHH:MM:SSZ&end=YYYY-MM-DDTHH:MM:SSZ`
+  Returns the report for a specific date range (usually a week period). Dates must be in RFC3339 format.
+
+  **Query Parameters:**
+  | Name | Required | Description |
+  |-------|----------|----------------------------|
+  | start | Yes | Start date (RFC3339) |
+  | end | Yes | End date (RFC3339) |
+
+  **Response Example:**
+  Same as above.
+
 ---
 
 **Notes:**
@@ -308,9 +343,33 @@ This command will start indexing all important elements on the repository then s
 
 ### GnoPackage
 | Field       | Type   | Description                    |
-|-------------|--------|--------------------------------|
-| Publisher   | string | Primary key, publisher address  |
-| Path        | string | Primary key, package path       |
-| Namespace   | string | Foreign key to Namespace        |
-| BlockHeight | int64  | Block height registered         |
+| ----------- | ------ | ------------------------------ |
+| Publisher   | string | Primary key, publisher address |
+| Path        | string | Primary key, package path      |
+| Namespace   | string | Foreign key to Namespace       |
+| BlockHeight | int64  | Block height registered        |
 
+# AI Report Model
+
+The `Report` model stores generated ecosystem reports:
+
+| Field     | Type      | Description                            |
+| --------- | --------- | -------------------------------------- |
+| ID        | string    | Unique report ID                       |
+| CreatedAt | time.Time | Timestamp of report creation           |
+| Data      | string    | JSON string containing the report data |
+
+The `Data` field contains a JSON object with the following structure:
+
+```json
+{
+  "cycle": "Weekly Report #17 — July 24, 2025",
+  "projects": [
+    {
+      "name": "gnolang/gno",
+      "summary": "The ancient scriptstone of Gno hummed with activity this cycle..."
+    }
+    // ... more projects
+  ]
+}
+```
