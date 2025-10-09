@@ -66,7 +66,7 @@ https://github.com/gnolang/gno
     - `GITHUB_API_TOKEN`: Your GitHub API token. Create one at [https://github.com/settings/tokens](https://github.com/settings/tokens)
     - `NEXT_PUBLIC_REDIRECT_PROXY`: Your redirect proxy. Create one at [https://github.com/settings/applications/new](https://github.com/settings/applications/new)
     - `NEXT_PUBLIC_OAUTH_CLIENT_ID`: Your OAuth client ID. Create one at [https://github.com/settings/applications/new](https://github.com/settings/applications/new)
-    - `NEXT_PUBLIC_GNO_CHAIN_ID`: The chain ID of the Gno chain. Default: test5
+    - `NEXT_PUBLIC_GNO_CHAIN_ID`: The chain ID of the Gno chain. Default: test8
     - `NEXT_PUBLIC_GHVERIFY_REALM_PATH`: Your GitHub realm path. Default: [https://gno.land/r/demo/ghverify](https://gno.land/r/demo/ghverify)
     - `NEXT_PUBLIC_PROFILE_REALM_PATH`: Your profile realm path. Default: [https://gno.land/r/demo/profile](https://gno.land/r/demo/profile)
     - `NEXT_PUBLIC_API_URL`: The API URL. Default: [http://localhost:3333](http://localhost:3333).
