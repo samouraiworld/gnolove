@@ -130,4 +130,4 @@ pnpm run check-types
 
 ---
 
-Thank you for contributing to Gnolove! Every contribution helps make the Gnoland ecosystem stronger. 🚀
+Thank you for contributing to Gnolove! :)
