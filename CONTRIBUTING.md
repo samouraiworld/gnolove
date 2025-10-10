@@ -98,7 +98,7 @@ Follow conventional commit format:
 
 1. Push your changes to your fork:
    ```bash
-   git push origin feature/your-feature-name
+   git push origin feat/your-feature-name
    ```
 
 2. Open a Pull Request on GitHub
