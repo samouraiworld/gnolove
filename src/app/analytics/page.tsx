@@ -13,6 +13,7 @@ import { SearchParamsFilters } from '@/types/url-filters';
 
 import AnalyticsClientPage from '@/components/features/analytics/analytics-client-page';
 import { prefetchScoreFactors } from '@/hooks/use-get-score-factors';
+import LayoutContainer from '@/layouts/layout-container';
 
 export const metadata: Metadata = {
   title: 'Analytics',
@@ -34,9 +35,11 @@ const AnalyticsPage = async ({ searchParams: { f, e, r } }: SearchParamsFilters)
   ]);
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <AnalyticsClientPage />
-    </HydrationBoundary>
+    <LayoutContainer>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <AnalyticsClientPage />
+      </HydrationBoundary>
+    </LayoutContainer>
   );
 };
 

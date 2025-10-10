@@ -59,7 +59,7 @@ const ContributionsDialog = ({ user, children, ...props }: ContributionsDialogPr
               <Table.Body>
                 {contributions.map((contribution) => (
                   <Table.Row
-                    key={contribution.url}
+                    key={`${contribution.label.name}-${contribution.id}`}
                     onClick={() => window.open(contribution.url || contribution.pullRequest?.url, '_blank')}
                     className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-grayA-2"
                   >

@@ -19,11 +19,11 @@ const Page = async () => {
   ]);
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <LayoutContainer>
+    <LayoutContainer>
+      <HydrationBoundary state={dehydrate(queryClient)}>
         <GovdaoPage />
-      </LayoutContainer>
-    </HydrationBoundary>
+      </HydrationBoundary>
+    </LayoutContainer>
   );
 };
 

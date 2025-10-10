@@ -41,7 +41,7 @@ export default async function SettingsPage() {
   return (
     <LayoutContainer>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <Box pt="9">
+        <Box>
           <Heading size="6">Settings</Heading>
 
           {kinds.map((k) => (

@@ -7,7 +7,7 @@
 ###  Introduction :
 
 "_At first, there was Bitcoin, out of entropy soup of the greater All. Then, there was Ethereum, which was created in the likeness of Bitcoin, but made Turing complete.
-Among these were Tendermint and Cosmos to engineer robust PoS and IBC. Then came Gno upon Cosmos and there spring forth Gnoland, simulated by the Gnomes of the Greater Resistance."_
+Among these were Tendermint and Cosmos to engineer robust PoS and IBC. Then came Gno upon Cosmos and there spring forth Gnoland, simulated by the Gnomes of the Greater Resistance._"
 Gno is an interpreted and fully-deterministic implementation of the Go programming language, designed to build succinct and composable smart contracts. The first blockchain to use it is gno.land, a Proof of Contribution-based chain, backed by a variation of the Tendermint consensus engine.
 
 In the future, contributors will be paid automatically for their contributions on the blockchain project, using different data prodivers prooving valuable contributions, and a decentralized reviewing organization.
@@ -61,40 +61,58 @@ https://github.com/gnolang/gno
    cp .env.example .env
    ```
 
-  Required environment variables:
+ - Frontend environment variables
 
-    - `GITHUB_API_TOKEN`: Your GitHub API token. Create one at [https://github.com/settings/tokens](https://github.com/settings/tokens)
-    - `NEXT_PUBLIC_REDIRECT_PROXY`: Your redirect proxy. Create one at [https://github.com/settings/applications/new](https://github.com/settings/applications/new)
-    - `NEXT_PUBLIC_OAUTH_CLIENT_ID`: Your OAuth client ID. Create one at [https://github.com/settings/applications/new](https://github.com/settings/applications/new)
-    - `NEXT_PUBLIC_GNO_CHAIN_ID`: The chain ID of the Gno chain. Default: test8
-    - `NEXT_PUBLIC_GHVERIFY_REALM_PATH`: Your GitHub realm path. Default: [https://gno.land/r/demo/ghverify](https://gno.land/r/demo/ghverify)
-    - `NEXT_PUBLIC_PROFILE_REALM_PATH`: Your profile realm path. Default: [https://gno.land/r/demo/profile](https://gno.land/r/demo/profile)
-    - `NEXT_PUBLIC_API_URL`: The API URL. Default: [http://localhost:3333](http://localhost:3333).
+   - Required:
+     - `GITHUB_API_TOKEN`: Your GitHub API token. Create one at [https://github.com/settings/tokens](https://github.com/settings/tokens)
+     - `NEXT_PUBLIC_API_URL`: The API (backend) URL
 
-4. Set up and run the server (backend)
+   - Optional:
+     - `NEXT_PUBLIC_MONITORING_API_URL`: enables monitoring/validators features.
+     - `YOUTUBE_API_KEY`: enables YouTube tutorials
+     - `NEXT_PUBLIC_GNO_CHAIN_ID`: used by Adena network checks when linking GitHub profile
+     - `NEXT_PUBLIC_OAUTH_CLIENT_ID` and `NEXT_PUBLIC_REDIRECT_PROXY`: GitHub OAuth linking 
+     - `NEXT_PUBLIC_GHVERIFY_REALM_PATH`: on‑chain verification UX
+     - `NEXT_PUBLIC_PROFILE_REALM_PATH`: on‑chain profile updates
+     - `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`: front‑end part of Clerk; pairs with backend `CLERK_SECRET_KEY`
 
   ```bash
   cd server
   cp .env.example .env
-  go run .
   ```
 
-  Required environment variables:
+ - Backend environment variables
 
-    - `GITHUB_API_TOKEN`: Your GitHub API token. Create one at [https://github.com/settings/tokens](https://github.com/settings/tokens)
-    - `GITHUB_OAUTH_CLIENT_ID`: Your OAuth client ID. Create one at [https://github.com/settings/applications/new](https://github.com/settings/applications/new)
-    - `GITHUB_OAUTH_CLIENT_SECRET`: Your OAuth client secret. Create one at [https://github.com/settings/applications/new](https://github.com/settings/applications/new)
-    - `GITHUB_REPOSITORIES`: A list of space-separated Github repositories we'll look for activity on.
-    - `GITHUB_OAUTH_REDIRECT_URL`: Your OAuth redirect URL. Default: [http://localhost:5500](http://localhost:5500)
-    - `GITHUB_GRAPHQL_ENDPOINT`: Your GitHub GraphQL endpoint. Default: [https://api.github.com/graphql](https://api.github.com/graphql)
-    - `GHVERIFY_OWNER_MNEMONIC`: Your GitHub verify owner mnemonic. Create one in Adena
-    - `GHVERIFY_REALM_PATH`: Your Gno ghverify realm path.
-    - `GOVDAO_REALM_PATH`: Your Gno GovDAO realm path.
-    - `GNO_GRAPHQL_ENDPOINT`: The Gno GraphQL endpoint. Default: [https://indexer.test8.testnets.gno.land/graphql/query](https://indexer.test8.testnets.gno.land/graphql/query)
+   - Required:
+     - `GITHUB_REPOSITORIES`: A list of space-separated GitHub repositories we'll look for activity on.
+     - `GITHUB_OAUTH_CLIENT_ID`: Your OAuth client ID. Create one at [https://github.com/settings/applications/new](https://github.com/settings/applications/new)
+     - `GITHUB_OAUTH_CLIENT_SECRET`: Your OAuth client secret. Create one at [https://github.com/settings/applications/new](https://github.com/settings/applications/new)
+     - `GITHUB_API_TOKEN`: Your GitHub API token. Create one at [https://github.com/settings/tokens](https://github.com/settings/tokens)
+     - `GNO_RPC_ENDPOINT`: Your Gno RPC endpoint. Used by RPC client and on‑chain code
+     - `GNO_GRAPHQL_ENDPOINT`: Your Gno GraphQL endpoint. Used by Gno indexer client
+     - `GNO_CHAIN_ID`: The Gno chain ID. Used by signer
+     - `GHVERIFY_OWNER_MNEMONIC`: Your GitHub verify owner mnemonic. Create one in Adena.
+     - `GHVERIFY_REALM_PATH`: Your Gno ghverify realm path. Used by signer
+     - `GOVDAO_REALM_PATH`: Your Gno GovDAO realm path. Used by signer
+
+   - Optional with defaults:
+     - `DATABASE_PATH`: The database path. Defaults to `db/database.db`.
+     - `LEADERBOARD_EXCLUDED_REPOS`: The repositories excluded when we calculate activity to compute leaderboards, sent through webhooks. Defaults to `samouraiworld/gnomonitoring`
+
+   - Optional (no defaults in code; enable extra features when provided):
+     - `DISCORD_WEBHOOK_URL`: URL for the Samourai Coop Discord webhook in which we send leaderboards. Deprecated.
+     - `CLERK_SECRET_KEY`: Enables Clerk‑protected features
+     - `MISTRAL_API_KEY`: Enables scheduled AI tasks
+
+4. Run the server (backend)
+   ```bash
+   cd server
+   go run .
+   ```
 
 5. Run the client (frontend) in another terminal
    ```bash
-   # In main directory
+   cd ..
    pnpm run dev
    ```
 

@@ -36,7 +36,6 @@ import { TPullRequest, TPullRequestReport } from '@/utils/schemas';
 
 import TEAMS from '@/constants/teams';
 
-import LayoutContainer from '@/components/layouts/layout-container';
 import TeamSelector from '@/modules/team-selector';
 import RepoPRStatusList from './repo-pr-status-list';
 
@@ -246,7 +245,7 @@ const ReportClientPage = () => {
   };
 
   return (
-    <LayoutContainer mt={{ initial: '2', sm: '5' }}>
+    <Box>
       <Flex direction="column" gap="4" flexGrow="1">
         <Flex direction={{ initial: 'column', sm: 'row' }} justify="between" align="center">
           <Heading as="h1" size={{ initial: '4', sm: '6' }}>
@@ -293,7 +292,7 @@ const ReportClientPage = () => {
           </Button>
         </Flex>
       </Flex>
-      <Separator size="4" />
+      <Separator my="2" size="4" />
       <Box position="relative">
         <ScrollArea type="auto" scrollbars="vertical" style={{ height: '80svh' }}>
           <Box pr="4">
@@ -350,7 +349,7 @@ const ReportClientPage = () => {
           </Box>
         </ScrollArea>
       </Box>
-    </LayoutContainer>
+    </Box>
   );
 };
 

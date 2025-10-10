@@ -215,7 +215,7 @@ const ValidatorsClientPage = () => {
   }
 
   return (
-    <Box my="4">
+    <Box>
       <Flex justify="between" mb="3" gap="3">
         <Box>
           <Heading size="7">Validator Monitoring</Heading>

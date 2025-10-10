@@ -25,11 +25,11 @@ const Page = async () => {
   ]);
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <LayoutContainer>
+    <LayoutContainer>
+      <HydrationBoundary state={dehydrate(queryClient)}>
         <ValidatorsClientPage />
-      </LayoutContainer>
-    </HydrationBoundary>
+      </HydrationBoundary>
+    </LayoutContainer>
   );
 };
 
