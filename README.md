@@ -63,13 +63,13 @@ https://github.com/gnolang/gno
 
   Required environment variables:
 
-    - `GITHUB_API_TOKEN`: Your GitHub API token. Create one at [https://github.com/settings/tokens](https://github.com/settings/tokens)
+    - `GITHUB_API_TOKEN`: (Required) Your GitHub API token. Create one at [https://github.com/settings/tokens](https://github.com/settings/tokens)
+    - `NEXT_PUBLIC_API_URL`: (Required) The API URL. Default: [http://localhost:3333](http://localhost:3333).
     - `NEXT_PUBLIC_GNO_CHAIN_ID`: The chain ID of the Gno chain. Default: test5
     - `NEXT_PUBLIC_OAUTH_CLIENT_ID`: Your OAuth client ID. Create one at [https://github.com/settings/applications/new](https://github.com/settings/applications/new)
     - `NEXT_PUBLIC_REDIRECT_PROXY`: Your redirect proxy. Create one at [https://github.com/settings/applications/new](https://github.com/settings/applications/new)
     - `NEXT_PUBLIC_GHVERIFY_REALM_PATH`: Your GitHub realm path. Default: [https://gno.land/r/demo/ghverify](https://gno.land/r/demo/ghverify)
     - `NEXT_PUBLIC_PROFILE_REALM_PATH`: Your profile realm path. Default: [https://gno.land/r/demo/profile](https://gno.land/r/demo/profile)
-    - `NEXT_PUBLIC_API_URL`: The API URL. Default: [http://localhost:3333](http://localhost:3333).
 
   ```bash
   cd server
@@ -78,13 +78,13 @@ https://github.com/gnolang/gno
 
   Required environment variables:
 
-    - `GITHUB_API_TOKEN`: Your GitHub API token. Create one at [https://github.com/settings/tokens](https://github.com/settings/tokens)
-    - `GITHUB_OAUTH_CLIENT_ID`: Your OAuth client ID. Create one at [https://github.com/settings/applications/new](https://github.com/settings/applications/new)
-    - `GITHUB_OAUTH_CLIENT_SECRET`: Your OAuth client secret. Create one at [https://github.com/settings/applications/new](https://github.com/settings/applications/new)
+    - `GITHUB_REPOSITORIES`: (Required) A list of space-separated Github repositories we'll look for activity on.
+    - `GITHUB_OAUTH_CLIENT_ID`: (Required) Your OAuth client ID. Create one at [https://github.com/settings/applications/new](https://github.com/settings/applications/new)
+    - `GITHUB_OAUTH_CLIENT_SECRET`: (Required) Your OAuth client secret. Create one at [https://github.com/settings/applications/new](https://github.com/settings/applications/new)
+    - `GHVERIFY_OWNER_MNEMONIC`: (Required) Your GitHub verify owner mnemonic. Create one in Adena
+    - `GITHUB_API_TOKEN`: (Required) Your GitHub API token. Create one at [https://github.com/settings/tokens](https://github.com/settings/tokens)
     - `GITHUB_OAUTH_REDIRECT_URL`: Your OAuth redirect URL. Default: [http://localhost:5500](http://localhost:5500)
     - `GITHUB_GRAPHQL_ENDPOINT`: Your GitHub GraphQL endpoint. Default: [https://api.github.com/graphql](https://api.github.com/graphql)
-    - `GITHUB_REPOSITORIES`: A list of space-separated Github repositories we'll look for activity on.
-    - `GHVERIFY_OWNER_MNEMONIC`: Your GitHub verify owner mnemonic. Create one in Adena
     - `GHVERIFY_REALM_PATH`: Your Gno ghverify realm path.
     - `GOVDAO_REALM_PATH`: Your Gno GovDAO realm path.
     - `GNO_GRAPHQL_ENDPOINT`: The Gno GraphQL endpoint. Default: [https://indexer.test7.testnets.gno.land/graphql/query](https://indexer.test7.testnets.gno.land/graphql/query)
