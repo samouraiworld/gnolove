@@ -471,7 +471,9 @@ export type TValidatorLastIncident = z.infer<typeof ValidatorLastIncidentSchema>
 // Leaderboard webhooks
 export const LeaderboardWebhookSchema = z.object({
   id: z.number().optional(),
-  url: z.string().url(),
+  url: z.string().regex(/^(https:\/\/|http:\/\/)[^\s/$.?#].[^\s]*$/i, {
+    message: 'Please enter a valid URL starting with http:// or https://',
+  }),
   userId: z.string().optional(),
   type: z.enum(['discord', 'slack']),
   frequency: z.enum(['daily', 'weekly']).default('weekly'),

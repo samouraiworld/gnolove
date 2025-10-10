@@ -95,7 +95,9 @@ export default function LeaderboardWebhookForm({ initial, onDone }: { initial?: 
         <Box>
           <Flex gap="2" direction={{ initial: 'column', sm: 'row' }} align={{ initial: 'start', sm: 'center' }}>
             <Text as="label" size="2" weight="medium">Webhook URL</Text>
-            <TextField.Root className="flex-1 w-full" placeholder="https://example.com/webhook" {...register('url', { required: true })} />
+            <TextField.Root className="flex-1 w-full" placeholder="https://example.com/webhook" {...register('url', { required: true })}
+              onBlur={(e) => setValue('url', e.target.value, { shouldValidate: true, shouldDirty: true })}
+            />
           </Flex>
           {formState.errors.url && <Text size="2" color="red">{formState.errors.url.message ?? 'A valid URL is required'}</Text>}
         </Box>
