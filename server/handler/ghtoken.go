@@ -3,6 +3,7 @@ package handler
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 	"os"
@@ -19,6 +20,14 @@ type GitHubTokenResponse struct {
 }
 
 func exchangeCodeForToken(code string) (*GitHubTokenResponse, error) {
+	if os.Getenv("GITHUB_OAUTH_CLIENT_ID") == "" {
+		return nil, errors.New("GITHUB_OAUTH_CLIENT_ID not set")
+	}
+
+	if os.Getenv("GITHUB_OAUTH_CLIENT_SECRET") == "" {
+		return nil, errors.New("GITHUB_OAUTH_CLIENT_SECRET not set")
+	}
+
 	url := "https://github.com/login/oauth/access_token"
 	body := fmt.Sprintf("client_id=%s&client_secret=%s&code=%s", os.Getenv("GITHUB_OAUTH_CLIENT_ID"), os.Getenv("GITHUB_OAUTH_CLIENT_SECRET"), code)
 

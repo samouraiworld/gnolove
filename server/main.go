@@ -62,10 +62,10 @@ func main() {
 		log.Fatal(err)
 	}
 	if os.Getenv("GITHUB_OAUTH_CLIENT_ID") == "" {
-		panic("GITHUB_OAUTH_CLIENT_ID is not set")
+		log.Println("GITHUB_OAUTH_CLIENT_ID is not set")
 	}
 	if os.Getenv("GITHUB_OAUTH_CLIENT_SECRET") == "" {
-		panic("GITHUB_OAUTH_CLIENT_SECRET is not set")
+		log.Println("GITHUB_OAUTH_CLIENT_SECRET is not set")
 	}
 	if os.Getenv("CLERK_SECRET_KEY") == "" {
 		logger.Warn("CLERK_SECRET_KEY is not set, some features will not work")

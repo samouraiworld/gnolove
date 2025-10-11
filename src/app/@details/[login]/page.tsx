@@ -1,12 +1,13 @@
 import { Metadata } from 'next';
+
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 
 import { prefetchContributor } from '@/hooks/use-get-contributor';
+import { prefetchUserNamespaces } from '@/hooks/use-get-user-namespaces';
+import { prefetchUserPackages } from '@/hooks/use-get-user-packages';
+import { prefetchUserProposals } from '@/hooks/use-get-user-proposals';
 
 import ContributorContent from '@/components/features/contributor/contributor-content';
-import { prefetchUserPackages } from '@/hooks/use-get-user-packages';
-import { prefetchUserNamespaces } from '@/hooks/use-get-user-namespaces';
-import { prefetchUserProposals } from '@/hooks/use-get-user-proposals';
 
 export async function generateMetadata({ params }: { params: { login: string } }): Promise<Metadata> {
   const decodedLogin = decodeURIComponent(params.login);
@@ -40,7 +41,7 @@ const ContributorPage = async ({ params }: { params: Promise<{ login: string }> 
       prefetchUserProposals(queryClient, contributor.wallet),
     ]);
   }
-  
+
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <ContributorContent {...{ login: formattedLogin }} />
