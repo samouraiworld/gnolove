@@ -1,6 +1,10 @@
 query GetUserRegistrations($StartBlock: Int!) {
   transactions(
-    filter: { success: true, from_block_height: $StartBlock, events: { pkg_path: "gno.land/r/gnoland/users/v1" } }
+    filter: {
+      success: true
+      from_block_height: $StartBlock
+      events: { gno_event: { pkg_path: "gno.land/r/gnoland/users/v1" } }
+    }
   ) {
     hash
     block_height
@@ -38,136 +42,112 @@ query GetPublishedPackages($StartBlock: Int!) {
 }
 
 query GetGovDAOProposals($StartBlock: Int!) {
-    getTransactions(
-        where: {
-            success: { eq: true }
-            response: {
-                events: {
-                    GnoEvent: {
-                        type: { eq: "ProposalCreated" }
-                        pkg_path: { eq: "gno.land/r/gov/dao" }
-                    }
-                }
-            }
-            _not:{
-              block_height:{lt: $StartBlock}
-            }
-        }
-        order: { heightAndIndex: ASC }
-    ) {
-        block_height
-        index
-        response {
-            events {
-                ... on GnoEvent {
-                    type
-                    func
-                    attrs {
-                        key
-                        value
-                    }
-                    pkg_path
-                }
-            }
-            data
-        }
-        messages {
-            typeUrl
-            route
-            value {
-                ... on MsgRun {
-                    caller
-                    send
-                    package {
-                        path
-                        files {
-                            name
-                            body
-                        }
-                        name
-                    }
-                }
-            }
-        }
+  getTransactions(
+    where: {
+      success: { eq: true }
+      response: { events: { GnoEvent: { type: { eq: "ProposalCreated" }, pkg_path: { eq: "gno.land/r/gov/dao" } } } }
+      _not: { block_height: { lt: $StartBlock } }
     }
+    order: { heightAndIndex: ASC }
+  ) {
+    block_height
+    index
+    response {
+      events {
+        ... on GnoEvent {
+          type
+          attrs {
+            key
+            value
+          }
+          pkg_path
+        }
+      }
+      data
+    }
+    messages {
+      typeUrl
+      route
+      value {
+        ... on MsgRun {
+          caller
+          send
+          package {
+            path
+            files {
+              name
+              body
+            }
+            name
+          }
+        }
+      }
+    }
+  }
 }
 
 query GetGovDAOProposalsVotes($StartBlock: Int!) {
-    getTransactions(
-        where: {
-            success: { eq: true }
-            messages: {
-                value: { MsgCall: { 
-                  func: { eq: "MustVoteOnProposalSimple" } 
-                  pkg_path: { eq: "gno.land/r/gov/dao" }
-                  } }
-            }
-            _not:{
-              block_height:{lt: $StartBlock}
-            }
-        }
-        order: { heightAndIndex: ASC }
-    ) {
-        index
-        hash
-        success
-        block_height
-        gas_wanted
-        gas_used
-        content_raw
-        memo
-        messages {
-            typeUrl
-            route
-            value {
-                ... on MsgCall {
-                    caller
-                    pkg_path
-                    func
-                    args
-                }
-            }
-        }
+  getTransactions(
+    where: {
+      success: { eq: true }
+      messages: {
+        value: { MsgCall: { func: { eq: "MustVoteOnProposalSimple" }, pkg_path: { eq: "gno.land/r/gov/dao" } } }
+      }
+      _not: { block_height: { lt: $StartBlock } }
     }
+    order: { heightAndIndex: ASC }
+  ) {
+    index
+    hash
+    success
+    block_height
+    gas_wanted
+    gas_used
+    content_raw
+    memo
+    messages {
+      typeUrl
+      route
+      value {
+        ... on MsgCall {
+          caller
+          pkg_path
+
+          args
+        }
+      }
+    }
+  }
 }
 
-
 query GetGovDAOExecutedProposals($StartBlock: Int!) {
-    getTransactions(
-        where: {
-            success: { eq: true }
-            messages: {
-                value: { MsgCall: { 
-                  func: { eq: "ExecuteProposal" } 
-                  pkg_path: { eq: "gno.land/r/gov/dao" }
-                } 
-              }
-            }
-            _not:{
-              block_height:{lt: $StartBlock}
-            }
-        }
-        order: { heightAndIndex: ASC }
-    ) {
-        index
-        hash
-        success
-        block_height
-        gas_wanted
-        gas_used
-        content_raw
-        memo
-        messages {
-            typeUrl
-            route
-            value {
-                ... on MsgCall {
-                    caller
-                    pkg_path
-                    func
-                    args
-                }
-            }
-        }
+  getTransactions(
+    where: {
+      success: { eq: true }
+      messages: { value: { MsgCall: { func: { eq: "ExecuteProposal" }, pkg_path: { eq: "gno.land/r/gov/dao" } } } }
+      _not: { block_height: { lt: $StartBlock } }
     }
+    order: { heightAndIndex: ASC }
+  ) {
+    index
+    hash
+    success
+    block_height
+    gas_wanted
+    gas_used
+    content_raw
+    memo
+    messages {
+      typeUrl
+      route
+      value {
+        ... on MsgCall {
+          caller
+          pkg_path
+
+          args
+        }
+      }
+    }
+  }
 }
