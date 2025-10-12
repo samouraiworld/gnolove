@@ -326,8 +326,6 @@ type GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMess
 	Caller string `json:"caller"`
 	// the gno package path.
 	Pkg_path string `json:"pkg_path"`
-	// the function name being invoked.
-	Func string `json:"func"`
 	// `args` are the arguments passed to the executed function.
 	Args []string `json:"args"`
 }
@@ -345,11 +343,6 @@ func (v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransaction
 // GetPkg_path returns GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgCall.Pkg_path, and is useful for accessing the field via an interface.
 func (v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgCall) GetPkg_path() string {
 	return v.Pkg_path
-}
-
-// GetFunc returns GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgCall.Func, and is useful for accessing the field via an interface.
-func (v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgCall) GetFunc() string {
-	return v.Func
 }
 
 // GetArgs returns GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransactionMessageValueMsgCall.Args, and is useful for accessing the field via an interface.
@@ -386,7 +379,7 @@ func (v *GetGovDAOExecutedProposalsGetTransactionsTransactionMessagesTransaction
 
 // GetGovDAOExecutedProposalsResponse is returned by GetGovDAOExecutedProposals on success.
 type GetGovDAOExecutedProposalsResponse struct {
-	// EXPERIMENTAL: Retrieves a list of Transactions that match the given
+	// Retrieves a list of Transactions that match the given
 	// where criteria. If the result is incomplete due to errors, both partial
 	// results and errors are returned.
 	GetTransactions []GetGovDAOExecutedProposalsGetTransactionsTransaction `json:"getTransactions"`
@@ -885,6 +878,8 @@ func (v *GetGovDAOProposalsGetTransactionsTransactionResponse) __premarshalJSON(
 //
 // GetGovDAOProposalsGetTransactionsTransactionResponseEventsEvent is implemented by the following types:
 // GetGovDAOProposalsGetTransactionsTransactionResponseEventsGnoEvent
+// GetGovDAOProposalsGetTransactionsTransactionResponseEventsStorageDepositEvent
+// GetGovDAOProposalsGetTransactionsTransactionResponseEventsStorageUnlockEvent
 // GetGovDAOProposalsGetTransactionsTransactionResponseEventsUnknownEvent
 type GetGovDAOProposalsGetTransactionsTransactionResponseEventsEvent interface {
 	implementsGraphQLInterfaceGetGovDAOProposalsGetTransactionsTransactionResponseEventsEvent()
@@ -893,6 +888,10 @@ type GetGovDAOProposalsGetTransactionsTransactionResponseEventsEvent interface {
 }
 
 func (v *GetGovDAOProposalsGetTransactionsTransactionResponseEventsGnoEvent) implementsGraphQLInterfaceGetGovDAOProposalsGetTransactionsTransactionResponseEventsEvent() {
+}
+func (v *GetGovDAOProposalsGetTransactionsTransactionResponseEventsStorageDepositEvent) implementsGraphQLInterfaceGetGovDAOProposalsGetTransactionsTransactionResponseEventsEvent() {
+}
+func (v *GetGovDAOProposalsGetTransactionsTransactionResponseEventsStorageUnlockEvent) implementsGraphQLInterfaceGetGovDAOProposalsGetTransactionsTransactionResponseEventsEvent() {
 }
 func (v *GetGovDAOProposalsGetTransactionsTransactionResponseEventsUnknownEvent) implementsGraphQLInterfaceGetGovDAOProposalsGetTransactionsTransactionResponseEventsEvent() {
 }
@@ -913,6 +912,12 @@ func __unmarshalGetGovDAOProposalsGetTransactionsTransactionResponseEventsEvent(
 	switch tn.TypeName {
 	case "GnoEvent":
 		*v = new(GetGovDAOProposalsGetTransactionsTransactionResponseEventsGnoEvent)
+		return json.Unmarshal(b, *v)
+	case "StorageDepositEvent":
+		*v = new(GetGovDAOProposalsGetTransactionsTransactionResponseEventsStorageDepositEvent)
+		return json.Unmarshal(b, *v)
+	case "StorageUnlockEvent":
+		*v = new(GetGovDAOProposalsGetTransactionsTransactionResponseEventsStorageUnlockEvent)
 		return json.Unmarshal(b, *v)
 	case "UnknownEvent":
 		*v = new(GetGovDAOProposalsGetTransactionsTransactionResponseEventsUnknownEvent)
@@ -936,6 +941,22 @@ func __marshalGetGovDAOProposalsGetTransactionsTransactionResponseEventsEvent(v 
 		result := struct {
 			TypeName string `json:"__typename"`
 			*GetGovDAOProposalsGetTransactionsTransactionResponseEventsGnoEvent
+		}{typename, v}
+		return json.Marshal(result)
+	case *GetGovDAOProposalsGetTransactionsTransactionResponseEventsStorageDepositEvent:
+		typename = "StorageDepositEvent"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*GetGovDAOProposalsGetTransactionsTransactionResponseEventsStorageDepositEvent
+		}{typename, v}
+		return json.Marshal(result)
+	case *GetGovDAOProposalsGetTransactionsTransactionResponseEventsStorageUnlockEvent:
+		typename = "StorageUnlockEvent"
+
+		result := struct {
+			TypeName string `json:"__typename"`
+			*GetGovDAOProposalsGetTransactionsTransactionResponseEventsStorageUnlockEvent
 		}{typename, v}
 		return json.Marshal(result)
 	case *GetGovDAOProposalsGetTransactionsTransactionResponseEventsUnknownEvent:
@@ -963,8 +984,6 @@ type GetGovDAOProposalsGetTransactionsTransactionResponseEventsGnoEvent struct {
 	Typename string `json:"__typename"`
 	// `type` is the type of transaction event emitted.
 	Type string `json:"type"`
-	// `func` is the name of the function that emitted the event.
-	Func string `json:"func"`
 	// `attrs` is the event's attribute information.
 	Attrs []GetGovDAOProposalsGetTransactionsTransactionResponseEventsGnoEventAttrsGnoEventAttribute `json:"attrs"`
 	// `pkg_path` is the path to the package that emitted the event.
@@ -979,11 +998,6 @@ func (v *GetGovDAOProposalsGetTransactionsTransactionResponseEventsGnoEvent) Get
 // GetType returns GetGovDAOProposalsGetTransactionsTransactionResponseEventsGnoEvent.Type, and is useful for accessing the field via an interface.
 func (v *GetGovDAOProposalsGetTransactionsTransactionResponseEventsGnoEvent) GetType() string {
 	return v.Type
-}
-
-// GetFunc returns GetGovDAOProposalsGetTransactionsTransactionResponseEventsGnoEvent.Func, and is useful for accessing the field via an interface.
-func (v *GetGovDAOProposalsGetTransactionsTransactionResponseEventsGnoEvent) GetFunc() string {
-	return v.Func
 }
 
 // GetAttrs returns GetGovDAOProposalsGetTransactionsTransactionResponseEventsGnoEvent.Attrs, and is useful for accessing the field via an interface.
@@ -1018,6 +1032,34 @@ func (v *GetGovDAOProposalsGetTransactionsTransactionResponseEventsGnoEventAttrs
 	return v.Value
 }
 
+// GetGovDAOProposalsGetTransactionsTransactionResponseEventsStorageDepositEvent includes the requested fields of the GraphQL type StorageDepositEvent.
+// The GraphQL type's documentation follows.
+//
+// `StorageDepositEvent` is emitted when a storage deposit fee is locked.
+// It has `type`, `bytes_delta`, `fee_delta`, and `pkg_path`.
+type GetGovDAOProposalsGetTransactionsTransactionResponseEventsStorageDepositEvent struct {
+	Typename string `json:"__typename"`
+}
+
+// GetTypename returns GetGovDAOProposalsGetTransactionsTransactionResponseEventsStorageDepositEvent.Typename, and is useful for accessing the field via an interface.
+func (v *GetGovDAOProposalsGetTransactionsTransactionResponseEventsStorageDepositEvent) GetTypename() string {
+	return v.Typename
+}
+
+// GetGovDAOProposalsGetTransactionsTransactionResponseEventsStorageUnlockEvent includes the requested fields of the GraphQL type StorageUnlockEvent.
+// The GraphQL type's documentation follows.
+//
+// `StorageUnlockEvent` is emitted when a storage deposit fee is unlocked.
+// It has `type`, `bytes_delta`, `fee_refund`, and `pkg_path`.
+type GetGovDAOProposalsGetTransactionsTransactionResponseEventsStorageUnlockEvent struct {
+	Typename string `json:"__typename"`
+}
+
+// GetTypename returns GetGovDAOProposalsGetTransactionsTransactionResponseEventsStorageUnlockEvent.Typename, and is useful for accessing the field via an interface.
+func (v *GetGovDAOProposalsGetTransactionsTransactionResponseEventsStorageUnlockEvent) GetTypename() string {
+	return v.Typename
+}
+
 // GetGovDAOProposalsGetTransactionsTransactionResponseEventsUnknownEvent includes the requested fields of the GraphQL type UnknownEvent.
 // The GraphQL type's documentation follows.
 //
@@ -1034,7 +1076,7 @@ func (v *GetGovDAOProposalsGetTransactionsTransactionResponseEventsUnknownEvent)
 
 // GetGovDAOProposalsResponse is returned by GetGovDAOProposals on success.
 type GetGovDAOProposalsResponse struct {
-	// EXPERIMENTAL: Retrieves a list of Transactions that match the given
+	// Retrieves a list of Transactions that match the given
 	// where criteria. If the result is incomplete due to errors, both partial
 	// results and errors are returned.
 	GetTransactions []GetGovDAOProposalsGetTransactionsTransaction `json:"getTransactions"`
@@ -1359,8 +1401,6 @@ type GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessage
 	Caller string `json:"caller"`
 	// the gno package path.
 	Pkg_path string `json:"pkg_path"`
-	// the function name being invoked.
-	Func string `json:"func"`
 	// `args` are the arguments passed to the executed function.
 	Args []string `json:"args"`
 }
@@ -1378,11 +1418,6 @@ func (v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMes
 // GetPkg_path returns GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgCall.Pkg_path, and is useful for accessing the field via an interface.
 func (v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgCall) GetPkg_path() string {
 	return v.Pkg_path
-}
-
-// GetFunc returns GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgCall.Func, and is useful for accessing the field via an interface.
-func (v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgCall) GetFunc() string {
-	return v.Func
 }
 
 // GetArgs returns GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMessageValueMsgCall.Args, and is useful for accessing the field via an interface.
@@ -1419,7 +1454,7 @@ func (v *GetGovDAOProposalsVotesGetTransactionsTransactionMessagesTransactionMes
 
 // GetGovDAOProposalsVotesResponse is returned by GetGovDAOProposalsVotes on success.
 type GetGovDAOProposalsVotesResponse struct {
-	// EXPERIMENTAL: Retrieves a list of Transactions that match the given
+	// Retrieves a list of Transactions that match the given
 	// where criteria. If the result is incomplete due to errors, both partial
 	// results and errors are returned.
 	GetTransactions []GetGovDAOProposalsVotesGetTransactionsTransaction `json:"getTransactions"`
@@ -2048,8 +2083,6 @@ type GetUserRegistrationsTransactionsTransactionMessagesTransactionMessageValueM
 	Caller string `json:"caller"`
 	// the gno package path.
 	Pkg_path string `json:"pkg_path"`
-	// the function name being invoked.
-	Func string `json:"func"`
 	// `args` are the arguments passed to the executed function.
 	Args []string `json:"args"`
 }
@@ -2067,11 +2100,6 @@ func (v *GetUserRegistrationsTransactionsTransactionMessagesTransactionMessageVa
 // GetPkg_path returns GetUserRegistrationsTransactionsTransactionMessagesTransactionMessageValueMsgCall.Pkg_path, and is useful for accessing the field via an interface.
 func (v *GetUserRegistrationsTransactionsTransactionMessagesTransactionMessageValueMsgCall) GetPkg_path() string {
 	return v.Pkg_path
-}
-
-// GetFunc returns GetUserRegistrationsTransactionsTransactionMessagesTransactionMessageValueMsgCall.Func, and is useful for accessing the field via an interface.
-func (v *GetUserRegistrationsTransactionsTransactionMessagesTransactionMessageValueMsgCall) GetFunc() string {
-	return v.Func
 }
 
 // GetArgs returns GetUserRegistrationsTransactionsTransactionMessagesTransactionMessageValueMsgCall.Args, and is useful for accessing the field via an interface.
@@ -2172,7 +2200,6 @@ query GetGovDAOExecutedProposals ($StartBlock: Int!) {
 				... on MsgCall {
 					caller
 					pkg_path
-					func
 					args
 				}
 			}
@@ -2215,7 +2242,6 @@ query GetGovDAOProposals ($StartBlock: Int!) {
 				__typename
 				... on GnoEvent {
 					type
-					func
 					attrs {
 						key
 						value
@@ -2291,7 +2317,6 @@ query GetGovDAOProposalsVotes ($StartBlock: Int!) {
 				... on MsgCall {
 					caller
 					pkg_path
-					func
 					args
 				}
 			}
@@ -2382,7 +2407,6 @@ query GetUserRegistrations ($StartBlock: Int!) {
 				... on MsgCall {
 					caller
 					pkg_path
-					func
 					args
 				}
 			}

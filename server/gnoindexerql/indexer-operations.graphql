@@ -9,7 +9,7 @@ query GetUserRegistrations($StartBlock: Int!) {
         ... on MsgCall {
           caller
           pkg_path
-          func
+          
           args
         }
       }
@@ -61,7 +61,7 @@ query GetGovDAOProposals($StartBlock: Int!) {
             events {
                 ... on GnoEvent {
                     type
-                    func
+                    
                     attrs {
                         key
                         value
@@ -123,7 +123,7 @@ query GetGovDAOProposalsVotes($StartBlock: Int!) {
                 ... on MsgCall {
                     caller
                     pkg_path
-                    func
+                    
                     args
                 }
             }
@@ -164,7 +164,7 @@ query GetGovDAOExecutedProposals($StartBlock: Int!) {
                 ... on MsgCall {
                     caller
                     pkg_path
-                    func
+                    
                     args
                 }
             }
