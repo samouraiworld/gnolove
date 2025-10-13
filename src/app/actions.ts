@@ -10,7 +10,9 @@ import {
   ContributorSchema,
   EnhancedUserWithStatsSchema,
   IssueSchema,
+  LeaderboardWebhookSchema,
   MilestoneSchema,
+  MonitoringWebhookSchema,
   NamespacesSchema,
   PackagesSchema,
   ProposalsSchema,
@@ -19,6 +21,9 @@ import {
   ReportHourSchema,
   RepositorySchema,
   ScoreFactorsSchema,
+  TLeaderboardWebhook,
+  TMonitoringWebhook,
+  TMonitoringWebhookKind,
   TYoutubeVideoPlaylist,
   UserSchema,
   ValidatorLastIncidentsSchema,
@@ -32,7 +37,6 @@ import MILESTONE from '@/constants/milestone';
 import TEAMS from '@/constants/teams';
 
 import ENV from '@/env';
-import { MonitoringWebhookSchema, TMonitoringWebhook, TMonitoringWebhookKind } from '@/utils/schemas';
 import { auth } from '@clerk/nextjs/server';
 
 export const getContributors = async (timeFilter: TimeFilter, excludeCoreTeam?: boolean, repositories?: string[]) => {
@@ -374,4 +378,70 @@ export const getValidatorLastIncident = async (timeFilter: EValidatorPeriod = EV
   const data = await fetchJson(url.toString(), { cache: 'no-cache' });
 
   return ValidatorLastIncidentsSchema.parse(data || []);
+};
+
+// Leaderboard webhooks
+export const listLeaderboardWebhooks = async (): Promise<TLeaderboardWebhook[]> => {
+  const { getToken } = auth();
+  const token = await getToken();
+  if (!token) throw new Error('Authentication required');
+  const url = new URL('/leaderboard-webhooks', ENV.NEXT_PUBLIC_API_URL);
+  const data = await fetchJson(url.toString(), { cache: 'no-cache', headers: { Authorization: `Bearer ${token}` } });
+  return LeaderboardWebhookSchema.array().parse(data);
+};
+
+export const createLeaderboardWebhook = async (
+  payload: Omit<TLeaderboardWebhook, 'id' | 'userId' | 'nextRunAt' | 'createdAt' | 'updatedAt'>,
+): Promise<void> => {
+  const { getToken } = auth();
+  const token = await getToken();
+  if (!token) throw new Error('Authentication required');
+  const url = new URL('/leaderboard-webhooks', ENV.NEXT_PUBLIC_API_URL);
+  const body = LeaderboardWebhookSchema.omit({ id: true, userId: true, nextRunAt: true, createdAt: true, updatedAt: true }).parse(payload as any);
+  const res = await fetch(url.toString(), {
+    method: 'POST',
+    body: JSON.stringify(body),
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+  });
+  if (!res.ok) {
+    const text = await res.text().catch(() => '');
+    throw new HttpError(`Request failed: ${res.status} ${res.statusText}${text ? ` - ${text}` : ''}`, { status: res.status, statusText: res.statusText, bodyText: text });
+  }
+  revalidatePath('/settings');
+};
+
+export const updateLeaderboardWebhook = async (
+  payload: TLeaderboardWebhook,
+): Promise<void> => {
+  const { getToken } = auth();
+  const token = await getToken();
+  if (!token) throw new Error('Authentication required');
+  if (payload.id == null) throw new Error('ID is required for updates');
+  const url = new URL(`/leaderboard-webhooks/${payload.id}`, ENV.NEXT_PUBLIC_API_URL);
+  const body = LeaderboardWebhookSchema.parse(payload);
+  const res = await fetch(url.toString(), {
+    method: 'PUT',
+    body: JSON.stringify(body),
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+  });
+  if (!res.ok) {
+    const text = await res.text().catch(() => '');
+    throw new HttpError(`Request failed: ${res.status} ${res.statusText}${text ? ` - ${text}` : ''}`, { status: res.status, statusText: res.statusText, bodyText: text });
+  }
+  revalidatePath('/settings');
+};
+
+export const deleteLeaderboardWebhook = async (
+  id: number,
+): Promise<void> => {
+  const { getToken } = auth();
+  const token = await getToken();
+  if (!token) throw new Error('Authentication required');
+  const url = new URL(`/leaderboard-webhooks/${encodeURIComponent(String(id))}`, ENV.NEXT_PUBLIC_API_URL);
+  const res = await fetch(url.toString(), { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } });
+  if (!res.ok) {
+    const text = await res.text().catch(() => '');
+    throw new HttpError(`Request failed: ${res.status} ${res.statusText}${text ? ` - ${text}` : ''}`, { status: res.status, statusText: res.statusText, bodyText: text });
+  }
+  revalidatePath('/settings');
 };
