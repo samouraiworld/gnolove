@@ -47,24 +47,26 @@ func GetContributorsWithScores(db *gorm.DB, since time.Time, repositories []stri
 	}
 
 	// Preload associations with conditions (since + repositories filters)
-	cond := func(tx *gorm.DB) *gorm.DB {
-		tx2 := tx.Where("created_at >= ?", since)
-		if len(excludedRepos) > 0 {
-			tx2 = tx2.Where("repository_id NOT IN ?", excludedRepos)
+	cond := func(table string) func(tx *gorm.DB) *gorm.DB {
+		return func(tx *gorm.DB) *gorm.DB {
+			tx2 := tx.Where(table+".created_at >= ?", since)
+			if len(excludedRepos) > 0 {
+				tx2 = tx2.Where(table+".repository_id NOT IN ?", excludedRepos)
+			}
+			if len(repositories) > 0 {
+				tx2 = tx2.Where(table+".repository_id IN ?", repositories)
+			}
+			return tx2
 		}
-		if len(repositories) > 0 {
-			tx2 = tx2.Where("repository_id IN ?", repositories)
-		}
-		return tx2
 	}
 
 	// Retrieve users with data based on conditions
 	err := db.Model(&models.User{}).
-		Preload("Issues", cond).
-		Preload("Commits", cond).
-		Preload("PullRequests", cond).
+		Preload("Issues", cond("issues")).
+		Preload("Commits", cond("commits")).
+		Preload("PullRequests", cond("pull_requests")).
 		Preload("Reviews", func(tx *gorm.DB) *gorm.DB {
-			scoped := cond(tx)
+			scoped := cond("reviews")(tx)
 			return scoped.
 				Joins("JOIN pull_requests ON pull_requests.id = reviews.pull_request_id").
 				Where("pull_requests.state = ?", "MERGED").
@@ -155,7 +157,7 @@ func SendLeaderboard(webhookURL, content string) error {
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
-		return fmt.Errorf("discord webhook returned status %d", resp.StatusCode)
+		return fmt.Errorf("webhook returned status %d. body=%s", resp.StatusCode, resp.Body)
 	}
 	return nil
 }

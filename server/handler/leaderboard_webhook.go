@@ -253,7 +253,7 @@ func LoopTriggerLeaderboardWebhooks(db *gorm.DB, logger *zap.SugaredLogger) {
 	for {
 		time.Sleep(1 * time.Minute)
 		var webhooks []models.LeaderboardWebhook
-		err := db.Where("active AND next_run_at <= ?", time.Now()).Find(&webhooks).Error
+		err := db.Where("active AND next_run_at > ? AND next_run_at <= ?", time.Now().Add(-time.Minute), time.Now()).Find(&webhooks).Error
 		if err != nil {
 			logger.Error("Failed to find webhooks", err)
 			continue
