@@ -1,3 +1,4 @@
+# Generated using Claude Sonnet 4.5
 # GnoLove E2E Testing Makefile
 # Provides convenient targets for different types of testing
 
@@ -10,7 +11,7 @@ help:
 	@echo "Available targets:"
 	@echo ""
 	@echo "  🏛️  govdao        - Run GovDAO end-to-end tests (recommended)"
-	@echo "  🔧 env           - Setup environment only (no specific testing)"
+	@echo "  🔧 env           - Setup environment (no specific testing)"
 	@echo "  📊 fake-data     - Create fake data (requires running environment)"
 	@echo "  🧹 clean         - Clean up processes and restore configs"
 	@echo ""
@@ -22,9 +23,9 @@ help:
 # GovDAO testing - full setup with DAO focus
 govdao:
 	@echo "🏛️ Starting GovDAO end-to-end testing..."
-	@./test_govdao_only.sh
+	@./test_govdao.sh
 
-# Environment setup only
+# Environment setup
 env:
 	@echo "🔧 Starting environment setup..."
 	@./setup_environment.sh

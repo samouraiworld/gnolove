@@ -56,14 +56,14 @@ cleanup() {
             cd "$PARENT_DIR"
             
             # Restore frontend .env
-            if [ -f "$BACKUP_DIR/.env" ]; then
-                cp "$BACKUP_DIR/.env" ".env"
+            if [ -f "$BACKUP_DIR/.env.front" ]; then
+                cp "$BACKUP_DIR/.env.front" ".env"
                 echo "✅ Restored original .env"
             fi
             
             # Restore backend server/.env
-            if [ -f "$BACKUP_DIR/server.env" ]; then
-                cp "$BACKUP_DIR/server.env" "server/.env"
+            if [ -f "$BACKUP_DIR/.env.back" ]; then
+                cp "$BACKUP_DIR/.env.back" "server/.env"
                 echo "✅ Restored original server/.env"
             fi
             
@@ -152,18 +152,14 @@ fi
 
 cd "$E2E_DIR/tx-indexer"
 
-# Delete indexer-db file if it exists
-if [ -f "indexer-db" ]; then
-    echo "🗑️  Removing existing indexer-db..."
-    rm -f indexer-db
+# Build tx-indexer if binary doesn't exist or source is newer
+if [ ! -f "./build/tx-indexer" ] || [ "$(find . -name '*.go' -newer ./build/tx-indexer 2>/dev/null)" ]; then
+    echo "🔨 Building tx-indexer..."
+    make build
+    echo "✅ tx-indexer built successfully"
+else
+    echo "✅ tx-indexer binary is up-to-date"
 fi
-
-# Start tx-indexer in background
-echo "🚀 Starting tx-indexer..."
-./build/tx-indexer start --remote http://127.0.0.1:26657 --db-path indexer-db &
-TX_INDEXER_PID=$!
-PIDS+=($TX_INDEXER_PID)
-echo "tx-indexer started with PID: $TX_INDEXER_PID"
 
 # 2. Clone gnomonitoring
 echo "📦 Cloning gnomonitoring..."
@@ -241,6 +237,21 @@ echo "gnodev started with PID: $GNODEV_PID"
 # Wait a bit for gnodev to start
 sleep 5
 
+# Now start tx-indexer (needs gno node to be running)
+echo "🚀 Starting tx-indexer..."
+cd "$E2E_DIR/tx-indexer"
+
+# Delete indexer-db file if it exists
+if [ -f "indexer-db" ]; then
+    echo "🗑️  Removing existing indexer-db..."
+    rm -f indexer-db
+fi
+
+./build/tx-indexer start --remote http://127.0.0.1:26657 --db-path indexer-db &
+TX_INDEXER_PID=$!
+PIDS+=($TX_INDEXER_PID)
+echo "tx-indexer started with PID: $TX_INDEXER_PID"
+
 # Open browser page
 echo "🌐 Opening browser page..."
 if command -v firefox &> /dev/null; then
@@ -280,15 +291,15 @@ fi
 
 # Backup and copy backend server/.env
 if [ -f "server/.env" ]; then
-    cp "server/.env" "$BACKUP_DIR/server.env"
+    cp "server/.env" "$BACKUP_DIR/.env.back"
     echo "💾 Backed up existing server/.env"
 fi
 
 if [ -f "$E2E_DIR/configs/env.back" ]; then
     cp "$E2E_DIR/configs/env.back" "server/.env"
-    echo "✅ Copied test server.env for backend"
+    echo "✅ Copied test .env.back for backend"
 else
-    echo "⚠️  Test server.env not found in $E2E_DIR/configs"
+    echo "⚠️  Test .env.back not found in $E2E_DIR/configs"
 fi
 
 # Backup gnomonitoring config.yaml (if it exists)
