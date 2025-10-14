@@ -165,7 +165,7 @@ fi
 echo "📦 Cloning gnomonitoring..."
 cd "$E2E_DIR"
 if [ ! -d "gnomonitoring" ]; then
-    git clone --single-branch --branch fix/modified-metrics-port git@github.com:samouraiworld/gnomonitoring.git
+    git clone --single-branch --branch fix/modified-metrics-port git@github.com:Davphla/gnomonitoring.git
 else
     echo "✅ gnomonitoring already exists"
 fi
