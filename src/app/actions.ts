@@ -467,7 +467,7 @@ export const invalidateProposals = () => {
 };
 
 export const getUsers = async (addresses?: string[]) => {
-  const url = new URL('/users', ENV.NEXT_PUBLIC_MONITORING_API_URL);
+  const url = new URL('/users', ENV.NEXT_PUBLIC_API_URL);
   if (addresses) url.searchParams.set('addresses', addresses.join(','));
 
   const data = await fetchJson(url.toString(), { cache: 'no-cache' });
