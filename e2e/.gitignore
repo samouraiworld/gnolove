@@ -1,0 +1,8 @@
+tx-indexer
+gnomonitoring
+data
+gno
+!configs/config.yaml
+!configs/.env.back
+!configs/.env.front
+backups
