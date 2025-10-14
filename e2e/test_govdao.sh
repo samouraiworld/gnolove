@@ -31,7 +31,7 @@ if [ "$CURL_AVAILABLE" = true ]; then
     check_service() {
         local url=$1
         local name=$2
-        local max_attempts=30
+        local max_attempts=5
         local attempt=1
         
         echo -n "🔍 Checking $name..."
