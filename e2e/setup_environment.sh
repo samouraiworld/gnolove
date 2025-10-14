@@ -264,8 +264,6 @@ else
     echo "⚠️  No supported browser found. Please open http://localhost:8888/r/gov/dao/v3/loader manually"
 fi
 
-# Note: Fake data creation moved to specific test scripts
-
 # 4. Setup gnolove
 echo "🎯 Setting up gnolove..."
 cd "$PARENT_DIR"
