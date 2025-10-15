@@ -16,6 +16,10 @@ CURRENT_DIR=$(pwd)
 PARENT_DIR=$(dirname "$CURRENT_DIR")
 E2E_DIR="$CURRENT_DIR"
 
+# Use address from environment variable or fallback to default
+ADDRESS="g17raryfukyf7an7p5gcklru4kx4ulh7wnx44ync"
+echo "📍 Using address: $ADDRESS"
+
 # Array to store all background process PIDs
 PIDS=()
 
@@ -199,15 +203,6 @@ fi
 
 cd "$E2E_DIR/gno"
 
-# Create key and get address
-echo "🔑 Creating gno key 'tmp_a'... -- TODO"
-# Remove existing key if it exists
-#gnokey delete tmp_a 2>/dev/null || true
-#echo "test1234567890" | gnokey add tmp_a --recover --home "."
-#ADDRESS=$(gnokey list | grep " tmp_a " | awk '{print $8}' | tr -d '()')
-ADDRESS=g17raryfukyf7an7p5gcklru4kx4ulh7wnx44ync
-
-echo "📍 Generated address: $ADDRESS"
 
 # Update the loader file
 LOADER_FILE="./examples/gno.land/r/gov/dao/v3/loader/loader.gno"
