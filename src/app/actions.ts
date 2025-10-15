@@ -445,3 +445,21 @@ export const deleteLeaderboardWebhook = async (
   }
   revalidatePath('/settings');
 };
+
+export const forceVotesIndexation = async () => {
+  const url = new URL('/on-chain/votes', ENV.NEXT_PUBLIC_API_URL);
+  const res = await fetch(url.toString(), { method: 'PUT' });
+  if (!res.ok) {
+    const text = await res.text().catch(() => '');
+    throw new HttpError(`Request failed: ${res.status} ${res.statusText}${text ? ` - ${text}` : ''}`, {
+      status: res.status,
+      statusText: res.statusText,
+      bodyText: text,
+    });
+  }
+};
+
+export async function invalidateProposals() {
+  // You can also perform mutations here (DB writes, etc.)
+  revalidatePath('/govdao/proposals');
+}

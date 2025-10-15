@@ -24,6 +24,8 @@ import useGetProposals from '@/hooks/use-get-proposals';
 import { aggregateVotes, capitalize, getProposalTitle, getStatusColor, percent } from '@/utils/govdao';
 import { TProposal } from '@/utils/schemas';
 
+import { forceVotesIndexation, invalidateProposals } from '@/app/actions';
+
 // Filters bar
 const Filters = ({
   query,
@@ -90,11 +92,13 @@ const ProposalCard = ({ proposal, isGovDaoMember }: { proposal: TProposal; isGov
         .memo('')
         .build();
       const txHash = await adena.broadcastTransaction({ tx });
+      await forceVotesIndexation();
       addToast({
         title: 'Vote submitted',
         message: 'Transaction has been successfully executed: ' + txHash,
         mode: 'positive',
       });
+      await invalidateProposals();
     } catch (err) {
       addToast({ title: 'Error', message: String((err as any)?.message ?? err), mode: 'negative' });
     }

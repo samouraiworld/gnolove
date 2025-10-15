@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/samouraiworld/topofgnomes/server/models"
@@ -208,12 +209,20 @@ func HandleGetVotesByUser(db *gorm.DB) http.HandlerFunc {
 
 func HandleSynchronizeVotes(syncer *sync.Syncer) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		err := syncer.SyncVotesOnProposals(r.Context())
-		if err != nil {
-			log.Printf("[HandleSynchronizeVotes] DB error : %v", err)
-			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
-			return
+		for i := 0; i < 10; i++ {
+			// silly way to retry until indexing the new vote
+			// Maybe we could improve it with server events ?
+			time.Sleep(time.Second)
+			newVotes, err := syncer.SyncVotesOnProposals(r.Context())
+			if err != nil {
+				log.Printf("[HandleSynchronizeVotes] DB error : %v", err)
+				w.WriteHeader(http.StatusInternalServerError)
+				json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
+				return
+			}
+			if newVotes{
+				break
+			}
 		}
 
 		w.WriteHeader(http.StatusOK)
