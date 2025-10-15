@@ -162,6 +162,7 @@ func main() {
 	router.HandleFunc("/onchain/proposals/{id}", handler.HandleGetProposal(database))
 	router.HandleFunc("/onchain/govdao-members", handler.HandleGetGovdaoMembers(database))
 	router.HandleFunc("/onchain/votes/{address}", handler.HandleGetVotesByUser(database))
+	router.Put("/on-chain/votes", handler.HandleSynchronizeVotes(syncer))
 
 	logger.Infof("Server running on port %d", port)
 	err = http.ListenAndServe(fmt.Sprintf(":%d", port), router)

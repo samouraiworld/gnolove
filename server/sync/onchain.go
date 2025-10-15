@@ -205,7 +205,7 @@ func extractGnoStringResponse(res string) (string, error) {
 	return strconv.Unquote(res)
 }
 
-func (s *Syncer) syncVotesOnProposals(ctx context.Context) error {
+func (s *Syncer) SyncVotesOnProposals(ctx context.Context) error {
 	s.logger.Info("Syncing Votes on Proposals")
 	lastBlock := getVotesLastBlock(s.db)
 	response, err := gnoindexerql.GetGovDAOProposalsVotes(ctx, s.graphqlClient, int(lastBlock))

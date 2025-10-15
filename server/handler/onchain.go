@@ -7,6 +7,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/samouraiworld/topofgnomes/server/models"
+	"github.com/samouraiworld/topofgnomes/server/sync"
 	"gorm.io/gorm"
 )
 
@@ -202,5 +203,19 @@ func HandleGetVotesByUser(db *gorm.DB) http.HandlerFunc {
 		}
 
 		json.NewEncoder(w).Encode(results)
+	}
+}
+
+func HandleSynchronizeVotes(syncer *sync.Syncer) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		err := syncer.SyncVotesOnProposals(r.Context())
+		if err != nil {
+			log.Printf("[HandleSynchronizeVotes] DB error : %v", err)
+			w.WriteHeader(http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
+			return
+		}
+
+		w.WriteHeader(http.StatusOK)
 	}
 }
