@@ -199,21 +199,13 @@ fi
 
 cd "$E2E_DIR/gno"
 
-# Build gno tools if gnokey doesn't exist
-if ! command -v gnokey &> /dev/null; then
-    echo "🔨 Building gno tools (gnokey not found)..."
-    make install
-else
-    echo "✅ gnokey already available, skipping build"
-fi
-
 # Create key and get address
 echo "🔑 Creating gno key 'tmp_a'... -- TODO"
 # Remove existing key if it exists
 #gnokey delete tmp_a 2>/dev/null || true
 #echo "test1234567890" | gnokey add tmp_a --recover --home "."
 #ADDRESS=$(gnokey list | grep " tmp_a " | awk '{print $8}' | tr -d '()')
-ADDRESS=g1j8p9lxgkwk7mh3afund7cz7qrmusucfc30tlue
+ADDRESS=g17raryfukyf7an7p5gcklru4kx4ulh7wnx44ync
 
 echo "📍 Generated address: $ADDRESS"
 
@@ -227,6 +219,8 @@ else
     echo "⚠️  Loader file not found at: $LOADER_FILE"
 fi
 
+make install
+
 # Start gnodev
 echo "🚀 Starting gnodev..."
 nohup bash -c gnodev ./examples/gno.land/r/gov/dao/v3/loader &
@@ -234,8 +228,18 @@ GNODEV_PID=$!
 PIDS+=($GNODEV_PID)
 echo "gnodev started with PID: $GNODEV_PID"
 
-# Wait a bit for gnodev to start
 sleep 5
+
+echo "🌐 Opening browser page..."
+if command -v firefox &> /dev/null; then
+    firefox "http://localhost:8888/r/gov/dao/v3/loader" &
+elif command -v google-chrome &> /dev/null; then
+    google-chrome "http://localhost:8888/r/gov/dao/v3/loader" &
+elif command -v chromium-browser &> /dev/null; then
+    chromium-browser "http://localhost:8888/r/gov/dao/v3/loader" &
+else
+    echo "⚠️  No supported browser found. Please open http://localhost:8888/r/gov/dao/v3/loader manually"
+fi
 
 # Now start tx-indexer (needs gno node to be running)
 echo "🚀 Starting tx-indexer..."
@@ -253,16 +257,6 @@ PIDS+=($TX_INDEXER_PID)
 echo "tx-indexer started with PID: $TX_INDEXER_PID"
 
 # Open browser page
-echo "🌐 Opening browser page..."
-if command -v firefox &> /dev/null; then
-    firefox "http://localhost:8888/r/gov/dao/v3/loader" &
-elif command -v google-chrome &> /dev/null; then
-    google-chrome "http://localhost:8888/r/gov/dao/v3/loader" &
-elif command -v chromium-browser &> /dev/null; then
-    chromium-browser "http://localhost:8888/r/gov/dao/v3/loader" &
-else
-    echo "⚠️  No supported browser found. Please open http://localhost:8888/r/gov/dao/v3/loader manually"
-fi
 
 # 4. Setup gnolove
 echo "🎯 Setting up gnolove..."
@@ -344,8 +338,6 @@ echo "  - Backend: http://localhost:3333"
 echo "  - Gno web: http://localhost:8888"
 echo "  - DAO loader: http://localhost:8888/r/gov/dao/v3/loader"
 echo "  - Monitoring: http://localhost:8880"
-echo ""
-echo "🔑 Generated address: $ADDRESS"
 echo ""
 echo "✅ Environment setup complete!"
 

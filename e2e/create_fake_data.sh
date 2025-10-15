@@ -30,7 +30,7 @@ MEMBER_MNEMONIC_C="cannon spray glance dad short between office sing warm betwee
 MEMBER_MNEMONIC_D="emerge tide pitch monitor exclude flush ceiling catch breeze cruel stock hard final join wool borrow bag whale canoe input position orphan hair better"  # Fill with member3 mnemonic
 
 # Address variables (will be populated after account creation)
-MEMBER_A_ADDR="g1yj0hrkajxgsxqw7x4r2fxek3s6c3syhwc55mh5"
+MEMBER_A_ADDR="g17raryfukyf7an7p5gcklru4kx4ulh7wnx44ync"
 MEMBER_B_ADDR="g1df0jqsjfly5dh9qrfx9hmdq9ncs3klkycp2k4k"
 MEMBER_C_ADDR="g1lrzc8qmj2j4gp94z3qzaxan9exp6w59gavrq6c"
 MEMBER_D_ADDR="g1cke7p70zcqtkgc29l6fk8d4zymjwva7slllpj4"
