@@ -460,6 +460,5 @@ export const forceVotesIndexation = async () => {
 };
 
 export async function invalidateProposals() {
-  // You can also perform mutations here (DB writes, etc.)
   revalidatePath('/govdao/proposals');
 }

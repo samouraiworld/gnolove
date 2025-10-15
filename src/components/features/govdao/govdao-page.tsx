@@ -158,7 +158,8 @@ const ProposalCard = ({ proposal, isGovDaoMember }: { proposal: TProposal; isGov
       {userVote && (
         <Flex gap="2">
           <Button disabled className="flex-1" color="red" onClick={() => vote('NO')}>
-            {userVote.vote}
+            {userVote.vote === 'YES' ? 'For' : 'Against'}
+            <Box ml="1">{emojify(userVote.vote === 'YES' ? '👍' : '👎')}</Box>
           </Button>
         </Flex>
       )}
