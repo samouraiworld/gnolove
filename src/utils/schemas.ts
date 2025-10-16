@@ -27,6 +27,7 @@ export const UserBaseSchema = z.object({
   avatarUrl: z.string().url(),
   url: z.string().url(),
   name: z.string(),
+  wallet: z.string().optional(),
 });
 
 export const UserSchema = z.preprocess(preprocessUser, UserBaseSchema);
