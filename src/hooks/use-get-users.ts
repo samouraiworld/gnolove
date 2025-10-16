@@ -21,7 +21,7 @@ export const prefetchUsers = async (queryClient: QueryClient, addresses?: string
 const useGetUsers = (addresses?: string[]) => {
   return useQuery({
     queryFn: () => getUsers(addresses),
-    queryKey: [...QUERY_KEY, ...(addresses || [])] as const,
+    queryKey: [...QUERY_KEY, ...(addresses || [])] as const
   });
 };
 
