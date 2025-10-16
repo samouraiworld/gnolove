@@ -16,7 +16,6 @@ CURRENT_DIR=$(pwd)
 PARENT_DIR=$(dirname "$CURRENT_DIR")
 E2E_DIR="$CURRENT_DIR"
 
-# Use address from environment variable or fallback to default
 ADDRESS="g17raryfukyf7an7p5gcklru4kx4ulh7wnx44ync"
 echo "📍 Using address: $ADDRESS"
 
