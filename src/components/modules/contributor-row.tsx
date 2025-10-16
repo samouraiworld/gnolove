@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -30,6 +30,7 @@ export interface ContributorRowProps {
 
 const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) => {
   const { isOffline } = useOffline();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const rankElement = useMemo(() => {
     if (rank < 3)
       return (
@@ -48,13 +49,18 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
     return undefined;
   }, [contributor]);
 
-  const onLastContributionClick = () => {
+  const onLastContributionClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
     if (typeof window === 'undefined' || !contributor.LastContribution) return;
     window.open(contributor.LastContribution.url, '_blank');
   };
 
+  const handleRowClick = () => {
+    setIsDialogOpen(true);
+  };
+
   return (
-    <Table.Row className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-grayA-2" key={contributor.id}>
+    <Table.Row className="cursor-pointer transition-all duration-300 ease-in-out hover:bg-grayA-2" key={contributor.id} onClick={handleRowClick}>
       {showRank && (
         <Cell className="text-center">
           <Flex height="100%" align="center" justify="center">
@@ -62,7 +68,6 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
           </Flex>
         </Cell>
       )}
-
       <Cell maxWidth={{ initial: '50px', xs: '100px', sm: '150px' }}>
         <Flex width="100%" height="100%" align="center" gap="2">
           <Image
@@ -76,6 +81,7 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
           <Link
             className={cn('min-w-0 max-w-[160px] xs:max-w-[180px] sm:max-w-none hover:underline hover:text-red-10', { 'pointer-events-none': isOffline })}
             href={isOffline ? '' : `/@${contributor.login}`}
+            onClick={(e) => e.stopPropagation()}
           >
             <Text
               truncate
@@ -93,7 +99,7 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
             </Badge>
           )}
 
-          <Link href={`https://github.com/${contributor.login}`} target="_blank" rel="noopener noreferrer">
+          <Link href={`https://github.com/${contributor.login}`} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
             <ExternalLinkIcon className="shrink-0 text-blue-10" />
           </Link>
         </Flex>
@@ -135,8 +141,14 @@ const ContributorRow = ({ contributor, rank, showRank }: ContributorRowProps) =>
 
       <Cell className="text-center">
         <Flex height="100%" align="center" justify="center">
-          <ContributionsDialog user={contributor}>
-            <IconButton variant="ghost">
+          <ContributionsDialog user={contributor} open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <IconButton
+              variant="ghost"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsDialogOpen(true);
+              }}
+            >
               <MagnifyingGlassIcon />
             </IconButton>
           </ContributionsDialog>
