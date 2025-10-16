@@ -21,17 +21,19 @@ const ProposalDetail = ({ id }: { id: string }) => {
   const { data: proposal } = useGetProposal(id);
   const { data: members } = useGetGovdaoMembers();
 
+  if (!proposal || !members) return null;
+
+  const votes = proposal.votes || [];
+
   const votedAddresses = useMemo(() => {
-    return new Set((proposal?.votes ?? []).map((v) => v.address.toLowerCase()));
-  }, [proposal?.votes]);
+    return new Set((votes).map((v) => v.address.toLowerCase()));
+  }, [votes]);
 
   const nonVoters = useMemo(() => {
-    return (members ?? []).filter((m) => !votedAddresses.has(m.address.toLowerCase()));
+    return (members).filter((m) => !votedAddresses.has(m.address.toLowerCase()));
   }, [members, votedAddresses]);
 
-  if (!proposal) return null;
-
-  const totals = aggregateVotes(proposal.votes);
+  const totals = aggregateVotes(votes);
   const forPct = percent(totals.for, totals.total);
   const againstPct = percent(totals.against, totals.total);
   const abstainPct = percent(totals.abstain, totals.total);
@@ -80,9 +82,9 @@ const ProposalDetail = ({ id }: { id: string }) => {
 
               <Tabs.Content value="votes">
                 <Flex direction="column" gap="3">
-                  {proposal.votes.length > 0 ? (
+                  {votes.length > 0 ? (
                     <Flex direction="column" gap="2">
-                      {[...proposal.votes]
+                      {[...votes]
                         .sort((a, b) => b.blockHeight - a.blockHeight)
                         .map((v) => {
                           const color: BadgeProps['color'] = v.vote === 'YES' ? 'green' : v.vote === 'NO' ? 'red' : 'gray';
