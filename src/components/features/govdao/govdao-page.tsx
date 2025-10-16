@@ -5,8 +5,10 @@ import { useMemo, useState } from 'react';
 import NextLink from 'next/link';
 
 import { TransactionBuilder, BroadcastType, MsgCallMessage } from '@adena-wallet/sdk';
+import { makeMsgCallMessage } from '@adena-wallet/sdk';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { Badge, Box, Card, Flex, Grid, Heading, SegmentedControl, Text, TextField, Button } from '@radix-ui/themes';
+import { emojify } from 'node-emoji';
 
 import StatCard from '@/features/govdao/stat-card';
 
@@ -21,7 +23,8 @@ import useGetProposals from '@/hooks/use-get-proposals';
 
 import { aggregateVotes, capitalize, getProposalTitle, getStatusColor, percent } from '@/utils/govdao';
 import { TProposal } from '@/utils/schemas';
-import { emojify } from 'node-emoji';
+
+import { forceVotesIndexation, invalidateProposals } from '@/app/actions';
 
 // Filters bar
 const Filters = ({
@@ -70,26 +73,32 @@ const ProposalCard = ({ proposal, isGovDaoMember }: { proposal: TProposal; isGov
 
   const status = (proposal.status || 'active').toLowerCase();
   const statusColor: any = getStatusColor(status);
+  const userVote = proposal.votes.find((v) => v.address === address);
 
   const vote = async (vote: string) => {
     if (!adena) return;
     try {
-      const transactionRequest = {
-        tx: TransactionBuilder.create()
-          .messages({
-            type: '/vm.m_call',
-            value: {
-              caller: address,
-              pkg_path: proposal.path,
-              func: 'MustVoteOnProposalSimple',
-              args: [proposal.id, vote],
-            },
-          } as MsgCallMessage)
-          .build(),
-        broadcastType: BroadcastType.SYNC,
-      };
-
-      await adena.signTransaction(transactionRequest);
+      const tx = TransactionBuilder.create()
+        .messages(
+          makeMsgCallMessage({
+            caller: address,
+            send: '',
+            pkg_path: proposal.path,
+            func: 'MustVoteOnProposalSimple',
+            args: [proposal.id, vote],
+            max_deposit: '',
+          }),
+        )
+        .memo('')
+        .build();
+      const txHash = await adena.broadcastTransaction({ tx });
+      await forceVotesIndexation();
+      addToast({
+        title: 'Vote submitted',
+        message: 'Transaction has been successfully executed: ' + txHash,
+        mode: 'positive',
+      });
+      await invalidateProposals();
     } catch (err) {
       addToast({ title: 'Error', message: String((err as any)?.message ?? err), mode: 'negative' });
     }
@@ -134,19 +143,23 @@ const ProposalCard = ({ proposal, isGovDaoMember }: { proposal: TProposal; isGov
           </Flex>
         </Card>
       </NextLink>
-      {adena && isGovDaoMember && proposal.status === 'created' && (
+      {adena && !userVote && isGovDaoMember && proposal.status === 'created' && (
         <Flex gap="2">
           <Button className="flex-1" color="green" onClick={() => vote('YES')}>
             For
             <Box ml="1">{emojify('👍')}</Box>
           </Button>
-          <Button className="flex-1" color="gray" onClick={() => vote('ABSTAIN')}>
-            Abstain
-            <Box ml="1">{emojify('🤷')}</Box>
-          </Button>
           <Button className="flex-1" color="red" onClick={() => vote('NO')}>
             Against
             <Box ml="1">{emojify('👎')}</Box>
+          </Button>
+        </Flex>
+      )}
+      {userVote && (
+        <Flex gap="2">
+          <Button disabled className="flex-1" color="red" onClick={() => vote('NO')}>
+            {userVote.vote === 'YES' ? 'For' : 'Against'}
+            <Box ml="1">{emojify(userVote.vote === 'YES' ? '👍' : '👎')}</Box>
           </Button>
         </Flex>
       )}

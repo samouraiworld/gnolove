@@ -135,7 +135,7 @@ func (s *Syncer) StartSynchonizing() error {
 				s.logger.Errorf("error while syncing proposals %s", err.Error())
 			}
 
-			err = s.syncVotesOnProposals(context.Background())
+			_, err = s.SyncVotesOnProposals(context.Background())
 			if err != nil {
 				s.logger.Errorf("error while syncing votes on proposals %s", err.Error())
 			}

@@ -205,12 +205,12 @@ func extractGnoStringResponse(res string) (string, error) {
 	return strconv.Unquote(res)
 }
 
-func (s *Syncer) syncVotesOnProposals(ctx context.Context) error {
+func (s *Syncer) SyncVotesOnProposals(ctx context.Context) (bool, error) {
 	s.logger.Info("Syncing Votes on Proposals")
 	lastBlock := getVotesLastBlock(s.db)
-	response, err := gnoindexerql.GetGovDAOProposalsVotes(ctx, s.graphqlClient, int(lastBlock))
+	response, err := gnoindexerql.GetGovDAOProposalsVotes(ctx, s.graphqlClient, int(lastBlock+1))
 	if err != nil {
-		return err
+		return false, err
 	}
 
 	for _, transaction := range response.GetTransactions {
@@ -236,12 +236,12 @@ func (s *Syncer) syncVotesOnProposals(ctx context.Context) error {
 
 			err = s.db.Save(proposal).Error
 			if err != nil {
-				return err
+				return false, err
 			}
 		}
 	}
 
-	return nil
+	return len(response.GetTransactions) > 0, nil
 }
 func getProposalCreatedEvent(events []gnoindexerql.GetGovDAOProposalsGetTransactionsTransactionResponseEventsEvent) (*gnoindexerql.GetGovDAOProposalsGetTransactionsTransactionResponseEventsGnoEvent, error) {
 	for _, event := range events {
