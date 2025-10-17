@@ -2083,8 +2083,6 @@ type GetUserRegistrationsTransactionsTransactionMessagesTransactionMessageValueM
 	Caller string `json:"caller"`
 	// the gno package path.
 	Pkg_path string `json:"pkg_path"`
-	// the function name being invoked.
-	Func string `json:"func"`
 	// `args` are the arguments passed to the executed function.
 	Args []string `json:"args"`
 }
@@ -2102,11 +2100,6 @@ func (v *GetUserRegistrationsTransactionsTransactionMessagesTransactionMessageVa
 // GetPkg_path returns GetUserRegistrationsTransactionsTransactionMessagesTransactionMessageValueMsgCall.Pkg_path, and is useful for accessing the field via an interface.
 func (v *GetUserRegistrationsTransactionsTransactionMessagesTransactionMessageValueMsgCall) GetPkg_path() string {
 	return v.Pkg_path
-}
-
-// GetFunc returns GetUserRegistrationsTransactionsTransactionMessagesTransactionMessageValueMsgCall.Func, and is useful for accessing the field via an interface.
-func (v *GetUserRegistrationsTransactionsTransactionMessagesTransactionMessageValueMsgCall) GetFunc() string {
-	return v.Func
 }
 
 // GetArgs returns GetUserRegistrationsTransactionsTransactionMessagesTransactionMessageValueMsgCall.Args, and is useful for accessing the field via an interface.
@@ -2414,7 +2407,6 @@ query GetUserRegistrations ($StartBlock: Int!) {
 				... on MsgCall {
 					caller
 					pkg_path
-					func
 					args
 				}
 			}
