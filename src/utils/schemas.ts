@@ -475,6 +475,26 @@ export const ValidatorLastIncidentsSchema = z.array(ValidatorLastIncidentSchema)
 
 export type TValidatorLastIncident = z.infer<typeof ValidatorLastIncidentSchema>;
 
+export const ValidatorUptimeSchema = z.object({
+  addr: z.string(),
+  moniker: z.string(),
+  lastDownDate: z.string(),
+  lastUpDate: z.string(),
+  uptime: z.number(),
+});
+
+export const ValidatorsUptimeSchema = z.array(ValidatorUptimeSchema);
+export type TValidatorUptime = z.infer<typeof ValidatorUptimeSchema>;
+
+export const ValidatorTxContribSchema = z.object({
+  addr: z.string(),
+  moniker: z.string(),
+  tx_contrib: z.number()
+});
+
+export const ValidatorsTxContribSchema = z.array(ValidatorTxContribSchema);
+export type TValidatorTxContrib = z.infer<typeof ValidatorTxContribSchema>;
+
 // Leaderboard webhooks
 export const LeaderboardWebhookSchema = z.object({
   id: z.number().optional(),
