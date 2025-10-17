@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
 
 import { LinkNone2Icon } from '@radix-ui/react-icons';
-import { Box, Button, Flex, Theme } from '@radix-ui/themes';
+import { Badge, Box, Button, Flex, Theme, Tooltip } from '@radix-ui/themes';
 
 import '@/styles/globals.css';
 
@@ -171,6 +171,11 @@ const RootLayout = ({ children, details }: RootLayoutProps) => {
                               </GithubLink>
                             </Flex>
                             <ConnectWalletButton />
+                            <Tooltip content={`Current Gno chain ID: ${process.env.NEXT_PUBLIC_GNO_CHAIN_ID}`}>
+                              <Badge mr="2" size="3">
+                                {process.env.NEXT_PUBLIC_GNO_CHAIN_ID}
+                              </Badge>
+                            </Tooltip>
                             <ThemeSwitch />
                           </Flex>
                         </Flex>

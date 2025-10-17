@@ -5,6 +5,7 @@ import { prefetchProposal } from '@/hooks/use-get-proposal';
 import { prefetchUsers } from '@/hooks/use-get-users';
 import LayoutContainer from '@/layouts/layout-container';
 import { notFound } from 'next/navigation';
+import { prefetchGovdaoMembers } from '@/hooks/use-get-govdao-members';
 import { TProposal } from '@/utils/schemas';
 
 export const generateMetadata = async ({ params }: { params: Promise<{ id: string }> }) => {
@@ -41,6 +42,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   if (!proposal) return notFound();
 
+  await prefetchGovdaoMembers(queryClient);
   await prefetchUsers(queryClient, proposal.votes.map((vote) => vote.address));
 
   return (

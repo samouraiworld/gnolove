@@ -8,7 +8,10 @@ import CodeBlock from '@/elements/code-block';
 import { guessLanguageFromFilename } from '@/utils/govdao';
 import Copyable from '@/elements/copyable';
 import React from 'react';
+import { useMemo } from 'react';
+import useGetGovdaoMembers from '@/hooks/use-get-govdao-members';
 import useGetUsers from '@/hooks/use-get-users';
+import ProposalVotes from './proposal-votes';
 
 const DetailRow = ({ label, value }: { label: string; value: string | React.ReactNode }) => (
   <Flex justify="between" wrap="wrap" align="center">
@@ -20,10 +23,21 @@ const DetailRow = ({ label, value }: { label: string; value: string | React.Reac
 const ProposalDetail = ({ id }: { id: string }) => {
   const { data: proposal } = useGetProposal(id);
   const { data: users } = useGetUsers(proposal?.votes.map((vote) => vote.address));
+  const { data: members } = useGetGovdaoMembers();
 
-  if (!proposal) return null;
+  if (!proposal || !members) return null;
 
-  const totals = aggregateVotes(proposal.votes);
+  const votes = proposal.votes || [];
+
+  const votedAddresses = useMemo(() => {
+    return new Set((votes).map((v) => v.address.toLowerCase()));
+  }, [votes]);
+
+  const nonVoters = useMemo(() => {
+    return (members).filter((m) => !votedAddresses.has(m.address.toLowerCase()));
+  }, [members, votedAddresses]);
+
+  const totals = aggregateVotes(votes);
   const forPct = percent(totals.for, totals.total);
   const againstPct = percent(totals.against, totals.total);
   const abstainPct = percent(totals.abstain, totals.total);
@@ -73,27 +87,30 @@ const ProposalDetail = ({ id }: { id: string }) => {
               </Tabs.Content>
 
               <Tabs.Content value="votes">
-                {proposal.votes.length > 0 ? (
-                  <Flex direction="column" gap="2">
-                    {[...proposal.votes]
-                      .sort((a, b) => b.blockHeight - a.blockHeight)
-                      .map((v) => {
-                        const color: BadgeProps['color'] = v.vote === 'YES' ? 'green' : v.vote === 'NO' ? 'red' : 'gray';
-                        return (
-                          <Card key={`${v.proposalID}-${v.address}-${v.hash}`} className="p-2">
+                <Flex direction="column" gap="3">
+                  {votes && votes.length > 0 ? (
+                    <ProposalVotes votes={votes} />
+                  ) : (
+                    <Text color="gray">No votes yet.</Text>
+                  )}
+
+                  {nonVoters && nonVoters.length > 0 && (
+                    <>
+                      <Separator my="2" />
+                      <Heading size="3">Did not vote ({nonVoters?.length ?? 0})</Heading>
+                      <Flex direction="column" gap="2">
+                        {nonVoters.map((m) => (
+                          <Card key={`nonvoter-${m.address}`} className="p-2">
                             <Flex align="center" justify="between">
-                              <Flex direction="column">
-                                <Copyable className="font-bold">{getUser(v.address)?.login || getUser(v.address)?.name || v.address}</Copyable>
-                              </Flex>
-                              <Badge color={color} variant="soft">{v.vote}</Badge>
+                              <Copyable className="font-bold">{m.address}</Copyable>
+                              <Text color="gray" size="2">{m.tier}</Text>
                             </Flex>
                           </Card>
-                        );
-                      })}
-                  </Flex>
-                ) : (
-                  <Text color="gray">No votes yet.</Text>
-                )}
+                        ))}
+                      </Flex>
+                    </>
+                  )}
+                </Flex>
               </Tabs.Content>
 
               <Tabs.Content value="files">
