@@ -462,10 +462,9 @@ export const forceVotesIndexation = async () => {
   }
 };
 
-export async function invalidateProposals() {
-  // You can also perform mutations here (DB writes, etc.)
+export const invalidateProposals = () => {
   revalidatePath('/govdao/proposals');
-}
+};
 
 export const getUsers = async (addresses?: string[]) => {
   const url = new URL('/users', ENV.NEXT_PUBLIC_API_URL);

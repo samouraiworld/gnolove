@@ -7,7 +7,6 @@ import RadixMarkdown from '@/elements/radix-markdown';
 import CodeBlock from '@/elements/code-block';
 import { guessLanguageFromFilename } from '@/utils/govdao';
 import Copyable from '@/elements/copyable';
-import React from 'react';
 import { useMemo } from 'react';
 import useGetGovdaoMembers from '@/hooks/use-get-govdao-members';
 import useGetUsers from '@/hooks/use-get-users';
@@ -22,7 +21,6 @@ const DetailRow = ({ label, value }: { label: string; value: string | React.Reac
 
 const ProposalDetail = ({ id }: { id: string }) => {
   const { data: proposal } = useGetProposal(id);
-  const { data: users } = useGetUsers(proposal?.votes.map((vote) => vote.address));
   const { data: members } = useGetGovdaoMembers();
 
   if (!proposal || !members) return null;
@@ -44,8 +42,6 @@ const ProposalDetail = ({ id }: { id: string }) => {
 
   const status = (proposal.status || 'active').toLowerCase();
   const statusColor: BadgeProps['color'] = getStatusColor(status);
-
-  const getUser = (address: string) => users?.find((user) => user.wallet === address);
 
   return (
     <Flex direction="column" gap="4" pt="6">
