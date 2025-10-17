@@ -443,9 +443,9 @@ export const YoutubeVideoPlaylistSchema = z.object({
 export type TYoutubeVideoPlaylist = z.infer<typeof YoutubeVideoPlaylistSchema>;
 
 export const ValidatorParticipationSchema = z.object({
-  Addr: z.string(),
-  Moniker: z.string(),
-  ParticipationRate: z.number(),
+  addr: z.string(),
+  moniker: z.string(),
+  participationRate: z.number(),
 });
 
 export type TValidatorParticipation = z.infer<typeof ValidatorParticipationSchema>;
@@ -462,13 +462,13 @@ export type TBlockHeight = z.infer<typeof BlockHeightSchema>;
 
 
 export const ValidatorLastIncidentSchema = z.object({
-  Moniker: z.string(),
-  Addr: z.string(),
-  Level: z.string(),
-  StartHeight: z.number(),
-  EndHeight: z.number(),
-  Msg: z.string(),
-  SentAt: z.string(),
+  moniker: z.string(),
+  addr: z.string(),
+  level: z.string(),
+  startHeight: z.number(),
+  endHeight: z.number(),
+  msg: z.string(),
+  sentAt: z.string(),
 }).nullable();
 
 export const ValidatorLastIncidentsSchema = z.array(ValidatorLastIncidentSchema);

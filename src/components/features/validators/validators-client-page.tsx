@@ -30,17 +30,17 @@ import StatCard from '../govdao/stat-card';
 export type ValidatorIncidentLevel = 'CRITICAL' | 'WARNING' | 'RESOLVED';
 
 export type ValidatorLastIncident = {
-  Moniker: string;
-  Addr: string;
-  Level: ValidatorIncidentLevel;
-  StartHeight: number;
-  EndHeight: number;
-  Msg: string;
-  SentAt: string;
+  moniker: string;
+  addr: string;
+  level: ValidatorIncidentLevel;
+  startHeight: number;
+  endHeight: number;
+  msg: string;
+  sentAt: string;
 };
 
 const ValidatorCardItem = ({ validator }: { validator: TValidatorParticipation }) => {
-  const participationRate = validator.ParticipationRate ?? 0;
+  const participationRate = validator.participationRate ?? 0;
 
   let StatusIcon = CheckCircledIcon;
   let iconColor = '#34d399';
@@ -59,7 +59,7 @@ const ValidatorCardItem = ({ validator }: { validator: TValidatorParticipation }
           <Flex align="center" gap="2">
             <StatusIcon width={20} height={20} color={iconColor} />
             <Text size="4" className="font-semibold">
-              {validator.Moniker}
+              {validator.moniker}
             </Text>
           </Flex>
         </Flex>
@@ -67,7 +67,7 @@ const ValidatorCardItem = ({ validator }: { validator: TValidatorParticipation }
           <Text size="2" color="gray">
             Address:
           </Text>
-          <Copyable>{validator.Addr}</Copyable>
+          <Copyable>{validator.addr}</Copyable>
         </Box>
         <Flex justify="between" gap="4" mt="2">
           <Text size="3" className={'font-semibold'}>
@@ -110,32 +110,32 @@ const renderEntries = (payload: any[], _label?: string | number) => {
         <Box key={idx} p="1">
           <Flex gap="1">
             <Text size="1">Level: </Text>
-            <Text size="1" weight="bold" style={{ color: getLevelColor(incident.Level) }}>
-              {incident.Level}
+            <Text size="1" weight="bold" style={{ color: getLevelColor(incident.level) }}>
+              {incident.level}
             </Text>
           </Flex>
           <Flex gap="1">
             <Text size="1">Moniker: </Text>
             <Text size="1" weight="bold">
-              {incident.Moniker}
+              {incident.moniker}
             </Text>
           </Flex>
           <Flex gap="1">
             <Text size="1">Msg: </Text>
             <Text size="1" weight="bold">
-              {incident.Msg}
+              {incident.msg}
             </Text>
           </Flex>
           <Flex gap="1">
             <Text size="1">From height: </Text>
             <Text size="1" weight="bold">
-              {incident.StartHeight}
+              {incident.startHeight}
             </Text>
           </Flex>
           <Flex gap="1">
             <Text size="1">To height: </Text>
             <Text size="1" weight="bold">
-              {incident.EndHeight}
+              {incident.endHeight}
             </Text>
           </Flex>
           {idx !== p.length - 1 && <Separator size="4" mt="2" />}
@@ -155,7 +155,7 @@ const ValidatorsClientPage = () => {
   const avgParticipationRate = useMemo(() => {
     if (!validators) return 0;
     const total = validators.reduce(
-      (acc: number, validator: TValidatorParticipation) => acc + (validator.ParticipationRate ?? 0),
+      (acc: number, validator: TValidatorParticipation) => acc + (validator.participationRate ?? 0),
       0,
     );
     return total / validators.length;
@@ -167,7 +167,7 @@ const ValidatorsClientPage = () => {
     const q = query.trim().toLowerCase();
     return validators.filter(
       (v: TValidatorParticipation) =>
-        v.Addr.toLowerCase().includes(q) || v.Moniker.toLowerCase().includes(q)
+        v.addr.toLowerCase().includes(q) || v.moniker.toLowerCase().includes(q)
     );
   }, [validators, query]);
 
@@ -176,7 +176,7 @@ const ValidatorsClientPage = () => {
   const filteredIncidents = useMemo(() => {
     if (!lastIncidents) return [];
     const filtered = lastIncidents.filter(
-      (incident) => incident && isAfter(new Date(incident.SentAt ?? ''), periodStart),
+      (incident) => incident && isAfter(new Date(incident.sentAt ?? ''), periodStart),
     );
     const grouped: Record<
       string,
@@ -184,14 +184,14 @@ const ValidatorsClientPage = () => {
     > = {};
     filtered.forEach((incident) => {
       if (!incident) return;
-      const date = format(new Date(incident.SentAt ?? ''), 'yyyy-MM-dd');
+      const date = format(new Date(incident.sentAt ?? ''), 'yyyy-MM-dd');
       if (!grouped[date]) {
         grouped[date] = { date, CRITICAL: 0, WARNING: 0, RESOLVED: 0, incidents: [] };
       }
-      grouped[date][incident.Level as 'CRITICAL' | 'WARNING' | 'RESOLVED']++;
+      grouped[date][incident.level as 'CRITICAL' | 'WARNING' | 'RESOLVED']++;
       grouped[date].incidents.push({
         ...incident,
-        Level: incident.Level as ValidatorIncidentLevel,
+        level: incident.level as ValidatorIncidentLevel,
       });
     });
 
@@ -303,7 +303,7 @@ const ValidatorsClientPage = () => {
       <Grid columns={{ initial: '1', md: '2' }} gap="3">
         {filteredValidators.length > 0 ? (
           filteredValidators.map((validator: TValidatorParticipation) => (
-            <ValidatorCardItem key={validator.Addr} validator={validator} />
+            <ValidatorCardItem key={validator.addr} validator={validator} />
           ))
         ) : (
           <Box p="4">
