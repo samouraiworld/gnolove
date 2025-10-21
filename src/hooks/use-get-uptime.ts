@@ -14,7 +14,7 @@ const useGetValidatorUptime = () => {
   return useQuery({
     queryKey: BASE_QUERY_KEY,
     queryFn: () => getValidatorUptime(),
-    refetchInterval: 5_000,
+    refetchInterval: 30_000,
   });
 };
 

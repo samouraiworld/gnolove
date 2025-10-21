@@ -489,11 +489,20 @@ export type TValidatorUptime = z.infer<typeof ValidatorUptimeSchema>;
 export const ValidatorTxContribSchema = z.object({
   addr: z.string(),
   moniker: z.string(),
-  tx_contrib: z.number()
+  txContrib: z.number()
 });
 
 export const ValidatorsTxContribSchema = z.array(ValidatorTxContribSchema);
 export type TValidatorTxContrib = z.infer<typeof ValidatorTxContribSchema>;
+
+export const ValidatorMissingBlockSchema = z.object({
+  addr: z.string(),
+  moniker: z.string(),
+  missingBlock: z.number()
+});
+
+export const ValidatorsMissingBlockSchema = z.array(ValidatorMissingBlockSchema);
+export type TValidatorMissingBlock = z.infer<typeof ValidatorMissingBlockSchema>;
 
 // Leaderboard webhooks
 export const LeaderboardWebhookSchema = z.object({

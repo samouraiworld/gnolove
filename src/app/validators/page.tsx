@@ -12,6 +12,7 @@ import { prefetchValidatorsLastIncident } from '@/hooks/use-get-validators-incid
 import { EValidatorPeriod } from '@/utils/validators';
 import { prefetchValidatorUptime } from '@/hooks/use-get-uptime';
 import { prefetchValidatorTxContrib } from '@/hooks/use-get-tx-contrib';
+import { prefetchValidatorsMissingBlock } from '@/hooks/use-get-missing-block';
 
 export const metadata: Metadata = {
   title: 'Validators monitoring',
@@ -25,7 +26,8 @@ const Page = async () => {
     prefetchBlockHeight(queryClient),
     prefetchValidatorsLastIncident(queryClient, EValidatorPeriod.MONTH),
     prefetchValidatorUptime(queryClient),
-    prefetchValidatorTxContrib(queryClient),
+    prefetchValidatorTxContrib(queryClient, EValidatorPeriod.MONTH),
+    prefetchValidatorsMissingBlock(queryClient, EValidatorPeriod.MONTH),
   ]);
 
   return (

@@ -32,6 +32,7 @@ import {
   YoutubeVideoPlaylistSchema,
   ValidatorsUptimeSchema,
   ValidatorsTxContribSchema,
+  ValidatorsMissingBlockSchema,
 } from '@/utils/schemas';
 import { EValidatorPeriod } from '@/utils/validators';
 
@@ -391,12 +392,22 @@ export const getValidatorUptime = async () => {
   return ValidatorsUptimeSchema.parse(data);
 };
 
-export const getValidatorTxContrib = async () => {
+export const getValidatorTxContrib = async (timeFilter: EValidatorPeriod = EValidatorPeriod.MONTH) => {
   const url = new URL('/tx_contrib', ENV.NEXT_PUBLIC_MONITORING_API_URL);
+  url.searchParams.set('period', timeFilter);
 
   const data = await fetchJson(url.toString(), { cache: 'no-cache' });
 
   return ValidatorsTxContribSchema.parse(data);
+};
+
+export const getValidatorMissingBlock = async (timeFilter: EValidatorPeriod = EValidatorPeriod.MONTH) => {
+  const url = new URL('/missing_block', ENV.NEXT_PUBLIC_MONITORING_API_URL);
+  url.searchParams.set('period', timeFilter);
+
+  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+
+  return ValidatorsMissingBlockSchema.parse(data);
 };
 
 // Leaderboard webhooks

@@ -19,13 +19,13 @@ import Loader from '@/elements/loader';
 import RechartTooltip from '@/elements/rechart-tooltip';
 
 import useGetBlockHeight from '@/hooks/use-get-blockHeight';
-import useGetValidators from '@/hooks/use-get-validators';
 import useGetValidatorsLastIncident from '@/hooks/use-get-validators-incident';
 
 import { TValidatorParticipation } from '@/utils/schemas';
 import { EValidatorPeriod } from '@/utils/validators';
 
 import StatCard from '../govdao/stat-card';
+import { useGetCombinedValidators } from '@/hooks/use-get-combined-validators';
 
 export type ValidatorIncidentLevel = 'CRITICAL' | 'WARNING' | 'RESOLVED';
 
@@ -88,6 +88,8 @@ const getPeriodStart = (period: EValidatorPeriod) => {
       return subMonths(now, 1);
     case EValidatorPeriod.YEAR:
       return subYears(now, 1);
+    case EValidatorPeriod.ALL_TIME:
+      return new Date(0);
     default:
       return subWeeks(now, 1);
   }
@@ -149,7 +151,7 @@ const renderEntries = (payload: any[], _label?: string | number) => {
 
 const ValidatorsClientPage = () => {
   const [period, setPeriod] = useState<EValidatorPeriod>(EValidatorPeriod.MONTH);
-  const { data: validators, isLoading } = useGetValidators(period);
+  const { data: validators, isLoading } = useGetCombinedValidators(period);
   const { data: blockHeight } = useGetBlockHeight();
   const { data: lastIncidents } = useGetValidatorsLastIncident();
   const [query, setQuery] = useState('');
