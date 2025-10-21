@@ -8,7 +8,9 @@ import type {
 } from '@/utils/schemas';
 import { EValidatorPeriod } from '@/utils/validators';
 
-interface TCombinedValidator {
+import { getValidators, getValidatorUptime, getValidatorTxContrib, getValidatorMissingBlock } from '@/app/actions';
+
+export interface TCombinedValidator {
   addr: string;
   moniker: string;
   participationRate: number;
@@ -22,14 +24,20 @@ interface TCombinedValidator {
 export const useGetCombinedValidators = (period: EValidatorPeriod = EValidatorPeriod.MONTH) => {
   const queryClient = useQueryClient();
 
-  const { data, isLoading } = useQuery<TCombinedValidator[]>({
+  const query = useQuery<TCombinedValidator[]>({
     queryKey: ['validators-combined', period],
     queryFn: async () => {
+      const getOrFetch = async <T>(key: unknown[], fn: () => Promise<T>): Promise<T> => {
+        const cached = queryClient.getQueryData<T>(key);
+        if (cached) return cached;
+        return queryClient.fetchQuery({ queryKey: key, queryFn: fn });
+      };
+
       const [validators, uptime, txContrib, missingBlock] = await Promise.all([
-        queryClient.ensureQueryData<TValidatorsParticipation>({ queryKey: ['validators', period] }),
-        queryClient.ensureQueryData<TValidatorUptime[]>({ queryKey: ['uptime'] }),
-        queryClient.ensureQueryData<TValidatorTxContrib[]>({ queryKey: ['tx-contrib', period] }),
-        queryClient.ensureQueryData<TValidatorMissingBlock[]>({ queryKey: ['missing-block', period] }),
+        getOrFetch(['validators', period], () => getValidators(period)),
+        getOrFetch(['uptime'], getValidatorUptime),
+        getOrFetch(['tx-contrib', period], () => getValidatorTxContrib(period)),
+        getOrFetch(['missing-block', period], () => getValidatorMissingBlock(period)),
       ]);
 
       return validators.map((v) => {
@@ -49,7 +57,11 @@ export const useGetCombinedValidators = (period: EValidatorPeriod = EValidatorPe
         };
       });
     },
+    refetchOnWindowFocus: false,
   });
 
-  return { data, isLoading };
+  return {
+    data: query.data,
+    isLoading: query.isPending,
+  };
 };
