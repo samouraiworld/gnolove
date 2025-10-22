@@ -11,7 +11,7 @@ import {
   LayersIcon,
   MagnifyingGlassIcon,
 } from '@radix-ui/react-icons';
-import { Card, Flex, Heading, Text, Box, TextField, Grid, Select, Separator, Tooltip, IconButton } from '@radix-ui/themes';
+import { Card, Flex, Heading, Text, Box, TextField, Grid, Select, Separator, Tooltip, IconButton, Dialog } from '@radix-ui/themes';
 import { format, subWeeks, subMonths, subYears, isAfter } from 'date-fns';
 import { BarChart, Bar, XAxis, YAxis, Tooltip as NativeRechartTooltip, ResponsiveContainer } from 'recharts';
 
@@ -75,31 +75,45 @@ const ValidatorCardItem = ({ validator }: { validator: TCombinedValidator }) => 
               Participation: {participationRate}%
             </Text>
           </Tooltip>
-          <Tooltip content="Percentage of time the validator was online and operational during the selected period." >
-            <Text size="3" className={'font-semibold'}>
-              uptime: {validator.uptime}
-            </Text>
-          </Tooltip>
-          <Tooltip content="Percentage of transactions contributed by the validator during the selected period." >
-            <Text size="3" className={'font-semibold'}>
-              txContrib: {validator.txContrib}
-            </Text>
-          </Tooltip>
-          <Tooltip content="Last time the validator get back online and operational." >
-            <Text size="3" className={'font-semibold'}>
-              lastUpDate: {validator.lastUpDate ? format(new Date(validator.lastUpDate), 'yyyy-MM-dd HH:mm') : 'N/A'}
-            </Text>
-          </Tooltip>
-          <Tooltip content="Last time the validator went offline." >
-            <Text size="3" className={'font-semibold'}>
-              lastDownDate: {validator.lastDownDate ? format(new Date(validator.lastDownDate), 'yyyy-MM-dd HH:mm') : 'N/A'}
-            </Text>
-          </Tooltip>
-          <Tooltip content="Number of blocks missed by the validator during the selected period." >
-            <Text size="3" className={'font-semibold'}>
-              missingBlock: {validator.missingBlock}
-            </Text>
-          </Tooltip>
+
+
+          <Dialog.Root>
+            <Dialog.Trigger>
+              <IconButton variant="ghost" size="4">Details</IconButton>
+            </Dialog.Trigger>
+            <Dialog.Content
+              maxHeight='88vh'
+              maxWidth='1000px'
+              style={{ overflow: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
+            >
+              <Tooltip content="Percentage of time the validator was online and operational during the selected period." >
+                <Text size="3" className={'font-semibold'}>
+                  uptime: {validator.uptime}
+                </Text>
+              </Tooltip>
+              <Tooltip content="Percentage of transactions contributed by the validator during the selected period." >
+                <Text size="3" className={'font-semibold'}>
+                  txContrib: {validator.txContrib}
+                </Text>
+              </Tooltip>
+              <Tooltip content="Last time the validator get back online and operational." >
+                <Text size="3" className={'font-semibold'}>
+                  lastUpDate: {validator.lastUpDate ? format(new Date(validator.lastUpDate), 'yyyy-MM-dd HH:mm') : 'N/A'}
+                </Text>
+              </Tooltip>
+              <Tooltip content="Last time the validator went offline." >
+                <Text size="3" className={'font-semibold'}>
+                  lastDownDate: {validator.lastDownDate ? format(new Date(validator.lastDownDate), 'yyyy-MM-dd HH:mm') : 'N/A'}
+                </Text>
+              </Tooltip>
+              <Tooltip content="Number of blocks missed by the validator during the selected period." >
+                <Text size="3" className={'font-semibold'}>
+                  missingBlock: {validator.missingBlock}
+                </Text>
+              </Tooltip>
+            </Dialog.Content>
+          </Dialog.Root>
+
         </Flex>
       </Flex>
     </Card>
@@ -182,11 +196,6 @@ const ValidatorsClientPage = () => {
   const { data: blockHeight } = useGetBlockHeight();
   const { data: lastIncidents } = useGetValidatorsLastIncident();
   const [query, setQuery] = useState('');
-
-  console.log({
-    validators,
-    isLoading,
-  });
 
   const avgParticipationRate = useMemo(() => {
     if (!validators) return 0;

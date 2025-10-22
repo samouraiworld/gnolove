@@ -365,6 +365,8 @@ export const getValidators = async (timeFilter: EValidatorPeriod = EValidatorPer
 
   const data = await fetchJson(url.toString(), { cache: 'no-cache' });
 
+  if (!data) return [];
+
   return ValidatorsParticipationSchema.parse(data);
 };
 
@@ -381,6 +383,8 @@ export const getValidatorLastIncident = async (timeFilter: EValidatorPeriod = EV
 
   const data = await fetchJson(url.toString(), { cache: 'no-cache' });
 
+  if (!data) return [];
+
   return ValidatorLastIncidentsSchema.parse(data);
 };
 
@@ -388,6 +392,8 @@ export const getValidatorUptime = async () => {
   const url = new URL('/uptime', ENV.NEXT_PUBLIC_MONITORING_API_URL);
 
   const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+
+  if (!data) return [];
 
   return ValidatorsUptimeSchema.parse(data);
 };
@@ -398,6 +404,8 @@ export const getValidatorTxContrib = async (timeFilter: EValidatorPeriod = EVali
 
   const data = await fetchJson(url.toString(), { cache: 'no-cache' });
 
+  if (!data) return [];
+
   return ValidatorsTxContribSchema.parse(data);
 };
 
@@ -406,6 +414,8 @@ export const getValidatorMissingBlock = async (timeFilter: EValidatorPeriod = EV
   url.searchParams.set('period', timeFilter);
 
   const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+
+  if (!data) return [];
 
   return ValidatorsMissingBlockSchema.parse(data);
 };
