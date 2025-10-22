@@ -7,7 +7,6 @@ import {
   CheckCircledIcon,
   CrossCircledIcon,
   ExclamationTriangleIcon,
-  InfoCircledIcon,
   LayersIcon,
   MagnifyingGlassIcon,
 } from '@radix-ui/react-icons';
@@ -26,6 +25,7 @@ import { EValidatorPeriod } from '@/utils/validators';
 
 import StatCard from '../govdao/stat-card';
 import { TCombinedValidator, useGetCombinedValidators } from '@/hooks/use-get-combined-validators';
+import DetailRow from '@/elements/detail-row';
 
 export type ValidatorIncidentLevel = 'CRITICAL' | 'WARNING' | 'RESOLVED';
 
@@ -76,47 +76,58 @@ const ValidatorCardItem = ({ validator }: { validator: TCombinedValidator }) => 
             </Text>
           </Tooltip>
 
-
           <Dialog.Root>
             <Dialog.Trigger>
               <IconButton variant="ghost" size="4">Details</IconButton>
             </Dialog.Trigger>
             <Dialog.Content
               maxHeight='88vh'
-              maxWidth='1000px'
-              style={{ overflow: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
+              maxWidth='450px'
+              style={{ overflow: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '10px' }}
             >
-              <Tooltip content="Percentage of time the validator was online and operational during the selected period." >
-                <Text size="3" className={'font-semibold'}>
-                  uptime: {validator.uptime}
+
+              <Heading mb="4">{validator.moniker}</Heading>
+
+              <Box>
+                <DetailRow label="Uptime" value={validator.uptime} />
+                <Text color="gray" size="1">
+                  Number of days since last up date.
                 </Text>
-              </Tooltip>
-              <Tooltip content="Percentage of transactions contributed by the validator during the selected period." >
-                <Text size="3" className={'font-semibold'}>
-                  txContrib: {validator.txContrib}
+              </Box>
+              <Separator />
+              <Box>
+                <DetailRow label="Tx Contrib" value={validator.txContrib} />
+                <Text color="gray" size="1">
+                  Percentage of transactions contributed by the validator during the selected period.
                 </Text>
-              </Tooltip>
-              <Tooltip content="Last time the validator get back online and operational." >
-                <Text size="3" className={'font-semibold'}>
-                  lastUpDate: {validator.lastUpDate ? format(new Date(validator.lastUpDate), 'yyyy-MM-dd HH:mm') : 'N/A'}
+              </Box>
+              <Separator />
+              <Box>
+                <DetailRow label="Last Up Date" value={validator.lastUpDate ? format(new Date(validator.lastUpDate), 'yyyy-MM-dd HH:mm') : 'N/A'} />
+                <Text color="gray" size="1">
+                  Last time the validator get back online and operational.
                 </Text>
-              </Tooltip>
-              <Tooltip content="Last time the validator went offline." >
-                <Text size="3" className={'font-semibold'}>
-                  lastDownDate: {validator.lastDownDate ? format(new Date(validator.lastDownDate), 'yyyy-MM-dd HH:mm') : 'N/A'}
+              </Box>
+              <Separator />
+              <Box>
+                <DetailRow label="Last Down Date" value={validator.lastDownDate ? format(new Date(validator.lastDownDate), 'yyyy-MM-dd HH:mm') : 'N/A'} />
+                <Text color="gray" size="1">
+                  Last time the validator went offline.
                 </Text>
-              </Tooltip>
-              <Tooltip content="Number of blocks missed by the validator during the selected period." >
-                <Text size="3" className={'font-semibold'}>
-                  missingBlock: {validator.missingBlock}
+              </Box>
+              <Separator />
+              <Box>
+                <DetailRow label="Missing Blocks" value={validator.missingBlock} />
+                <Text color="gray" size="1">
+                  Number of blocks missed by the validator during the selected period.
                 </Text>
-              </Tooltip>
+              </Box>
             </Dialog.Content>
           </Dialog.Root>
 
         </Flex>
       </Flex>
-    </Card>
+    </Card >
   );
 };
 
