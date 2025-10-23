@@ -1,0 +1,12 @@
+interval_seconde: 1200
+backend_port: "8989"
+allow_origin: "http://localhost:3000"
+rpc_endpoint: "http://127.0.0.1:26657"
+windows_size: 100
+daily_report_hour: 10
+daily_report_minute: 34
+metrics_port: 8880
+gnoweb: "http://127.0.0.1:8888"
+graphql: "http://127.0.0.1:8546/graphql/query"
+clerk_secret_key: "sk_test...." #change me
+dev_mode: true # Set to true for local development without Clerk auth
