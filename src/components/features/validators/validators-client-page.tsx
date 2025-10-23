@@ -24,8 +24,11 @@ import useGetValidatorsLastIncident from '@/hooks/use-get-validators-incident';
 import { EValidatorPeriod } from '@/utils/validators';
 
 import StatCard from '../govdao/stat-card';
-import { TCombinedValidator, useGetCombinedValidators } from '@/hooks/use-get-combined-validators';
 import DetailRow from '@/elements/detail-row';
+import useGetValidators from '@/hooks/use-get-validators';
+import useGetValidatorsMissingBlock from '@/hooks/use-get-missing-block';
+import useGetValidatorTxContrib from '@/hooks/use-get-tx-contrib';
+import useGetValidatorUptime from '@/hooks/use-get-uptime';
 
 export type ValidatorIncidentLevel = 'CRITICAL' | 'WARNING' | 'RESOLVED';
 
@@ -38,6 +41,19 @@ export type ValidatorLastIncident = {
   msg: string;
   sentAt: string;
 };
+
+export interface TCombinedValidator {
+  addr: string;
+  moniker: string;
+  participationRate: number;
+  uptime: number | null;
+  txContrib: number | null;
+  lastUpDate: string | null;
+  lastDownDate: string | null;
+  missingBlock: number | null;
+}
+
+const CURRENT_TIME_ZONE = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 const ValidatorCardItem = ({ validator }: { validator: TCombinedValidator }) => {
   const participationRate = validator.participationRate ?? 0;
@@ -204,29 +220,54 @@ const renderEntries = (payload: any[], _label?: string | number) => {
 
 const ValidatorsClientPage = () => {
   const [period, setPeriod] = useState<EValidatorPeriod>(EValidatorPeriod.MONTH);
-  const { data: validators, isLoading } = useGetCombinedValidators(period);
+  const { data: participationRate, isLoading } = useGetValidators(period);
+  const { data: missingBlocks } = useGetValidatorsMissingBlock(period);
+  const { data: txContrib } = useGetValidatorTxContrib(period);
+  const { data: uptime } = useGetValidatorUptime();
   const { data: blockHeight } = useGetBlockHeight();
   const { data: lastIncidents } = useGetValidatorsLastIncident();
   const [query, setQuery] = useState('');
+  const [validators, setValidators] = useState([] as TCombinedValidator[]);
+
+  const combinedValidators = useMemo(() => {
+    return participationRate?.map((v) => {
+      if (!v) return null;
+
+      const up = uptime?.find((u) => u?.addr === v.addr);
+      const tx = txContrib?.find((t) => t?.addr === v.addr);
+      const missing = missingBlocks?.find((m) => m?.addr === v.addr);
+
+      return {
+        addr: v.addr,
+        moniker: v.moniker,
+        participationRate: v.participationRate,
+        uptime: up?.uptime ?? null,
+        txContrib: tx?.txContrib ?? null,
+        lastUpDate: up?.lastUpDate ?? null,
+        lastDownDate: up?.lastDownDate ?? null,
+        missingBlock: missing?.missingBlock ?? null,
+      };
+    }).filter((v): v is NonNullable<TCombinedValidator> => v !== null);
+  }, [participationRate, uptime, txContrib, missingBlocks]);
 
   const avgParticipationRate = useMemo(() => {
-    if (!validators) return 0;
-    const total = validators.reduce(
+    if (!combinedValidators?.length) return 0;
+    const total = combinedValidators.reduce(
       (acc: number, validator: TCombinedValidator) => acc + (validator.participationRate ?? 0),
       0,
     );
-    return total / validators.length;
-  }, [validators]);
+    return total / combinedValidators.length;
+  }, [combinedValidators]);
 
   const filteredValidators = useMemo(() => {
-    if (!validators) return [];
-    if (!query.trim()) return validators;
+    if (!combinedValidators) return [];
+    if (!query.trim()) return combinedValidators;
     const q = query.trim().toLowerCase();
-    return validators.filter(
+    return combinedValidators.filter(
       (v: TCombinedValidator) =>
         v.addr.toLowerCase().includes(q) || v.moniker.toLowerCase().includes(q)
     );
-  }, [validators, query]);
+  }, [combinedValidators, query]);
 
   const periodStart = getPeriodStart(period);
   // Group incidents by date and stack by level
