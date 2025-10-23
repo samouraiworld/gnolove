@@ -83,45 +83,46 @@ const ValidatorCardItem = ({ validator }: { validator: TCombinedValidator }) => 
             <Dialog.Content
               maxHeight='88vh'
               maxWidth='450px'
-              style={{ overflow: 'auto', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '10px' }}
             >
+              <Flex direction="column" justify="between" gap="3">
 
-              <Heading mb="4">{validator.moniker}</Heading>
+                <Heading mb="4">{validator.moniker}</Heading>
 
-              <Box>
-                <DetailRow label="Uptime" value={validator.uptime} />
-                <Text color="gray" size="1">
-                  Number of days since last up date.
-                </Text>
-              </Box>
-              <Separator />
-              <Box>
-                <DetailRow label="Tx Contrib" value={validator.txContrib} />
-                <Text color="gray" size="1">
-                  Percentage of transactions contributed by the validator during the selected period.
-                </Text>
-              </Box>
-              <Separator />
-              <Box>
-                <DetailRow label="Last Up Date" value={validator.lastUpDate ? format(new Date(validator.lastUpDate), 'yyyy-MM-dd HH:mm') : 'N/A'} />
-                <Text color="gray" size="1">
-                 Last time the validator got back online and was operational.
-                </Text>
-              </Box>
-              <Separator />
-              <Box>
-                <DetailRow label="Last Down Date" value={validator.lastDownDate ? format(new Date(validator.lastDownDate), 'yyyy-MM-dd HH:mm') : 'N/A'} />
-                <Text color="gray" size="1">
-                  Last time the validator went offline.
-                </Text>
-              </Box>
-              <Separator />
-              <Box>
-                <DetailRow label="Missing Blocks" value={validator.missingBlock} />
-                <Text color="gray" size="1">
-                  Number of blocks missed by the validator during the selected period.
-                </Text>
-              </Box>
+                <Box>
+                  <DetailRow label="Uptime" value={validator.uptime} />
+                  <Text color="gray" size="1">
+                    Number of days since last up date.
+                  </Text>
+                </Box>
+                <Separator />
+                <Box>
+                  <DetailRow label="Tx Contrib" value={validator.txContrib} />
+                  <Text color="gray" size="1">
+                    Percentage of transactions contributed by the validator during the selected period.
+                  </Text>
+                </Box>
+                <Separator />
+                <Box>
+                  <DetailRow label="Last Up Date" value={validator.lastUpDate ? format(new Date(validator.lastUpDate), 'yyyy-MM-dd HH:mm') : 'N/A'} />
+                  <Text color="gray" size="1">
+                    Last time the validator got back online and was operational.
+                  </Text>
+                </Box>
+                <Separator />
+                <Box>
+                  <DetailRow label="Last Down Date" value={validator.lastDownDate ? format(new Date(validator.lastDownDate), 'yyyy-MM-dd HH:mm') : 'N/A'} />
+                  <Text color="gray" size="1">
+                    Last time the validator went offline.
+                  </Text>
+                </Box>
+                <Separator />
+                <Box>
+                  <DetailRow label="Missing Blocks" value={validator.missingBlock} />
+                  <Text color="gray" size="1">
+                    Number of blocks missed by the validator during the selected period.
+                  </Text>
+                </Box>
+              </Flex>
             </Dialog.Content>
           </Dialog.Root>
 
