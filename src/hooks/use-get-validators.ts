@@ -15,7 +15,7 @@ export const prefetchValidators = async (
   return validators;
 };
 
-const useGetValidators = (period: EValidatorPeriod = EValidatorPeriod.MONTH) => {
+const useGetValidators = (period: EValidatorPeriod) => {
   return useQuery({
     queryKey: [ ...BASE_QUERY_KEY, period ],
     queryFn: () => getValidators(period),

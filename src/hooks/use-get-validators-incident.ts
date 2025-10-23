@@ -11,7 +11,7 @@ export const prefetchValidatorsLastIncident = async (queryClient: QueryClient, t
   return validatorLastIncident;
 };
 
-const useGetValidatorsLastIncident = (timeFilter: EValidatorPeriod = EValidatorPeriod.MONTH) => {
+const useGetValidatorsLastIncident = (timeFilter: EValidatorPeriod) => {
   return useQuery({
     queryKey: [ ...BASE_QUERY_KEY, timeFilter ],
     queryFn: () => getValidatorLastIncident(timeFilter),

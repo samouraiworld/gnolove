@@ -15,7 +15,7 @@ export const prefetchValidatorsMissingBlock = async (
   return validators;
 };
 
-const useGetValidatorsMissingBlock = (period: EValidatorPeriod = EValidatorPeriod.MONTH) => {
+const useGetValidatorsMissingBlock = (period: EValidatorPeriod) => {
   return useQuery({
     queryKey: [ ...BASE_QUERY_KEY, period ],
     queryFn: () => getValidatorMissingBlock(period),

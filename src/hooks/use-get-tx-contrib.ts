@@ -15,7 +15,7 @@ export const prefetchValidatorTxContrib = async (
   return txContributions;
 };
 
-const useGetValidatorTxContrib = (period: EValidatorPeriod = EValidatorPeriod.MONTH) => {
+const useGetValidatorTxContrib = (period: EValidatorPeriod) => {
   return useQuery({
     queryKey: [ ...BASE_QUERY_KEY, period ],
     queryFn: () => getValidatorTxContrib(period),
