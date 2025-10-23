@@ -105,7 +105,7 @@ const ValidatorCardItem = ({ validator }: { validator: TCombinedValidator }) => 
               <Box>
                 <DetailRow label="Last Up Date" value={validator.lastUpDate ? format(new Date(validator.lastUpDate), 'yyyy-MM-dd HH:mm') : 'N/A'} />
                 <Text color="gray" size="1">
-                  Last time the validator get back online and operational.
+                 Last time the validator got back online and was operational.
                 </Text>
               </Box>
               <Separator />
