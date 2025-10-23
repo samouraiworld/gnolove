@@ -174,7 +174,7 @@ const renderEntries = (payload: any[], _label?: string | number) => {
               {incident.moniker}
             </Text>
           </Flex>
-          {incident.msg && incident.msg !== "" && (
+          {incident.msg && (
             <Flex gap="1">
               <Text size="1">Msg: </Text>
               <Text size="1" weight="bold">
