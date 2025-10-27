@@ -33,6 +33,7 @@ import {
   ValidatorsUptimeSchema,
   ValidatorsTxContribSchema,
   ValidatorsMissingBlockSchema,
+  ValidatorsOperationTimeSchema,
 } from '@/utils/schemas';
 import { EValidatorPeriod } from '@/utils/validators';
 
@@ -418,6 +419,17 @@ export const getValidatorMissingBlock = async (timeFilter: EValidatorPeriod = EV
   if (!data) return [];
 
   return ValidatorsMissingBlockSchema.parse(data);
+};
+
+export const getValidatorOperationTime = async (timeFilter: EValidatorPeriod = EValidatorPeriod.MONTH) => {
+  const url = new URL('/operation_time', ENV.NEXT_PUBLIC_MONITORING_API_URL);
+  url.searchParams.set('period', timeFilter);
+
+  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+
+  if (!data) return [];
+
+  return ValidatorsOperationTimeSchema.parse(data);
 };
 
 // Leaderboard webhooks

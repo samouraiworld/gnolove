@@ -29,6 +29,7 @@ import useGetValidators from '@/hooks/use-get-validators';
 import useGetValidatorsMissingBlock from '@/hooks/use-get-missing-block';
 import useGetValidatorTxContrib from '@/hooks/use-get-tx-contrib';
 import useGetValidatorUptime from '@/hooks/use-get-uptime';
+import useGetValidatorOperationTime from '@/hooks/use-get-operation-time';
 
 export type ValidatorIncidentLevel = 'CRITICAL' | 'WARNING' | 'RESOLVED';
 
@@ -50,10 +51,9 @@ export interface TCombinedValidator {
   txContrib: number | null;
   lastUpDate: string | null;
   lastDownDate: string | null;
+  operationTime: number | null;
   missingBlock: number | null;
 }
-
-const CURRENT_TIME_ZONE = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 const ValidatorCardItem = ({ validator }: { validator: TCombinedValidator }) => {
   const participationRate = validator.participationRate ?? 0;
@@ -105,35 +105,42 @@ const ValidatorCardItem = ({ validator }: { validator: TCombinedValidator }) => 
                 <Heading mb="4">{validator.moniker}</Heading>
 
                 <Box>
-                  <DetailRow label="Uptime" value={validator.uptime} />
+                  <DetailRow label="Uptime" value={validator.uptime + " %"} />
                   <Text color="gray" size="1">
-                    Number of days since last up date.
+                    Operation rate among the last 500 blocks.
                   </Text>
                 </Box>
                 <Separator />
                 <Box>
-                  <DetailRow label="Tx Contrib" value={validator.txContrib} />
+                  <DetailRow label="Tx Contrib" value={validator.txContrib + " %"} />
                   <Text color="gray" size="1">
                     Percentage of transactions contributed by the validator during the selected period.
                   </Text>
                 </Box>
                 <Separator />
                 <Box>
-                  <DetailRow label="Last Up Date" value={validator.lastUpDate ? format(new Date(validator.lastUpDate), 'yyyy-MM-dd HH:mm') : 'N/A'} />
+                  <DetailRow label="Operation time" value={validator.operationTime + " days"} />
+                  <Text color="gray" size="1">
+                    Number of days elapsed since the validator became operational.
+                  </Text>
+                </Box>
+                <Separator />
+                <Box>
+                  <DetailRow label="Last Up Date" value={validator.lastUpDate ? `${format(new Date(validator.lastUpDate), 'yyyy-MM-dd HH:mm')} UTC` : 'N/A'} />
                   <Text color="gray" size="1">
                     Last time the validator got back online and was operational.
                   </Text>
                 </Box>
                 <Separator />
                 <Box>
-                  <DetailRow label="Last Down Date" value={validator.lastDownDate ? format(new Date(validator.lastDownDate), 'yyyy-MM-dd HH:mm') : 'N/A'} />
+                  <DetailRow label="Last Down Date" value={validator.lastDownDate ? `${format(new Date(validator.lastDownDate), 'yyyy-MM-dd HH:mm')} UTC` : 'N/A'} />
                   <Text color="gray" size="1">
                     Last time the validator went offline.
                   </Text>
                 </Box>
                 <Separator />
                 <Box>
-                  <DetailRow label="Missing Blocks" value={validator.missingBlock} />
+                  <DetailRow label="Missing Blocks" value={validator.missingBlock + " block(s)"} />
                   <Text color="gray" size="1">
                     Number of blocks missed by the validator during the selected period.
                   </Text>
@@ -225,7 +232,8 @@ const ValidatorsClientPage = () => {
   const { data: txContrib } = useGetValidatorTxContrib(period);
   const { data: uptime } = useGetValidatorUptime();
   const { data: blockHeight } = useGetBlockHeight();
-  const { data: lastIncidents } = useGetValidatorsLastIncident();
+  const { data: lastIncidents } = useGetValidatorsLastIncident(period);
+  const { data: operationTime } = useGetValidatorOperationTime();
   const [query, setQuery] = useState('');
   const [validators, setValidators] = useState([] as TCombinedValidator[]);
 
@@ -236,6 +244,7 @@ const ValidatorsClientPage = () => {
       const up = uptime?.find((u) => u?.addr === v.addr);
       const tx = txContrib?.find((t) => t?.addr === v.addr);
       const missing = missingBlocks?.find((m) => m?.addr === v.addr);
+      const operation = operationTime?.find((o) => o?.addr === v.addr);
 
       return {
         addr: v.addr,
@@ -243,8 +252,9 @@ const ValidatorsClientPage = () => {
         participationRate: v.participationRate,
         uptime: up?.uptime ?? null,
         txContrib: tx?.txContrib ?? null,
-        lastUpDate: up?.lastUpDate ?? null,
-        lastDownDate: up?.lastDownDate ?? null,
+        lastUpDate: operation?.lastUpDate ?? null,
+        lastDownDate: operation?.lastDownDate ?? null,
+        operationTime: operation?.operationTime ?? null,
         missingBlock: missing?.missingBlock ?? null,
       };
     }).filter((v): v is NonNullable<TCombinedValidator> => v !== null);

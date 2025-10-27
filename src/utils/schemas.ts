@@ -477,13 +477,22 @@ export type TValidatorLastIncident = z.infer<typeof ValidatorLastIncidentSchema>
 export const ValidatorUptimeSchema = z.object({
   addr: z.string(),
   moniker: z.string(),
-  lastDownDate: z.string(),
-  lastUpDate: z.string(),
   uptime: z.number(),
 }).nullable();
 
 export const ValidatorsUptimeSchema = z.array(ValidatorUptimeSchema);
 export type TValidatorUptime = z.infer<typeof ValidatorUptimeSchema>;
+
+export const ValidatorOperationTimeSchema = z.object({
+  addr: z.string(),
+  moniker: z.string(),
+  lastDownDate: z.string(),
+  lastUpDate: z.string(),
+  operationTime: z.number(),
+}).nullable();
+
+export const ValidatorsOperationTimeSchema = z.array(ValidatorOperationTimeSchema);
+export type TValidatorOperationTime = z.infer<typeof ValidatorOperationTimeSchema>;
 
 export const ValidatorTxContribSchema = z.object({
   addr: z.string(),
