@@ -332,7 +332,7 @@ const ValidatorsClientPage = () => {
 
       <Grid columns={{ initial: '1', md: '3' }} gap="3">
         <StatCard icon={<LayersIcon />} title="Block height" value={blockHeight?.last_stored || 0} />
-        <StatCard icon={<CheckCircledIcon />} title="Active validators" value={combinedValidators?.length} />
+        <StatCard icon={<CheckCircledIcon />} title="Active validators" value={combinedValidators?.length ?? 'N/A'} />
         <StatCard icon={<ActivityLogIcon />} title="Avg participation rate" value={avgParticipationRate ? avgParticipationRate + ' %' : 'N/A'} />
       </Grid>
 
