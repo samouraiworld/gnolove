@@ -446,7 +446,7 @@ export const ValidatorParticipationSchema = z.object({
   addr: z.string(),
   moniker: z.string(),
   participationRate: z.number(),
-});
+}).nullable();
 
 export type TValidatorParticipation = z.infer<typeof ValidatorParticipationSchema>;
 
@@ -456,7 +456,7 @@ export type TValidatorsParticipation = z.infer<typeof ValidatorsParticipationSch
 
 export const BlockHeightSchema = z.object({
   last_stored: z.number(),
-});
+}).nullable();
 
 export type TBlockHeight = z.infer<typeof BlockHeightSchema>;
 
@@ -472,8 +472,45 @@ export const ValidatorLastIncidentSchema = z.object({
 }).nullable();
 
 export const ValidatorLastIncidentsSchema = z.array(ValidatorLastIncidentSchema);
-
 export type TValidatorLastIncident = z.infer<typeof ValidatorLastIncidentSchema>;
+
+export const ValidatorUptimeSchema = z.object({
+  addr: z.string(),
+  moniker: z.string(),
+  uptime: z.number(),
+}).nullable();
+
+export const ValidatorsUptimeSchema = z.array(ValidatorUptimeSchema);
+export type TValidatorUptime = z.infer<typeof ValidatorUptimeSchema>;
+
+export const ValidatorOperationTimeSchema = z.object({
+  addr: z.string(),
+  moniker: z.string(),
+  lastDownDate: z.string(),
+  lastUpDate: z.string(),
+  operationTime: z.number(),
+}).nullable();
+
+export const ValidatorsOperationTimeSchema = z.array(ValidatorOperationTimeSchema);
+export type TValidatorOperationTime = z.infer<typeof ValidatorOperationTimeSchema>;
+
+export const ValidatorTxContribSchema = z.object({
+  addr: z.string(),
+  moniker: z.string(),
+  txContrib: z.number()
+}).nullable();
+
+export const ValidatorsTxContribSchema = z.array(ValidatorTxContribSchema);
+export type TValidatorTxContrib = z.infer<typeof ValidatorTxContribSchema>;
+
+export const ValidatorMissingBlockSchema = z.object({
+  addr: z.string(),
+  moniker: z.string(),
+  missingBlock: z.number()
+}).nullable();
+
+export const ValidatorsMissingBlockSchema = z.array(ValidatorMissingBlockSchema);
+export type TValidatorMissingBlock = z.infer<typeof ValidatorMissingBlockSchema>;
 
 // Leaderboard webhooks
 export const LeaderboardWebhookSchema = z.object({

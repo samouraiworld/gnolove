@@ -10,7 +10,7 @@ import {
   LayersIcon,
   MagnifyingGlassIcon,
 } from '@radix-ui/react-icons';
-import { Card, Flex, Heading, Text, Box, TextField, Grid, Select, Separator } from '@radix-ui/themes';
+import { Card, Flex, Heading, Text, Box, TextField, Grid, Select, Separator, Tooltip, IconButton, Dialog } from '@radix-ui/themes';
 import { format, subWeeks, subMonths, subYears, isAfter } from 'date-fns';
 import { BarChart, Bar, XAxis, YAxis, Tooltip as NativeRechartTooltip, ResponsiveContainer } from 'recharts';
 
@@ -19,13 +19,17 @@ import Loader from '@/elements/loader';
 import RechartTooltip from '@/elements/rechart-tooltip';
 
 import useGetBlockHeight from '@/hooks/use-get-blockHeight';
-import useGetValidators from '@/hooks/use-get-validators';
 import useGetValidatorsLastIncident from '@/hooks/use-get-validators-incident';
 
-import { TValidatorParticipation } from '@/utils/schemas';
 import { EValidatorPeriod } from '@/utils/validators';
 
 import StatCard from '../govdao/stat-card';
+import DetailRow from '@/elements/detail-row';
+import useGetValidators from '@/hooks/use-get-validators';
+import useGetValidatorsMissingBlock from '@/hooks/use-get-missing-block';
+import useGetValidatorTxContrib from '@/hooks/use-get-tx-contrib';
+import useGetValidatorUptime from '@/hooks/use-get-uptime';
+import useGetValidatorOperationTime from '@/hooks/use-get-operation-time';
 
 export type ValidatorIncidentLevel = 'CRITICAL' | 'WARNING' | 'RESOLVED';
 
@@ -39,7 +43,19 @@ export type ValidatorLastIncident = {
   sentAt: string;
 };
 
-const ValidatorCardItem = ({ validator }: { validator: TValidatorParticipation }) => {
+export interface TCombinedValidator {
+  addr: string;
+  moniker: string;
+  participationRate: number;
+  uptime: number | null;
+  txContrib: number | null;
+  lastUpDate: string | null;
+  lastDownDate: string | null;
+  operationTime: number | null;
+  missingBlock: number | null;
+}
+
+const ValidatorCardItem = ({ validator }: { validator: TCombinedValidator }) => {
   const participationRate = validator.participationRate ?? 0;
 
   let StatusIcon = CheckCircledIcon;
@@ -70,12 +86,71 @@ const ValidatorCardItem = ({ validator }: { validator: TValidatorParticipation }
           <Copyable>{validator.addr}</Copyable>
         </Box>
         <Flex justify="between" gap="4" mt="2">
-          <Text size="3" className={'font-semibold'}>
-            Participation: {participationRate}%
-          </Text>
+          <Tooltip content="Percentage of time the validator was online and operational during the selected period." >
+            <Text size="3" className={'font-semibold'}>
+              Participation: {participationRate}%
+            </Text>
+          </Tooltip>
+
+          <Dialog.Root>
+            <Dialog.Trigger>
+              <IconButton variant="ghost" size="4">Details</IconButton>
+            </Dialog.Trigger>
+            <Dialog.Content
+              maxHeight='88vh'
+              maxWidth='450px'
+            >
+              <Flex direction="column" justify="between" gap="3">
+
+                <Heading mb="4">{validator.moniker}</Heading>
+
+                <Box>
+                  <DetailRow label="Uptime" value={validator.uptime + " %"} />
+                  <Text color="gray" size="1">
+                    Operation rate among the last 500 blocks.
+                  </Text>
+                </Box>
+                <Separator />
+                <Box>
+                  <DetailRow label="Tx Contrib" value={validator.txContrib + " %"} />
+                  <Text color="gray" size="1">
+                    Percentage of transactions contributed by the validator during the selected period.
+                  </Text>
+                </Box>
+                <Separator />
+                <Box>
+                  <DetailRow label="Operation time" value={validator.operationTime + " days"} />
+                  <Text color="gray" size="1">
+                    Number of days elapsed since the validator became operational.
+                  </Text>
+                </Box>
+                <Separator />
+                <Box>
+                  <DetailRow label="Last Up Date" value={validator.lastUpDate ? `${format(new Date(validator.lastUpDate), 'yyyy-MM-dd HH:mm')} UTC` : 'N/A'} />
+                  <Text color="gray" size="1">
+                    Last time the validator got back online and was operational.
+                  </Text>
+                </Box>
+                <Separator />
+                <Box>
+                  <DetailRow label="Last Down Date" value={validator.lastDownDate ? `${format(new Date(validator.lastDownDate), 'yyyy-MM-dd HH:mm')} UTC` : 'N/A'} />
+                  <Text color="gray" size="1">
+                    Last time the validator went offline.
+                  </Text>
+                </Box>
+                <Separator />
+                <Box>
+                  <DetailRow label="Missing Blocks" value={validator.missingBlock + " block(s)"} />
+                  <Text color="gray" size="1">
+                    Number of blocks missed by the validator during the selected period.
+                  </Text>
+                </Box>
+              </Flex>
+            </Dialog.Content>
+          </Dialog.Root>
         </Flex>
       </Flex>
-    </Card>
+    </Card >
   );
 };
 
@@ -88,6 +163,8 @@ const getPeriodStart = (period: EValidatorPeriod) => {
       return subMonths(now, 1);
     case EValidatorPeriod.YEAR:
       return subYears(now, 1);
+    case EValidatorPeriod.ALL_TIME:
+      return new Date(0);
     default:
       return subWeeks(now, 1);
   }
@@ -120,12 +197,14 @@ const renderEntries = (payload: any[], _label?: string | number) => {
               {incident.moniker}
             </Text>
           </Flex>
-          <Flex gap="1">
-            <Text size="1">Msg: </Text>
-            <Text size="1" weight="bold">
-              {incident.msg}
-            </Text>
-          </Flex>
+          {incident.msg && (
+            <Flex gap="1">
+              <Text size="1">Msg: </Text>
+              <Text size="1" weight="bold">
+                {incident.msg}
+              </Text>
+            </Flex>
+          )}
           <Flex gap="1">
             <Text size="1">From height: </Text>
             <Text size="1" weight="bold">
@@ -147,29 +226,57 @@ const renderEntries = (payload: any[], _label?: string | number) => {
 
 const ValidatorsClientPage = () => {
   const [period, setPeriod] = useState<EValidatorPeriod>(EValidatorPeriod.MONTH);
-  const { data: validators, isLoading } = useGetValidators(period);
+  const { data: participationRate, isLoading } = useGetValidators(period);
+  const { data: missingBlocks } = useGetValidatorsMissingBlock(period);
+  const { data: txContrib } = useGetValidatorTxContrib(period);
+  const { data: uptime } = useGetValidatorUptime();
   const { data: blockHeight } = useGetBlockHeight();
-  const { data: lastIncidents } = useGetValidatorsLastIncident();
+  const { data: lastIncidents } = useGetValidatorsLastIncident(period);
+  const { data: operationTime } = useGetValidatorOperationTime();
   const [query, setQuery] = useState('');
+  const [validators, setValidators] = useState([] as TCombinedValidator[]);
+
+  const combinedValidators = useMemo(() => {
+    return participationRate?.map((v) => {
+      if (!v) return null;
+
+      const up = uptime?.find((u) => u?.addr === v.addr);
+      const tx = txContrib?.find((t) => t?.addr === v.addr);
+      const missing = missingBlocks?.find((m) => m?.addr === v.addr);
+      const operation = operationTime?.find((o) => o?.addr === v.addr);
+
+      return {
+        addr: v.addr,
+        moniker: v.moniker,
+        participationRate: v.participationRate,
+        uptime: up?.uptime ?? null,
+        txContrib: tx?.txContrib ?? null,
+        lastUpDate: operation?.lastUpDate ?? null,
+        lastDownDate: operation?.lastDownDate ?? null,
+        operationTime: operation?.operationTime ?? null,
+        missingBlock: missing?.missingBlock ?? null,
+      };
+    }).filter((v): v is NonNullable<TCombinedValidator> => v !== null);
+  }, [participationRate, uptime, txContrib, missingBlocks]);
 
   const avgParticipationRate = useMemo(() => {
-    if (!validators) return 0;
-    const total = validators.reduce(
-      (acc: number, validator: TValidatorParticipation) => acc + (validator.participationRate ?? 0),
+    if (!combinedValidators?.length) return 0;
+    const total = combinedValidators.reduce(
+      (acc: number, validator: TCombinedValidator) => acc + (validator.participationRate ?? 0),
       0,
     );
-    return total / validators.length;
-  }, [validators]);
+    return total / combinedValidators.length;
+  }, [combinedValidators]);
 
   const filteredValidators = useMemo(() => {
-    if (!validators) return [];
-    if (!query.trim()) return validators;
+    if (!combinedValidators) return [];
+    if (!query.trim()) return combinedValidators;
     const q = query.trim().toLowerCase();
-    return validators.filter(
-      (v: TValidatorParticipation) =>
+    return combinedValidators.filter(
+      (v: TCombinedValidator) =>
         v.addr.toLowerCase().includes(q) || v.moniker.toLowerCase().includes(q)
     );
-  }, [validators, query]);
+  }, [combinedValidators, query]);
 
   const periodStart = getPeriodStart(period);
   // Group incidents by date and stack by level
@@ -225,7 +332,7 @@ const ValidatorsClientPage = () => {
 
       <Grid columns={{ initial: '1', md: '3' }} gap="3">
         <StatCard icon={<LayersIcon />} title="Block height" value={blockHeight?.last_stored || 0} />
-        <StatCard icon={<CheckCircledIcon />} title="Active validators" value={validators?.length} />
+        <StatCard icon={<CheckCircledIcon />} title="Active validators" value={combinedValidators?.length ?? 'N/A'} />
         <StatCard icon={<ActivityLogIcon />} title="Avg participation rate" value={avgParticipationRate ? avgParticipationRate + ' %' : 'N/A'} />
       </Grid>
 
@@ -293,6 +400,7 @@ const ValidatorsClientPage = () => {
         <Select.Root value={period} onValueChange={(v) => setPeriod(v as EValidatorPeriod)}>
           <Select.Trigger variant="soft" />
           <Select.Content>
+            <Select.Item value={EValidatorPeriod.ALL_TIME}>All Time</Select.Item>
             <Select.Item value={EValidatorPeriod.YEAR}>Past Year</Select.Item>
             <Select.Item value={EValidatorPeriod.MONTH}>Past Month</Select.Item>
             <Select.Item value={EValidatorPeriod.WEEK}>Past Week</Select.Item>
@@ -302,7 +410,7 @@ const ValidatorsClientPage = () => {
 
       <Grid columns={{ initial: '1', md: '2' }} gap="3">
         {filteredValidators.length > 0 ? (
-          filteredValidators.map((validator: TValidatorParticipation) => (
+          filteredValidators.map((validator: TCombinedValidator) => (
             <ValidatorCardItem key={validator.addr} validator={validator} />
           ))
         ) : (

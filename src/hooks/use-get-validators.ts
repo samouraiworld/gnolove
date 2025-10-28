@@ -11,14 +11,15 @@ export const prefetchValidators = async (
   period: EValidatorPeriod = EValidatorPeriod.MONTH,
 ) => {
   const validators = await getValidators(period);
-  queryClient.setQueryData(BASE_QUERY_KEY, validators);
+  queryClient.setQueryData([...BASE_QUERY_KEY, period], validators);
   return validators;
 };
 
-const useGetValidators = (period: EValidatorPeriod = EValidatorPeriod.MONTH) => {
+const useGetValidators = (period: EValidatorPeriod) => {
   return useQuery({
-    queryKey: BASE_QUERY_KEY,
+    queryKey: [ ...BASE_QUERY_KEY, period ],
     queryFn: () => getValidators(period),
+    refetchInterval: 30_000,
   });
 };
 

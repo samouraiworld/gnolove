@@ -30,6 +30,10 @@ import {
   ValidatorsParticipationSchema,
   YoutubePlaylistIdSchema,
   YoutubeVideoPlaylistSchema,
+  ValidatorsUptimeSchema,
+  ValidatorsTxContribSchema,
+  ValidatorsMissingBlockSchema,
+  ValidatorsOperationTimeSchema,
 } from '@/utils/schemas';
 import { EValidatorPeriod } from '@/utils/validators';
 
@@ -355,11 +359,14 @@ export const getYoutubePlaylistVideos = async (playlistId: string, maxResults: n
   return YoutubeVideoPlaylistSchema.parse(playlist);
 };
 
+// Validators gnomonitoring requests
 export const getValidators = async (timeFilter: EValidatorPeriod = EValidatorPeriod.MONTH) => {
   const url = new URL('/Participation', ENV.NEXT_PUBLIC_MONITORING_API_URL);
   url.searchParams.set('period', timeFilter);
 
   const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+
+  if (!data) return [];
 
   return ValidatorsParticipationSchema.parse(data);
 };
@@ -377,7 +384,52 @@ export const getValidatorLastIncident = async (timeFilter: EValidatorPeriod = EV
 
   const data = await fetchJson(url.toString(), { cache: 'no-cache' });
 
-  return ValidatorLastIncidentsSchema.parse(data || []);
+  if (!data) return [];
+
+  return ValidatorLastIncidentsSchema.parse(data);
+};
+
+export const getValidatorUptime = async () => {
+  const url = new URL('/uptime', ENV.NEXT_PUBLIC_MONITORING_API_URL);
+
+  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+
+  if (!data) return [];
+
+  return ValidatorsUptimeSchema.parse(data);
+};
+
+export const getValidatorTxContrib = async (timeFilter: EValidatorPeriod = EValidatorPeriod.MONTH) => {
+  const url = new URL('/tx_contrib', ENV.NEXT_PUBLIC_MONITORING_API_URL);
+  url.searchParams.set('period', timeFilter);
+
+  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+
+  if (!data) return [];
+
+  return ValidatorsTxContribSchema.parse(data);
+};
+
+export const getValidatorMissingBlock = async (timeFilter: EValidatorPeriod = EValidatorPeriod.MONTH) => {
+  const url = new URL('/missing_block', ENV.NEXT_PUBLIC_MONITORING_API_URL);
+  url.searchParams.set('period', timeFilter);
+
+  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+
+  if (!data) return [];
+
+  return ValidatorsMissingBlockSchema.parse(data);
+};
+
+export const getValidatorOperationTime = async (timeFilter: EValidatorPeriod = EValidatorPeriod.MONTH) => {
+  const url = new URL('/operation_time', ENV.NEXT_PUBLIC_MONITORING_API_URL);
+  url.searchParams.set('period', timeFilter);
+
+  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+
+  if (!data) return [];
+
+  return ValidatorsOperationTimeSchema.parse(data);
 };
 
 // Leaderboard webhooks

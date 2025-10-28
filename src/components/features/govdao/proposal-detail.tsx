@@ -9,13 +9,7 @@ import { guessLanguageFromFilename } from '@/utils/govdao';
 import Copyable from '@/elements/copyable';
 import { useMemo } from 'react';
 import useGetGovdaoMembers from '@/hooks/use-get-govdao-members';
-
-const DetailRow = ({ label, value }: { label: string; value: string | React.ReactNode }) => (
-  <Flex justify="between" wrap="wrap" align="center">
-    <Text color="gray">{label}</Text>
-    {typeof value === 'string' ? <Text>{value}</Text> : value}
-  </Flex>
-);
+import DetailRow from '@/elements/detail-row';
 
 const ProposalDetail = ({ id }: { id: string }) => {
   const { data: proposal } = useGetProposal(id);
