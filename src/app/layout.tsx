@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 
-import { Analytics } from '@vercel/analytics/next';
 import type { Metadata } from 'next';
 import { ThemeProvider } from 'next-themes';
 
@@ -190,7 +189,6 @@ const RootLayout = ({ children, details }: RootLayoutProps) => {
               </ThemeProvider>
             </QueryClientWrapper>
             <OfflineBanner />
-            <Analytics />
           </OfflineProvider>
         </AuthProvider>
       </body>
