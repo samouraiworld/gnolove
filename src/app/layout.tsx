@@ -142,7 +142,11 @@ const RootLayout = ({ children, details }: RootLayoutProps) => {
         <AuthProvider>
           <OfflineProvider>
             <QueryClientWrapper>
-              <ThemeProvider defaultTheme="light" attribute="class">
+              <ThemeProvider 
+                defaultTheme="system" 
+                attribute="class"
+                enableSystem={true}
+              >
                 <Theme>
                   <ToastProvider>
                     <AdenaProvider>
