@@ -70,7 +70,7 @@ const Scoreboard = ({ ...props }: FlexProps) => {
     const currentParams = searchParams.toString();
     if (urlParams === currentParams) return;
 
-    router.replace(`?${urlParams}`);
+    router.replace(`?${urlParams}`, { scroll: false });
   }, [timeFilter, exclude, selectedRepositories, router, searchParams, buildSearchParams]);
 
   useEffect(() => {
