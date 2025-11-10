@@ -3,18 +3,32 @@
 import { useTheme } from 'next-themes';
 
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
-import { IconButton } from '@radix-ui/themes';
+import { IconButton, Spinner } from '@radix-ui/themes';
+import { useEffect, useState } from 'react';
 
 const ThemeSwitch = () => {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const onClick = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
   };
 
+  if (!mounted) {
+    return (
+      <IconButton>
+        <Spinner />
+      </IconButton>
+    );
+  }
+
   return (
-    <IconButton onClick={onClick} suppressHydrationWarning>
-      {theme === 'light' ? <MoonIcon /> : <SunIcon />}
+    <IconButton onClick={onClick}>
+      {resolvedTheme === 'light' ? <MoonIcon /> : <SunIcon />}
     </IconButton>
   );
 };
