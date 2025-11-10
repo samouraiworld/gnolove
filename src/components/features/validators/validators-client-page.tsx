@@ -265,7 +265,7 @@ const ValidatorsClientPage = () => {
       (acc: number, validator: TCombinedValidator) => acc + (validator.participationRate ?? 0),
       0,
     );
-    return total / combinedValidators.length;
+    return (total / combinedValidators.length).toFixed(2);
   }, [combinedValidators]);
 
   const filteredValidators = useMemo(() => {
