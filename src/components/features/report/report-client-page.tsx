@@ -1,8 +1,11 @@
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
-
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import {
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from 'next/navigation';
 
 import {
   ArrowLeftIcon,
@@ -18,37 +21,60 @@ import {
   Text,
   Button,
   ScrollArea,
-  Separator,
+  Tabs,
 } from '@radix-ui/themes';
-import { endOfWeek, subWeeks, addWeeks, format, isAfter, getWeek, setWeek, startOfWeek } from 'date-fns';
+import {
+  endOfWeek,
+  startOfWeek,
+  subWeeks,
+  addWeeks,
+  isAfter,
+  getWeek,
+  setWeek,
+  format,
+  endOfMonth,
+  startOfMonth,
+  subMonths,
+  addMonths,
+  endOfYear,
+  startOfYear,
+  subYears,
+  addYears,
+} from 'date-fns';
 import { enUS } from 'date-fns/locale';
 
 import RepositoriesSelector from '@/modules/repositories-selector';
-
 import Loader from '@/elements/loader';
-
 import { useOffline } from '@/contexts/offline-context';
-
 import useGetPullRequestsReport from '@/hooks/use-get-pullrequests-report';
 import useGetRepositories from '@/hooks/use-get-repositories';
-
-import { TPullRequest, TPullRequestReport } from '@/utils/schemas';
-
+import { TPullRequest } from '@/utils/schemas';
 import TEAMS from '@/constants/teams';
-
 import TeamSelector from '@/modules/team-selector';
 import RepoPRStatusList from './repo-pr-status-list';
+import { TimeFilter } from '@/utils/github';
+
+const TIMEFILTER_MAP = {
+  [TimeFilter.ALL_TIME]: 'All time',
+  [TimeFilter.YEARLY]: 'Yearly',
+  [TimeFilter.MONTHLY]: 'Monthly',
+  [TimeFilter.WEEKLY]: 'Weekly',
+};
+
+export const STATUS_ORDER = [
+  'waiting_for_review',
+  'in_progress',
+  'reviewed',
+  'merged',
+  'blocked',
+] as const;
+export type Status = (typeof STATUS_ORDER)[number];
 
 type RepoStatusMap = {
   [repo: string]: {
-    [status in 'in_progress' | 'waiting_for_review' | 'reviewed' | 'merged' | 'blocked']?: TPullRequest[];
+    [status in Status]?: TPullRequest[];
   };
 };
-
-type TeamRepoStatusMap = {
-  map: Record<string, RepoStatusMap>;
-  foundAny: boolean;
-}
 
 type RepoStatusArray = [
   repo: string,
@@ -56,9 +82,11 @@ type RepoStatusArray = [
     [status in Status]?: TPullRequest[];
   }
 ];
-export type Status = keyof TPullRequestReport;
 
-export const STATUS_ORDER = ['waiting_for_review', 'in_progress', 'reviewed', 'merged', 'blocked'] as const satisfies readonly Status[];
+type TeamRepoStatusMap = {
+  map: Record<string, RepoStatusMap>;
+  foundAny: boolean;
+};
 
 const statusToEmoji = {
   waiting_for_review: '🕒',
@@ -131,18 +159,21 @@ function groupPRsByRepoAndStatus(
 ): { repoStatusMap: RepoStatusMap; foundAny: boolean } {
   const repoStatusMap: RepoStatusMap = {};
   let foundAny = false;
+
   STATUS_ORDER.forEach((status) => {
-    const prs = (pullRequests || {})[status] || [];
+    const prs = pullRequests?.[status] || [];
     prs.forEach((pr) => {
       const repo = selectedRepositories.find((r) => pr.url.includes(r));
       if (!repo) return;
       if (pr.authorLogin && !teamMembers.includes(pr.authorLogin)) return;
+
       if (!repoStatusMap[repo]) repoStatusMap[repo] = {};
       if (!repoStatusMap[repo][status]) repoStatusMap[repo][status] = [];
       repoStatusMap[repo][status].push(pr);
       foundAny = true;
     });
   });
+
   return { repoStatusMap, foundAny };
 }
 
@@ -151,13 +182,16 @@ const ReportClientPage = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
   const initialWeek = Number(searchParams.get('week'));
   const initialRefDate =
     !Number.isNaN(initialWeek) && initialWeek >= 1 && initialWeek <= 53
       ? setWeek(new Date(), initialWeek, { weekStartsOn: 0, firstWeekContainsDate: 1 })
       : new Date();
-  const [startDate, setStartDate] = useState<Date>(startOfWeek(initialRefDate, { weekStartsOn: 0 }));
-  const [endDate, setEndDate] = useState<Date>(endOfWeek(initialRefDate, { weekStartsOn: 0 }));
+
+  const [timeFilter, setTimeFilter] = useState<TimeFilter>(TimeFilter.WEEKLY);
+  const [startDate, setStartDate] = useState(startOfWeek(initialRefDate, { weekStartsOn: 0 }));
+  const [endDate, setEndDate] = useState(endOfWeek(initialRefDate, { weekStartsOn: 0 }));
   const [selectedTeams, setSelectedTeams] = useState<string[]>(['Core Team']);
   const [selectedRepositories, setSelectedRepositories] = useState<string[]>(['gnolang/gno']);
   const [copied, setCopied] = useState(false);
@@ -165,7 +199,6 @@ const ReportClientPage = () => {
   const { data: repositories = [] } = useGetRepositories();
   const { data: pullRequests, isPending } = useGetPullRequestsReport({ startDate, endDate });
 
-  // Sync week with URL: initialize from ?week= and update URL when week changes via navigation buttons
   useEffect(() => {
     const weekParam = Number(searchParams.get('week'));
     if (!Number.isNaN(weekParam) && weekParam >= 1 && weekParam <= 53) {
@@ -177,13 +210,35 @@ const ReportClientPage = () => {
       setStartDate(targetStart);
       setEndDate(targetEnd);
     } else {
-      // Ensure URL reflects current week if missing/invalid
       const currentWeek = getWeek(endDate, { weekStartsOn: 0, firstWeekContainsDate: 1 });
       const params = new URLSearchParams(searchParams.toString());
       params.set('week', String(currentWeek));
       router.replace(`${pathname}?${params.toString()}`, { scroll: false });
     }
   }, []);
+
+  useEffect(() => {
+    const now = new Date();
+    switch (timeFilter) {
+      case TimeFilter.ALL_TIME:
+        setStartDate(new Date(1980, 0, 1)); // arbitrary early date
+        setEndDate(new Date());
+        break;
+      case TimeFilter.YEARLY:
+        setStartDate(startOfYear(now));
+        setEndDate(endOfYear(now));
+        break;
+      case TimeFilter.MONTHLY:
+        setStartDate(startOfMonth(now));
+        setEndDate(endOfMonth(now));
+        break;
+      case TimeFilter.WEEKLY:
+      default:
+        setStartDate(startOfWeek(now, { weekStartsOn: 0 }));
+        setEndDate(endOfWeek(now, { weekStartsOn: 0 }));
+        break;
+    }
+  }, [timeFilter]);
 
   const pushWeekToUrl = (date: Date) => {
     const week = getWeek(date, { weekStartsOn: 0, firstWeekContainsDate: 1 });
@@ -192,34 +247,52 @@ const ReportClientPage = () => {
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
-  const handlePreviousWeek = () => {
-    const targetEnd = endOfWeek(subWeeks(endDate, 1), { weekStartsOn: 0 });
-    const targetStart = startOfWeek(targetEnd, { weekStartsOn: 0 });
-    setStartDate(targetStart);
-    setEndDate(targetEnd);
-    pushWeekToUrl(targetEnd);
-  };
-
-  const handleNextWeek = () => {
-    const targetEnd = endOfWeek(addWeeks(endDate, 1), { weekStartsOn: 0 });
-    if (!isAfter(targetEnd, endOfWeek(new Date(), { weekStartsOn: 0 }))) {
-      const targetStart = startOfWeek(targetEnd, { weekStartsOn: 0 });
-      setStartDate(targetStart);
+  const handlePreviousPeriod = () => {
+    if (timeFilter === TimeFilter.WEEKLY) {
+      const targetEnd = endOfWeek(subWeeks(endDate, 1), { weekStartsOn: 0 });
+      setStartDate(startOfWeek(targetEnd, { weekStartsOn: 0 }));
       setEndDate(targetEnd);
       pushWeekToUrl(targetEnd);
+    } else if (timeFilter === TimeFilter.MONTHLY) {
+      setStartDate(startOfMonth(subMonths(startDate, 1)));
+      setEndDate(endOfMonth(subMonths(endDate, 1)));
+    } else if (timeFilter === TimeFilter.YEARLY) {
+      setStartDate(startOfYear(subYears(startDate, 1)));
+      setEndDate(endOfYear(subYears(endDate, 1)));
+    }
+  };
+
+  const handleNextPeriod = () => {
+    if (timeFilter === TimeFilter.WEEKLY) {
+      const targetEnd = endOfWeek(addWeeks(endDate, 1), { weekStartsOn: 0 });
+      if (!isAfter(targetEnd, endOfWeek(new Date(), { weekStartsOn: 0 }))) {
+        setStartDate(startOfWeek(targetEnd, { weekStartsOn: 0 }));
+        setEndDate(targetEnd);
+        pushWeekToUrl(targetEnd);
+      }
+    } else if (timeFilter === TimeFilter.MONTHLY) {
+      const nextEnd = endOfMonth(addMonths(endDate, 1));
+      if (!isAfter(nextEnd, new Date())) {
+        setStartDate(startOfMonth(addMonths(startDate, 1)));
+        setEndDate(nextEnd);
+      }
+    } else if (timeFilter === TimeFilter.YEARLY) {
+      const nextEnd = endOfYear(addYears(endDate, 1));
+      if (!isAfter(nextEnd, new Date())) {
+        setStartDate(startOfYear(addYears(startDate, 1)));
+        setEndDate(nextEnd);
+      }
     }
   };
 
   const teamRepoStatusMap: TeamRepoStatusMap = useMemo(() => {
     if (!pullRequests) return { map: {}, foundAny: false };
-
     const map: Record<string, RepoStatusMap> = {};
     let foundAny = false;
 
     selectedTeams.forEach((teamName) => {
       const team = TEAMS.find((t) => t.name === teamName);
       if (!team) return;
-
       const teamMembers = team.members;
       const { repoStatusMap, foundAny: teamFound } = groupPRsByRepoAndStatus(
         pullRequests as Record<Status, TPullRequest[]>,
@@ -246,23 +319,28 @@ const ReportClientPage = () => {
 
   return (
     <Box>
-      <Flex direction="column" gap="4" flexGrow="1">
+      <Flex direction="column" gap="4">
         <Flex direction={{ initial: 'column', sm: 'row' }} justify="between" align="center">
           <Heading as="h1" size={{ initial: '4', sm: '6' }}>
-            <span className="mr-2" role="img" aria-label="report">
-              📋
-            </span>
-            Weekly report
+            📋 Report
           </Heading>
           <Text size={{ initial: '2', sm: '4' }} color="gray">
-            Week from {format(startDate, 'MMMM d, yyyy', { locale: enUS })} to {format(endDate, 'MMMM d, yyyy', { locale: enUS })}
+            From {timeFilter === TimeFilter.ALL_TIME ? "Big Bang" : format(startDate, 'MMMM d, yyyy', { locale: enUS })} to {format(endDate, 'MMMM d, yyyy', { locale: enUS })}
           </Text>
         </Flex>
+
         <Flex gap="2" justify="between" align="center">
-          <Button variant="ghost" onClick={handlePreviousWeek}>
-            <ArrowLeftIcon />
-            <Text className="hidden sm:block">Previous Week</Text>
-          </Button>
+
+          <Box width="64px">
+            {timeFilter === TimeFilter.WEEKLY && (
+              <Button variant="ghost" onClick={handlePreviousPeriod}>
+                <ArrowLeftIcon />
+                <Text className="hidden sm:block">Previous</Text>
+              </Button>
+            )}
+          </Box>
+
+
           <Flex direction={{ initial: 'column', sm: 'row' }} gap={{ initial: '1', sm: '2' }}>
             <TeamSelector
               teams={TEAMS}
@@ -279,34 +357,48 @@ const ReportClientPage = () => {
               Copy as markdown
             </Button>
           </Flex>
-          <Button
-            variant="ghost"
-            onClick={handleNextWeek}
-            disabled={isAfter(
-              endOfWeek(addWeeks(endDate, 1), { weekStartsOn: 0 }),
-              endOfWeek(new Date(), { weekStartsOn: 0 }),
+
+          <Box width="64px">
+            {timeFilter === TimeFilter.WEEKLY && (
+
+              <Button
+                variant="ghost"
+                onClick={handleNextPeriod}
+                disabled={isAfter(endDate, new Date())}
+              >
+                <Text className="hidden sm:block">Next</Text>
+                <ArrowRightIcon />
+              </Button>
             )}
-          >
-            <Text className="hidden sm:block">Next Week</Text>
-            <ArrowRightIcon />
-          </Button>
+
+          </Box>
         </Flex>
+
+        <Tabs.Root value={timeFilter} onValueChange={(value) => setTimeFilter(value as TimeFilter)} mb="4">
+          <Tabs.List justify="center">
+            {Object.values(TimeFilter).map((value) => (
+              <Tabs.Trigger value={value} key={value}>
+                {TIMEFILTER_MAP[value]}
+              </Tabs.Trigger>
+            ))}
+          </Tabs.List>
+        </Tabs.Root>
       </Flex>
-      <Separator my="2" size="4" />
+
       <Box position="relative">
         <ScrollArea type="auto" scrollbars="vertical" style={{ height: '80svh' }}>
           <Box pr="4">
             {(() => {
               if (!pullRequests || isPending)
                 return (
-                  <Flex justify="center" align="center" height="80svh" width="100%">
+                  <Flex justify="center" align="center" height="80svh">
                     <Loader />
                   </Flex>
                 );
 
-              if (!teamRepoStatusMap.foundAny) {
-                return <Text color="gray">No pull requests found for these teams and repositories.</Text>;
-              }
+              if (!teamRepoStatusMap.foundAny)
+                return <Text color="gray">No pull requests found for these filters.</Text>;
+
               return (
                 <Box>
                   {selectedTeams.map((teamName) => {
@@ -322,8 +414,10 @@ const ReportClientPage = () => {
                         otherRepos.push([repo, statusMap]);
                       }
                     });
+
                     otherRepos.sort(([a], [b]) => a.localeCompare(b));
                     const sortedRepos = [...gnolangRepos, ...otherRepos];
+
                     return (
                       <Box key={teamName} mb="8" p="1">
                         <Heading
@@ -338,7 +432,12 @@ const ReportClientPage = () => {
                           </Flex>
                         </Heading>
                         {sortedRepos.map(([repo, statusMap]) => (
-                          <RepoPRStatusList key={repo} repo={repo} statusMap={statusMap} isOffline={isOffline} />
+                          <RepoPRStatusList
+                            key={repo}
+                            repo={repo}
+                            statusMap={statusMap}
+                            isOffline={isOffline}
+                          />
                         ))}
                       </Box>
                     );
