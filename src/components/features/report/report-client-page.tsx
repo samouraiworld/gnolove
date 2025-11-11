@@ -358,14 +358,14 @@ const ReportClientPage = () => {
         </Flex>
 
         <Flex gap="2" justify="between" align="center">
-          <Box width="64px">
+          <Flex width="64px">
             {timeFilter !== TimeFilter.ALL_TIME && (
               <Button variant="ghost" onClick={handlePreviousPeriod}>
                 <ArrowLeftIcon />
                 <Text className="hidden sm:block">Previous</Text>
               </Button>
             )}
-          </Box>
+          </Flex>
 
           <Flex direction={{ initial: 'column', sm: 'row' }} gap={{ initial: '1', sm: '2' }}>
             <TeamSelector
@@ -384,7 +384,7 @@ const ReportClientPage = () => {
             </Button>
           </Flex>
 
-          <Box width="64px">
+          <Flex width="64px" justify="end">
             {timeFilter !== TimeFilter.ALL_TIME && (
               <Button
                 variant="ghost"
@@ -395,7 +395,7 @@ const ReportClientPage = () => {
                 <ArrowRightIcon />
               </Button>
             )}
-          </Box>
+          </Flex>
         </Flex>
 
         <Tabs.Root value={timeFilter} onValueChange={(value) => setTimeFilter(value as TimeFilter)} mb="4">
