@@ -222,7 +222,7 @@ const ReportClientPage = () => {
       params.set('week', String(currentWeek));
       router.replace(`${pathname}?${params.toString()}`, { scroll: false });
     }
-  }, []);
+  }, [searchParams]);
 
   useEffect(() => {
     const now = new Date();
@@ -241,11 +241,14 @@ const ReportClientPage = () => {
         break;
       case TimeFilter.WEEKLY:
       default:
-        setStartDate(startOfWeek(now, { weekStartsOn: 0 }));
-        setEndDate(endOfWeek(now, { weekStartsOn: 0 }));
+        const weekParam = Number(searchParams.get('week'));
+        if (Number.isNaN(weekParam) || weekParam < 1 || weekParam > 53) {
+          setStartDate(startOfWeek(now, { weekStartsOn: 0 }));
+          setEndDate(endOfWeek(now, { weekStartsOn: 0 }));
+        }
         break;
     }
-  }, [timeFilter]);
+  }, [timeFilter, searchParams]);
 
   const pushWeekToUrl = (date: Date) => {
     const week = getWeek(date, { weekStartsOn: 0, firstWeekContainsDate: 1 });
