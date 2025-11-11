@@ -198,6 +198,7 @@ const ReportClientPage = () => {
 
   const { data: repositories = [] } = useGetRepositories();
   const { data: pullRequests, isPending } = useGetPullRequestsReport({ startDate, endDate });
+  
 
   useEffect(() => {
     const weekParam = Number(searchParams.get('week'));
@@ -332,7 +333,7 @@ const ReportClientPage = () => {
         <Flex gap="2" justify="between" align="center">
 
           <Box width="64px">
-            {timeFilter === TimeFilter.WEEKLY && (
+            {timeFilter !== TimeFilter.ALL_TIME && (
               <Button variant="ghost" onClick={handlePreviousPeriod}>
                 <ArrowLeftIcon />
                 <Text className="hidden sm:block">Previous</Text>
@@ -359,8 +360,7 @@ const ReportClientPage = () => {
           </Flex>
 
           <Box width="64px">
-            {timeFilter === TimeFilter.WEEKLY && (
-
+            {timeFilter !== TimeFilter.ALL_TIME && (
               <Button
                 variant="ghost"
                 onClick={handleNextPeriod}
@@ -370,7 +370,6 @@ const ReportClientPage = () => {
                 <ArrowRightIcon />
               </Button>
             )}
-
           </Box>
         </Flex>
 
