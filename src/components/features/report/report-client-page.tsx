@@ -103,7 +103,12 @@ const reviewDecisionToEmoji = {
   '': '',
 };
 
-const generateMarkdownReport = (startDate: Date, endDate: Date, selectedTeams: string[], teamRepoStatusMap: TeamRepoStatusMap) => {
+const generateMarkdownReport = (
+  startDate: Date,
+  endDate: Date,
+  selectedTeams: string[],
+  teamRepoStatusMap: TeamRepoStatusMap,
+) => {
   let md = '# Weekly PR Report\n';
   md += `**Week:** ${format(startDate, 'MMMM d, yyyy')} - ${format(endDate, 'MMMM d, yyyy')}\n\n`;
   md += '**Legend:**\n';
@@ -115,7 +120,7 @@ const generateMarkdownReport = (startDate: Date, endDate: Date, selectedTeams: s
     const repoStatusMap = teamRepoStatusMap.map[teamName];
     if (!repoStatusMap || Object.keys(repoStatusMap).length === 0) {
       md += `No pull requests found for team **${teamName}**.\n\n`;
-      return md;
+      return;
     }
 
     md += `## 👥 ${teamName}\n`;
@@ -141,7 +146,8 @@ const generateMarkdownReport = (startDate: Date, endDate: Date, selectedTeams: s
           md += `    - **${pr.title}**  `;
           md += `([#${pr.number}](${pr.url})) by @${pr.authorLogin}`;
           if (pr.reviewDecision) {
-            md += ` ${reviewDecisionToEmoji[(pr.reviewDecision as keyof typeof reviewDecisionToEmoji)] || ''}`;
+            md += ` ${reviewDecisionToEmoji[pr.reviewDecision as keyof typeof reviewDecisionToEmoji] || ''
+              }`;
           }
           md += '\n \n';
         });
@@ -195,10 +201,10 @@ const ReportClientPage = () => {
   const [selectedTeams, setSelectedTeams] = useState<string[]>(['Core Team']);
   const [selectedRepositories, setSelectedRepositories] = useState<string[]>(['gnolang/gno']);
   const [copied, setCopied] = useState(false);
+  const [isFiltering, setIsFiltering] = useState(false);
 
   const { data: repositories = [] } = useGetRepositories();
   const { data: pullRequests, isPending } = useGetPullRequestsReport({ startDate, endDate });
-  
 
   useEffect(() => {
     const weekParam = Number(searchParams.get('week'));
@@ -222,7 +228,7 @@ const ReportClientPage = () => {
     const now = new Date();
     switch (timeFilter) {
       case TimeFilter.ALL_TIME:
-        setStartDate(new Date(1980, 0, 1)); // arbitrary early date
+        setStartDate(new Date(1980, 0, 1));
         setEndDate(new Date());
         break;
       case TimeFilter.YEARLY:
@@ -307,15 +313,33 @@ const ReportClientPage = () => {
     return { map, foundAny };
   }, [pullRequests, selectedRepositories, selectedTeams]);
 
+  useEffect(() => {
+    if (pullRequests && teamRepoStatusMap) {
+      const timeout = setTimeout(() => setIsFiltering(false), 150);
+      return () => clearTimeout(timeout);
+    }
+  }, [pullRequests, teamRepoStatusMap]);
+
   const handleCopyMarkdown = async () => {
     const md = generateMarkdownReport(startDate, endDate, selectedTeams, teamRepoStatusMap);
     try {
       await navigator.clipboard.writeText(md);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch (e) {
+    } catch {
       setCopied(false);
     }
+  };
+
+  // wrappers to enable filtering loader
+  const handleTeamsChange = (teams: string[]) => {
+    setIsFiltering(true);
+    setTimeout(() => setSelectedTeams(teams), 0);
+  };
+
+  const handleRepositoriesChange = (repos: string[]) => {
+    setIsFiltering(true);
+    setTimeout(() => setSelectedRepositories(repos), 0);
   };
 
   return (
@@ -326,12 +350,11 @@ const ReportClientPage = () => {
             📋 Report
           </Heading>
           <Text size={{ initial: '2', sm: '4' }} color="gray">
-            From {timeFilter === TimeFilter.ALL_TIME ? "Big Bang" : format(startDate, 'MMMM d, yyyy', { locale: enUS })} to {format(endDate, 'MMMM d, yyyy', { locale: enUS })}
+            From {timeFilter === TimeFilter.ALL_TIME ? 'Big Bang' : format(startDate, 'MMMM d, yyyy', { locale: enUS })} to {format(endDate, 'MMMM d, yyyy', { locale: enUS })}
           </Text>
         </Flex>
 
         <Flex gap="2" justify="between" align="center">
-
           <Box width="64px">
             {timeFilter !== TimeFilter.ALL_TIME && (
               <Button variant="ghost" onClick={handlePreviousPeriod}>
@@ -341,17 +364,16 @@ const ReportClientPage = () => {
             )}
           </Box>
 
-
           <Flex direction={{ initial: 'column', sm: 'row' }} gap={{ initial: '1', sm: '2' }}>
             <TeamSelector
               teams={TEAMS}
               selectedTeams={selectedTeams}
-              onSelectedTeamsChange={setSelectedTeams}
+              onSelectedTeamsChange={handleTeamsChange}
             />
             <RepositoriesSelector
               repositories={repositories}
               selectedRepositories={selectedRepositories}
-              onSelectedRepositoriesChange={setSelectedRepositories}
+              onSelectedRepositoriesChange={handleRepositoriesChange}
             />
             <Button onClick={handleCopyMarkdown} variant="soft">
               {copied ? <CheckIcon /> : <CopyIcon />}
@@ -388,7 +410,7 @@ const ReportClientPage = () => {
         <ScrollArea type="auto" scrollbars="vertical" style={{ height: '80svh' }}>
           <Box pr="4">
             {(() => {
-              if (!pullRequests || isPending)
+              if (isPending || isFiltering)
                 return (
                   <Flex justify="center" align="center" height="80svh">
                     <Loader />
@@ -403,17 +425,13 @@ const ReportClientPage = () => {
                   {selectedTeams.map((teamName) => {
                     const repoStatusMap = teamRepoStatusMap.map[teamName];
                     if (!repoStatusMap || Object.keys(repoStatusMap).length === 0) return null;
-                    // Sort repos: gnolang/* first (original order), then others alphabetically
+
                     const gnolangRepos: [string, any][] = [];
                     const otherRepos: [string, any][] = [];
                     Object.entries(repoStatusMap).forEach(([repo, statusMap]) => {
-                      if (repo.startsWith('gnolang/')) {
-                        gnolangRepos.push([repo, statusMap]);
-                      } else {
-                        otherRepos.push([repo, statusMap]);
-                      }
+                      if (repo.startsWith('gnolang/')) gnolangRepos.push([repo, statusMap]);
+                      else otherRepos.push([repo, statusMap]);
                     });
-
                     otherRepos.sort(([a], [b]) => a.localeCompare(b));
                     const sortedRepos = [...gnolangRepos, ...otherRepos];
 
