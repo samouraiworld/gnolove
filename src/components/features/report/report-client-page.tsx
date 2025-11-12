@@ -12,6 +12,8 @@ import {
   ArrowRightIcon,
   CheckIcon,
   CopyIcon,
+  DotsVerticalIcon,
+  DownloadIcon,
   PersonIcon,
 } from '@radix-ui/react-icons';
 import {
@@ -22,6 +24,7 @@ import {
   Button,
   ScrollArea,
   Tabs,
+  DropdownMenu,
 } from '@radix-ui/themes';
 import {
   endOfWeek,
@@ -329,9 +332,29 @@ const ReportClientPage = () => {
       await navigator.clipboard.writeText(md);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch {
-      console.error('Failed to copy markdown report to clipboard');
+    } catch (e) {
+      console.error('Failed to copy markdown report to clipboard', e);
       setCopied(false);
+    }
+  };
+
+  const handleDownloadMarkdown = async () => {
+    const md = generateMarkdownReport(startDate, endDate, selectedTeams, teamRepoStatusMap);
+
+    try {
+      const blob = new Blob([md], { type: 'text/markdown' });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `pr-report-${format(startDate, 'yyyy-MM-dd')}-to-${format(endDate, 'yyyy-MM-dd')}.md`;
+      document.body.appendChild(a);
+      a.click();
+
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      console.error('Failed to download markdown report', e);
     }
   };
 
@@ -379,10 +402,37 @@ const ReportClientPage = () => {
               selectedRepositories={selectedRepositories}
               onSelectedRepositoriesChange={handleRepositoriesChange}
             />
-            <Button onClick={handleCopyMarkdown} variant="soft">
-              {copied ? <CheckIcon /> : <CopyIcon />}
-              Copy as markdown
-            </Button>
+
+            <Flex className="hidden sm:flex" gap="2">
+              <Button onClick={handleCopyMarkdown} variant="soft">
+                {copied ? <CheckIcon /> : <CopyIcon />}
+                Copy as markdown
+              </Button>
+              <Button onClick={handleDownloadMarkdown} variant="soft">
+                <DownloadIcon /> Download as markdown
+              </Button>
+            </Flex>
+
+            <Box className="sm:hidden">
+              <DropdownMenu.Root>
+                <DropdownMenu.Trigger>
+                  <Button className="w-full" variant="soft">
+                    <DotsVerticalIcon />
+                    Actions
+                  </Button>
+                </DropdownMenu.Trigger>
+                <DropdownMenu.Content>
+                  <DropdownMenu.Item onClick={handleCopyMarkdown}>
+                    {copied ? <CheckIcon /> : <CopyIcon />}
+                    Copy as markdown
+                  </DropdownMenu.Item>
+                  <DropdownMenu.Item onClick={handleDownloadMarkdown}>
+                    <DownloadIcon />
+                    Download as markdown
+                  </DropdownMenu.Item>
+                </DropdownMenu.Content>
+              </DropdownMenu.Root>
+            </Box>
           </Flex>
 
           <Flex width="64px" justify="end">
