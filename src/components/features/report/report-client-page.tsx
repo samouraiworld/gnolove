@@ -330,6 +330,7 @@ const ReportClientPage = () => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
+      console.error('Failed to copy markdown report to clipboard');
       setCopied(false);
     }
   };
@@ -337,12 +338,12 @@ const ReportClientPage = () => {
   // wrappers to enable filtering loader
   const handleTeamsChange = (teams: string[]) => {
     setIsFiltering(true);
-    setTimeout(() => setSelectedTeams(teams), 0);
+    setSelectedTeams(teams);
   };
 
   const handleRepositoriesChange = (repos: string[]) => {
     setIsFiltering(true);
-    setTimeout(() => setSelectedRepositories(repos), 0);
+    setSelectedRepositories(repos);
   };
 
   return (
