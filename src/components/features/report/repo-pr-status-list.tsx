@@ -171,11 +171,11 @@ const RepoPRStatusList = ({ repo, statusMap, isOffline }: RepoPRStatusListProps)
                                       {pr.url}
                                     </Link>
                                   </Text>
-                                  {/* {pr.reviews && pr.reviews.length > 0 && ( */}
+                                  {pr.reviews && pr.reviews.length > 0 && (
                                     <Text size="1" color="gray">
                                       <Text weight="bold">Reviewed: </Text> {pr.reviews?.length} times
                                     </Text>
-                                  {/* )} */}
+                                  )}
                                 </Flex>
                               </HoverCard.Content>
                             </HoverCard.Root>
