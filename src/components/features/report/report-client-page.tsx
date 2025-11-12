@@ -224,8 +224,6 @@ const ReportClientPage = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const [selectedTeams, setSelectedTeams] = useState<string[]>(['Core Team']);
-  const [selectedRepositories, setSelectedRepositories] = useState<string[]>(['gnolang/gno']);
   const [copied, setCopied] = useState(false);
   const [isFiltering, setIsFiltering] = useState(false);
 
@@ -237,6 +235,8 @@ const ReportClientPage = () => {
     const year = Number(params.get('year')) || new Date().getFullYear();
     const month = Number(params.get('month')) || new Date().getMonth() + 1;
     const week = Number(params.get('week')) || getWeek(new Date());
+    const repos = params.getAll('repos').length ? params.getAll('repos') : ['gnolang/gno'];
+    const teams = params.getAll('teams').length ? params.getAll('teams') : ['Core Team'];
 
     let start: Date, end: Date;
     switch (filter) {
@@ -259,7 +259,7 @@ const ReportClientPage = () => {
         end = new Date();
     }
 
-    return { filter, year, month, week, start, end };
+    return { filter, year, month, week, start, end, repos, teams };
   }, [searchParams]);
 
   const [timeFilter, setTimeFilter] = useState(initialParams.filter);
@@ -268,6 +268,8 @@ const ReportClientPage = () => {
   const [year, setYear] = useState(initialParams.year);
   const [month, setMonth] = useState(initialParams.month);
   const [week, setWeekNum] = useState(initialParams.week);
+  const [selectedTeams, setSelectedTeams] = useState<string[]>(initialParams.teams);
+  const [selectedRepositories, setSelectedRepositories] = useState<string[]>(initialParams.repos);
   const { data: pullRequests, isPending } = useGetPullRequestsReport({ startDate, endDate });
 
   useEffect(() => {
@@ -282,57 +284,60 @@ const ReportClientPage = () => {
       params.set('week', String(week));
     }
 
+    selectedRepositories.forEach((repo) => params.append('repos', repo));
+    selectedTeams.forEach((team) => params.append('teams', team));
+
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
-  }, [timeFilter, year, month, week]);
+  }, [timeFilter, year, month, week, selectedTeams, selectedRepositories]);
 
   const handleNextPeriod = () => {
-  if (timeFilter === TimeFilter.WEEKLY) {
-    const next = addWeeks(startDate, 1);
-    setStartDate(startOfWeek(next));
-    setEndDate(endOfWeek(next));
-    setWeekNum(getWeek(next));
-    setYear(getYear(next));
-  } else if (timeFilter === TimeFilter.MONTHLY) {
-    const next = addMonths(startDate, 1);
-    setStartDate(startOfMonth(next));
-    setEndDate(endOfMonth(next));
-    setMonth(getMonth(next) + 1);
-    setYear(getYear(next));
-  } else if (timeFilter === TimeFilter.YEARLY) {
-    const next = addYears(startDate, 1);
-    setStartDate(startOfYear(next));
-    setEndDate(endOfYear(next));
-    setYear(getYear(next));
-  }
-};
+    if (timeFilter === TimeFilter.WEEKLY) {
+      const next = addWeeks(startDate, 1);
+      setStartDate(startOfWeek(next));
+      setEndDate(endOfWeek(next));
+      setWeekNum(getWeek(next));
+      setYear(getYear(next));
+    } else if (timeFilter === TimeFilter.MONTHLY) {
+      const next = addMonths(startDate, 1);
+      setStartDate(startOfMonth(next));
+      setEndDate(endOfMonth(next));
+      setMonth(getMonth(next) + 1);
+      setYear(getYear(next));
+    } else if (timeFilter === TimeFilter.YEARLY) {
+      const next = addYears(startDate, 1);
+      setStartDate(startOfYear(next));
+      setEndDate(endOfYear(next));
+      setYear(getYear(next));
+    }
+  };
 
-const handlePreviousPeriod = () => {
-  if (timeFilter === TimeFilter.WEEKLY) {
-    const prev = subWeeks(startDate, 1);
-    setStartDate(startOfWeek(prev));
-    setEndDate(endOfWeek(prev));
-    setWeekNum(getWeek(prev));
-    setYear(getYear(prev));
-  } else if (timeFilter === TimeFilter.MONTHLY) {
-    const prev = subMonths(startDate, 1);
-    setStartDate(startOfMonth(prev));
-    setEndDate(endOfMonth(prev));
-    setMonth(getMonth(prev) + 1);
-    setYear(getYear(prev));
-  } else if (timeFilter === TimeFilter.YEARLY) {
-    const prev = subYears(startDate, 1);
-    setStartDate(startOfYear(prev));
-    setEndDate(endOfYear(prev));
-    setYear(getYear(prev));
+  const handlePreviousPeriod = () => {
+    if (timeFilter === TimeFilter.WEEKLY) {
+      const prev = subWeeks(startDate, 1);
+      setStartDate(startOfWeek(prev));
+      setEndDate(endOfWeek(prev));
+      setWeekNum(getWeek(prev));
+      setYear(getYear(prev));
+    } else if (timeFilter === TimeFilter.MONTHLY) {
+      const prev = subMonths(startDate, 1);
+      setStartDate(startOfMonth(prev));
+      setEndDate(endOfMonth(prev));
+      setMonth(getMonth(prev) + 1);
+      setYear(getYear(prev));
+    } else if (timeFilter === TimeFilter.YEARLY) {
+      const prev = subYears(startDate, 1);
+      setStartDate(startOfYear(prev));
+      setEndDate(endOfYear(prev));
+      setYear(getYear(prev));
+    }
   }
-}
 
-  useEffect(() => {    
+  useEffect(() => {
     const { start, end } = TIMEFILTER_CONFIG[timeFilter].getRange(
       timeFilter === TimeFilter.YEARLY ? year :
-      timeFilter === TimeFilter.MONTHLY ? month :
-      timeFilter === TimeFilter.WEEKLY ? week :
-      undefined,
+        timeFilter === TimeFilter.MONTHLY ? month :
+          timeFilter === TimeFilter.WEEKLY ? week :
+            undefined,
     );
     setStartDate(start);
     setEndDate(end);
