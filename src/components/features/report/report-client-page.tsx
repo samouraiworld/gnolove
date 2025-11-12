@@ -43,6 +43,8 @@ import {
   startOfYear,
   subYears,
   addYears,
+  getMonth,
+  getYear,
 } from 'date-fns';
 import { enUS } from 'date-fns/locale';
 
@@ -57,12 +59,42 @@ import TeamSelector from '@/modules/team-selector';
 import RepoPRStatusList from './repo-pr-status-list';
 import { TimeFilter } from '@/utils/github';
 
-const TIMEFILTER_MAP = {
-  [TimeFilter.ALL_TIME]: 'All time',
-  [TimeFilter.YEARLY]: 'Yearly',
-  [TimeFilter.MONTHLY]: 'Monthly',
-  [TimeFilter.WEEKLY]: 'Weekly',
-};
+export const TIMEFILTER_CONFIG = {
+  [TimeFilter.ALL_TIME]: {
+    label: 'All time',
+    getRange: () => ({
+      start: new Date(1980, 0, 1),
+      end: new Date(),
+    }),
+  },
+  [TimeFilter.YEARLY]: {
+    label: 'Yearly',
+    getRange: (year = new Date().getFullYear()) => ({
+      start: startOfYear(new Date(year, 0, 1)),
+      end: endOfYear(new Date(year, 0, 1)),
+      year,
+    }),
+  },
+  [TimeFilter.MONTHLY]: {
+    label: 'Monthly',
+    getRange: (month = new Date().getMonth() + 1) => ({
+      start: startOfMonth(new Date(new Date().getFullYear(), month - 1, 1)),
+      end: endOfMonth(new Date(new Date().getFullYear(), month - 1, 1)),
+      month,
+    }),
+  },
+  [TimeFilter.WEEKLY]: {
+    label: 'Weekly',
+    getRange: (week = getWeek(new Date())) => {
+      const ref = setWeek(new Date(), week, { weekStartsOn: 0 });
+      return {
+        start: startOfWeek(ref, { weekStartsOn: 0 }),
+        end: endOfWeek(ref, { weekStartsOn: 0 }),
+        week,
+      };
+    },
+  },
+} as const;
 
 export const STATUS_ORDER = [
   'waiting_for_review',
@@ -123,7 +155,7 @@ const generateMarkdownReport = (
     const repoStatusMap = teamRepoStatusMap.map[teamName];
     if (!repoStatusMap || Object.keys(repoStatusMap).length === 0) {
       md += `No pull requests found for team **${teamName}**.\n\n`;
-      return;
+      return md;
     }
 
     md += `## 👥 ${teamName}\n`;
@@ -192,111 +224,120 @@ const ReportClientPage = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const initialWeek = Number(searchParams.get('week'));
-  const initialRefDate =
-    !Number.isNaN(initialWeek) && initialWeek >= 1 && initialWeek <= 53
-      ? setWeek(new Date(), initialWeek, { weekStartsOn: 0, firstWeekContainsDate: 1 })
-      : new Date();
-
-  const [timeFilter, setTimeFilter] = useState<TimeFilter>(TimeFilter.WEEKLY);
-  const [startDate, setStartDate] = useState(startOfWeek(initialRefDate, { weekStartsOn: 0 }));
-  const [endDate, setEndDate] = useState(endOfWeek(initialRefDate, { weekStartsOn: 0 }));
   const [selectedTeams, setSelectedTeams] = useState<string[]>(['Core Team']);
   const [selectedRepositories, setSelectedRepositories] = useState<string[]>(['gnolang/gno']);
   const [copied, setCopied] = useState(false);
   const [isFiltering, setIsFiltering] = useState(false);
 
   const { data: repositories = [] } = useGetRepositories();
+
+  const initialParams = useMemo(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    const filter = (params.get('filter') as TimeFilter) || TimeFilter.WEEKLY;
+    const year = Number(params.get('year')) || new Date().getFullYear();
+    const month = Number(params.get('month')) || new Date().getMonth() + 1;
+    const week = Number(params.get('week')) || getWeek(new Date());
+
+    let start: Date, end: Date;
+    switch (filter) {
+      case TimeFilter.YEARLY:
+        start = startOfYear(new Date(year, 0, 1));
+        end = endOfYear(new Date(year, 0, 1));
+        break;
+      case TimeFilter.MONTHLY:
+        start = startOfMonth(new Date(year, month - 1, 1));
+        end = endOfMonth(new Date(year, month - 1, 1));
+        break;
+      case TimeFilter.WEEKLY:
+        const ref = setWeek(new Date(year, 0, 1), week, { weekStartsOn: 0 });
+        start = startOfWeek(ref, { weekStartsOn: 0 });
+        end = endOfWeek(ref, { weekStartsOn: 0 });
+        break;
+      case TimeFilter.ALL_TIME:
+      default:
+        start = new Date(1980, 0, 1);
+        end = new Date();
+    }
+
+    return { filter, year, month, week, start, end };
+  }, [searchParams]);
+
+  const [timeFilter, setTimeFilter] = useState(initialParams.filter);
+  const [startDate, setStartDate] = useState(initialParams.start);
+  const [endDate, setEndDate] = useState(initialParams.end);
+  const [year, setYear] = useState(initialParams.year);
+  const [month, setMonth] = useState(initialParams.month);
+  const [week, setWeekNum] = useState(initialParams.week);
   const { data: pullRequests, isPending } = useGetPullRequestsReport({ startDate, endDate });
 
   useEffect(() => {
-    const weekParam = Number(searchParams.get('week'));
-    if (!Number.isNaN(weekParam) && weekParam >= 1 && weekParam <= 53) {
-      const targetEnd = endOfWeek(
-        setWeek(new Date(), weekParam, { weekStartsOn: 0, firstWeekContainsDate: 1 }),
-        { weekStartsOn: 0 },
-      );
-      const targetStart = startOfWeek(targetEnd, { weekStartsOn: 0 });
-      setStartDate(targetStart);
-      setEndDate(targetEnd);
-    } else {
-      const currentWeek = getWeek(endDate, { weekStartsOn: 0, firstWeekContainsDate: 1 });
-      const params = new URLSearchParams(searchParams.toString());
-      params.set('week', String(currentWeek));
-      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
-    }
-  }, [searchParams]);
+    const params = new URLSearchParams();
+    params.set('filter', timeFilter);
 
-  useEffect(() => {
-    const now = new Date();
-    switch (timeFilter) {
-      case TimeFilter.ALL_TIME:
-        setStartDate(new Date(1980, 0, 1));
-        setEndDate(new Date());
-        break;
-      case TimeFilter.YEARLY:
-        setStartDate(startOfYear(now));
-        setEndDate(endOfYear(now));
-        break;
-      case TimeFilter.MONTHLY:
-        setStartDate(startOfMonth(now));
-        setEndDate(endOfMonth(now));
-        break;
-      case TimeFilter.WEEKLY:
-      default:
-        const weekParam = Number(searchParams.get('week'));
-        if (Number.isNaN(weekParam) || weekParam < 1 || weekParam > 53) {
-          setStartDate(startOfWeek(now, { weekStartsOn: 0 }));
-          setEndDate(endOfWeek(now, { weekStartsOn: 0 }));
-        }
-        break;
-    }
-  }, [timeFilter, searchParams]);
-
-  const pushWeekToUrl = (date: Date) => {
-    const week = getWeek(date, { weekStartsOn: 0, firstWeekContainsDate: 1 });
-    const params = new URLSearchParams(searchParams.toString());
-    params.set('week', String(week));
-    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
-  };
-
-  const handlePreviousPeriod = () => {
-    if (timeFilter === TimeFilter.WEEKLY) {
-      const targetEnd = endOfWeek(subWeeks(endDate, 1), { weekStartsOn: 0 });
-      setStartDate(startOfWeek(targetEnd, { weekStartsOn: 0 }));
-      setEndDate(targetEnd);
-      pushWeekToUrl(targetEnd);
+    if (timeFilter === TimeFilter.YEARLY) {
+      params.set('year', String(year));
     } else if (timeFilter === TimeFilter.MONTHLY) {
-      setStartDate(startOfMonth(subMonths(startDate, 1)));
-      setEndDate(endOfMonth(subMonths(endDate, 1)));
-    } else if (timeFilter === TimeFilter.YEARLY) {
-      setStartDate(startOfYear(subYears(startDate, 1)));
-      setEndDate(endOfYear(subYears(endDate, 1)));
+      params.set('month', String(month));
+    } else if (timeFilter === TimeFilter.WEEKLY) {
+      params.set('week', String(week));
     }
-  };
+
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+  }, [timeFilter, year, month, week]);
 
   const handleNextPeriod = () => {
-    if (timeFilter === TimeFilter.WEEKLY) {
-      const targetEnd = endOfWeek(addWeeks(endDate, 1), { weekStartsOn: 0 });
-      if (!isAfter(targetEnd, endOfWeek(new Date(), { weekStartsOn: 0 }))) {
-        setStartDate(startOfWeek(targetEnd, { weekStartsOn: 0 }));
-        setEndDate(targetEnd);
-        pushWeekToUrl(targetEnd);
-      }
-    } else if (timeFilter === TimeFilter.MONTHLY) {
-      const nextEnd = endOfMonth(addMonths(endDate, 1));
-      if (!isAfter(nextEnd, new Date())) {
-        setStartDate(startOfMonth(addMonths(startDate, 1)));
-        setEndDate(nextEnd);
-      }
-    } else if (timeFilter === TimeFilter.YEARLY) {
-      const nextEnd = endOfYear(addYears(endDate, 1));
-      if (!isAfter(nextEnd, new Date())) {
-        setStartDate(startOfYear(addYears(startDate, 1)));
-        setEndDate(nextEnd);
-      }
-    }
-  };
+  if (timeFilter === TimeFilter.WEEKLY) {
+    const next = addWeeks(startDate, 1);
+    setStartDate(startOfWeek(next));
+    setEndDate(endOfWeek(next));
+    setWeekNum(getWeek(next));
+    setYear(getYear(next));
+  } else if (timeFilter === TimeFilter.MONTHLY) {
+    const next = addMonths(startDate, 1);
+    setStartDate(startOfMonth(next));
+    setEndDate(endOfMonth(next));
+    setMonth(getMonth(next) + 1);
+    setYear(getYear(next));
+  } else if (timeFilter === TimeFilter.YEARLY) {
+    const next = addYears(startDate, 1);
+    setStartDate(startOfYear(next));
+    setEndDate(endOfYear(next));
+    setYear(getYear(next));
+  }
+};
+
+const handlePreviousPeriod = () => {
+  if (timeFilter === TimeFilter.WEEKLY) {
+    const prev = subWeeks(startDate, 1);
+    setStartDate(startOfWeek(prev));
+    setEndDate(endOfWeek(prev));
+    setWeekNum(getWeek(prev));
+    setYear(getYear(prev));
+  } else if (timeFilter === TimeFilter.MONTHLY) {
+    const prev = subMonths(startDate, 1);
+    setStartDate(startOfMonth(prev));
+    setEndDate(endOfMonth(prev));
+    setMonth(getMonth(prev) + 1);
+    setYear(getYear(prev));
+  } else if (timeFilter === TimeFilter.YEARLY) {
+    const prev = subYears(startDate, 1);
+    setStartDate(startOfYear(prev));
+    setEndDate(endOfYear(prev));
+    setYear(getYear(prev));
+  }
+}
+
+  useEffect(() => {    
+    const { start, end } = TIMEFILTER_CONFIG[timeFilter].getRange(
+      timeFilter === TimeFilter.YEARLY ? year :
+      timeFilter === TimeFilter.MONTHLY ? month :
+      timeFilter === TimeFilter.WEEKLY ? week :
+      undefined,
+    );
+    setStartDate(start);
+    setEndDate(end);
+
+  }, [timeFilter]);
 
   const teamRepoStatusMap: TeamRepoStatusMap = useMemo(() => {
     if (!pullRequests) return { map: {}, foundAny: false };
@@ -452,8 +493,8 @@ const ReportClientPage = () => {
         <Tabs.Root value={timeFilter} onValueChange={(value) => setTimeFilter(value as TimeFilter)} mb="4">
           <Tabs.List justify="center">
             {Object.values(TimeFilter).map((value) => (
-              <Tabs.Trigger value={value} key={value}>
-                {TIMEFILTER_MAP[value]}
+              <Tabs.Trigger key={value} value={value}>
+                {TIMEFILTER_CONFIG[value].label}
               </Tabs.Trigger>
             ))}
           </Tabs.List>
