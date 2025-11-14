@@ -77,9 +77,9 @@ export const TIMEFILTER_CONFIG = {
   },
   [TimeFilter.MONTHLY]: {
     label: 'Monthly',
-    getRange: (month = new Date().getMonth() + 1) => ({
-      start: startOfMonth(new Date(new Date().getFullYear(), month - 1, 1)),
-      end: endOfMonth(new Date(new Date().getFullYear(), month - 1, 1)),
+    getRange: (month = new Date().getMonth()) => ({
+      start: startOfMonth(new Date(new Date().getFullYear(), month, 1)),
+      end: endOfMonth(new Date(new Date().getFullYear(), month, 1)),
       month,
     }),
   },
@@ -233,7 +233,7 @@ const ReportClientPage = () => {
     const params = new URLSearchParams(searchParams.toString());
     const filter = (params.get('filter') as TimeFilter) || TimeFilter.WEEKLY;
     const year = Number(params.get('year')) || new Date().getFullYear();
-    const month = Number(params.get('month')) || new Date().getMonth() + 1;
+    const month = Number(params.get('month')) || new Date().getMonth();
     const week = Number(params.get('week')) || getWeek(new Date());
     const repos = params.getAll('repos').length ? params.getAll('repos') : ['gnolang/gno'];
     const teams = params.getAll('teams').length ? params.getAll('teams') : ['Core Team'];
@@ -245,8 +245,8 @@ const ReportClientPage = () => {
         end = endOfYear(new Date(year, 0, 1));
         break;
       case TimeFilter.MONTHLY:
-        start = startOfMonth(new Date(year, month - 1, 1));
-        end = endOfMonth(new Date(year, month - 1, 1));
+        start = startOfMonth(new Date(year, month, 1));
+        end = endOfMonth(new Date(year, month, 1));
         break;
       case TimeFilter.WEEKLY:
         const ref = setWeek(new Date(year, 0, 1), week, { weekStartsOn: 0 });
@@ -301,7 +301,7 @@ const ReportClientPage = () => {
       const next = addMonths(startDate, 1);
       setStartDate(startOfMonth(next));
       setEndDate(endOfMonth(next));
-      setMonth(getMonth(next) + 1);
+      setMonth(getMonth(next));
       setYear(getYear(next));
     } else if (timeFilter === TimeFilter.YEARLY) {
       const next = addYears(startDate, 1);
@@ -322,7 +322,7 @@ const ReportClientPage = () => {
       const prev = subMonths(startDate, 1);
       setStartDate(startOfMonth(prev));
       setEndDate(endOfMonth(prev));
-      setMonth(getMonth(prev) + 1);
+      setMonth(getMonth(prev));
       setYear(getYear(prev));
     } else if (timeFilter === TimeFilter.YEARLY) {
       const prev = subYears(startDate, 1);
@@ -333,12 +333,23 @@ const ReportClientPage = () => {
   }
 
   useEffect(() => {
-    const { start, end } = TIMEFILTER_CONFIG[timeFilter].getRange(
-      timeFilter === TimeFilter.YEARLY ? year :
-        timeFilter === TimeFilter.MONTHLY ? month :
-          timeFilter === TimeFilter.WEEKLY ? week :
-            undefined,
-    );
+    let start: Date, end: Date;
+
+    switch (timeFilter) {
+      case TimeFilter.ALL_TIME:
+        ({ start, end } = TIMEFILTER_CONFIG[timeFilter].getRange());
+        break;
+      case TimeFilter.YEARLY:
+        ({ start, end } = TIMEFILTER_CONFIG[timeFilter].getRange(year));
+        break;
+      case TimeFilter.MONTHLY:
+        ({ start, end } = TIMEFILTER_CONFIG[timeFilter].getRange(month));
+        break;
+      case TimeFilter.WEEKLY:
+        ({ start, end } = TIMEFILTER_CONFIG[timeFilter].getRange(week));
+        break;
+    }
+
     setStartDate(start);
     setEndDate(end);
 
