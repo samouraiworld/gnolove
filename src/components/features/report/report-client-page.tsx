@@ -59,6 +59,9 @@ import TeamSelector from '@/modules/team-selector';
 import RepoPRStatusList from './repo-pr-status-list';
 import { TimeFilter } from '@/utils/github';
 
+const DEFAULT_REPOSITORIES = ['gnolang/gno'];
+const DEFAULT_TEAMS = ['Core Team'];
+
 export const TIMEFILTER_CONFIG = {
   [TimeFilter.ALL_TIME]: {
     label: 'All time',
@@ -235,8 +238,8 @@ const ReportClientPage = () => {
     const year = Number(params.get('year')) || new Date().getFullYear();
     const month = Number(params.get('month')) || new Date().getMonth();
     const week = Number(params.get('week')) || getWeek(new Date());
-    const repos = params.getAll('repos').length ? params.getAll('repos') : ['gnolang/gno'];
-    const teams = params.getAll('teams').length ? params.getAll('teams') : ['Core Team'];
+    const repos = params.getAll('repos').length ? params.getAll('repos') : DEFAULT_REPOSITORIES;
+    const teams = params.getAll('teams').length ? params.getAll('teams') : DEFAULT_TEAMS;
 
     let start: Date, end: Date;
     switch (filter) {
