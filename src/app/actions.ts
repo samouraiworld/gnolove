@@ -21,6 +21,7 @@ import {
   ReportHourSchema,
   RepositorySchema,
   ScoreFactorsSchema,
+  LastSyncSchema,
   TLeaderboardWebhook,
   TMonitoringWebhook,
   TMonitoringWebhookKind,
@@ -58,6 +59,13 @@ export const getContributors = async (timeFilter: TimeFilter, excludeCoreTeam?: 
   const data = await fetchJson(url.toString(), { cache: 'no-cache' });
 
   return z.array(EnhancedUserWithStatsSchema).parse(data);
+};
+
+export const getLastSync = async (): Promise<string | null> => {
+  const url = new URL('/sync/last', ENV.NEXT_PUBLIC_API_URL);
+  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+  const parsed = LastSyncSchema.parse(data);
+  return parsed?.lastSyncedAt ?? null;
 };
 
 // Monitoring webhooks (GOVDAO, VALIDATOR)

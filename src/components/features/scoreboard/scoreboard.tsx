@@ -14,6 +14,7 @@ import Loader from '@/elements/loader';
 
 import useGetContributors from '@/hooks/use-get-contributors';
 import useGetRepositories from '@/hooks/use-get-repositories';
+import useGetLastSync from '@/hooks/use-get-last-sync';
 
 import { getTimeFilterFromSearchParam, TimeFilter } from '@/utils/github';
 
@@ -54,6 +55,7 @@ const Scoreboard = ({ ...props }: FlexProps) => {
     exclude,
     repositories: selectedRepositories,
   });
+  const { data: lastSyncedAt } = useGetLastSync();
 
   const filteredContributors = useMemo(() => (contributors ?? []).filter(({ score }) => score), [contributors]);
 
@@ -95,6 +97,12 @@ const Scoreboard = ({ ...props }: FlexProps) => {
           ))}
         </Tabs.List>
       </Tabs.Root>
+
+      {lastSyncedAt && (
+        <Text size="1" color="gray" align="center" mb="4">
+          Last updated: {new Date(lastSyncedAt).toLocaleString()}
+        </Text>
+      )}
 
       <Flex
         direction={{ initial: 'column', sm: 'row' }}

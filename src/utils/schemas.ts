@@ -390,6 +390,11 @@ export const ScoreFactorsSchema = z.object({
 
 export type TScoreFactors = z.infer<typeof ScoreFactorsSchema>;
 
+export const LastSyncSchema = z.object({
+  lastSyncedAt: z.string().nullable().optional(),
+});
+export type TLastSync = z.infer<typeof LastSyncSchema>;
+
 export const YoutubePlaylistIdSchema = z.string();
 export type TYoutubePlaylistId = z.infer<typeof YoutubePlaylistIdSchema>;
 
