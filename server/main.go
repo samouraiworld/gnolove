@@ -136,6 +136,9 @@ func main() {
 	router.HandleFunc("/contributors/{login}", contributor.HandleGetContributor(database))
 	router.Post("/github/link", handler.HandleLink(database))
 
+	// Get last sync time
+	router.HandleFunc("/sync/last", handler.HandleGetLastSync(syncer))
+
 	// reports
 	// Leaderboard webhook endpoints
 	router.Group(func(r chi.Router) {

@@ -27,6 +27,7 @@ type Syncer struct {
 	logger        *zap.SugaredLogger
 	graphqlClient graphql.Client
 	rpcClient     *rpcclient.RPCClient
+	lastSyncedAt  time.Time
 }
 
 func NewSyncer(db *gorm.DB, repositories []models.Repository, logger *zap.SugaredLogger) *Syncer {
@@ -48,6 +49,7 @@ func NewSyncer(db *gorm.DB, repositories []models.Repository, logger *zap.Sugare
 		logger:        logger,
 		graphqlClient: gqlClient,
 		rpcClient:     rpcClient,
+		lastSyncedAt:  time.Time{},
 	}
 }
 
@@ -146,6 +148,7 @@ func (s *Syncer) StartSynchonizing() error {
 			}
 
 			s.logger.Info("Syncing finished.")
+			s.lastSyncedAt = time.Now().UTC()
 
 			<-time.Tick(2 * time.Hour)
 		}
@@ -174,6 +177,10 @@ func (s *Syncer) StartSynchonizing() error {
 	}
 
 	return nil
+}
+
+func (s *Syncer) LastSyncedAt() time.Time {
+	return s.lastSyncedAt
 }
 
 func (s *Syncer) syncReports() error {
