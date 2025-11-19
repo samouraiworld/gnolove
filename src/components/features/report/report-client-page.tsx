@@ -15,6 +15,7 @@ import {
   DotsVerticalIcon,
   DownloadIcon,
   PersonIcon,
+  ResetIcon
 } from '@radix-ui/react-icons';
 import {
   Box,
@@ -27,24 +28,10 @@ import {
   DropdownMenu,
 } from '@radix-ui/themes';
 import {
-  endOfWeek,
-  startOfWeek,
-  subWeeks,
-  addWeeks,
-  isAfter,
-  getWeek,
-  setWeek,
   format,
-  endOfMonth,
-  startOfMonth,
+  subDays,
   subMonths,
-  addMonths,
-  endOfYear,
-  startOfYear,
   subYears,
-  addYears,
-  getMonth,
-  getYear,
 } from 'date-fns';
 import { enUS } from 'date-fns/locale';
 
@@ -63,40 +50,10 @@ const DEFAULT_REPOSITORIES = ['gnolang/gno'];
 const DEFAULT_TEAMS = ['Core Team'];
 
 export const TIMEFILTER_CONFIG = {
-  [TimeFilter.ALL_TIME]: {
-    label: 'All time',
-    getRange: () => ({
-      start: new Date(1980, 0, 1),
-      end: new Date(),
-    }),
-  },
-  [TimeFilter.YEARLY]: {
-    label: 'Yearly',
-    getRange: (year = new Date().getFullYear()) => ({
-      start: startOfYear(new Date(year, 0, 1)),
-      end: endOfYear(new Date(year, 0, 1)),
-      year,
-    }),
-  },
-  [TimeFilter.MONTHLY]: {
-    label: 'Monthly',
-    getRange: (month = new Date().getMonth()) => ({
-      start: startOfMonth(new Date(new Date().getFullYear(), month, 1)),
-      end: endOfMonth(new Date(new Date().getFullYear(), month, 1)),
-      month,
-    }),
-  },
-  [TimeFilter.WEEKLY]: {
-    label: 'Weekly',
-    getRange: (week = getWeek(new Date())) => {
-      const ref = setWeek(new Date(), week, { weekStartsOn: 0 });
-      return {
-        start: startOfWeek(ref, { weekStartsOn: 0 }),
-        end: endOfWeek(ref, { weekStartsOn: 0 }),
-        week,
-      };
-    },
-  },
+  [TimeFilter.ALL_TIME]: { label: 'All time' },
+  [TimeFilter.YEARLY]: { label: 'Yearly' },
+  [TimeFilter.MONTHLY]: { label: 'Monthly' },
+  [TimeFilter.WEEKLY]: { label: 'Weekly' },
 } as const;
 
 export const STATUS_ORDER = [
@@ -184,8 +141,7 @@ const generateMarkdownReport = (
           md += `    - **${pr.title}**  `;
           md += `([#${pr.number}](${pr.url})) by @${pr.authorLogin}`;
           if (pr.reviewDecision) {
-            md += ` ${reviewDecisionToEmoji[pr.reviewDecision as keyof typeof reviewDecisionToEmoji] || ''
-              }`;
+            md += ` ${reviewDecisionToEmoji[pr.reviewDecision as keyof typeof reviewDecisionToEmoji] || ''}`;
           }
           md += '\n \n';
         });
@@ -221,6 +177,35 @@ function groupPRsByRepoAndStatus(
   return { repoStatusMap, foundAny };
 }
 
+const computeRange = (filter: TimeFilter, offset: number) => {
+  const now = new Date();
+  let start: Date, end: Date;
+  switch (filter) {
+    case TimeFilter.ALL_TIME: {
+      start = new Date(1980, 0, 1);
+      end = now;
+      break;
+    }
+    case TimeFilter.YEARLY: {
+      end = subYears(now, offset);
+      start = subYears(end, 1);
+      break;
+    }
+    case TimeFilter.MONTHLY: {
+      end = subMonths(now, offset);
+      start = subMonths(end, 1);
+      break;
+    }
+    case TimeFilter.WEEKLY:
+    default: {
+      end = subDays(now, offset * 7);
+      start = subDays(end, 6);
+      break;
+    }
+  }
+  return { start, end };
+};
+
 const ReportClientPage = () => {
   const { isOffline } = useOffline();
   const router = useRouter();
@@ -235,42 +220,19 @@ const ReportClientPage = () => {
   const initialParams = useMemo(() => {
     const params = new URLSearchParams(searchParams.toString());
     const filter = (params.get('filter') as TimeFilter) || TimeFilter.WEEKLY;
-    const year = Number(params.get('year')) || new Date().getFullYear();
-    const month = Number(params.get('month')) || new Date().getMonth();
-    const week = Number(params.get('week')) || getWeek(new Date());
+    const offset = Number(params.get('offset')) || 0;
     const repos = params.getAll('repos').length ? params.getAll('repos') : DEFAULT_REPOSITORIES;
     const teams = params.getAll('teams').length ? params.getAll('teams') : DEFAULT_TEAMS;
 
-    let start: Date, end: Date;
-    switch (filter) {
-      case TimeFilter.YEARLY:
-        start = startOfYear(new Date(year, 0, 1));
-        end = endOfYear(new Date(year, 0, 1));
-        break;
-      case TimeFilter.MONTHLY:
-        start = startOfMonth(new Date(year, month, 1));
-        end = endOfMonth(new Date(year, month, 1));
-        break;
-      case TimeFilter.WEEKLY:
-        const ref = setWeek(new Date(year, 0, 1), week, { weekStartsOn: 0 });
-        start = startOfWeek(ref, { weekStartsOn: 0 });
-        end = endOfWeek(ref, { weekStartsOn: 0 });
-        break;
-      case TimeFilter.ALL_TIME:
-      default:
-        start = new Date(1980, 0, 1);
-        end = new Date();
-    }
+    const { start, end } = computeRange(filter, offset);
 
-    return { filter, year, month, week, start, end, repos, teams };
+    return { filter, offset, start, end, repos, teams };
   }, [searchParams]);
 
   const [timeFilter, setTimeFilter] = useState(initialParams.filter);
   const [startDate, setStartDate] = useState(initialParams.start);
   const [endDate, setEndDate] = useState(initialParams.end);
-  const [year, setYear] = useState(initialParams.year);
-  const [month, setMonth] = useState(initialParams.month);
-  const [week, setWeekNum] = useState(initialParams.week);
+  const [offset, setOffset] = useState<number>(initialParams.offset);
   const [selectedTeams, setSelectedTeams] = useState<string[]>(initialParams.teams);
   const [selectedRepositories, setSelectedRepositories] = useState<string[]>(initialParams.repos);
   const { data: pullRequests, isPending } = useGetPullRequestsReport({ startDate, endDate });
@@ -278,85 +240,29 @@ const ReportClientPage = () => {
   useEffect(() => {
     const params = new URLSearchParams();
     params.set('filter', timeFilter);
-
-    if (timeFilter === TimeFilter.YEARLY) {
-      params.set('year', String(year));
-    } else if (timeFilter === TimeFilter.MONTHLY) {
-      params.set('month', String(month));
-    } else if (timeFilter === TimeFilter.WEEKLY) {
-      params.set('week', String(week));
-    }
+    if (timeFilter !== TimeFilter.ALL_TIME) params.set('offset', String(offset));
 
     selectedRepositories.forEach((repo) => params.append('repos', repo));
     selectedTeams.forEach((team) => params.append('teams', team));
 
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
-  }, [timeFilter, year, month, week, selectedTeams, selectedRepositories]);
+  }, [timeFilter, offset, selectedTeams, selectedRepositories]);
 
   const handleNextPeriod = () => {
-    if (timeFilter === TimeFilter.WEEKLY) {
-      const next = addWeeks(startDate, 1);
-      setStartDate(startOfWeek(next));
-      setEndDate(endOfWeek(next));
-      setWeekNum(getWeek(next));
-      setYear(getYear(next));
-    } else if (timeFilter === TimeFilter.MONTHLY) {
-      const next = addMonths(startDate, 1);
-      setStartDate(startOfMonth(next));
-      setEndDate(endOfMonth(next));
-      setMonth(getMonth(next));
-      setYear(getYear(next));
-    } else if (timeFilter === TimeFilter.YEARLY) {
-      const next = addYears(startDate, 1);
-      setStartDate(startOfYear(next));
-      setEndDate(endOfYear(next));
-      setYear(getYear(next));
-    }
+    // Move window forward towards today; clamp at 0 (latest)
+    setOffset((o) => (o > 0 ? o - 1 : 0));
   };
 
   const handlePreviousPeriod = () => {
-    if (timeFilter === TimeFilter.WEEKLY) {
-      const prev = subWeeks(startDate, 1);
-      setStartDate(startOfWeek(prev));
-      setEndDate(endOfWeek(prev));
-      setWeekNum(getWeek(prev));
-      setYear(getYear(prev));
-    } else if (timeFilter === TimeFilter.MONTHLY) {
-      const prev = subMonths(startDate, 1);
-      setStartDate(startOfMonth(prev));
-      setEndDate(endOfMonth(prev));
-      setMonth(getMonth(prev));
-      setYear(getYear(prev));
-    } else if (timeFilter === TimeFilter.YEARLY) {
-      const prev = subYears(startDate, 1);
-      setStartDate(startOfYear(prev));
-      setEndDate(endOfYear(prev));
-      setYear(getYear(prev));
-    }
-  }
+    // Move window further back in time
+    setOffset((o) => o + 1);
+  };
 
   useEffect(() => {
-    let start: Date, end: Date;
-
-    switch (timeFilter) {
-      case TimeFilter.ALL_TIME:
-        ({ start, end } = TIMEFILTER_CONFIG[timeFilter].getRange());
-        break;
-      case TimeFilter.YEARLY:
-        ({ start, end } = TIMEFILTER_CONFIG[timeFilter].getRange(year));
-        break;
-      case TimeFilter.MONTHLY:
-        ({ start, end } = TIMEFILTER_CONFIG[timeFilter].getRange(month));
-        break;
-      case TimeFilter.WEEKLY:
-        ({ start, end } = TIMEFILTER_CONFIG[timeFilter].getRange(week));
-        break;
-    }
-
+    const { start, end } = computeRange(timeFilter, offset);
     setStartDate(start);
     setEndDate(end);
-
-  }, [timeFilter]);
+  }, [timeFilter, offset]);
 
   const teamRepoStatusMap: TeamRepoStatusMap = useMemo(() => {
     if (!pullRequests) return { map: {}, foundAny: false };
@@ -452,6 +358,12 @@ const ReportClientPage = () => {
           </Flex>
 
           <Flex direction={{ initial: 'column', sm: 'row' }} gap={{ initial: '1', sm: '2' }}>
+            {timeFilter !== TimeFilter.ALL_TIME && offset !== 0 && (
+              <Button variant="soft" onClick={() => setOffset(0)}>
+                <ResetIcon />
+                Come back to today
+              </Button>
+            )}
             <TeamSelector
               teams={TEAMS}
               selectedTeams={selectedTeams}
@@ -500,7 +412,7 @@ const ReportClientPage = () => {
               <Button
                 variant="ghost"
                 onClick={handleNextPeriod}
-                disabled={isAfter(endDate, new Date())}
+                disabled={offset === 0}
               >
                 <Text className="hidden sm:block">Next</Text>
                 <ArrowRightIcon />
@@ -509,7 +421,14 @@ const ReportClientPage = () => {
           </Flex>
         </Flex>
 
-        <Tabs.Root value={timeFilter} onValueChange={(value) => setTimeFilter(value as TimeFilter)} mb="4">
+        <Tabs.Root
+          value={timeFilter}
+          onValueChange={(value) => {
+            setTimeFilter(value as TimeFilter);
+            setOffset(0);
+          }}
+          mb="4"
+        >
           <Tabs.List justify="center">
             {Object.values(TimeFilter).map((value) => (
               <Tabs.Trigger key={value} value={value}>
