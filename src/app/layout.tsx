@@ -24,6 +24,7 @@ import AuthProvider from '@/contexts/auth-provider';
 import ToastProvider from '@/contexts/toast-context';
 
 import QueryClientWrapper from '@/wrappers/query-client';
+import PlausibleProvider from 'next-plausible';
 
 // Site-wide SEO metadata
 export const metadata: Metadata = {
@@ -138,63 +139,65 @@ const RootLayout = ({ children, details }: RootLayoutProps) => {
       </head>
 
       <body>
-        <AuthProvider>
-          <OfflineProvider>
-            <QueryClientWrapper>
-              <ThemeProvider 
-                defaultTheme="system" 
-                attribute="class"
-                enableSystem={true}
-              >
-                <Theme>
-                  <ToastProvider>
-                    <AdenaProvider>
-                      <Toaster />
+        <PlausibleProvider domain="gnolove.world">
+          <AuthProvider>
+            <OfflineProvider>
+              <QueryClientWrapper>
+                <ThemeProvider 
+                  defaultTheme="system" 
+                  attribute="class"
+                  enableSystem={true}
+                >
+                  <Theme>
+                    <ToastProvider>
+                      <AdenaProvider>
+                        <Toaster />
 
-                      <Box
-                        position="fixed"
-                        top="0"
-                        left="0"
-                        width="100%"
-                        p="2"
-                        className="z-50"
-                        style={{ background: 'var(--accent-1)', borderBottom: '1px solid var(--gray-a3)' }}
-                      >
-                        <Flex justify="between" align="center">
-                          <MobileNavDrawer />
-                          <NavHeader />
-                          <Flex gap="2" align="center" justify="end">
-                            <Flex gap="2" align="center" hidden>
-                              <AdenaAddress />
-                              <GithubLink>
-                                <Button variant="soft">
-                                  <LinkNone2Icon />
-                                  Link Github Account
-                                </Button>
-                              </GithubLink>
+                        <Box
+                          position="fixed"
+                          top="0"
+                          left="0"
+                          width="100%"
+                          p="2"
+                          className="z-50"
+                          style={{ background: 'var(--accent-1)', borderBottom: '1px solid var(--gray-a3)' }}
+                        >
+                          <Flex justify="between" align="center">
+                            <MobileNavDrawer />
+                            <NavHeader />
+                            <Flex gap="2" align="center" justify="end">
+                              <Flex gap="2" align="center" hidden>
+                                <AdenaAddress />
+                                <GithubLink>
+                                  <Button variant="soft">
+                                    <LinkNone2Icon />
+                                    Link Github Account
+                                  </Button>
+                                </GithubLink>
+                              </Flex>
+                              <ConnectWalletButton />
+                              <Tooltip content={`Current Gno chain ID: ${process.env.NEXT_PUBLIC_GNO_CHAIN_ID}`}>
+                                <Badge mr="2" size="3">
+                                  {process.env.NEXT_PUBLIC_GNO_CHAIN_ID}
+                                </Badge>
+                              </Tooltip>
+                              <ThemeSwitch />
                             </Flex>
-                            <ConnectWalletButton />
-                            <Tooltip content={`Current Gno chain ID: ${process.env.NEXT_PUBLIC_GNO_CHAIN_ID}`}>
-                              <Badge mr="2" size="3">
-                                {process.env.NEXT_PUBLIC_GNO_CHAIN_ID}
-                              </Badge>
-                            </Tooltip>
-                            <ThemeSwitch />
                           </Flex>
-                        </Flex>
-                      </Box>
+                        </Box>
 
-                      {children}
+                        {children}
 
-                      {details}
-                    </AdenaProvider>
-                  </ToastProvider>
-                </Theme>
-              </ThemeProvider>
-            </QueryClientWrapper>
-            <OfflineBanner />
-          </OfflineProvider>
-        </AuthProvider>
+                        {details}
+                      </AdenaProvider>
+                    </ToastProvider>
+                  </Theme>
+                </ThemeProvider>
+              </QueryClientWrapper>
+              <OfflineBanner />
+            </OfflineProvider>
+          </AuthProvider>
+        </PlausibleProvider>
       </body>
     </html>
   );
