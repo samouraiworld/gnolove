@@ -22,7 +22,7 @@ export const prefetchContributors = async (queryClient: QueryClient, params: Use
     return queryClient.getQueryData(queryKey) as Awaited<ReturnType<typeof getContributors>>;
   } catch (err) {
     console.error('prefetchContributors failed', err);
-    return [] as Awaited<ReturnType<typeof getContributors>>;
+    return { users: [], lastSyncedAt: null } as Awaited<ReturnType<typeof getContributors>>;
   }
 };
 

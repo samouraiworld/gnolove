@@ -15,7 +15,16 @@ import (
 	"gorm.io/gorm"
 )
 
-func getUserStats(db *gorm.DB, startTime time.Time, exclude, repositories []string) ([]UserWithStats, error) {
+func getUserStats(db *gorm.DB, startTime time.Time, exclude, repositories []string) ([]UserWithStats, *time.Time, error) {
+	// Get last sync time
+	var syncStatus models.SyncStatus
+	var returnedTime *time.Time
+	db.First(&syncStatus, 1)
+	if !syncStatus.LastSyncedAt.IsZero() {
+		time := syncStatus.LastSyncedAt.UTC()
+		returnedTime = &time
+	}
+
 	users := make([]models.User, 0)
 	query := db.Model(&models.User{})
 
@@ -47,7 +56,7 @@ func getUserStats(db *gorm.DB, startTime time.Time, exclude, repositories []stri
 		Preload("Reviews.PullRequest").
 		Find(&users).Error
 	if err != nil {
-		return nil, err
+		return nil, returnedTime, err
 	}
 	res := make([]UserWithStats, 0, len(users))
 
@@ -88,7 +97,7 @@ func getUserStats(db *gorm.DB, startTime time.Time, exclude, repositories []stri
 			(a.TotalCommits + a.TotalPrs + a.TotalIssues + a.TotalReviewedPullRequests)
 	})
 
-	return res, nil
+	return res, returnedTime, nil
 }
 
 func getPrByState(prs []models.PullRequest, state string) []models.PullRequest {
@@ -106,6 +115,11 @@ type UserWithStats struct {
 	TotalReviewedPullRequests int
 	LastContribution          interface{}
 	Score                     float64 `json:"score"`
+}
+
+type UserStatsResponse struct {
+	LastSyncedAt *time.Time      `json:"lastSyncedAt"`
+	Users        []UserWithStats `json:"users"`
 }
 
 func HandleGetUserStats(db *gorm.DB, cache *ristretto.Cache) func(w http.ResponseWriter, r *http.Request) {
@@ -130,9 +144,9 @@ func HandleGetUserStats(db *gorm.DB, cache *ristretto.Cache) func(w http.Respons
 		cacheKey := fmt.Sprintf("stats:%s:%s:%s", strings.Join(repositories, ","), strings.Join(exclude, ","), r.URL.Query().Get("time"))
 		data, ok := cache.Get(cacheKey)
 		if ok {
-			json.NewEncoder(w).Encode(data.([]UserWithStats))
+			json.NewEncoder(w).Encode(data.(UserStatsResponse))
 		} else {
-			stats, err := getUserStats(db, startTime, exclude, repositories)
+			stats, lastSyncedAt, err := getUserStats(db, startTime, exclude, repositories)
 			if err != nil {
 				w.WriteHeader(http.StatusInternalServerError)
 				w.Write([]byte(err.Error()))
@@ -140,8 +154,12 @@ func HandleGetUserStats(db *gorm.DB, cache *ristretto.Cache) func(w http.Respons
 				return
 			}
 
-			cache.SetWithTTL(cacheKey, stats, 0, time.Minute*5)
-			json.NewEncoder(w).Encode(stats)
+			resp := UserStatsResponse{
+				LastSyncedAt: lastSyncedAt,
+				Users:        stats,
+			}
+			cache.SetWithTTL(cacheKey, resp, 0, time.Minute*5)
+			json.NewEncoder(w).Encode(resp)
 		}
 
 	}

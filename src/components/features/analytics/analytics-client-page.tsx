@@ -30,7 +30,7 @@ const AnalyticsClientPage = () => {
 
   const filteredContributors = useMemo(() => {
     if (!contributors) return [];
-    return contributors.map((contributor) => ({
+    return contributors?.users?.map((contributor) => ({
       ...contributor,
       commits: filterContributionsByRepo(contributor.commits, selectedRepositories),
       issues: filterContributionsByRepo(contributor.issues, selectedRepositories),

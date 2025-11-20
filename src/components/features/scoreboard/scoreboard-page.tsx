@@ -39,7 +39,7 @@ const ScoreboardPage = ({ videos }: { videos?: TYoutubeVideoPlaylist }) => {
   const { data: issues, isPending: isIssuesPending } = useGetLastIssues();
   const { data: newContributors, isPending: isNewContributorsPending } = useGetNewContributors();
 
-  const lastPRs = useMemo(() => getLastPRs(allTimeContributors ?? [], 5), [allTimeContributors]);
+  const lastPRs = useMemo(() => getLastPRs(allTimeContributors?.users ?? [], 5), [allTimeContributors]);
 
   const { isOffline } = useOffline();
 
