@@ -1,3 +1,10 @@
+export interface MenuItem {
+  label: string;
+  href: string;
+  new: boolean;
+  subItems?: MenuItem[];
+}
+
 export const MENU_ITEMS = [
   {
     label: 'Home',
@@ -15,33 +22,40 @@ export const MENU_ITEMS = [
     new: false,
   },
   {
-    label: 'Milestone',
-    href: '/milestone',
-    new: false,
-  },
-  {
-    label: 'GovDAO',
-    href: '/govdao',
-    new: true,
-  },
-  {
-    label: 'Validators',
-    href: '/validators',
-    new: true,
-  },
-  {
     label: 'Analytics',
     href: '/analytics',
     new: false,
   },
   {
-    label: 'Tutorials',
-    href: '/tutorials',
+    label: 'Gnoland',
+    href: '',
     new: false,
+    subItems: [
+      {
+        label: 'Milestone',
+        href: '/milestone',
+        new: false,
+      },
+      {
+        label: 'GovDAO',
+        href: '/govdao',
+        new: false,
+      },
+      {
+        label: 'Validators',
+        href: '/validators',
+        new: false,
+      },
+      {
+        label: 'Tutorials',
+        href: '/tutorials',
+        new: false,
+      },
+      {
+        label: 'Settings',
+        href: '/settings',
+        new: true,
+      },
+    ],
   },
-  {
-    label: 'Settings',
-    href: '/settings',
-    new: true,
-  },
-] as const satisfies ReadonlyArray<{ label: string; href: string; new: boolean }>;
+] as const satisfies ReadonlyArray<MenuItem>;
