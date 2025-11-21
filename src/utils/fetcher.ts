@@ -12,7 +12,9 @@ export class HttpError extends Error {
   }
 }
 
-export async function fetchJson<T = unknown>(url: string | URL, init?: RequestInit): Promise<T> {
+type NextRequestInit = RequestInit & { next?: { revalidate?: number; tags?: string[] } };
+
+export async function fetchJson<T = unknown>(url: string | URL, init?: NextRequestInit): Promise<T> {
   const res = await fetch(typeof url === 'string' ? url : url.toString(), init);
   if (!res.ok) {
     const bodyText = await res.text();
