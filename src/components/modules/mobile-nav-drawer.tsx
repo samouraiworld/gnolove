@@ -1,10 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { HamburgerMenuIcon, ChevronDownIcon, ChevronRightIcon } from '@radix-ui/react-icons';
+import { HamburgerMenuIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import { Button, Flex, IconButton, Badge, Theme, Box } from '@radix-ui/themes';
 import { Drawer } from 'vaul';
 import { motion, AnimatePresence } from 'motion/react';
@@ -12,7 +12,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import MinecraftHeart from '@/images/minecraft-heart.png';
 
 import Footer from '@/components/modules/footer';
-import { MENU_ITEMS } from '@/constants/menu-items';
+import { MENU_ITEMS, MenuItem } from '@/constants/menu-items';
 import { useOffline } from '@/contexts/offline-context';
 import { cn } from '@/utils/style';
 
@@ -32,7 +32,7 @@ const MobileNavDrawer = () => {
     });
   };
 
-  const renderMenuItem = (item: any) => {
+  const renderMenuItem = (item: MenuItem) => {
     const hasSubItems = item.subItems && item.subItems.length > 0;
     const isExpanded = expandedItems.has(item.label);
 
@@ -70,7 +70,7 @@ const MobileNavDrawer = () => {
                 style={{ overflow: "hidden" }}
               >
                 <Flex ml="4" mt="4" direction="column" gap="4">
-                  {item.subItems.map((subItem: any, index: number) => (
+                  {item.subItems?.map((subItem: MenuItem, index: number) => (
                     <motion.div
                       key={subItem.label}
                       initial={{ x: -10, opacity: 0 }}
@@ -101,8 +101,8 @@ const MobileNavDrawer = () => {
     }
 
     return (
-      <Drawer.Close asChild key={item.href}>
-        <Flex align="center">
+      <Flex align="center">
+        <Drawer.Close asChild key={item.href}>
           <Link className={cn(isOffline && 'pointer-events-none')} href={item.href}>
             <Button variant="ghost" size="4" className="w-full justify-start">
               <span>
@@ -111,8 +111,8 @@ const MobileNavDrawer = () => {
               </span>
             </Button>
           </Link>
-        </Flex>
-      </Drawer.Close>
+        </Drawer.Close>
+      </Flex>
     );
   };
 
