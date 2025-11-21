@@ -136,7 +136,6 @@ func main() {
 	router.HandleFunc("/contributors/{login}", contributor.HandleGetContributor(database))
 	router.Post("/github/link", handler.HandleLink(database))
 
-	// reports
 	// Leaderboard webhook endpoints
 	router.Group(func(r chi.Router) {
 		r.Use(clerkhttp.WithHeaderAuthorization())

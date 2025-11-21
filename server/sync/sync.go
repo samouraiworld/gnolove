@@ -147,6 +147,14 @@ func (s *Syncer) StartSynchonizing() error {
 
 			s.logger.Info("Syncing finished.")
 
+			// Persist last synced time. Only keep one line at a time in that table
+			err = s.db.Where("id = ?", 1).
+				Assign(models.SyncStatus{LastSyncedAt: time.Now().UTC()}).
+				FirstOrCreate(&models.SyncStatus{}).Error
+			if err != nil {
+				s.logger.Errorf("Failed to persist last synced time: %v", err)
+			}
+
 			<-time.Tick(2 * time.Hour)
 		}
 	}()

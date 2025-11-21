@@ -27,7 +27,7 @@ const BestPerformingTeams = () => {
   const { data: contributors, isPending } = useGetContributors({ timeFilter, repositories: selectedRepositories });
 
   const filteredContributors = useMemo(
-    () => (contributors ?? []).filter(({ score }) => score),
+    () => (contributors?.users ?? []).filter(({ score }) => score),
     [contributors],
   );
 

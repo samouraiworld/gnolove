@@ -57,7 +57,10 @@ export const getContributors = async (timeFilter: TimeFilter, excludeCoreTeam?: 
 
   const data = await fetchJson(url.toString(), { cache: 'no-cache' });
 
-  return z.array(EnhancedUserWithStatsSchema).parse(data);
+  return z.object({
+    users: z.array(EnhancedUserWithStatsSchema),
+    lastSyncedAt: z.string().nullable().optional(),
+  }).parse(data);
 };
 
 // Monitoring webhooks (GOVDAO, VALIDATOR)

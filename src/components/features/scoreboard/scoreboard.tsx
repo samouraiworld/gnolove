@@ -55,7 +55,7 @@ const Scoreboard = ({ ...props }: FlexProps) => {
     repositories: selectedRepositories,
   });
 
-  const filteredContributors = useMemo(() => (contributors ?? []).filter(({ score }) => score), [contributors]);
+  const filteredContributors = useMemo(() => (contributors?.users ?? []).filter(({ score }) => score), [contributors]);
 
   const buildSearchParams = () => {
     const params = new URLSearchParams();
@@ -95,6 +95,12 @@ const Scoreboard = ({ ...props }: FlexProps) => {
           ))}
         </Tabs.List>
       </Tabs.Root>
+
+      {contributors?.lastSyncedAt && (
+        <Text size="1" color="gray" align="center" mb="4">
+          Last updated: {new Date(contributors.lastSyncedAt).toLocaleString()}
+        </Text>
+      )}
 
       <Flex
         direction={{ initial: 'column', sm: 'row' }}
