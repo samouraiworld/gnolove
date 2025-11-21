@@ -2,13 +2,13 @@
 
 import { Flex, Button, Badge, DropdownMenu, ChevronDownIcon } from '@radix-ui/themes';
 import NextLink from 'next/link';
-import { MENU_ITEMS } from '@/constants/menu-items';
+import { MENU_ITEMS, MenuItem } from '@/constants/menu-items';
 import { useOffline } from '@/contexts/offline-context';
 
 const NavHeader = () => {
   const { isOffline } = useOffline();
 
-  const renderMenuItem = (item: any) => {
+  const renderMenuItem = (item: MenuItem) => {
     if (item.subItems && item.subItems.length > 0) {
       return (
         <DropdownMenu.Root key={item.href}>
@@ -22,7 +22,7 @@ const NavHeader = () => {
             </Button>
           </DropdownMenu.Trigger>
           <DropdownMenu.Content>
-            {item.subItems.map((subItem: any) => (
+            {item.subItems.map((subItem: MenuItem) => (
               <DropdownMenu.Item key={subItem.href} asChild>
                 <NextLink href={subItem.href}>
                   <Flex align='center' gap='2'>
@@ -50,7 +50,7 @@ const NavHeader = () => {
   };
 
   return (
-    <Flex className='hidden md:flex' align='center' gap='4' px='2'>
+    <Flex className='hidden md:flex' align='center' gap='6' px='4'>
       {MENU_ITEMS.map(renderMenuItem)}
     </Flex>
   );
