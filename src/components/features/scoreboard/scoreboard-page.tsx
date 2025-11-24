@@ -53,6 +53,7 @@ const ScoreboardPage = ({ videos }: { videos?: TYoutubeVideoPlaylist }) => {
           muted
           playsInline
           poster='/images/header.png'
+          preload='none'
         >
           <source src="/videos/gnolove_drone-on-the-desk-video.mp4" type="video/mp4" />
         </video>
@@ -60,9 +61,9 @@ const ScoreboardPage = ({ videos }: { videos?: TYoutubeVideoPlaylist }) => {
           alt="Gnolove"
           src="/images/header.png"
           className="hidden motion-reduce:block h-full min-h-[200px] w-full object-cover rounded-4"
-          priority
           width={1920}
           height={1000}
+          loading="lazy"
         />
       </Box>
 
