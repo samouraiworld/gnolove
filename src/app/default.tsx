@@ -13,8 +13,12 @@ import { prefetchMilestone } from '@/hooks/use-get-milestone';
 import { prefetchNewContributors } from '@/hooks/use-get-new-contributors';
 import { prefetchRepositories } from '@/hooks/use-get-repositories';
 import { SearchParamsFilters } from '@/types/url-filters';
-import { getYoutubeChannelUploadsPlaylistId, getYoutubePlaylistVideos } from '@/app/actions';
+import { getYoutubeChannelUploadsPlaylistId } from '@/app/actions';
 import { GNOLAND_YOUTUBE_CHANNEL_ID } from '@/constants/videos';
+import { prefetchScoreFactors } from '@/hooks/use-get-score-factors';
+import LayoutContainer from '@/layouts/layout-container';
+import { prefetchYoutubePlaylistVideos } from '@/hooks/use-youtube-playlist-videos';
+import type { TYoutubeVideoPlaylist } from '@/utils/schemas';
 
 export const metadata: Metadata = {
   title: 'Top of Gnome',
@@ -36,22 +40,31 @@ const HomePage = async ({ searchParams: { f, e, r } }: SearchParamsFilters) => {
     prefetchContributors(queryClient, { timeFilter, exclude, repositories: getIds(selectedRepositories) }),
     prefetchLastIssues(queryClient),
     prefetchNewContributors(queryClient),
+    prefetchScoreFactors(queryClient),
   ]);
 
   const uploadsPlaylistId = await getYoutubeChannelUploadsPlaylistId({ channelId: GNOLAND_YOUTUBE_CHANNEL_ID }).catch(() => {
     console.error('YouTube uploads playlist ID prefetch failed');
     return '';
   });
-  const videos = uploadsPlaylistId ?
-    await getYoutubePlaylistVideos(uploadsPlaylistId, 6).catch(() => {
-      console.error('YouTube videos prefetch failed');
+  let videos: TYoutubeVideoPlaylist | undefined;
+  if (uploadsPlaylistId) {
+    const playlistData = await prefetchYoutubePlaylistVideos(queryClient, {
+      playlistId: uploadsPlaylistId,
+      maxResults: 6,
+    }).catch((err) => {
+      console.error('YouTube videos prefetch failed', err);
       return undefined;
-    }) : undefined;
+    });
+    videos = playlistData?.pages?.[0];
+  }
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <ScoreboardPage videos={videos} />
-    </HydrationBoundary>
+    <LayoutContainer>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <ScoreboardPage videos={videos} />
+      </HydrationBoundary>
+    </LayoutContainer>
   );
 };
 

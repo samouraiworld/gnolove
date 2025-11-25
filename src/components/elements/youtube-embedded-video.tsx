@@ -1,18 +1,43 @@
 'use client';
 
-import { ComponentProps, useMemo, useState } from 'react';
+import { ComponentProps, useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 
 import { cn } from '@/utils/style';
 import Loader from '@/elements/loader';
+import { Button } from '@radix-ui/themes';
+import { PlayIcon } from '@radix-ui/react-icons';
 
 export interface YoutubeEmbeddedVideoProps extends ComponentProps<'iframe'> {
   id: string;
 }
 
 const YoutubeEmbeddedVideo = ({ className, src, loading = 'lazy', title, id, ...props }: YoutubeEmbeddedVideoProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isIframeVisible, setIsIframeVisible] = useState(false);
+  const [shouldShowThumbnail, setShouldShowThumbnail] = useState(false);
+
+  useEffect(() => {
+    const target = containerRef.current;
+    if (!target) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setShouldShowThumbnail(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: '200px' }
+    );
+
+    observer.observe(target);
+
+    return () => observer.disconnect();
+  }, []);
 
   const thumbnail = useMemo(() => {
     return id ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : null;
@@ -26,28 +51,28 @@ const YoutubeEmbeddedVideo = ({ className, src, loading = 'lazy', title, id, ...
   };
 
   return (
-    <div className={cn('relative aspect-video w-full overflow-hidden', className)}>
+    <div ref={containerRef} className={cn('relative aspect-video w-full overflow-hidden', className)}>
       {!isIframeVisible && (
-        <button
-          type="button"
+        <Button
           onClick={handleActivate}
-          className="absolute inset-0 flex h-full w-full items-center justify-center overflow-hidden bg-black/30 text-white transition hover:bg-black/40"
+          className="flex h-full w-full items-center justify-center overflow-hidden"
           aria-label={title ? `Play ${title}` : 'Play video'}
+          variant="ghost"
         >
-          {thumbnail && (
+          {shouldShowThumbnail && thumbnail && (
             <Image
               alt={title ? `${title} thumbnail` : 'YouTube video thumbnail'}
               src={thumbnail}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              className="-z-10 object-cover"
+              className="object-cover"
               loading="lazy"
             />
           )}
-          <span className="flex items-center gap-2 rounded-full bg-black/70 px-4 py-2 text-sm font-semibold">
-            ▶ Play
-          </span>
-        </button>
+          <div className="absolute flex items-center justify-center bg-whiteA-12 dark:bg-blackA-12 p-2 rounded-full">
+            <PlayIcon className="stroke-red-12 size-6" />
+          </div>
+        </Button>
       )}
 
       {isIframeVisible && iframeSrc && (

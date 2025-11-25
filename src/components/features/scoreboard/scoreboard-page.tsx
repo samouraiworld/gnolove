@@ -63,7 +63,6 @@ const ScoreboardPage = ({ videos }: { videos?: TYoutubeVideoPlaylist }) => {
           className="hidden motion-reduce:block h-full min-h-[200px] w-full object-cover rounded-4"
           width={1920}
           height={1000}
-          loading="lazy"
         />
       </Box>
 
