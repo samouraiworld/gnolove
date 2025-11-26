@@ -101,8 +101,8 @@ const MobileNavDrawer = () => {
     }
 
     return (
-      <Flex align="center">
-        <Drawer.Close asChild key={item.href}>
+      <Flex align="center" key={item.href}>
+        <Drawer.Close asChild>
           <Link className={cn(isOffline && 'pointer-events-none')} href={item.href}>
             <Button variant="ghost" size="4" className="w-full justify-start">
               <span>

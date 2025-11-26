@@ -1,6 +1,6 @@
 'use client';
 
-import { Flex, Button, Badge, DropdownMenu, ChevronDownIcon } from '@radix-ui/themes';
+import { Flex, Button, Badge, DropdownMenu, ChevronDownIcon, Text } from '@radix-ui/themes';
 import NextLink from 'next/link';
 import { MENU_ITEMS, MenuItem } from '@/constants/menu-items';
 import { useOffline } from '@/contexts/offline-context';
@@ -21,17 +21,19 @@ const NavHeader = () => {
               </Flex>
             </Button>
           </DropdownMenu.Trigger>
-          <DropdownMenu.Content>
-            {item.subItems.map((subItem: MenuItem) => (
-              <DropdownMenu.Item key={subItem.href} asChild>
-                <NextLink href={subItem.href}>
-                  <Flex align='center' gap='2'>
-                    {subItem.label}
-                    {subItem.new && <Badge color='red'>new</Badge>}
-                  </Flex>
-                </NextLink>
-              </DropdownMenu.Item>
-            ))}
+          <DropdownMenu.Content variant='soft'>
+            <Flex direction='column' align='start' p='2'>
+              {item.subItems.map((subItem: MenuItem) => (
+                <DropdownMenu.Item key={subItem.href} asChild>
+                  <NextLink href={subItem.href} className='w-full'>
+                    <Flex align='center' gap='2'>
+                      <Text color='indigo'>{subItem.label}</Text>
+                      {subItem.new && <Badge color='red'>new</Badge>}
+                    </Flex>
+                  </NextLink>
+                </DropdownMenu.Item>
+              ))}
+            </Flex>
           </DropdownMenu.Content>
         </DropdownMenu.Root>
       );
