@@ -1,24 +1,31 @@
 import { Metadata } from 'next';
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
+
 import Tutorials from '@/components/features/tutorials/tutorials';
-import { getYoutubePlaylistVideos } from '@/app/actions';
 import { TUTORIAL_VIDEOS_YOUTUBE_PLAYLIST_ID } from '@/features/tutorials/constants';
 import LayoutContainer from '@/layouts/layout-container';
-import type { TYoutubeVideoPlaylist } from '@/utils/schemas';
+import { prefetchYoutubePlaylistVideos } from '@/hooks/use-youtube-playlist-videos';
 
 export const metadata: Metadata = {
   title: 'Tutorials and guides',
 };
 
 const TutorialsPage = async () => {
-  const playlistItems: TYoutubeVideoPlaylist | undefined = await getYoutubePlaylistVideos(TUTORIAL_VIDEOS_YOUTUBE_PLAYLIST_ID, 6)
-    .catch((err) => {
-      console.error('Tutorials YouTube fetch failed', err);
-      return undefined;
-    });
+  const queryClient = new QueryClient();
+
+  await prefetchYoutubePlaylistVideos(queryClient, {
+    playlistId: TUTORIAL_VIDEOS_YOUTUBE_PLAYLIST_ID,
+    maxResults: 6,
+  }).catch((err) => {
+    console.error('Tutorials YouTube fetch failed', err);
+    return undefined;
+  });
 
   return (
     <LayoutContainer>
-      <Tutorials playlistItems={playlistItems} />
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <Tutorials />
+      </HydrationBoundary>
     </LayoutContainer>
   );
 };

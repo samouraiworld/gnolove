@@ -42,6 +42,7 @@ import TEAMS from '@/constants/teams';
 
 import ENV from '@/env';
 import { auth } from '@clerk/nextjs/server';
+import { REVALIDATE_SECONDS } from '@/constants/revalidate';
 
 export const getContributors = async (timeFilter: TimeFilter, excludeCoreTeam?: boolean, repositories?: string[]) => {
   const url = new URL('/stats', ENV.NEXT_PUBLIC_API_URL);
@@ -55,7 +56,7 @@ export const getContributors = async (timeFilter: TimeFilter, excludeCoreTeam?: 
 
   if (repositories) url.searchParams.append('repositories', repositories.join(','));
 
-  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+  const data = await fetchJson(url.toString(), { cache: 'no-store' });
 
   return z.object({
     users: z.array(EnhancedUserWithStatsSchema),
@@ -158,7 +159,7 @@ export const updateReportHour = async (payload: { hour: number; minute: number; 
 export const getLastIssues = async (last: number) => {
   const url = new URL('/issues?labels=help wanted,bounty', ENV.NEXT_PUBLIC_API_URL);
 
-  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.FAST } });
 
   return z.array(IssueSchema).parse(data).slice(0, last);
 };
@@ -169,7 +170,7 @@ export const getPullrequestsReportByDate = async (startDate: Date, endDate: Date
   url.searchParams.set('startdate', startDate.toISOString());
   url.searchParams.set('enddate', endDate.toISOString());
 
-  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.FAST } });
 
   return PullRequestReportSchema.parse(data);
 };
@@ -177,7 +178,7 @@ export const getPullrequestsReportByDate = async (startDate: Date, endDate: Date
 export const getNewContributors = async () => {
   const url = new URL('/contributors/newest?number=5', ENV.NEXT_PUBLIC_API_URL);
 
-  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.FAST } });
 
   return z.array(UserSchema).parse(data);
 };
@@ -185,7 +186,7 @@ export const getNewContributors = async () => {
 export const getMilestone = async () => {
   const url = new URL(`/milestones/${MILESTONE.number}`, ENV.NEXT_PUBLIC_API_URL);
 
-  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT } });
 
   return MilestoneSchema.parse(data);
 };
@@ -193,7 +194,7 @@ export const getMilestone = async () => {
 export const getRepositories = async () => {
   const url = new URL('/repositories', ENV.NEXT_PUBLIC_API_URL);
 
-  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.SLOW } });
 
   return z.array(RepositorySchema).parse(data);
 };
@@ -201,7 +202,7 @@ export const getRepositories = async () => {
 export const getContributor = async (login: string) => {
   const url = new URL(`/contributors/${login}`, ENV.NEXT_PUBLIC_API_URL);
 
-  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.FAST } });
 
   return ContributorSchema.parse(data);
 };
@@ -209,7 +210,7 @@ export const getContributor = async (login: string) => {
 export const getPackages = async () => {
   const url = new URL('/onchain/packages', ENV.NEXT_PUBLIC_API_URL);
 
-  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.SLOW } });
 
   return PackagesSchema.parse(data);
 };
@@ -218,7 +219,7 @@ export const getPackagesByUser = async (address: string) => {
   if (!address) return [];
   const url = new URL(`/onchain/packages/${address}`, ENV.NEXT_PUBLIC_API_URL);
 
-  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT } });
 
   return PackagesSchema.parse(data);
 };
@@ -226,7 +227,7 @@ export const getPackagesByUser = async (address: string) => {
 export const getNamespaces = async () => {
   const url = new URL('/onchain/namespaces', ENV.NEXT_PUBLIC_API_URL);
 
-  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.SLOW } });
 
   return NamespacesSchema.parse(data);
 };
@@ -234,7 +235,7 @@ export const getNamespaces = async () => {
 export const getNamespacesByUser = async (address: string) => {
   const url = new URL(`/onchain/namespaces/${address}`, ENV.NEXT_PUBLIC_API_URL);
 
-  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT } });
 
   return NamespacesSchema.parse(data);
 };
@@ -244,8 +245,7 @@ export const getProposals = async (address?: string) => {
   const url = new URL('/onchain/proposals', ENV.NEXT_PUBLIC_API_URL);
   if (address) url.searchParams.set('address', address);
 
-  const res = await fetch(url.toString(), { cache: 'no-cache' });
-  const data = await res.json();
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT } });
 
   return ProposalsSchema.parse(data);
 };
@@ -254,8 +254,7 @@ export const getProposals = async (address?: string) => {
 export const getGovdaoMembers = async () => {
   const url = new URL('/onchain/govdao-members', ENV.NEXT_PUBLIC_API_URL);
 
-  const res = await fetch(url.toString(), { cache: 'no-cache' });
-  const data = await res.json();
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.FAST } });
 
   return GovdaoMembersSchema.parse(data);
 };
