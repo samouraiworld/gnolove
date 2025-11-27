@@ -46,7 +46,7 @@ const ScoreboardPage = ({ videos }: { videos?: TYoutubeVideoPlaylist }) => {
   return (
     <Flex gap="4" direction="column">
       <Box my="4">
-        <video
+        {/* <video
           className="motion-reduce:hidden h-full min-h-[200px] w-full object-cover rounded-4"
           autoPlay
           loop
@@ -56,11 +56,11 @@ const ScoreboardPage = ({ videos }: { videos?: TYoutubeVideoPlaylist }) => {
           preload='none'
         >
           <source src="/videos/gnolove_drone-on-the-desk-video.mp4" type="video/mp4" />
-        </video>
+        </video> */}
         <Image
           alt="Gnolove"
           src="/images/header.png"
-          className="hidden motion-reduce:block h-full min-h-[200px] w-full object-cover rounded-4"
+          className="h-full min-h-[200px] w-full object-cover rounded-4"
           width={1920}
           height={1000}
         />
