@@ -206,7 +206,7 @@ func (s *Syncer) syncPRs(repository models.Repository) error {
 					EndCursor   githubv4.String
 					HasNextPage bool
 				}
-			} `graphql:"pullRequests(first: 100 after:$cursor orderBy: { field: UPDATED_AT, direction: DESC } )"`
+			} `graphql:"pullRequests(first: 50 after:$cursor orderBy: { field: UPDATED_AT, direction: DESC } )"`
 		} `graphql:"repository(owner: $owner, name: $name)"`
 	}
 
