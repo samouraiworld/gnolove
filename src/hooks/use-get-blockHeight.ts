@@ -1,7 +1,6 @@
 import { QueryClient, useQuery } from '@tanstack/react-query';
 
 import { getBlockHeight } from '@/app/actions';
-import { POLLING_INTERVALS } from '@/constants/polling';
 
 export const BASE_QUERY_KEY = ['block-height'] as const;
 
@@ -15,7 +14,6 @@ const useGetBlockHeight = () => {
   return useQuery({
     queryKey: BASE_QUERY_KEY,
     queryFn: () => getBlockHeight(),
-    refetchInterval: POLLING_INTERVALS.BLOCK_HEIGHT,
   });
 };
 

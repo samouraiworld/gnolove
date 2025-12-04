@@ -14,7 +14,6 @@ const useGetValidatorOperationTime = () => {
   return useQuery({
     queryKey: BASE_QUERY_KEY,
     queryFn: () => getValidatorOperationTime(),
-    refetchInterval: 30_000,
   });
 };
 

@@ -3,7 +3,6 @@ import { QueryClient, useQuery } from '@tanstack/react-query';
 import { EValidatorPeriod } from '@/utils/validators';
 
 import { getValidatorTxContrib } from '@/app/actions';
-import { POLLING_INTERVALS } from '@/constants/polling';
 
 export const BASE_QUERY_KEY = ['tx-contrib'] as const;
 
@@ -20,7 +19,6 @@ const useGetValidatorTxContrib = (period: EValidatorPeriod) => {
   return useQuery({
     queryKey: [ ...BASE_QUERY_KEY, period ],
     queryFn: () => getValidatorTxContrib(period),
-    refetchInterval: POLLING_INTERVALS.VALIDATOR_METRICS,
   });
 };
 
