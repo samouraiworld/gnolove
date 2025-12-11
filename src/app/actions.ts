@@ -56,7 +56,7 @@ export const getContributors = async (timeFilter: TimeFilter, excludeCoreTeam?: 
 
   if (repositories) url.searchParams.append('repositories', repositories.join(','));
 
-  const data = await fetchJson(url.toString(), { cache: 'no-store' });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT } });
 
   return z.object({
     users: z.array(EnhancedUserWithStatsSchema),
@@ -71,7 +71,7 @@ export const listMonitoringWebhooks = async (kind: TMonitoringWebhookKind): Prom
   const token = await getToken();
   if (!token) throw new Error('Authentication required');
   const url = new URL(`/webhooks/${kind}`, ENV.NEXT_PUBLIC_MONITORING_API_URL);
-  const data = await fetchJson(url.toString(), { cache: 'no-cache', headers: { Authorization: `Bearer ${token}` } });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT }, headers: { Authorization: `Bearer ${token}` } });
   return MonitoringWebhookSchema.array().parse(data);
 };
 
@@ -136,7 +136,7 @@ export const getReportHour = async () => {
   if (!token) throw new Error('Authentication required');
   const url = new URL('/usersH', ENV.NEXT_PUBLIC_MONITORING_API_URL);
 
-  const data = await fetchJson(url.toString(), { cache: 'no-cache', headers: { Authorization: `Bearer ${token}` } });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.GNOMONITORING }, headers: { Authorization: `Bearer ${token}` } });
   if (!data) return ReportHourSchema.parse({ DailyReportHour: 9, DailyReportMinute: 0, Timezone: 'Europe/Paris' });
   return ReportHourSchema.parse(data);
 };
@@ -159,7 +159,7 @@ export const updateReportHour = async (payload: { hour: number; minute: number; 
 export const getLastIssues = async (last: number) => {
   const url = new URL('/issues?labels=help wanted,bounty', ENV.NEXT_PUBLIC_API_URL);
 
-  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.FAST } });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT } });
 
   return z.array(IssueSchema).parse(data).slice(0, last);
 };
@@ -170,7 +170,7 @@ export const getPullrequestsReportByDate = async (startDate: Date, endDate: Date
   url.searchParams.set('startdate', startDate.toISOString());
   url.searchParams.set('enddate', endDate.toISOString());
 
-  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.FAST } });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT } });
 
   return PullRequestReportSchema.parse(data);
 };
@@ -178,7 +178,7 @@ export const getPullrequestsReportByDate = async (startDate: Date, endDate: Date
 export const getNewContributors = async () => {
   const url = new URL('/contributors/newest?number=5', ENV.NEXT_PUBLIC_API_URL);
 
-  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.FAST } });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT } });
 
   return z.array(UserSchema).parse(data);
 };
@@ -194,7 +194,7 @@ export const getMilestone = async () => {
 export const getRepositories = async () => {
   const url = new URL('/repositories', ENV.NEXT_PUBLIC_API_URL);
 
-  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.SLOW } });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT } });
 
   return z.array(RepositorySchema).parse(data);
 };
@@ -202,7 +202,7 @@ export const getRepositories = async () => {
 export const getContributor = async (login: string) => {
   const url = new URL(`/contributors/${login}`, ENV.NEXT_PUBLIC_API_URL);
 
-  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.FAST } });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT } });
 
   return ContributorSchema.parse(data);
 };
@@ -210,7 +210,7 @@ export const getContributor = async (login: string) => {
 export const getPackages = async () => {
   const url = new URL('/onchain/packages', ENV.NEXT_PUBLIC_API_URL);
 
-  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.SLOW } });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT } });
 
   return PackagesSchema.parse(data);
 };
@@ -227,7 +227,7 @@ export const getPackagesByUser = async (address: string) => {
 export const getNamespaces = async () => {
   const url = new URL('/onchain/namespaces', ENV.NEXT_PUBLIC_API_URL);
 
-  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.SLOW } });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT } });
 
   return NamespacesSchema.parse(data);
 };
@@ -254,7 +254,7 @@ export const getProposals = async (address?: string) => {
 export const getGovdaoMembers = async () => {
   const url = new URL('/onchain/govdao-members', ENV.NEXT_PUBLIC_API_URL);
 
-  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.FAST } });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT } });
 
   return GovdaoMembersSchema.parse(data);
 };
@@ -277,7 +277,7 @@ export const getProposal = async (id: string) => {
 export const getScoreFactors = async () => {
   const url = new URL('/score-factors', ENV.NEXT_PUBLIC_API_URL);
 
-  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT } });
 
   return ScoreFactorsSchema.parse(data);
 };
@@ -308,7 +308,7 @@ export const getYoutubeChannelUploadsPlaylistId = async (searchParams: {
 
   const data = await fetchJson<{ items: Array<{ contentDetails: { relatedPlaylists: { uploads: string } } }> }>(
     url.toString(),
-    { next: { revalidate: 86400 } },
+    { next: { revalidate: REVALIDATE_SECONDS.YOUTUBE } },
   );
 
   const uploads = data.items[0]?.contentDetails?.relatedPlaylists?.uploads;
@@ -334,7 +334,7 @@ export const getYoutubePlaylistVideos = async (playlistId: string, maxResults: n
   url.searchParams.set('key', ENV.YOUTUBE_API_KEY);
   if (pageToken) url.searchParams.set('pageToken', pageToken);
 
-  const data = await fetchJson<TYoutubeVideoPlaylist>(url.toString(), { next: { revalidate: 3600 } });
+  const data = await fetchJson<TYoutubeVideoPlaylist>(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.YOUTUBE } });
 
   if (!data || !Array.isArray(data.items)) {
     throw new Error('Invalid YouTube response: items missing or not an array');
@@ -366,7 +366,7 @@ export const getValidators = async (timeFilter: EValidatorPeriod = EValidatorPer
   const url = new URL('/Participation', ENV.NEXT_PUBLIC_MONITORING_API_URL);
   url.searchParams.set('period', timeFilter);
 
-  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.GNOMONITORING } });
 
   if (!data) return [];
 
@@ -375,7 +375,7 @@ export const getValidators = async (timeFilter: EValidatorPeriod = EValidatorPer
 
 export const getBlockHeight = async () => {
   const url = new URL('/block_height', ENV.NEXT_PUBLIC_MONITORING_API_URL);
-  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.GNOMONITORING } });
 
   return BlockHeightSchema.parse(data);
 };
@@ -384,7 +384,7 @@ export const getValidatorLastIncident = async (timeFilter: EValidatorPeriod = EV
   const url = new URL('/latest_incidents', ENV.NEXT_PUBLIC_MONITORING_API_URL);
   url.searchParams.set('period', timeFilter);
 
-  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.GNOMONITORING } });
 
   if (!data) return [];
 
@@ -394,7 +394,7 @@ export const getValidatorLastIncident = async (timeFilter: EValidatorPeriod = EV
 export const getValidatorUptime = async () => {
   const url = new URL('/uptime', ENV.NEXT_PUBLIC_MONITORING_API_URL);
 
-  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.GNOMONITORING } });
 
   if (!data) return [];
 
@@ -405,7 +405,7 @@ export const getValidatorTxContrib = async (timeFilter: EValidatorPeriod = EVali
   const url = new URL('/tx_contrib', ENV.NEXT_PUBLIC_MONITORING_API_URL);
   url.searchParams.set('period', timeFilter);
 
-  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.GNOMONITORING } });
 
   if (!data) return [];
 
@@ -416,7 +416,7 @@ export const getValidatorMissingBlock = async (timeFilter: EValidatorPeriod = EV
   const url = new URL('/missing_block', ENV.NEXT_PUBLIC_MONITORING_API_URL);
   url.searchParams.set('period', timeFilter);
 
-  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.GNOMONITORING } });
 
   if (!data) return [];
 
@@ -427,7 +427,7 @@ export const getValidatorOperationTime = async (timeFilter: EValidatorPeriod = E
   const url = new URL('/operation_time', ENV.NEXT_PUBLIC_MONITORING_API_URL);
   url.searchParams.set('period', timeFilter);
 
-  const data = await fetchJson(url.toString(), { cache: 'no-cache' });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.GNOMONITORING } });
 
   if (!data) return [];
 
@@ -440,7 +440,7 @@ export const listLeaderboardWebhooks = async (): Promise<TLeaderboardWebhook[]> 
   const token = await getToken();
   if (!token) throw new Error('Authentication required');
   const url = new URL('/leaderboard-webhooks', ENV.NEXT_PUBLIC_API_URL);
-  const data = await fetchJson(url.toString(), { cache: 'no-cache', headers: { Authorization: `Bearer ${token}` } });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT }, headers: { Authorization: `Bearer ${token}` } });
   return LeaderboardWebhookSchema.array().parse(data);
 };
 

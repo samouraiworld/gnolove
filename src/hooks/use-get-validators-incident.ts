@@ -1,7 +1,6 @@
 import { QueryClient, useQuery } from '@tanstack/react-query';
 
 import { getValidatorLastIncident } from '@/app/actions';
-import { POLLING_INTERVALS } from '@/constants/polling';
 import { EValidatorPeriod } from '@/utils/validators';
 
 export const BASE_QUERY_KEY = ['validators-last-incident'] as const;
@@ -16,7 +15,6 @@ const useGetValidatorsLastIncident = (timeFilter: EValidatorPeriod) => {
   return useQuery({
     queryKey: [ ...BASE_QUERY_KEY, timeFilter ],
     queryFn: () => getValidatorLastIncident(timeFilter),
-    refetchInterval: POLLING_INTERVALS.VALIDATOR_INCIDENTS,
   });
 };
 
