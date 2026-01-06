@@ -124,6 +124,7 @@ func main() {
 
 	router.HandleFunc("/repositories", handler.HandleGetRepository(database))
 	router.HandleFunc("/stats", handler.HandleGetUserStats(database, cache))
+	router.HandleFunc("/last-prs", handler.HandleGetLastPrs(database, cache))
 	router.HandleFunc("/users", handler.HandleGetUsers(database))
 	router.HandleFunc("/users/{address}", handler.HandleGetUser(database))
 	router.HandleFunc("/issues", handler.GetIssues(database))

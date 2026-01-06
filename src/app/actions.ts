@@ -18,6 +18,7 @@ import {
   ProposalsSchema,
   GovdaoMembersSchema,
   PullRequestReportSchema,
+  PullRequestSchema,
   ReportHourSchema,
   RepositorySchema,
   ScoreFactorsSchema,
@@ -181,6 +182,17 @@ export const getNewContributors = async () => {
   const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT } });
 
   return z.array(UserSchema).parse(data);
+};
+
+export const getFreshlyMerged = async () => {
+  const url = new URL('/last-prs', ENV.NEXT_PUBLIC_API_URL);
+
+  // TODO: Receive repositories and filter like on the comment below
+  //if (repositories) url.searchParams.append('repositories', repositories.join(','));
+
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT } });
+
+  return z.array(PullRequestSchema).nullish().parse(data);
 };
 
 export const getMilestone = async () => {
