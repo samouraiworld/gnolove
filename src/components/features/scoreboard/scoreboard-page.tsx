@@ -14,10 +14,10 @@ import UserTable from '@/modules/user-table';
 
 import YoutubeEmbeddedVideo from '@/elements/youtube-embedded-video';
 
-import useGetContributors from '@/hooks/use-get-contributors';
 import useGetLastIssues from '@/hooks/use-get-last-issues';
 import useGetMilestone from '@/hooks/use-get-milestone';
 import useGetNewContributors from '@/hooks/use-get-new-contributors';
+import useGetFreshlyMerged from '@/hooks/use-get-freshly-merged';
 
 import { getLastPRs, TimeFilter } from '@/utils/github';
 
@@ -31,15 +31,10 @@ import { TYoutubeVideoPlaylist } from '@/utils/schemas';
 import Image from 'next/image';
 
 const ScoreboardPage = ({ videos }: { videos?: TYoutubeVideoPlaylist }) => {
-  const { data: allTimeContributors, isPending: isAllTimePending } = useGetContributors({
-    timeFilter: TimeFilter.ALL_TIME,
-  });
-
   const { data: milestone } = useGetMilestone();
   const { data: issues, isPending: isIssuesPending } = useGetLastIssues();
   const { data: newContributors, isPending: isNewContributorsPending } = useGetNewContributors();
-
-  const lastPRs = useMemo(() => getLastPRs(allTimeContributors?.users ?? [], 5), [allTimeContributors]);
+  const { data: freshlyMerged, isPending: isFreshlyMergedPending } = useGetFreshlyMerged();
 
   const { isOffline } = useOffline();
 
@@ -89,7 +84,7 @@ const ScoreboardPage = ({ videos }: { videos?: TYoutubeVideoPlaylist }) => {
           <Heading as="h2" weight="bold" size="6" mt="6">
             ✔️ Freshly Merged
           </Heading>
-          {isAllTimePending ? <Loader /> : <PrsTable prs={lastPRs} />}
+          {isFreshlyMergedPending ? <Loader /> : <PrsTable prs={freshlyMerged ?? []} />}
         </Flex>
 
         <Flex direction="column" gap="4">

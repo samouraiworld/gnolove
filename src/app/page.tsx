@@ -11,6 +11,7 @@ import { prefetchContributors } from '@/hooks/use-get-contributors';
 import { prefetchLastIssues } from '@/hooks/use-get-last-issues';
 import { prefetchMilestone } from '@/hooks/use-get-milestone';
 import { prefetchNewContributors } from '@/hooks/use-get-new-contributors';
+import { prefetchFreshlyMerged } from '@/hooks/use-get-freshly-merged';
 import { prefetchRepositories } from '@/hooks/use-get-repositories';
 import { SearchParamsFilters } from '@/types/url-filters';
 import { getYoutubeChannelUploadsPlaylistId } from '@/app/actions';
@@ -40,6 +41,7 @@ const HomePage = async ({ searchParams: { f, e, r } }: SearchParamsFilters) => {
     prefetchContributors(queryClient, { timeFilter, exclude, repositories: getIds(selectedRepositories) }),
     prefetchLastIssues(queryClient),
     prefetchNewContributors(queryClient),
+    prefetchFreshlyMerged(queryClient),
     prefetchScoreFactors(queryClient),
   ]);
 

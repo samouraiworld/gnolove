@@ -73,15 +73,11 @@ func getUserStats(db *gorm.DB, startTime time.Time, exclude, repositories []stri
 		score := CalculateScore(int64(len(user.Commits)), int64(len(user.Issues)), int64(len(user.PullRequests)), int64(len(user.Reviews)))
 		res = append(res, UserWithStats{
 			User: models.User{
-				Login:        user.Login,
-				ID:           user.ID,
-				AvatarUrl:    user.AvatarUrl,
-				URL:          user.URL,
-				Name:         user.Name,
-				Commits:      user.Commits,
-				Issues:       user.Issues,
-				PullRequests: user.PullRequests,
-				Reviews:      user.Reviews,
+				Login:     user.Login,
+				ID:        user.ID,
+				AvatarUrl: user.AvatarUrl,
+				URL:       user.URL,
+				Name:      user.Name,
 			},
 			TotalCommits:              len(user.Commits),
 			TotalPrs:                  len(user.PullRequests),
@@ -160,6 +156,31 @@ func HandleGetUserStats(db *gorm.DB, cache *ristretto.Cache) func(w http.Respons
 			}
 			cache.SetWithTTL(cacheKey, resp, 0, time.Minute*5)
 			json.NewEncoder(w).Encode(resp)
+		}
+
+	}
+}
+
+func HandleGetLastPrs(db *gorm.DB, cache *ristretto.Cache) func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		repositories := getRepositoriesWithRequest(r)
+
+		cacheKey := fmt.Sprintf("lastprs:%s:%s", strings.Join(repositories, ","), r.URL.Query().Get("time"))
+		data, ok := cache.Get(cacheKey)
+		if ok {
+			json.NewEncoder(w).Encode(data.([]*models.PullRequest))
+		} else {
+			lastPRs, err := getLastPrs(db, repositories)
+			if err != nil {
+				w.WriteHeader(http.StatusInternalServerError)
+				w.Write([]byte(err.Error()))
+
+				return
+			}
+
+			cache.SetWithTTL(cacheKey, lastPRs, 0, time.Minute*5)
+			json.NewEncoder(w).Encode(lastPRs)
 		}
 
 	}

@@ -8,6 +8,7 @@ import (
 	"github.com/samouraiworld/topofgnomes/server/handler/viewmodels"
 	"github.com/samouraiworld/topofgnomes/server/models"
 	"github.com/samouraiworld/topofgnomes/server/repository"
+	"gorm.io/gorm"
 )
 
 func GetPullrequestsReportByDate(repo repository.PullRequestRepository) func(w http.ResponseWriter, r *http.Request) {
@@ -78,4 +79,14 @@ func GetPullrequestsReportByDate(repo repository.PullRequestRepository) func(w h
 
 		json.NewEncoder(w).Encode(response)
 	}
+}
+
+func getLastPrs(db *gorm.DB, repositories []string) ([]*models.PullRequest, error) {
+	prs := make([]*models.PullRequest, 0)
+	err := db.Model(&models.PullRequest{}).Where("repository_id IN (?) and state = 'MERGED'", repositories).Order("merged_at desc").Limit(5).Find(&prs).Error
+	if err != nil {
+		return nil, err
+	}
+
+	return prs, nil
 }
