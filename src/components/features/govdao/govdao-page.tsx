@@ -63,11 +63,19 @@ const Filters = ({
   </Flex>
 );
 
-const ProposalCard = ({ proposal, isGovDaoMember }: { proposal: TProposal; isGovDaoMember: boolean }) => {
+const ProposalCard = ({
+  proposal,
+  isGovDaoMember,
+  totalMembers,
+}: {
+  proposal: TProposal;
+  isGovDaoMember: boolean;
+  totalMembers: number;
+}) => {
   const totals = aggregateVotes(proposal.votes);
-  const forPct = percent(totals.for, totals.total);
-  const againstPct = percent(totals.against, totals.total);
-  const abstainPct = percent(totals.abstain, totals.total);
+  const forPct = percent(totals.for, totalMembers);
+  const againstPct = percent(totals.against, totalMembers);
+  const abstainPct = percent(totals.abstain, totalMembers);
   const { addToast } = useToast();
   const { adena, address } = useAdena();
 
@@ -127,7 +135,7 @@ const ProposalCard = ({ proposal, isGovDaoMember }: { proposal: TProposal; isGov
               Proposal path: {proposal.path}
             </Text>
             <Box className="relative h-2 w-full shrink-0 overflow-hidden rounded-full bg-red-6">
-              <Box className="absolute left-0 top-0 h-full bg-green-9" width={`${forPct}%`} />
+              <Box className="absolute left-0 top-0 h-full bg-green-9" width={`${Math.min(100, forPct)}%`} />
             </Box>
             <Flex mt="2" justify="between" className="shrink-0">
               <Text color="green" size="2">
@@ -269,7 +277,7 @@ const GovdaoPage = () => {
       ) : (
         <Grid columns={{ initial: '1', md: '2' }} gap="6">
           {filtered.map((p) => (
-            <ProposalCard key={p.id} proposal={p} isGovDaoMember={isGovDaoMember} />
+            <ProposalCard key={p.id} proposal={p} isGovDaoMember={isGovDaoMember} totalMembers={members?.length ?? 0} />
           ))}
         </Grid>
       )}
