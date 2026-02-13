@@ -120,31 +120,6 @@ func (s *Syncer) StartSynchonizing() error {
 				s.logger.Errorf("error while syncing user details %s", err.Error())
 			}
 
-			err = s.syncGnoUserRegistrations(context.Background())
-			if err != nil {
-				s.logger.Errorf("error while syncing gno user registrations %s", err.Error())
-			}
-
-			err = s.syncPublishedPackages(context.Background())
-			if err != nil {
-				s.logger.Errorf("error while syncing gno published packages %s", err.Error())
-			}
-
-			err = s.syncProposals(context.Background())
-			if err != nil {
-				s.logger.Errorf("error while syncing proposals %s", err.Error())
-			}
-
-			_, err = s.SyncVotesOnProposals(context.Background())
-			if err != nil {
-				s.logger.Errorf("error while syncing votes on proposals %s", err.Error())
-			}
-
-			err = s.syncGovDaoMembers()
-			if err != nil {
-				s.logger.Errorf("error while syncing GovDao members %s", err.Error())
-			}
-
 			s.logger.Info("Syncing finished.")
 
 			// Persist last synced time. Only keep one line at a time in that table
@@ -181,6 +156,43 @@ func (s *Syncer) StartSynchonizing() error {
 		s.logger.Warn("MISTRAL_API_KEY is not set. Report synchronization will not start.")
 	}
 
+	return nil
+}
+
+func (s *Syncer) StartSynchonizingChain() error {
+	go func() {
+		for {
+			err := s.syncGnoUserRegistrations(context.Background())
+			if err != nil {
+				s.logger.Errorf("error while syncing gno user registrations %s", err.Error())
+			}
+
+			err = s.syncPublishedPackages(context.Background())
+			if err != nil {
+				s.logger.Errorf("error while syncing gno published packages %s", err.Error())
+			}
+
+			err = s.syncProposals(context.Background())
+			if err != nil {
+				s.logger.Errorf("error while syncing proposals %s", err.Error())
+			}
+
+			_, err = s.SyncVotesOnProposals(context.Background())
+			if err != nil {
+				s.logger.Errorf("error while syncing votes on proposals %s", err.Error())
+			}
+
+			err = s.syncGovDaoMembers()
+			if err != nil {
+				s.logger.Errorf("error while syncing GovDao members %s", err.Error())
+			}
+
+			s.logger.Info("Onchain Sync finished.")
+			// On chain sync, we want to sync every minute
+			<-time.Tick(time.Minute)
+		}
+	}()
+	
 	return nil
 }
 

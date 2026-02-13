@@ -54,7 +54,6 @@ func getRegistrationsLastBlock(db *gorm.DB) int64 {
 func (s *Syncer) syncPublishedPackages(ctx context.Context) error {
 	s.logger.Info("Syncing PublishedPackages")
 	lastBlock := getPublishedPackagesLastBlock(s.db)
-	fmt.Println(lastBlock)
 	response, err := gnoindexerql.GetPublishedPackages(ctx, s.graphqlClient, int(lastBlock))
 	if err != nil {
 		return err

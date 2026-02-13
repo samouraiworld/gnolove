@@ -222,7 +222,7 @@ export const getContributor = async (login: string) => {
 export const getPackages = async () => {
   const url = new URL('/onchain/packages', ENV.NEXT_PUBLIC_API_URL);
 
-  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT } });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.ONCHAIN_300 } });
 
   return PackagesSchema.parse(data);
 };
@@ -231,7 +231,7 @@ export const getPackagesByUser = async (address: string) => {
   if (!address) return [];
   const url = new URL(`/onchain/packages/${address}`, ENV.NEXT_PUBLIC_API_URL);
 
-  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT } });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.ONCHAIN_300 } });
 
   return PackagesSchema.parse(data);
 };
@@ -239,7 +239,7 @@ export const getPackagesByUser = async (address: string) => {
 export const getNamespaces = async () => {
   const url = new URL('/onchain/namespaces', ENV.NEXT_PUBLIC_API_URL);
 
-  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT } });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.ONCHAIN_300 } });
 
   return NamespacesSchema.parse(data);
 };
@@ -247,7 +247,7 @@ export const getNamespaces = async () => {
 export const getNamespacesByUser = async (address: string) => {
   const url = new URL(`/onchain/namespaces/${address}`, ENV.NEXT_PUBLIC_API_URL);
 
-  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT } });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.ONCHAIN_300 } });
 
   return NamespacesSchema.parse(data);
 };
@@ -257,7 +257,7 @@ export const getProposals = async (address?: string) => {
   const url = new URL('/onchain/proposals', ENV.NEXT_PUBLIC_API_URL);
   if (address) url.searchParams.set('address', address);
 
-  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT } });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.ONCHAIN_300 } });
 
   return ProposalsSchema.parse(data);
 };
@@ -266,7 +266,7 @@ export const getProposals = async (address?: string) => {
 export const getGovdaoMembers = async () => {
   const url = new URL('/onchain/govdao-members', ENV.NEXT_PUBLIC_API_URL);
 
-  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT } });
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.ONCHAIN_300 } });
 
   return GovdaoMembersSchema.parse(data);
 };

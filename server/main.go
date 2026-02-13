@@ -98,6 +98,12 @@ func main() {
 		panic(err)
 	}
 
+	// Start data synchronization chain on second process
+	err = syncer.StartSynchonizingChain()
+	if err != nil {
+		panic(err)
+	}
+
 	// Start the Discord leaderboard cron job if webhook is configured
 	if os.Getenv("DISCORD_WEBHOOK_URL") != "" {
 	} else {
