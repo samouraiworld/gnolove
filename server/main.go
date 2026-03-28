@@ -5,12 +5,14 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/dgraph-io/ristretto"
 	"github.com/go-chi/chi/v5"
 
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/rs/cors"
 	"github.com/samouraiworld/topofgnomes/server/db"
 	"github.com/samouraiworld/topofgnomes/server/handler"
 	"github.com/samouraiworld/topofgnomes/server/handler/ai"
@@ -121,6 +123,20 @@ func main() {
 	router := chi.NewRouter()
 	router.Use(LoggingMiddleware)
 	router.Use(Compress())
+
+	// CORS — allow Memba and gnolove.world to access the API.
+	// Configurable via CORS_ALLOWED_ORIGINS env var (comma-separated).
+	corsOrigins := os.Getenv("CORS_ALLOWED_ORIGINS")
+	if corsOrigins == "" {
+		corsOrigins = "https://memba.samourai.app,https://gnolove.world"
+	}
+	router.Use(cors.New(cors.Options{
+		AllowedOrigins:   strings.Split(corsOrigins, ","),
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"Authorization", "Content-Type"},
+		AllowCredentials: true,
+		MaxAge:           600, // 10 min — conservative during migration
+	}).Handler)
 
 	// repositories
 	prRepo := infrarepo.NewPullRequestRepository(database)
