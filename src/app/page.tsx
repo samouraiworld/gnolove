@@ -66,10 +66,6 @@ export default function HomePage() {
           Open Gnolove on Memba →
         </a>
 
-        <p style={{ fontSize: '13px', opacity: 0.4, maxWidth: '440px' }}>
-          This page will automatically redirect in the coming days.
-          Remaining sections (validators, GovDAO, teams) will be migrated soon.
-        </p>
       </div>
     </LayoutContainer>
   );

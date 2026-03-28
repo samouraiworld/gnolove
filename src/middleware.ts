@@ -1,30 +1,13 @@
-import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
-import { NextRequest, NextResponse } from 'next/server';
-import { isClerkEnabled } from './utils/clerk';
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
 
-// Protect /settings and any nested routes
-const isProtectedRoute = createRouteMatcher(['/settings(.*)']);
+const MEMBA_GNOLOVE_URL = 'https://memba.samourai.app/gnolove'
 
-const enabledMiddleware = clerkMiddleware((auth, req: NextRequest) => {
-  if (isProtectedRoute(req)) {
-    auth().protect();
-  }
-});
-
-const disabledMiddleware = (req: NextRequest) => {
-  if (isProtectedRoute(req)) {
-    return NextResponse.redirect(new URL('/', req.url));
-  }
-
-  return NextResponse.next();
-};
-
-export default isClerkEnabled ? enabledMiddleware : disabledMiddleware;
+export function middleware(_req: NextRequest) {
+  return NextResponse.redirect(MEMBA_GNOLOVE_URL, { status: 301 })
+}
 
 export const config = {
-  // Skip static files and _next, protect everything else via the middleware above
-  matcher: [
-    '/((?!.+\\.[\\w]+$|_next).*)',
-    '/(api)(.*)'
-  ],
-};
+  // Redirect all page routes; exclude static assets and _next internals
+  matcher: ['/((?!_next/static|_next/image|favicon\\.ico|.*\\.(?:png|ico|webmanifest)).*)',],
+}
