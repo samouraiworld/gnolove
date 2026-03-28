@@ -1,73 +1,76 @@
 import { Metadata } from 'next';
-
-import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
-
-import ScoreboardPage from '@/components/features/scoreboard/scoreboard-page';
-
-import { getIds } from '@/utils/array';
-import { getTimeFilterFromSearchParam, TimeFilter } from '@/utils/github';
-import { getSelectedRepositoriesFromSearchParam } from '@/utils/repositories';
-import { prefetchContributors } from '@/hooks/use-get-contributors';
-import { prefetchLastIssues } from '@/hooks/use-get-last-issues';
-import { prefetchMilestone } from '@/hooks/use-get-milestone';
-import { prefetchNewContributors } from '@/hooks/use-get-new-contributors';
-import { prefetchFreshlyMerged } from '@/hooks/use-get-freshly-merged';
-import { prefetchRepositories } from '@/hooks/use-get-repositories';
-import { SearchParamsFilters } from '@/types/url-filters';
-import { getYoutubeChannelUploadsPlaylistId } from '@/app/actions';
-import { GNOLAND_YOUTUBE_CHANNEL_ID } from '@/constants/videos';
-import { prefetchScoreFactors } from '@/hooks/use-get-score-factors';
 import LayoutContainer from '@/layouts/layout-container';
-import { prefetchYoutubePlaylistVideos } from '@/hooks/use-youtube-playlist-videos';
-import type { TYoutubeVideoPlaylist } from '@/utils/schemas';
 
 export const metadata: Metadata = {
-  title: 'Top of Gnome',
+  title: 'Gnolove is becoming Memba',
+  description:
+    'The Gnolove contributor scoreboard has moved to Memba. Visit memba.samourai.app/gnolove for the latest data.',
+  alternates: {
+    canonical: 'https://memba.samourai.app/gnolove',
+  },
 };
 
-const HomePage = async ({ searchParams: { f, e, r } }: SearchParamsFilters) => {
-  const timeFilter = getTimeFilterFromSearchParam(f, TimeFilter.MONTHLY);
-  const exclude = !!e;
+const MEMBA_GNOLOVE_URL = 'https://memba.samourai.app/gnolove';
 
-  const queryClient = new QueryClient();
-
-  const allRepositories = await prefetchRepositories(queryClient);
-
-  const selectedRepositories = getSelectedRepositoriesFromSearchParam(r, allRepositories);
-
-  await Promise.all([
-    prefetchMilestone(queryClient),
-    prefetchContributors(queryClient, { timeFilter: TimeFilter.ALL_TIME }),
-    prefetchContributors(queryClient, { timeFilter, exclude, repositories: getIds(selectedRepositories) }),
-    prefetchLastIssues(queryClient),
-    prefetchNewContributors(queryClient),
-    prefetchFreshlyMerged(queryClient),
-    prefetchScoreFactors(queryClient),
-  ]);
-
-  const uploadsPlaylistId = await getYoutubeChannelUploadsPlaylistId({ channelId: GNOLAND_YOUTUBE_CHANNEL_ID }).catch(() => {
-    console.error('YouTube uploads playlist ID prefetch failed');
-    return '';
-  });
-  let videos: TYoutubeVideoPlaylist | undefined;
-  if (uploadsPlaylistId) {
-    const playlistData = await prefetchYoutubePlaylistVideos(queryClient, {
-      playlistId: uploadsPlaylistId,
-      maxResults: 6,
-    }).catch((err) => {
-      console.error('YouTube videos prefetch failed', err);
-      return undefined;
-    });
-    videos = playlistData?.pages?.[0];
-  }
-
+export default function HomePage() {
   return (
     <LayoutContainer>
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <ScoreboardPage videos={videos} />
-      </HydrationBoundary>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          minHeight: '60vh',
+          gap: '24px',
+          textAlign: 'center',
+          padding: '40px 20px',
+        }}
+      >
+        <div style={{ fontSize: '64px' }}>💚</div>
+
+        <h1 style={{ fontSize: '32px', fontWeight: 700, margin: 0 }}>
+          Gnolove is becoming Memba
+        </h1>
+
+        <p
+          style={{
+            fontSize: '16px',
+            maxWidth: '560px',
+            lineHeight: 1.7,
+            opacity: 0.7,
+          }}
+        >
+          The contributor scoreboard, weekly reports, and analytics you know
+          from Gnolove are now part of{' '}
+          <strong>Memba</strong> — our Gno multisig &amp; DAO wallet.
+          Same data, better experience, one unified platform.
+        </p>
+
+        <a
+          href={MEMBA_GNOLOVE_URL}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            padding: '14px 32px',
+            fontSize: '16px',
+            fontWeight: 600,
+            color: '#fff',
+            background: 'linear-gradient(135deg, #00d4aa, #00b894)',
+            borderRadius: '12px',
+            textDecoration: 'none',
+            boxShadow: '0 4px 20px rgba(0, 212, 170, 0.3)',
+          }}
+        >
+          Open Gnolove on Memba →
+        </a>
+
+        <p style={{ fontSize: '13px', opacity: 0.4, maxWidth: '440px' }}>
+          This page will automatically redirect in the coming days.
+          Remaining sections (validators, GovDAO, teams) will be migrated soon.
+        </p>
+      </div>
     </LayoutContainer>
   );
-};
-
-export default HomePage;
+}

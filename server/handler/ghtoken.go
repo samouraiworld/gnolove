@@ -55,7 +55,6 @@ type GithubInfo struct {
 
 func HandleVerifyGithubAccount(signer *signer.Signer, database *gorm.DB) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "*")
 		err := verifyGithubLoginBelongsToUser(r)
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
@@ -96,8 +95,6 @@ func linkAddressToUser(database *gorm.DB, address, login string) error {
 
 func HandleGetGithubUserAndTokenByCode(signer *signer.Signer, database *gorm.DB) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-
 		code := r.URL.Query().Get("code")
 		ghUser, token, err := getGithubUserByCode(code)
 
