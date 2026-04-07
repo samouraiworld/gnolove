@@ -13,7 +13,7 @@ import (
 // Free models (e.g. Qwen) have no cost on OpenRouter.
 const (
 	openrouterBaseURL = "https://openrouter.ai/api/v1/"
-	openrouterModel   = "qwen/qwen3-235b-a22b:free" // Free tier, large context
+	openrouterModel   = "qwen/qwen3.6-plus:free" // Free tier, large context
 )
 
 func callOpenRouterAPI(apiKey, systemPrompt, userPrompt string, outputFormatSchema map[string]interface{}) (string, error) {
