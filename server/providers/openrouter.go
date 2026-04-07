@@ -86,11 +86,11 @@ func callOpenRouterWithModel(apiKey, model, systemPrompt, userPrompt string, out
 		return "", fmt.Errorf("failed to decode response: %w", err)
 	}
 
-	if len(result.Choices) == 0 || result.Choices[0].Message["content"] == "" {
+	if len(result.Choices) == 0 || result.Choices[0].Message.Content == "" {
 		return "", errors.New("no valid response from openrouter")
 	}
 
-	return result.Choices[0].Message["content"], nil
+	return result.Choices[0].Message.Content, nil
 }
 
 func callOpenRouterAPI(apiKey, systemPrompt, userPrompt string, outputFormatSchema map[string]interface{}) (string, error) {

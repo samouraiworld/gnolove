@@ -9,6 +9,13 @@ import (
 	"os"
 )
 
+// ChatMessage represents a message in the OpenAI-compatible response format.
+// Uses json.RawMessage for Content to handle both string and null/array values.
+type ChatMessage struct {
+	Role    string `json:"role"`
+	Content string `json:"content"`
+}
+
 type MistralResponse struct {
 	ID     string `json:"id"`
 	Object string `json:"object"`
@@ -20,9 +27,9 @@ type MistralResponse struct {
 	} `json:"usage"`
 	Created int64 `json:"created"`
 	Choices []struct {
-		Index        int               `json:"index"`
-		Message      map[string]string `json:"message"`
-		FinishReason string            `json:"finish_reason"`
+		Index        int         `json:"index"`
+		Message      ChatMessage `json:"message"`
+		FinishReason string      `json:"finish_reason"`
 	} `json:"choices"`
 }
 
@@ -96,11 +103,11 @@ func callMistralAPI(apiKey, systemPrompt, userPrompt string, outputFormatSchema 
 		return "", fmt.Errorf("failed to decode response: %w", err)
 	}
 
-	if len(mistralResp.Choices) == 0 || mistralResp.Choices[0].Message["content"] == "" {
+	if len(mistralResp.Choices) == 0 || mistralResp.Choices[0].Message.Content == "" {
 		return "", errors.New("no valid mistral response message found")
 	}
 
-	content := mistralResp.Choices[0].Message["content"]
+	content := mistralResp.Choices[0].Message.Content
 
 	return content, nil
 }
