@@ -69,7 +69,7 @@ func getLastUpdatedMilestone(db gorm.DB, repositoryID string) time.Time {
 	return lastMilestone.UpdatedAt
 }
 
-func (s *Syncer) StartSynchonizing() error {
+func (s *Syncer) StartSynchonizing(ctx context.Context) error {
 	for _, repository := range s.repositories {
 		err := s.db.Save(&repository).Error
 		if err != nil {
@@ -77,6 +77,8 @@ func (s *Syncer) StartSynchonizing() error {
 		}
 	}
 	go func() {
+		ticker := time.NewTicker(2 * time.Hour)
+		defer ticker.Stop()
 		for {
 			for _, repository := range s.repositories {
 				fmt.Printf("repository: %#v", repository)
@@ -130,7 +132,12 @@ func (s *Syncer) StartSynchonizing() error {
 				s.logger.Errorf("Failed to persist last synced time: %v", err)
 			}
 
-			<-time.Tick(2 * time.Hour)
+			select {
+			case <-ctx.Done():
+				s.logger.Info("GitHub sync stopped (context cancelled).")
+				return
+			case <-ticker.C:
+			}
 		}
 	}()
 
@@ -150,6 +157,13 @@ func (s *Syncer) StartSynchonizing() error {
 			return fmt.Errorf("failed to schedule report synchronization: %w", err)
 		}
 
+		// Stop cron on context cancellation
+		go func() {
+			<-ctx.Done()
+			c.Stop()
+			s.logger.Info("Report cron stopped (context cancelled).")
+		}()
+
 		c.Start()
 		s.logger.Info("Report synchronization started (runs every Sunday at 23:59 UTC)")
 	} else {
@@ -159,25 +173,27 @@ func (s *Syncer) StartSynchonizing() error {
 	return nil
 }
 
-func (s *Syncer) StartSynchonizingChain() error {
+func (s *Syncer) StartSynchonizingChain(ctx context.Context) error {
 	go func() {
+		ticker := time.NewTicker(time.Minute)
+		defer ticker.Stop()
 		for {
-			err := s.syncGnoUserRegistrations(context.Background())
+			err := s.syncGnoUserRegistrations(ctx)
 			if err != nil {
 				s.logger.Errorf("error while syncing gno user registrations %s", err.Error())
 			}
 
-			err = s.syncPublishedPackages(context.Background())
+			err = s.syncPublishedPackages(ctx)
 			if err != nil {
 				s.logger.Errorf("error while syncing gno published packages %s", err.Error())
 			}
 
-			err = s.syncProposals(context.Background())
+			err = s.syncProposals(ctx)
 			if err != nil {
 				s.logger.Errorf("error while syncing proposals %s", err.Error())
 			}
 
-			_, err = s.SyncVotesOnProposals(context.Background())
+			_, err = s.SyncVotesOnProposals(ctx)
 			if err != nil {
 				s.logger.Errorf("error while syncing votes on proposals %s", err.Error())
 			}
@@ -188,11 +204,16 @@ func (s *Syncer) StartSynchonizingChain() error {
 			}
 
 			s.logger.Info("Onchain Sync finished.")
-			// On chain sync, we want to sync every minute
-			<-time.Tick(time.Minute)
+
+			select {
+			case <-ctx.Done():
+				s.logger.Info("On-chain sync stopped (context cancelled).")
+				return
+			case <-ticker.C:
+			}
 		}
 	}()
-	
+
 	return nil
 }
 

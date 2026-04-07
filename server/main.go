@@ -1,11 +1,14 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
+	"os/signal"
 	"strings"
+	"syscall"
 	"time"
 
 	"github.com/dgraph-io/ristretto"
@@ -92,16 +95,24 @@ func main() {
 		os.Getenv("GOVDAO_REALM_PATH"),
 	)
 
+	// Create a root context that will be cancelled on shutdown signal
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	// Listen for termination signals
+	sigChan := make(chan os.Signal, 1)
+	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
+
 	syncer := sync.NewSyncer(database, repositories, logger)
 
 	// Start data synchronization first
-	err = syncer.StartSynchonizing()
+	err = syncer.StartSynchonizing(ctx)
 	if err != nil {
 		panic(err)
 	}
 
 	// Start data synchronization chain on second process
-	err = syncer.StartSynchonizingChain()
+	err = syncer.StartSynchonizingChain(ctx)
 	if err != nil {
 		panic(err)
 	}
@@ -142,7 +153,7 @@ func main() {
 	prRepo := infrarepo.NewPullRequestRepository(database)
 
 	// Start triggering leaderboard webhooks
-	go handler.LoopTriggerLeaderboardWebhooks(database, logger)
+	go handler.LoopTriggerLeaderboardWebhooks(ctx, database, logger)
 
 	router.HandleFunc("/repositories", handler.HandleGetRepository(database))
 	router.HandleFunc("/stats", handler.HandleGetUserStats(database, cache))
@@ -186,11 +197,32 @@ func main() {
 	router.HandleFunc("/onchain/votes/{address}", handler.HandleGetVotesByUser(database))
 	router.Put("/on-chain/votes", handler.HandleSynchronizeVotes(syncer))
 
-	logger.Infof("Server running on port %d", port)
-	err = http.ListenAndServe(fmt.Sprintf(":%d", port), router)
-	if err != nil {
-		panic(err)
+	srv := &http.Server{
+		Addr:    fmt.Sprintf(":%d", port),
+		Handler: router,
 	}
+
+	// Start HTTP server in a goroutine
+	go func() {
+		logger.Infof("Server running on port %d", port)
+		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			logger.Fatalf("HTTP server error: %v", err)
+		}
+	}()
+
+	// Wait for shutdown signal
+	sig := <-sigChan
+	logger.Infof("Received signal %v, shutting down gracefully...", sig)
+	cancel() // Signal all goroutines to stop
+
+	// Give the HTTP server a deadline to finish active requests
+	shutdownCtx, shutdownCancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer shutdownCancel()
+
+	if err := srv.Shutdown(shutdownCtx); err != nil {
+		logger.Errorf("HTTP server shutdown error: %v", err)
+	}
+	logger.Info("Server stopped.")
 }
 
 func Compress() func(next http.Handler) http.Handler {
