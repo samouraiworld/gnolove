@@ -15,6 +15,7 @@ import {
   MonitoringWebhookSchema,
   NamespacesSchema,
   PackagesSchema,
+  ProposalSchema,
   ProposalsSchema,
   GovdaoMembersSchema,
   PullRequestReportSchema,
@@ -276,14 +277,13 @@ export const getProposalsByUser = async (address: string) => {
   return getProposals(address);
 };
 
-// Temporary helper to fetch a single proposal by id until backend provides an endpoint
 export const getProposal = async (id: string) => {
   if (!id) throw new HttpError('Proposal id is required', { status: 400, statusText: 'Bad Request' });
 
-  const proposals = await getProposals();
-  const found = proposals.find((p) => p.id === id);
-  if (!found) throw new HttpError('Proposal not found', { status: 404 });
-  return found;
+  const url = new URL(`/onchain/proposals/${id}`, ENV.NEXT_PUBLIC_API_URL);
+  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.ONCHAIN_300 } });
+
+  return ProposalSchema.parse(data);
 };
 
 export const getScoreFactors = async () => {

@@ -125,10 +125,12 @@ const ProposalCard = ({
                 ID: {proposal.id}
               </Text>
             </Flex>
-            <Heading size="4">{getProposalTitle(proposal)}</Heading>
+            <Heading size="4" className="line-clamp-2">{getProposalTitle(proposal)}</Heading>
             {proposal.description && (
-              <Box className="min-h-0 flex-1 overflow-auto">
-                <RadixMarkdown>{proposal.description}</RadixMarkdown>
+              <Box className="min-h-0 flex-1 overflow-hidden">
+                <Box className="line-clamp-6">
+                  <RadixMarkdown>{proposal.description}</RadixMarkdown>
+                </Box>
               </Box>
             )}
             <Text mb="2" color="gray" className="shrink-0 truncate" title={`Proposal path: ${proposal.path}`}>

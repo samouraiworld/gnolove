@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -249,9 +250,16 @@ func HandleDeleteLeaderboardWebhook(db *gorm.DB) http.HandlerFunc {
 }
 
 // Loop through active leaderboard webhooks and trigger them
-func LoopTriggerLeaderboardWebhooks(db *gorm.DB, logger *zap.SugaredLogger) {
+func LoopTriggerLeaderboardWebhooks(ctx context.Context, db *gorm.DB, logger *zap.SugaredLogger) {
+	ticker := time.NewTicker(1 * time.Minute)
+	defer ticker.Stop()
 	for {
-		time.Sleep(1 * time.Minute)
+		select {
+		case <-ctx.Done():
+			logger.Info("Leaderboard webhook loop stopped (context cancelled).")
+			return
+		case <-ticker.C:
+		}
 		var webhooks []models.LeaderboardWebhook
 		err := db.Where("active AND next_run_at > ? AND next_run_at <= ?", time.Now().Add(-time.Minute), time.Now()).Find(&webhooks).Error
 		if err != nil {
