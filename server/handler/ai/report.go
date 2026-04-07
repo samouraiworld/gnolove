@@ -128,6 +128,38 @@ func HandleGetAllReports(db *gorm.DB) http.HandlerFunc {
 	}
 }
 
+// HandleGenerateReport handles POST /ai/report/generate
+// Triggers manual report generation. Idempotent — returns existing report if one exists for the current week.
+func HandleGenerateReport(db *gorm.DB) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost {
+			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+			return
+		}
+		w.Header().Set("Content-Type", "application/json")
+
+		report, err := GenerateReport(db)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		dataObj, err := unmarshalReportData(report)
+		if err != nil {
+			http.Error(w, "Report generated but failed to parse data", http.StatusInternalServerError)
+			return
+		}
+
+		response := map[string]interface{}{
+			"id":        report.ID,
+			"createdAt": report.CreatedAt,
+			"data":      dataObj,
+		}
+
+		json.NewEncoder(w).Encode(response)
+	}
+}
+
 func unmarshalReportData(report models.Report) (map[string]interface{}, error) {
 	var dataObj map[string]interface{}
 
