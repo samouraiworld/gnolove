@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"sync"
 	"time"
 
 	"github.com/google/uuid"
@@ -11,6 +12,14 @@ import (
 	"github.com/samouraiworld/topofgnomes/server/providers"
 	"gorm.io/gorm"
 )
+
+// Daily cooldown — prevent excessive LLM calls (max 1 attempt per 24h).
+var (
+	lastAttemptMu   sync.Mutex
+	lastAttemptTime time.Time
+)
+
+const reportCooldown = 24 * time.Hour
 
 // GetLastReport fetches the last generated report from the database.
 func GetLastReport(db *gorm.DB) (*models.Report, error) {
@@ -62,6 +71,17 @@ func GenerateReport(db *gorm.DB) (models.Report, error) {
 	if err == nil {
 		return existing, nil
 	}
+
+	// Daily cooldown — avoid hammering LLM APIs on repeated calls/retries
+	lastAttemptMu.Lock()
+	if time.Since(lastAttemptTime) < reportCooldown {
+		lastAttemptMu.Unlock()
+		return models.Report{}, fmt.Errorf("report generation on cooldown (last attempt: %s, retry after %s)",
+			lastAttemptTime.Format(time.RFC3339),
+			lastAttemptTime.Add(reportCooldown).Format(time.RFC3339))
+	}
+	lastAttemptTime = now
+	lastAttemptMu.Unlock()
 
 	endTime := now
 	startTime := endTime.AddDate(0, 0, -7)
