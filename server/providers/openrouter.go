@@ -10,17 +10,21 @@ import (
 )
 
 // OpenRouter uses the OpenAI-compatible /chat/completions endpoint.
-// Free models (e.g. Qwen) have no cost on OpenRouter.
-const (
-	openrouterBaseURL = "https://openrouter.ai/api/v1/"
-	openrouterModel   = "qwen/qwen3.6-plus:free" // Free tier, large context
-)
+// Free models are tried in order — if one is rate-limited, the next is attempted.
+const openrouterBaseURL = "https://openrouter.ai/api/v1/"
 
-func callOpenRouterAPI(apiKey, systemPrompt, userPrompt string, outputFormatSchema map[string]interface{}) (string, error) {
+var openrouterModels = []string{
+	"qwen/qwen3.6-plus:free",                    // Qwen 3.6 Plus — large context
+	"meta-llama/llama-3.3-70b-instruct:free",     // Llama 3.3 70B
+	"google/gemma-3-27b-it:free",                 // Gemma 3 27B
+	"nousresearch/hermes-3-llama-3.1-405b:free",  // Hermes 3 405B
+}
+
+func callOpenRouterWithModel(apiKey, model, systemPrompt, userPrompt string, outputFormatSchema map[string]interface{}) (string, error) {
 	url := fmt.Sprintf("%schat/completions", openrouterBaseURL)
 
 	body := map[string]interface{}{
-		"model":       openrouterModel,
+		"model":       model,
 		"temperature": 0.7,
 		"messages": []map[string]string{
 			{"role": "system", "content": systemPrompt},
@@ -60,6 +64,10 @@ func callOpenRouterAPI(apiKey, systemPrompt, userPrompt string, outputFormatSche
 	}
 	defer resp.Body.Close()
 
+	if resp.StatusCode == http.StatusTooManyRequests || resp.StatusCode == http.StatusServiceUnavailable {
+		return "", fmt.Errorf("model %s rate-limited (status %d)", model, resp.StatusCode)
+	}
+
 	if resp.StatusCode != http.StatusOK {
 		var buf bytes.Buffer
 		_, _ = buf.ReadFrom(resp.Body)
@@ -77,6 +85,19 @@ func callOpenRouterAPI(apiKey, systemPrompt, userPrompt string, outputFormatSche
 	}
 
 	return result.Choices[0].Message["content"], nil
+}
+
+func callOpenRouterAPI(apiKey, systemPrompt, userPrompt string, outputFormatSchema map[string]interface{}) (string, error) {
+	var lastErr error
+	for _, model := range openrouterModels {
+		result, err := callOpenRouterWithModel(apiKey, model, systemPrompt, userPrompt, outputFormatSchema)
+		if err == nil {
+			return result, nil
+		}
+		lastErr = err
+		fmt.Printf("[OpenRouter] model %s failed: %v, trying next...\n", model, err)
+	}
+	return "", fmt.Errorf("all OpenRouter models failed, last error: %w", lastErr)
 }
 
 // AskLLM tries OpenRouter first (free), falls back to Mistral if unavailable.
