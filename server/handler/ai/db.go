@@ -131,8 +131,8 @@ func GenerateReport(db *gorm.DB) (models.Report, error) {
 
 	userPrompt := string(inputDataJSON)
 
-	// Generate report using AskAssistant
-	assistantResponse, err := providers.AskMistral(reportSystemPrompt, userPrompt, reportOutputFormatSchema)
+	// Generate report using LLM (OpenRouter free tier preferred, Mistral fallback)
+	assistantResponse, err := providers.AskLLM(reportSystemPrompt, userPrompt, reportOutputFormatSchema)
 	if err != nil {
 		return models.Report{}, err
 	}
