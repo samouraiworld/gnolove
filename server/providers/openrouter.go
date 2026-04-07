@@ -13,12 +13,18 @@ import (
 // Free models are tried in order — if one is rate-limited, the next is attempted.
 const openrouterBaseURL = "https://openrouter.ai/api/v1/"
 
-var openrouterModels = []string{
-	"qwen/qwen3.6-plus:free",                    // Qwen 3.6 Plus — large context
-	"meta-llama/llama-3.3-70b-instruct:free",     // Llama 3.3 70B
-	"google/gemma-3-27b-it:free",                 // Gemma 3 27B
-	"nousresearch/hermes-3-llama-3.1-405b:free",  // Hermes 3 405B
+// Free models tried first, then low-cost paid model as final fallback.
+// Order matters: cheapest/most-available first.
+var openrouterFreeModels = []string{
+	"qwen/qwen3.6-plus:free",                   // Qwen 3.6 Plus — large context
+	"meta-llama/llama-3.3-70b-instruct:free",    // Llama 3.3 70B
+	"google/gemma-3-27b-it:free",                // Gemma 3 27B
+	"nousresearch/hermes-3-llama-3.1-405b:free", // Hermes 3 405B
 }
+
+// Paid fallback — very cheap ($0.08/M input, $0.20/M output).
+// A single weekly report costs ~$0.001.
+const openrouterPaidModel = "qwen/qwen3-30b-a3b"
 
 func callOpenRouterWithModel(apiKey, model, systemPrompt, userPrompt string, outputFormatSchema map[string]interface{}) (string, error) {
 	url := fmt.Sprintf("%schat/completions", openrouterBaseURL)
@@ -89,15 +95,28 @@ func callOpenRouterWithModel(apiKey, model, systemPrompt, userPrompt string, out
 
 func callOpenRouterAPI(apiKey, systemPrompt, userPrompt string, outputFormatSchema map[string]interface{}) (string, error) {
 	var lastErr error
-	for _, model := range openrouterModels {
+
+	// Try free models first
+	for _, model := range openrouterFreeModels {
 		result, err := callOpenRouterWithModel(apiKey, model, systemPrompt, userPrompt, outputFormatSchema)
 		if err == nil {
+			fmt.Printf("[OpenRouter] report generated with free model %s\n", model)
 			return result, nil
 		}
 		lastErr = err
-		fmt.Printf("[OpenRouter] model %s failed: %v, trying next...\n", model, err)
+		fmt.Printf("[OpenRouter] free model %s failed: %v, trying next...\n", model, err)
 	}
-	return "", fmt.Errorf("all OpenRouter models failed, last error: %w", lastErr)
+
+	// Final fallback: low-cost paid model
+	fmt.Printf("[OpenRouter] all free models exhausted, trying paid fallback %s\n", openrouterPaidModel)
+	result, err := callOpenRouterWithModel(apiKey, openrouterPaidModel, systemPrompt, userPrompt, outputFormatSchema)
+	if err == nil {
+		fmt.Printf("[OpenRouter] report generated with paid model %s\n", openrouterPaidModel)
+		return result, nil
+	}
+	lastErr = err
+
+	return "", fmt.Errorf("all OpenRouter models failed (free + paid), last error: %w", lastErr)
 }
 
 // AskLLM tries OpenRouter first (free), falls back to Mistral if unavailable.
