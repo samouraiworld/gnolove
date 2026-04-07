@@ -141,7 +141,7 @@ func (s *Syncer) StartSynchonizing(ctx context.Context) error {
 		}
 	}()
 
-	if os.Getenv("MISTRAL_API_KEY") != "" {
+	if os.Getenv("OPENROUTER_API_KEY") != "" || os.Getenv("MISTRAL_API_KEY") != "" {
 		c := cron.New()
 
 		// Schedule the task to run every Sunday at 23:59
@@ -167,7 +167,7 @@ func (s *Syncer) StartSynchonizing(ctx context.Context) error {
 		c.Start()
 		s.logger.Info("Report synchronization started (runs every Sunday at 23:59 UTC)")
 	} else {
-		s.logger.Warn("MISTRAL_API_KEY is not set. Report synchronization will not start.")
+		s.logger.Warn("No AI API key set (OPENROUTER_API_KEY or MISTRAL_API_KEY). Report synchronization will not start.")
 	}
 
 	return nil
