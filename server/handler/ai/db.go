@@ -44,9 +44,26 @@ func GetAllReports(db *gorm.DB) ([]models.Report, error) {
 	return reports, nil
 }
 
-// GenerateReport creates a new report based on the latest 7days PRs and issues data and save it in database.
+// GenerateReport creates a new report based on the latest 7 days PRs and issues data and saves it in the database.
+// It is idempotent: if a report already exists for the current week (Monday-Sunday), it returns it instead of creating a duplicate.
 func GenerateReport(db *gorm.DB) (models.Report, error) {
-	endTime := time.Now()
+	// Compute current week boundaries (Monday 00:00 to Sunday 23:59:59)
+	now := time.Now().UTC()
+	weekday := now.Weekday()
+	if weekday == time.Sunday {
+		weekday = 7
+	}
+	weekStart := time.Date(now.Year(), now.Month(), now.Day()-int(weekday)+1, 0, 0, 0, 0, time.UTC)
+	weekEnd := weekStart.AddDate(0, 0, 7).Add(-time.Second)
+
+	// Check if a report already exists for this week
+	var existing models.Report
+	err := db.Where("created_at >= ? AND created_at <= ?", weekStart, weekEnd).First(&existing).Error
+	if err == nil {
+		return existing, nil
+	}
+
+	endTime := now
 	startTime := endTime.AddDate(0, 0, -7)
 
 	// Fetch merged pull requests
