@@ -225,6 +225,26 @@ func (s *Syncer) syncReports() error {
 	}
 
 	s.logger.Infof("Report generated successfully: %s", report.ID)
+
+	// Broadcast to Discord if webhook is configured
+	webhookURL := os.Getenv("DISCORD_REPORT_WEBHOOK_URL")
+	if webhookURL == "" {
+		webhookURL = os.Getenv("DISCORD_WEBHOOK_URL")
+	}
+	if webhookURL != "" {
+		dataObj, parseErr := ai.ParseReportData(report)
+		if parseErr != nil {
+			s.logger.Warnf("Failed to parse report data for broadcast: %v", parseErr)
+			return nil // report saved, broadcast is best-effort
+		}
+		message := ai.FormatReportForDiscord(report, dataObj)
+		if sendErr := ai.SendDiscordMessage(webhookURL, message); sendErr != nil {
+			s.logger.Warnf("Failed to broadcast report to Discord: %v", sendErr)
+		} else {
+			s.logger.Info("Report broadcasted to Discord successfully.")
+		}
+	}
+
 	return nil
 }
 
