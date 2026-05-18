@@ -46,5 +46,13 @@ func InitDB() (*gorm.DB, error) {
 		panic(err)
 	}
 
+	// Backfill legacy reports written before the prompt_version column existed.
+	// AutoMigrate creates the column with default=1 for new rows, but rows
+	// written under the legacy schema land at 0 — flip those to 1 so the
+	// frontend can rely on the version being present and meaningful.
+	if err := db.Exec("UPDATE reports SET prompt_version = 1 WHERE prompt_version = 0").Error; err != nil {
+		return nil, fmt.Errorf("backfill reports.prompt_version: %w", err)
+	}
+
 	return db, nil
 }

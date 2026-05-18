@@ -1,5 +1,10 @@
 package ai
 
+// PromptVersion2 is the schema/prompt revision this file emits.
+// Bump alongside reportOutputFormatSchemaV2 + reportSystemPromptV2 whenever
+// the wire shape changes.
+const PromptVersion2 = 2
+
 var reportOutputFormatSchema = map[string]interface{}{
 	"type":        "object",
 	"name":        "WeeklyGnolandReport",
@@ -97,3 +102,79 @@ json
     }
   ]
 }`
+
+// reportOutputFormatSchemaV2 emits per project:
+//   - summary       (legacy, == summary_long for one rollover cycle)
+//   - summary_short (≤ 2 sentences, factual, skimmable)
+//   - summary_long  (CTO-perspective paragraph)
+//   - team          (optional team slug if one team clearly drove the work)
+var reportOutputFormatSchemaV2 = map[string]interface{}{
+	"type":        "object",
+	"name":        "WeeklyGnolandReportV2",
+	"description": "Weekly summary of the Gnoland ecosystem with both a short and a long summary per project.",
+	"properties": map[string]interface{}{
+		"cycle": map[string]interface{}{
+			"type":        "string",
+			"description": "Human-readable cycle label, e.g. 'Weekly Report — May 18, 2026'.",
+		},
+		"projects": map[string]interface{}{
+			"type":        "array",
+			"description": "One entry per project that saw activity this cycle.",
+			"items": map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"project_name": map[string]interface{}{
+						"type":        "string",
+						"description": "Repository identifier, e.g. 'gnolang/gno'.",
+					},
+					"summary": map[string]interface{}{
+						"type":        "string",
+						"description": "Identical to summary_long. Emitted for backward compatibility with prompt v1 readers.",
+					},
+					"summary_short": map[string]interface{}{
+						"type":        "string",
+						"description": "Two sentences max. Factual, plain English, no metaphors. The headline a user would skim on a dashboard card.",
+					},
+					"summary_long": map[string]interface{}{
+						"type":        "string",
+						"description": "One CTO-perspective paragraph (4-6 sentences). What shipped, what's at risk, what's worth a leadership-level eye. Plain English, no fantasy framing.",
+					},
+					"team": map[string]interface{}{
+						"type":        "string",
+						"description": "Optional team slug if one team clearly drove the work this cycle (e.g. 'core-team', 'onbloc'). Leave empty if mixed or unclear.",
+					},
+				},
+				"required": []string{"project_name", "summary", "summary_short", "summary_long"},
+			},
+		},
+	},
+	"required": []string{"projects"},
+	"strict":   false,
+}
+
+const reportSystemPromptV2 = `
+SYSTEM — GNO ECOSYSTEM CTO BRIEFING
+
+You are summarising one week of contributor activity across the Gno ecosystem
+for the Gno Ecosystem CTO and the leads of contributing teams. For each project
+that saw activity, emit three views and one optional attribution:
+
+  - summary_short : 2 sentences max, plain English, factual, skimmable.
+                    No metaphors. Mention the highest-impact change and the
+                    one risk worth knowing. This is what shows on a card.
+  - summary_long  : 4-6 sentences, written from a Gno Ecosystem CTO's
+                    perspective. Talk about what shipped, what's blocked,
+                    what merits leadership attention. Name contributors by
+                    GitHub login (no decoration). No fantasy framing.
+  - summary       : copy of summary_long. Emitted for legacy readers.
+  - team          : optional. If one team clearly drove this project's work
+                    this cycle, give the slug. Leave empty if mixed.
+
+The input is a JSON object with a "projects" array. Each project lists its
+merged pull requests (with author GitHub login) and freshly opened issues.
+
+Output strictly matches the WeeklyGnolandReportV2 schema. Do not invent
+projects that aren't in the input. Skip projects with no merged PRs and no
+new issues.
+`
+
