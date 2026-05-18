@@ -80,34 +80,7 @@ func (s *Syncer) StartSynchonizing(ctx context.Context) error {
 		ticker := time.NewTicker(2 * time.Hour)
 		defer ticker.Stop()
 		for {
-			for _, repository := range s.repositories {
-				fmt.Printf("repository: %#v", repository)
-				s.logger.Info("Starting synchronization for ", repository.ID)
-				err := s.syncUsers(repository)
-				if err != nil {
-					s.logger.Errorf("error while syncing users %s", err.Error())
-				}
-
-				err = s.syncIssues(repository)
-				if err != nil {
-					s.logger.Errorf("error while syncing issues %s", err.Error())
-				}
-
-				err = s.syncPRs(repository)
-				if err != nil {
-					s.logger.Errorf("error while syncing PRs %s", err.Error())
-				}
-
-				err = s.syncMilestones(repository)
-				if err != nil {
-					s.logger.Errorf("error while syncing Milestones %s", err.Error())
-				}
-
-				err = s.syncCommits(repository)
-				if err != nil {
-					s.logger.Errorf("error while syncing commits %s", err.Error())
-				}
-			}
+			s.syncRepositoriesConcurrently(ctx)
 
 			// For some reason github api doesn't return all users. so we have to sync them manually
 			// by taking the ids from pull requests and issues without a corresponding ID on users table
