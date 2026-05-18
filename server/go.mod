@@ -18,6 +18,7 @@ require (
 	github.com/subosito/gotenv v1.6.0
 	go.uber.org/zap v1.27.0
 	golang.org/x/oauth2 v0.24.0
+	gopkg.in/yaml.v3 v3.0.1
 	gorm.io/driver/sqlite v1.5.6
 	gorm.io/gorm v1.25.12
 )
@@ -76,5 +77,4 @@ require (
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20250115164207-1a7da9e5054f // indirect
 	google.golang.org/grpc v1.69.4 // indirect
 	google.golang.org/protobuf v1.36.3 // indirect
-	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

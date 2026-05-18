@@ -3,6 +3,7 @@ package ai
 import (
 	"encoding/json"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/samouraiworld/topofgnomes/server/models"
@@ -151,12 +152,64 @@ func HandleGenerateReport(db *gorm.DB) http.HandlerFunc {
 		}
 
 		response := map[string]interface{}{
-			"id":        report.ID,
-			"createdAt": report.CreatedAt,
-			"data":      dataObj,
+			"id":            report.ID,
+			"createdAt":     report.CreatedAt,
+			"promptVersion": report.PromptVersion,
+			"data":          dataObj,
 		}
 
 		json.NewEncoder(w).Encode(response)
+	}
+}
+
+// HandleRegenerateReport handles POST /ai/report/regenerate.
+// Overwrites the report for the cycle containing ?cycleStart=RFC3339
+// (defaults to this week's Monday) using ?promptVersion=N (defaults to 2).
+// Bypasses the daily cooldown — this is the operator-triggered fallback for
+// when the Sunday cron misses a cycle.
+func HandleRegenerateReport(db *gorm.DB) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost {
+			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+			return
+		}
+		w.Header().Set("Content-Type", "application/json")
+
+		cycleStart := time.Now().UTC()
+		if cs := r.URL.Query().Get("cycleStart"); cs != "" {
+			t, err := time.Parse(time.RFC3339, cs)
+			if err != nil {
+				http.Error(w, "invalid cycleStart (expected RFC3339)", http.StatusBadRequest)
+				return
+			}
+			cycleStart = t
+		}
+		promptVersion := PromptVersion2
+		if v := r.URL.Query().Get("promptVersion"); v != "" {
+			parsed, err := strconv.Atoi(v)
+			if err != nil || (parsed != 1 && parsed != PromptVersion2) {
+				http.Error(w, "promptVersion must be 1 or 2", http.StatusBadRequest)
+				return
+			}
+			promptVersion = parsed
+		}
+
+		report, err := RegenerateReport(db, nil, cycleStart, promptVersion)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		dataObj, err := unmarshalReportData(report)
+		if err != nil {
+			http.Error(w, "regenerated but failed to parse data", http.StatusInternalServerError)
+			return
+		}
+		_ = json.NewEncoder(w).Encode(map[string]interface{}{
+			"id":            report.ID,
+			"createdAt":     report.CreatedAt,
+			"promptVersion": report.PromptVersion,
+			"data":          dataObj,
+		})
 	}
 }
 
