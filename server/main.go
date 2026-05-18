@@ -170,6 +170,7 @@ func main() {
 	router.Get("/teams", teamshandler.HandleGetAll(teamsCfg))
 	router.Get("/teams/{slug}", teamshandler.HandleGetBySlug(teamsCfg))
 	router.Get("/teams/{slug}/active-repos", teamshandler.HandleGetActiveRepos(database, teamsCfg, cache))
+	router.Get("/teams/{slug}/team-stats", teamshandler.HandleGetTeamStats(database, teamsCfg, cache))
 
 	router.HandleFunc("/repositories", handler.HandleGetRepository(database))
 	router.HandleFunc("/stats", handler.HandleGetUserStats(database, cache))
