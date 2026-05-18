@@ -80,34 +80,7 @@ func (s *Syncer) StartSynchonizing(ctx context.Context) error {
 		ticker := time.NewTicker(2 * time.Hour)
 		defer ticker.Stop()
 		for {
-			for _, repository := range s.repositories {
-				fmt.Printf("repository: %#v", repository)
-				s.logger.Info("Starting synchronization for ", repository.ID)
-				err := s.syncUsers(repository)
-				if err != nil {
-					s.logger.Errorf("error while syncing users %s", err.Error())
-				}
-
-				err = s.syncIssues(repository)
-				if err != nil {
-					s.logger.Errorf("error while syncing issues %s", err.Error())
-				}
-
-				err = s.syncPRs(repository)
-				if err != nil {
-					s.logger.Errorf("error while syncing PRs %s", err.Error())
-				}
-
-				err = s.syncMilestones(repository)
-				if err != nil {
-					s.logger.Errorf("error while syncing Milestones %s", err.Error())
-				}
-
-				err = s.syncCommits(repository)
-				if err != nil {
-					s.logger.Errorf("error while syncing commits %s", err.Error())
-				}
-			}
+			s.syncRepositoriesConcurrently(ctx)
 
 			// For some reason github api doesn't return all users. so we have to sync them manually
 			// by taking the ids from pull requests and issues without a corresponding ID on users table
@@ -580,13 +553,25 @@ func (s *Syncer) syncCommits(repository models.Repository) error {
 	return nil
 }
 
-// syncUserDetails fetches and updates detailed GitHub data for all users
+// syncUserDetails refreshes GitHub profile fields (bio, top repos, follower
+// counts) for stale users only. A user is "stale" if their DetailsSyncedAt is
+// older than userDetailsRefreshInterval (default 7d) or zero (never synced).
+//
+// Pre-Phase-2a this loop was O(N_users) every sync cycle and a known scaling
+// risk (plan §11 R-2). The 7d window keeps profile drift bounded while
+// shrinking each cycle's GraphQL traffic to "new contributors + weekly slice".
 func (s *Syncer) syncUserDetails() error {
-	var users []models.User
-	if err := s.db.Find(&users).Error; err != nil {
-		s.logger.Errorf("Failed to fetch users for details sync: %v", err)
+	cutoff := time.Now().UTC().Add(-userDetailsRefreshInterval())
+	users, err := selectStaleUsers(s.db, cutoff)
+	if err != nil {
+		s.logger.Errorf("Failed to fetch stale users for details sync: %v", err)
 		return err
 	}
+	if len(users) == 0 {
+		s.logger.Info("User details sync: nothing stale.")
+		return nil
+	}
+	s.logger.Infof("User details sync: refreshing %d stale users (cutoff=%s).", len(users), cutoff.Format(time.RFC3339))
 
 	for _, user := range users {
 		var q struct {
@@ -687,6 +672,11 @@ func (s *Syncer) syncUserDetails() error {
 				user.TopRepositories = string(topReposJSON)
 			}
 		}
+
+		// Stamp the refresh time so the next cycle skips this user for ~7d.
+		// Done only on the happy path so transient GitHub errors above keep
+		// the user "stale" and we'll retry next cycle.
+		user.DetailsSyncedAt = time.Now().UTC()
 
 		if err := s.db.Save(&user).Error; err != nil {
 			s.logger.Errorf("Failed to update user %s: %v", user.Login, err)

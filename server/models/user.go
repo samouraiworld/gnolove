@@ -22,6 +22,11 @@ type User struct {
 	Followers       int       `json:"followers"`
 	Following       int       `json:"following"`
 
+	// DetailsSyncedAt records when syncUserDetails last refreshed this user's
+	// profile fields (bio, top repos, follower counts). Zero means never.
+	// Used by Phase 2a's incremental refresh to skip users seen recently.
+	DetailsSyncedAt time.Time `gorm:"index" json:"detailsSyncedAt"`
+
 	Issues       []Issue       `gorm:"foreignKey:AuthorID" json:"issues"`
 	PullRequests []PullRequest `gorm:"foreignKey:AuthorID" json:"pullRequests"`
 	Reviews      []Review      `gorm:"foreignKey:AuthorID" json:"reviews"`
