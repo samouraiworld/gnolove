@@ -20,10 +20,12 @@ import (
 	"github.com/samouraiworld/topofgnomes/server/handler"
 	"github.com/samouraiworld/topofgnomes/server/handler/ai"
 	"github.com/samouraiworld/topofgnomes/server/handler/contributor"
+	teamshandler "github.com/samouraiworld/topofgnomes/server/handler/teams"
 	infrarepo "github.com/samouraiworld/topofgnomes/server/infra/repository"
 	"github.com/samouraiworld/topofgnomes/server/models"
 	"github.com/samouraiworld/topofgnomes/server/signer"
 	"github.com/samouraiworld/topofgnomes/server/sync"
+	"github.com/samouraiworld/topofgnomes/server/teams"
 	"github.com/subosito/gotenv"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
@@ -61,6 +63,16 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	teamsConfigPath := os.Getenv("TEAMS_CONFIG_PATH")
+	if teamsConfigPath == "" {
+		teamsConfigPath = "config/teams.yaml"
+	}
+	teamsCfg, err := teams.Load(teamsConfigPath)
+	if err != nil {
+		panic(fmt.Errorf("load teams config: %w", err))
+	}
+	logger.Infof("loaded %d teams from %s (mtime=%s)", len(teamsCfg.Teams), teamsConfigPath, teamsCfg.LastSyncedAt.Format(time.RFC3339))
 
 	database, err = db.InitDB()
 	if err != nil {
@@ -154,6 +166,10 @@ func main() {
 
 	// Start triggering leaderboard webhooks
 	go handler.LoopTriggerLeaderboardWebhooks(ctx, database, logger)
+
+	router.Get("/teams", teamshandler.HandleGetAll(teamsCfg))
+	router.Get("/teams/{slug}", teamshandler.HandleGetBySlug(teamsCfg))
+	router.Get("/teams/{slug}/active-repos", teamshandler.HandleGetActiveRepos(database, teamsCfg, cache))
 
 	router.HandleFunc("/repositories", handler.HandleGetRepository(database))
 	router.HandleFunc("/stats", handler.HandleGetUserStats(database, cache))
