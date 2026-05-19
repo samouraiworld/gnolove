@@ -1,0 +1,147 @@
+# gnolove Focus Areas taxonomy — single source of truth for /topics.
+#
+# Editing rules
+# - schemaVersion bumps when the YAML shape changes (not when topics change).
+# - slug is lowercase kebab-case, unique case-insensitively.
+# - label is the user-visible string. Unique case-insensitively.
+# - patterns are RE2 source strings. Matching is performed against a
+#   lowercased haystack of `${repo_name} ${pr_title}`, so do NOT include
+#   case-folded patterns — write everything lowercase and the matcher
+#   handles case folding at the boundary.
+# - Order matters: earlier rules win on ambiguous hits. The first rule
+#   that matches wins, exactly like the legacy frontend logic. Tune
+#   order so the highest-signal topic wins when multiple match.
+# - The "other" bucket is NOT defined here. It's the classifier's
+#   default fallback when no rule matches.
+#
+# After editing, run `go test ./topics/...` then bounce the gnolove backend.
+
+schemaVersion: 1
+
+topics:
+  - slug: gnovm
+    label: Gno VM
+    patterns:
+      - '\bvm\b'
+      - 'interpreter'
+      - '\bstack[- ]engine\b'
+      - 'gnoland/gno'
+
+  - slug: gnocore
+    label: Core protocol
+    patterns:
+      - '\bcore\b'
+      - '\bprotocol\b'
+      - 'tm2'
+      - 'consensus'
+
+  - slug: gnosdk
+    label: SDK
+    patterns:
+      - '\bsdk\b'
+      - '\bjs-client\b'
+      - 'tx[- ]builder'
+
+  - slug: gnops
+    label: Ops & infra
+    patterns:
+      - 'portal[- ]loop'
+      - 'validator'
+      - '\binfra\b'
+      - 'deploy'
+      - '\bops\b'
+
+  - slug: security
+    label: Security
+    patterns:
+      - '\bsecurity\b'
+      - '\bauth\b'
+      - 'audit'
+      - 'multisig'
+      - 'signer'
+      - 'cve'
+
+  - slug: devx
+    label: DevX & tooling
+    patterns:
+      - 'gnopls'
+      - 'gno-?cli'
+      - 'devx'
+      - '\btooling\b'
+      - '\blinter\b'
+      - '\blsp\b'
+
+  - slug: docs
+    label: Docs
+    patterns:
+      - '\bdocs?\b'
+      - 'readme'
+      - 'tutorial'
+
+  - slug: wallet
+    label: Wallet
+    patterns:
+      - 'adena'
+      - '\bwallet\b'
+      - 'gnokey'
+
+  - slug: indexer
+    label: Indexer & API
+    patterns:
+      - 'gnoscan'
+      - '\bindexer\b'
+      - '\bgraphql\b'
+
+  - slug: governance
+    label: Governance
+    patterns:
+      - 'govdao'
+      - '\bgovern'
+      - '\bproposal'
+      - 'multisig'
+
+  - slug: dex
+    label: DEX
+    patterns:
+      - 'gnoswap'
+      - '\bdex\b'
+      - '\bswap\b'
+      - '\bamm\b'
+      - 'liquidity'
+
+  - slug: nft
+    label: NFT
+    patterns:
+      - '\bnft\b'
+      - '\berc721\b'
+      - 'grc721'
+
+  - slug: messaging
+    label: Messaging
+    patterns:
+      - 'berty'
+      - 'messaging'
+      - '\bp2p\b'
+
+  - slug: ibc
+    label: IBC
+    patterns:
+      - '\bibc\b'
+      - 'cosmos[- ]sdk'
+      - 'relayer'
+
+  - slug: ai
+    label: AI
+    patterns:
+      - '\bai\b'
+      - 'mistral'
+      - 'openrouter'
+      - '\bllm\b'
+
+  - slug: zk
+    label: ZK
+    patterns:
+      - '\bzk\b'
+      - 'zero[- ]knowledge'
+      - '\bsnark\b'
+      - '\bstark\b'

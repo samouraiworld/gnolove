@@ -21,11 +21,13 @@ import (
 	"github.com/samouraiworld/topofgnomes/server/handler/ai"
 	"github.com/samouraiworld/topofgnomes/server/handler/contributor"
 	teamshandler "github.com/samouraiworld/topofgnomes/server/handler/teams"
+	topicshandler "github.com/samouraiworld/topofgnomes/server/handler/topics"
 	infrarepo "github.com/samouraiworld/topofgnomes/server/infra/repository"
 	"github.com/samouraiworld/topofgnomes/server/models"
 	"github.com/samouraiworld/topofgnomes/server/signer"
 	"github.com/samouraiworld/topofgnomes/server/sync"
 	"github.com/samouraiworld/topofgnomes/server/teams"
+	"github.com/samouraiworld/topofgnomes/server/topics"
 	"github.com/subosito/gotenv"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
@@ -73,6 +75,16 @@ func main() {
 		panic(fmt.Errorf("load teams config: %w", err))
 	}
 	logger.Infof("loaded %d teams from %s (mtime=%s)", len(teamsCfg.Teams), teamsConfigPath, teamsCfg.LastSyncedAt.Format(time.RFC3339))
+
+	topicsConfigPath := os.Getenv("TOPICS_CONFIG_PATH")
+	if topicsConfigPath == "" {
+		topicsConfigPath = "config/topics.yaml"
+	}
+	topicsCfg, err := topics.Load(topicsConfigPath)
+	if err != nil {
+		panic(fmt.Errorf("load topics config: %w", err))
+	}
+	logger.Infof("loaded %d topics from %s (mtime=%s)", len(topicsCfg.Topics), topicsConfigPath, topicsCfg.LastSyncedAt.Format(time.RFC3339))
 
 	database, err = db.InitDB()
 	if err != nil {
@@ -171,6 +183,8 @@ func main() {
 	router.Get("/teams/{slug}", teamshandler.HandleGetBySlug(teamsCfg))
 	router.Get("/teams/{slug}/active-repos", teamshandler.HandleGetActiveRepos(database, teamsCfg, cache))
 	router.Get("/teams/{slug}/team-stats", teamshandler.HandleGetTeamStats(database, teamsCfg, cache))
+
+	router.Get("/topics", topicshandler.HandleGetAll(topicsCfg))
 
 	router.HandleFunc("/repositories", handler.HandleGetRepository(database))
 	router.HandleFunc("/stats", handler.HandleGetUserStats(database, cache))
