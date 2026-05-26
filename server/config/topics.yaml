@@ -22,18 +22,45 @@ topics:
   - slug: gnovm
     label: Gno VM
     patterns:
+      - '\(gnovm\)'
       - '\bvm\b'
       - 'interpreter'
       - '\bstack[- ]engine\b'
-      - 'gnoland/gno'
+      - 'gnomod'
+      - 'precompile'
+      - 'type-check'
+      - 'transpile'
+      - '\bast\b'
+      - '\bparser\b'
+
+  - slug: consensus
+    label: Consensus
+    patterns:
+      - '\(consensus\)'
+      - '\bconsensus\b'
+      - '\btendermint\b'
+      - '\bbft\b'
+      - '\bvalidator set\b'
+      - '\bblock\b'
 
   - slug: gnocore
-    label: Core protocol
+    label: Core / TM2
     patterns:
+      - '\(tm2\)'
       - '\bcore\b'
       - '\bprotocol\b'
       - 'tm2'
-      - 'consensus'
+
+  - slug: realms
+    label: Realms & packages
+    patterns:
+      - '\(gno\.land\)'
+      - '\brealm\b'
+      - '\bpackage\b'
+      - 'grc20'
+      - '\bavl\b'
+      - 'r/'
+      - 'p/'
 
   - slug: gnosdk
     label: SDK
@@ -45,11 +72,13 @@ topics:
   - slug: gnops
     label: Ops & infra
     patterns:
+      - '\(ci\)'
+      - '\(build\)'
       - 'portal[- ]loop'
-      - 'validator'
       - '\binfra\b'
       - 'deploy'
       - '\bops\b'
+      - '\bci\b'
 
   - slug: security
     label: Security
@@ -70,6 +99,26 @@ topics:
       - '\btooling\b'
       - '\blinter\b'
       - '\blsp\b'
+
+  - slug: frontend
+    label: Frontend
+    patterns:
+      - '\breact\b'
+      - '\bvite\b'
+      - '\bcss\b'
+      - '\bui\b'
+      - 'component'
+      - '\bux\b'
+      - '\bfrontend\b'
+
+  - slug: testing
+    label: Testing & CI
+    patterns:
+      - '\btest\b'
+      - '\bvitest\b'
+      - '\be2e\b'
+      - 'coverage'
+      - '\bci/cd\b'
 
   - slug: docs
     label: Docs
@@ -98,7 +147,6 @@ topics:
       - 'govdao'
       - '\bgovern'
       - '\bproposal'
-      - 'multisig'
 
   - slug: dex
     label: DEX
