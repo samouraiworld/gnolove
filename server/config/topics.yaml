@@ -23,6 +23,7 @@ topics:
     label: Gno VM
     patterns:
       - '\(gnovm\)'
+      - '\(gnolang\)'
       - '\bvm\b'
       - 'interpreter'
       - '\bstack[- ]engine\b'
@@ -40,13 +41,24 @@ topics:
       - '\bconsensus\b'
       - '\btendermint\b'
       - '\bbft\b'
-      - '\bvalidator set\b'
+      - '\bvalidator'
+      - '\bvalset\b'
+      - 'val-scenarios'
+      - '\bvalopers?\b'
+      - '\(blockchain\)'
       - '\bblock\b'
 
   - slug: gnocore
     label: Core / TM2
     patterns:
       - '\(tm2\)'
+      - '\(gnoland\)'
+      - '\(node\)'
+      - 'gnogenesis'
+      - 'gnoland1'
+      - '\bhardfork\b'
+      - '\bamino\b'
+      - 'genproto'
       - '\bcore\b'
       - '\bprotocol\b'
       - 'tm2'
@@ -57,6 +69,9 @@ topics:
       - '\(gno\.land\)'
       - '\brealm\b'
       - '\bpackage\b'
+      - 'boards2?'
+      - '\bexamples?\)'
+      - '\bbptree\b'
       - 'grc20'
       - '\bavl\b'
       - 'r/'
@@ -79,6 +94,11 @@ topics:
       - 'deploy'
       - '\bops\b'
       - '\bci\b'
+      - '\bfaucet\b'
+      - 'gnofaucet'
+      - '\bcontribs?\b'
+      - '\bgnobr\b'
+      - 'github-bot'
 
   - slug: security
     label: Security
@@ -95,14 +115,17 @@ topics:
     patterns:
       - 'gnopls'
       - 'gno-?cli'
+      - 'gnodev'
       - 'devx'
       - '\btooling\b'
       - '\blinter\b'
       - '\blsp\b'
+      - '\(codegen\)'
 
   - slug: frontend
     label: Frontend
     patterns:
+      - 'gnoweb'
       - '\breact\b'
       - '\bvite\b'
       - '\bcss\b'
@@ -119,6 +142,7 @@ topics:
       - '\be2e\b'
       - 'coverage'
       - '\bci/cd\b'
+      - '\bbenchops?\b'
 
   - slug: docs
     label: Docs
