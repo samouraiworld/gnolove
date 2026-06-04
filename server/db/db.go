@@ -41,6 +41,7 @@ func InitDB() (*gorm.DB, error) {
 		&models.GovDaoMember{},
 		&models.LeaderboardWebhook{},
 		&models.SyncStatus{},
+		&models.NotablePR{},
 	)
 	if err != nil {
 		panic(err)

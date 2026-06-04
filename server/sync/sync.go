@@ -95,6 +95,13 @@ func (s *Syncer) StartSynchonizing(ctx context.Context) error {
 				s.logger.Errorf("error while syncing user details %s", err.Error())
 			}
 
+			// Mirror the gnolang "Notable PRs" board (#66). Best-effort: a
+			// missing read:project token scope must not break the main sync.
+			err = s.syncNotableBoard(ctx)
+			if err != nil {
+				s.logger.Errorf("error while syncing notable PRs board %s", err.Error())
+			}
+
 			s.logger.Info("Syncing finished.")
 
 			// Persist last synced time. Only keep one line at a time in that table
