@@ -55,5 +55,12 @@ func InitDB() (*gorm.DB, error) {
 		return nil, fmt.Errorf("backfill reports.prompt_version: %w", err)
 	}
 
+	// Backfill notable_prs rows written before the multi-board column existed —
+	// they all came from the default board (#66). Avoids a transient empty
+	// board before the first multi-board sync re-stamps them.
+	if err := db.Exec("UPDATE notable_prs SET board_id = ? WHERE board_id = '' OR board_id IS NULL", models.DefaultBoardID).Error; err != nil {
+		return nil, fmt.Errorf("backfill notable_prs.board_id: %w", err)
+	}
+
 	return db, nil
 }

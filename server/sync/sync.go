@@ -95,11 +95,13 @@ func (s *Syncer) StartSynchonizing(ctx context.Context) error {
 				s.logger.Errorf("error while syncing user details %s", err.Error())
 			}
 
-			// Mirror the gnolang "Notable PRs" board (#66). Best-effort: a
-			// missing read:project token scope must not break the main sync.
-			err = s.syncNotableBoard(ctx)
-			if err != nil {
-				s.logger.Errorf("error while syncing notable PRs board %s", err.Error())
+			// Mirror the gnolang project boards (models.NotableBoards). Best-effort
+			// and per-board: a missing read:project token scope, or one slow/large
+			// board, must not break the others or the main sync.
+			for _, board := range models.NotableBoards {
+				if err := s.syncBoard(ctx, board); err != nil {
+					s.logger.Errorf("error while syncing notable board %q: %s", board.ID, err.Error())
+				}
 			}
 
 			s.logger.Info("Syncing finished.")

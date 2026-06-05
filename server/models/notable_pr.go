@@ -15,15 +15,20 @@ type NotablePRReview struct {
 	State string `json:"state"`
 }
 
-// NotablePR is one pull-request item from the gnolang "Notable PRs by Area"
-// GitHub Project board (org project #66, https://github.com/orgs/gnolang/projects/66).
+// NotablePR is one item mirrored from a gnolang GitHub Project board (see
+// models.NotableBoards). We mirror boards read-only into gnolove.
 //
-// The board gathers PRs that need review or help so area leaders can surface
-// them. We mirror it read-only into gnolove. The board may also contain draft
-// issues / issues; those are skipped at sync time (only PR-backed items land here).
+// Items can be pull requests or, on boards configured with IncludeIssues,
+// issues — distinguished by ItemType. Issue items leave PR-only fields
+// (ReviewDecision, Additions/Deletions, IsDraft, Reviews…) zero-valued.
 type NotablePR struct {
-	// ItemID is the ProjectV2Item node id — the stable board-entry identifier.
+	// ItemID is the ProjectV2Item node id — globally unique across boards.
 	ItemID string `gorm:"primarykey" json:"itemID"`
+
+	// BoardID is the source board slug (see models.BoardConfig.ID).
+	BoardID string `gorm:"index" json:"boardId"`
+	// ItemType is "pr" or "issue".
+	ItemType string `json:"itemType"`
 
 	Number          int    `json:"number"`
 	Title           string `json:"title"`
