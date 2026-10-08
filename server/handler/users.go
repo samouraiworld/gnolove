@@ -2,6 +2,7 @@ package handler
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
 	"strings"
 
@@ -52,7 +53,13 @@ func HandleGetUser(db *gorm.DB) func(w http.ResponseWriter, r *http.Request) {
 		var user models.User
 		err := db.Model(&models.User{}).Where("wallet = ?", address).First(&user).Error
 		if err != nil {
-			w.WriteHeader(http.StatusInternalServerError)
+			// A wallet without a gnolove account is not a server failure. The body
+			// stays "record not found", which clients already read as "no account".
+			status := http.StatusInternalServerError
+			if errors.Is(err, gorm.ErrRecordNotFound) {
+				status = http.StatusNotFound
+			}
+			w.WriteHeader(status)
 			w.Write([]byte(err.Error()))
 			return
 		}
