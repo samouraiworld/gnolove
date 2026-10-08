@@ -226,10 +226,13 @@ func TestLoadRealConfigFile(t *testing.T) {
 	if len(cfg.Topics) < 10 {
 		t.Fatalf("expected real config to have >=10 topics, got %d", len(cfg.Topics))
 	}
-	// Parity smoke: the gnolove/gno repo should classify as gnovm
-	// (it's the canonical first-rule-wins case from the legacy TS).
-	if got := cfg.Classify("gnoland/gno", "feat: core consensus tweak"); got != "gnovm" {
-		t.Errorf("gnoland/gno + core title => %q, want gnovm", got)
+	// gnovm is the first rule, so it wins over a later one that also matches.
+	if got := cfg.Classify("gnolang/gno", "fix(gnovm): interpreter panic on a nil map"); got != "gnovm" {
+		t.Errorf("gnovm title => %q, want gnovm", got)
+	}
+	// The repo name alone no longer means gnovm: a consensus title in gno is consensus.
+	if got := cfg.Classify("gnolang/gno", "feat: core consensus tweak"); got != "consensus" {
+		t.Errorf("gno + consensus title => %q, want consensus", got)
 	}
 	// adena-wallet should pick wallet, not security (auth pattern).
 	if got := cfg.Classify("onbloc/adena-wallet", "x"); got != "wallet" {
