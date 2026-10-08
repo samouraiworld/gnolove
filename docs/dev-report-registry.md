@@ -11,7 +11,7 @@ The YAML catalogue is authoritative: 59 canonical repositories, including the `g
 
 ## Migration
 
-Startup calls SQLite `VACUUM INTO` before AutoMigrate on the legacy schema, saving `<DATABASE_PATH>.before-dev-report-registry.sqlite`. Backup errors stop startup. An existing snapshot is retained on subsequent attempts. Registry reconciliation is transactional: contribution and notable PR references move to canonical aliases. No history is deleted.
+Startup calls SQLite `VACUUM INTO` on a temporary file before AutoMigrate, verifies SQLite integrity and the legacy repository schema, then atomically publishes `<DATABASE_PATH>.before-dev-report-registry.sqlite`. Backup errors stop startup. A valid existing snapshot is retained on subsequent attempts. An invalid existing snapshot blocks startup: move it aside for investigation and retry the backup before authorizing migration. Interrupted temporary files cannot count as completed snapshots. Registry reconciliation is transactional: contribution and notable PR references move to canonical aliases. No history is deleted.
 
 Startup resets public attestations before the first GitHub metadata check. Reads exclude unlisted or unattested repositories, including historical reports; metadata errors suppress prior activity. Catalogue rows remain visible with sync status, except private repositories. Failed contribution stages preserve the previous successful checkpoint and report incomplete sync. New repository backfills can require several cycles; absent metrics are not confirmed zero activity.
 

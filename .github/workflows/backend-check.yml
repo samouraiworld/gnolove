@@ -1,0 +1,33 @@
+name: Backend checks
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'server/**'
+      - '.github/workflows/backend-check.yml'
+  merge_group:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: backend-check-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend-test-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: server/go.mod
+          cache-dependency-path: server/go.sum
+      - name: Test with race detector
+        working-directory: server
+        run: go test -race -count=1 ./...
+      - name: Build server
+        working-directory: server
+        run: go build ./...
