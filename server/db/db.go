@@ -24,6 +24,10 @@ func InitDB() (*gorm.DB, error) {
 		return nil, err
 	}
 
+	if err := BackupBeforeRepositoryUpgrade(db, dbPath); err != nil {
+		return nil, err
+	}
+
 	err = db.AutoMigrate(
 		&models.User{},
 		&models.Commit{},

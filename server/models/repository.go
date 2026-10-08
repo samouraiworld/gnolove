@@ -4,20 +4,34 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 )
 
 type Repository struct {
-	ID         string `json:"id"`
-	Name       string `json:"name"`
-	Owner      string `json:"owner"`
-	BaseBranch string `json:"baseBranch"`
+	ID           string     `json:"id" yaml:"id" gorm:"primaryKey"`
+	Name         string     `json:"name" yaml:"-"`
+	Owner        string     `json:"owner" yaml:"-"`
+	BaseBranch   string     `json:"baseBranch" yaml:"branch"`
+	Category     string     `json:"category" yaml:"category"`
+	Description  string     `json:"description" yaml:"description"`
+	Status       string     `json:"status" yaml:"status"`
+	Aliases      []string   `json:"-" yaml:"aliases,omitempty" gorm:"-"`
+	Listed       bool       `json:"-" yaml:"-"`
+	Public       bool       `json:"-" yaml:"-"`
+	Stars        *int       `json:"stars" yaml:"-"`
+	Language     string     `json:"language" yaml:"-"`
+	PushedAt     *time.Time `json:"pushedAt" yaml:"-"`
+	LastSyncedAt *time.Time `json:"lastSyncedAt" yaml:"-"`
+	SyncError    string     `json:"syncError" yaml:"-"`
 }
 
-// GetRepositoriesFromConfig parses GITHUB_REPOSITORIES from the environment.
-// Format: each repo is `owner/name/branch`. Repos can be separated by spaces,
-// commas, or newlines (mix-and-match supported). Blank entries are skipped.
+// The reviewed registry is authoritative, including when the legacy env is set.
 func GetRepositoriesFromConfig() ([]Repository, error) {
-	return ParseRepositoriesConfig(os.Getenv("GITHUB_REPOSITORIES"))
+	path := os.Getenv("REPOSITORIES_CONFIG_PATH")
+	if path == "" {
+		path = "config/repositories.yaml"
+	}
+	return LoadRepositoryRegistry(path)
 }
 
 // ParseRepositoriesConfig is the env-free core, exposed for tests.

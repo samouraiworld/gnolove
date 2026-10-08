@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/samouraiworld/topofgnomes/server/models"
@@ -25,6 +26,9 @@ func HandleGetLastReport(db *gorm.DB) http.HandlerFunc {
 		}
 
 		dataObj, err := unmarshalReportData(*lastReport)
+		if err == nil {
+			err = filterPublicReport(db, dataObj)
+		}
 		if err != nil {
 			http.Error(w, "Failed to decode report data or user prompt", http.StatusInternalServerError)
 			return
@@ -76,6 +80,9 @@ func HandleGetReportByWeek(db *gorm.DB) http.HandlerFunc {
 		}
 
 		dataObj, err := unmarshalReportData(*report)
+		if err == nil {
+			err = filterPublicReport(db, dataObj)
+		}
 		if err != nil {
 			http.Error(w, "Failed to decode report data or user prompt", http.StatusInternalServerError)
 			return
@@ -107,6 +114,9 @@ func HandleGetAllReports(db *gorm.DB) http.HandlerFunc {
 		var formattedReports []map[string]interface{}
 		for _, report := range reports {
 			dataObj, err := unmarshalReportData(report)
+			if err == nil {
+				err = filterPublicReport(db, dataObj)
+			}
 			if err != nil {
 				http.Error(w, "Failed to decode report data or user prompt", http.StatusInternalServerError)
 				return
@@ -146,6 +156,9 @@ func HandleGenerateReport(db *gorm.DB) http.HandlerFunc {
 		}
 
 		dataObj, err := unmarshalReportData(report)
+		if err == nil {
+			err = filterPublicReport(db, dataObj)
+		}
 		if err != nil {
 			http.Error(w, "Report generated but failed to parse data", http.StatusInternalServerError)
 			return
@@ -200,6 +213,9 @@ func HandleRegenerateReport(db *gorm.DB) http.HandlerFunc {
 			return
 		}
 		dataObj, err := unmarshalReportData(report)
+		if err == nil {
+			err = filterPublicReport(db, dataObj)
+		}
 		if err != nil {
 			http.Error(w, "regenerated but failed to parse data", http.StatusInternalServerError)
 			return
@@ -221,4 +237,43 @@ func unmarshalReportData(report models.Report) (map[string]interface{}, error) {
 	}
 
 	return dataObj, nil
+}
+
+func filterPublicReport(db *gorm.DB, data map[string]interface{}) error {
+	if db.Callback().Query().Get("gnolove:public_repositories") == nil {
+		return nil
+	}
+	repos, err := models.PublicRepositories(db)
+	if err != nil {
+		return err
+	}
+	allowed := map[string]bool{}
+	for _, repo := range repos {
+		allowed[strings.ToLower(repo.ID)] = true
+	}
+	// Alias names remain valid in preserved historical reports if their current
+	// canonical repository is attested public.
+	registry, err := models.GetRepositoriesFromConfig()
+	if err != nil {
+		return err
+	}
+	for _, repo := range registry {
+		if allowed[strings.ToLower(repo.ID)] {
+			for _, alias := range repo.Aliases {
+				allowed[strings.ToLower(alias)] = true
+			}
+		}
+	}
+	projects, _ := data["projects"].([]interface{})
+	visible := []interface{}{}
+	for _, raw := range projects {
+		if project, ok := raw.(map[string]interface{}); ok {
+			id, _ := project["project_name"].(string)
+			if allowed[strings.ToLower(id)] {
+				visible = append(visible, project)
+			}
+		}
+	}
+	data["projects"] = visible
+	return nil
 }

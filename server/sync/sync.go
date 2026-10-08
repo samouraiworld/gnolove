@@ -21,12 +21,13 @@ import (
 )
 
 type Syncer struct {
-	db            *gorm.DB
-	client        *githubv4.Client
-	repositories  []models.Repository
-	logger        *zap.SugaredLogger
-	graphqlClient graphql.Client
-	rpcClient     *rpcclient.RPCClient
+	db                    *gorm.DB
+	client                *githubv4.Client
+	repositories          []models.Repository
+	logger                *zap.SugaredLogger
+	graphqlClient         graphql.Client
+	rpcClient             *rpcclient.RPCClient
+	invalidatePublicCache func()
 }
 
 func NewSyncer(db *gorm.DB, repositories []models.Repository, logger *zap.SugaredLogger) *Syncer {
@@ -70,12 +71,6 @@ func getLastUpdatedMilestone(db gorm.DB, repositoryID string) time.Time {
 }
 
 func (s *Syncer) StartSynchonizing(ctx context.Context) error {
-	for _, repository := range s.repositories {
-		err := s.db.Save(&repository).Error
-		if err != nil {
-			return err
-		}
-	}
 	go func() {
 		ticker := time.NewTicker(2 * time.Hour)
 		defer ticker.Stop()
@@ -235,6 +230,7 @@ func (s *Syncer) syncPRs(repository models.Repository) error {
 
 	var q struct {
 		Repository struct {
+			IsPrivate    bool
 			PullRequests struct {
 				Nodes    []pullRequest
 				PageInfo struct {
@@ -255,6 +251,9 @@ func (s *Syncer) syncPRs(repository models.Repository) error {
 	for hasNextPage {
 		err := s.client.Query(context.Background(), &q, variables)
 		if err != nil {
+			return err
+		}
+		if err := s.checkRepositoryVisibility(repository, q.Repository.IsPrivate); err != nil {
 			return err
 		}
 
@@ -325,7 +324,8 @@ func (s *Syncer) syncUsers(repository models.Repository) error {
 
 		var q struct {
 			Repository struct {
-				Users struct {
+				IsPrivate bool
+				Users     struct {
 					Nodes    []user
 					PageInfo struct {
 						EndCursor   githubv4.String
@@ -337,6 +337,9 @@ func (s *Syncer) syncUsers(repository models.Repository) error {
 
 		err := s.client.Query(context.Background(), &q, variables)
 		if err != nil {
+			return err
+		}
+		if err := s.checkRepositoryVisibility(repository, q.Repository.IsPrivate); err != nil {
 			return err
 		}
 
@@ -370,7 +373,8 @@ func (s *Syncer) syncIssues(repository models.Repository) error {
 
 	var q struct {
 		Repository struct {
-			Issues struct {
+			IsPrivate bool
+			Issues    struct {
 				Nodes    []issue
 				PageInfo struct {
 					EndCursor   githubv4.String
@@ -390,6 +394,9 @@ func (s *Syncer) syncIssues(repository models.Repository) error {
 
 		err := s.client.Query(context.Background(), &q, variables)
 		if err != nil {
+			return err
+		}
+		if err := s.checkRepositoryVisibility(repository, q.Repository.IsPrivate); err != nil {
 			return err
 		}
 
@@ -452,6 +459,7 @@ func (s *Syncer) syncMilestones(repository models.Repository) error {
 
 	var q struct {
 		Repository struct {
+			IsPrivate  bool
 			Milestones struct {
 				Nodes    []milestone
 				PageInfo struct {
@@ -472,6 +480,9 @@ func (s *Syncer) syncMilestones(repository models.Repository) error {
 
 		err := s.client.Query(context.Background(), &q, variables)
 		if err != nil {
+			return err
+		}
+		if err := s.checkRepositoryVisibility(repository, q.Repository.IsPrivate); err != nil {
 			return err
 		}
 
@@ -509,7 +520,8 @@ func (s *Syncer) syncMilestones(repository models.Repository) error {
 func (s *Syncer) syncCommits(repository models.Repository) error {
 	var q struct {
 		Repository struct {
-			Ref struct {
+			IsPrivate bool
+			Ref       struct {
 				Target struct {
 					Commit struct {
 						History struct {
@@ -536,6 +548,9 @@ func (s *Syncer) syncCommits(repository models.Repository) error {
 
 		err := s.client.Query(context.Background(), &q, variables)
 		if err != nil {
+			return err
+		}
+		if err := s.checkRepositoryVisibility(repository, q.Repository.IsPrivate); err != nil {
 			return err
 		}
 

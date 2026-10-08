@@ -86,8 +86,18 @@ func main() {
 	}
 	logger.Infof("loaded %d topics from %s (mtime=%s)", len(topicsCfg.Topics), topicsConfigPath, topicsCfg.LastSyncedAt.Format(time.RFC3339))
 
+	if os.Getenv("GITHUB_REPOSITORIES") != "" {
+		logger.Warn("GITHUB_REPOSITORIES is deprecated and ignored; config/repositories.yaml is authoritative")
+	}
+
 	database, err = db.InitDB()
 	if err != nil {
+		log.Fatal(err)
+	}
+	if err := models.ReconcileRepositories(database, repositories); err != nil {
+		log.Fatal(err)
+	}
+	if err := models.InstallPublicRepositoryFilter(database); err != nil {
 		log.Fatal(err)
 	}
 	if os.Getenv("GITHUB_OAUTH_CLIENT_ID") == "" {
@@ -127,7 +137,16 @@ func main() {
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
 
+	cache, err := ristretto.NewCache(&ristretto.Config{
+		NumCounters: 100000,    // number of keys to track frequency of (10M).
+		MaxCost:     100000000, // maximum cost of cache (1GB).
+		BufferItems: 64,        // number of keys per Get buffer.
+	})
+	if err != nil {
+		panic(err)
+	}
 	syncer := sync.NewSyncer(database, repositories, logger)
+	syncer.SetPublicCacheInvalidator(cache.Clear)
 
 	// Start data synchronization first
 	err = syncer.StartSynchonizing(ctx)
@@ -147,14 +166,6 @@ func main() {
 		logger.Warn("DISCORD_WEBHOOK_URL not set, skipping leaderboard notifier")
 	}
 
-	cache, err := ristretto.NewCache(&ristretto.Config{
-		NumCounters: 100000,    // number of keys to track frequency of (10M).
-		MaxCost:     100000000, // maximum cost of cache (1GB).
-		BufferItems: 64,        // number of keys per Get buffer.
-	})
-	if err != nil {
-		panic(err)
-	}
 	router := chi.NewRouter()
 	router.Use(LoggingMiddleware)
 	router.Use(Compress())
@@ -189,6 +200,7 @@ func main() {
 	router.Get("/contributors/cohorts", contributor.HandleGetCohorts(database, cache))
 
 	router.HandleFunc("/repositories", handler.HandleGetRepository(database))
+	router.Get("/repositories/stats", handler.HandleGetRepositoryStats(database, cache))
 	router.HandleFunc("/stats", handler.HandleGetUserStats(database, cache))
 	router.HandleFunc("/last-prs", handler.HandleGetLastPrs(database, cache))
 	router.HandleFunc("/projects/boards", handler.HandleGetBoards())
