@@ -13,8 +13,8 @@ import (
 // sequential and would have started to brush GitHub's GraphQL rate limit
 // once the curated ~50-repo allowlist lands in Phase 2b (plan R-1).
 //
-// Each repo's GraphQL passes are wrapped in exponential backoff so a single
-// rate-limit hiccup doesn't drop a repo from the cycle.
+// Each GitHub page is retried with bounded backoff, preserving pagination
+// and the cutoff established before any rows in that pass were written.
 func (s *Syncer) syncRepositoriesConcurrently(ctx context.Context) {
 	workers := syncWorkerCount()
 	repoCh := make(chan models.Repository)
@@ -49,7 +49,7 @@ func (s *Syncer) syncRepositoriesConcurrently(ctx context.Context) {
 }
 
 // syncOneRepo runs the five per-repository sync passes for a single repo,
-// each wrapped in rate-limit backoff. A failure in one pass is logged but
+// with page-level backoff. A failure in one pass is logged but
 // doesn't skip the rest — partial progress is better than none.
 func (s *Syncer) syncOneRepo(ctx context.Context, repo models.Repository, workerID int) {
 	s.logger.Infof("[worker %d] sync starting for %s", workerID, repo.ID)
@@ -68,17 +68,18 @@ func (s *Syncer) syncOneRepo(ctx context.Context, repo models.Repository, worker
 		name string
 		fn   func() error
 	}{
-		{"users", func() error { return s.syncUsers(repo) }},
-		{"issues", func() error { return s.syncIssues(repo) }},
-		{"prs", func() error { return s.syncPRs(repo) }},
-		{"milestones", func() error { return s.syncMilestones(repo) }},
-		{"commits", func() error { return s.syncCommits(repo) }},
+		{"users", func() error { return s.syncUsers(ctx, repo) }},
+		{"issues", func() error { return s.syncIssues(ctx, repo) }},
+		{"prs", func() error { return s.syncPRs(ctx, repo) }},
+		{"milestones", func() error { return s.syncMilestones(ctx, repo) }},
+		{"commits", func() error { return s.syncCommits(ctx, repo) }},
 	}
 	for _, step := range steps {
 		if ctx.Err() != nil {
-			return
+			failed = true
+			break
 		}
-		err := backoffRetry(ctx, defaultBackoffAttempts, defaultBackoffBase, isRetryableGitHubErr, step.fn)
+		err := step.fn()
 		if err != nil {
 			failed = true
 			s.logger.Errorf("[worker %d] %s sync %s failed: %v", workerID, repo.ID, step.name, err)

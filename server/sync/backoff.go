@@ -110,3 +110,11 @@ func backoffRetry(ctx context.Context, attempts int, base time.Duration, isRetry
 	}
 	return lastErr
 }
+
+// Retry the current query, preserving its cursor and the pass's original cutoff.
+// Retrying a whole pass would recompute MAX(updated_at) from partial writes.
+func (s *Syncer) queryGitHubPage(ctx context.Context, query interface{}, variables map[string]interface{}) error {
+	return backoffRetry(ctx, defaultBackoffAttempts, defaultBackoffBase, isRetryableGitHubErr, func() error {
+		return s.client.Query(ctx, query, variables)
+	})
+}

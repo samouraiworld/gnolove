@@ -15,7 +15,7 @@ Startup calls SQLite `VACUUM INTO` on a temporary file before AutoMigrate, verif
 
 Startup resets public attestations before the first GitHub metadata check. Reads exclude unlisted or unattested repositories, including historical reports; metadata errors suppress prior activity. Catalogue rows remain visible with sync status, except private repositories. Failed contribution stages preserve the previous successful checkpoint and report incomplete sync. New repository backfills can require several cycles; absent metrics are not confirmed zero activity.
 
-GitHub HTTP 500/502/503/504 responses and rate-limit errors use the same bounded retry policy within each sync stage: four attempts with 2/4/8-second delays. Authentication errors and ordinary permission failures stop immediately. Exhausted retries still leave the repository sync incomplete; they never advance its successful checkpoint.
+GitHub HTTP 500/502/503/504 responses and rate-limit errors use the same bounded retry policy for each current query/page: four attempts with 2/4/8-second delays. Authentication errors and ordinary permission failures stop immediately. Exhausted retries still leave the repository sync incomplete; they never advance its successful checkpoint. Retries preserve the page cursor and original cutoff. When no successful checkpoint exists or the previous cycle was incomplete, PR/issue/milestone passes restart from the beginning so partial rows cannot hide older history. Request contexts also cancel contribution HTTP calls.
 
 ## Acceptance after deployment
 
