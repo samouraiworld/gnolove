@@ -41,6 +41,29 @@ jobs:
           container = json.loads(subprocess.check_output(['docker', 'inspect', 'gnolove-backend'], text=True))[0]
           image = json.loads(subprocess.check_output(['docker', 'image', 'inspect', container['Image']], text=True))[0]
           print(json.dumps({'running': container['State']['Running'], 'imageID': container['Image'], 'repoDigests': image.get('RepoDigests', []), 'startedAt': container['State']['StartedAt']}))
+          # Read only the public tm2 backfill aggregate from the mounted SQLite DB.
+          import pathlib, sqlite3, urllib.parse
+          configured = next(entry.split('=', 1)[1] for entry in container['Config']['Env'] if entry.startswith('DATABASE_PATH='))
+          path = pathlib.PurePosixPath(configured)
+          candidates = []
+          for mount in container['Mounts']:
+              try:
+                  relative = path.relative_to(mount['Destination'])
+              except ValueError:
+                  continue
+              candidates.append((len(mount['Destination']), pathlib.Path(mount['Source']) / relative))
+          assert candidates, 'Database mount not found'
+          database = max(candidates, key=lambda item: item[0])[1].resolve()
+          uri = 'file:' + urllib.parse.quote(str(database)) + '?mode=ro'
+          with sqlite3.connect(uri, uri=True, timeout=30) as db:
+              db.execute('PRAGMA query_only=ON')
+              repo_id = 'gnolang/tm2-js-client'
+              checkpoint = db.execute('SELECT last_synced_at, sync_error FROM repositories WHERE id=?', (repo_id,)).fetchone()
+              counts = {}
+              for table in ['pull_requests', 'issues', 'milestones', 'commits']:
+                  date = 'committed_date' if table == 'commits' else 'updated_at'
+                  counts[table] = db.execute('SELECT count(*), min(' + date + '), max(' + date + ') FROM ' + table + ' WHERE repository_id=?', (repo_id,)).fetchone()
+              print(json.dumps({'repository': repo_id, 'checkpoint': checkpoint, 'persistedHistory': counts, 'databaseReadOnly': True}))
           logs = subprocess.check_output(['docker', 'logs', '--since', '15m', 'gnolove-backend'], stderr=subprocess.STDOUT, text=True)
           selected = [line for line in logs.splitlines() if ('sync ' in line and ' failed:' in line) or 'repository metadata ' in line or 'Syncing finished.' in line or 'tm2-js-client' in line]
           print('\n'.join(selected[-80:]))
