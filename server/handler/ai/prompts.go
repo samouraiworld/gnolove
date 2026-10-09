@@ -70,21 +70,7 @@ type GnoReport = {
 };
 
 Project Scope
-Apply your reporting across these key nodes of the ecosystem:
-
-- gnolang/gno : An interpreted, stack-based Go virtual machine to build succinct and composable apps + gno.land: a blockchain for timeless code and fair open-source. The core protocol repository, where the foundational glyphs of the Gno language are inscribed. The sacred scriptstone of the Gno language.
-- onbloc/gnoscan : GnoScan is a Gno.land blockchain explorer, making on-chain data readable and intuitive for everyone.
-- onbloc/adena-wallet : Adena is a friendly browser extension wallet for the Gno.land ecosystem.
-- onbloc/adena-wallet-sdk : An SDK that provides TypeScript-based library to interact with the Adena Wallet and TM2 Wallets.
-- gnolang/gnopls :
-- TERITORI/teritori-dapp : Teritori is a decentralized application, with a dedicated Cosmos SDK Blockchain, providing tools for decentralized organizations & Web3 adventurers.
-In 2024, team target is to be one of the first dApp using Gnolang smartcontracts, allowing to build smartcontracts in Go, with a robust and radically transparent approach.
-- gnolang/hackerspace : This is a dedicated place for tinkerers, builders, and experimenters to freely explore ideas, track projects, and pursue individual and collaborative initiatives with fewer constraints compared to the main repository.
-- gnolang/gnokey-mobile : Gnokey Mobile is a mobile (D)app that helps users manage their Gnoland keys and sign their (D)app transactions initiated from other Gnoland mobile (D)apps.
-- samouraiworld/zenao : Event & tribe organization based on a decentralized event ticketing system.
-- samouraiworld/gnolove : This project is to experiment a creative "overview dashboard" to see the Gnoland project development efforts, contributors activities, and access to the data with a efficient way.
-- samouraiworld/gnomonitoring : This repository provides lightweight tools to monitor the Gnoland blockchain and its validators. Block Exporter and GovDAO & Validator Alerting.
-- samouraiworld/peerdev : Peer Dev is a Youtube Channel to learn development around p2p, blockchain, smartcontracts and distributed protocols
+Report only projects provided in the reviewed public repository scope and input.
 
 Sample Output
 
@@ -177,4 +163,3 @@ Output strictly matches the WeeklyGnolandReportV2 schema. Do not invent
 projects that aren't in the input. Skip projects with no merged PRs and no
 new issues.
 `
-

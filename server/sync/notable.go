@@ -58,6 +58,7 @@ func (s *Syncer) syncBoard(ctx context.Context, board models.BoardConfig) error 
 								}
 								Repository struct {
 									NameWithOwner githubv4.String
+									IsPrivate     githubv4.Boolean
 								}
 								Labels struct {
 									Nodes []ghLabel
@@ -101,6 +102,7 @@ func (s *Syncer) syncBoard(ctx context.Context, board models.BoardConfig) error 
 								}
 								Repository struct {
 									NameWithOwner githubv4.String
+									IsPrivate     githubv4.Boolean
 								}
 								Labels struct {
 									Nodes []ghLabel
@@ -150,6 +152,13 @@ func (s *Syncer) syncBoard(ctx context.Context, board models.BoardConfig) error 
 			var item models.NotablePR
 
 			if pr := node.Content.PullRequest; pr.Number != 0 {
+				visible, err := s.publicBoardRepository(string(pr.Repository.NameWithOwner), bool(pr.Repository.IsPrivate))
+				if err != nil {
+					return err
+				}
+				if !visible {
+					continue
+				}
 				labels := toLabels(pr.Labels.Nodes)
 
 				assignees := make([]string, 0, len(pr.Assignees.Nodes))
@@ -202,6 +211,13 @@ func (s *Syncer) syncBoard(ctx context.Context, board models.BoardConfig) error 
 					SyncedAt:           syncedAt,
 				}
 			} else if iss := node.Content.Issue; board.IncludeIssues && iss.Number != 0 {
+				visible, err := s.publicBoardRepository(string(iss.Repository.NameWithOwner), bool(iss.Repository.IsPrivate))
+				if err != nil {
+					return err
+				}
+				if !visible {
+					continue
+				}
 				labels := toLabels(iss.Labels.Nodes)
 
 				assignees := make([]string, 0, len(iss.Assignees.Nodes))
@@ -265,4 +281,17 @@ func deriveArea(board models.BoardConfig, fieldArea string, labels []models.Nota
 		}
 	}
 	return ""
+}
+
+// Boards can contain repositories outside the registry or lose visibility mid-cycle.
+func (s *Syncer) publicBoardRepository(id string, private bool) (bool, error) {
+	if private {
+		if err := s.checkRepositoryVisibility(models.Repository{ID: id}, true); err != errPrivateRepository {
+			return false, err
+		}
+		return false, nil
+	}
+	var count int64
+	err := s.db.Model(&models.Repository{}).Where("id = ? AND listed = ? AND public = ?", id, true, true).Count(&count).Error
+	return count == 1, err
 }

@@ -84,7 +84,6 @@ https://github.com/gnolang/gno
  - Backend environment variables
 
    - Required:
-     - `GITHUB_REPOSITORIES`: A list of space-separated GitHub repositories we'll look for activity on.
      - `GITHUB_OAUTH_CLIENT_ID`: Your OAuth client ID. Create one at [https://github.com/settings/applications/new](https://github.com/settings/applications/new)
      - `GITHUB_OAUTH_CLIENT_SECRET`: Your OAuth client secret. Create one at [https://github.com/settings/applications/new](https://github.com/settings/applications/new)
      - `GITHUB_API_TOKEN`: Your GitHub API token. Create one at [https://github.com/settings/tokens](https://github.com/settings/tokens)
@@ -96,6 +95,7 @@ https://github.com/gnolang/gno
      - `GOVDAO_REALM_PATH`: Your Gno GovDAO realm path. Used by signer
 
    - Optional with defaults:
+     - `REPOSITORIES_CONFIG_PATH`: Reviewed registry, default `config/repositories.yaml`. The legacy `GITHUB_REPOSITORIES` variable is ignored.
      - `DATABASE_PATH`: The database path. Defaults to `db/database.db`.
      - `LEADERBOARD_EXCLUDED_REPOS`: The repositories excluded when we calculate activity to compute leaderboards, sent through webhooks. Defaults to `samouraiworld/gnomonitoring`
 
@@ -143,3 +143,9 @@ by & for Gno.land community.
 🥷
 
 
+
+### Dev Report repository registry
+
+The reviewed catalogue is stored in [`server/config/repositories.yaml`](server/config/repositories.yaml). GitHub public visibility is checked before ingestion and on every activity page. `GET /repositories` exposes metadata and sync status; `GET /repositories/stats?time=monthly` provides grouped activity (all, weekly, monthly or yearly). Merged PRs use the merge date, open PRs are current totals, and contributors are distinct period authors of commits, PRs, reviews and issues.
+
+See [rollout and rollback](docs/dev-report-registry.md) before deploying this migration.

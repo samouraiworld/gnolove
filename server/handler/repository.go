@@ -14,7 +14,11 @@ func HandleGetRepository(db *gorm.DB) func(w http.ResponseWriter, r *http.Reques
 
 		var repositories []models.Repository
 
-		db.Model(&models.Repository{}).Find(&repositories)
+		repositories = []models.Repository{}
+		if err := db.Where("listed = ? AND status != ?", true, "private").Order("id").Find(&repositories).Error; err != nil {
+			http.Error(w, "Repository catalogue unavailable", http.StatusServiceUnavailable)
+			return
+		}
 		json.NewEncoder(w).Encode(repositories)
 	}
 }

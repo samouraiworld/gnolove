@@ -136,6 +136,18 @@ func HandleGetUserStats(db *gorm.DB, cache *ristretto.Cache) func(w http.Respons
 
 		exclude := r.URL.Query()["exclude"]
 		repositories := getRepositoriesWithRequest(r)
+		if db.Callback().Query().Get("gnolove:public_repositories") != nil {
+			public, err := models.PublicRepositories(db)
+			if err != nil {
+				http.Error(w, "Repository catalogue unavailable", http.StatusServiceUnavailable)
+				return
+			}
+			allowed := map[string]bool{}
+			for _, repo := range public {
+				allowed[repo.ID] = true
+			}
+			repositories = slices.DeleteFunc(repositories, func(id string) bool { return !allowed[id] })
+		}
 
 		cacheKey := fmt.Sprintf("stats:%s:%s:%s", strings.Join(repositories, ","), strings.Join(exclude, ","), r.URL.Query().Get("time"))
 		data, ok := cache.Get(cacheKey)
@@ -165,6 +177,18 @@ func HandleGetLastPrs(db *gorm.DB, cache *ristretto.Cache) func(w http.ResponseW
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		repositories := getRepositoriesWithRequest(r)
+		if db.Callback().Query().Get("gnolove:public_repositories") != nil {
+			public, err := models.PublicRepositories(db)
+			if err != nil {
+				http.Error(w, "Repository catalogue unavailable", http.StatusServiceUnavailable)
+				return
+			}
+			allowed := map[string]bool{}
+			for _, repo := range public {
+				allowed[repo.ID] = true
+			}
+			repositories = slices.DeleteFunc(repositories, func(id string) bool { return !allowed[id] })
+		}
 
 		cacheKey := fmt.Sprintf("lastprs:%s:%s", strings.Join(repositories, ","), r.URL.Query().Get("time"))
 		data, ok := cache.Get(cacheKey)
@@ -201,6 +225,18 @@ func HandleGetNewestContributors(db *gorm.DB) func(w http.ResponseWriter, r *htt
 		}
 
 		repositories := getRepositoriesWithRequest(r)
+		if db.Callback().Query().Get("gnolove:public_repositories") != nil {
+			public, err := models.PublicRepositories(db)
+			if err != nil {
+				http.Error(w, "Repository catalogue unavailable", http.StatusServiceUnavailable)
+				return
+			}
+			allowed := map[string]bool{}
+			for _, repo := range public {
+				allowed[repo.ID] = true
+			}
+			repositories = slices.DeleteFunc(repositories, func(id string) bool { return !allowed[id] })
+		}
 		placeholders := make([]string, len(repositories))
 		args := make([]interface{}, len(repositories))
 

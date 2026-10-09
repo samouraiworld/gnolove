@@ -1,0 +1,299 @@
+# Public Gno ecosystem allowlist. Changes deploy with the server.
+schemaVersion: 1
+repositories:
+  - id: gnolang/gno
+    branch: master
+    category: core
+    status: active
+    description: "Gno: An interpreted, stack-based Go virtual machine to build succinct and composable apps + gno.land: a blockchain for timeless code and fair open-source."
+  - id: onbloc/gnoscan
+    branch: main
+    category: onbloc
+    status: active
+    description: "GnoScan is a Gno.land blockchain explorer, making on-chain data readable and intuitive for everyone."
+  - id: onbloc/adena-wallet
+    branch: main
+    category: onbloc
+    status: active
+    description: "Adena is a friendly browser extension wallet for the Gno.land ecosystem."
+  - id: onbloc/adena-wallet-sdk
+    branch: main
+    category: onbloc
+    status: active
+    description: "An SDK that provides TypeScript-based library to interact with the Adena Wallet and TM2 Wallets."
+  - id: TERITORI/teritori-dapp
+    branch: main
+    category: partner
+    status: active
+    description: ""
+  - id: gnolang/hackerspace
+    branch: main
+    category: core
+    status: active
+    description: "Tinker, build, explore Gno - without the monorepo!"
+  - id: gnolang/gnokey-mobile
+    branch: main
+    category: core
+    status: unavailable
+    description: ""
+  - id: samouraiworld/zenao
+    branch: main
+    category: samourai
+    status: inactive
+    description: "Zenao"
+  - id: samouraiworld/gnolove
+    branch: main
+    category: samourai
+    status: active
+    description: "Gnolove"
+  - id: samouraiworld/gnomonitoring
+    branch: main
+    category: samourai
+    status: active
+    description: "Gno Monitoring"
+  - id: samouraiworld/peerdev
+    branch: main
+    category: samourai
+    status: inactive
+    description: "Peer Dev is a Youtube Channel to learn development around p2p, blockchain, smartcontracts and distributed protocols"
+  - id: allinbits/dither.chat
+    branch: main
+    category: partner
+    status: inactive
+    description: "A monorepo of all the services, indexers, and frontend for dither.chat"
+  - id: samouraiworld/memba
+    branch: main
+    category: samourai
+    status: active
+    description: "Multisig Wallet & Decentralized Governances - Exploration "
+  - id: samouraiworld/gno-agent-workspace
+    branch: main
+    category: samourai
+    status: active
+    description: ""
+  - id: onbloc/gno-ibc
+    branch: main
+    category: onbloc
+    status: active
+    description: "Gno.land IBC for EVM based chains via Union protocol."
+  - id: gnoverse/community-scripts
+    branch: main
+    category: gnoverse
+    status: active
+    description: "A collection of various community scripts and tests that will eventually become mainstream"
+  - id: samouraiworld/gnoland-packages
+    branch: main
+    category: samourai
+    status: active
+    description: "Centralized repo with all our Samcrew packages on Gnoland (Subscription, piechart, ...)"
+  - id: samouraiworld/gnodaokit
+    branch: main
+    category: samourai
+    status: active
+    description: "Framework for Building Decentralized Autonomous Organizations (DAOs) in Gnolang"
+  - id: samouraiworld/gno-validator-tools
+    branch: main
+    category: samourai
+    status: active
+    description: "Infrastructure-as-Code toolkit for deploying and operating Gnoland validator and sentry nodes "
+  - id: samouraiworld/katana
+    branch: master
+    category: samourai
+    status: active
+    description: ""
+  - id: samouraiworld/validator-diagnostics
+    branch: master
+    category: samourai
+    status: active
+    description: ""
+  - id: samouraiworld/gno-onboarding-bot
+    branch: master
+    category: samourai
+    status: inactive
+    description: ""
+  - id: samouraiworld/gno-govdao-activity-parser
+    branch: main
+    category: samourai
+    status: inactive
+    description: ""
+  - id: gnoverse/gnopls
+    branch: main
+    category: gnoverse
+    status: active
+    description: "The Gno Language Server"
+    aliases: [gnolang/gnopls]
+  - id: gnoverse/gnoreplay
+    branch: main
+    category: gnoverse
+    status: active
+    description: "Replay gno.land mainnet's history against gno changes and report txs whose result would change"
+  - id: gnoverse/gnoscope
+    branch: main
+    category: gnoverse
+    status: active
+    description: ""
+  - id: gnoverse/gno-mcp
+    branch: main
+    category: gnoverse
+    status: active
+    description: "MCP server + agent skill that puts your AI agent on gno.land"
+  - id: gnoverse/gnockpit
+    branch: main
+    category: gnoverse
+    status: active
+    description: ""
+  - id: gnoverse/tlin
+    branch: main
+    category: gnoverse
+    status: active
+    description: "Advanced Linter for Gno"
+  - id: gnoverse/gnoshot
+    branch: main
+    category: gnoverse
+    status: active
+    description: "Screenshots of gno.land pages: the whole gnoweb page, and the crop that matters — the realm's own render."
+  - id: gnoverse/vscode-gno
+    branch: main
+    category: gnoverse
+    status: active
+    description: "Visual Studio Code plugin for the Gno language"
+  - id: gnoverse/gnops
+    branch: main
+    category: gnoverse
+    status: active
+    description: "Community-run hub for the Gno DevOps family"
+  - id: gnoverse/memeland
+    branch: main
+    category: gnoverse
+    status: active
+    description: "meme.land: A Gno-powered meme sharing platform where you can share and upvote memes. Built with React and the Gno programming language. "
+  - id: gnoverse/x402
+    branch: main
+    category: gnoverse
+    status: active
+    description: ""
+  - id: gnoverse/gnonightsky
+    branch: main
+    category: gnoverse
+    status: active
+    description: ""
+  - id: gnoverse/boards2-mobile
+    branch: main
+    category: gnoverse
+    status: active
+    description: ""
+  - id: gnoverse/awesome-gno
+    branch: main
+    category: gnoverse
+    status: active
+    description: "Curated list of great gno.land resources by the community."
+  - id: gnoverse/dsocial
+    branch: main
+    category: gnoverse
+    status: inactive
+    description: "Experimental: Social apps, tools, researchs and dApps on Gno.land"
+  - id: gnoverse/gno-explorer
+    branch: main
+    category: gnoverse
+    status: inactive
+    description: "Allows one to use the indexer to see certain pre-configured data points: number of realms, number of packages, number of addresses...etc. on Gno.land"
+  - id: gnolang/gnonative
+    branch: main
+    category: core
+    status: active
+    description: "Develop for Gno using your app's native language"
+  - id: gnolang/tm2-js-client
+    branch: main
+    category: core
+    status: active
+    description: "The Tendermint2 JS/TS client (SDK)"
+  - id: gnolang/gno-js-client
+    branch: main
+    category: core
+    status: active
+    description: "Gnoland JS / TS Client (SDK)"
+  - id: gnolang/amino-ts
+    branch: main
+    category: core
+    status: active
+    description: "Amino binary and JSON encoding for TypeScript, byte-compatible with go-amino, with tm2 and gno.land types"
+  - id: gnolang/gno-types
+    branch: main
+    category: core
+    status: active
+    description: ""
+  - id: gnolang/tm2-rpc
+    branch: main
+    category: core
+    status: active
+    description: ""
+  - id: gnolang/tx-indexer
+    branch: main
+    category: core
+    status: active
+    description: "A minimal Tendermint2 indexer capable of serving chain data"
+  - id: gnolang/faucet-hub
+    branch: main
+    category: core
+    status: active
+    description: "Faucet frontend for Gno chains"
+  - id: gnolang/faucet
+    branch: main
+    category: core
+    status: inactive
+    description: "A minimal and configurable Gno.land / TM2 faucet"
+  - id: gnolang/getting-started
+    branch: main
+    category: core
+    status: active
+    description: "The easiest way to try Gno"
+  - id: gnolang/repo-template
+    branch: main
+    category: core
+    status: active
+    description: "Boilerplate for building real-world Gno apps with dev tools and structure."
+  - id: gnolang/gno-by-example
+    branch: main
+    category: core
+    status: active
+    description: "Tutorials and snippets for learning Gno"
+  - id: gnolang/workshops
+    branch: main
+    category: core
+    status: active
+    description: "https://www.youtube.com/@_gnoland"
+  - id: gnolang/blog
+    branch: main
+    category: core
+    status: active
+    description: ""
+  - id: onbloc/gno-token-resource
+    branch: main
+    category: onbloc
+    status: active
+    description: "Gnoland token resources maintained by Onbloc"
+  - id: onbloc/gnoland-bridge
+    branch: main
+    category: onbloc
+    status: active
+    description: ""
+  - id: onbloc/gno-ibc-relayer-api
+    branch: main
+    category: onbloc
+    status: active
+    description: "API server for querying IBC relayer packet events"
+  - id: gnoswap-labs/gnoswap
+    branch: main
+    category: partner
+    status: active
+    description: "Core smart contracts (realms) of GnoSwap"
+  - id: gnoswap-labs/gnoswap-interface
+    branch: develop
+    category: partner
+    status: active
+    description: "Web interface for GnoSwap"
+  - id: allinbits/gno-realms
+    branch: master
+    category: partner
+    status: active
+    description: ""

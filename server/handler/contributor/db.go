@@ -3,6 +3,8 @@ package contributor
 import (
 	"encoding/json"
 	"errors"
+	"github.com/samouraiworld/topofgnomes/server/models"
+	"strings"
 	"time"
 
 	"gorm.io/gorm"
@@ -102,9 +104,9 @@ func getMonthlyCounts(db *gorm.DB, userID string) ([]TimeCount, []TimeCount, []T
 func getEntityMonthlyCounts(db *gorm.DB, tableName string, userID string, months []string, now time.Time) []TimeCount {
 	// Whitelist of allowed table names
 	allowedTables := map[string]bool{
-		"commits":        true,
-		"pull_requests":  true,
-		"issues":         true,
+		"commits":       true,
+		"pull_requests": true,
+		"issues":        true,
 	}
 	if !allowedTables[tableName] {
 		// Optionally log or handle the error here
@@ -116,7 +118,7 @@ func getEntityMonthlyCounts(db *gorm.DB, tableName string, userID string, months
 		Count  int
 	}
 	query := "SELECT strftime('%Y-%m', created_at) as period, COUNT(*) as count FROM " + tableName + " WHERE author_id = ? AND created_at >= ? GROUP BY period"
-	db.Raw(query, userID, now.AddDate(0, -12, 0)).Scan(&counts)
+	db.Raw(publicActivitySQL(db, query), userID, now.AddDate(0, -12, 0)).Scan(&counts)
 	countMap := make(map[string]int)
 	for _, c := range counts {
 		countMap[c.Period] = c.Count
@@ -141,7 +143,7 @@ func getDailyContributions(db *gorm.DB, userID string) []TimeCount {
 		Period string
 		Count  int
 	}
-	db.Raw(`
+	db.Raw(publicActivitySQL(db, `
 		SELECT strftime('%Y-%m-%d', created_at) as period, COUNT(*) as count FROM (
 			SELECT created_at FROM commits WHERE author_id = ? AND created_at >= ?
 			UNION ALL
@@ -149,7 +151,7 @@ func getDailyContributions(db *gorm.DB, userID string) []TimeCount {
 			UNION ALL
 			SELECT created_at FROM issues WHERE author_id = ? AND created_at >= ?
 		) GROUP BY period
-	`, userID, now.AddDate(-1, 0, 0), userID, now.AddDate(-1, 0, 0), userID, now.AddDate(-1, 0, 0)).Scan(&dailyCounts)
+	`), userID, now.AddDate(-1, 0, 0), userID, now.AddDate(-1, 0, 0), userID, now.AddDate(-1, 0, 0)).Scan(&dailyCounts)
 	dailyMap := map[string]int{}
 	for _, c := range dailyCounts {
 		dailyMap[c.Period] = c.Count
@@ -305,7 +307,7 @@ func getTopContributedRepositories(db *gorm.DB, userID string) []repoInfoWithCon
 		ORDER BY contributions DESC
 		LIMIT 3
 	`
-	db.Raw(query, userID, userID, userID).Scan(&repos)
+	db.Raw(publicActivitySQL(db, query), userID, userID, userID).Scan(&repos)
 	var out []repoInfoWithContributions
 	for _, r := range repos {
 		if r.Contributions > 0 {
@@ -331,4 +333,10 @@ func getTotalCounts(db *gorm.DB, userID string) (int64, int64, int64) {
 		totalIssues = 0
 	}
 	return totalCommits, totalPRs, totalIssues
+}
+
+func publicActivitySQL(db *gorm.DB, query string) string {
+	// All raw activity queries below use this exact author predicate. Keeping the
+	// visibility condition inside each UNION arm prevents private count leakage.
+	return strings.ReplaceAll(query, "WHERE author_id = ?", "WHERE author_id = ? AND "+models.RepositoryVisibilityPredicate(db))
 }
