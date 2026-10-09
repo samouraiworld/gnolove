@@ -8,6 +8,12 @@ on:
       - 'server/**'
       - '.github/workflows/deploy_backend_org.yml'
   workflow_dispatch:
+    inputs:
+      operation:
+        description: 'Deploy the backend, or only prepare and verify a recovery checkpoint'
+        type: choice
+        options: [deploy, preflight]
+        default: deploy
 
 # One deploy at a time: a newer merge waits for the running deploy instead of racing it.
 concurrency:
@@ -15,7 +21,121 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  preflight:
+    if: github.event_name == 'workflow_dispatch' && inputs.operation == 'preflight'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+    - name: Snapshot and verify recovery without restarting the service
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        command_timeout: 12m
+        script_stop: true
+        script: |
+          set -eu
+          cd Gnolove
+          umask 077
+          python3 -I - <<'PY'
+          import datetime, hashlib, json, os, pathlib, shutil, sqlite3, subprocess, urllib.parse
+
+          def docker(*args):
+              return subprocess.check_output(['docker', *args], text=True)
+
+          def within(path, parent):
+              try:
+                  path.relative_to(parent)
+                  return True
+              except ValueError:
+                  return False
+
+          def digest(path):
+              h = hashlib.sha256()
+              with path.open('rb') as f:
+                  for chunk in iter(lambda: f.read(1024 * 1024), b''):
+                      h.update(chunk)
+              return h.hexdigest()
+
+          def validate(path):
+              uri = 'file:' + urllib.parse.quote(str(path)) + '?mode=ro'
+              with sqlite3.connect(uri, uri=True) as db:
+                  assert db.execute('PRAGMA integrity_check').fetchall() == [('ok',)], 'SQLite integrity failed'
+                  names = {r[0] for r in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+                  assert 'repositories' in names, 'Repository table missing'
+                  columns = [r[1] for r in db.execute('PRAGMA table_info(repositories)')]
+                  assert 'listed' not in columns, 'Already migrated: inspect before continuing'
+                  counts = {}
+                  for table in ['repositories', 'users', 'commits', 'pull_requests', 'issues', 'reviews']:
+                      if table in names:
+                          counts[table] = db.execute('SELECT count(*) FROM "' + table + '"').fetchone()[0]
+                  assert counts['repositories'] > 0, 'Empty repository snapshot'
+                  return {'tables': len(names), 'counts': counts, 'repositoryColumns': columns}
+
+          container = json.loads(docker('inspect', 'gnolove-backend'))[0]
+          assert container['State']['Running'], 'Backend is not running'
+          env = dict(x.split('=', 1) for x in container['Config']['Env'] if '=' in x)
+          configured = env.get('DATABASE_PATH')
+          assert configured and pathlib.PurePosixPath(configured).is_absolute(), 'Explicit absolute DATABASE_PATH required'
+          mounts = [m for m in container['Mounts'] if within(pathlib.PurePosixPath(configured), m['Destination'])]
+          assert mounts, 'Database mount not found'
+          mount = max(mounts, key=lambda m: len(m['Destination']))
+          source = pathlib.Path(mount['Source']).resolve()
+          database = (source / pathlib.PurePosixPath(configured).relative_to(mount['Destination'])).resolve()
+          assert within(database, source) and database.is_file(), 'Database is outside its mount or absent'
+          image_id = container['Image']
+          image = json.loads(docker('image', 'inspect', image_id))[0]
+          root = pathlib.Path.cwd().resolve()
+          timestamp = datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+          checkpoint = root / 'backups' / ('dev-report-preflight-' + timestamp)
+          assert not within(checkpoint, source), 'Snapshot must be outside the active database mount'
+          required = image['Size'] * 2 + database.stat().st_size * 3 + 1024 ** 3
+          free = shutil.disk_usage(root).free
+          assert free > required, 'Insufficient free space for recovery checkpoint'
+          checkpoint.mkdir(parents=True, mode=0o700, exist_ok=False)
+          os.chmod(checkpoint, 0o700)
+          snapshot = checkpoint / 'legacy.sqlite'
+          with sqlite3.connect('file:' + urllib.parse.quote(str(database)) + '?mode=ro', uri=True, timeout=30) as live:
+              with sqlite3.connect(snapshot) as copy:
+                  live.backup(copy, pages=256, sleep=0.1)
+          os.chmod(snapshot, 0o600)
+          evidence = validate(snapshot)
+          restored = checkpoint / 'restore-test.sqlite'
+          shutil.copyfile(snapshot, restored)
+          assert validate(restored) == evidence, 'Restored snapshot differs'
+          assert digest(restored) == digest(snapshot), 'Restored bytes differ'
+          restored.unlink()
+          archive = checkpoint / 'previous-image.tar'
+          subprocess.run(['docker', 'image', 'save', '-o', str(archive), image_id], check=True)
+          os.chmod(archive, 0o600)
+          assert archive.stat().st_size > 0, 'Empty image archive'
+          assert json.loads(docker('inspect', 'gnolove-backend'))[0]['Image'] == image_id, 'Image changed during preflight'
+          manifest = {
+              'checkpoint': str(checkpoint), 'database': str(database), 'databaseEnv': configured,
+              'imageID': image_id, 'imageReference': container['Config']['Image'],
+              'repoDigests': image.get('RepoDigests', []), 'databaseSHA256': digest(snapshot),
+              'databaseBytes': snapshot.stat().st_size, 'imageArchiveSHA256': digest(archive),
+              'imageArchiveBytes': archive.stat().st_size, 'snapshot': evidence,
+              'independentRestoreIntegrity': 'ok', 'freeBytesBefore': free,
+              'serviceRestarted': False, 'productionDatabaseReplaced': False,
+              'limitation': 'Recovery copies retained outside active mount on this VPS; not an off-host disaster-recovery copy'
+          }
+          (checkpoint / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
+          for path in [snapshot, archive, checkpoint / 'manifest.json']:
+              with path.open('rb') as f:
+                  os.fsync(f.fileno())
+          directory = os.open(checkpoint, os.O_RDONLY | os.O_DIRECTORY)
+          try:
+              os.fsync(directory)
+          finally:
+              os.close(directory)
+          print(json.dumps(manifest, sort_keys=True))
+          PY
+
   test:
+    if: github.event_name == 'push' || inputs.operation == 'deploy'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
