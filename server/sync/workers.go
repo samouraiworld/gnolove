@@ -53,7 +53,7 @@ func (s *Syncer) syncRepositoriesConcurrently(ctx context.Context) {
 // doesn't skip the rest — partial progress is better than none.
 func (s *Syncer) syncOneRepo(ctx context.Context, repo models.Repository, workerID int) {
 	s.logger.Infof("[worker %d] sync starting for %s", workerID, repo.ID)
-	if err := backoffRetry(ctx, defaultBackoffAttempts, defaultBackoffBase, isRateLimitErr, func() error { return s.syncRepositoryMetadata(ctx, repo) }); err != nil {
+	if err := backoffRetry(ctx, defaultBackoffAttempts, defaultBackoffBase, isRetryableGitHubErr, func() error { return s.syncRepositoryMetadata(ctx, repo) }); err != nil {
 		// An unattested repo cannot expose prior data when metadata reads fail.
 		if updateErr := s.db.Model(&models.Repository{}).Where("id = ?", repo.ID).Updates(map[string]interface{}{"public": false, "sync_error": "GitHub metadata unavailable"}).Error; updateErr != nil {
 			s.logger.Errorf("repository visibility checkpoint %s: %v", repo.ID, updateErr)
@@ -78,7 +78,7 @@ func (s *Syncer) syncOneRepo(ctx context.Context, repo models.Repository, worker
 		if ctx.Err() != nil {
 			return
 		}
-		err := backoffRetry(ctx, defaultBackoffAttempts, defaultBackoffBase, isRateLimitErr, step.fn)
+		err := backoffRetry(ctx, defaultBackoffAttempts, defaultBackoffBase, isRetryableGitHubErr, step.fn)
 		if err != nil {
 			failed = true
 			s.logger.Errorf("[worker %d] %s sync %s failed: %v", workerID, repo.ID, step.name, err)

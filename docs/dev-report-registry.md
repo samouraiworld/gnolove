@@ -15,6 +15,8 @@ Startup calls SQLite `VACUUM INTO` on a temporary file before AutoMigrate, verif
 
 Startup resets public attestations before the first GitHub metadata check. Reads exclude unlisted or unattested repositories, including historical reports; metadata errors suppress prior activity. Catalogue rows remain visible with sync status, except private repositories. Failed contribution stages preserve the previous successful checkpoint and report incomplete sync. New repository backfills can require several cycles; absent metrics are not confirmed zero activity.
 
+GitHub HTTP 500/502/503/504 responses and rate-limit errors use the same bounded retry policy within each sync stage: four attempts with 2/4/8-second delays. Authentication errors and ordinary permission failures stop immediately. Exhausted retries still leave the repository sync incomplete; they never advance its successful checkpoint.
+
 ## Acceptance after deployment
 
 - `/repositories` returns the reviewed catalogue (59 entries unless a repository becomes private), with `gnoverse/gnopls` replacing the old name and mobile history retained.
