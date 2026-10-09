@@ -61,7 +61,7 @@ jobs:
               checkpoint = db.execute('SELECT last_synced_at, sync_error FROM repositories WHERE id=?', (repo_id,)).fetchone()
               counts = {}
               for table in ['pull_requests', 'issues', 'milestones', 'commits']:
-                  date = 'committed_date' if table == 'commits' else 'updated_at'
+                  date = 'created_at' if table == 'commits' else 'updated_at'
                   counts[table] = db.execute('SELECT count(*), min(' + date + '), max(' + date + ') FROM ' + table + ' WHERE repository_id=?', (repo_id,)).fetchone()
               print(json.dumps({'repository': repo_id, 'checkpoint': checkpoint, 'persistedHistory': counts, 'databaseReadOnly': True}))
           logs = subprocess.check_output(['docker', 'logs', '--since', '15m', 'gnolove-backend'], stderr=subprocess.STDOUT, text=True)
