@@ -49,9 +49,31 @@ func isRateLimitErr(err error) bool {
 	switch {
 	case strings.Contains(msg, "rate limit"),
 		strings.Contains(msg, "secondary rate"),
-		strings.Contains(msg, "abuse detection"),
-		strings.Contains(msg, "403 forbidden"):
+		strings.Contains(msg, "abuse detection"):
 		return true
+	}
+	return false
+}
+
+// Retry temporary GitHub HTTP failures within the same bounded sync pass.
+// Match the SDK's status prefix, not text in an error body; wrapped errors
+// retain their classification. Authentication and permission errors stop.
+func isRetryableGitHubErr(err error) bool {
+	if isRateLimitErr(err) {
+		return true
+	}
+	const prefix = "non-200 ok status code: "
+	for cause := err; cause != nil; cause = errors.Unwrap(cause) {
+		msg := strings.ToLower(cause.Error())
+		if !strings.HasPrefix(msg, prefix) {
+			continue
+		}
+		status := strings.TrimPrefix(msg, prefix)
+		for _, code := range []string{"500 ", "502 ", "503 ", "504 "} {
+			if strings.HasPrefix(status, code) {
+				return true
+			}
+		}
 	}
 	return false
 }
@@ -87,4 +109,12 @@ func backoffRetry(ctx context.Context, attempts int, base time.Duration, isRetry
 		lastErr = errors.New("backoffRetry: exhausted with no recorded error")
 	}
 	return lastErr
+}
+
+// Retry the current query, preserving its cursor and the pass's original cutoff.
+// Retrying a whole pass would recompute MAX(updated_at) from partial writes.
+func (s *Syncer) queryGitHubPage(ctx context.Context, query interface{}, variables map[string]interface{}) error {
+	return backoffRetry(ctx, defaultBackoffAttempts, defaultBackoffBase, isRetryableGitHubErr, func() error {
+		return s.client.Query(ctx, query, variables)
+	})
 }

@@ -52,19 +52,38 @@ func NewSyncer(db *gorm.DB, repositories []models.Repository, logger *zap.Sugare
 	}
 }
 
+// Partial rows are not a successful incremental checkpoint. Revisit history
+// after an incomplete cycle, including interrupted initial backfills.
+func repositoryNeedsBackfill(db gorm.DB, repositoryID string) bool {
+	var repo models.Repository
+	if err := db.Select("last_synced_at", "sync_error").Where("id = ?", repositoryID).First(&repo).Error; err != nil {
+		return true
+	}
+	return repo.LastSyncedAt == nil || repo.SyncError != ""
+}
+
 func getLastUpdatedPR(db gorm.DB, repositoryID string) time.Time {
+	if repositoryNeedsBackfill(db, repositoryID) {
+		return time.Time{}
+	}
 	var lastPR models.PullRequest
 	db.Model(&lastPR).Where("repository_id = ?", repositoryID).Order("updated_at desc").First(&lastPR)
 	return lastPR.UpdatedAt
 }
 
 func getLastUpdatedIssue(db gorm.DB, repositoryID string) time.Time {
+	if repositoryNeedsBackfill(db, repositoryID) {
+		return time.Time{}
+	}
 	var lastIssue models.Issue
 	db.Model(&lastIssue).Where("repository_id = ?", repositoryID).Order("updated_at desc").First(&lastIssue)
 	return lastIssue.UpdatedAt
 }
 
 func getLastUpdatedMilestone(db gorm.DB, repositoryID string) time.Time {
+	if repositoryNeedsBackfill(db, repositoryID) {
+		return time.Time{}
+	}
 	var lastMilestone models.Milestone
 	db.Model(&lastMilestone).Where("repository_id = ?", repositoryID).Order("updated_at desc").First(&lastMilestone)
 	return lastMilestone.UpdatedAt
@@ -225,7 +244,7 @@ func (s *Syncer) syncReports() error {
 	return nil
 }
 
-func (s *Syncer) syncPRs(repository models.Repository) error {
+func (s *Syncer) syncPRs(ctx context.Context, repository models.Repository) error {
 	lastUpdatedTime := getLastUpdatedPR(*s.db, repository.ID)
 
 	var q struct {
@@ -249,7 +268,7 @@ func (s *Syncer) syncPRs(repository models.Repository) error {
 	}
 
 	for hasNextPage {
-		err := s.client.Query(context.Background(), &q, variables)
+		err := s.queryGitHubPage(ctx, &q, variables)
 		if err != nil {
 			return err
 		}
@@ -311,7 +330,7 @@ func (s *Syncer) syncPRs(repository models.Repository) error {
 	return nil
 }
 
-func (s *Syncer) syncUsers(repository models.Repository) error {
+func (s *Syncer) syncUsers(ctx context.Context, repository models.Repository) error {
 	variables := map[string]interface{}{
 		"cursor": (*githubv4.String)(nil), // Null after argument to get first page.
 		"owner":  githubv4.String(repository.Owner),
@@ -335,7 +354,7 @@ func (s *Syncer) syncUsers(repository models.Repository) error {
 			} `graphql:"repository(owner: $owner, name: $name)"`
 		}
 
-		err := s.client.Query(context.Background(), &q, variables)
+		err := s.queryGitHubPage(ctx, &q, variables)
 		if err != nil {
 			return err
 		}
@@ -368,7 +387,7 @@ func (s *Syncer) syncUsers(repository models.Repository) error {
 	return nil
 }
 
-func (s *Syncer) syncIssues(repository models.Repository) error {
+func (s *Syncer) syncIssues(ctx context.Context, repository models.Repository) error {
 	lastUpdatedTime := getLastUpdatedIssue(*s.db, repository.ID)
 
 	var q struct {
@@ -392,7 +411,7 @@ func (s *Syncer) syncIssues(repository models.Repository) error {
 	}
 	for hasNextPage {
 
-		err := s.client.Query(context.Background(), &q, variables)
+		err := s.queryGitHubPage(ctx, &q, variables)
 		if err != nil {
 			return err
 		}
@@ -454,7 +473,7 @@ func (s *Syncer) syncIssues(repository models.Repository) error {
 	return nil
 }
 
-func (s *Syncer) syncMilestones(repository models.Repository) error {
+func (s *Syncer) syncMilestones(ctx context.Context, repository models.Repository) error {
 	lastUpdatedTime := getLastUpdatedMilestone(*s.db, repository.ID)
 
 	var q struct {
@@ -478,7 +497,7 @@ func (s *Syncer) syncMilestones(repository models.Repository) error {
 	}
 	for hasNextPage {
 
-		err := s.client.Query(context.Background(), &q, variables)
+		err := s.queryGitHubPage(ctx, &q, variables)
 		if err != nil {
 			return err
 		}
@@ -517,7 +536,7 @@ func (s *Syncer) syncMilestones(repository models.Repository) error {
 	return nil
 }
 
-func (s *Syncer) syncCommits(repository models.Repository) error {
+func (s *Syncer) syncCommits(ctx context.Context, repository models.Repository) error {
 	var q struct {
 		Repository struct {
 			IsPrivate bool
@@ -546,7 +565,7 @@ func (s *Syncer) syncCommits(repository models.Repository) error {
 	}
 	for hasNextPage {
 
-		err := s.client.Query(context.Background(), &q, variables)
+		err := s.queryGitHubPage(ctx, &q, variables)
 		if err != nil {
 			return err
 		}
