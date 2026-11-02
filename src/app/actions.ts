@@ -10,9 +10,7 @@ import {
   ContributorSchema,
   EnhancedUserWithStatsSchema,
   IssueSchema,
-  LeaderboardWebhookSchema,
   MilestoneSchema,
-  MonitoringWebhookSchema,
   NamespacesSchema,
   PackagesSchema,
   ProposalSchema,
@@ -20,12 +18,8 @@ import {
   GovdaoMembersSchema,
   PullRequestReportSchema,
   PullRequestSchema,
-  ReportHourSchema,
   RepositorySchema,
   ScoreFactorsSchema,
-  TLeaderboardWebhook,
-  TMonitoringWebhook,
-  TMonitoringWebhookKind,
   TYoutubeVideoPlaylist,
   UserSchema,
   ValidatorLastIncidentsSchema,
@@ -43,7 +37,6 @@ import MILESTONE from '@/constants/milestone';
 import TEAMS from '@/constants/teams';
 
 import ENV from '@/env';
-import { auth } from '@clerk/nextjs/server';
 import { REVALIDATE_SECONDS } from '@/constants/revalidate';
 
 export const getContributors = async (timeFilter: TimeFilter, excludeCoreTeam?: boolean, repositories?: string[]) => {
@@ -64,98 +57,6 @@ export const getContributors = async (timeFilter: TimeFilter, excludeCoreTeam?: 
     users: z.array(EnhancedUserWithStatsSchema),
     lastSyncedAt: z.string().nullable().optional(),
   }).parse(data);
-};
-
-// Monitoring webhooks (GOVDAO, VALIDATOR)
-export const listMonitoringWebhooks = async (kind: TMonitoringWebhookKind): Promise<TMonitoringWebhook[]> => {
-  if (!ENV.NEXT_PUBLIC_MONITORING_API_URL) throw new Error('Monitoring API base URL is not configured');
-  const { getToken } = auth();
-  const token = await getToken();
-  if (!token) throw new Error('Authentication required');
-  const url = new URL(`/webhooks/${kind}`, ENV.NEXT_PUBLIC_MONITORING_API_URL);
-  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT }, headers: { Authorization: `Bearer ${token}` } });
-  return MonitoringWebhookSchema.array().parse(data);
-};
-
-export const createMonitoringWebhook = async (
-  kind: TMonitoringWebhookKind,
-  payload: Omit<TMonitoringWebhook, 'ID'>,
-): Promise<void> => {
-  if (!ENV.NEXT_PUBLIC_MONITORING_API_URL) throw new Error('Monitoring API base URL is not configured');
-  const { getToken } = auth();
-  const token = await getToken();
-  if (!token) throw new Error('Authentication required');
-  const url = new URL(`/webhooks/${kind}`, ENV.NEXT_PUBLIC_MONITORING_API_URL);
-  const body = MonitoringWebhookSchema.omit({ ID: true }).parse(payload);
-  const res = await fetch(url.toString(), { method: 'POST', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` } });
-  if (!res.ok) {
-    const text = await res.text().catch(() => '');
-    throw new HttpError(`Request failed: ${res.status} ${res.statusText}${text ? ` - ${text}` : ''}`, { status: res.status, statusText: res.statusText, bodyText: text });
-  }
-  revalidatePath('/settings');
-};
-
-export const updateMonitoringWebhook = async (
-  kind: TMonitoringWebhookKind,
-  payload: TMonitoringWebhook,
-): Promise<void> => {
-  if (!ENV.NEXT_PUBLIC_MONITORING_API_URL) throw new Error('Monitoring API base URL is not configured');
-  const { getToken } = auth();
-  const token = await getToken();
-  if (!token) throw new Error('Authentication required');
-  const url = new URL(`/webhooks/${kind}`, ENV.NEXT_PUBLIC_MONITORING_API_URL);
-  if (payload.ID == null) throw new Error('ID is required for updates');
-  const body = MonitoringWebhookSchema.parse(payload);
-  const res = await fetch(url.toString(), { method: 'PUT', body: JSON.stringify(body), headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` } });
-  if (!res.ok) {
-    const text = await res.text().catch(() => '');
-    throw new HttpError(`Request failed: ${res.status} ${res.statusText}${text ? ` - ${text}` : ''}`, { status: res.status, statusText: res.statusText, bodyText: text });
-  }
-  revalidatePath('/settings');
-};
-
-export const deleteMonitoringWebhook = async (
-  kind: TMonitoringWebhookKind,
-  id: number,
-): Promise<void> => {
-  if (!ENV.NEXT_PUBLIC_MONITORING_API_URL) throw new Error('Monitoring API base URL is not configured');
-  const { getToken } = auth();
-  const token = await getToken();
-  if (!token) throw new Error('Authentication required');
-  const url = new URL(`/webhooks/${kind}?id=${encodeURIComponent(String(id))}`, ENV.NEXT_PUBLIC_MONITORING_API_URL);
-  const res = await fetch(url.toString(), { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } });
-  if (!res.ok) {
-    const text = await res.text().catch(() => '');
-    throw new HttpError(`Request failed: ${res.status} ${res.statusText}${text ? ` - ${text}` : ''}`, { status: res.status, statusText: res.statusText, bodyText: text });
-  }
-  revalidatePath('/settings');
-};
-
-export const getReportHour = async () => {
-  if (!ENV.NEXT_PUBLIC_MONITORING_API_URL) throw new Error('Monitoring API base URL is not configured');
-  const { getToken } = auth();
-  const token = await getToken();
-  if (!token) throw new Error('Authentication required');
-  const url = new URL('/usersH', ENV.NEXT_PUBLIC_MONITORING_API_URL);
-
-  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.GNOMONITORING }, headers: { Authorization: `Bearer ${token}` } });
-  if (!data) return ReportHourSchema.parse({ DailyReportHour: 9, DailyReportMinute: 0, Timezone: 'Europe/Paris' });
-  return ReportHourSchema.parse(data);
-};
-
-export const updateReportHour = async (payload: { hour: number; minute: number; timezone: string }) => {
-  if (!ENV.NEXT_PUBLIC_MONITORING_API_URL) throw new Error('Monitoring API base URL is not configured');
-  const { getToken } = auth();
-  const token = await getToken();
-  if (!token) throw new Error('Authentication required');
-  const url = new URL('/usersH', ENV.NEXT_PUBLIC_MONITORING_API_URL);
-
-  const res = await fetch(url.toString(), { cache: 'no-cache', method: 'PUT', body: JSON.stringify(payload), headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` } });
-  if (!res.ok) {
-    const text = await res.text().catch(() => '');
-    throw new HttpError(`Request failed: ${res.status} ${res.statusText}${text ? ` - ${text}` : ''}`, { status: res.status, statusText: res.statusText, bodyText: text });
-  }
-  revalidatePath('/settings');
 };
 
 export const getLastIssues = async (last: number) => {
@@ -444,72 +345,6 @@ export const getValidatorOperationTime = async (timeFilter: EValidatorPeriod = E
   if (!data) return [];
 
   return ValidatorsOperationTimeSchema.parse(data);
-};
-
-// Leaderboard webhooks
-export const listLeaderboardWebhooks = async (): Promise<TLeaderboardWebhook[]> => {
-  const { getToken } = auth();
-  const token = await getToken();
-  if (!token) throw new Error('Authentication required');
-  const url = new URL('/leaderboard-webhooks', ENV.NEXT_PUBLIC_API_URL);
-  const data = await fetchJson(url.toString(), { next: { revalidate: REVALIDATE_SECONDS.DEFAULT }, headers: { Authorization: `Bearer ${token}` } });
-  return LeaderboardWebhookSchema.array().parse(data);
-};
-
-export const createLeaderboardWebhook = async (
-  payload: Omit<TLeaderboardWebhook, 'id' | 'userId' | 'nextRunAt' | 'createdAt' | 'updatedAt'>,
-): Promise<void> => {
-  const { getToken } = auth();
-  const token = await getToken();
-  if (!token) throw new Error('Authentication required');
-  const url = new URL('/leaderboard-webhooks', ENV.NEXT_PUBLIC_API_URL);
-  const body = LeaderboardWebhookSchema.omit({ id: true, userId: true, nextRunAt: true, createdAt: true, updatedAt: true }).parse(payload as any);
-  const res = await fetch(url.toString(), {
-    method: 'POST',
-    body: JSON.stringify(body),
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-  });
-  if (!res.ok) {
-    const text = await res.text().catch(() => '');
-    throw new HttpError(`Request failed: ${res.status} ${res.statusText}${text ? ` - ${text}` : ''}`, { status: res.status, statusText: res.statusText, bodyText: text });
-  }
-  revalidatePath('/settings');
-};
-
-export const updateLeaderboardWebhook = async (
-  payload: TLeaderboardWebhook,
-): Promise<void> => {
-  const { getToken } = auth();
-  const token = await getToken();
-  if (!token) throw new Error('Authentication required');
-  if (payload.id == null) throw new Error('ID is required for updates');
-  const url = new URL(`/leaderboard-webhooks/${payload.id}`, ENV.NEXT_PUBLIC_API_URL);
-  const body = LeaderboardWebhookSchema.parse(payload);
-  const res = await fetch(url.toString(), {
-    method: 'PUT',
-    body: JSON.stringify(body),
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-  });
-  if (!res.ok) {
-    const text = await res.text().catch(() => '');
-    throw new HttpError(`Request failed: ${res.status} ${res.statusText}${text ? ` - ${text}` : ''}`, { status: res.status, statusText: res.statusText, bodyText: text });
-  }
-  revalidatePath('/settings');
-};
-
-export const deleteLeaderboardWebhook = async (
-  id: number,
-): Promise<void> => {
-  const { getToken } = auth();
-  const token = await getToken();
-  if (!token) throw new Error('Authentication required');
-  const url = new URL(`/leaderboard-webhooks/${encodeURIComponent(String(id))}`, ENV.NEXT_PUBLIC_API_URL);
-  const res = await fetch(url.toString(), { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } });
-  if (!res.ok) {
-    const text = await res.text().catch(() => '');
-    throw new HttpError(`Request failed: ${res.status} ${res.statusText}${text ? ` - ${text}` : ''}`, { status: res.status, statusText: res.statusText, bodyText: text });
-  }
-  revalidatePath('/settings');
 };
 
 export const forceVotesIndexation = async () => {

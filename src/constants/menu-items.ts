@@ -51,11 +51,6 @@ export const MENU_ITEMS = [
         href: '/tutorials',
         new: false,
       },
-      {
-        label: 'Settings',
-        href: '/settings',
-        new: true,
-      },
     ],
   },
 ] as const satisfies ReadonlyArray<MenuItem>;
