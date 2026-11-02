@@ -31,9 +31,6 @@ import (
 	"github.com/subosito/gotenv"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
-
-	"github.com/clerk/clerk-sdk-go/v2"
-	clerkhttp "github.com/clerk/clerk-sdk-go/v2/http"
 )
 
 var database *gorm.DB
@@ -105,11 +102,6 @@ func main() {
 	}
 	if os.Getenv("GITHUB_OAUTH_CLIENT_SECRET") == "" {
 		panic("GITHUB_OAUTH_CLIENT_SECRET is not set")
-	}
-	if os.Getenv("CLERK_SECRET_KEY") == "" {
-		logger.Warn("CLERK_SECRET_KEY is not set, some features will not work")
-	} else {
-		clerk.SetKey(os.Getenv("CLERK_SECRET_KEY"))
 	}
 
 	if os.Getenv("DISCORD_WEBHOOK_URL") != "" {
@@ -216,15 +208,6 @@ func main() {
 	router.HandleFunc("/github/oauth/exchange", handler.HandleGetGithubUserAndTokenByCode(signer, database))
 	router.HandleFunc("/contributors/{login}", contributor.HandleGetContributor(database))
 	router.Post("/github/link", handler.HandleLink(database))
-
-	// Leaderboard webhook endpoints
-	router.Group(func(r chi.Router) {
-		r.Use(clerkhttp.WithHeaderAuthorization())
-		r.Get("/leaderboard-webhooks", handler.HandleGetLeaderboardWebhooks(database))
-		r.Post("/leaderboard-webhooks", handler.HandleCreateLeaderboardWebhook(database))
-		r.Put("/leaderboard-webhooks/{id}", handler.HandleUpdateLeaderboardWebhook(database))
-		r.Delete("/leaderboard-webhooks/{id}", handler.HandleDeleteLeaderboardWebhook(database))
-	})
 
 	// ai endpoints
 	router.HandleFunc("/ai/report", ai.HandleGetLastReport(database))

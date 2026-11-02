@@ -6,7 +6,6 @@ toolchain go1.24.3
 
 require (
 	github.com/Khan/genqlient v0.8.1
-	github.com/clerk/clerk-sdk-go/v2 v2.4.0
 	github.com/dgraph-io/ristretto v0.2.0
 	github.com/gnolang/gno v0.0.0-20250214130904-9884ba10e8b0
 	github.com/go-chi/chi/v5 v5.2.1
@@ -33,7 +32,6 @@ require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.3.0 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
-	github.com/go-jose/go-jose/v3 v3.0.4 // indirect
 	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
