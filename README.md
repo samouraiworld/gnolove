@@ -74,7 +74,6 @@ https://github.com/gnolang/gno
      - `NEXT_PUBLIC_OAUTH_CLIENT_ID` and `NEXT_PUBLIC_REDIRECT_PROXY`: GitHub OAuth linking 
      - `NEXT_PUBLIC_GHVERIFY_REALM_PATH`: on‑chain verification UX
      - `NEXT_PUBLIC_PROFILE_REALM_PATH`: on‑chain profile updates
-     - `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`: front‑end part of Clerk; pairs with backend `CLERK_SECRET_KEY`
 
   ```bash
   cd server
@@ -101,7 +100,6 @@ https://github.com/gnolang/gno
 
    - Optional (no defaults in code; enable extra features when provided):
      - `DISCORD_WEBHOOK_URL`: URL for the Samourai Coop Discord webhook in which we send leaderboards. Deprecated.
-     - `CLERK_SECRET_KEY`: Enables Clerk‑protected features
      - `MISTRAL_API_KEY`: Enables scheduled AI tasks
 
 4. Run the server (backend)

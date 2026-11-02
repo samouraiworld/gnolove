@@ -361,26 +361,6 @@ export const GovdaoMemberSchema = z.object({
 });
 export const GovdaoMembersSchema = z.array(GovdaoMemberSchema);
 
-// Monitoring webhooks
-export const MonitoringWebhookSchema = z.object({
-  ID: z.number().optional(),
-  URL: z.string().url(),
-  Type: z.enum(['discord', 'slack']),
-  Description: z.string(),
-  CreatedAt: z.string().optional(),
-  LastCheckedID: z.number().optional(),
-});
-
-export type TMonitoringWebhook = z.infer<typeof MonitoringWebhookSchema>;
-export type TMonitoringWebhookKind = 'govdao' | 'validator';
-
-export const ReportHourSchema = z.object({
-  daily_report_hour: z.number().default(9),
-  daily_report_minute: z.number().default(0),
-  Timezone: z.string().default('Europe/Paris'),
-});
-export type TReportHour = z.infer<typeof ReportHourSchema>;
-
 export const ScoreFactorsSchema = z.object({
   prFactor: z.number(),
   issueFactor: z.number(),
@@ -511,25 +491,3 @@ export const ValidatorMissingBlockSchema = z.object({
 
 export const ValidatorsMissingBlockSchema = z.array(ValidatorMissingBlockSchema);
 export type TValidatorMissingBlock = z.infer<typeof ValidatorMissingBlockSchema>;
-
-// Leaderboard webhooks
-export const LeaderboardWebhookSchema = z.object({
-  id: z.number().optional(),
-  url: z.string().regex(/^(https:\/\/|http:\/\/)[^\s/$.?#].[^\s]*$/i, {
-    message: 'Please enter a valid URL starting with http:// or https://',
-  }),
-  userId: z.string().optional(),
-  type: z.enum(['discord', 'slack']),
-  frequency: z.enum(['daily', 'weekly']).default('weekly'),
-  day: z.number().int().min(0).max(6).default(4),
-  hour: z.number().int().min(0).max(23).default(15),
-  minute: z.number().int().min(0).max(59).default(0),
-  timezone: z.string().default('Europe/Paris'),
-  repositories: z.array(z.string()).default([]),
-  active: z.boolean().default(true),
-  nextRunAt: z.string().optional(),
-  createdAt: z.string().optional(),
-  updatedAt: z.string().optional(),
-});
-
-export type TLeaderboardWebhook = z.infer<typeof LeaderboardWebhookSchema>;

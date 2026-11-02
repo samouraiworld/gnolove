@@ -218,49 +218,7 @@ This command will start indexing all important elements on the repository then s
   _No parameters._
 
 #### Leaderboard Webhooks
-These requests are user-scoped and therefore need to be authenticated with a Clerk token. They will return 401s if they're not authenticated.
-- **Get leaderboard webhooks**  
-  `GET /leaderboard-webhooks`  
-  Returns all leaderboard webhooks.
-
-  _No parameters._
-
-- **Create leaderboard webhook**  
-  `POST /leaderboard-webhooks`  
-  Body: `{ "url": "...", "type": "discord", "frequency": "daily", "day": 0, "hour": 0, "minute": 0, "timezone": "UTC", "repositories": ["..."], "active": true }`  
-  Creates a new leaderboard webhook.
-
-  | Field   | In   | Type   | Required | Description           |
-  |---------|------|--------|----------|-----------------------|
-  | url     | body | string | Yes      | Webhook URL           |
-  | type    | body | string | Yes      | Webhook type (discord, slack) |
-  | frequency | body | string | Yes      | Webhook frequency (daily, weekly) |
-  | day     | body | int    | No       | Day of the week (0=Sunday, 6=Saturday) for weekly frequency |
-  | hour    | body | int    | Yes      | Hour of the day (0-23) |
-  | minute  | body | int    | Yes      | Minute of the hour (0-59) |
-  | timezone | body | string | Yes      | Timezone (e.g. "America/New_York") |
-  | repositories | body | string | No       | Comma-separated repository IDs (owner/name) |
-
-- **Update leaderboard webhook**  
-  `PUT /leaderboard-webhooks/{id}`  
-  Body: `{ "url": "...", "type": "discord", "frequency": "daily", "day": 0, "hour": 0, "minute": 0, "timezone": "UTC", "repositories": ["..."], "active": true }`  
-  Updates an existing leaderboard webhook.
-
-  | Field   | In   | Type   | Required | Description           |
-  |---------|------|--------|----------|-----------------------|
-  | url     | body | string | Yes      | Webhook URL           |
-  | type    | body | string | Yes      | Webhook type (discord, slack) |
-  | frequency | body | string | Yes      | Webhook frequency (daily, weekly) |
-  | day     | body | int    | No       | Day of the week (0=Sunday, 6=Saturday) for weekly frequency |
-  | hour    | body | int    | Yes      | Hour of the day (0-23) |
-  | minute  | body | int    | Yes      | Minute of the hour (0-59) |
-  | timezone | body | string | Yes      | Timezone (e.g. "America/New_York") |
-  | repositories | body | string | No       | Comma-separated repository IDs (owner/name) |
-  | active  | body | bool   | Yes      | Whether the webhook is active |
-
-- **Delete leaderboard webhook**  
-  `DELETE /leaderboard-webhooks/{id}`  
-  Deletes an existing leaderboard webhook.
+Stored leaderboard webhooks are still delivered on schedule by the server, but no API manages them any more.
 
 #### Reports endpoints
 
